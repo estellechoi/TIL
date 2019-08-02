@@ -8,6 +8,7 @@
 
  Window
  | Document Object Model | Browser Object Model | JavaScript Core |
+ | --- | --- | --- |
 
 ### 1. 문서객체모델 (DOM, Document Object Model)
 * HTML, XML 문서의 프로그래밍 인터페이스
