@@ -77,6 +77,7 @@
 #### 문법
 > 줄 앞에 4개의 공백(Space) 또는 1개의 탭(Tab)이 있는 텍스트를 코드블럭으로 변환
 > 들여쓰기 없이 \`\`\` 으로 감싸는 방법도 있다.
+> \`\`\`Ruby 와 같이 특정 언어의 문법을 강조할 수 있다. (Syntax highlighting)
 > 코드블럭 바로 앞에는 빈 줄이 있어야 한다.
 
       ```
@@ -85,6 +86,12 @@
 
           This is a code block.
 
+      ```Javascript
+          var x = document.getElementsByTagName("li");
+              // <li> 태그가 1개 이더라도 자동 배열 처리
+          x[0].style.color = "red";
+      ```
+
 #### 사용예시
 
 ```
@@ -92,6 +99,12 @@ This is a code block.
 ```
 
     This is a code block.
+
+```Javascript
+    var x = document.getElementsByTagName("li");
+        // <li> 태그가 1개 이더라도 자동 배열 처리
+    x[0].style.color = "red";
+```
 
 ### 4) 수평선
 #### 문법
