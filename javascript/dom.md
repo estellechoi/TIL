@@ -3,6 +3,7 @@
  - 웹브라우저의 구성요소들은 하나하나가 객체화되어 있다.
  - 자바스크립트로 이 객체들을 제어해서 웹브라우저를 제어할 수 있다.
  - 객체들은 서로 계층적인 관계로 구조화되어 있다.
+ - DOM과 BOM은 window 객체의 하나의 속성이며, 브라우저 환경에서만 사용할 수 있다.
 
  [계층구조]
 
@@ -10,24 +11,34 @@
  | --- |
 
  |
- 
+
  | Document Object Model | Browser Object Model | JavaScript Core |
  | --- | --- | --- |
 
+
+####  * Window 객체란 ?
+ - 브라우저 전체를 담당하는 전역객체
+ - [ex] `window.close();` 현재 브라우저의 창을 닫습니다.
+
+<br/>
+
 ### 1. 문서객체모델 (DOM, Document Object Model)
-* HTML, XML 문서의 프로그래밍 인터페이스
-* 웹페이지를 자바스크립트와 같은 스크립트언어로 제어하기 위한 객체 모델
-* 윈도우에 로드된 문서를 의미
-* HTML 문서의 계층구조를 트리 형태로 표현
+ - 문서에 대한 모든 내용을 담고있는 객체
+ - 문서 즉 열려진 페이지에 대한 정보를 따로 객체화 시켜서 관리
+ - elements(요소) 에 대한 접근을 통해 HTML의 내용을 변경, CSS (style) 의 내용 또한 변경 가능
+ - document 객체, event 속성
 
 
 ### 2. 브라우저객체모델 (BOM, Browser Object Model)
-* 웹브라우저 창을 관리할 목적으로 제공되는 객체 모음을 대상으로 하는 모델
-* 웹브라우저의 창이나 프레임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단
-* 전역객체인 Window의 프로퍼티와 메소드를 통해 제어
+ - 브라우저에 대한 모든 내용을 담고있는 객체
+ - 뒤로가기, 북마크, 즐겨찾기, 히스토리, URL정보 등
+ - 브라우저가 가지고 있는 정보를 따로 객체화 시켜서 관리
+ - history, location 객체
 
-### 동적 웹페이지 작성
-#### 1. id로 접근
+<br/>
+
+### 3. DOM - 동적 웹페이지 작성 / 요소(Element) 접근
+#### 1) id로 접근
 
 ```Javascript
     document.all.bb[2].style.color = "blue";
@@ -37,7 +48,7 @@
     // 현재문서에서 #bb 중 첫번째만 호출
 ```
 
-#### 2. tag로 접근
+#### 2) tag로 접근
 
 ```Javascript
     var x = document.getElementsByTagName("li");
@@ -45,7 +56,7 @@
     x[0].style.color = "red";
 ```
 
-#### 3. class로 접근
+#### 3) class로 접근
 
 ```Javascript
     var x = document.getElementsByClassName("aa");
@@ -54,7 +65,7 @@
     document.getElementsByClassName("aa")[3].style.background = "blue";
 ```
 
-#### 4. name으로 접근
+#### 4) name으로 접근
 
 ```Javascript
     <input type = "text" name = "leh">
@@ -65,7 +76,7 @@
     x[0].style.border = "1px solid pink";
 ```
 
-#### 5. querySelector
+#### 5) querySelector
 
 ```Javascript
     var x = document.querySelector("ul");
@@ -80,3 +91,8 @@
 ```
 
 ### ?
+
+<br/>
+
+####  * 참고문서
+ - [JavaScript Tutorial](https://www.w3schools.com/js/)
