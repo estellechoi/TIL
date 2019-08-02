@@ -83,6 +83,7 @@
  - 들여쓰기 없이 \`\`\` 으로 감싸는 방법도 있다.
  - \`\`\`Ruby 와 같이 특정 언어의 문법을 강조할 수 있다. (Syntax highlighting)
  - 코드블럭 바로 앞에는 빈 줄이 있어야 한다.
+ - \` 으로 감싸면 인라인 블럭을 만든다.
 
       ```
       This is a code block.
@@ -109,6 +110,14 @@ This is a code block.
         // <li> 태그가 1개 이더라도 자동 배열 처리
     x[0].style.color = "red";
 ```
+
+#### 문법
+
+    `---`
+
+#### 사용예시
+
+`---`
 
 ### 4) 수평선
 #### 문법
@@ -211,6 +220,8 @@ __double underscores__ <br/>
 
 &#128525;
 
+ * [더 많은 이모지를 확인하려면 다음 링크를 클릭](https://steemit.com/steemkr-guide/@snow-airline/steemkr-quick-start-guide)
+
 ### 8) 체크박스 (Checkbox / Task Lists)
 #### 문법
 
@@ -249,9 +260,35 @@ __double underscores__ <br/>
 
 엔터 여러 번은 여러 줄을  띄우지 않는다.
 
+### 10) 표 (Table)
+#### 문법
+ - 열 구분 \|
+ - 행 구분 \| \-\-\- \|
+
+    1 | 2 | 3
+    --- | --- | ---
+    일반 텍스트 | &#128525; | `---`
+
+#### 사용예시
+
+1 | 2 | 3
+--- | --- | ---
+일반 텍스트 | &#128525; | `---`
+
+### 11) 마크다운 포맷 무시하기
+#### 문법
+ - 열슬래시(Backslash) \\ 사용
+
+    \*\*
+
+#### 사용예시
+
+\*\*
+
 ***
 ###     * 참고문서
 
   * [마크다운 markdown 작성법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
   * [존 그루버 마크다운 페이지 번역](https://nolboo.kim/blog/2013/09/07/john-gruber-markdown/)
   * [깃허브 취향의 마크다운 번역](https://nolboo.kim/blog/2014/03/25/github-flavored-markdown/)
+  * [마크다운 총정리 All in One](https://steemit.com/kr/@nand/markdown)
