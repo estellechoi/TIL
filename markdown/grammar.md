@@ -21,6 +21,8 @@
 ## h2
 ### h3
 
+<br/>
+
 ###  2) 인용구
 #### 문법
 
@@ -41,6 +43,8 @@
 > * list
 
 >     code block
+
+<br/>
 
 ### 3) 목록 (List)
 #### 문법
@@ -78,6 +82,8 @@
 - apple
   - banana
     - carrot
+
+<br/>
 
 ### 4) 코드블럭 (Fenced Code Blocks)
 #### 문법
@@ -121,6 +127,8 @@ This is a code block.
 
 `---`
 
+<br/>
+
 ### 4) 수평선
 #### 문법
 
@@ -148,6 +156,8 @@ This is a code block.
 ---------------------------------------
 
 <hr/>
+
+<br/>
 
 ### 5) 링크 (Links)
 #### 문법
@@ -199,11 +209,15 @@ __double underscores__ <br/>
 ++underline++ <br/>
 ~~cancelline~~
 
+<br/>
+
 ### 6) 이미지 (Image)
 #### 문법
 
     ![Alt text](/path/to/img.jpg)
     ![Alt text](/path/to/img.jpg "Optional title")
+
+<br/>
 
 ### 7) 이모티콘 자동완성 (Emoji autocomplete)
 #### 문법
@@ -224,6 +238,8 @@ __double underscores__ <br/>
 
  * [더 많은 이모지를 확인하려면 다음 링크를 클릭](https://steemit.com/steemkr-guide/@snow-airline/steemkr-quick-start-guide)
 
+<br/>
+
 ### 8) 체크박스 (Checkbox / Task Lists)
 #### 문법
 
@@ -238,6 +254,8 @@ __double underscores__ <br/>
 - [x] list syntax required (any unordered or ordered list supported)
 - [x] this is a complete item
 - [ ] this is an incomplete item
+
+<br/>
 
 ### 9) 띄어쓰기와 줄바꿈 (Space and Enter)
 #### 문법
@@ -262,6 +280,8 @@ __double underscores__ <br/>
 
 엔터 여러 번은 여러 줄을  띄우지 않는다.
 
+<br/>
+
 ### 10) 표 (Table)
 #### 문법
  - 열 구분 \|
@@ -279,6 +299,8 @@ __double underscores__ <br/>
 --- | --- | ---
 일반 텍스트 | &#128525; | `---`
 
+<br/>
+
 ### 11) 마크다운 포맷 무시하기
 #### 문법
  - 열슬래시(Backslash) \\ 사용
@@ -288,6 +310,8 @@ __double underscores__ <br/>
 #### 사용예시
 
 \*\*
+
+<br/>
 
 ***
 ###     * 참고문서
