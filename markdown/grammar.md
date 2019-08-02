@@ -184,8 +184,24 @@ __double underscores__ <br/>
 
 #### 사용예시
 
+:+1:
 
+### 8) 체크박스 (Checkbox / Task Lists)
+#### 문법
 
+    - [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+    - [x] list syntax required (any unordered or ordered list supported)
+    - [x] this is a complete item
+    - [ ] this is an incomplete item
+
+#### 사용예시
+
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+
+***
 ###     * 참고문서
 
   * [마크다운 markdown 작성법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
