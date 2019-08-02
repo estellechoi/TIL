@@ -6,7 +6,10 @@
 
  [계층구조]
 
- Window
+ | Window |
+ | --- |
+
+ |
  
  | Document Object Model | Browser Object Model | JavaScript Core |
  | --- | --- | --- |
