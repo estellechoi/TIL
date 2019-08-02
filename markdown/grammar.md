@@ -82,6 +82,7 @@
       ```
       This is a code block.
       ```
+
           This is a code block.
 
 #### 사용예시
@@ -91,3 +92,80 @@ This is a code block.
 ```
 
     This is a code block.
+
+#### 4) 수평선 (<hr/>)
+#### 문법
+
+    * * *
+
+    ***
+
+    *****
+
+    - - -
+
+    ---------------------------------------
+
+#### 사용예시
+* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------
+
+#### 5) 링크 (Links)
+#### 문법
+  * 참조링크
+
+    [Google][googlelink]
+    googlelink]: https://google.com "Go google"
+
+  * 인라인 링크
+
+    Link: [Google](https://google.com)
+
+  * 자동연결
+
+    <http://example.com/>
+    <estele.choi@gmail.com>
+
+#### 사용예시
+  * 참조링크
+ [Google][googlelink]
+ [googlelink]: https://google.com "Go google"
+
+  * 인라인 링크
+Link: [Google](https://google.com)
+
+  * 자동연결
+<http://example.com/>
+<estele.choi@gmail.com>
+
+ #### 6) 강조
+ #### 문법
+
+     *single asterisks*
+    _single underscores_
+    **double asterisks**
+    __double underscores__
+    ++underline++
+    ~~cancelline~~
+
+#### 사용예시
+
+*single asterisks*
+_single underscores_
+**double asterisks**
+__double underscores__
+++underline++
+~~cancelline~~
+
+#### 6) 이미지 (Image)
+#### 문법
+
+    ![Alt text](/path/to/img.jpg)
+    ![Alt text](/path/to/img.jpg "Optional title")
