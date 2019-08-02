@@ -1,7 +1,8 @@
 ## 마크다운(Markdown) 파일 작성법
-### 1. 마크다운(Markdown)
+### 1. 마크다운(Markdown) &#127776;
  마크다운(Markdown)은 텍스트 기반의 마크업 언어로 2004년 존 그루버에 의해 만들어졌다. 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능하다. 특수기호와 문자를 이용한 매우 간단한 구조의 문법을 사용하여 웹에서도 빠르게 컨텐츠를 작성하고 직관적으로 인식할 수 있다. 마크다운이 최근 각광받기 시작한 이유는 깃헙(https://github.com) 덕분이다. 깃헙을 사용하는 사람이라면 누구나 리드미(README.md)를 통해 마크다운 문서를 접했을 것이다. 리드미는 깃헙 저장소(Repository)에 관한 설명을 작성하는 파일이다. 마크다운을 통해 소스코드에 대한 설명, 이슈 등을 간단하게 기록하고 가독성을 높일 수 있다는 강점이 부각되면서 점점 여러 곳으로 퍼져가게 된다.
 
+<br/>
 ### 2. 마크다운 작성법
 ###  1) 헤더 (Headers)
 #### 문법
@@ -214,11 +215,11 @@ __double underscores__ <br/>
 
 #### 문법
 
-    &#128525;
+    &#128525; &#128513; &#128519; &#10047;
 
 #### 사용예시
 
-&#128525;
+&#128525; &#128513; &#128519; &#10047;
 
  * [더 많은 이모지를 확인하려면 다음 링크를 클릭](https://steemit.com/steemkr-guide/@snow-airline/steemkr-quick-start-guide)
 
@@ -294,3 +295,4 @@ __double underscores__ <br/>
   * [존 그루버 마크다운 페이지 번역](https://nolboo.kim/blog/2013/09/07/john-gruber-markdown/)
   * [깃허브 취향의 마크다운 번역](https://nolboo.kim/blog/2014/03/25/github-flavored-markdown/)
   * [마크다운 총정리 All in One](https://steemit.com/kr/@nand/markdown)
+  * [Quick Start Guide - 👍 😎 👀 💃 스팀잇 이모지 마스터 리스트 🚀 😝 🌍 🍒](https://steemit.com/steemkr-guide/@snow-airline/steemkr-quick-start-guide)
