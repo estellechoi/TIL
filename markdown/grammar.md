@@ -27,5 +27,4 @@
 
 > #### h4
 > * list
-
->     code block
+>       code block
