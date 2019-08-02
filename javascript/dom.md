@@ -14,33 +14,41 @@
 ### 동적 웹페이지 작성
 #### 1. id로 접근
 
+```Javascript
     document.all.bb[2].style.color = "blue";
     // #bb 가 2 개 이상일 경우 배열 처리
 
     document.getElementById("bb").style.fontSize = "40px";
     // 현재문서에서 #bb 중 첫번째만 호출
+```
 
 #### 2. tag로 접근
 
+```Javascript
     var x = document.getElementsByTagName("li");
     // <li> 태그가 1개 이더라도 자동 배열 처리
     x[0].style.color = "red";
+```
 
 #### 3. class로 접근
 
+```Javascript
     var x = document.getElementsByClassName("aa");
     // .aa 가 1 개 이더라도 자동 배열 처리
     x[2].style.background="blue";
     document.getElementsByClassName("aa")[3].style.background = "blue";
+```
 
 #### 4. name으로 접근
 
+```Javascript
     <input type = "text" name = "leh">
     document.all.leh.style.color = "green";
     <input type = "text" name = "userid"><p>
     <input type = "text" name = "pwd"><p>
     var x = document.getElementsByName("userid");
     x[0].style.border = "1px solid pink";
+```
 
 #### 5. querySelector
 
