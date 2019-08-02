@@ -19,14 +19,18 @@
 ## h2
 ### h3
 
-###  2) 블럭인용문자
+###  2) 인용구
 #### 문법
 
     > This is a blockquote.
+    >> 2단
+    >>> 3단
 
 #### 사용예시
 
 > This is a blockquote.
+>> 2단
+>>> 3단
 
 
 블럭인용문자 내에서는 다른 마크다운 요소들을 포함할 수 있다. 아래와 같이 !
@@ -221,6 +225,29 @@ __double underscores__ <br/>
 - [x] list syntax required (any unordered or ordered list supported)
 - [x] this is a complete item
 - [ ] this is an incomplete item
+
+### 9) 띄어쓰기와 줄바꿈 (Space and Enter)
+#### 문법
+> 단락 바꿈 : 엔터 2 번
+> 강제로 여러 줄을 맘대로 띄고 싶다면 <br/> 사용
+
+    띄어쓰기(space)       여러 번 = 한 번
+    엔터 한 번은 글이 붙는다.
+
+    엔터 두 번은 단락을 바꾼다.
+
+
+    엔터 여러 번은 여러 줄을  띄우지 않는다.
+
+#### 사용예시
+
+띄어쓰기(space)       여러 번 = 한 번
+엔터 한 번은 글이 붙는다.
+
+엔터 두 번은 단락을 바꾼다.
+
+
+엔터 여러 번은 여러 줄을  띄우지 않는다.
 
 ***
 ###     * 참고문서
