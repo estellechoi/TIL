@@ -177,6 +177,15 @@ __double underscores__ <br/>
     ![Alt text](/path/to/img.jpg)
     ![Alt text](/path/to/img.jpg "Optional title")
 
+### 7) 이모티콘 자동완성 (Emoji autocomplete)
+#### 문법
+
+    :를 타이핑하면 이모티콘 추천 목록을 불러온다. :+1:
+
+#### 사용예시
+
+
+
 ###     * 참고문서
 
   * [마크다운 markdown 작성법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
