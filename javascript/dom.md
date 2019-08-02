@@ -44,6 +44,7 @@
 
 #### 5. querySelector
 
+```Javascript
     var x = document.querySelector("ul");
     x.style.display = "flex";
 
@@ -53,5 +54,6 @@
       x[i].style.marginLeft = "10px";
       x[i].style.listStyle = "none";
     }
+```
 
 ### ?
