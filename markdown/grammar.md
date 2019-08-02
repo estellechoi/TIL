@@ -39,39 +39,39 @@
 ### 3) 목록 (List)
 #### 문법
 
-    1. 첫번째
-    2. 두번째
-    3. 세번째
+    1. apple
+    2. banana
+    3. carrot
 
-    * 첫번째
-      * 두번째
-        * 세번째
+    * apple
+      * banana
+        * carrot
 
-    + 첫번째
-      + 두번째
-        + 세번째
+    + apple
+      + banana
+        + carrot
 
-    - 첫번째
-      - 두번째
-        - 세번째
+    - apple
+      - banana
+        - carrot
 
 #### 사용예시
 
-1. 첫번째
-2. 두번째
-3. 세번째
+1. apple
+2. banana
+3. carrot
 
-* 첫번째
-  * 두번째
-    * 세번째
+* apple
+  * banana
+    * carrot
 
-+ 첫번째
-  + 두번째
-    + 세번째
++ apple
+  + banana
+    + carrot
 
-- 첫번째
-  - 두번째
-    - 세번째
+- apple
+  - banana
+    - carrot
 
 ### 4) 코드블럭 (Fenced Code Blocks)
 #### 문법
