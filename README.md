@@ -1,5 +1,5 @@
 # TIL
-Today I learned (오늘 새로 배운 것을 기록합니다)
+&#127905; Today I learned (오늘 새로 배운 것을 기록합니다)
 ***
 ### Javascript
 [DOM과 BOM](https://github.com/estellechoi/TIL/blob/master/javascript/dom.md)
