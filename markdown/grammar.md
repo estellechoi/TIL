@@ -3,7 +3,7 @@
  마크다운(Markdown)은 텍스트 기반의 마크업 언어로 2004년 존 그루버에 의해 만들어졌다. 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능하다. 특수기호와 문자를 이용한 매우 간단한 구조의 문법을 사용하여 웹에서도 빠르게 컨텐츠를 작성하고 직관적으로 인식할 수 있다. 마크다운이 최근 각광받기 시작한 이유는 깃헙(https://github.com) 덕분이다. 깃헙을 사용하는 사람이라면 누구나 리드미(README.md)를 통해 마크다운 문서를 접했을 것이다. 리드미는 깃헙 저장소(Repository)에 관한 설명을 작성하는 파일이다. 마크다운을 통해 소스코드에 대한 설명, 이슈 등을 간단하게 기록하고 가독성을 높일 수 있다는 강점이 부각되면서 점점 여러 곳으로 퍼져가게 된다.
 
 ### 2. 마크다운 작성법
-####  1) 헤더 (Headers)
+###  1) 헤더 (Headers)
 #### 문법
 
     # h1
@@ -19,7 +19,7 @@
 ## h2
 ### h3
 
-####  2) 블럭인용문자
+###  2) 블럭인용문자
 #### 문법
 
     > This is a blockquote.
@@ -36,7 +36,7 @@
 
 >     code block
 
-#### 3) 목록 (List)
+### 3) 목록 (List)
 #### 문법
 
     1. 첫번째
@@ -73,7 +73,7 @@
   - 두번째
     - 세번째
 
-#### 4) 코드블럭 (Fenced Code Blocks)
+### 4) 코드블럭 (Fenced Code Blocks)
 #### 문법
 > 줄 앞에 4개의 공백(Space) 또는 1개의 탭(Tab)이 있는 텍스트를 코드블럭으로 변환
 > 들여쓰기 없이 \`\`\` 으로 감싸는 방법도 있다.
@@ -93,7 +93,7 @@ This is a code block.
 
     This is a code block.
 
-#### 4) 수평선
+### 4) 수평선
 #### 문법
 
     * * *
@@ -121,7 +121,7 @@ This is a code block.
 
 <hr/>
 
-#### 5) 링크 (Links)
+### 5) 링크 (Links)
 #### 문법
   * 참조링크
 
@@ -139,13 +139,16 @@ This is a code block.
 
 #### 사용예시
   * 참조링크
+
      [Google][googlelink]
      [googlelink]: https://google.com "Go google"
 
   * 인라인 링크
+
     Link: [Google](https://google.com)
 
   * 자동연결
+
     <http://example.com/>
     <estele.choi@gmail.com>
 
@@ -168,7 +171,7 @@ __double underscores__ <br/>
 ++underline++ <br/>
 ~~cancelline~~
 
-#### 6) 이미지 (Image)
+### 6) 이미지 (Image)
 #### 문법
 
     ![Alt text](/path/to/img.jpg)
