@@ -7,7 +7,7 @@
  [계층구조]
 
  | Window |
- | --- |
+ | --- | --- | --- |
  | Document Object Model | Browser Object Model | JavaScript Core |
 
 ### 1. 문서객체모델 (DOM, Document Object Model)
