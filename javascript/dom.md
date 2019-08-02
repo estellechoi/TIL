@@ -28,6 +28,7 @@
  - elements(요소) 에 대한 접근을 통해 HTML의 내용을 변경, CSS (style) 의 내용 또한 변경 가능
  - document 객체, event 속성
 
+<br/>
 
 ### 2. 브라우저객체모델 (BOM, Browser Object Model)
  - 브라우저에 대한 모든 내용을 담고있는 객체
