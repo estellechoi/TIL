@@ -1,13 +1,23 @@
 
-## 문서객체모델(DOM)과 브라우저객체모델(BOM)
-### 문서객체모델 (DOM, Document Object Model)
+## 객체모델(Object Model) - 문서객체모델(DOM)과 브라우저객체모델(BOM)
+ - 웹브라우저의 구성요소들은 하나하나가 객체화되어 있다.
+ - 자바스크립트로 이 객체들을 제어해서 웹브라우저를 제어할 수 있다.
+ - 객체들은 서로 계층적인 관계로 구조화되어 있다.
+
+ [계층구조]
+
+ | Window |
+ | --- |
+ | Document Object Model | Browser Object Model | JavaScript Core |
+
+### 1. 문서객체모델 (DOM, Document Object Model)
 * HTML, XML 문서의 프로그래밍 인터페이스
 * 웹페이지를 자바스크립트와 같은 스크립트언어로 제어하기 위한 객체 모델
 * 윈도우에 로드된 문서를 의미
 * HTML 문서의 계층구조를 트리 형태로 표현
 
 
-### 브라우저객체모델 (BOM, Browser Object Model)
+### 2. 브라우저객체모델 (BOM, Browser Object Model)
 * 웹브라우저 창을 관리할 목적으로 제공되는 객체 모음을 대상으로 하는 모델
 * 웹브라우저의 창이나 프레임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단
 * 전역객체인 Window의 프로퍼티와 메소드를 통해 제어
