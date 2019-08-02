@@ -176,3 +176,9 @@ __double underscores__ <br/>
 
     ![Alt text](/path/to/img.jpg)
     ![Alt text](/path/to/img.jpg "Optional title")
+
+###     * 참고문서
+
+  * [마크다운 markdown 작성법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
+  * [존 그루버 마크다운 페이지 번역](https://nolboo.kim/blog/2013/09/07/john-gruber-markdown/)
+  * [깃허브 취향의 마크다운 번역](https://nolboo.kim/blog/2014/03/25/github-flavored-markdown/)
