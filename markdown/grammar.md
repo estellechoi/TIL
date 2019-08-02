@@ -76,13 +76,18 @@
 #### 4) 코드블럭 (Fenced Code Blocks)
 #### 문법
 > 줄 앞에 4개의 공백(Space) 또는 1개의 탭(Tab)이 있는 텍스트를 코드블럭으로 변환
-울타리 블럭은 들여쓰기 없이 \`\`\` 으로 감싸면 된다.
-코드블럭 바로 앞에는 빈 줄이 있어야 한다.
+> 들여쓰기 없이 \`\`\` 으로 감싸는 방법도 있다.
+> 코드블럭 바로 앞에는 빈 줄이 있어야 한다.
+
+      ```
+      This is a code block.
+      ```
+          This is a code block.
+
+#### 사용예시
 
 ```
 This is a code block.
 ```
 
     This is a code block.
-
-#### 사용예시
