@@ -12,7 +12,7 @@
 ```
 
 ### 2. \<select\> \<option value\=\"2019\" checked\>
- - <select>의 value 사용
+ - \<select\>의 value 사용
 
 #### 예시
 
