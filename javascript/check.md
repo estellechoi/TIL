@@ -23,3 +23,15 @@
     // 따옴표를 잊으면 에러가 난다 !
     }
 ```
+
+### 3. 함수 호출
+ - 문서 로드 시 \: \<body onload\=\"Check()\"\>
+
+#### 예시
+
+```JavaScript
+  <body onload="Check()">
+```
+
+#### 참고 코드
+[Test_board3/WebContent/content.jsp](https://github.com/estellechoi/jsp-tutorials/blob/master/Test_board3/WebContent/content.jsp)
