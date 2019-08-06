@@ -1,4 +1,5 @@
 ## JSP 문서 로드시 <input type="radio"> & <select> 체크 설정하기
+
 ### 1. \<input type\=\"radio\" checked\>
  - JavaScript 배열 인덱스 값 사용
  - checked 속성 값에 true 설정
