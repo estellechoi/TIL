@@ -37,3 +37,6 @@
  - 연도 `year`
     - 두자리 연도 year(2) 또는 네자리 연도 year(4) 를 사용할 수 있다.
     - 유효하지 않은 연도는 \'0000\' 으로 저장된다.
+
+
+ * 참고링크 : [TCP SCHOOL.com](http://tcpschool.com/mysql/mysql_datatype_numeric)
