@@ -27,3 +27,31 @@
 ```JSP
   <%@ page buffer = "none"%>
 ```
+
+
+#### autoFlush 속성 설정하기
+ - 플러시(flush) : 버퍼가 다 찼을 때, 버퍼에 쌓인 데이터를 전송하고 버퍼를 비우는 것
+ - autoFlush = "true" 버퍼가 다 차면 버퍼를 플러시하고 계속 작업을 진행한다.
+ - autoFlush = "false" 버퍼가 다 차면 예외를 발생시키고 작업을 중단한다.
+    > java.io.IOException: 오류: JSP 버퍼 오버플로우
+
+```JSP
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <%@ page buffer="1kb" autoFlush="false"%>
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  </head>
+  <body>
+  	안녕하세요
+  	<%
+  		for(int i=0; i<1000; i++) {
+  			out.print(i);
+  		}
+  	%>
+  </body>
+  </html>
+```
