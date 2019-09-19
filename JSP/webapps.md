@@ -17,6 +17,7 @@
   #### 웹어플리케이션 폴더와 URL의 관계
   - 웹어플리케이션 폴더명과 URL의 경로가 같다.
       > webapps\test → http://localhost:8080/test
+      > 여기에서 /test 를 컨텍스트 경로(context path) 라고 한다.
 
-  - ROOT 웹어플리케이션의 경우 URL 경로는 빈 문자열이다.
+  - ROOT 웹어플리케이션의 경우 컨텍스트 경로는 빈 문자열이다.
       > webapps\ROOT → http://localhost:8080
