@@ -164,7 +164,7 @@ This is a code block.
   * 참조링크
 
         [Google][googlelink]
-        googlelink]: https://google.com "Go google"
+        [googlelink]: https://google.com "Go google"
 
   * 인라인 링크
 
