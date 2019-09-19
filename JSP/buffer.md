@@ -34,6 +34,7 @@
 
 #### autoFlush 속성 설정하기
  - 플러시(flush) : 버퍼가 다 찼을 때, 버퍼에 쌓인 데이터를 전송하고 버퍼를 비우는 것
+ - [autoFlush 속성으로 버퍼가 다 찼을 때 데이터 자동전송 여부를 설정할 수 있다.](https://github.com/estellechoi/jsp-tutorials/blob/master/Test/WebContent/buffer_true.jsp)
  - autoFlush = "true" 버퍼가 다 차면 버퍼를 플러시하고 계속 작업을 진행한다.
  - autoFlush = "false" 버퍼가 다 차면 예외를 발생시키고 작업을 중단한다.
     > java.io.IOException: 오류: JSP 버퍼 오버플로우
