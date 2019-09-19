@@ -14,10 +14,17 @@
  - 웹어플리케이션 폴더와 그 하위 폴더를 제외한 나머지 폴더에는 JSP, HTML, 이미지 등의 파일 위치
 
 
-  #### 웹어플리케이션 폴더와 URL의 관계
+  #### 컨텍스트 경로
   - 웹어플리케이션 폴더명과 URL의 경로가 같다.
       > webapps\test → http://localhost:8080/test
       > 여기에서 /test 를 컨텍스트 경로(context path) 라고 한다.
 
   - ROOT 웹어플리케이션의 경우 컨텍스트 경로는 빈 문자열이다.
       > webapps\ROOT → http://localhost:8080
+
+  - request 기본 객체는 컨텍스트 경로를 불러오는 메소드를 제공한다.
+  ```JSP
+    <%=request.getContextPath()%>
+  ```
+
+  - URL의 컨텍스트 경로와 일치하는 웹어플리케이션이 존재하지 않으면, ROOT 웹어플리케이션 하위 폴더 중에서 검색하여 실행한다.
