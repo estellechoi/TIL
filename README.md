@@ -5,7 +5,7 @@
  - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSP/buffer.md)
  - [웹어플리케이션 폴더 구성과 URL 매핑](https://github.com/estellechoi/TIL/blob/master/JSP/webapps.md)
  - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSP/war.md)
- - [프로젝트 로그 관리하기](https://github.com/estellechoi/TIL/blob/master/JSP/log.md)
+ - [프로젝트 로그 관리하기](https://github.com/estellechoi/TIL/blob/master/JSP/log.md) *
 
 ### Javascript
  - [DOM과 BOM](https://github.com/estellechoi/TIL/blob/master/javascript/dom.md)
@@ -14,7 +14,7 @@
 ### MySQL
  - [MySQL의 자료형](https://github.com/estellechoi/TIL/blob/master/mySQL/dataType.md)
  - [MySQL 쿼리 문법](https://github.com/estellechoi/TIL/blob/master/mySQL/query.md)
- - [Command 로 MySQL 접근하기](https://github.com/estellechoi/TIL/blob/master/mySQL/cmd.md)
+ - [Command 로 MySQL 접근하기](https://github.com/estellechoi/TIL/blob/master/mySQL/cmd.md) *
 
 ### Markdown
  - [마크다운(Markdown) 파일 작성법](https://github.com/estellechoi/TIL/blob/master/markdown/grammar.md)
