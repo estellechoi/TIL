@@ -13,6 +13,7 @@
 ### MySQL
  - [MySQL의 자료형](https://github.com/estellechoi/TIL/blob/master/mySQL/dataType.md)
  - [MySQL 쿼리 문법](https://github.com/estellechoi/TIL/blob/master/mySQL/query.md)
+ - [Command 로 MySQL 접근하기](https://github.com/estellechoi/TIL/blob/master/mySQL/cmd.md)
 
 ### Markdown
  - [마크다운(Markdown) 파일 작성법](https://github.com/estellechoi/TIL/blob/master/markdown/grammar.md)
