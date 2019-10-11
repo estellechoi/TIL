@@ -6,6 +6,7 @@
  - [웹어플리케이션 폴더 구성과 URL 매핑](https://github.com/estellechoi/TIL/blob/master/JSP/webapps.md)
  - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSP/war.md)
  - [프로젝트 로그 관리하기](https://github.com/estellechoi/TIL/blob/master/JSP/log.md) *
+ - [웹에서 쿠키(Cookie) 사용하기](https://github.com/estellechoi/TIL/blob/master/JSP/cookie.md) *
 
 ### Javascript
  - [DOM과 BOM](https://github.com/estellechoi/TIL/blob/master/javascript/dom.md)
