@@ -71,6 +71,10 @@
   %>
  ```
 
+ #### 테스트 코드
+ [cookie.jsp](https://github.com/estellechoi/jsp-tutorials/blob/master/Test/WebContent/Cookie/cookie.jsp)
+ [cookie_view.jsp](https://github.com/estellechoi/jsp-tutorials/blob/master/Test/WebContent/Cookie/cookie_view.jsp)
+
  ***
  ###     * 참고문서
 
