@@ -9,6 +9,7 @@
  - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSP/war.md)
  - [프로젝트 로그 관리하기](https://github.com/estellechoi/TIL/blob/master/JSP/log.md) *
  - [웹에서 쿠키(Cookie) 사용하기](https://github.com/estellechoi/TIL/blob/master/JSP/cookie.md) *
+ - [JAR 과 WAR 의 차이](https://github.com/estellechoi/TIL/blob/master/JSP/jar_war.md) *
 
 ### Javascript
  - [DOM과 BOM](https://github.com/estellechoi/TIL/blob/master/javascript/dom.md)
