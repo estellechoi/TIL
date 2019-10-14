@@ -3,7 +3,7 @@
 
 \* 표시한 항목은 수정이 필요하거나 아직 학습 중인 주제입니다.
 ***
-### JSP (최범균의 JSP 2.3 웹프로그래밍 학습 내용)
+### JSP (최범균의 JSP 2.3 웹프로그래밍 + 추가 학습)
  - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSP/buffer.md)
  - [웹어플리케이션 폴더 구성과 URL 매핑](https://github.com/estellechoi/TIL/blob/master/JSP/webapps.md)
  - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSP/war.md)
