@@ -40,6 +40,8 @@
 
  #### mv (Move)
  - mv a.txt \/home\/estellechoi\/ : a.txt 파일을 해당 경로로 이동
+ - mv a.txt estellechoi\/ : a.txt 파일을 현재 디렉토리의 하위 디렉토리인 estellechoi 밑으로 이동
+ - mv a.txt .. : a.txt 파일을 상위 디렉토리로 이동
  - mv a.txt b.txt : a.txt 파일의 이름을 b.txt로 변경하여 이동 (?)
 
  #### vi
