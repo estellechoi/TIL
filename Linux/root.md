@@ -5,7 +5,7 @@
  - useradd -g agroup estellechoi : estellechoi 사용자를 추가하고 agroup 그룹에 포함시킴
  - passwd estellechoi : estellechoi 사용자의 비밀번호 지정/변경
 
- #### usermod
+ #### usermod (사용자 속성)
  - usermod -g root estellechoi : estellechoi 사용자의 그룹을 root 그룹으로 변경
 
  #### userdel
@@ -14,3 +14,18 @@
 
  #### groups
  - groups estellechoi : estellechoi 사용자가 소속된 그룹을 보여줌
+
+ ####groupadd
+ - groupadd agroup : agroup 라는 그룹을 추가
+
+ ####groupmod (그룹 속성)
+ - groupmod -n agroup bgroup : agroup 이름을 bgroup으로 변경
+
+ ####groupdel
+ - groupdel agroup : agroup 그룹을 삭제
+
+ ####gpasswd
+ - gpasswd agroup : agroup 그룹의 비밀번호 지정
+ - gpasswd -a estellechoi agroup : estellechoi 사용자를 agroup 그룹에 추가
+ - gpasswd -d estellechoi agroup : estellechoi 사용자를 agroup 그룹에서 제거
+ - gpasswd -A estellechoi agroup : estellechoi 사용자를 agroup 그룹의 관리자로 지정
