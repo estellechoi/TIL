@@ -20,5 +20,8 @@
  - [MySQL 쿼리 문법](https://github.com/estellechoi/TIL/blob/master/mySQL/query.md)
  - [Command 로 MySQL 데이터베이스 백업/복원하기](https://github.com/estellechoi/TIL/blob/master/mySQL/cmd.md) *
 
+### Linux
+ - [리눅스 기본 명령어](https://github.com/estellechoi/TIL/blob/master/Linux/terminal.md)
+
 ### Markdown
  - [마크다운(Markdown) 파일 작성법](https://github.com/estellechoi/TIL/blob/master/markdown/grammar.md)
