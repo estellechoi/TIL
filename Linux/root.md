@@ -15,16 +15,16 @@
  #### groups
  - groups estellechoi : estellechoi 사용자가 소속된 그룹을 보여줌
 
- ####groupadd
+ #### groupadd
  - groupadd agroup : agroup 라는 그룹을 추가
 
- ####groupmod (그룹 속성)
+ #### groupmod (그룹 속성)
  - groupmod -n agroup bgroup : agroup 이름을 bgroup으로 변경
 
- ####groupdel
+ #### groupdel
  - groupdel agroup : agroup 그룹을 삭제
 
- ####gpasswd
+ #### gpasswd
  - gpasswd agroup : agroup 그룹의 비밀번호 지정
  - gpasswd -a estellechoi agroup : estellechoi 사용자를 agroup 그룹에 추가
  - gpasswd -d estellechoi agroup : estellechoi 사용자를 agroup 그룹에서 제거
