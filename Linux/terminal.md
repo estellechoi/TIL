@@ -35,7 +35,7 @@
 
  #### cp (Copy)
  - cp a.txt a2.txt : a.txt 파일을 복사하여 현재 디렉토리에 a2.txt 이름의 파일로 저장
- - cp a.txt \/test\/a2.txt : a.txt 파일을 복사하여 test 디렉토리에 a2.txt 이름의 파일로 저장
+ - cp a.txt test\/a2.txt : a.txt 파일을 복사하여 test 디렉토리에 a2.txt 이름의 파일로 저장
  - cp ..\/a.txt . : 상위 디렉토리의 a.txt 파일을 복사하여 현재 디렉토리에 저장
 
  #### mv (Move)
