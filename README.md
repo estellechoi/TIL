@@ -22,6 +22,7 @@
 
 ### Linux
  - [리눅스 기본 명령어](https://github.com/estellechoi/TIL/blob/master/Linux/terminal.md)
+ - [리눅스 슈퍼유저(root) 명령어](https://github.com/estellechoi/TIL/blob/master/Linux/root.md)
 
 ### Markdown
  - [마크다운(Markdown) 파일 작성법](https://github.com/estellechoi/TIL/blob/master/markdown/grammar.md)
