@@ -58,8 +58,11 @@
  #### chmod (Change Mode)
  - chmod 777 test : test 디렉토리의 user, group, other의 사용권한을 모두 rwx로 변경
     > chomod [8진법수] [파일/디렉토리명] : user, group, other의 권한 변경
+
     > rwx : (2진법) 111 → 1*4 + 1*2 + 1*1 = 7
+
     > r-x : (2진법) 101 → 1*4 + 0*2 + 1*1 = 5
+
     > r-- : (2진법) 100 → 1*4 + 0*2 + 0*2 = 4
 
  - chmod 4755 test : test 디렉토리의 user id 를 설정하고 user는 rwx, group/other는 r-x 권한 부여
