@@ -59,17 +59,17 @@
  - chmod 777 test : test 디렉토리의 user, group, other의 사용권한을 모두 rwx로 변경
     > chomod [8진법수] [파일/디렉토리명] : user, group, other의 권한 변경
 
-    > rwx : (2진법) 111 → 1*4 + 1*2 + 1*1 = 7
+    > rwx : (2진법) 111 → 1\*4 + 1\*2 + 1\*1 = 7
 
-    > r-x : (2진법) 101 → 1*4 + 0*2 + 1*1 = 5
+    > r-x : (2진법) 101 → 1\*4 + 0\*2 + 1\*1 = 5
 
-    > r-- : (2진법) 100 → 1*4 + 0*2 + 0*2 = 4
+    > r-- : (2진법) 100 → 1\*4 + 0\*2 + 0\*2 = 4
 
  - chmod 4755 test : test 디렉토리의 user id 를 설정하고 user는 rwx, group/other는 r-x 권한 부여
     > chmod [4XXX] [파일/디렉토리명] : SetUid (user id 설정) 및 user, group, ohter의 권한 변경
 
     - _-rwxr-xr-x : 파일/디렉토리 접근권한 분류 표기 (첫글자 - : 파일/디렉토리 분류)_
-        - - : 일반
+        - \- : 일반
         - d : 디렉토리
     - rwx : read, write, execute 가능
     - r-x : 디렉토리에 들어올 수 있음
