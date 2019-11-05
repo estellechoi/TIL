@@ -1,10 +1,10 @@
 # TIL
-&#127905; Today I learned (오늘 새로 배운 것을 기록합니다)
+:dizzy::dizzy::dizzy: Today I learned (오늘 새로 배운 것을 기록합니다)
 
 \* 표시한 항목은 수정이 필요하거나 아직 학습 중인 주제입니다.
 ***
 ### ETC
- - [:cloud: 작은팁 저장소](https://github.com/estellechoi/TIL/blob/master/ETC/smallTips.md)
+ - [:heart_decoration: 작은팁 저장소](https://github.com/estellechoi/TIL/blob/master/ETC/smallTips.md)
 
 ### JSP (최범균의 JSP 2.3 웹프로그래밍 + 추가 학습)
  - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSP/buffer.md)
