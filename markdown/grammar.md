@@ -237,6 +237,7 @@ __double underscores__ <br/>
 &#128525; &#128513; &#128519; &#10047;
 
  * [더 많은 이모지를 확인하려면 다음 링크를 클릭](https://steemit.com/steemkr-guide/@snow-airline/steemkr-quick-start-guide)
+ * [EMOJI CHEAT SHEET](https://www.webfx.com/tools/emoji-cheat-sheet/)
 
 <br/>
 
