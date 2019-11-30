@@ -25,7 +25,7 @@
       - 바로 이미지 파일을 열어보자. \"파일이 존재하지 않습니다\" 라는 메세지와 함께 파일이 열리지 않는다. 컴퓨터가 해당 파일을 현재 위치한 디렉토리 내에서만 찾기 때문이다.
         ![screenshot3](./../img/screenshot_iterm_fail.png)
       - 이번에는 이미지 파일이 위치한 디렉토리로 이동한 후 파일을 열어보자. 잘 열린다 !
-        ![screenshot4](./img/screenshot_iterm_success.png)
+        ![screenshot4](./../img/screenshot_iterm_success.png)
 
   - 그렇다면, 명령을 했을 때 컴퓨터에게 자주 사용하는 특정 디렉토리 몇 개만 간단히 뒤져보라고 지정해주면 되지 않을까?
   - 그렇게 지정해주는 디렉토리 경로를 PATH 라고 한다. PATH 는 환경변수(Environment variable) 라는 메모리에 저장된다. *
@@ -37,49 +37,58 @@
  ### 2. 자바 환경변수 설정하기
   - 자바 컴파일 실행파일(javac.exe)을 어디에서든 실행할 수 있도록 PATH 로 지정해보자.
   - 먼저 JDK 가 설치된 디렉토리의 Home 디렉토리로 이동한다.
-    ```cd /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
+    ```
+      cd /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
     ```
     \('jdk1.8.0_231.jdk' 는 자신이 설정한 Java 버전에 따라 다를 수 있다.\)
 
-  ![screenshot5](./img/cdJava.png)
+  ![screenshot5](./../img/cdJava.png)
 
   - 다음 명령을 한다. vi 편집기를 사용해 .bash_profile 파일을 연다.
-  ```vi ~/.bash_profile
+  ```
+    vi ~/.bash_profile
   ```
 
-  ![screenshot6](./img/vi.png)
+  ![screenshot6](./../img/vi.png)
 
   - 첫번째 그림과 같이 창이 변경된다.
   - 이 상태에서 입력(INSERT) 모드로 전환하기 위해 `i` 키를 누른다. 두번째 그림처럼 INSERT 모드로 변경되었다.
-  ![screenshot7](./img/vi2.png)
-  ![screenshot8](./img/viInsert.png)
+
+  ![screenshot7](./../img/vi2.png)
+  ![screenshot8](./../img/viInsert.png)
 
   - java.exe 파일이 위치한 디렉토리 경로를 PATH 로 지정해주자.
-  ```export PATH=${PATH}:$JAVA_HOME/bin
+  ```
+    export PATH=${PATH}:$JAVA_HOME/bin
   ```
   > javac.exe 파일의 경로는 /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/bin/javac 이다.
+
   > 기본으로 JAVA_HOME 변수가 설정되어 있지 않다면 JAVA_HOME 변수도 등록해야 한다. (아래 그림 참고)
 
   - `esc` 키를 눌러 INSERT 모드를 종료한다.
   - 이제 vi 편집기를 종료해야 한다. vi 명령어 중 \"변경사항 저장 후 종료\" 명령어인 `:wq` 를 입력하고 `enter`(return) 키를 누른다!
-    ![screenshot9](./img/viPATH.png)
+
+    ![screenshot9](./../img/viPATH.png)
 
   - 원래의 창으로 돌아오면 편집한 .bash_profile 파일을 적용시키기 위해 다음 명령어를 입력한다.
-  ```source ~/.bash_profile
+  ```
+    source ~/.bash_profile
   ```
   - 이제 설정이 끝났다.
-    ![screenshot10](./img/source.png)
+    ![screenshot10](./../img/source.png)
 
   - 설정이 잘 적용되었는지 확인해보자. 환경변수 $PATH 를 출력하는 명령어를 입력한다.
-  ```echo $PATH
   ```
-  -  \/Library\/Java\/JavaVirtualMachines\/jdk1.8.0_231.jdk\/Contents\/Home\/bin 경로가 추가되어 있으면 잘 적용된 것이다.
-    ![screenshot11](./img/echoPATH.png)
+    echo $PATH
+  ```
+  -  \/Library\/Java\/JavaVirtualMachines\/jdk1.8.0_231.jdk\/Contents\/Home\/bin 경로가 추가되어 있으면 잘 적용된 것이다. *
+
+    ![screenshot11](./../img/echoPATH.png)
 
 
 <hr/>
 
 
-    &#128519; 참고 문서
-    [macOS Java 환경변수(PATH) 설정 방법](https://whitepaek.tistory.com/28)
-    [컴퓨터 초보자를 위한 강좌 패스(Path)란 무엇인가](http://mwultong.blogspot.com/2006/03/path.html)
+  &#128519; 참고 문서
+  [macOS Java 환경변수(PATH) 설정 방법](https://whitepaek.tistory.com/28)
+  [컴퓨터 초보자를 위한 강좌 패스(Path)란 무엇인가](http://mwultong.blogspot.com/2006/03/path.html)

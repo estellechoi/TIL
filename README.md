@@ -5,6 +5,7 @@
 ***
 ### ETC
  - [:shipit: 작은팁 저장소](https://github.com/estellechoi/TIL/blob/master/ETC/smallTips.md)
+ - [&#128187; 컴알못 탈출하기](https://github.com/estellechoi/TIL/blob/master/ETC/ImNotComputerDummy.md)
 
 ### JSP (최범균의 JSP 2.3 웹프로그래밍 + 추가 학습)
  - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSP/buffer.md)
