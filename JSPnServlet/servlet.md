@@ -1,4 +1,4 @@
-# 웹서버 (Web Server) 와 웹 어플리케이션 서버(Web Application Server)
+# 자바 웹 어플리케이션(Java Web Application) 과 서블릿 (Servlet) 
 
 
 ## 자바 웹 어플리케이션 (Java Web Application)

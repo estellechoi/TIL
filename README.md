@@ -7,13 +7,19 @@
  - [:shipit: 작은팁 저장소](https://github.com/estellechoi/TIL/blob/master/ETC/smallTips.md)
  - [&#128187; 컴알못 탈출하기](https://github.com/estellechoi/TIL/blob/master/ETC/ImNotComputerDummy.md)
 
-### JSP (최범균의 JSP 2.3 웹프로그래밍 + 추가 학습)
- - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSP/buffer.md)
- - [웹어플리케이션 폴더 구성과 URL 매핑](https://github.com/estellechoi/TIL/blob/master/JSP/webapps.md)
- - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSP/war.md)
- - [프로젝트 로그 관리하기](https://github.com/estellechoi/TIL/blob/master/JSP/log.md) *
- - [웹에서 쿠키(Cookie) 사용하기](https://github.com/estellechoi/TIL/blob/master/JSP/cookie.md) *
- - [JAR 과 WAR 의 차이](https://github.com/estellechoi/TIL/blob/master/JSP/jar_war.md) *
+### www
+ - [브라우저(Browser)](https://github.com/estellechoi/TIL/blob/master/www/browser.md)
+ - [인터넷과 HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
+ - [웹서버 (Web Server) 와 웹 어플리케이션 서버(Web Application Server)](https://github.com/estellechoi/TIL/blob/master/www/was.md)
+
+### JSP & Servlet
+ - [자바 웹 어플리케이션(Java Web Application) 과 서블릿 (Servlet)](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/servlet.md)
+ - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/buffer.md)
+ - [웹어플리케이션 폴더 구성과 URL 매핑](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/webapps.md)
+ - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/war.md)
+ - [프로젝트 로그 관리하기](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/log.md) *
+ - [웹에서 쿠키(Cookie) 사용하기](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/cookie.md) *
+ - [JAR 과 WAR 의 차이](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/jar_war.md) *
 
 ### Javascript
  - [DOM과 BOM](https://github.com/estellechoi/TIL/blob/master/javascript/dom.md)
