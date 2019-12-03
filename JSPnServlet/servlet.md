@@ -1,21 +1,21 @@
 # 자바 웹 어플리케이션(Java Web Application) 과 서블릿 (Servlet)
 
 
-
+<br>
 
 ## 자바 웹 어플리케이션 (Java Web Application)
 - WAS 에 설치(deploy)되어 동작하는 어플리케이션이다.
 - HTML, CSS, 이미지, 자바 클래스(Servlet, Interface 등 포함), 각종 설정파일 등이 포함된다.
 
 
-
+<br>
 
 ## Context Path
 - WAS(Web Application Server)에서 웹 어플리케이션을 구분하기 위한 path
 - 이클립스에서는 디폴트로 프로젝트 이름이 설정된다. \/projectname
 
 
-
+<br>
 
 ## 서블릿 (Servlet) 이란 ?
 - WAS 에서 동작하는 Java 클래스이다.
@@ -25,7 +25,7 @@
 - 웹 페이지를 구성하는 화면(HTML)은 JSP로 표현하고, 복잡한 프로그래밍은 서블릿으로 구현한다.
 
 
-
+<br>
 
 ## Servlet 작성법
 - Servlet 3.0 이상
@@ -37,7 +37,7 @@
 	 - `<servlet>` `<servlet-mapping>``
 
 
-
+<br>
 
 ## Servlet 의 생명주기(Life Cycle)
 - HttpServlet 클래스의 3 가지 메소드를 Override
@@ -56,7 +56,7 @@
 		  - POST 요청일 때 doPost() 메소드 호출
 
 
-
+<br>
 
 ## 요청(Request)과 응답(Response)
 - WAS는 Servlet 요청을 받으면 요청 정보를 HttpServletRequest 객체를 생성하여 저장하고, 객체를 서블릿에 전달한다.
@@ -70,7 +70,7 @@
 	 - 서블릿은 HttpServletResponse 객체를 이용하여 ContentType, 응답코드, 응답 메세지 등을 전송한다.
 
 
-
+<br>
 
 ## doGet() 메소드
 - html 내 form 태그의 method 가 get 일 때 호출됨
@@ -78,7 +78,7 @@
 - 인코딩처리 : server.xml 에서 `<Connector>` 태그에 속성 추가 : `URIEncoding = “UTF-8”``
 
 
-
+<br>
 
 ***
 

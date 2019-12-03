@@ -1,7 +1,7 @@
 # 웹서버 (Web Server) 와 웹 어플리케이션 서버(Web Application Server)
 
 
-
+<br>
 
 ## 웹서버 (Web Server) 란 ?
 - 웹 서버는 보통 소프트웨어를 말하지만, 웹 서버 소프트웨어가 동작하는 컴퓨터를 말하기도 한다.
@@ -11,7 +11,7 @@
 	 - 동적인 결과 : 웹서버 프로그램에 의해 만들어진 결과물
 
 
-
+<br>
 
 ## 클라이언트/서버 구조
 - 클라이언트(Client)는 서비스(Service)를 제공하는 서버(Server)에게 정보를 요청하여 응답 받은 결과를 사용한다.
@@ -20,7 +20,7 @@
 	 - 웹 서버의 디폴트 port = 80번
 
 
-
+<br>
 
 ## DBMS (Database Management System) 와 미들웨어 (Middle Ware)
 - DBMS : MySQL, MariaDB 등이 있다.
@@ -29,7 +29,7 @@
 	 - 비즈니스 로직을 클라이언트와 DBMS 사이의 미들웨어 서버에서 동작하도록 함으로써 클라이언트는 입출력만 담당하도록 한다.
 
 
-
+<br>
 
 ## 웹 어플리케이션 서버 (WAS, Web Application Server) 란 ?
 - 일종의 미들웨어로 웹 클라이언트(웹브라우저)의 요청 중 웹 어플리케이션이 동작하도록 지원한다.
@@ -45,7 +45,7 @@
 ![webServer](./../img/webServer.png)
 
 
-
+<br>
 
 ***
 
