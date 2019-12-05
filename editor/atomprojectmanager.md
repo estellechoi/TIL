@@ -12,11 +12,13 @@
   ![atom1](./../img/atom1.png)
 
 <br>
+
   - 가장 아래에 있는 Install 탭을 클릭하면 Install Packages 탭이 열린다.
 
   ![atom2](./../img/atom2.png)
 
 <br>
+
   - Project Manager 를 검색한다. (다운로드 수가 많다.. 모두 맥 사용자들인가 ?)
   - Install 버튼을 클릭하여 설치한다.
 
@@ -31,11 +33,13 @@
   ![atom4](./../img/atom4.png)
 
 <br>
+
   - 아래와 같은 창이 열리는데, 프로젝트 이름을 입력하고 Save 버튼을 클릭하여 저장한다.
 
   ![atom5](./../img/atom5.png)
 
 <br>
+
   - 이제 아톰을 종료하고 재시작한다.
   - 기대와 달리 작업 폴더가 보이지 않는다.. 아쉽지만, 저장된 프로젝트 리스트를 열어서 작업할 프로젝트를 직접 열어주어야 한다.
   - 리스트를 열기 위해 [Packages] - [Project Manager] - [List Projects] 순으로 클릭한다. (단축키는 `ctrl + cmd + p`)
@@ -43,6 +47,7 @@
   ![atom6](./../img/atom6.png)
 
 <br>
+
   - 아래와 같이 저장된 프로젝트 리스트를 확인할 수 있고, 리스트 중에서 작업할 프로젝트를 선택하면 된다!
 
   ![atom7](./../img/atom7.png)
