@@ -1,10 +1,8 @@
-# EL (Expression Language)과 JSTL (JSP Standard Tag Library) 표기법
+# EL 과 JSTL
 
 <br>
 
 ## 1. EL (Expression Language)
-
-<br>
 
 ### 1-1. EL (Expression Language) 이란 ?
 - 값을 표현하는데 사용되는 스크립트 언어로서, JSP의 기본문법을 보완한다.
@@ -12,24 +10,26 @@
 - 수치, 관계, 논리 연산자를 제공하여 함께 사용할 수 있다.
 - 자바 클래스에서 메소드를 호출하는 기능을 제공한다.
 - 문법 : ${expr}
-```
-<jsp:include page=“/module/${skin.id}/header.jsp” flush=“true” />
-${sessionScope.member.id} 님, 환영합니다.
-```
+  ```
+  <jsp:include page=“/module/${skin.id}/header.jsp” flush=“true” />
+  ${sessionScope.member.id} 님, 환영합니다.
+  ```
 
 - 다이나믹 웹 모듈 2.4 부터 EL 표기법 사용이 가능하다.
 
-  *이클립스에서 다이나믹 웹 모듈 버전 바꾸기*
+<br>
+
+### 1-1-1. *이클립스에서 다이나믹 웹 모듈 버전 바꾸기*
 
   1. 이클립스 Navigator 를 연다.
   2. 해당 프로젝트 하위에 .settings 디렉토리가 있다.
   3. .settings/org.eclipse.wst.common.project.facet.core.xml 파일을 연다.
 
-  ![webmodule](webmodule.png)
+  ![webmodule](./../img/webmodule.png)
 
   4. 아래와 같이 버전을 수정한다.
 
-  ![webmodule2](webmodule2.png)
+  ![webmodule2](./../img/webmodule2.png)
 
   5. 이클립스를 재시작하면 적용된다.
 
@@ -61,19 +61,19 @@ ${sessionScope.member.id} 님, 환영합니다.
 
 ### 1-3. EL 기본객체
 
-  ![](el.png)
+  ![el](./../img/el.png)
 
 <br>
 
 ### 1-4. EL 의 데이터 타입
-	- boolean
-	- int
-	- double
-	- String
-		  - 값에 포함된 \‘ \‘ 는 \₩ 과 함께 사용해야 한다. `₩’`
-	- \₩
-		  - \₩ 값은 \₩ 과 함께 사용해야 한다. `₩₩`
-	- null
+- boolean
+- int
+- double
+- String
+	- 값에 포함된 \‘ \‘ 는 \₩ 과 함께 사용해야 한다. `₩’`
+- \₩
+	- \₩ 값은 \₩ 과 함께 사용해야 한다. `₩₩`
+- null
 
 <br>
 
@@ -86,14 +86,12 @@ ${sessionScope.member.id} 님, 환영합니다.
 <br>
 
 ### 1-6. EL 비활성화 하기
-- JSP 에서 \<\%\@ page isELIgnored\=\“true\” \%\> 명시한다.
+- JSP 에서 `<%@ page isELIgnored=“true” %>` 명시한다.
 - isELIgnored 속성의 디폴트 값은 false 이다.
 
 <br>
 
 ## 2. JSTL (JSP Standard Tag Library)
-
-<br>
 
 ## 2-1. JSTL (JSP Standard Tag Library) 이란 ?
 - JSTL 은 JSP 페이지에서 조건문, 반복문 처리를 html 태그 형태로 작성할 수 있게 도와주는 라이브러리이다.
@@ -126,7 +124,7 @@ ${sessionScope.member.id} 님, 환영합니다.
 
 <br>
 
-## \<\c\:set\> \<\c\:remove\>
+## 2-4. \<\c\:set\> \<\c\:remove\>
 - `<c:set var=“변수명” scope=“session” value=“value” />`
 - `<c:set var=“변수명” scope=“request”> value </c:set>`
 - `<c:remove var=“변수명” scope=“request” />`
@@ -145,4 +143,4 @@ ${sessionScope.member.id} 님, 환영합니다.
 <hr>
 
 ### Reference
- - edwith [부스트코스] 교육 자료 
+ - edwith [부스트코스] 교육 자료
