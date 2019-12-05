@@ -14,6 +14,9 @@
 
 ### JSP & Servlet
  - [자바 웹 어플리케이션(Java Web Application) 과 서블릿 (Servlet)](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/servlet.md)
+ - [EL 과 JSTL](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/el.md)
+ - [JSP (JavaServer Pages)](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/jsp.md)
+ - [Scope 란?](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/scope.md)
  - [출력 버퍼와 응답](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/buffer.md)
  - [웹어플리케이션 폴더 구성과 URL 매핑](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/webapps.md)
  - [웹어플리케이션 배포](https://github.com/estellechoi/TIL/blob/master/JSPnServlet/war.md)
