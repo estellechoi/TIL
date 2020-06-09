@@ -36,6 +36,8 @@
 
 - The `Document` interface represents any web page loaded in the browser and serves as an entry point into the web page's content, which is the [DOM tree](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core). The DOM tree includes elements such as `<body>` and `<table>`, among many others.
 
+<br>
+
 ---
 
 ### Reference
