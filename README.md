@@ -16,6 +16,7 @@
 
 ### DOM
 
+- [To read about DOM]()
 - [DOM (Document Object Model)](https://github.com/estellechoi/TIL/blob/master/Dom/dom.md)
 
 ### Javascript
@@ -56,6 +57,6 @@
 
 - [아톰(Atom) 편집기에서 작업 내용 유지하기](https://github.com/estellechoi/TIL/blob/master/editor/atomprojectmanager.md)
 
-### Stronly recommending to read
+### To read
 
 -
