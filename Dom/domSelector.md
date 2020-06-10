@@ -24,7 +24,7 @@ The Selectors API provides methods that make it quick and easy to retrieve `Elem
 
 - A common use for `DocumentFragment` is to create one, assemble a DOM subtree within it, then append or insert the fragment into the DOM using `Node` interface methods such as `appendChild()` or `insertBefore()`.
 
-- An empty DocumentFragment can be created using the `document.createDocumentFragment()` method or the constructor.
+- An empty `DocumentFragment` can be created using the `document.createDocumentFragment()` method or the constructor.
 
 - For example,
 
