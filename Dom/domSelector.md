@@ -2,6 +2,8 @@
 
 The Selectors API provides methods that make it quick and easy to retrieve `Element` nodes from the DOM by matching against a set of selectors.
 
+<br>
+
 ## The NodeSelector interface
 
 - This specification adds two new methods to any objects implementing the [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document), [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment), or [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) interfaces:
@@ -54,6 +56,8 @@ const els = document.querySelectorAll("p.warning, p.note");
 // returns the first element whose ID is one of main, basic, or exclamation.
 const els2 = document.querySelector("#main, #basic, #exclamation");
 ```
+
+<br>
 
 ## `Element.querySelector()` and `Document.querySelector()`
 
