@@ -76,6 +76,29 @@ for (let i = 0; i < tableAttrs.length; i++) {
 table.summary = "note: increased border";
 ```
 
+<br>
+
+### Core Interfaces in the DOM
+
+- The `document` and `window` objects are the objects whose interfaces you generally use most often in DOM programming. In simple terms, the `window` object represents something like the browser, and the `document` object is the root of the document itself. `Element` inherits from the generic `Node` interface, and together these two interfaces provide many of the methods and properties you use on individual elements.
+
+- The following is a brief list of common APIs in web and XML page scripting using the DOM.
+
+  - `document.getElementById(id)`
+  - `document.getElementsByTagName(name)`
+  - `document.createElement(name)`
+  - `parentNode.appendChild(node)`
+  - `element.innerHTML`
+  - `element.style.left`
+  - `element.setAttribute()`
+  - `element.getAttribute()`
+  - `element.addEventListener()`
+  - `window.content`
+  - `window.onload`
+  - `window.scrollTo()`
+
+<br>
+
 ---
 
 ### Reference
