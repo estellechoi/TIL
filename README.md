@@ -2,7 +2,9 @@
 
 🌎 Today I learned, 오늘 새로 배운 것을 기록합니다.
 
-> \* marked document is under revise.
+> \* marked document is under revision.
+
+<br>
 
 ---
 
@@ -53,3 +55,7 @@
 ### Editor
 
 - [아톰(Atom) 편집기에서 작업 내용 유지하기](https://github.com/estellechoi/TIL/blob/master/editor/atomprojectmanager.md)
+
+### Stronly recommending to read
+
+-
