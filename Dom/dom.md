@@ -1,5 +1,7 @@
 # DOM ( Document Object Model)
 
+> [MDN Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) 문서를 개인적인 필요에 따라 부분 번역하였음
+
 ## What is the DOM?
 
 - The Document Object Model(DOM) represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects. That way, programming languages can connect to the page.
@@ -42,16 +44,37 @@
 
 > Note: Because the vast majority of code that uses the DOM revolves around manipulating HTML documents, it's common to refer to the nodes in the DOM as elements, although strictly speaking not every node is an element.
 
--
-
 | Data type (Interface) | Description                                                                                                                                                                                                                                                                                                       |
-| --------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document              | This object is the root `document` object itself.                                                                                                                                                                                                                                                                 |
-| Node                  | Every object located within a document is a node of some kind. In an HTML document, an object can be an `element` node but also a text node or attribute node.                                                                                                                                                    |
-| Element               | It refers to an element or a node of type `element`.테스트2                                                                                                                                                                                                                                                       |
-| NodeList              | An array of elements, like the kind that is returned by the method document.`getElementsByTagName()`. Items in a nodeList are accessed by index in either of two ways: `list.item(0)`, `list[0]`. In the first, `item()` is the single method on the `nodeList` object. The latter uses the typical array syntax. |
-| Attribute             | It is an object reference that exposes a special (albeit small) interface for attributes. Attributes are nodes in the DOM just like elements are, though you may rarely use them as such.                                                                                                                         |
-| NamedNodeMap          | It is like an array, but the items are accessed by name or index. A namedNodeMap has an `item()` method.                                                                                                                                                                                                          |
+| :-------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|       Document        | This object is the root `document` object itself.                                                                                                                                                                                                                                                                 |
+|         Node          | Every object located within a document is a node of some kind. In an HTML document, an object can be an `element` node but also a text node or attribute node.                                                                                                                                                    |
+|        Element        | It refers to an element or a node of type `element`.테스트2                                                                                                                                                                                                                                                       |
+|       NodeList        | An array of elements, like the kind that is returned by the method document.`getElementsByTagName()`. Items in a nodeList are accessed by index in either of two ways: `list.item(0)`, `list[0]`. In the first, `item()` is the single method on the `nodeList` object. The latter uses the typical array syntax. |
+|       Attribute       | It is an object reference that exposes a special (albeit small) interface for attributes. Attributes are nodes in the DOM just like elements are, though you may rarely use them as such.                                                                                                                         |
+|     NamedNodeMap      | It is like an array, but the items are accessed by name or index. A namedNodeMap has an `item()` method.                                                                                                                                                                                                          |
+
+<br>
+
+## DOM interfaces
+
+- This guide is about the objects and the actual things you can use to manipulate the DOM hierarchy.
+
+### Interfaces and Objects
+
+- DOM 객체들은 몇가지 서로 다른 인터페이스에서 비롯된다. 예를 들어, `table` 객체는 테이블에 특화된 [`HTMLTableElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement) 인터페이스를 사용한다. 그렇기 때문에 `createCaption`, `insertRow` 등과 같은 테이블 조작에 사용할 법한 메소드를 제공한다. 한편, `table`은 HTML 요소 중 하나이기도 하다. 따라서 일반적인 [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) 인터페이스를 함께 사용할 수 있다. 또 한편 DOM의 관점에서는 HTML이나 XML과 같은 문서의 Node 트리를 구성하는 하나의 노드이다. 따라서 `Node` 인터페이스 역시 사용할 수 있다. 사실 `Element` 인터페이스도 `Node` 인터페이스에서 파생되었다.
+
+```javascript
+const table = document.getElementById("table");
+const tableAttrs = table.attributes; // attributes ->  Node/Element interface
+
+// border attribute -> HTMLTableElement interface
+for (let i = 0; i < tableAttrs.length; i++) {
+	if (tableAttrs[i].nodeName.toLowerCase() == "border") table.border = "1";
+}
+
+// summary attribute -> HTMLTableElement interface
+table.summary = "note: increased border";
+```
 
 ---
 
