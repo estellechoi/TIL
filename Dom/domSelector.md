@@ -1,5 +1,7 @@
 # Locating DOM elements using selectors
 
+> [Locating DOM elements using selectors | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors) 외 관련 문서를 개인적인 필요에 따라 부분 번역하였음
+
 The Selectors API provides methods that make it quick and easy to retrieve `Element` nodes from the DOM by matching against a set of selectors.
 
 <br>
