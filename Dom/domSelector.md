@@ -8,11 +8,11 @@ The Selectors API provides methods that make it quick and easy to retrieve `Elem
 
 - This specification adds two new methods to any objects implementing the [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document), [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment), or [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) interfaces:
 
-`querySelector()` : returns the first matching `Element` node within the node's subtree. If no matching node is found, `null` is returned.
+  - `querySelector()` : returns the first matching `Element` node within the node's subtree. If no matching node is found, `null` is returned.
 
-`querySelectorAll()` : returns a `NodeList` containing all matching `Element` nodes within the node's subtree, or an empty `NodeList` if no matches are found.
+  - `querySelectorAll()` : returns a `NodeList` containing all matching `Element` nodes within the node's subtree, or an empty `NodeList` if no matches are found.
 
-> Note: The NodeList returned by `querySelectorAll()` is not live, which means that changes in the DOM are not reflected in the collection. This is different from other DOM querying methods that return live node lists.
+  > Note: The NodeList returned by `querySelectorAll()` is not live, which means that changes in the DOM are not reflected in the collection. This is different from other DOM querying methods that return live node lists.
 
 ### What is DocumentFragment?
 
