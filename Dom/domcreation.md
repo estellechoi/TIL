@@ -6,7 +6,7 @@ This page describes how to use the [DOM Core](https://www.w3.org/TR/DOM-Level-3-
 
 ## Dynamically creating a DOM tree
 
-- I am going to create the following XML document dynamically:
+I am going to create the following XML document dynamically:
 
 ```xml
 <?xml version="1.0"?>
@@ -85,7 +85,7 @@ doc.appendChild(peopleElem);
 
 <br>
 
-### automating the DOM tree creation using JXON
+### Automating the DOM tree creation using JXON
 
 - You can automate the creation of a DOM tree using a [JXON reverse algorithm](https://developer.mozilla.org/en-US/docs/Archive/JXON#JXON_reverse_algorithms) in association with the following JSON representation:
 
