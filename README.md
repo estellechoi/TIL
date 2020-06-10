@@ -16,7 +16,7 @@
 
 ### DOM
 
-- [To read about DOM]()
+- [To read about DOM](https://github.com/estellechoi/TIL/blob/master/Dom/toRead.md)
 - [DOM (Document Object Model)](https://github.com/estellechoi/TIL/blob/master/Dom/dom.md)
 
 ### Javascript
@@ -56,7 +56,3 @@
 ### Editor
 
 - [아톰(Atom) 편집기에서 작업 내용 유지하기](https://github.com/estellechoi/TIL/blob/master/editor/atomprojectmanager.md)
-
-### To read
-
--
