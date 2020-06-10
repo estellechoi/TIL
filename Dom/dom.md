@@ -1,6 +1,6 @@
 # DOM ( Document Object Model)
 
-> [MDN Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) 문서를 개인적인 필요에 따라 부분 번역하였음
+> [MDN Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction), [Using the W3C DOM Level 1 Core](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core) 문서를 개인적인 필요에 따라 부분 번역하였음
 
 ## What is the DOM?
 
@@ -96,6 +96,32 @@ table.summary = "note: increased border";
   - `window.content`
   - `window.onload`
   - `window.scrollTo()`
+
+<br>
+
+## What is a content tree?
+
+> The W3C's DOM Level 1 Core is a powerful object model for changing the content tree of documents. It is supported in all major browsers including Mozilla Firefox and Microsoft Internet Explorer. It is a powerful base for scripting on the web.
+
+- Any HTML document (or for that matter any SGML document or XML document) is a tree structure.
+- When Mozilla parses a document, it builds a content tree and then uses it to display the document.
+- For example,
+
+```html
+<html>
+	<head>
+		<title>My Document</title>
+	</head>
+	<body>
+		<h1>Header</h1>
+		<p>Paragraph</p>
+	</body>
+</html>
+```
+
+![Content Tree](./../img/contentTree.jpg)
+
+- Each of the boxes in the tree above is a node. The line above a node expresses a parent-child relationship: the node on top is the parent, and the node on the bottom is the child. Two children of the same parent are therefore siblings. Similarly, one can refer to ancestors and descendants. (Cousins are too messy, though.)
 
 <br>
 
