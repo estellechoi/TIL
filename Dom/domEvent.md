@@ -4,21 +4,17 @@
 
 ## Registering event listeners
 
-### `EventTarget.addEventListener`
+### EventTarget.addEventListener
 
 ```javascript
 myButton.addEventListener("click", greet, false); // Assuming a button element
 ```
-
-<br>
 
 ### HTML attribute
 
 ```html
 <button onclick="alert('Hello world!')"></button>
 ```
-
-<br>
 
 ### DOM element properties
 
