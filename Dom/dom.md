@@ -121,7 +121,7 @@ table.summary = "note: increased border";
 
 ![Content Tree](./../img/contentTree.jpg)
 
-- Each of the boxes in the tree above is a node. The line above a node expresses a parent-child relationship: the node on top is the parent, and the node on the bottom is the child. Two children of the same parent are therefore siblings. Similarly, one can refer to ancestors and descendants. (Cousins are too messy, though.)
+Each of the boxes in the tree above is a node. The line above a node expresses a parent-child relationship: the node on top is the parent, and the node on the bottom is the child. Two children of the same parent are therefore siblings. Similarly, one can refer to ancestors and descendants. (Cousins are too messy, though.)
 
 <br>
 
