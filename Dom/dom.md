@@ -38,6 +38,21 @@
 
 <br>
 
+## Fundamental data types
+
+> Note: Because the vast majority of code that uses the DOM revolves around manipulating HTML documents, it's common to refer to the nodes in the DOM as elements, although strictly speaking not every node is an element.
+
+-
+
+| Data type (Interface) | Description                                                                                                                                                                                                                                                                                                       |
+| --------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document              | This object is the root `document` object itself.                                                                                                                                                                                                                                                                 |
+| Node                  | Every object located within a document is a node of some kind. In an HTML document, an object can be an `element` node but also a text node or attribute node.                                                                                                                                                    |
+| Element               | It refers to an element or a node of type `element`.테스트2                                                                                                                                                                                                                                                       |
+| NodeList              | An array of elements, like the kind that is returned by the method document.`getElementsByTagName()`. Items in a nodeList are accessed by index in either of two ways: `list.item(0)`, `list[0]`. In the first, `item()` is the single method on the `nodeList` object. The latter uses the typical array syntax. |
+| Attribute             | It is an object reference that exposes a special (albeit small) interface for attributes. Attributes are nodes in the DOM just like elements are, though you may rarely use them as such.                                                                                                                         |
+| NamedNodeMap          | It is like an array, but the items are accessed by name or index. A namedNodeMap has an `item()` method.                                                                                                                                                                                                          |
+
 ---
 
 ### Reference
