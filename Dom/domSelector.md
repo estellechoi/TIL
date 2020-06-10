@@ -14,6 +14,8 @@ The Selectors API provides methods that make it quick and easy to retrieve `Elem
 
   > Note: The NodeList returned by `querySelectorAll()` is not live, which means that changes in the DOM are not reflected in the collection. This is different from other DOM querying methods that return live node lists.
 
+<br>
+
 ### What is DocumentFragment?
 
 - `DocumentFragment` 인터페이스는 하나의 문서를 이루고있는 `document` 객체의 노드 트리에서 특정 부분을 떼내기 위해 사용된다. 여기에 중요한 점이 있다. 떼내어진 조각 객체는 `document` 객체로부터 생겨났지만 부모를 가지지 않는다. 또한 문서의 한 부분으로 생각해서는 안된다. 조각 객체에 변경 사항이 생기더라도 문서에 영향을 주지 않고 독립적으로 존재하기 때문이다.
