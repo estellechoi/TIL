@@ -6,7 +6,7 @@
 
 ## Registering event listeners
 
-- EventTarget.addEventListener
+- `EventTarget.addEventListener`
 
 ```javascript
 myButton.addEventListener("click", greet, false); // Assuming a button element
