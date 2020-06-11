@@ -41,17 +41,19 @@ myButton.onclick = (event) => {
 target.addEventListener(type, listener [, options]);
 ```
 
-- `type` : A case-sensitive string representing the event type.
-- `listener` : The object that receives a notification when an event of the specified type occurs. This must be an object implementing the `EventListener` interface, or a JavaScript function.
-- `options` : An `options` object specifies characteristics about the event listener. The available options are:
+- `type` : A string representing the event type.
+- `listener` : The object that receives a notification when an event occurs. An object implementing the `EventListener` interface, or a JavaScript function.
+- `options` : An object specifying characteristics.
 
-      	- `capture` : 등록된 이벤트 리스너 하위에 있는 타겟에 이벤트를 전송하기 전에 반드시 등록된 리스너에 가장 먼저 이벤트를 전송할지 여부
-      	- `once` : 이벤트가 등록된 이후로 리스너를 한 번만 작동시키고 제거할지 여부
-      	- `passive` : 이벤트 리스너의 콜백함수에서 [`preventDefault()`](https://developer.mozilla.org/ko/docs/Web/API/Event/preventDefault) 메소드를 호출할지 여부, `true` 이면 `preventDefault()` 메소드를 절대 호출하지 않는다. (`preventDefault()`를 이용하여 `scroll` 이벤트를 막지 않겠다.)
+#### Options
 
-> `passive` 속성에 대한 자세한 내용은 [여기](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md).
+The available options are:
 
-> `preventDefault()` : 이벤트를 취소할 수 있는 경우, 이벤트의 전파를 막지않고 그 이벤트를 취소한다. 이벤트의 취소가능 여부는 [`event.cancelable`](https://developer.mozilla.org/ko/docs/Web/API/Event/cancelable)를 사용해서 확인할 수 있다. 취소불가능한 이벤트에 대해서 preventDefault를 호출해도 결과는 없다. `preventDefault()`는 DOM을 통한 이벤트의 전파를 막지않는다. 전파를 막을때는 [`event.stopPropagation()`](https://developer.mozilla.org/ko/docs/Web/API/Event/stopPropagation)를 사용한다.
+- `capture` : 등록된 이벤트 리스너 하위에 있는 타겟에 이벤트를 전송하기 전에 반드시 등록된 리스너에 가장 먼저 이벤트를 전송할지 여부
+
+- `once` : 이벤트가 등록된 이후로 리스너를 한 번만 작동시키고 제거할지 여부
+
+- `passive` : 이벤트 리스너의 콜백함수에서 [`preventDefault()`](https://developer.mozilla.org/ko/docs/Web/API/Event/preventDefault) 메소드를 호출할지 여부, `true` 이면 `preventDefault()` 메소드를 절대 호출하지 않는다. (`preventDefault()`를 이용하여 `scroll` 이벤트를 막지 않겠다.)
 
 ```javascript
 target.addEventListener("click", onceHandler, {
@@ -60,6 +62,11 @@ target.addEventListener("click", onceHandler, {
 	passive: true,
 });
 ```
+
+> `passive` 속성에 대한 자세한 내용은 [여기](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md).
+
+> `preventDefault()` : 이벤트를 취소할 수 있는 경우, 이벤트의 전파를 막지않고 그 이벤트를 취소한다.
+> 이벤트의 취소가능 여부는 [`event.cancelable`](https://developer.mozilla.org/ko/docs/Web/API/Event/cancelable)를 사용해서 확인할 수 있다. 취소불가능한 이벤트에 대해서 preventDefault를 호출해도 결과는 없다. `preventDefault()`는 DOM을 통한 이벤트의 전파를 막지않는다. 전파를 막을때는 [`event.stopPropagation()`](https://developer.mozilla.org/ko/docs/Web/API/Event/stopPropagation)를 사용한다.
 
 <br>
 
