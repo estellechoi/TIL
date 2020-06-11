@@ -1,4 +1,4 @@
-# DOM ( Document Object Model)
+# DOM (Document Object Model)
 
 > This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version. But, maybe helpful for some people.
 
