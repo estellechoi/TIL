@@ -14,6 +14,10 @@
 - [인터넷과 HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
 - [웹서버 (Web Server) 와 웹 어플리케이션 서버(Web Application Server)](https://github.com/estellechoi/TIL/blob/master/www/was.md)
 
+### HTTP
+
+- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
+
 ### DOM
 
 - [To read about DOM](https://github.com/estellechoi/TIL/blob/master/Dom/toRead.md)
