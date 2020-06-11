@@ -1,6 +1,6 @@
 # Events and the DOM
 
-> [Events and the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Events) 외 관련 문서를 개인적인 필요에 따라 재정렬 혹은 부분 번역하였음
+> This markdown page is Korean/English mixed entirely depending on my personal way to study, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version.
 
 <br>
 
