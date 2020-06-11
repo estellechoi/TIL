@@ -1,6 +1,6 @@
 # DOM ( Document Object Model)
 
-> [MDN Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction), [Using the W3C DOM Level 1 Core](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core) 문서를 개인적인 필요에 따라 부분 번역하였음
+> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version.
 
 ## What is the DOM?
 
