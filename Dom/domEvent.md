@@ -66,6 +66,7 @@ target.addEventListener("click", onceHandler, {
 > `passive` 속성에 대한 자세한 내용은 [여기](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md).
 
 > `preventDefault()` : 이벤트를 취소할 수 있는 경우, 이벤트의 전파를 막지않고 그 이벤트를 취소한다.
+
 > 이벤트의 취소가능 여부는 [`event.cancelable`](https://developer.mozilla.org/ko/docs/Web/API/Event/cancelable)를 사용해서 확인할 수 있다. 취소불가능한 이벤트에 대해서 preventDefault를 호출해도 결과는 없다. `preventDefault()`는 DOM을 통한 이벤트의 전파를 막지않는다. 전파를 막을때는 [`event.stopPropagation()`](https://developer.mozilla.org/ko/docs/Web/API/Event/stopPropagation)를 사용한다.
 
 <br>
@@ -76,11 +77,13 @@ target.addEventListener("click", onceHandler, {
 
 #### Problem
 
-최신 브라우저들은 JavaScript 코드가 실행되는 중에도 부드러운 스크롤 퍼포먼스를 지원하기 시작했다. 하지만 터치스크린 디바이스 사용이 증가하면서 브라우저 스크롤 퍼포먼스에 허점이 생겼다. `touchstart`, `touchmove` 이벤트가 발생한 경우, 유저가 터치 상태로 스크롤을 시도하면 자동으로 `preventDefault()` 메소드가 호출되면서 스크롤 기능이 막혔기 때문이다. 다시 말해, 스크린을 터치하는 순간 어떤 결과가 나오기까지 스크롤 딜레이가 발생하게 되었다.\
+최신 브라우저들은 JavaScript 코드가 실행되는 중에도 부드러운 스크롤 퍼포먼스를 지원하기 시작했다. 하지만 터치스크린 디바이스 사용이 증가하면서 브라우저 스크롤 퍼포먼스에 허점이 생겼다. `touchstart`, `touchmove` 이벤트가 발생한 경우, 유저가 터치 상태로 스크롤을 시도하면 자동으로 `preventDefault()` 메소드가 호출되면서 스크롤 기능이 막혔기 때문이다. 다시 말해, 스크린을 터치하는 순간 어떤 결과가 나오기까지 스크롤 딜레이가 발생하게 되었다.
 
 > 왜 자동으로 `preventDefault()` 메소드가 호출될까 ?
 
 > [`wheel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event) 이벤트 발생시에도 동일 이슈가 있다.
+
+<br>
 
 #### Solution: the `passive` option
 
@@ -140,6 +143,8 @@ target.addEventListener(
 
 ### Event listener with an arrow function
 
+Please note that while anonymous and arrow functions are similar, they have different `this` bindings. While anonymous (and all traditional JavaScript functions) create their own `this` bindings, arrow functions inherit the `this` binding of the containing function.
+
 ```javascript
 function modifyText(new_text) {
 	document.getElementById("t2").firstChild.nodeValue = new_text;
@@ -154,8 +159,6 @@ target.addEventListener(
 	false
 );
 ```
-
-> Please note that while anonymous and arrow functions are similar, they have different `this` bindings. While anonymous (and all traditional JavaScript functions) create their own `this` bindings, arrow functions inherit the `this` binding of the containing function.
 
 <br>
 
