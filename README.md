@@ -18,6 +18,9 @@
 
 - [To read about DOM](https://github.com/estellechoi/TIL/blob/master/Dom/toRead.md)
 - [DOM (Document Object Model)](https://github.com/estellechoi/TIL/blob/master/Dom/dom.md)
+- [Events and the DOM](https://github.com/estellechoi/TIL/blob/master/Dom/domEvent.md)
+- [Locating DOM elements using selectors](https://github.com/estellechoi/TIL/blob/master/Dom/domSelector.md)
+- [How to create a DOM tree](https://github.com/estellechoi/TIL/blob/master/Dom/domcreation.md)
 
 ### Javascript
 
