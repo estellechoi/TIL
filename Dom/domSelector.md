@@ -1,6 +1,6 @@
 # Locating DOM elements using selectors
 
-> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version.
+> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version. But, maybe helpful for some people.
 
 The Selectors API provides methods that make it quick and easy to retrieve `Element` nodes from the DOM by matching against a set of selectors.
 
