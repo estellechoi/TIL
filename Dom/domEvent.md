@@ -1,6 +1,6 @@
 # Events and the DOM
 
-> This markdown page is Korean/English mixed entirely depending on my personal way to study, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version.
+> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version.
 
 <br>
 
