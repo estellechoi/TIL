@@ -1,6 +1,6 @@
 # How to create a DOM tree
 
-This page describes how to use the [DOM Core](https://www.w3.org/TR/DOM-Level-3-Core/) API in JavaScript to create and modify DOM objects.
+> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version.
 
 <br>
 
