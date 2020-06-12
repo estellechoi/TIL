@@ -7,7 +7,7 @@
 - 객체들은 계층적인 관계이며, 트리 구조이다.
 - DOM과 BOM은 각각 `window` 객체의 속성 중 하나이다.
 
-<img src="./../img/domBom.png" alt="DOM/BOM" width="200"/>
+<img src="./../img/domBom.png" alt="DOM/BOM" width="500"/>
 
 ### What is `window` object?
 
