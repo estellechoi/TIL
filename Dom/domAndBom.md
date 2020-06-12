@@ -1,11 +1,20 @@
-# Object Model: DOM and BOM)
+# Object Model: DOM and BOM
 
-## What is Object Model ?
+## What is the Object Model ?
 
 - 웹브라우저의 모든 구성 요소들은 객체화되어 있다.
 - JavaScript와 같은 스크립트 언어를 이용해서 이 객체들에 접근, 조작할 수 있다.
 - 객체들은 계층적인 관계이며, 트리 구조이다.
 - DOM과 BOM은 각각 `window` 객체의 속성 중 하나이다.
+
+```
+{
+    document,
+    alert: function alert() { ... },
+    navigator,
+    ...
+}
+```
 
 <img src="./../img/domBom.png" alt="DOM/BOM" width="500"/>
 
