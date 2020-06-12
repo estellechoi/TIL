@@ -46,4 +46,4 @@
 
 ### Reference
 
-- [JavaScript Tutorial](https://www.w3schools.com/js/)
+- [JavaScript Window - The Browser Object Model | w3schools](https://www.w3schools.com/js/js_window.asp)
