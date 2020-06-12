@@ -25,7 +25,7 @@
 
 <br/>
 
-## DOM, Document Object Model
+## DOM (Document Object Model)
 
 - 문서에 대한 모든 내용을 담고있는 객체
 - 문서 즉 열려진 페이지에 대한 정보를 따로 객체화 시켜서 관리
@@ -33,7 +33,7 @@
 
 <br/>
 
-## BOM, Browser Object Model
+## BOM (Browser Object Model)
 
 - 브라우저에 대한 모든 내용을 담고있는 객체
 - 뒤로가기, 북마크, 즐겨찾기, 히스토리, URL정보 등
