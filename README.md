@@ -26,11 +26,6 @@
 - [Locating DOM elements using selectors](https://github.com/estellechoi/TIL/blob/master/Dom/domSelector.md)
 - [How to create a DOM tree](https://github.com/estellechoi/TIL/blob/master/Dom/domcreation.md)
 
-### Javascript
-
-- [DOM과 BOM](https://github.com/estellechoi/TIL/blob/master/javascript/dom.md)
-- [JSP 문서 로드시 \<input type\=\"radio\"\> \& \<select\> 체크 설정하기](https://github.com/estellechoi/TIL/blob/master/javascript/check.md)
-
 ### Security
 
 - Cross site scripting (XSS) \*
