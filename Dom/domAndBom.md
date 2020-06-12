@@ -1,5 +1,9 @@
 # Object Model: DOM and BOM
 
+> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation. Just the reorderd, added, and removed from reference documents, or some parts are the English-Korean translated version. But, maybe helpful for some people.
+
+<br>
+
 ## What is the Object Model ?
 
 - 웹브라우저의 모든 구성 요소들은 객체화되어 있다.
