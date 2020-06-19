@@ -38,14 +38,18 @@ After receiving an HTTP request, a server can send a `Set-Cookie` header with th
 
 > Set-Cookie 헤더의 여러 옵션들을 보려면 [여기](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie).
 
+<br>
+
 ### `Set-Cookie` Response Header
 
-서버에서 사용자 브라우저로 쿠키를 보내고 싶다면, 응답 헤더 중 `Set-Cookie` 헤더에 담아 보낸다. 이 헤더는 이렇게 (`Set-Cookie: name=value`) 생겼다.
+서버에서 사용자 브라우저로 쿠키를 보내고 싶다면, 응답 헤더 중 `Set-Cookie` 헤더에 담아 보낸다. 이 헤더는 이렇게 생겼다. `Set-Cookie: name=value`
 
 ```
 Set-Cookie: cookie1=choco
 Set-Cookie: cookie2=strawberry
 ```
+
+<br>
 
 ### `Cookie` Request Header
 
@@ -57,7 +61,7 @@ Cookie: cookie1=choco; cookie2=strawberry
 
 <br>
 
-### How to use the `Set-Cookie` header in various server-side applications
+> How to use the `Set-Cookie` header in various server-side applications
 
 - [Node.js](https://nodejs.org/dist/latest-v8.x/docs/api/http.html#http_response_setheader_name_value)
 - [Python](https://docs.python.org/3/library/http.cookies.html)
@@ -87,6 +91,8 @@ Cookie: cookie1=choco; cookie2=strawberry
 Set-Cookie: cookie1=orange; Expires=Wed, 31 Oct 2021 07:28:00 GMT;
 ```
 
+<br>
+
 #### `Max-Age`속성
 
 쿠키의 생성 시점으로 부터 얼마 후 종료시킬지 지정한다. (초 단위)
@@ -104,6 +110,8 @@ If both Expires and Max-Age are set, Max-Age has precedence.
 #### `Secure` 속성
 
 Sent to the server only with an encrypted request over the HTTPS protocol, never with unsecured HTTP, and therefore can't easily be accessed by a `man-in-the-middle` attacker. Insecure sites (with http: in the URL) can't set cookies with the `Secure` attribute.
+
+<br>
 
 #### `HttpOnly` 속성
 
@@ -129,6 +137,8 @@ For example, if `Path=/docs` is set, these paths match:
 - `/docs/Web/`
 - `/docs/Web/HTTP`
 
+<br>
+
 #### `Domain` 속성
 
 Specifies which hosts(domains) are allowed to receive the cookie.
@@ -136,6 +146,8 @@ Specifies which hosts(domains) are allowed to receive the cookie.
 - If unspecified, it defaults to the same origin that set the cookie, <strong>excluding</strong> subdomains.
 
 - If specified, then subdomains are always included.
+
+<br>
 
 #### `SameSite` 속성
 
@@ -149,15 +161,15 @@ Possible values are:
 
 - `None` : no restrictions on cross-site requests.
 
+최근 동향을 보면, 브라우저에서 쿠키를 받을 때 `SameSite=Lax` 속성 값을 기본으로 부여하고 있다. Cross Origin 요청시 쿠키를 요청에 포함시키고 싶으면, 서버에서 쿠키를 응답할 때 `None` 값을 명시적으로 지정해주어야 한다.
+
+> [Browsers that support SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#Browser_compatibility)
+
 For example,
 
 ```
 Set-Cookie: cookie1=candy; SameSite=Strict
 ```
-
-최근 동향을 보면, 브라우저에서 쿠키를 받을 때 `SameSite=Lax` 속성 값을 기본으로 부여하고 있다. Cross Origin 요청시 쿠키를 요청에 포함시키고 싶으면, 서버에서 쿠키를 응답할 때 `None` 값을 명시적으로 지정해주어야 한다.
-
-> [Browsers that support SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#Browser_compatibility)
 
 <br>
 
@@ -175,7 +187,9 @@ Information should be stored in cookies with the understanding that all cookie v
 
 <br>
 
-### Cookies for sensitive information (such as indicating authentication) should have a short lifetime
+### Should have a short lifetime
+
+Cookies for sensitive information (such as indicating authentication) should have a short lifetime.
 
 <br>
 
@@ -185,11 +199,13 @@ This has the effect of ensuring that the authentication cookie is not sent with 
 
 <br>
 
-### Cookie prefixes
+### Use Cookie prefixes
 
 `이 쿠키는 보안상 안전한 서버에서 생성되었습니다`와 같은 정보는 서버에서 제공할 수 없다. 심지어 쿠키가 생성된 서버의 주소도 제공할 수 없다. 보안상 이유로 쿠키 매커니즘이 그렇게 고안되었기 때문이다. 예로, `Domain` 속성을 이용하면 모든 서브 도메인에서 쿠키에 접근할 수 있도록 설정을 변경함으로써 해킹 공격이 가능하다. ([Session fixation attack](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#Session_fixation))
 
-아래와 같은 `Cookie prefixes`를 이용하면 안전하게 쿠키에 대한 정보들을 제공할 수 있다. 다만, `Cookie prefixes`를 포함하는 쿠키들은 규정된 조건을 정확하게 지켜 속성 값들을 지정해야 한다. 그렇지 않으면 브라우저에서 해당 쿠키들을 거절해버린다.
+쿠키에 대한 정보를 제공하고 싶으면 어떻게 해야하나. `Cookie prefixes`를 이용하면 안전하게 쿠키에 대한 정보를 제공할 수 있다. 다만, `Cookie prefixes`를 포함하는 쿠키들은 규정된 조건을 정확하게 지켜 속성 값들을 지정해야 한다. 그렇지 않으면 브라우저에서 해당 쿠키들을 거절해버린다.
+
+### Cookie prefixes
 
 - `__Host-` : If a cookie name has this prefix, it is accepted in a `Set-Cookie` header only if it is also marked with the `Secure` attribute, was sent from a secure origin, does not include a `Domain` attribute, and has the `Path` attribute set to `/`. In this way, these cookies can be seen as "domain-locked".
 
@@ -201,7 +217,7 @@ This has the effect of ensuring that the authentication cookie is not sent with 
 
 A web page may contain images or other components stored on servers in other domains (for example, ad banners), which may set third-party cookies. A third party server can build up a profile of a user's browsing history and habits based on cookies sent to it by the same browser when accessing multiple sites. Cookie blocking can cause some third-party components (such as social media widgets) to not function as intended.
 
-> See also [types of cookies used by Google.](https://policies.google.com/technologies/types).
+> See also [types of cookies used by Google](https://policies.google.com/technologies/types).
 
 <br>
 
