@@ -8,6 +8,18 @@
 
 An HTTP cookie is a small piece of data that a server sends to the user's web browser. The browser may store it and send it back with later requests to the same server. Typically, it's used to tell if two requests came from the same browser — keeping a user logged-in, for example. It remembers stateful information for the `stateless` HTTP protocol.
 
+### Cookies are mainly used for:
+
+- Session management
+- Personalization
+- Tracking
+
+<br>
+
+## Other ways to store information in the browser
+
+> 이 주제는 쿠키가 아닌 것들에 대한 소개이다. 하지만 이 글을 진지하게 읽는 사람이 있다면, 쿠키를 알기 전에 여기서 언급하는 것이 좋겠다.
+
 Now recommended to use modern storage APIs. Modern APIs for client storage are the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) and [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API).
 
 ### Web Storage API
@@ -17,14 +29,6 @@ Now recommended to use modern storage APIs. Modern APIs for client storage are t
 ### IndexedDB API
 
 More structured and larger amounts of data can be stored using the IndexedDB API.
-
-<br>
-
-### Cookies are mainly used for:
-
-- Session management
-- Personalization
-- Tracking
 
 <br>
 
