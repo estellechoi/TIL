@@ -8,7 +8,15 @@
 
 An HTTP cookie is a small piece of data that a server sends to the user's web browser. The browser may store it and send it back with later requests to the same server. Typically, it's used to tell if two requests came from the same browser — keeping a user logged-in, for example. It remembers stateful information for the `stateless` HTTP protocol.
 
-Now recommended to use modern storage APIs. Modern APIs for client storage are the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) ([`window.localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and [`window.sessionStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage), which correspond to session and permanent cookies in duration, but have larger storage limits than cookies, and are never sent to a server) and [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API). More structured and larger amounts of data can be stored using the IndexedDB API.
+Now recommended to use modern storage APIs. Modern APIs for client storage are the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) and [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API).
+
+### Web Storage API
+
+[`window.localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and [`window.sessionStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) properties correspond to session and permanent cookies in duration, but have larger storage limits than cookies, and are never sent to a server.
+
+### IndexedDB API
+
+More structured and larger amounts of data can be stored using the IndexedDB API.
 
 <br>
 
