@@ -8,11 +8,17 @@
 
 <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer.
 
-It is an architectural style for distributed hypermedia systems like [World Wide Web](https://ko.wikipedia.org/wiki/%EC%9B%94%EB%93%9C_%EC%99%80%EC%9D%B4%EB%93%9C_%EC%9B%B9). The idea is that simple HTTP is used to make calls between machines.
+It is an architectural style for distributed hypermedia systems like [World Wide Web](https://ko.wikipedia.org/wiki/%EC%9B%94%EB%93%9C_%EC%99%80%EC%9D%B4%EB%93%9C_%EC%9B%B9).
+
+REST는 HTTP/1.1 스펙과 동시에 만들어졌는데, HTTP 프로토콜을 의도에 맞게 활용하여 서비스를 디자인하도록 유도하기 때문에 디자인 기준이 명확해지며, 의미적인 범용성을 지니므로 중간 계층의 컴포넌트들이 서비스를 최적화하는데 도움이 된다.
+
+REST의 기본 원칙을 성실히 지킨 서비스를 `RESTful` 하다고 한다.
 
 REST has it’s own [6 guiding constraints](https://restfulapi.net/rest-architectural-constraints/) which must be satisfied if an interface needs to be referred as <strong>RESTful</strong>.
 
 It was first presented by Roy Fielding in 2000 in his famous [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm).
+
+> Roy Fielding은 HTTP/1.0, 1.1 스펙 작성에 참여했었고 아파치 HTTP 서버 프로젝트의 공동설립자다.
 
 <br>
 
@@ -285,6 +291,10 @@ HTTP PUT /device-management/managed-devices/{id}  //Update device for given Id
 HTTP DELETE /device-management/managed-devices/{id}  //Delete device for given Id
 ```
 
+#### PATCH
+
+[PATCH](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PATCH) 라는 HTTP Method에 주목하자. PUT이 자원의 전체를 교체하는 의미를 지니는 대신, PATCH는 일부를 변경한다는 의미를 지니기 때문에 최근 update 이벤트에서 PUT보다 더 의미적으로 적합하다고 평가받고 있다.
+
 <br>
 
 ### 4. Use query component to filter URI collection
@@ -374,3 +384,4 @@ RESTful applications use HTTP requests to post data (create or update), read dat
 - [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 - [REST | wikipedia](https://ko.wikipedia.org/wiki/REST)
 - [REST 아키텍처를 훌륭하게 적용하기 위한 몇 가지 디자인 팁](https://spoqa.github.io/2012/02/27/rest-introduction.html)
+- [PATCH | MDN](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PATCH)
