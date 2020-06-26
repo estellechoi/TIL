@@ -10,23 +10,9 @@ REST stands for <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer.
 
 It is an architectural style for distributed hypermedia systems like [World Wide Web](https://ko.wikipedia.org/wiki/%EC%9B%94%EB%93%9C_%EC%99%80%EC%9D%B4%EB%93%9C_%EC%9B%B9). The idea is that simple HTTP is used to make calls between machines.
 
-RESTful applications use HTTP requests to post data (create or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all 4 CRUD (Create/Read/Update/Delete) operations.
-
-![REST HTTP Method](./../img/restHttpMethod.jpeg)
-
-> HTTP is HyperText Transfer Protocol. It is the underlying protocol used by the World Wide Web and this protocol defines how messages are formatted and transmitted, and what actions Web servers and browsers should take in response to various commands.
-
 REST has it’s own [6 guiding constraints](https://restfulapi.net/rest-architectural-constraints/) which must be satisfied if an interface needs to be referred as <strong>RESTful</strong>.
 
 It was first presented by Roy Fielding in 2000 in his famous [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm).
-
-<br>
-
-## Principles of REST
-
-### 1. Client–server
-
-By separating the user interface concerns from the data storage concerns, we improve the portability of the user interface across multiple platforms and improve scalability by simplifying the server components.
 
 <br>
 
@@ -78,6 +64,226 @@ When you need to, you are free to return executable code to support a part of yo
 
 <br>
 
+## REST Resource Naming Guide
+
+REST APIs use [Uniform Resource Identifiers (URIs)](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) to address resources. REST API designers should create URIs that convey a REST API’s resource model to its potential client developers.
+
+#### 1. A resource can be a singleton or a collection.
+
+For example, `customers` is a collection resource and `customer` is a singleton.
+
+- `customers` collection resource using the URI:
+
+`/customers`
+
+- a single `customer` resource using the URI:
+
+`/customers/{customerId}`
+
+#### 2. A resource may contain sub-collection resources also.
+
+- `accounts` of a particular `customer`
+
+  `/customers/{customerId}/accounts`
+
+- a singleton resource `account`
+
+`/customers/{customerId}/accounts/{accountId}`
+
+<br>
+
+## REST Resource Naming Best Practices
+
+### 1. Use nouns to represent resources
+
+RESTful URI should refer to a resource that is a thing (noun) instead of referring to an action (verb).
+
+For examples,
+
+```
+/device-management/managed-devices
+/device-management/managed-devices/{device-id}
+/user-management/users/
+/user-management/users/{id}
+```
+
+For more clarity, let’s divide the resource archetypes into four categories (document, collection, store and controller). Resist the temptation to design resources that are hybrids of more than one archetype.
+
+<br>
+
+#### document
+
+Use “singular” name to denote document resource archetype.
+
+```
+/device-management/managed-devices/{device-id}
+/user-management/users/{id}
+/user-management/users/admin
+```
+
+#### collection
+
+Use “plural” name to denote collection resource archetype.
+
+```
+/device-management/managed-devices
+/user-management/users
+/user-management/users/{id}/accounts
+```
+
+#### store
+
+A store resource lets an API client put resources in, get them back out, and decide when to delete them. Use “plural” name to denote store resource archetype.
+
+```
+/song-management/users/{id}/playlists
+```
+
+#### controller
+
+A controller resource models a procedural concept. Controller resources are like executable functions, with parameters and return values; inputs and outputs.
+
+Use “verb” to denote controller archetype.
+
+```
+/cart-management/users/{id}/cart/checkout
+/song-management/users/{id}/playlist/play
+```
+
+<br>
+
+### 2. Consistency
+
+You may implement below design hints to achieve consistency:
+
+#### Use forward slash `/` to indicate hierarchical relationships
+
+```
+/device-management
+/device-management/managed-devices
+/device-management/managed-devices/{id}
+/device-management/managed-devices/{id}/scripts
+/device-management/managed-devices/{id}/scripts/{id}
+```
+
+#### Do not use trailing forward slash `/` in URIs
+
+A forward slash `/` adds no semantic value and may cause confusion. It’s better to drop them completely.
+
+- Not good
+
+```
+/device-management/managed-devices/
+```
+
+- Good
+
+```
+/device-management/managed-devices
+```
+
+#### Use hyphens `-` to improve the readability
+
+- Less readable
+
+```
+/inventory-management/managedEntities/{id}/installScriptLocation
+
+```
+
+- More readable
+
+```
+/inventory-management/managed-entities/{id}/install-script-location
+
+```
+
+#### Do not use underscores
+
+Depending on the application’s font, it’s possible that the underscore `_` character can either get partially obscured or completely hidden in some browsers or screens. To avoid this confusion, use hyphens `-` instead of underscores `_`.
+
+- Less readable
+
+```
+/inventory_management/managed_entities/{id}/install_script_location
+```
+
+- More readable
+
+```
+/inventory-management/managed-entities/{id}/install-script-location
+```
+
+#### Use lowercase letters in URIs
+
+When convenient, lowercase letters should be consistently preferred in URI paths.
+
+> If you have time, read [this](https://www.ietf.org/rfc/rfc3986.txt)
+
+```
+http://api.example.org/my-folder/my-doc  //1
+HTTP://API.EXAMPLE.ORG/my-folder/my-doc  //2
+http://api.example.org/My-Folder/my-doc  //3
+```
+
+In above examples, 1 and 2 are same but 3 is not as it uses My-Folder in capital letters.
+
+#### Do not use file extentions
+
+File extensions look bad and do not add any advantage. Removing them decreases the length of URIs as well. No reason to keep them.
+
+##### If you want to highlight the media type of API
+
+If you want to highlight the media type of API using file extenstion then you should rely on the media type, as communicated through the `Content-Type` header, to determine how to process the body’s content.
+
+- Correct URI
+
+```
+/device-management/managed-devices
+```
+
+- Do not use like below
+
+```
+/device-management/managed-devices.xml
+```
+
+<br>
+
+### 3. Never use CRUD function names in URIs
+
+URIs should not be used to indicate that a CRUD function is performed. URIs should be used to uniquely identify resources and not any action upon them. HTTP request methods should be used to indicate which CRUD function is performed.
+
+For examples,
+
+```
+HTTP GET /device-management/managed-devices  //Get all devices
+HTTP POST /device-management/managed-devices  //Create new Device
+
+HTTP GET /device-management/managed-devices/{id}  //Get device for given Id
+HTTP PUT /device-management/managed-devices/{id}  //Update device for given Id
+HTTP DELETE /device-management/managed-devices/{id}  //Delete device for given Id
+```
+
+<br>
+
+### 4. Use query component to filter URI collection
+
+Many times, you will come across requirements where you will need a collection of resources sorted, filtered or limited based on some certain resource attribute. For this, do not create new APIs.
+
+Enable sorting, filtering and pagination capabilities in resource collection API and pass the input parameters as query parameters.
+
+For examples,
+
+```
+/device-management/managed-devices
+/device-management/managed-devices?region=USA
+/device-management/managed-devices?region=USA&brand=XYZ
+/device-management/managed-devices?region=USA&brand=XYZ&sort=installation-date
+```
+
+<br>
+
 ## Benefits of using REST Architecture
 
 ### Lightweight Web Services
@@ -102,7 +308,7 @@ When developers need the universal presence with minimum efforts, given the fact
 
 <br>
 
-## REST API
+## REST API and RESTful Web Services
 
 ### What is API ?
 
@@ -118,9 +324,15 @@ An API(Application Programming Interface) serves as an interface between differe
 
 A REST API defines a set of functions which developers can perform requests and receive responses via HTTP protocol such as GET and POST.
 
+RESTful applications use HTTP requests to post data (create or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all 4 CRUD (Create/Read/Update/Delete) operations.
+
+![REST HTTP Method](./../img/restHttpMethod.jpeg)
+
+> HTTP is HyperText Transfer Protocol. It is the underlying protocol used by the World Wide Web and this protocol defines how messages are formatted and transmitted, and what actions Web servers and browsers should take in response to various commands.
+
 <br>
 
-## RESTful Web Services
+### RESTful Web Services
 
 `RESTful` is typically used to refer to web services implementing REST architecture.
 
