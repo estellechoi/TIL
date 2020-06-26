@@ -16,9 +16,11 @@
 
 ### HTTP
 
-- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
 - [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/Http/rest.md)
+- [Some Tips for REST](https://github.com/estellechoi/TIL/blob/master/Http/restTips.md)
+- [REST API Security](https://github.com/estellechoi/TIL/blob/master/Http/restSecurity.md) \*
 - [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/Http/cookie.md)
+- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
 
 ### DOM
 
