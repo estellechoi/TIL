@@ -6,7 +6,7 @@
 
 ## What is REST ?
 
-REST stands for <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer.
+<b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer.
 
 It is an architectural style for distributed hypermedia systems like [World Wide Web](https://ko.wikipedia.org/wiki/%EC%9B%94%EB%93%9C_%EC%99%80%EC%9D%B4%EB%93%9C_%EC%9B%B9). The idea is that simple HTTP is used to make calls between machines.
 
@@ -16,13 +16,15 @@ It was first presented by Roy Fielding in 2000 in his famous [dissertation](http
 
 <br>
 
-## Architectural Constraints
+## 6 Architectural Constraints
+
+> For details, see [tutorial pages](https://restfulapi.net/caching/).
 
 ### 1. Uniform interface
 
-API의 인터페이스를 결정하고, 정해진 인터페이스를 정확하게 따라야 한다. 서버 내의 각 리소스에 접근할 수 있는 URI는 오직 1 개여야 하며, 연관 데이터에 추가적으로 접근할 수 있는 방법을 제공해야 한다.
+API의 인터페이스를 결정하고, 결정된 인터페이스를 정확하게 따라야 한다. 서버 내의 각 리소스에 접근할 수 있는 URI는 오직 1 개여야 하며, 연관 데이터에 추가적으로 접근할 수 있는 방법을 제공해야 한다.
 
-하나의 리소스가 너무 많은 데이터를 갖고있어서는 안된다. 관련 데이터가 필요하면 언제든 그 데이터에 접근할 수 있는 URI 링크를 포함해야 한다.
+하나의 리소스가 너무 많은 정보(데이터)를 갖고있어서는 안된다. 대신, 관련 데이터가 필요하면 언제든 그 데이터에 접근할 수 있는 URI 를 호출할 수 있어야 한다.
 
 Also, the resource representations across the system should follow specific guidelines such as naming conventions, link formats, or data format (XML or/and JSON).
 
@@ -30,13 +32,13 @@ All resources should be accessible through a common approach such as HTTP GET an
 
 <br>
 
-### 2. Client–server
+### 2. Client–server: Servers and clients replaceable independently
 
 Client application and server application MUST be able to evolve separately without any dependency on each other. A client should know only resource URIs, and that’s all. Servers and clients may also be replaced and developed independently, as long as the interface between them is not altered.
 
 <br>
 
-### 3. Stateless
+### 3. Stateless: The client is responsible for managing the state, not server
 
 Make all client-server interactions stateless. The server will not store anything about the latest HTTP request the client made. It will treat every request as new. No session, no history.
 
@@ -68,27 +70,35 @@ When you need to, you are free to return executable code to support a part of yo
 
 REST APIs use [Uniform Resource Identifiers (URIs)](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) to address resources. REST API designers should create URIs that convey a REST API’s resource model to its potential client developers.
 
-#### 1. A resource can be a singleton or a collection.
+### 1. A resource can be a singleton or a collection.
 
 For example, `customers` is a collection resource and `customer` is a singleton.
 
 - `customers` collection resource using the URI:
 
-`/customers`
+```
+/customers
+```
 
 - a single `customer` resource using the URI:
 
-`/customers/{customerId}`
+```
+/customers/{customerId}
+```
 
-#### 2. A resource may contain sub-collection resources also.
+### 2. A resource may contain sub-collection resources also.
 
 - `accounts` of a particular `customer`
 
-  `/customers/{customerId}/accounts`
+```
+/customers/{customerId}/accounts
+```
 
 - a singleton resource `account`
 
-`/customers/{customerId}/accounts/{accountId}`
+```
+/customers/{customerId}/accounts/{accountId}
+```
 
 <br>
 
@@ -166,6 +176,8 @@ You may implement below design hints to achieve consistency:
 /device-management/managed-devices/{id}/scripts/{id}
 ```
 
+<br>
+
 #### Do not use trailing forward slash `/` in URIs
 
 A forward slash `/` adds no semantic value and may cause confusion. It’s better to drop them completely.
@@ -182,21 +194,23 @@ A forward slash `/` adds no semantic value and may cause confusion. It’s bette
 /device-management/managed-devices
 ```
 
+<br>
+
 #### Use hyphens `-` to improve the readability
 
 - Less readable
 
 ```
 /inventory-management/managedEntities/{id}/installScriptLocation
-
 ```
 
 - More readable
 
 ```
 /inventory-management/managed-entities/{id}/install-script-location
-
 ```
+
+<br>
 
 #### Do not use underscores
 
@@ -214,6 +228,8 @@ Depending on the application’s font, it’s possible that the underscore `_` c
 /inventory-management/managed-entities/{id}/install-script-location
 ```
 
+<br>
+
 #### Use lowercase letters in URIs
 
 When convenient, lowercase letters should be consistently preferred in URI paths.
@@ -228,9 +244,13 @@ http://api.example.org/My-Folder/my-doc  //3
 
 In above examples, 1 and 2 are same but 3 is not as it uses My-Folder in capital letters.
 
+<br>
+
 #### Do not use file extentions
 
 File extensions look bad and do not add any advantage. Removing them decreases the length of URIs as well. No reason to keep them.
+
+<br>
 
 ##### If you want to highlight the media type of API
 
