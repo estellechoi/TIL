@@ -370,6 +370,8 @@ RESTful applications use HTTP requests to post data (create or update), read dat
 
 <br>
 
+> REST 를 위한 디자인 팁은 [여기](https://github.com/estellechoi/TIL/blob/master/Http/restTips.md).
+
 ---
 
 ### References
