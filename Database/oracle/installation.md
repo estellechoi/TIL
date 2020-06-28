@@ -1,6 +1,4 @@
-# Oracle
-
-## Installation of Oracle Database 12c on Mac
+# Installation of Oracle Database 12c on Mac
 
 Download an [existing Database 12c Image](https://hub.docker.com/r/absolutapps/oracle-12c-ee) public available on Docker Hub.
 
