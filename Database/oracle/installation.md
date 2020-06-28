@@ -18,6 +18,8 @@ docker pull absolutapps/oracle-12c-ee
 docker run -d --name oracle12c --privileged -v /${path}:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
 ```
 
+<br>
+
 For example, you run the below command and the current working directory is `/Users/user`.
 
 ```
@@ -52,29 +54,33 @@ If not started,
 docker start oracle12c
 ```
 
+<br>
+
 Execute container.
 
 ```
 docker exec -it oracle12c bash
 ```
 
+<br>
+
 Get the list of containers executed.
-
-```
-docker ps
-```
-
-the blow has no difference with `docker ps`, but newer version.
 
 ```
 docker container ls
 ```
+
+> Has no difference with `docker ps`, but newer version.
+
+<br>
 
 Get the list of images downloaded;
 
 ```
 docker image ls
 ```
+
+<br>
 
 If you want to stop the container,
 
