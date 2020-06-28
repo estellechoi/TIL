@@ -36,9 +36,9 @@ In this case database settings and data will be saved to `/Users/user/oracle` fo
 
 > `/Users/user/oracle` stands for `/u01/app/oracle`.
 
-Ports will be exposed either to localhost or boot2docker container (MacOs and Win).
-
 > If you have any issue regarding the path option, [this Stackoverflow page](https://stackoverflow.com/questions/45122459/docker-mounts-denied-the-paths-are-not-shared-from-os-x-and-are-not-known) may help.
+
+Ports will be exposed either to localhost or boot2docker container (MacOs and Win).
 
 <br>
 
