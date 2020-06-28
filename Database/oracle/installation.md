@@ -2,6 +2,8 @@
 
 Download an [existing Database 12c Image](https://hub.docker.com/r/absolutapps/oracle-12c-ee) public available on Docker Hub.
 
+> What is Docker? [This video](https://www.youtube.com/watch?v=tPjpcsgxgWc) and [this video](https://www.youtube.com/watch?v=chnCcGCTyBg) may help you get knowing of Docker.
+
 <br>
 
 ### Pull image from Docker Hub
