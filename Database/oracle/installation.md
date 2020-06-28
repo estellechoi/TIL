@@ -2,26 +2,26 @@
 
 Download an [existing Database 12c Image](https://hub.docker.com/r/absolutapps/oracle-12c-ee) public available on Docker Hub.
 
+<br>
+
 ### Pull image
 
 ```
 docker pull absolutapps/oracle-12c-ee
 ```
 
+<br>
+
 ### Run image with options
 
 ```
-docker run -d --name oracle12c
-  --privileged -v /${path}:/u01/app/oracle
-  -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
+docker run -d --name oracle12c --privileged -v /${path}:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
 ```
 
 For example, you run the below command and the current working directory is `/Users/user`.
 
 ```
-docker run -d --name oracle12c
-  --privileged -v /oracle:/u01/app/oracle
-  -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
+docker run -d --name oracle12c --privileged -v /oracle:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
 ```
 
 In this case database settings and data will be saved to `/Users/user/oracle` folder and ports will be exposed either to localhost or boot2docker container (MacOs and Win).
