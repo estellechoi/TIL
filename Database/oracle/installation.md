@@ -18,6 +18,8 @@ docker pull absolutapps/oracle-12c-ee
 
 > A virtual container is derived from the image. An image developer can define image defaults related to: detached or foreground running, container identification, network settings, runtime constraints on CPU and memory.
 
+> About `docker run`, see [here](https://docs.docker.com/engine/reference/run/).
+
 ```
 docker run -d --name oracle12c --privileged -v /${path}:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
 ```
