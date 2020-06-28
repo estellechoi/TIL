@@ -21,7 +21,7 @@ docker pull absolutapps/oracle-12c-ee
 > About `docker run`, see [here](https://docs.docker.com/engine/reference/run/).
 
 ```
-docker run -d --name oracle12c --privileged -v /${path}:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
+docker run -d --name ${container_name} --privileged -v /${path}:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
 ```
 
 <br>
