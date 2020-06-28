@@ -26,7 +26,11 @@ For example, you run the below command and the current working directory is `/Us
 docker run -d --name oracle12c --privileged -v /oracle:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
 ```
 
-In this case database settings and data will be saved to `/Users/user/oracle` folder and ports will be exposed either to localhost or boot2docker container (MacOs and Win).
+In this case database settings and data will be saved to `/Users/user/oracle` folder.
+
+> `/Users/user/oracle` stands for `/u01/app/oracle`.
+
+Ports will be exposed either to localhost or boot2docker container (MacOs and Win).
 
 > If you have any issue regarding the path option, [this Stackoverflow page](https://stackoverflow.com/questions/45122459/docker-mounts-denied-the-paths-are-not-shared-from-os-x-and-are-not-known) may help.
 
