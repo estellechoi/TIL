@@ -26,7 +26,7 @@ docker run -d --name ${container_name} --privileged -v /${path}:/u01/app/oracle 
 
 <br>
 
-For example, you may run the below command and the current working directory is `/Users/user`.
+For example, you may run the below command, and assume that the current working directory is `/Users/user`.
 
 ```
 docker run -d --name oracle12c --privileged -v /oracle:/u01/app/oracle -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
