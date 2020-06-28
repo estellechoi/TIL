@@ -34,7 +34,7 @@
 
 - Cross site scripting (XSS) \*
 
-### MySQL
+### Database
 
 - [MySQL의 자료형](https://github.com/estellechoi/TIL/blob/master/mySQL/dataType.md)
 - [MySQL 쿼리 문법](https://github.com/estellechoi/TIL/blob/master/mySQL/query.md)
