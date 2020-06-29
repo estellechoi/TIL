@@ -8,11 +8,30 @@
 
 Node.js is a JavaScript runtime built on [Chrome's V8 JavaScript engine](https://v8.dev/).
 
-Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.
+Node.js came into existence when the developers of original JavaScript extended it from something working only in the browser to the thing running on your machine as a standalone application.
 
-> I/O stands for Input/Output
+Both your browser JavaScript and Node.js run on the V8 JavaScript runtime engine. This engine takes your JavaScript code and converts it into a faster machine code.
 
-Node.js’ package ecosystem, [npm](https://www.npmjs.com/), is the largest ecosystem of open source libraries in the world.
+<br>
+
+## Event-driven, non-blocking I/O model
+
+Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. I/O stands for input/output.
+
+### Event-driven
+
+<br>
+
+### Non-blocking I/O model
+
+I/O takes time hence blocking other functions.
+
+![Blocking vs. Non-blocking I/O](./../img/blocking.png)
+
+> There is a full article on [Blocking vs. Non-Blocking](https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/).
+> <br>
+
+## How Node.js works
 
 ![Node.js Processing](./../img/nodeProcessing.png)
 
@@ -84,7 +103,7 @@ The callbacks for asynchronous requests will also be executed on the Event Loop.
 
 <br>
 
-> Seed the [official Node.js docs](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) for more information.
+> See the [official Node.js docs](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) for more information.
 
 <br>
 
