@@ -18,9 +18,7 @@ Both your browser JavaScript and Node.js run on the V8 JavaScript runtime engine
 
 <br>
 
-### What is runtime ?
-
-For questions like "What is runtime?", here's some answers many people liked. See this [Stackoverflow page](https://stackoverflow.com/questions/3900549/what-is-runtime).
+> For questions like "What is runtime?", here's some answers many people liked. See this [Stackoverflow page](https://stackoverflow.com/questions/3900549/what-is-runtime).
 
 <br>
 
