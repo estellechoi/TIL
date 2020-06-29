@@ -1,5 +1,7 @@
 # Node.js
 
+> This markdown page is Korean/English mixed entirely depending on my personal need, not readers' possible expectation.
+
 <br>
 
 ## What is Node.js ?
@@ -8,9 +10,17 @@
 
 Node.js is a JavaScript runtime built on [Chrome's V8 JavaScript engine](https://v8.dev/).
 
+한국말로 하면, Node.js는 크롬 브라우저의 V8 엔진에서 동작하는 Javascript 런타임이다.
+
 Node.js came into existence when the developers of original JavaScript extended it from something working only in the browser to the thing running on your machine as a standalone application.
 
 Both your browser JavaScript and Node.js run on the V8 JavaScript runtime engine. This engine takes your JavaScript code and converts it into a faster machine code.
+
+<br>
+
+### What is runtime ?
+
+For questions like "What is runtime?", here's some answers many people liked. See this [Stackoverflow page](https://stackoverflow.com/questions/3900549/what-is-runtime).
 
 <br>
 
@@ -18,19 +28,13 @@ Both your browser JavaScript and Node.js run on the V8 JavaScript runtime engine
 
 Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. I/O stands for input/output.
 
-### 1. Event-driven
-
-Here's a [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ) titled "What the heck is the event loop anyway?" by Philip Roberts.
-
-![Node.js Processing](./../img/nodeProcessing.png)
-
 <br>
 
-### 2. Non-blocking I/O
+### What is Non-blocking I/O ?
 
 I/O takes time hence blocking other functions. In the blocking method, a request is not initiated until prior request to fetch data is responded and finish its work like printing results on the screen.
 
-![Blocking vs. Non-blocking I/O](./../img/blocking.png)
+![Blocking vs Non-blocking I/O](./../img/blocking.png "Blocking vs Non-blocking")
 
 <br>
 
@@ -41,6 +45,14 @@ Javascript solved this problem using a non-blocking request. You can initiate bo
 <br>
 
 > There is a full article on [Blocking vs. Non-Blocking](https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/).
+
+<br>
+
+### Event loop
+
+Here's a [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ) titled "What the heck is the event loop anyway?" by Philip Roberts.
+
+![Node.js Processing](./../img/nodeProcessing.png)
 
 <br>
 
