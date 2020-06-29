@@ -18,18 +18,31 @@ Both your browser JavaScript and Node.js run on the V8 JavaScript runtime engine
 
 Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. I/O stands for input/output.
 
-### Event-driven
+### 1. Event-driven
+
+Here's a [video](https://www.youtube.com/watch?v=8aGhZQkoFbQ) titled "What the heck is the event loop anyway?" by Philip Roberts.
+
+![Node.js Processing](./../img/nodeProcessing.png)
 
 <br>
 
-### Non-blocking I/O model
+### 2. Non-blocking I/O
 
-I/O takes time hence blocking other functions.
+I/O takes time hence blocking other functions. In the blocking method, a request is not initiated until prior request to fetch data is responded and finish its work like printing results on the screen.
 
 ![Blocking vs. Non-blocking I/O](./../img/blocking.png)
 
+<br>
+
+If this was a web server, we would have to start a new thread for every new request. But JavaScript is single-threaded (not really, but it has a single-threaded event loop). So this would make JavaScript not very well suited for multi-threaded tasks.
+
+Javascript solved this problem using a non-blocking request. You can initiate both requests in parallel. This non-blocking I/O operation eliminates the need for multi-threading.
+
+<br>
+
 > There is a full article on [Blocking vs. Non-Blocking](https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/).
-> <br>
+
+<br>
 
 ## How Node.js works
 
