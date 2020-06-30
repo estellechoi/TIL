@@ -23,6 +23,10 @@ The Engine consists of two main components:
 
 <br>
 
+> How V8 engine works? there is my another markdown page, see [here](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md).
+
+<br>
+
 ## JavaScript Runtime
 
 For JavaScript runtime, we have the Engine but there is actually a lot more. We have those things called Web APIs which are provided by browsers, like the DOM, AJAX, setTimeout and many more.
