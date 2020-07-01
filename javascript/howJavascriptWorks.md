@@ -262,12 +262,6 @@ console.log("Bye");
 
 <br>
 
-#### 3. `console.log('Hi')` is executed.
-
-![Stop 3](./../img/eventLoop3.png)
-
-<br>
-
 #### 4. `console.log('Hi')` is removed from the Call Stack.
 
 ![Stop 4](./../img/eventLoop4.png)
