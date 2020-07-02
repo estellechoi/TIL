@@ -351,7 +351,7 @@ The timer keeps hadling the countdown.
 
 <br>
 
-## How `setTimeout(callback, 0)` works
+### How `setTimeout(callback, 0)` works
 
 It’s important to note that `setTimeout()` doesn’t automatically put your callback on the event loop queue. It sets up a timer. When the timer expires, the environment places your callback into the event loop, so that some future tick will pick it up and execute it.
 
