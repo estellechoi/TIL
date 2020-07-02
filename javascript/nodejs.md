@@ -18,10 +18,6 @@ Both your browser JavaScript and Node.js run on the V8 JavaScript runtime engine
 
 <br>
 
-> For questions like "What is runtime?", here's some answers many people liked. See this [Stackoverflow page](https://stackoverflow.com/questions/3900549/what-is-runtime).
-
-<br>
-
 ## Event-driven, non-blocking I/O model
 
 Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. I/O stands for input/output.
