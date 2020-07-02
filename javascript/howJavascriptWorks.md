@@ -437,7 +437,7 @@ try {
 }
 ```
 
-This callback function throws an error, but the error would be not catched. This is because the caller of the callback is not the `setTimeout()` but the event loop. When the call stack has nothing more to execute, the event loop calls back a callback function. At that time, `setTimeout()` has already been removed from the runtime and never exists. Any exception handled in `catch { .. }` statement should be from `setTimeout()` not the callback. So, how can be the errors from callbacks handled?
+This callback function throws an error, but the error would be not caught. This is because the caller of the callback is not the `setTimeout()` but the event loop. When the call stack has nothing more to execute, the event loop calls back a callback function. At that time, `setTimeout()` has already been removed from the runtime and never exists. Any exception handled in `catch { .. }` statement should be from `setTimeout()` not the callback. So, how can be the errors from callbacks handled?
 
 <br>
 
