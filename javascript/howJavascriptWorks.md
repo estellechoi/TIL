@@ -491,8 +491,6 @@ You define an asynchronous function using the `async` function declaration. Such
 
 <br>
 
-<br>
-
 #### Example
 
 This is a standard JavaScript function.
