@@ -6,6 +6,10 @@
 
 ## JavaScript Engine
 
+> For questions like "What is runtime?", here's some answers many people liked. See this [Stackoverflow page](https://stackoverflow.com/questions/3900549/what-is-runtime).
+
+<br>
+
 A JavaScript engine is a program or an interpreter which executes JavaScript code. A popular example of a JavaScript Engine is Google’s V8 engine. The V8 engine is used inside Chrome and also for Node.js runtime.
 <br>
 
