@@ -89,6 +89,8 @@ function printEvent(event) {
 
 각각의 `<li>` 요소를 클릭했을 때 이벤트 로그가 찍히는 코드를 작성해야 한다고 가정하겠습니다. 이를 위해서는 4개의 `<li>` 요소에 일일이 `addEventListener`를 이용해 이벤트를 등록해야 할 것 같네요.
 
+<br>
+
 ```javascript
 const lists = document.querySelectorAll("ul > li");
 
@@ -122,13 +124,19 @@ ul.addEventListener("click", function (event) {
 
 ## 이벤트 캡쳐링(Event Capturing)
 
-이벤트 캡쳐링은 위에서 언급했듯이, 이벤트 버블링과 반대 방향으로 진행되는 이벤트 전파 방식입니다. 어떤 요소에서 이벤트가 발생했을 때, 최상위 요소 `window`에서부터 이벤트가 실제로 발생한 요소까지 탐색하여 찾아옵니다. 이벤트 캡쳐링을 사용하려면 다음과 같이 `addEventListener()` 메소드의 3 번째 인자에 `{ capture: true }` 값을 주면 됩니다.
+이벤트 캡쳐링은 위에서 언급했듯이, 이벤트 버블링과 반대 방향으로 진행되는 이벤트 전파 방식입니다. 어떤 요소에서 이벤트가 발생했을 때, 최상위 요소인 `<html>`에서부터 이벤트가 실제로 발생한 요소까지 탐색하여 찾아옵니다. 이벤트 캡쳐링을 사용하려면 이벤트를 등록할 때 `addEventListener()` 메소드의 3 번째 인자에 `{ capture: true }` 값을 주면 됩니다.
 
 > `addEventListener()` 메소드의 3 번째 인자에는 옵션 객체가 들어옵니다. 옵션 객체에서 해당 리스너에 대한 여러 설정들을 지정할 수 있는데, `capture`는 그 설정 옵션들 중 하나입니다. 이 옵션의 기본값은 보통 `false` 입니다.
 
 <br>
 
-코드로 알아보겠습니다. 다음과 같은 DOM 트리가 있습니다.
+위에서 봤던 그림을 다시 한번 보겠습니다.
+
+![Event Bubbling](./../img/bubbling.png)
+
+<br>
+
+위의 DOM 트리를 코드로 하면 다음과 같습니다.
 
 ```html
 <div id="wrap">
@@ -138,7 +146,9 @@ ul.addEventListener("click", function (event) {
 </div>
 ```
 
-`<a>` 요소를 클릭했다고 가정해봅시다. `<a>` 요소에서 바로 이벤트가 발생할 것 같지만, 그렇지 않습니다. 최상위 요소인 `<html>` 요소에서 가장 먼저 이벤트가 발생합니다. 그 다음 `<body>`로, `<a>` 요소를 감싸고 있는 `<p>` 요소까지 이벤트 전파가 일어납니다. 이렇게 이벤트가 전파되는 중에 `{ capture: true }` 옵션을 가진 이벤트 리스너를 찾으면, 그 리스너의 콜백 함수가 실행됩니다.
+<br>
+
+위의 DOM 트리에서 `<a>` 요소를 클릭했다고 가정해봅시다. `<a>` 요소에서 바로 이벤트가 발생할 것 같지만, 그렇지 않습니다. 최상위 요소인 `<html>` 요소에서 가장 먼저 이벤트가 발생합니다. 그 다음 `<body>`로, `<a>` 요소를 감싸고 있는 `<p>` 요소까지 이벤트 전파가 일어납니다. 이렇게 이벤트가 전파되는 중에 `{ capture: true }` 옵션을 가진 이벤트 리스너를 찾으면, 그 리스너의 콜백 함수가 실행됩니다.
 
 <br>
 
@@ -162,7 +172,9 @@ function printLog(event) {
 
 이벤트 버블링과 이벤트 캡쳐링은 이벤트가 전파되는 방식들입니다.
 
-> 도움이 되는 원문 : "Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
+> 도움을 받은 원문에서 발췌한 정의입니다.
+
+> "Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
 
 <br>
 
