@@ -54,11 +54,11 @@ function printEvent(event) {
 
 ## 이벤트 전파(Event Propagation)
 
-사용자가 버튼을 클릭하면 `click` 이벤트가 발생한다고 가정해보겠습니다. 얼핏 보면 이 `click` 이벤트는 사용자가 클릭한 버튼에서 한순간 발생했다 사라지는 것 같지만, 그렇지 않습니다. DOM에서 이벤트가 발생하면 `event` 객체가 생성됩니다. 이 객체는 DOM의 트리 구조 내에서 특정한 매커니즘에 따라 이동합니다. 그러다가 어떤 버튼 요소에 등록된 이벤트 리스너(Event Listener)에 의해 감지됩니다. 이 때문에 우리는 그 요소에서 이벤트가 발생한 것처럼 느낍니다.
+사용자가 버튼을 클릭하면 `click` 이벤트가 발생한다고 가정해보겠습니다. 얼핏 보면 이 `click` 이벤트는 사용자가 클릭한 버튼에서 한순간 발생했다 사라지는 것 같지만, 그렇지 않습니다. DOM에서 이벤트가 발생하면 `event` 객체가 생성되는데요, 이 객체는 DOM의 트리 구조 내에서 특정한 매커니즘에 따라 이동합니다. 그러다가 어떤 요소(버튼)에 등록된 이벤트 리스너(Event Listener)에 의해 감지됩니다. 이 때문에 우리는 그 요소에서 이벤트가 발생한 것처럼 느낍니다.
 
-따라서, 이벤트를 잘 핸들링하려면 이벤트 전파(Event Propagation)를 이해하는 것이 중요합니다. 다음은 도움을 받은 원문에서 발췌한 이벤트 전파의 정의입니다.
+이벤트를 잘 핸들링하려면 이벤트 전파(Event Propagation)를 이해하는 것이 중요합니다. 다음은 도움을 받은 원문에서 발췌한 이벤트 전파의 정의입니다.
 
-"Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
+> "Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
 
 <br>
 
@@ -66,11 +66,11 @@ function printEvent(event) {
 
 이벤트가 전파되는 과정을 순서에 따라 3 단계로 나눌 수 있습니다.
 
-- 1. 캡쳐링(Capturing) 단계
+1. 캡쳐링(Capturing) 단계
 
-- 2. 타겟(Target) 단계
+2. 타겟(Target) 단계
 
-- 3. 버블링(Bubbling) 단계
+3. 버블링(Bubbling) 단계
 
 <br>
 
