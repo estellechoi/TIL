@@ -12,7 +12,11 @@ DOM에서 발생하는 이벤트를 감지하고 그 이벤트에 대한 후속 
 
 - `addEventListener()` : 특정 이벤트에 대해 이를 핸들링할 이벤트 핸들러를 등록
 - `removeEventListener()` : `EventTarget` 인터페이스에 등록된 이벤트 리스너를 제거
-- `dispatchEvent()` : `EventTarget` 인터페이스에 이벤트를 전송
+- `dispatchEvent()` : `EventTarget` 인터페이스에 이벤트를 디스패치
+
+<br>
+
+> 디스패치(Dispatch)가 무엇인지 모른다면, [여기](https://www.w3.org/TR/DOM-Level-3-Events/#dispatch)를 보세요.
 
 <br>
 
@@ -57,10 +61,6 @@ function printEvent(event) {
 사용자가 버튼을 클릭하면 `click` 이벤트가 발생한다고 가정해보겠습니다. 얼핏 보면 이 `click` 이벤트는 사용자가 클릭한 버튼에서 한순간 발생했다 사라지는 것 같지만, 실제로는 그렇지 않습니다.
 
 DOM에서 사용자 이벤트를 감지하면 `Event` 객체가 생성되는데요, 이를 이벤트가 디스패치(Dispatch)되었다고 합니다. 이 `Event` 객체는 DOM의 트리 구조 내에서 특정한 매커니즘에 따라 이동합니다. 이것을 이벤트 전파(Event Propagation)라고 합니다. 그러다가 어떤 요소(버튼)에 등록된 이벤트 리스너(Event Listener)에 의해 감지됩니다. 이 때문에 우리는 이벤트 리스너가 등록된 바로 그 요소에서 이벤트가 발생한 것처럼 느끼는 것이죠.
-
-<br>
-
-> 이벤트 디스패치(Dispatch)에 대한 정확한 정의를 확인하려면, [여기](https://www.w3.org/TR/DOM-Level-3-Events/#dispatch)를 보세요.
 
 <br>
 
