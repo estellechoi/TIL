@@ -1,4 +1,4 @@
-# 이벤트 핸들링
+# 이벤트 전파와 이벤트 핸들링
 
 > 이 글은 여러 문서와 아티클을 참고해서 제가 직접 작성한 글입니다.
 
@@ -49,6 +49,38 @@ function printEvent(event) {
 - `Event.target` : 이벤트가 원래 디스패치된 대상을 참조 (실제로 사용자 이벤트가 일어난 노드)
 
 - `Event.currentTarget` : 이벤트 핸들링을 위해 현재 등록된 대상을 참조 (이벤트가 현재 전달되기로한 객체)
+
+<br>
+
+## 이벤트 전파(Event Propagation)
+
+사용자가 버튼을 클릭하면 `click` 이벤트가 발생한다고 가정해보겠습니다. 얼핏 보면 이 `click` 이벤트는 사용자가 클릭한 버튼에서 한순간 발생했다 사라지는 것 같지만, 그렇지 않습니다. DOM에서 이벤트가 발생하면 `event` 객체가 생성됩니다. 이 객체는 DOM의 트리 구조 내에서 특정한 매커니즘에 따라 이동합니다. 그러다가 어떤 버튼 요소에 등록된 이벤트 리스너(Event Listener)에 의해 감지됩니다. 이 때문에 우리는 그 요소에서 이벤트가 발생한 것처럼 느낍니다.
+
+따라서, 이벤트를 잘 핸들링하려면 이벤트 전파(Event Propagation)를 이해하는 것이 중요합니다. 다음은 도움을 받은 원문에서 발췌한 이벤트 전파의 정의입니다.
+
+"Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
+
+<br>
+
+### 이벤트 전파의 3 단계
+
+이벤트가 전파되는 과정을 순서에 따라 3 단계로 나눌 수 있습니다.
+
+- 1. 캡쳐링(Capturing) 단계
+
+- 2. 타겟(Target) 단계
+
+- 3. 버블링(Bubbling) 단계
+
+<br>
+
+`<td>` 요소를 클릭한다고 가정하겠습니다. 이때 발생한 이벤트는 위의 3 단계 순서와 같이 전파되는데요, 그 모습은 아래 그림과 같습니다.
+
+![Event Flow](./../img/eventFlow.svg)
+
+<br>
+
+> 이벤트 디스패치(Dispatch)가 무엇인지 모른다면, [여기](https://www.w3.org/TR/DOM-Level-3-Events/#dispatch)를 보세요.
 
 <br>
 
@@ -168,13 +200,9 @@ function printLog(event) {
 
 <br>
 
-## 이벤트 전파(Event Propagation)
+## 이벤트 전파 막기
 
 이벤트 버블링과 이벤트 캡쳐링은 이벤트가 전파되는 방식들입니다.
-
-> 도움을 받은 원문에서 발췌한 정의입니다.
-
-> "Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
 
 <br>
 
@@ -194,9 +222,9 @@ function handleEvent(event) {
 
 ## 이벤트 위임(Event Delegation)
 
-이벤트 캡쳐링과 버블링을 활용하면 이벤트 핸들링 패턴인 이벤트 위임(Event Delegation)을 구현할 수 있습니다. 이벤트 위임은 비슷한 방식으로 여러 요소의 이벤트를 핸들링할 때 사용됩니다. 위의 이벤트 버블링 예제처럼, 반복되는 요소마다 이벤트 리스너를 등록하지 않고, 요소들의 공통 조상이 되는 요소에 이벤트 리스너를 단 하나만 할당하는 방식입니다. 상위 요소에 하나의 리스너를 등록해도 이벤트 전파를 이용해 하위의 여러 요소들의 이벤트를 핸들링할 수 있기 때문입니다.
+이벤트 캡쳐링과 버블링을 활용하면 이벤트 핸들링 패턴인 이벤트 위임(Event Delegation)을 구현할 수 있습니다. 이벤트 위임은 비슷한 방식으로 여러 요소의 이벤트를 핸들링할 때 사용됩니다. 위의 이벤트 버블링 예제처럼, 반복되는 요소마다 이벤트 리스너를 등록하지 않고, 요소들의 공통 조상이 되는 요소에 이벤트 리스너를 단 하나만 등록하는 방식입니다. 상위 요소에 하나의 리스너를 등록해도 이벤트 전파를 이용해 하위의 여러 요소들의 이벤트를 핸들링할 수 있기 때문입니다.
 
-상위 요소에 할당한 이벤트 리스너의 콜백 함수(이벤트 핸들러)에서 `Event.target`을 통해 실제로 이벤트가 발생한 요소에 접근할 수 있습니다. `Event.target`이 실제로 이벤트가 발생한 요소를 알려주기 때문에, 실제 이벤트가 발생하는 요소가 아닌 상위 요소에 이벤트 핸들링을 위임해놔도 되는거죠.
+상위 요소에 등록한 이벤트 리스너의 콜백 함수(이벤트 핸들러)에서 `Event.target`을 통해 실제로 이벤트가 발생한 요소에 접근할 수 있습니다. `Event.target`이 실제로 이벤트가 발생한 요소를 알려주기 때문에, 실제 이벤트가 발생하는 요소가 아닌 상위 요소에 이벤트를 핸들링하라고 위임해놔도 되는거죠.
 
 <br>
 
