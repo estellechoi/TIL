@@ -54,11 +54,19 @@ function printEvent(event) {
 
 ## 이벤트 전파(Event Propagation)
 
-사용자가 버튼을 클릭하면 `click` 이벤트가 발생한다고 가정해보겠습니다. 얼핏 보면 이 `click` 이벤트는 사용자가 클릭한 버튼에서 한순간 발생했다 사라지는 것 같지만, 그렇지 않습니다. DOM에서 이벤트가 발생하면 `event` 객체가 생성되는데요, 이 객체는 DOM의 트리 구조 내에서 특정한 매커니즘에 따라 이동합니다. 그러다가 어떤 요소(버튼)에 등록된 이벤트 리스너(Event Listener)에 의해 감지됩니다. 이 때문에 우리는 그 요소에서 이벤트가 발생한 것처럼 느낍니다.
+사용자가 버튼을 클릭하면 `click` 이벤트가 발생한다고 가정해보겠습니다. 얼핏 보면 이 `click` 이벤트는 사용자가 클릭한 버튼에서 한순간 발생했다 사라지는 것 같지만, 실제로는 그렇지 않습니다.
+
+DOM에서 사용자 이벤트를 감지하면 `Event` 객체가 생성되는데요, 이를 이벤트가 디스패치(Dispatch)되었다고 합니다. 이 `Event` 객체는 DOM의 트리 구조 내에서 특정한 매커니즘에 따라 이동합니다. 이것을 이벤트 전파(Event Propagation)라고 합니다. 그러다가 어떤 요소(버튼)에 등록된 이벤트 리스너(Event Listener)에 의해 감지됩니다. 이 때문에 우리는 이벤트 리스너가 등록된 바로 그 요소에서 이벤트가 발생한 것처럼 느끼는 것이죠.
+
+<br>
+
+> 이벤트 디스패치(Dispatch)에 대한 정확한 정의를 확인하려면, [여기](https://www.w3.org/TR/DOM-Level-3-Events/#dispatch)를 보세요.
+
+<br>
 
 이벤트를 잘 핸들링하려면 이벤트 전파(Event Propagation)를 이해하는 것이 중요합니다. 다음은 도움을 받은 원문에서 발췌한 이벤트 전파의 정의입니다.
 
-> "Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."
+<b><i>"Event propagation is a mechanism that defines how events propagate or travel through the DOM tree to arrive at its target and what happens to it afterward."</i></b>
 
 <br>
 
@@ -74,19 +82,15 @@ function printEvent(event) {
 
 <br>
 
-`<td>` 요소를 클릭한다고 가정하겠습니다. 이때 발생한 이벤트는 위의 3 단계 순서와 같이 전파되는데요, 그 모습은 아래 그림과 같습니다.
+아래의 DOM 트리에서 `<td>` 요소를 클릭한다고 가정하겠습니다. 이때 발생한 이벤트는 위의 3 단계 순서와 같이 전파되는데요, 그 모습은 아래 그림과 같습니다.
 
 ![Event Flow](./../img/eventFlow.svg)
 
 <br>
 
-> 이벤트 디스패치(Dispatch)가 무엇인지 모른다면, [여기](https://www.w3.org/TR/DOM-Level-3-Events/#dispatch)를 보세요.
-
-<br>
-
 ## 이벤트 버블링(Event Bubbling)
 
-이벤트 버블링(Event Bubbling)은 어떤 요소에서 이벤트가 발생했을 때 그 이벤트가 더 상위의 요소들로 전달되는 특성입니다.
+이벤트 버블링(Event Bubbling)은 어떤 요소에서 이벤트가 발생했을 때 그 이벤트가 더 상위의 요소들로 전달되는 전파 방식입니다. 위에서 살펴본 이벤트 전파의 과정 중 3 단계 전파 과정입니다.
 
 > 반대로, 이벤트 캡쳐링(Event Capturing)은 이벤트 버블링과 반대 방향으로 진행되는 이벤트 전파 방식입니다.
 
