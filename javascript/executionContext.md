@@ -1,5 +1,7 @@
 # JavaScript 기본: 실행 컨텍스트(Execution Context)
 
+> 이 글은 여러 문서와 아티클을 참고해서 제가 직접 작성한 글입니다.
+
 <br>
 
 ## 실행 컨텍스트란?
@@ -7,8 +9,6 @@
 실행 컨텍스트(Execution Context)는 Javascript 코드가 분석되고 실행되는 환경을 나타내는 추상적인 개념입니다. 쉽게 말해 실행 컨텍스트는 코드가 실행되고 있는 환경, 범위에 대한 개념입니다.
 
 <br>
-
-## 실행 컨텍스트의 종류
 
 JavaScript의 실행 컨텍스트에는 3 종류가 있습니다.
 
@@ -180,6 +180,81 @@ variableObject = {
 
 <br>
 
+## 호이스팅(Hoisting)
+
+> [이 영상](https://www.youtube.com/watch?v=ppMlvGMT2qE&feature=youtu.be)을 보는 것을 추천합니다.
+
+호이스팅(Hoisting)이란 선언된 모든 변수들의 선언 정보가 코드가 실행되기 전에 최상단으로 끌어올려지는 현상입니다. 함수의 경우, 표현식이 아닌 선언식으로 작성되었다면 변수가 선언된 것과 같으므로 함수 선언식이 통째로 호이스팅 됩니다.
+
+<br>
+
+아래 코드는 어떻게 동작할까요? 이 코드에는 변수 `tmp`가 선언되어 있고, 선언식 함수 `print`가 있습니다.
+
+```javascript
+console.log(tmp); // output: undefined
+
+console.log(tmp2); // output: undefined
+
+print(); // output: 'Hello'
+
+var tmp = "World";
+
+var tmp2;
+
+function print() {
+	console.log("Hello");
+}
+```
+
+변수를 선언하기 전에 호출하기 때문에 마치 에러가 날 것 같지만, 위 코드는 잘 작동합니다. 변수 `tmp`와 `tmp2`, 함수 `print`에 대한 선언이 호이스팅 되었기 때문입니다. 다시 말해 실행 컨텍스트의 변수 객체에 `tmp`, `tmp2`, `print`가 각각 프로퍼티로 담겨졌기 때문에 참조가 가능한 것입니다.
+
+`console.log(tmp)`의 결과는 왜 `undefined` 일까요? 먼저, 에러가 나지 않고 `undefined`가 출력되는 이유는 변수 `tmp`가 호이스팅 되어 참조할 수 있는 상태이기 때문입니다. 한편 `var tmp = "World"` 코드에 의해 할당된 값은 아직 참조할 수 없으며 변수의 선언부만 호이스팅 되었다는 것을 알 수 있습니다.
+
+<br>
+
+표현식 함수의 경우에는 이야기가 다릅니다.
+
+```javascript
+expression(); // 에러 발생
+
+// 함수 표현식 (호이스팅 피하기)
+var expression = function () {
+	console.log("expression");
+};
+```
+
+익명 함수가 할당된 변수 `expression`을 이용해 해당 함수를 호출하는 코드에서 에러가 발생합니다. 이는 변수 `expression`의 선언은 호이스팅 되었지만 이 변수가 참조하고 있는 함수 표현식은 호이스팅 되지 않았기 때문입니다.
+
+> 호이스팅 되는 변수들이 많아지면 JavaScript 코드의 실행은 그만큼 늦어집니다. 이는 성능에 좋지 않습니다. 위와 같이 함수 선언식 대신 함수 표현식을 이용해 함수가 통째로 호이스팅 되는 것을 피할 수 있습니다.
+
+<br>
+
+```javascript
+console.log(expression); // output: undefined
+
+// 함수 표현식
+var expression = function () {
+	console.log("expression");
+};
+```
+
+위는 함수는 호출하지 않고, 변수 `expression`을 콘솔에 출력하는 코드입니다. 함수 표현식은 호이스팅 되지 않았지만 변수 `expression`의 선언은 호이스팅 된 것을 알 수 있네요.
+
+<br>
+
+아래는 함수 선언식과 그 함수를 호출하는 코드입니다. 함수 선언식은 호이스팅 됩니다. 함수 표현식의 경우와 비교해보세요.
+
+```javascript
+declaration(); // output: declaration
+
+// 함수 선언식 - 선언과 동시에 초기화
+function declaration() {
+	console.log("declaration");
+}
+```
+
+<br>
+
 ## 네이티브 객체(Native Built-in Objects)
 
 [ECMAScript](https://developer.mozilla.org/ko/docs/Web/JavaScript/%EC%96%B8%EC%96%B4_%EB%A6%AC%EC%86%8C%EC%8A%A4)에 정의된 객체입니다. 애플리케이션 전역의 공통 기능을 제공하며, 애플리케이션의 환경과 관계없이 언제나 사용할 수 있습니다.
@@ -197,3 +272,5 @@ variableObject = {
 - [자바스크립트 언어 자료 | MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/%EC%96%B8%EC%96%B4_%EB%A6%AC%EC%86%8C%EC%8A%A4)
 - [Understanding Execution Context and Execution Stack in Javascript](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0)
 - [Execution context, Scope chain and JavaScript internals](https://medium.com/@happymishra66/execution-context-in-javascript-319dd72e8e2c)
+- [실행 컨텍스트와 자바스크립트의 동작 원리](https://poiemaweb.com/js-execution-context)
+- [실행 컨텍스트 | www.zerocho.com](https://www.zerocho.com/category/JavaScript/post/5741d96d094da4986bc950a0)
