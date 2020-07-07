@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+<link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/lib/lightbox/css/lightbox.min.css" /><link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/style/content/font.css?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e" /><link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/style/content/content.css?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e" /><!--[if lt IE 9]><script src="https://t1.daumcdn.net/tistory_admin/lib/jquery/jquery-1.12.4.min.js"></script><![endif]--><!--[if gte IE 9]>
+<!--><script src="https://t1.daumcdn.net/tistory_admin/lib/jquery/jquery-3.2.1.min.js"></script><!--<![endif]-->
+<script src="https://t1.daumcdn.net/tistory_admin/lib/lightbox/js/lightbox-plus-jquery.min.js"></script>
+<script>
+lightbox.options.fadeDuration = 200;
+lightbox.options.resizeDuration = 200;
+lightbox.options.wrapAround = false;
+lightbox.options.albumLabel = "%1 / %2";
+</script>
+<script>var tjQuery = jQuery.noConflict(true);</script><style type="text/css">.tt_article_useless_p_margin p {padding-top:0 !important;padding-bottom:0 !important;margin-top:0 !important;margin-bottom:0 !important;}</style><meta name="referrer" content="always"><link rel="icon" href="//t1.daumcdn.net/tistory_admin/static/top/favicon_0630.ico" /><link rel="apple-touch-icon" href="//img1.daumcdn.net/thumb/C180x180/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F241F093D5701E73803">
+<link rel="apple-touch-icon" sizes="76x76" href="//img1.daumcdn.net/thumb/C76x76/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F241F093D5701E73803">
+<link rel="apple-touch-icon" sizes="120x120" href="//img1.daumcdn.net/thumb/C120x120/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F241F093D5701E73803">
+<link rel="apple-touch-icon" sizes="152x152" href="//img1.daumcdn.net/thumb/C152x152/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F241F093D5701E73803"><meta name="description" content="아래문서는 11월 28일 김영보 강사님의 &quot;자바스크립트 중/고급 강좌&quot;를 듣기 위한 정리로 David Shariff의 blog 문서를 정리한 것이다. http://davidshariff.com/blog/what-is-the-execution-context-in-javascrip..">
+
+<!-- BEGIN OPENGRAPH -->
+<link rel="canonical" href="https://smarttech.tistory.com/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" /><meta property="og:type" content="article"><meta property="og:url" content="https://smarttech.tistory.com/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" ><meta property="og:site_name" content="" ><meta property="og:title" content="[Javascript] Execution context와 Stack에 대해서 정리하자." ><meta name="by" content="smarttech" ><meta property="og:description" content="아래문서는 11월 28일 김영보 강사님의 &quot;자바스크립트 중/고급 강좌&quot;를 듣기 위한 정리로 David Shariff의 blog 문서를 정리한 것이다. http://davidshariff.com/blog/what-is-the-execution-context-in-javascrip.." ><meta property="og:image" content="https://t1.daumcdn.net/tistory_admin/static/images/openGraph/opengraph.png" >
+<!-- END OPENGRAPH -->
+
+
+
+<!-- BEGIN TWITTERCARD -->
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@TISTORY"><meta name="twitter:title" content="[Javascript] Execution context와 Stack에 대해서 정리하자." ><meta name="twitter:description" content="아래문서는 11월 28일 김영보 강사님의 &quot;자바스크립트 중/고급 강좌&quot;를 듣기 위한 정리로 David Shariff의 blog 문서를 정리한 것이다. http://davidshariff.com/blog/what-is-the-execution-context-in-javascrip.." ><meta property="twitter:image" content="https://t1.daumcdn.net/tistory_admin/static/images/openGraph/opengraph.png" >
+<!-- END TWITTERCARD -->
+
+
+
+<!-- BEGIN DAUMAPP -->
+<meta property="dg:plink" content="https://smarttech.tistory.com/24" ><meta name="plink" content="https://smarttech.tistory.com/24" ><meta name="title" content="[Javascript] Execution context와 Stack에 대해서 정리하자." ><meta name="article:media_name" content="" ><meta property="article:mobile_url" content="https://smarttech.tistory.com/m/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" ><meta property="article:pc_url" content="https://smarttech.tistory.com/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" ><meta property="article:mobile_view_url" content="https://smarttech.tistory.com/m/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" ><meta property="article:pc_view_url" content="https://smarttech.tistory.com/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" ><meta property="article:talk_channel_view_url" content="https://smarttech.tistory.com/m/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" ><meta property="article:pc_service_home" content="https://www.tistory.com" ><meta property="article:mobile_service_home" content="https://www.tistory.com/m" ><meta property="article:txid" content="1576720_24" /><meta property="article:published_time" content="2013-11-22T18:32:13+09:00" ><meta property="og:regDate" content="20131122183213" ><meta property="article:modified_time" content="2013-11-25T18:30:18+09:00" >
+<!-- END DAUMAPP -->
+
+
+
+<!-- BEGIN STRUCTURED_DATA -->
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":{"@id":"https:\/\/smarttech.tistory.com\/entry\/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90"},"url":"https:\/\/smarttech.tistory.com\/entry\/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90","headline":"[Javascript] Execution context\uc640 Stack\uc5d0 \ub300\ud574\uc11c \uc815\ub9ac\ud558\uc790.","description":"\uc544\ub798\ubb38\uc11c\ub294 11\uc6d4 28\uc77c \uae40\uc601\ubcf4 \uac15\uc0ac\ub2d8\uc758 \"\uc790\ubc14\uc2a4\ud06c\ub9bd\ud2b8 \uc911\/\uace0\uae09 \uac15\uc88c\"\ub97c \ub4e3\uae30 \uc704\ud55c \uc815\ub9ac\ub85c David Shariff\uc758 blog \ubb38\uc11c\ub97c \uc815\ub9ac\ud55c \uac83\uc774\ub2e4. http:\/\/davidshariff.com\/blog\/what-is-the-execution-context-in-javascrip..","author":{"@type":"Person","name":"smarttech"},"image":{"@type":"ImageObject","url":"https:\/\/t1.daumcdn.net\/tistory_admin\/static\/images\/openGraph\/opengraph.png","width":"800px","height":"800px"},"datePublished":"20131122T18:32:13+09:00","dateModified":"20131125T18:30:18+09:00","publisher":{"@type":"Organization","name":"TISTORY","logo":{"@type":"ImageObject","url":"https:\/\/t1.daumcdn.net\/tistory_admin\/static\/images\/openGraph\/opengraph.png","width":"800px","height":"800px"}}}</script>
+<!-- END STRUCTURED_DATA -->
+
+
+    <meta charset="utf-8">
+    <title> :: [Javascript] Execution context와 Stack에 대해서 정리하자.</title>
+    <link rel="alternate" type="application/rss+xml" title="" href="https://smarttech.tistory.com/rss" />
+    <link rel="stylesheet" href="https://tistory3.daumcdn.net/tistory/1576720/skin/images/bootstrap.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+    <!-- <link rel="stylesheet" href="https://tistory3.daumcdn.net/tistory/1576720/skin/images/font-awesome.css"> -->
+    <link rel="stylesheet" href="https://tistory3.daumcdn.net/tistory/1576720/skin/images/nivo-slider.css">
+    <link rel="stylesheet" href="https://tistory3.daumcdn.net/tistory/1576720/skin/images/default.css">
+    <link rel="stylesheet" type="text/css" href="https://tistory3.daumcdn.net/tistory/1576720/skin/style.css?_T_=1382144094" />
+    <script src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/jquery-1.9.1.js"></script>
+    <script src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/hoverIntent.js"></script>
+    <script src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/superfish.js"></script>
+    <script src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/jquery.nivo.slider.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#jb_main_menu_category > ul').contents().unwrap();
+        $('#jb_main_menu_category > li').contents().unwrap();
+        $('#jb_main_menu_category > ul').addClass('sf-menu');
+        $('#jb_main_menu_category > ul.sf-menu').superfish();
+        $('#slider').nivoSlider({
+          effect: 'random', // Specify sets like: 'fold,fade,sliceDown'
+          slices: 15, // For slice animations
+          boxCols: 8, // For box animations
+          boxRows: 4, // For box animations
+          animSpeed: 500, // Slide transition speed
+          pauseTime: 3000, // How long each slide will show
+          startSlide: 0, // Set starting Slide (0 index)
+          directionNav: true, // Next & Prev navigation
+          controlNav: true, // 1,2,3... navigation
+          controlNavThumbs: false, // Use thumbnails for Control Nav
+          pauseOnHover: true, // Stop animation while hovering
+          manualAdvance: false, // Force manual transitions
+          prevText: 'Prev', // Prev directionNav text
+          nextText: 'Next', // Next directionNav text
+          randomStart: false, // Start on a random slide
+          beforeChange: function(){}, // Triggers before a slide transition
+          afterChange: function(){}, // Triggers after a slide transition
+          slideshowEnd: function(){}, // Triggers after all slides have been shown
+          lastSlide: function(){}, // Triggers when last slide is shown
+          afterLoad: function(){} // Triggers when slider has loaded
+        });
+        $('#jb_main_menu_category').css('display','block');
+        $('span.interword').replaceWith('<li><a>...</a></li>');
+      });
+    </script>
+  
+<style type="text/css">
+		#daumSearchBox {
+			height: 21px;
+			background-image : url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bg_search2_2.gif);
+			margin: 5px auto ;
+			padding: 0;
+		}
+		#daumSearchBox input {
+			background: none;
+			margin : 0;
+			padding : 0;
+			border : 0;
+		}
+		#daumSearchBox #daumLogo {
+			width: 34px;
+			height: 21px;
+			float: left;
+			margin-right: 5px;
+			background-image : url(//i1.daumcdn.net/img-media/tistory/img/bg_search1_2_2010ci.gif);
+		}
+		#daumSearchBox #show_q {
+			background-color: transparent;
+			border: none;
+			font: 12px Gulim, Sans-serif;
+			color: #555;
+			margin-top: 4px;
+			margin-right: 15px;
+			float: left;
+		}
+
+		#daumSearchBox #show_btn {
+			background-image : url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bt_search_2.gif);
+			width: 37px;
+			height: 21px;
+			float: left;
+			margin:0;
+			cursor:pointer;
+			text-indent:-1000em;
+		}
+	</style>
+<link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/plugins/TistoryProfileLayer/style.css?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e" />
+<script type="text/javascript" src="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/plugins/TistoryProfileLayer/profile.js?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e"></script>
+	<style type="text/css">
+		.another_category { border: 1px solid #E5E5E5; padding: 10px 10px 5px; margin:10px 0; clear: both; }
+		.another_category h4 { font-size: 12px !important; margin: 0 !important; border-bottom: 1px solid #E5E5E5 !important; padding: 2px 0 6px !important; }
+		.another_category h4 a { font-weight: bold !important; }
+		.another_category table { table-layout: fixed; border-collapse: collapse; width: 100% !important; margin-top: 10px !important; }
+		* html .another_category table { width: auto !important; }
+		*:first-child+html .another_category table { width: auto !important; }
+		.another_category th, .another_category td { padding: 0 0 4px !important; }
+		.another_category th { text-align: left; font-size: 12px !important; font-weight: normal;  word-break: break-all; overflow: hidden; line-height: 1.5; }
+		.another_category td { text-align: right; width: 80px; font-size: 11px; }
+		.another_category th a { font-weight: normal; text-decoration: none; border: none !important; }
+		.another_category th a.current{ font-weight: bold; text-decoration: none !important; border-bottom: 1px solid !important; }
+		.another_category th span { font-weight: normal; text-decoration: none; font: 10px Tahoma, Sans-serif; border: none !important; }
+
+		.another_category_color_gray, .another_category_color_gray h4 { border-color: #E5E5E5 !important; }
+		.another_category_color_gray * { color: #909090 !important; }
+		.another_category_color_gray th a.current{border-color:#909090 !important;}
+		.another_category_color_gray h4, .another_category_color_gray h4 a { color: #737373 !important; }
+
+
+		.another_category_color_red, .another_category_color_red h4 { border-color: #F6D4D3 !important;  }
+		.another_category_color_red * { color: #E86869 !important; }
+		.another_category_color_red th a.current{border-color:#E86869 !important;}
+		.another_category_color_red h4, .another_category_color_red h4 a { color: #ED0908 !important; }
+
+
+		.another_category_color_green, .another_category_color_green h4 { border-color: #CCE7C8 !important; }
+		.another_category_color_green * { color: #64C05B !important; }
+		.another_category_color_green th a.current{border-color:#64C05B !important;}
+		.another_category_color_green h4, .another_category_color_green h4 a { color: #3EA731 !important; }
+
+
+		.another_category_color_blue, .another_category_color_blue h4 { border-color: #C8DAF2 !important; }
+		.another_category_color_blue * { color: #477FD6 !important; }
+		.another_category_color_blue th a.current{border-color:#477FD6 !important;}
+		.another_category_color_blue h4, .another_category_color_blue h4 a { color: #1960CA !important; }
+
+
+		.another_category_color_violet, .another_category_color_violet h4 { border-color: #E1CEEC !important;  }
+		.another_category_color_violet * { color:#9D64C5 !important; }
+		.another_category_color_violet th a.current{border-color:#9D64C5 !important;}
+		.another_category_color_violet h4, .another_category_color_violet h4 a { color: #7E2CB5 !important; }
+	</style>
+<script type="text/javascript">
+        
+        window.TistoryBlog = {
+            basePath: "",
+            url: "https://smarttech.tistory.com",
+            tistoryUrl: "https://smarttech.tistory.com",
+			manageUrl: 'https://smarttech.tistory.com/manage',
+            token: '9XsBKiNhXP7E42fNTUeK6g=='
+        };
+        var servicePath = "";
+        var blogURL = "";
+    </script>
+
+	<script> (function() { window.orgjQuery = window.jQuery; window.jQuery = tjQuery })()</script>
+    <script type="text/javascript" defer src=https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/script/reaction/reaction-button-container.min.js?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e></script>
+    <script> (function() { window.jQuery = window.orgjQuery; delete window.orgjQuery })()</script>
+        <script type="text/javascript" src="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/script/_/base.js?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e"></script>
+        <link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/style/dialog.css?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e"/>
+            <link rel="stylesheet" type="text/css" href="//t1.daumcdn.net/tistory_admin/www/style/top/font.css">
+    <link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/style/postBtn.css?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e"/>
+        <link rel="stylesheet" type="text/css" href="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/style/component/tistory.css?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e" />
+        <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script></head>
+  <body><script type="text/javascript">
+	(function() {
+		if (!window.T) {
+			window.T = {}
+		}
+		window.T.config = {"TOP_SSL_URL":"https:\/\/www.tistory.com","PREVIEW":false,"ROLE":"guest","PREV_PAGE":"\/entry\/javautilconcurrent-java-5-Concurrency-Utities-\uc18c\uac1c","NEXT_PAGE":"\/entry\/MongoDB-\uc124\uce58-\ubc0f-\ud658\uacbd\uc124\uc815","BLOG":{"isDormancy":true,"title":""},"NEED_COMMENT_LOGIN":true,"COMMENT_LOGIN_CONFIRM_MESSAGE":"\uc774 \ube14\ub85c\uadf8\ub294 \ud734\uba74 \uc0c1\ud0dc\uc774\ubbc0\ub85c \ub85c\uadf8\uc778\ud55c \uc0ac\uc6a9\uc790\uc5d0\uac8c\ub9cc  \uc791\uc131\uc774 \ud5c8\uc6a9\ub429\ub2c8\ub2e4. \uc9c0\uae08 \ub85c\uadf8\uc778\ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?","LOGIN_URL":"https:\/\/www.tistory.com\/auth\/login\/?redirectUrl=http%3A%2F%2Fsmarttech.tistory.com%2Fentry%2FJavascript-Execution-context%25EC%2599%2580-Stack%25EC%2597%2590-%25EB%258C%2580%25ED%2595%25B4%25EC%2584%259C-%25EC%25A0%2595%25EB%25A6%25AC%25ED%2595%2598%25EC%259E%2590","DEFAULT_URL":"https:\/\/smarttech.tistory.com","USER":{"name":null,"homepage":null},"ROLE_GROUP":"visitor","SUBSCRIPTION":{"status":"none","isConnected":false,"isProcessing":false,"isPending":false,"isWait":false,"isNone":true},"IS_LOGIN":false,"HAS_BLOG":false,"TOP_URL":"http:\/\/www.tistory.com"};
+		window.appInfo = {"domain":"tistory.com","topUrl":"https:\/\/www.tistory.com","loginUrl":"https:\/\/www.tistory.com\/auth\/login","logoutUrl":"https:\/\/www.tistory.com\/auth\/logout"};
+
+        window.initData = {};
+        
+	})();
+</script>
+
+<script type="text/javascript" src="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/script/blog/common.js?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e"></script>
+<div style="margin:0; padding:0; border:none; background:none; float:none; clear:none; z-index:0"></div>
+
+
+<div id="jb_header_bg">
+  <div id="jb_header">
+    <div id="jb_site_title">
+      <h1><a href="/"></a></h1>
+    </div><!-- #jb_site_title -->
+    <div id="jb_header_right" class="span6">
+      <a href="#"><img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/facebook-icon.png" /></a>
+      <a href="#"><img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/twitter-icon.png" /></a>
+      <a href="#"><img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/gplus-icon.png" /></a>
+      <a href="https://smarttech.tistory.com/rss"><img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/rss-icon.png" /></a>
+    </div>
+  </div><!-- #jb_header -->
+</div><!-- #jb_header_bg -->
+
+<div id="jb_main_menu_bg">
+  <div id="jb_main_menu">
+    <!-- Blog Menu For Tistory -->
+    <div id="blog_menu" class="span4">
+      <ul>		<li class="t_menu_home first">
+			<a href="/">홈</a>
+		</li>
+				<li class="t_menu_tag">
+			<a href="/tag">태그</a>
+		</li>
+				<li class="t_menu_location last">
+			<a href="/location">위치로그</a>
+		</li>
+		</ul>
+    </div>
+    <!-- Blog Menu For Textcube -->
+    <!-- <div id="blog_menu">
+      <ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/tag">태그</a></li>
+        <li><a href="/guestbook">방명록</a></li>
+      </ul>
+    </div> -->
+    <div id="jb_main_menu_category">
+      <ul class="tt_category">
+	<li class="">
+		<a class="link_tit" href="/category">
+			분류 전체보기							<span class="c_cnt">(13)</span>
+			
+					</a>
+
+				<ul class="category_list">
+							<li class="">
+					<a class="link_item" href="/category/Hadoop">
+						Hadoop													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/Javascript">
+						Javascript													<span class="c_cnt">(7)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/NodeJs">
+						NodeJs													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/R">
+						R													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/JBoss">
+						JBoss													<span class="c_cnt">(2)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/AWS">
+						AWS													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/IMDG">
+						IMDG													<span class="c_cnt">(3)</span>
+						
+											</a>
+
+					
+				</li>
+					</ul>
+			</li>
+</ul>
+    </div>
+  </div><!-- #jb_main_menu -->
+</div><!-- #jb_main_menu_bg -->
+
+<div id="jb_slider_bg">
+  <div id="jb_slider">
+    <div class="slider-wrapper theme-default">
+      <div class="ribbon"></div>
+      <div id="slider" class="nivoSlider">
+        <a href="#"><img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/slider-01.png" title="데이타을 지배하는자!! 그가 세상을 움직인다!! "   /></a>
+        <img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/slider-02.png" title="데이타을 지배하는자!! 그가 세상을 움직인다!! " />
+        <img src="https://tistory3.daumcdn.net/tistory/1576720/skin/images/slider-03.png" title="데이타을 지배하는자!! 그가 세상을 움직인다!! " />
+      </div>
+    </div>
+  </div><!-- #jb_slider -->
+</div><!-- #jb_slider_bg -->
+
+<div id="jb_main_bg">
+  <div id="jb_main">
+    <div id="jb_main_content">
+      
+      
+      
+      
+      
+      
+        <div class="content_wrap post">
+          <h2 class="post_title"><a href="/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90">[Javascript] Execution context와 Stack에 대해서 정리하자.</a></h2>
+          <p class="post_info">
+            <span class="post_info_category"><a href="/category/Javascript">Javascript</a> |
+            <span class="post_info_date">2013. 11. 22. 18:32</span>
+          </p>
+          
+          <div class="article"><p>아래문서는 11월 28일 김영보 강사님의 "자바스크립트 중/고급 강좌"를 듣기 위한 정리로 David Shariff의 blog 문서를 정리한 것이다.</p><p><a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/" target="_blank" class="tx-link">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a><br /></p><p>1. Execution Context?</p><p style="margin-left: 2em;">자바스트립트가 실행될때 실행되는 환경은 매우 중요하며 다음과 같은 것으로 분류된다</p><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><li>Global Code - 코드가 첫번째로 실행되는 기본환경</li><li>Function code - Whenever the flow of execution enters a function body.</li><li>Eval code - eval function내에서 실행되는 코드</li></ul></ul><div>&nbsp;&nbsp;<img src="http://davidshariff.com/blog/wp-content/uploads/2012/06/img1.jpg" border="0" style="background-color: transparent; font-size: 9pt; line-height: 1.5;"></div><div><p>위 코드는 global context 1개와 3개의 다른 function context 표현 되어 있다.&nbsp;</p><p>global context는 프로그램내에서 다른 컨텍스트부터 접근이 가능한 유일한 context이다.</p><p>여러개의 function context를 만들수 있으며 각각의 function context는 함수를 호출함으로 만들어진다. 이 function context는 밖에서 접근할수 없는 함수내부에 선언된 변수등의 것을&nbsp;private scope로&nbsp;만든다.<br /><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">current context 밖에 선언된 변수들을 접근가능하다. 하지만 outside context는 안쪽에 선언된 context의 변수를 접근할수 없다. &nbsp; 왜 이렇게 작동하지는 다음을 보고 이해하자.</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">2. Execution Context Stack</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">&nbsp; 브라우저의 javascript interpreter는 single thead로 구현되어있다.</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">즉, 한번에 1개의 action을 할수있으며 나머지를 &nbsp;Execution Stack이라고 불리는 곳에 쌓이게 된다.</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">아래그림을 통해서 single threaded stack를 이해하자.</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">&nbsp;&nbsp;</span><img src="http://davidshariff.com/blog/wp-content/uploads/2012/06/ecstack.jpg" border="0" style="background-color: transparent; font-size: 9pt; line-height: 1.5;"></p><p>우리가 아는 것 처럼, 브라우저가 첫번째로 당신의 스크립트를 로드할때 global execution context로 들어간다.</p><p>global 코드 내에서 function를 호출하면 프로그램의 흐름은 function으로 들어가면서 새로운 execution contect를 생성하게 된다. 그 생성된 execution context는 execution stack의 최상위에 위치하게된다.&nbsp;</p><p>만약 현재 function에서 다른 내부 function을 호출하면 &nbsp;똑같은 일이 일어난다. &nbsp;execution 흐름은 function안으로 들어가고 새로운 execution context를 생성하고 다시 execution stack의 최상위로 위치하게 된다.</p><p>브라우저는 항상 stack 상위에 있는 current execution context를 실행하다. 그 execution context가 완료되면 stack에서 빠져나오며 제어의 흐름을 current stack 아래의 context에게 넘겨준다.</p><p>다음 예를 통해서 이해해보자</p><div class="txc-textbox" style="border: 1px solid rgb(254, 222, 199); background-color: rgb(254, 222, 199); padding: 10px;"><p style="background-color: rgb(255, 255, 255);">(function foo(i) {</p><p style="background-color: rgb(255, 255, 255); margin-left: 2em;">if(i === 3 ) {</p><p style="background-color: rgb(255, 255, 255); margin-left: 4em;">return;</p><p style="background-color: rgb(255, 255, 255); margin-left: 2em;">} else {</p><p style="background-color: rgb(255, 255, 255); margin-left: 4em;">foo(++1);</p><p style="background-color: rgb(255, 255, 255); margin-left: 2em;">}</p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">}(0));</span><br /></p></div><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></p><p><br /></p><p><img src="http://davidshariff.com/blog/wp-content/uploads/2012/06/es1.gif" border="0"></p><p>Execution Stack에서 기억해야할 5가지는 아래와 같다.</p><ul style="list-style-type: disc;"><li>단일 스레드</li><li>동기화 실행</li><li>1개의 Global context</li><li>무한 function context들</li><li>각각의 function 호출은 새로운 &nbsp;execution Context 생성한다.</li></ul><div><br /></div><div>3. Execution Context 상세</div><div style="margin-left: 2em;">2가지 stages 로 구분된다.</div><div>&nbsp;&nbsp; &nbsp; 1). &nbsp;Creation Stage</div><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><li>변수,함수, arguments 만들어라</li><li>Scope Chain 만들어라.</li><li>"this"의 값을 결정해라.</li></ul></ul><div>&nbsp; &nbsp; 2). Activation / Code Execution Stage</div><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><li>값, 함수의 참조값을 할당, &nbsp;코드를 해석하고 실행<br /><br /></li></ul></ul><div>&nbsp;&nbsp;&nbsp; &nbsp; execution context 개념적으로 3개의 프로퍼티로 나타낼수 있다.</div><div></div><div class="txc-textbox" style="border: 1px solid rgb(254, 222, 199); background-color: rgb(254, 222, 199); padding: 10px;"><div><span style="font-size: 9pt; line-height: 1.5;">executionContextObj = {</span></div><div>&nbsp; &nbsp; variableObject: { /* function arguments / parameters, inner variable and function declarations */ },&nbsp;</div><div>&nbsp; &nbsp; scopeChain: { /* variableObject + all parent execution context's variableObject */ },</div><div>&nbsp; &nbsp; this: {}</div><div>}</div></div><p><br /></p><p>4. Activation / Variable Object [AO/VO]</p><p style="margin-left: 2em;">executionContextObj는 함수가 코드가 실행되전에 함수호출될때 만들어 진다. 이것을 creation Stage이다.</p><p style="margin-left: 2em;">여기서, 해석기는 함수의&nbsp;파라미터, 넘겨지는 argument, 로컬함수선언, 로컬변수 선언 스캔하여 executionContextObject를 만든다. &nbsp;그결과로 executionContextObject의 variableObject가 된다.</p><p style="margin-left: 2em;">브라우저 해석기가 코드를 어떻게 평가하는지 아래 내용을 보자.</p><p style="margin-left: 2em;">1) &nbsp;함수를 호출하는 코드를 찾는다. &nbsp; ----- (1)</p><p style="margin-left: 2em;">2) 함수코드가 실행되기전 execution context를 생성한다. &nbsp; ----(2)</p><p style="margin-left: 2em;">3) creation stage로 들어간다.</p><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><li>variable object를 만든다. &nbsp; ----(3)</li><ul style="list-style-type: disc;"><li>arguments object를 만든다. &nbsp; &nbsp;----(4)</li><ul style="list-style-type: disc;"><li>파라미터에 대해서 체크, 그 파라미터 이름과 값을 초기화</li></ul><li>함수 선언에 대한 context를 스캔한다.</li><ul style="list-style-type: disc;"><li>각 함수를 찾아서 그 이름을 가진 variable object를 만들고 메모리에 그함수를 참조 pointer를 갖도록한다. &nbsp; &nbsp;--------- (5)</li><li>그 함수 이름이 존재하면 참조pointer는 overwrite 된다</li></ul><li>변수 선언에 대해서 context를 스캔한다.</li><ul style="list-style-type: disc;"><li>선언된 변수를 찾으면 &nbsp;변수이름을 가진 property를 variable object에 생성하고 값을 "undefined"로 초기화 한다. &nbsp; ---- (6)</li><li>만약 그변수의 이름이 variable object에&nbsp;존재하면 아무일도 안하고 계속 스캔한다.</li></ul></ul></ul></ul></ul><div style="margin-left: 2em;">4) Activation / Code Execution Stage:</div><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><ul style="list-style-type: disc;"><li>context안에 있는 함수 코드를 해석하고 실해하며 한줄씩 실행되면서 변수의 값들을 할당한다.</li></ul></ul></ul><div><br /></div><div>&nbsp; &nbsp; &nbsp; &nbsp; 예제를 통해서 위의 동작들을 다시 한번 보자</div><div><br /></div><div class="txc-textbox" style="border: 1px solid rgb(254, 254, 184); background-color: rgb(254, 254, 184); padding: 10px;"><div>&nbsp;&nbsp;function foo(i) {</div><div>&nbsp; &nbsp; var a = 'hello';</div><div>&nbsp; &nbsp; var b = function privateB() {</div><div><br /></div><div>&nbsp; &nbsp; };</div><div>&nbsp; &nbsp; function c() {</div><div><br /></div><div>&nbsp; &nbsp; }</div><div>}</div><div><br /></div><div>foo(22);</div></div><p><br /></p><p>foo(22)가 호출되면 &nbsp;다음과 같이 create stage 볼수있다.</p><div class="txc-textbox" style="border: 1px solid rgb(254, 254, 184); background-color: rgb(254, 254, 184); padding: 10px;"><p>fooExecutionContext = { &nbsp; ------ (2)</p><p>&nbsp; &nbsp; variableObject: { &nbsp; &nbsp; ------(3)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; arguments: { &nbsp; &nbsp; &nbsp;-------(4)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0: 22,</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; length: 1</p><p>&nbsp; &nbsp; &nbsp; &nbsp; },</p><p>&nbsp; &nbsp; &nbsp; &nbsp; i: 22, &nbsp; &nbsp; &nbsp;----- (4)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; c: pointer to function c() &nbsp;-------(5)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; a: undefined, &nbsp; &nbsp;------(6)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; b: undefined &nbsp; &nbsp;------(6)</p><p>&nbsp; &nbsp; },</p><p>&nbsp; &nbsp; scopeChain: { ... },</p><p>&nbsp; &nbsp; this: { ... }</p><p>}<br /></p></div><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">위에서 보는 처럼, creation stage에서는 property의 이름을 정의하는 것을 다루며 &nbsp;값 할당은 안한다.(arugment/파라미터는 제외)</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">creation stage가 완료되면 실행의 흐름은 함수 안으로 들어가게 된다.&nbsp;</span></p><p><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">&nbsp;Actionvation / code execution stage 단계는 아래와 같이 보일것이다. (함수 실행후)</span></p><div class="txc-textbox" style="border: 1px solid rgb(254, 254, 184); background-color: rgb(254, 254, 184); padding: 10px;"><p>fooExecutionContext = {</p><p>&nbsp; &nbsp; variableObject: {</p><p>&nbsp; &nbsp; &nbsp; &nbsp; arguments: {</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0: 22,</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; length: 1</p><p>&nbsp; &nbsp; &nbsp; &nbsp; },</p><p>&nbsp; &nbsp; &nbsp; &nbsp; i: 22,</p><p>&nbsp; &nbsp; &nbsp; &nbsp; c: pointer to function c()</p><p>&nbsp;<span style="color: rgb(255, 0, 0);"> &nbsp; &nbsp; &nbsp; a: 'hello',</span></p><p><span style="color: rgb(255, 0, 0);">&nbsp; &nbsp; &nbsp; &nbsp; b: pointer to function privateB()</span></p><p>&nbsp; &nbsp; },</p><p>&nbsp; &nbsp; scopeChain: { ... },</p><p>&nbsp; &nbsp; this: { ... }</p><p>}<span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></p></div><p><br /></p><p>=======================================================================</p><p>위의 내용을 모두 이해 했다면 javascript에서 hoisting 에 대해서 바로 이해가 될것이다.</p><p>아래 예제를 통해서 확인해보자. &nbsp;</p><div class="txc-textbox" style="border: 3px double rgb(254, 137, 67); background-color: rgb(254, 222, 199); padding: 10px;"><p>​(function() {</p><p><br /></p><p>&nbsp; &nbsp; console.log(typeof foo); // function pointer</p><p>&nbsp; &nbsp; console.log(typeof bar); // undefined</p><p><br /></p><p>&nbsp; &nbsp; var foo = 'hello',</p><p>&nbsp; &nbsp; &nbsp; &nbsp; bar = function() {</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 'world';</p><p>&nbsp; &nbsp; &nbsp; &nbsp; };</p><p><br /></p><p>&nbsp; &nbsp; function foo() {</p><p>&nbsp; &nbsp; &nbsp; &nbsp; return 'hello';</p><p>&nbsp; &nbsp; }</p><p><br /></p><p>}());​<br /></p></div><p><br /></p><ul style="list-style-type: disc;"><li>왜 우리는 foo 를 선언하기 전에 foo를 접근할수 있었을까?</li><ul style="list-style-type: disc;"><li>creation stage 단계에서 &nbsp;activation / code execution stage 전에 미리 만들어 졌음을 알수있다.</li><li>그래서 함수코드가 실행될때 foo는 벌써 activation object에 정의 되어있었을 것이다.</li></ul></ul><ul style="list-style-type: disc;"><li>foo는 두번 선언되어있는데 왜 foo는 undefinded 또는 string으로 보여주지 않고 function으로 보여줄까?</li><ul style="list-style-type: disc;"><li>두번 선언되었음에도 불구하고 우리는 creation stage에서 함수가 activation object로 변수가 생성되기 전에&nbsp;생성된것을 알고있다. 만약 property name 벌써 activation object로 존재한다면 선언을 그냥 넘어갈것이다.</li></ul><ul style="list-style-type: disc;"><li>그러므로, function foo대한 참조는 &nbsp; 첫번째로 activation object로 생성된다. &nbsp;해석기가&nbsp;var foo를 얻을 때 벌써 foo 이름 property가 존재함으로 코드는 아무것도 않고 넘어가게된다.</li><li><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></li></ul><li><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">왜 bar는 undefined 인가?</span></li><ul style="list-style-type: disc;"><li><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">bar 는 function를 할당한 변수이다. 변수는 creation stage 에서 생성되지만 그것은 undefined값으로 초기화 되어있다.</span></li><li><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /></span></li></ul><li><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;"><br /><br /><br /><span style="background-color: transparent; font-size: 9pt; line-height: 1.5;">다소 어설픈 번역일지라도 해당 핵심을 이해하는 데는 충분하다.&nbsp;&nbsp;</span></span></li></ul><p><br /></p></div><p>[문서번역]&nbsp;<a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/" target="_blank" class="tx-link" style="background-color: transparent; font-size: 9pt; line-height: 1.5;">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p><p><br /></p><div class="container_postbtn #post_button_group">
+    <div class="postbtn_like">
+        
+<script>
+    window.ReactionButtonType = 'reaction';
+    window.ReactionApiUrl = '//smarttech.tistory.com/reaction';
+    window.ReactionReqBody = {
+        entryId: 24    }
+</script>
+<div class="wrap_btn" id=reaction-24></div>
+<script src=https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/script/reaction/reaction-button-container.min.js?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e></script>
+        <div class="wrap_btn wrap_btn_share">
+    <button type="button" class="btn_post sns_btn btn_share" data-thumbnail-url="https://t1.daumcdn.net/tistory_admin/static/images/openGraph/opengraph.png" data-title="[Javascript] Execution context와 Stack에 대해서 정리하자." data-description="아래문서는 11월 28일 김영보 강사님의 &quot;자바스크립트 중/고급 강좌&quot;를 듣기 위한 정리로 David Shariff의 blog 문서를 정리한 것이다. http://davidshariff.com/blog/what-is-the-execution-context-in-javascrip.." data-profile-image="https://t1.daumcdn.net/tistory_admin/static/manage/images/r3/default_L.png" data-profile-name="smarttech" data-pc-url="https://smarttech.tistory.com/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" data-relative-pc-url="/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90" data-blog-title="">
+        <span class="ico_postbtn ico_share">공유하기</span>
+    </button>
+</div>
+                <div class="wrap_btn wrap_btn_etc" data-entry-id="24" data-entry-visibility="public" data-category-visibility="public">
+    <button type="button" class="btn_post btn_etc2"><span class="ico_postbtn ico_etc">글 요소</span></button>
+</div>
+    </div>
+    <button type="button" class="btn_menu_toolbar btn_subscription  #subscribe" data-blog-id="1576720" data-url="https://smarttech.tistory.com/24" data-device="web_pc">
+    <em class="txt_state">구독하기</em>
+    <strong class="txt_tool_id"></strong>
+    <span class="img_common_tistory ico_check_type1"></span>
+</button>
+    <div class="postbtn_ccl" data-ccl-type="">
+    <a href="https://creativecommons.org/licenses//4.0/deed.ko" target="_blank" class="link_ccl">
+        <span class="bundle_ccl">
+                    </span>
+    </a>
+</div>
+    <!--
+<rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Work rdf:about="">
+        <license rdf:resource="http://creativecommons.org/licenses/by-/2.0/kr/" />
+    </Work>
+    <License rdf:about="http://creativecommons.org/licenses/by-/">
+        <permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+        <permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+        <requires rdf:resource="http://web.resource.org/cc/Notice"/>
+        <requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+                    </License>
+</rdf:RDF>
+-->
+</div><div class="another_category another_category_color_gray">
+<h4>'<a href="/category/Javascript">Javascript</a>' 카테고리의 다른 글</h4>
+<table>
+<tr>
+<th>
+<a href="/entry/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90?category=477108"  class ="current" >[Javascript] Execution context와 Stack에 대해서 정리하자.</a>&nbsp;&nbsp;<span>(1)</span>
+</th>
+<td>
+2013.11.22</td>
+</tr>
+<tr>
+<th>
+<a href="/entry/easymock-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EB%B2%95?category=477108" >[easymock 설치 및 사용법]</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2013.11.11</td>
+</tr>
+<tr>
+<th>
+<a href="/entry/Backbonejs%EC%A3%BC%EC%86%8C%EB%A1%9D-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A81%EB%8B%A8%EA%B3%84?category=477108" >[Backbonejs]주소록 프로그램-1단계</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2013.11.11</td>
+</tr>
+<tr>
+<th>
+<a href="/entry/Backbonejs-Routers-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0?category=477108" >[Backbone.js] Routers 알아보기</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2013.11.06</td>
+</tr>
+<tr>
+<th>
+<a href="/entry/Backbonejs-conllection-Tamplate-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0?category=477108" >[Backbone.js] conllection, Tamplate 사용하기</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2013.11.05</td>
+</tr>
+<tr>
+<th>
+<a href="/entry/Backbonejs-Views?category=477108" >[Backbone.js] Views 알아보기</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2013.11.05</td>
+</tr>
+</table></div></div>
+          
+          <div class="discuss">
+            <p class="discuss_count">
+              <a href="#tb" onclick="toggleLayerForEntry(24, 'trackback'); return false">Trackbacks <span id="trackbackCount24">0</span></a> / <a href="#rp" onclick="">Comments <span id="commentCount24_0">1</span></a>
+            </p>
+            <div id="entry24Trackback" style="display:none">
+              <p class="trackback_address"><strong>Trackback Address</strong> : </p>
+                
+            </div>
+            <div id="entry24Comment">
+              
+                <div class="comment_list">
+                  <ul>
+                    
+                      <li id="comment9697297" class="rp_secret hiddenComment">
+                        <div class="comment_list_1">
+                          <p class="comment_info">
+                            <span class="comment_info_name"></span>
+                            <span class="comment_info_date">2014.05.21 11:52</span>
+                            <span class="comment_edit edit_image">
+                              <a href="#" onclick="commentRequireLoginByDormancy(); return false;commentComment(9697297); return false" title="Reply" class="action"><i class="icon-comment"></i></a>
+                              <a href="#" onclick="deleteComment(9697297);return false" title="Edit" class="action"><i class="icon-edit"></i></a>
+                            </span>
+                          </p>
+                          <p>비밀댓글입니다</p>
+                        </div><!-- .comment_list_1 -->
+                        
+                      </li>
+                    
+                  </ul>
+                </div><!-- .comment_list -->
+              
+              <form method="post" action="/comment/add/24" onsubmit="return false" style="margin: 0">
+                <div class="comment_write">
+                  
+                    
+                      <div class="comment_form">
+                        <input type="text" id="name_" name="name" value="" placeholder="Name" />
+                      </div>
+                      <div class="comment_form">
+                        <input type="password" id="password_" name="password" value="" placeholder="Password" />
+                      </div>
+                      <div class="comment_form">
+                        <input type="text" id="homepage_" name="homepage" value="http://" class="span4" />
+                      </div>
+                    
+                    <div class="comment_form">
+                      <label for="secret_" class="checkbox">
+                        <input type="checkbox" name="secret" id="secret_" />
+                        Secret
+                      </label>
+                    </div>
+                  
+                  <div class="comment_form">
+                    <textarea name="comment"></textarea>
+                  </div>
+                  <div class="comment_form">
+                    <input type="submit" value="Submit" onclick="addComment(this, 24); return false;" class="btn" />
+                  </div>
+                </div><!-- .comment_input -->
+              </form>
+            </div><script type="text/javascript">loadedComments[24]=true;findFragmentAndHighlight(24)</script>
+          </div><!-- .discuss -->
+        </div><!-- .post -->
+      
+      
+        <div class="pagination">
+          <ul>
+            <li><a  href='/entry/javautilconcurrent-java-5-Concurrency-Utities-소개'> < </a></li>
+            <li><a  href='/entry/ArrayBlockingQueue'><span >1</span></a></li><li><a  href='/entry/javautilconcurrentBlockingQueue'><span >2</span></a></li><li><a  href='/entry/javautilconcurrent-java-5-Concurrency-Utities-소개'><span >3</span></a></li><li><a ><span class="selected">4</span></a></li><li><a  href='/entry/MongoDB-설치-및-환경설정'><span >5</span></a></li><li><a  href='/entry/easymock-설치-및-사용법'><span >6</span></a></li><li><a  href='/entry/Backbonejs주소록-프로그램1단계'><span >7</span></a></li><li><a  href='/entry/Backbonejs-Routers-알아보기'><span >8</span></a></li><li><a ><span >&middot;&middot;&middot;</span></a></li><li><a  href='/entry/Jboss-EAP-5-버전-지원현황'><span >13</span></a></li>
+            <li><a  href='/entry/MongoDB-설치-및-환경설정'> > </a></li>
+          </ul>
+        </div>
+      
+    </div><!-- #jb_main_content -->
+    <div id="jb_sidebar_right">
+       
+          <!-- Blog Information -->
+          <div class="sidebar bloginfo">
+            <img src="https://t1.daumcdn.net/tistory_admin/static/manage/images/r3/default_L.png" />
+            <p><span class="blog_owner"> by smarttech</span></p>
+          </div>
+        
+          <!-- Search -->
+          <div class="sidebar search form-inline">
+            
+              <input type="text" name="search" value="" onkeypress="if (event.keyCode == 13) { try{window.location.href='/search/'+looseURIEncode(document.getElementsByName('search')[0].value);document.getElementsByName('search')[0].value='';return false;}catch(e){} }" />
+              <input type="button" value="Search" onclick="try{window.location.href='/search/'+looseURIEncode(document.getElementsByName('search')[0].value);document.getElementsByName('search')[0].value='';return false;}catch(e){}" class="btn" />
+            
+          </div>
+        
+          <!-- Category -->
+          <div class="sidebar category">
+            <h3><i class="icon-folder-open"></i> Category</h3>
+            <ul class="tt_category">
+	<li class="">
+		<a class="link_tit" href="/category">
+			분류 전체보기							<span class="c_cnt">(13)</span>
+			
+					</a>
+
+				<ul class="category_list">
+							<li class="">
+					<a class="link_item" href="/category/Hadoop">
+						Hadoop													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/Javascript">
+						Javascript													<span class="c_cnt">(7)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/NodeJs">
+						NodeJs													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/R">
+						R													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/JBoss">
+						JBoss													<span class="c_cnt">(2)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/AWS">
+						AWS													<span class="c_cnt">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="/category/IMDG">
+						IMDG													<span class="c_cnt">(3)</span>
+						
+											</a>
+
+					
+				</li>
+					</ul>
+			</li>
+</ul>
+          </div>
+        
+          <!-- Tags -->
+          <div class="sidebar tags">
+            <h3><i class="icon-tags"></i> Tags</h3>
+            <ul>
+              
+            </ul>
+          </div>
+        
+          <!-- Recent Posts -->
+          <div class="sidebar recent_posts">
+            <h3><i class="icon-spinner icon-spin"></i> Recent Posts</h3>
+            <ul>
+              
+                <li>
+                  <a href="/entry/ArrayBlockingQueue">[ArrayBlockingQueue] <span id="commentCountOnRecentEntries30"></span></a>
+                </li>
+              
+
+                <li>
+                  <a href="/entry/javautilconcurrentBlockingQueue">[java.util.concurrent.BlockingQueue ] <span id="commentCountOnRecentEntries29"></span></a>
+                </li>
+              
+
+                <li>
+                  <a href="/entry/javautilconcurrent-java-5-Concurrency-Utities-%EC%86%8C%EA%B0%9C">java.util.concurrent - java 5 Concurre.. <span id="commentCountOnRecentEntries28"></span></a>
+                </li>
+              
+            </ul>
+          </div>
+        
+          <!-- Recent Comments -->
+          <div class="sidebar recent_comments">
+            <h3><i class="icon-comments-alt"></i> Recent Comments</h3>
+            <ul>
+              
+            </ul>
+          </div>
+        
+          <!-- Recent Trackbacks -->
+          <div class="sidebar recent_trackbacks">
+            <h3><i class="icon-paper-clip"></i> Recent Trackbacks</h3>
+            <ul>
+              
+            </ul>
+          </div>
+        
+          <!-- Links -->
+          <div class="sidebar links">
+            <h3><i class="icon-link"></i> Links</h3>
+            <ul>
+              
+            </ul>
+          </div>
+        
+    </div><!-- #jb_sidebar_right -->
+  </div><!-- #jb_main -->
+</div><!-- #jb_main_bg -->
+
+<div id="jb_copyright_bg">
+  <div id="jb_copyright">
+    <div id="jb_copyright_1">
+      <h6>Copyright ©  All Rights Reserved.</h6>
+    </div><!-- #jb_copyright_1 -->
+    <div id="jb_copyright_2">
+      <h6>Designed by <a href="http://www.cmsfactory.net" target="_blank">CMSFactory.NET</a></h6>
+    </div><!-- #jb_copyright_2 -->
+  </div><!-- #jb_copyright -->
+</div><!-- #jb_copyright_bg -->
+
+
+  <script src="//search1.daumcdn.net/search/statics/common/js/g/search_dragselection.min.js"></script>
+<script>
+    (function($) {
+        $("body").bind('copy', function (e) {
+
+            var url = document.location.href,
+                decodedUrl = decodeURI(url),
+                selection = window.getSelection();
+
+
+            if (typeof window.getSelection == "undefined") {//IE8 or earlier...
+                event.preventDefault();
+
+                var pagelink = '\n\n 출처: ' + decodedUrl,
+                    copytext = selection + pagelink;
+
+                if (window.clipboardData) {
+                    window.clipboardData.setData('Text', copytext);
+                }
+                return;
+            }
+            var body_element = document.getElementsByTagName('body')[0];
+
+            //if the selection is short let's not annoy our users
+            if (("" + selection).length < 30) return;
+
+            //create a div outside of the visible area
+            var newdiv = document.createElement('div');
+            newdiv.style.position = 'absolute';
+            newdiv.style.left = '-99999px';
+            body_element.appendChild(newdiv);
+            newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+            //we need a <pre> tag workaround
+            //otherwise the text inside "pre" loses all the line breaks!
+            if (selection.getRangeAt(0).commonAncestorContainer.nodeName == "PRE") {
+                newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+            }
+
+            newdiv.innerHTML += '<br /><br />출처: <a href="' + url + '">' + escapeHTML(decodedUrl) + '</a> []';
+
+            selection.selectAllChildren(newdiv);
+
+            window.setTimeout(function () {
+                body_element.removeChild(newdiv);
+            }, 200);
+        });
+    })(tjQuery);
+</script>
+	<script>
+	    lightbox.option({
+			"fadeDuration": 200,
+		    "resizeDuration": 200,
+		    "wrapAround": false,
+			"albumLabel": "%1 / %2",
+			"fitImagesInViewport":true ,
+			"stopEvent": false
+	    })
+	</script>            <script type="text/javascript" src="//t1.daumcdn.net/tiara/js/v1/tiara.min.js"></script>
+            <script type="text/javascript">window.tiara = {"svcDomain":"user.tistory.com","section":"\uae00\ubdf0","trackPage":"\uae00\ubdf0_\ubcf4\uae30","page":"\uae00\ubdf0","key":"1576720-24","customProps":{"userId":0,"blogId":"1576720","role":"guest","filterTarget":false,"trackPage":"\uae00\ubdf0_\ubcf4\uae30","entryId":"24"},"entry":{"entryId":"24","categoryName":"Javascript","categoryId":"477108","author":"1188421","authorId":"1188421","image":"1188421","plink":"\/entry\/Javascript-Execution-context%EC%99%80-Stack%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90","tags":[],"key":"1576720-24"},"sentryDsn":"https:\/\/a53520229cd744e798d42900d76b0e2a@aem-collector.daumkakao.io\/713"};</script>
+            <script type="text/javascript" src="https://t1.daumcdn.net/tistory_admin/assets/blog/165add7dae745f4dee9109796ef72cd51aee0b1e/blogs/script/tiara/tiara.min.js?_version_=165add7dae745f4dee9109796ef72cd51aee0b1e" defer></script>
+                        <script type="text/javascript">
+                window.roosevelt_params_queue = window.roosevelt_params_queue || [{channel_id: 'dk', channel_label: 'tistory'}];
+            </script>
+            <script type="text/javascript" src="//t1.daumcdn.net/midas/rt/dk_bt/roosevelt_dk_bt.js" async></script><script type="text/javascript">if(window.console!=undefined){setTimeout(console.log.bind(console,"%cTISTORY","font:8em Arial;color:#EC6521;font-weight:bold"),0);setTimeout(console.log.bind(console,"%c  나를 표현하는 블로그","font:2em sans-serif;color:#333;"),0);}</script><iframe style="position:absolute;width:1px;height:1px;left:-100px;top:-100px" src="//smarttech.tistory.com/api" id="editEntry"></iframe><div id="tistoryEtcLayer" class="layer_post"></div><div id="tistorySnsLayer" class="layer_post"></div></body>
+</html>
