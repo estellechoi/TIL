@@ -1,4 +1,4 @@
-# JavaScript 기본: 실행 컨텍스트(Execution Context)
+# 실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)
 
 > 이 글은 여러 문서와 아티클을 참고해서 제가 직접 작성한 글입니다.
 
