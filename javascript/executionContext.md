@@ -1,12 +1,10 @@
 # 실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)
 
-> 이 글은 여러 문서와 아티클을 참고해서 제가 직접 작성한 글입니다.
-
 <br>
 
-## 실행 컨텍스트란?
+## 실행 컨텍스트란(Execution Context)?
 
-실행 컨텍스트(Execution Context)는 Javascript 코드가 분석되고 실행되는 환경을 나타내는 추상적인 개념입니다. 쉽게 말해 실행 컨텍스트는 코드가 실행되고 있는 환경, 범위에 대한 개념입니다.
+실행 컨텍스트(Execution Context)는 코드가 분석되고 실행되는 환경을 나타내는 추상적인 개념입니다. 쉽게 말해 코드가 실행되고 있는 환경, 범위에 대한 개념입니다.
 
 <br>
 
@@ -20,138 +18,46 @@ JavaScript의 실행 컨텍스트에는 3 종류가 있습니다.
 
 <br>
 
-### 전역 컨텍스트(Global Execution Context)
+### 1) 전역 컨텍스트(Global Execution Context)
 
-디폴트, 기본 컨텍스트입니다. 특정 함수 내에서 실행되지 않는 모든 코드가 이 전역 컨텍스트에서 실행됩니다. 한 프로그램에서 단 하나의 전역 컨텍스트만이 존재할 수 있습니다.
+기본 컨텍스트입니다. 특정 함수 내에서 실행되지 않는 모든 코드가 이 전역 컨텍스트에서 실행됩니다. 전역 컨텍스트는 단 하나만 존재할 수 있습니다.
 
-전역 컨텍스트가 하는 일은 다음의 2가지 입니다.
+전역 컨텍스트가 하는 일은 다음과 같습니다.
 
-- 전역 객체를 생성하고,
-- `this`에 이 전역 객체를 할당합니다.
-
-<br>
-
-> 전역 객체(Global Object)는 모든 객체들의 최상위 객체를 의미합니다. 일반적으로 웹 브라우저에서는 `window`, 서버 사이드(Node.js)에서는 `global` 객체가 전역 객체입니다. `strict` 모드에서 전역 객체는 `undefined` 입니다.
+- 전역 객체(Global object)를 생성하고,
+- `this` 변수에 전역 객체를 할당합니다.
 
 <br>
 
-### 함수 컨텍스트(Functional Execution Context)
+> 전역 객체(Global Object)란?
 
-함수가 호출될 때마다 함수의 실행을 위한 새로운 실행 컨텍스트가 생성되는데, 이를 함수 컨텍스트(Functional Execution Context)라고 합니다. 모든 함수는 자신만의 실행 컨텍스트를 가지는데, 함수의 실행 컨텍스트가 생성되는 시점은 그 함수가 호출되는 시점입니다.
-
-<br>
-
-### Eval 함수 컨택스트(Eval Function Execution Context)
-
-`eval` 함수 내에서 실행되는 코드를 위한 실행 컨텍스트입니다.
+> 전역 객체는 모든 객체들의 최상위 객체를 의미합니다. 일반적으로 웹 브라우저에서는 `window`, 서버 사이드(Node.js)에서는 `global` 객체가 전역 객체입니다. `strict` 모드에서 전역 객체는 `undefined` 입니다.
 
 <br>
 
-## 실행 컨텍스트 스택(ECS, Execution context stack)
+### 2) 함수 컨텍스트(Functional Execution Context)
 
-실행 컨텍스트를 담는 LIFO(Last In First Out) 스택 자료구조 입니다. 이 스택은 기본으로 전역 컨텍스트를 담고 있습니다. JS 엔진에서 전역 컨텍스트의 코드를 실행시키는 중 함수 호출이 발생하면, 스택의 가장 위에 호출된 함수의 실행 컨텍스트가 담깁니다. 새로운 컨택스트가 쌓였으므로, JS 엔진은 전역 컨텍스트의 실행을 멈추고 함수 컨텍스트의 작업을 시작합니다. 이런 식으로 함수가 호출될 때마다 새로운 실행 컨택스트가 생성되고 기존의 컨텍스트 위에 쌓입니다. 함수 컨텍스트의 모든 코드가 실행되면 실행이 완료된 컨텍스트를 걷어내고 정지되었던 컨텍스트들이 차례로 작업을 완료합니다. 모든 함수 컨텍스트의 작업이 완료된 후에 전역 컨택스트가 다시 실행됩니다.
+함수가 호출될 때마다 함수의 실행을 위한 새로운 실행 컨텍스트가 생성되는데, 이를 함수 컨텍스트(Functional Execution Context)라고 합니다. 모든 함수는 자신만의 실행 컨텍스트를 가집니다.
 
 <br>
 
-아래의 그림을 참고하세요.
+### 3) Eval 함수 컨텍스트(Eval Function Execution Context)
+
+`eval` 함수의 실행 컨텍스트입니다.
+
+<br>
+
+## 실행 컨텍스트 스택(Execution context stack)
+
+실행 컨텍스트들을 담는 LIFO(Last In First Out) 스택 자료구조 입니다. 이 스택은 기본으로 전역 컨텍스트를 담고 있습니다. JS 엔진에서 전역 컨텍스트의 코드를 실행시키는 중 함수 호출이 발생하면, 스택의 가장 위에 호출된 함수의 실행 컨텍스트가 담깁니다. 새로운 컨텍스트가 쌓였으므로, JS 엔진은 전역 컨텍스트의 실행을 멈추고 함수 컨텍스트의 작업을 시작합니다. 이런 식으로 함수가 호출될 때마다 새로운 실행 컨택스트가 생성되고 기존의 컨텍스트 위에 쌓입니다. 함수 컨텍스트의 모든 코드가 실행되면 실행이 완료된 컨텍스트를 걷어내고 정지되었던 컨텍스트들이 차례로 작업을 완료합니다. 모든 함수 컨텍스트의 작업이 완료된 후에 전역 컨택스트가 다시 실행됩니다.
+
+<br>
+
+실제 코드가 실행 컨텍스트 스택에 어떻게 쌓이는지 보려면 아래의 그림을 참고하세요.
 
 <br>
 
 ![Execution Context](./../img/executionContext.png)
-
-<br>
-
-## 실행 컨텍스트가 그래서 뭐에요?
-
-실행 컨텍스트는 코드가 분석되고 실행되는 환경을 나타내는 추상적인 개념이라고 위에서 언급했습니다. 하지만 물리적으로는 객체의 형태를 가집니다. 실행 컨텍스트 객체는 다음과 같은 몇 가지 프로퍼티를 가지고 있습니다.
-
-- 변수 객체(Variable Object)
-- 스코프 체인(Scope chain)
-- `this`
-
-![Execution Context Object](./../img/executionContextObject.png)
-
-<br>
-
-### 1. 변수 객체(Variable Object)
-
-변수 객체(Variable Object)는 모든 변수들의 선언 정보를 담는 특별한 객체입니다. 이 객체에 담기는 변수들의 선언 정보는 다음의 항목들을 포함합니다.
-
-- 선언된 모든 변수(함수)
-- 함수의 경우, 그 함수의 인자(Arguments)
-- 함수 안에 선언된 또 다른 함수(Inner Function)
-
-<br>
-
-> 변수 객체의 다른 말은 활성 객체(Activation Object)입니다. 변수 객체는 코드가 실행될 때 JS 엔진에 의해 참조되며 코드에서는 접근할 수 없습니다.
-
-<br>
-
-예를 들어, 아래와 같은 코드가 있습니다.
-
-```javascript
-function funA(a, b) {
-	var c = 3;
-
-	var d = 2;
-
-	d = function () {
-		return a - b;
-	};
-}
-
-funA(3, 2);
-```
-
-<br>
-
-`funA` 함수가 호출되면 이 함수에 대한 실행 컨텍스트가 생성될 겁니다. 그 실행 컨텍스트 객체의 모습은 대략 아래와 같겠네요.
-
-```javascript
-executionContextObj = {
-	variableObject: {},
-	scopechain: [],
-	this,
-};
-```
-
-<br>
-
-여기에서 `variableObject` 객체는 아래와 같이 구성될 겁니다.
-
-```javascript
-variableObject = {
-  argumentObject : {
-    0: a,
-    1: b,
-    length: 2
-  },
-  a: 3,
-  b: 2
-  c: undefined,
-  d: undefined then pointer to the function defintion of d
-}
-```
-
-먼저 함수 `funA`의 인자들에 대한 정보를 가진 객체 `argumentObject`가 있습니다. 함수의 인자들인 `a`, `b`가 있고, `a`, `b`에는 각각 함수가 호출될 때 주어진 값들이 할당되어 있습니다. 함수 내에서 선언된 변수들 `c`, `d`도 있네요.
-
-<br>
-
-### 2. 스코프 체인(Scope Chain)
-
-변수 객체가 생성될 때 JS 엔진은 스코프 체인(Scope Chain)이라는 것을 만듭니다. 스코프 체인은 현재 함수가 참조할 수 있는 변수와 함수들의 선언 정보를 담고 있는 변수 객체들의 리스트입니다. 스코프 체인은 전역 컨텍스트의 변수 객체와 현재 실행되는 함수의 변수 객체를 포함합니다. 현재 실행중인 실행 컨텍스트의 변수 객체를 선두로 하여 순차적으로 상위 컨텍스트들의 변수 객체들이 리스트에 포함되며 마지막으로 전역 컨텍스트의 변수 객체를 포함합니다.
-
-![Scope Chain](./../img/sc.jpg)
-
-<br>
-
-### 3. `this`
-
-스코프 체인 생성이 완료되면, `this`에 값이 할당됩니다. `this`에 할당되는 값은 함수 호출 패턴에 의해 결정됩니다.
-
-<br>
-
-그럼, 실행 컨텍스트 객체는 언제 어떻게 생성될까요?
 
 <br>
 
@@ -168,31 +74,175 @@ JS 엔진은 다음의 2 단계 과정을 통해 실행 컨텍스트를 생성�
 
 생성 단계는 함수가 호출되었지만 아직 실행은 시작되지 않은 단계, 함수를 실행하기 위한 실행 컨텍스트를 생성하는 단계입니다. 이 단계에서 JS 엔진은 코드를 실행하지는 않고 스캔만 하면서 다음의 3가지 기능을 수행합니다.
 
-- 변수 객체(VO, Variable Object) 생성
+- 변수 객체(Variable Object) 생성
 - 스코프 체인(Scope chain) 생성
 - `this` 값 할당
 
 <br>
 
-### 실행 단계
+위의 변수 객체, 스코프 체인, `this` 변수가 실행 컨텍스트의 구성 요소입니다. 실행 컨텍스트는 코드가 분석되고 실행되는 환경을 나타내는 추상적인 개념이라고 위에서 언급했습니다. 하지만 물리적으로는 이 3가지를 프로퍼티로 하는 객체의 형태를 가집니다.
 
-실행 단계에 접어들면, JS 엔진은 변수 객체의 프로퍼티들에 값을 할당하기 위해 실행할 함수를 한 번 더 스캔합니다. 값들이 업데이트되면, 이제 코드를 실행합니다.
+<br>
 
-이 단계에서는 위의 예제에서 보았던 `variableObject` 객체가 아래와 같이 바뀝니다.
+그 모습은 대략 아래와 같겠네요.
 
 ```javascript
-variableObject = {
-  argumentObject : {
-    0: a,
-    1: b,
-    length: 2
+'executionContext': {
+	variableObject: {},
+	scopeChain: [],
+	this,
+};
+```
+
+<br>
+
+#### 1) 변수 객체(Variable Object)
+
+> 변수 객체의 다른 말은 활성 객체(Activation Object)입니다.
+
+변수 객체(Variable Object)는 모든 변수들의 선언 정보를 담는 특별한 객체입니다. 이 객체에 담기는 변수들의 선언 정보는 다음의 항목들을 포함합니다.
+
+- 선언된 모든 변수(함수)
+- 함수의 경우, 그 함수의 인자(Arguments)
+- 내부 함수(Inner Function)
+
+> 내부 함수(Inner Function) : 함수 안에 선언된 또 다른 함수
+
+<br>
+
+#### 2) 스코프 체인(Scope Chain)
+
+변수 객체가 생성될 때 JS 엔진은 스코프 체인(Scope Chain)이라는 것을 만듭니다. 스코프 체인은 현재 함수가 참조할 수 있는 변수와 함수들의 선언 정보를 담고 있는 변수 객체들의 리스트입니다. 스코프 체인은 전역 컨텍스트의 변수 객체와 현재 실행되는 함수의 변수 객체를 포함합니다. 현재 실행중인 실행 컨텍스트의 변수 객체를 선두로 하여 순차적으로 상위 컨텍스트들의 변수 객체들이 리스트에 포함되며 마지막으로 전역 컨텍스트의 변수 객체를 포함합니다.
+
+![Scope Chain](./../img/sc.jpg)
+
+<br>
+
+#### 3) `this` 변수
+
+스코프 체인 생성이 완료되면, `this`에 값이 할당됩니다. `this`에 할당되는 값은 함수 호출 패턴에 의해 결정됩니다.
+
+<br>
+
+### 실행 단계
+
+실행 단계로 접어들면, JS 엔진은 변수 객체의 프로퍼티들에 값을 할당하기 위해 실행할 함수를 한 번 더 스캔합니다. 값들이 업데이트되면, 드디어 코드를 실행합니다.
+
+<br>
+
+### 예제
+
+웹 브라우저에서 아래의 코드를 실행한다고 가정하겠습니다. 이 경우에는 3 개의 컨텍스트가 생성됩니다.
+
+```javascript
+var name = "Estelle";
+
+function print(job) {
+	console.log(`${job} ${name}`);
+}
+
+function setName(newName) {
+	var name = newName;
+	console.log(name);
+	print("Engineer");
+}
+
+setName("Bomm");
+```
+
+#### 전역 컨텍스트 생성
+
+가장 먼저, 전역 컨텍스트가 생성됩니다. 그 모습은 아래와 같을 겁니다.
+
+```javascript
+'globalExecutionContext': {
+  variableObject: {
+    arguments: null,
+    name: undefined,
+    print: Function,
+    setName: Function
   },
-  a: 3,
-  b: 2,
-  c: 3, // value updated
-  d: undefined then pointer to the function defintion of d
+  scopeChain: [globalExecutionContext.variableObject],
+  this: window,
 }
 ```
+
+변수 객체 `variableObject`는 선언된 모든 변수들의 이름을 담고 있습니다. 여기에는 (함수 컨텍스트의 경우) 인자들의 정보를 담고 있는 `arguments` 프로퍼티도 있는데요, 전역 컨텍스트에는 인자가 없으므로 인자 정보를 담는 `arguments` 프로퍼티의 값은 `null` 입니다. 전역 컨텍스트의 스코프 체인 `scopeChain` 리스트에는 자기 자신인 전역 변수 객체만 포함되고, `this`에는 `window` 객체가 할당됩니다.
+
+<br>
+
+#### `setName` 함수 컨텍스트
+
+전역 컨텍스트에서 코드가 실행되다가 `setName("Bomm")` 코드를 만나면 함수 `setName`이 호출됩니다. 이때 함수 컨텍스트가 생성됩니다. 아래의 모습으로요.
+
+```javascript
+'setNameContext': {
+  variableObject: {
+    arguments: {
+      0: newName
+      length: 1
+    },
+    newName: 'Bomm',
+    name: undefined,
+  },
+  scopeChain: [setNameContext.variableObject, globalExecutionContext.variableObject],
+  this: window,
+}
+```
+
+변수 객체의 `arguments` 프로퍼티에 함수의 인자에 대한 정보가 담깁니다. 그리고 인자인 `newName`은 함수가 호출되는 순간 선언과 동시에 값 대입이 되었기 때문에 컨텍스트 내에서도 값이 할당되어 있습니다. 함수 내부에서 선언된 `name` 변수도 있습니다. `scopeChain` 리스트에는 자기 자신의 변수 객체와 상위의 전역 변수 객체가 담깁니다.
+
+이제 이 컨텍스트 안에서 코드가 실행됩니다.
+
+<br>
+
+    ```javascript
+    function setName(newName) {
+      var name = newName;
+      console.log(name); // output: 'Bomm'
+      print("Engineer");
+    }
+    ```
+
+이 부분인데요, 아래의 순서로 코드가 실행됩니다.
+
+- 인자 `newName`의 값을 할당할 `name` 변수는 자기 자신의 컨텍스트에서 찾습니다.
+
+- `console.log(name)`가 실행됩니다. `name` 변수에 할당된 값 `Bomm`이 콘솔에 출력됩니다.
+
+- `print` 함수를 호출합니다. `print` 함수의 실행 컨텍스트가 생성됩니다. `setName` 함수의 컨텍스트는 잠시 실행을 멈춥니다.
+
+<br>
+
+#### `print` 함수 컨텍스트
+
+```javascript
+'printContext': {
+  variableObject: {
+    arguments: {
+      0: job
+      length: 1
+    },
+    job: 'Engineer'
+  },
+  scopeChain: [printContext.variableObject, globalExecutionContext.variableObject],
+  this: window,
+}
+```
+
+`print` 함수의 실행 컨텍스트는 위와 같습니다. 그런데 `scopeChain` 리스트를 보면, 상위의 스코프라고 생각했던 `setName` 함수의 변수 객체가 없습니다. 이것은 <strong>Lexical Scoping</strong> 때문입니다. `print` 함수의 스코프 체인은 이 함수가 호출될 때가 아닌, 함수가 선언된 시점에 미리 정해집니다.
+
+    ```javascript
+    function print(job) {
+      console.log(`${job} ${name}`); // output: 'Engineer Estelle'
+    }
+    ```
+
+이제 코드를 실행합니다. 이때 필요한 `name` 변수는 이 컨텍스트의 변수 객체에 없기 때문에, 스코프 체인을 따라 올라가 상위의 전역 변수 객체에서 찾게 됩니다. 따라서 콘솔에 출력되는 값은 `Engineer Bomm`이 아닌 `Engineer Estelle`이 됩니다.
+
+<br>
+
+`print` 함수의 실행이 종료되면 `print` 함수 컨텍스트가 사라지고, `setName` 함수의 실행이 마무리됩니다. 이후 `setName` 함수 컨텍스트도 사라지고, 마지막에는 전역 컨텍스트도 사라지면서 실행 컨텍스트 스택이 비워집니다.
 
 <br>
 
