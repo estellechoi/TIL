@@ -355,13 +355,66 @@ function declaration() {
 
 <br>
 
-## 네이티브 객체(Native Built-in Objects)
+### TDZ(Temporal Dead Zone): `let`, `const`와 호이스팅
 
-[ECMAScript](https://developer.mozilla.org/ko/docs/Web/JavaScript/%EC%96%B8%EC%96%B4_%EB%A6%AC%EC%86%8C%EC%8A%A4)에 정의된 객체입니다. 애플리케이션 전역의 공통 기능을 제공하며, 애플리케이션의 환경과 관계없이 언제나 사용할 수 있습니다.
+`let`, `const` 키워드로 선언한 변수는 호이스팅 되지 않는 걸까요?
 
-`Object`, `String`, `Number`, `Function`, `Array`, `RegExp`, `Date`, `Math`와 같은 객체 생성에 관계가 있는 함수 객체와 메소드로 구성됩니다.
+```javascript
+console.log(str); // ReferenceError
 
-> 네이티브 객체를 Global Objects라고도 합니다. 이는 전역 객체(Global object)와는 다른 의미이므로 혼동에 주의하세요.
+const str = "apple";
+```
+
+위의 코드를 볼게요. 호이스팅 규칙에 따르면 `console.log(str)` 코드는 `'apple'`을 출력해야 할 것 같은데, `ReferenceError` 에러가 발생합니다. 이는 `let`, `const` 키워드로 선언된 변수는 TDZ(Temporal Dead Zone)에 영향을 받기 때문입니다. 쉽게 말하면, 잠시 접근할 수 없는 상태에 있는 겁니다.
+
+<br>
+
+변수 `str`은 호이스팅 되었지만, 접근할 수 없을 뿐입니다.
+
+<br>
+
+#### TDZ(Temporal Dead Zone)란?
+
+호이스팅 되었지만, (실행중인 코드에서) 아직 선언되지 않은 변수가 있는 곳을 말합니다. TDZ에 있는 변수에는 접근할 수 없으며, 변수가 선언되는 지점에 TDZ에서 나오게 됩니다.
+
+<br>
+
+```javascript
+let val = "out Scope";
+
+function test() {
+	console.log(val); // ReferenceError
+	let val = "inner scope"; // val 초기화 - escape from TDZ
+}
+
+test();
+```
+
+위의 코드에서 `test` 함수 내에 `let` 키워드로 선언한 변수 `val`이 호이스팅 되지 않는다고 가정해보겠습니다. 그렇다면, `test` 함수를 호출했을 때 전역 변수에 할당된 값 `'out Scope'`가 출력되어야 합니다.
+
+실제 결과는 `'out Scope'`가 출력되지 않고 `ReferenceError` 에러가 발생합니다. 즉, 호이스팅은 되었지만 아직 TDZ에 있기 때문에 접근할 수 없는 것입니다. 실행 컨텍스트가 생성될 때 `let`/`const` 변수 선언은 Lexical Environment에 저장됩니다. 하지만 초기화(값 바인딩)되기 전까지는 접근할 수 없는 TDZ 상태에 있게 됩니다.
+
+> `var` 변수 선언은 Variable Environment에 따로 저장되며, TDZ에 영향을 받지 않습니다.
+
+<br>
+
+변수가 초기화된다는 것은 무엇일까요? TDZ는 변수에 값이 할당될 때가 아닌, 변수가 선언될 때 끝납니다.
+
+<b>The TDZ ends when a variable is declared, rather than assigned.</b>
+
+> 위 문장은 Stackoverflow의 [What is the temporal dead zone?](https://stackoverflow.com/questions/33198849/what-is-the-temporal-dead-zone) 답변에서 가져왔습니다. 이 답변은 많은 useful 평가를 받았습니다.
+
+<br>
+
+```javascript
+let tmp;
+console.log(tmp); // output : undefined
+
+tmp = 10;
+console.log(tmp); // output: 10
+```
+
+변수 `tmp`에 값이 할당되지 않았지만, 선언되었기 때문에 TDZ에 있지 않습니다. 이때 변수 `tmp`에는 `undefined`가 바인딩되어 있습니다(초기화 되어있습니다).
 
 <br>
 
@@ -376,5 +429,4 @@ function declaration() {
 - [실행 컨텍스트 | www.zerocho.com](https://www.zerocho.com/category/JavaScript/post/5741d96d094da4986bc950a0)
 - [함수 표현식 vs 함수 선언식 | 캡틴판교님의 블로그](https://joshua1988.github.io/web-development/javascript/function-expressions-vs-declarations/)
 - [Lexical Scope and Dynamic Scope | bestalign's dev blog](https://bestalign.github.io/2015/07/12/Lexical-Scope-and-Dynamic-Scope/)
-- [University of Washington CSE341 2014 Spring - Lecture 9](https://courses.cs.washington.edu/courses/cse341/14sp/slides/lec09.pdf)
-- [스코프 | poiemaweb.com](https://poiemaweb.com/js-scope)
+- [Don't Use JavaScript Variables Without Knowing Temporal Dead Zone](https://dmitripavlutin.com/javascript-variables-and-temporal-dead-zone/)
