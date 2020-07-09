@@ -101,7 +101,9 @@ JS 엔진은 다음의 2 단계 과정을 통해 실행 컨텍스트를 생성�
 변수 객체(Variable Object)는 모든 변수들의 선언 정보를 담는 특별한 객체입니다. 이 객체에 담기는 변수들은 다음의 항목들을 포함합니다.
 
 - 선언된 모든 변수(함수)
+
 - 함수의 경우, 그 함수의 인자(Arguments)
+
 - 내부 함수(Inner Function)
 
 > 내부 함수(Inner Function) : 함수 안에 선언된 또 다른 함수
@@ -110,7 +112,7 @@ JS 엔진은 다음의 2 단계 과정을 통해 실행 컨텍스트를 생성�
 
 #### 2) 스코프 체인(Scope Chain)
 
-변수 객체가 생성될 때 JS 엔진은 스코프 체인(Scope Chain)이라는 것을 만듭니다. 스코프 체인은 현재 함수가 참조할 수 있는 변수와 함수들의 선언 정보를 담고 있는 변수 객체들의 리스트입니다. 스코프 체인은 전역 컨텍스트의 변수 객체와 현재 실행되는 함수의 변수 객체를 포함합니다. 현재 실행중인 실행 컨텍스트의 변수 객체를 선두로 하여 순차적으로 상위 컨텍스트들의 변수 객체들이 리스트에 포함되며 마지막으로 전역 컨텍스트의 변수 객체를 포함합니다.
+스코프 체인은 현재 실행 컨텍스트에서 참조할 수 있는 변수 객체들의 리스트입니다. 스코프 체인은 현재 실행되는 함수 자신의 변수 객체와 전역 컨텍스트의 변수 객체를 포함합니다. 현재 실행중인 실행 컨텍스트의 변수 객체를 선두로 하여 순차적으로 상위 컨텍스트들의 변수 객체들이 리스트에 포함되며 마지막으로 전역 컨텍스트의 변수 객체를 포함합니다.
 
 ![Scope Chain](./../img/sc.jpg)
 
@@ -119,6 +121,20 @@ JS 엔진은 다음의 2 단계 과정을 통해 실행 컨텍스트를 생성�
 #### 3) `this` 변수
 
 스코프 체인 생성이 완료되면, `this`에 값이 할당됩니다. `this`에 할당되는 값은 함수 호출 패턴에 의해 결정됩니다.
+
+<br>
+
+#### Lexical Environment & Variable Environment
+
+실행 컨텍스트에는 사실 2가지 공간이 나뉘어져 있습니다. Lexical Environment와 Variable Environment 입니다. ES6에서 이 둘의 차이는 다음과 같습니다.
+
+- Lexical Environment : 함수 선언식, 변수 선언(`let`, `const`)
+
+- Variable Environment : 변수 선언(`var`)
+
+> 참고로, [ES6 공식문서](http://ecma-international.org/ecma-262/6.0/)에 정의된 Lexical Environment는 다음과 같습니다.
+
+> A Lexical Environment is a specification type used to define the association of Identifiers to specific variables and functions based upon the lexical nesting structure of ECMAScript code. A Lexical Environment consists of an Environment Record and a possibly null reference to an outer Lexical Environment.
 
 <br>
 
@@ -228,7 +244,7 @@ setName("Bomm");
 }
 ```
 
-`print` 함수의 실행 컨텍스트는 위와 같습니다. 그런데 `scopeChain` 리스트를 보면, 상위의 스코프라고 생각했던 `setName` 함수의 변수 객체가 없습니다. 이것은 <strong>Lexical Scoping</strong> 때문입니다. `print` 함수의 스코프 체인은 이 함수가 호출될 때가 아닌, 함수가 선언된 시점에 미리 정해집니다.
+`print` 함수의 실행 컨텍스트는 위와 같습니다. 그런데 `scopeChain` 리스트를 보면, 상위의 스코프라고 생각했던 `setName` 함수의 변수 객체가 없습니다. 이것은 (<strong>Lexical Scoping</strong>) 때문입니다. `print` 함수의 스코프 체인은 이 함수가 호출된 `setName` 컨텍스트가 아닌, 함수가 선언된 전역 컨텍스트를 상위 스코프로 하기 때문입니다.
 
     ```javascript
     function print(job) {
@@ -241,6 +257,24 @@ setName("Bomm");
 <br>
 
 `print` 함수의 실행이 종료되면 `print` 함수 컨텍스트가 사라지고, `setName` 함수의 실행이 마무리됩니다. 이후 `setName` 함수 컨텍스트도 사라지고, 마지막에는 전역 컨텍스트도 사라지면서 실행 컨텍스트 스택이 비워집니다.
+
+<br>
+
+## 렉시컬 스코프(Lexical Scope)
+
+> lexical : 사전의, 사전식의
+
+렉시컬 스코프(Lexical scope)는 정적 스코프(Static scope)라고도 합니다. 반대로 동적 스코프(Dynamic scope)가 있는데요, 두 스코프의 개념은 아래와 같습니다.
+
+- 렉시컬 스코프 : 함수가 선언된 스코프를 상위 스코프로 함 (Where defined)
+
+- 동적 스코프 : 함수가 호출된 스코프를 상위 스코프로 함 (Where called)
+
+<br>
+
+JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 채택했습니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
+
+> Stackoverflow에 [What is lexical scope?](https://stackoverflow.com/questions/1047454/what-is-lexical-scope)를 주제로 사람들이 묻고 답한 내용이 있습니다.
 
 <br>
 
@@ -339,3 +373,4 @@ function declaration() {
 - [실행 컨텍스트와 자바스크립트의 동작 원리](https://poiemaweb.com/js-execution-context)
 - [실행 컨텍스트 | www.zerocho.com](https://www.zerocho.com/category/JavaScript/post/5741d96d094da4986bc950a0)
 - [함수 표현식 vs 함수 선언식 | 캡틴판교님의 블로그](https://joshua1988.github.io/web-development/javascript/function-expressions-vs-declarations/)
+- [Lexical Scope and Dynamic Scope | bestalign's dev blog](https://bestalign.github.io/2015/07/12/Lexical-Scope-and-Dynamic-Scope/)
