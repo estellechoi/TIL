@@ -117,13 +117,54 @@ console.log(val); // error - val is not defined.
 
 <br>
 
-## 렉시컬 스코프(Lexical Scope)
+## 암묵적 전역(Implicit global)
+
+```javascript
+var a = 10;
+
+function sum() {
+	b = 20; // gets global scope
+	console.log(a * b);
+}
+
+sum();
+```
+
+위의 코드는 선언된 적이 없는 `b`라는 이름의 변수에 값을 할당하고 있습니다. 잘 동작할까요? 잘 동작합니다.
+
+어디에서도 변수 `b`를 선언하지 않았지만, `b`가 전역 객체인 `window`의 프로퍼티로 자동 추가되기 때문입니다. 변수 `b`의 선언을 찾을 수 없지만, JS 엔진은 에러를 발생시키지 않고 `b`가 마치 전역 변수인 것처럼 `window.b` 프로퍼티를 동적 생성하여 참조합니다. 이를 암묵적 전역(Implicit global)이라고 합니다.
+
+<br>
+
+> `b`는 호이스팅 되지 않습니다. 선언된 적이 없기 때문입니다. 또한 코드가 실행될 때 전역 객체의 프로퍼티로 동적 추가되었지만, 호이스팅은 코드의 실행 전에 진행되는 작업입니다.
+
+<br>
+
+## 상위 스코프
+
+함수 내에서 어떤 변수를 참조할 때는 지역 변수 중에서 해당 변수가 있는지 찾고, 없다면 전역 변수까지 상위로 올라가며 찾게 됩니다.
+
+```javascript
+var global = "global";
+
+function change() {
+	global = "change";
+}
+
+change();
+
+console.log(global); // output: 'change'
+```
+
+위의 코드에서 함수 `change`가 실행되면 전역 변수 `global`의 값이 `'change'`로 바뀝니다. 처음에는 함수 내부에 선언된 변수 중 이름이 `global`인 변수를 찾겠지만, 그런 식별자를 가진 변수가 없기 때문에 상위로 올라가 전역에 선언된 변수 `global`을 참조하기 때문입니다.
+
+<br>
 
 ## 렉시컬 스코프(Lexical Scope)
 
-> lexical : 사전의, 사전식의
+렉시컬 스코프(Lexical scope)는 정적 스코프(Static scope)의 다른 말입니다. 반대로 동적 스코프(Dynamic scope)가 있는데요, 두 스코프의 개념은 아래와 같습니다.
 
-렉시컬 스코프(Lexical scope)는 정적 스코프(Static scope)라고도 합니다. 반대로 동적 스코프(Dynamic scope)가 있는데요, 두 스코프의 개념은 아래와 같습니다.
+함수 내에서 변수를 참조할 때,
 
 - 렉시컬 스코프 : 함수가 선언된 스코프를 상위 스코프로 함 (Where defined)
 
@@ -131,7 +172,7 @@ console.log(val); // error - val is not defined.
 
 <br>
 
-JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 채택했습니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
+> JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 사용합니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
 
 <br>
 
