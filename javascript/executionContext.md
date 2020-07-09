@@ -128,9 +128,9 @@ JS 엔진은 다음의 2 단계 과정을 통해 실행 컨텍스트를 생성�
 
 실행 컨텍스트는 사실 두 공간으로 나뉘어져 있습니다.(Lexical Environment, Variable Environment) ES6에서 이 둘의 차이는 다음과 같습니다.
 
-- Lexical Environment : 함수 선언식, 변수 선언(`let`, `const`)
+- Lexical Environment : 함수 선언식, 변수 선언(`let`, `const`) 저장
 
-- Variable Environment : 변수 선언(`var`)
+- Variable Environment : 변수 선언(`var`) 저장
 
 > 참고로, [ES6 공식문서](http://ecma-international.org/ecma-262/6.0/)에 정의된 Lexical Environment는 다음과 같습니다.
 
