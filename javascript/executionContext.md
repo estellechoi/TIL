@@ -164,7 +164,7 @@ function setName(newName) {
 setName("Bomm");
 ```
 
-#### 전역 컨텍스트 생성
+#### 1) 전역 컨텍스트 생성
 
 가장 먼저, 전역 컨텍스트가 생성됩니다. 그 모습은 아래와 같을 겁니다.
 
@@ -185,7 +185,7 @@ setName("Bomm");
 
 <br>
 
-#### `setName` 함수 컨텍스트
+#### 2) `setName` 함수 컨텍스트
 
 전역 컨텍스트에서 코드가 실행되다가 `setName('Bomm')` 코드를 만나면 함수 `setName`이 호출됩니다. 이때 함수 컨텍스트가 생성됩니다. 아래의 모습으로요.
 
@@ -228,7 +228,7 @@ function setName(newName) {
 
 <br>
 
-#### `print` 함수 컨텍스트
+#### 3) `print` 함수 컨텍스트
 
 ```javascript
 'printContext': {
