@@ -14,7 +14,7 @@ JavaScript의 실행 컨텍스트에는 3 종류가 있습니다.
 
 - 함수 컨텍스트(Functional Execution Context)
 
-- Eval 함수 컨택스트(Eval Function Execution Context)
+- Eval 함수 컨텍스트(Eval Function Execution Context)
 
 <br>
 
