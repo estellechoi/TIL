@@ -392,7 +392,7 @@ test();
 
 위의 코드에서 `test` 함수 내에 `let` 키워드로 선언한 변수 `val`이 호이스팅 되지 않는다고 가정해보겠습니다. 그렇다면, `test` 함수를 호출했을 때 전역 변수에 할당된 값 `'out Scope'`가 출력되어야 합니다.
 
-실제 결과는 `'out Scope'`가 출력되지 않고 `ReferenceError` 에러가 발생합니다. 즉, 호이스팅은 되었지만 아직 TDZ에 있기 때문에 접근할 수 없는 것입니다. 실행 컨텍스트가 생성될 때 `let`/`const` 변수 선언은 Lexical Environment에 저장됩니다. 하지만 초기화(값 바인딩)되기 전까지는 접근할 수 없는 TDZ 상태에 있게 됩니다.
+실제 결과는 `'out Scope'`가 출력되지 않고 `ReferenceError` 에러가 발생합니다. 즉, 호이스팅은 되었지만 아직 TDZ에 있기 때문에 접근할 수 없는 것입니다. 실행 컨텍스트가 생성될 때 `let`/`const` 변수 선언은 Lexical Environment에 저장됩니다. Lexical Environment에 저장된 변수들은 초기화(값 바인딩)되기 전까지는 접근할 수 없는 TDZ 상태에 있게 됩니다.
 
 > `var` 변수 선언은 Variable Environment에 따로 저장되며, TDZ에 영향을 받지 않습니다.
 
