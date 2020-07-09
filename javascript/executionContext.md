@@ -2,7 +2,7 @@
 
 <br>
 
-## 실행 컨텍스트란(Execution Context)?
+## 실행 컨텍스트(Execution Context)란?
 
 실행 컨텍스트(Execution Context)는 코드가 분석되고 실행되는 환경을 나타내는 추상적인 개념입니다. 쉽게 말해 코드가 실행되고 있는 환경, 범위에 대한 개념입니다.
 
