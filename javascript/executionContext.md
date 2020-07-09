@@ -210,17 +210,17 @@ setName("Bomm");
 
 <br>
 
-    ```javascript
-    function setName(newName) {
-      var name = newName;
-      console.log(name); // output: 'Bomm'
-      print("Engineer");
-    }
-    ```
+```javascript
+function setName(newName) {
+	var name = newName;
+	console.log(name); // output: 'Bomm'
+	print("Engineer");
+}
+```
 
 이 부분인데요, 아래의 순서로 코드가 실행됩니다.
 
-- 인자 `newName`의 값을 할당할 `name` 변수는 자기 자신의 컨텍스트에서 찾습니다.
+- 변수 `name`에 인자 `newName`의 값을 할당합니다. 변수 `name`은 자기 자신의 컨텍스트에서 찾습니다.
 
 - `console.log(name)`가 실행됩니다. `name` 변수에 할당된 값 `Bomm`이 콘솔에 출력됩니다.
 
@@ -244,7 +244,7 @@ setName("Bomm");
 }
 ```
 
-`print` 함수의 실행 컨텍스트는 위와 같습니다. 그런데 `scopeChain` 리스트를 보면, 상위의 스코프라고 생각했던 `setName` 함수의 변수 객체가 없습니다. 이것은 (<strong>Lexical Scoping</strong>) 때문입니다. `print` 함수의 스코프 체인은 이 함수가 호출된 `setName` 컨텍스트가 아닌, 함수가 선언된 전역 컨텍스트를 상위 스코프로 하기 때문입니다.
+`print` 함수의 실행 컨텍스트는 위와 같습니다. 그런데 `scopeChain` 리스트를 보면, 상위의 스코프라고 생각했던 `setName` 함수의 변수 객체가 없습니다. 이것은 JavaScript가 렉시컬 스코프(<strong>Lexical Scope</strong>)를 따르기 때문입니다. `print` 함수의 스코프 체인은 이 함수가 호출된 `setName` 컨텍스트가 아닌, 함수가 선언된 전역 컨텍스트를 상위 스코프로 하기 때문입니다.
 
     ```javascript
     function print(job) {
