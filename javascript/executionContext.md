@@ -164,6 +164,8 @@ function setName(newName) {
 setName("Bomm");
 ```
 
+<br>
+
 #### 1) 전역 컨텍스트 생성
 
 가장 먼저, 전역 컨텍스트가 생성됩니다. 그 모습은 아래와 같을 겁니다.
