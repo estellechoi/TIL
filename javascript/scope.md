@@ -40,7 +40,7 @@ JavaScript에서 스코프를 크게 두 가지로 분류할 수 있습니다.
 
 - 전역 스코프(Global scope) : 코드 어디에서든 참조 가능한 범위
 
-- 지역 스코프(Local scope) : 함수 또는 코드 블록(`{ .. }`) 내에서만 참조 가능한 범위, 함수/블록 자신과 하위 함수/블록에서만 참조 가능
+- 지역 스코프(Local scope) : 함수 또는 코드 블록 `{ .. }` 내에서만 참조 가능한 범위, 함수/블록 자신과 하위 함수/블록에서만 참조 가능
 
   > JavaScript에서 지역 스코프는 기본적으로 함수 레벨 스코프(Function-level scope) 입니다. 다만, ES6에서 도입된 `let`, `const` 키워드로 선언된 변수는 블록 레벨 스코프(Block-level scope)를 따릅니다.
 
@@ -81,7 +81,7 @@ console.log(local); // error - local is not defined
 
 ### 블록 레벨 스코프(Block-level scope)
 
-어떤 언어들은 블록 레벨 스코프(Block-level scope)를 따릅니다. 예를 들어, C언어는 블록 레벨 스코프를 따릅니다. 블록 레벨 스코프란 코드 블록(`{ .. }`) 내에서 유효한 스코프를 말합니다.
+어떤 언어들은 블록 레벨 스코프(Block-level scope)를 따릅니다. 예를 들어, C언어는 블록 레벨 스코프를 따릅니다. 블록 레벨 스코프란 코드 블록 `{ .. }` 내에서 유효한 스코프를 말합니다.
 
 > 코드 블록은 `if`, `for`, `while`, `try`/`catch` 등의 Statement에서 쓰이는 블록을 말합니다.
 
@@ -184,6 +184,8 @@ JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 사�
 
 ### References
 
+- [let | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+- [block | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/statements/block)
 - [스코프 | poiemaweb.com](https://poiemaweb.com/js-scope)
 - [Lexical Scope and Dynamic Scope | bestalign's dev blog](https://bestalign.github.io/2015/07/12/Lexical-Scope-and-Dynamic-Scope/)
 - [University of Washington CSE341 2014 Spring - Lecture 9](https://courses.cs.washington.edu/courses/cse341/14sp/slides/lec09.pdf)
