@@ -187,7 +187,7 @@ setName("Bomm");
 
 #### `setName` 함수 컨텍스트
 
-전역 컨텍스트에서 코드가 실행되다가 `setName("Bomm")` 코드를 만나면 함수 `setName`이 호출됩니다. 이때 함수 컨텍스트가 생성됩니다. 아래의 모습으로요.
+전역 컨텍스트에서 코드가 실행되다가 `setName('Bomm')` 코드를 만나면 함수 `setName`이 호출됩니다. 이때 함수 컨텍스트가 생성됩니다. 아래의 모습으로요.
 
 ```javascript
 'setNameContext': {
@@ -222,7 +222,7 @@ function setName(newName) {
 
 - 변수 `name`에 인자 `newName`의 값을 할당합니다. 변수 `name`은 자기 자신의 컨텍스트에서 찾습니다.
 
-- `console.log(name)`가 실행됩니다. `name` 변수에 할당된 값 `Bomm`이 콘솔에 출력됩니다.
+- `console.log(name)`가 실행됩니다. `name` 변수에 할당된 값 `'Bomm'`이 콘솔에 출력됩니다.
 
 - `print` 함수를 호출합니다. `print` 함수의 실행 컨텍스트가 생성됩니다. `setName` 함수의 컨텍스트는 잠시 실행을 멈춥니다.
 
@@ -246,13 +246,13 @@ function setName(newName) {
 
 `print` 함수의 실행 컨텍스트는 위와 같습니다. 그런데 `scopeChain` 리스트를 보면, 상위의 스코프라고 생각했던 `setName` 함수의 변수 객체가 없습니다. 이것은 JavaScript가 렉시컬 스코프(<strong>Lexical Scope</strong>)를 따르기 때문입니다. `print` 함수의 스코프 체인은 이 함수가 호출된 `setName` 컨텍스트가 아닌, 함수가 선언된 전역 컨텍스트를 상위 스코프로 하기 때문입니다.
 
-    ```javascript
-    function print(job) {
-      console.log(`${job} ${name}`); // output: 'Engineer Estelle'
-    }
-    ```
+```javascript
+function print(job) {
+	console.log(`${job} ${name}`); // output: 'Engineer Estelle'
+}
+```
 
-이제 코드를 실행합니다. 이때 필요한 `name` 변수는 이 컨텍스트의 변수 객체에 없기 때문에, 스코프 체인을 따라 올라가 상위의 전역 변수 객체에서 찾게 됩니다. 따라서 콘솔에 출력되는 값은 `Engineer Bomm`이 아닌 `Engineer Estelle`이 됩니다.
+이제 코드를 실행합니다. 이때 필요한 `name` 변수는 이 컨텍스트의 변수 객체에 없기 때문에, 스코프 체인을 따라 올라가 상위의 전역 변수 객체에서 찾게 됩니다. 따라서 콘솔에 출력되는 값은 `'Engineer Bomm'`이 아닌 `'Engineer Estelle'`이 됩니다.
 
 <br>
 
@@ -274,6 +274,8 @@ function setName(newName) {
 
 JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 채택했습니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
 
+<br>
+
 > Stackoverflow에 [What is lexical scope?](https://stackoverflow.com/questions/1047454/what-is-lexical-scope)를 주제로 사람들이 묻고 답한 내용이 있습니다.
 
 <br>
@@ -282,11 +284,11 @@ JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 채�
 
 > [이 영상](https://www.youtube.com/watch?v=ppMlvGMT2qE&feature=youtu.be)을 보는 것을 추천합니다.
 
-호이스팅(Hoisting)이란 선언된 모든 변수들의 선언 정보가 코드가 실행되기 전에 최상단으로 끌어올려지는 현상입니다. 함수의 경우, 표현식이 아닌 선언식으로 작성되었다면 변수가 선언된 것과 같으므로 함수 선언식이 통째로 호이스팅 됩니다.
+호이스팅(Hoisting)이란 선언된 모든 변수들의 선언 정보가 코드가 실행되기 전에 최상단으로 끌어올려지는 현상입니다. 함수의 경우, 표현식이 아닌 선언식으로 작성되었다면 함수 선언식이 통째로 호이스팅 됩니다.
 
 <br>
 
-아래 코드는 어떻게 동작할까요? 이 코드에는 변수 `tmp`가 선언되어 있고, 선언식 함수 `print`가 있습니다.
+아래 코드는 어떻게 동작할까요? 이 코드에는 변수 `tmp`가 선언되어 있고, `print` 함수 선언식이 있습니다.
 
 ```javascript
 console.log(tmp); // output: undefined
@@ -306,7 +308,7 @@ function print() {
 
 변수를 선언하기 전에 호출하기 때문에 마치 에러가 날 것 같지만, 위 코드는 잘 작동합니다. 변수 `tmp`와 `tmp2`, 함수 `print`에 대한 선언이 호이스팅 되었기 때문입니다. 다시 말해 실행 컨텍스트의 변수 객체에 `tmp`, `tmp2`, `print`가 각각 프로퍼티로 담겨졌기 때문에 참조가 가능한 것입니다.
 
-`console.log(tmp)`의 결과는 왜 `undefined` 일까요? 먼저, 에러가 나지 않고 `undefined`가 출력되는 이유는 변수 `tmp`가 호이스팅 되어 참조할 수 있는 상태이기 때문입니다. 한편 `var tmp = "World"` 코드에 의해 할당된 값은 아직 참조할 수 없으며 변수의 선언부만 호이스팅 되었다는 것을 알 수 있습니다.
+`console.log(tmp)`의 결과는 왜 `undefined` 일까요? 먼저, 에러가 나지 않고 `undefined`가 출력되는 이유는 변수 `tmp`가 호이스팅 되어 참조할 수 있는 상태이기 때문입니다. 한편 `var tmp = 'World'` 코드에 의해 할당된 값은 아직 참조할 수 없으며 변수의 선언부만 호이스팅 되었다는 것을 알 수 있습니다.
 
 <br>
 
@@ -343,7 +345,7 @@ var expression = function () {
 아래는 함수 선언식과 그 함수를 호출하는 코드입니다. 함수 선언식은 호이스팅 됩니다. 함수 표현식의 경우와 비교해보세요.
 
 ```javascript
-declaration(); // output: declaration
+declaration(); // output: 'declaration'
 
 // 함수 선언식 - 선언과 동시에 초기화
 function declaration() {
