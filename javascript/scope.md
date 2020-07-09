@@ -81,7 +81,7 @@ console.log(local); // error - local is not defined
 
 ### 블록 레벨 스코프(Block-level scope)
 
-어떤 언어들은 블록 스코프(Block-level scope)를 따릅니다. 예를 들어, C언어는 블록 레벨 스코프를 따릅니다. 블록 레벨 스코프란 코드 블록(`{ .. }`) 내에서 유효한 스코프를 말합니다.
+어떤 언어들은 블록 레벨 스코프(Block-level scope)를 따릅니다. 예를 들어, C언어는 블록 레벨 스코프를 따릅니다. 블록 레벨 스코프란 코드 블록(`{ .. }`) 내에서 유효한 스코프를 말합니다.
 
 > 코드 블록은 `if`, `for`, `while`, `try`/`catch` 등의 Statement에서 쓰이는 블록을 말합니다.
 
@@ -172,7 +172,7 @@ console.log(global); // output: 'change'
 
 <br>
 
-> JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 사용합니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
+JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 사용합니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
 
 <br>
 
