@@ -262,23 +262,7 @@ function print(job) {
 
 <br>
 
-## 렉시컬 스코프(Lexical Scope)
-
-> lexical : 사전의, 사전식의
-
-렉시컬 스코프(Lexical scope)는 정적 스코프(Static scope)라고도 합니다. 반대로 동적 스코프(Dynamic scope)가 있는데요, 두 스코프의 개념은 아래와 같습니다.
-
-- 렉시컬 스코프 : 함수가 선언된 스코프를 상위 스코프로 함 (Where defined)
-
-- 동적 스코프 : 함수가 호출된 스코프를 상위 스코프로 함 (Where called)
-
-<br>
-
-JavaScript를 포함한 대부분의 언어들에서 렉시컬 스코프를 채택했습니다. 반대로 동적 스코프(Dynamic scope)는 Perl, Bash 등 오래된 언어들이 사용하는 방식입니다.
-
-<br>
-
-> Stackoverflow에 [What is lexical scope?](https://stackoverflow.com/questions/1047454/what-is-lexical-scope)를 주제로 사람들이 묻고 답한 내용이 있습니다.
+> 렉시컬 스코프(Lexical Scope)가 무엇인지 모른다면, 저의 [다른 글](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)을 참고하세요.
 
 <br>
 
