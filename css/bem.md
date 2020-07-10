@@ -19,7 +19,7 @@ CSS 방법론이란, CSS 작성시 클래스(`class`) 작명을 일관되고 구
 
 ## BEM(Block, Element, Modifier)
 
-BEM은 CSS 방법론 중 하나입니다. `header__nav_secondary`와 같은 클래스명은 본적이 있다면, 이것이 바로 BEM 방법론을 적용한 작명입니다. BEM 방법론은 어떤 HTML 요소에 대해 클래스 작명을 할 때 그 요소를 3 가지 관점으로 나누어 구분합니다.
+BEM은 CSS 방법론 중 하나입니다. `header__nav--secondary`와 같은 클래스명은 본적이 있다면, 이것이 바로 BEM 방법론을 적용한 작명입니다. BEM 방법론은 어떤 HTML 요소에 대해 클래스 작명을 할 때 그 요소를 3 가지 관점으로 나누어 구분합니다.
 
 - Block
 
@@ -32,7 +32,7 @@ BEM은 CSS 방법론 중 하나입니다. `header__nav_secondary`와 같은 클�
 위의 3 가지 관점은 클래스 작명에 아래와 같이 반영됩니다.
 
 ```
-.block__element_modifier { .. }
+.block__element--modifier { .. }
 ```
 
 <br>
@@ -168,10 +168,10 @@ Block/Element의 외형, 상태, 행동 등을 정의하는 객체.
 
 <br>
 
-Modifier 이름은 요소의 외형(`size_s`, `theme_islands`) 또는 요소의 상태(`disabled`, `focused`), 요소의 행동(`directions_left-top`)을 나타냅니다. Block/Element와는 밑줄(`_`) 1 개로 구분합니다.
+Modifier 이름은 요소의 외형(`size-s`, `theme-islands`) 또는 요소의 상태(`disabled`, `focused`), 요소의 행동(`directions-left-top`)을 나타냅니다. Block/Element와는 하이픈(`--`) 2 개로 구분합니다.
 
 ```
-block-name__element-name_modifier-name
+block-name__element-name--modifier-name
 ```
 
 <br>
@@ -182,10 +182,10 @@ block-name__element-name_modifier-name
 
 <br>
 
-예를 들어, 아래의 마크업은 적합합니다. Modifier 클래스인 `search-form_theme_islands`가 그 대상인 기존의 Block 클래스 `search-form`와 함께 쓰였기 때문입니다.
+예를 들어, 아래의 마크업은 적합합니다. Modifier 클래스인 `search-form--theme-islands`가 그 대상인 기존의 Block 클래스 `search-form`와 함께 쓰였기 때문입니다.
 
 ```html
-<form class="search-form search-form_theme_islands">
+<form class="search-form search-form--theme-islands">
 	<input class="search-form__input" />
 
 	<button class="search-form__button">Search</button>
@@ -198,7 +198,7 @@ block-name__element-name_modifier-name
 
 ```html
 <!-- Incorrect. The modified class `search-form` is missing -->
-<form class="search-form_theme_islands">
+<form class="search-form--theme-islands">
 	<input class="search-form__input" />
 
 	<button class="search-form__button">Search</button>
@@ -215,37 +215,39 @@ Boolean Modifier는 존재 자체로 그 값이 `true`로 간주되는 Modifier 
 
 ```html
 <!-- `focused` Boolean modifier -->
-<form class="search-form search-form_focused">
+<form class="search-form search-form--focused">
 	<input class="search-form__input" />
 
 	<!-- `disabled` Boolean modifier -->
-	<button class="search-form__button search-form__button_disabled">
+	<button class="search-form__button search-form__button--disabled">
 		Search
 	</button>
 </form>
 ```
 
-예를 들어, 위의 클래스 `search-form_focused`는 그 자체로 해당 요소가 focused 되었음을 나타냅니다.
+예를 들어, 위의 클래스 `search-form--focused`는 그 자체로 해당 요소가 focused 되었음을 나타냅니다.
 
 <br>
 
 #### Key-value
 
-Key-value Modifier는 이름과 값으로 구성됩니다. Modifier의 '이름 - 값' 관계는 밑줄(`_`) 1 개로 구분합니다.
+Key-value Modifier는 이름과 값으로 구성됩니다. Modifier의 '이름 - 값' 관계는 하이픈(`-`) 1 개로 구분합니다.
 
 ```
-block-name__element-name_modifier-name_modifier-value
+block-name__element-name--modifier-value
 ```
 
 아래는 예시 마크업 입니다.
 
 ```html
 <!-- `theme` modifier with the value `islands` -->
-<form class="search-form search-form_theme_islands">
+<form class="search-form search-form--theme-islands">
 	<input class="search-form__input" />
 
 	<!-- `size` modifier with the value `m` -->
-	<button class="search-form__button search-form__button_size_m">Search</button>
+	<button class="search-form__button search-form__button--size-m">
+		Search
+	</button>
 </form>
 ```
 
@@ -294,5 +296,6 @@ Block 클래스인 `search-form`에는 `margin`, `position` 등의 속성을 이
 
 ### References
 
-- [BEM Documentation](https://en.bem.info/methodology/quick-start/)
+- [BEM](https://en.bem.info/methodology/quick-start/)
+- [Get BEM](http://getbem.com/)
 - [Semantic Class Naming](https://ukiahsmith.com/blog/semantic-class-naming/)
