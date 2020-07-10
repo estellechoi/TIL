@@ -19,7 +19,7 @@ CSS 방법론이란, CSS 작성시 클래스(`class`) 작명을 일관되고 구
 
 ## BEM(Block, Element, Modifier)
 
-BEM은 CSS 방법론 중 하나입니다. `header__nav‐‐secondary`와 같은 클래스명은 본적이 있다면, 이것이 바로 BEM 방법론을 적용한 작명입니다. BEM 방법론은 어떤 HTML 요소에 대해 클래스 작명을 할 때 그 요소를 3 가지 관점으로 나누어 구분합니다.
+BEM은 CSS 방법론 중 하나입니다. `header__nav_secondary`와 같은 클래스명은 본적이 있다면, 이것이 바로 BEM 방법론을 적용한 작명입니다. BEM 방법론은 어떤 HTML 요소에 대해 클래스 작명을 할 때 그 요소를 3 가지 관점으로 나누어 구분합니다.
 
 - Block
 
@@ -32,7 +32,7 @@ BEM은 CSS 방법론 중 하나입니다. `header__nav‐‐secondary`와 같은
 위의 3 가지 관점은 클래스 작명에 아래와 같이 반영됩니다.
 
 ```
-.block__element--modifier { .. }
+.block__element_modifier { .. }
 ```
 
 <br>
