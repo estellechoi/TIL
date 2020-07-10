@@ -1,4 +1,4 @@
-# CSS Methodology: BEM(Block, Element, Modifier)
+# CSS 방법론: BEM(Block, Element, Modifier)
 
 <br>
 
