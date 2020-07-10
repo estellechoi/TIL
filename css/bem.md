@@ -1,8 +1,8 @@
-# CSS Architecture: BEM(Block, Element, Modifier)
+# CSS Methodology: BEM(Block, Element, Modifier)
 
 <br>
 
-## CSS 방법론(CSS Architecture)
+## CSS 방법론(CSS Methodology)
 
 CSS 방법론이란, CSS 작성시 클래스(`class`) 작명을 일관되고 구조적으로 할 수 있는 방법에 대한 가이드입니다. BEM과 같은 CSS 방법론을 적용함으로써 달성하고자 하는 골은 아래와 같습니다.
 
@@ -10,6 +10,10 @@ CSS 방법론이란, CSS 작성시 클래스(`class`) 작명을 일관되고 구
 
 - 쉬운 유지보수 (시멘틱(Semantic) 클래스명)
   > 시멘틱 클래스명 : 클래스 이름만으로 무슨 의미인지 예측 가능
+
+<br>
+
+> [여기](https://2019.stateofcss.com/technologies/methodologies/)에서 BEM, Atomic CSS, OOCSS 등 CSS 방법론 동향을 확인하세요.
 
 <br>
 
@@ -130,7 +134,13 @@ block-name__element-name
 
 - Block과 마찬가지로 중첩이 가능합니다. (Nesting)
 
-다만, Element는 다른 Element의 하위 요소가 될 수 없습니다. 가령, `block__elem1__elem2`와 같은 계층 구조로 클래스 작명을 해서는 안됩니다.
+<br>
+
+다만,
+
+> In the BEM methodology, you can't create elements of elements.
+
+Element는 다른 Element의 하위 요소가 될 수 없습니다. 가령, `block__elem1__elem2`와 같은 계층 구조로 클래스 작명을 해서는 안됩니다.
 
 예를 들어, 실제 마크업을 할 때 아래와 같이 클래스 이름을 지으면 됩니다. Element가 중첩 관계에 있더라도 클래스명은 Element간의 계층 구조를 반영해서는 안됩니다. 이는 우리의 목표인 확장성과 재사용성을 높이는데 도움이 됩니다. 각 Element에 대한 CSS 코드를 변경하지 않고도 Block 내에서 DOM 구조를 언제든지 바꿀 수 있도록 하기 때문입니다.
 
@@ -145,6 +155,138 @@ block-name__element-name
 	</div>
 </form>
 ```
+
+<br>
+
+## Modifier
+
+> BEM 공식 문서에 정의된 Modifier
+
+<strong>An entity that defines the appearance, state, or behavior of a block or element.</strong>
+
+Block/Element의 외형, 상태, 행동 등을 정의하는 객체.
+
+<br>
+
+Modifier 이름은 요소의 외형(`size_s`, `theme_islands`) 또는 요소의 상태(`disabled`, `focused`), 요소의 행동(`directions_left-top`)을 나타냅니다. Block/Element와는 밑줄(`_`) 1 개로 구분합니다.
+
+```
+block-name__element-name_modifier-name
+```
+
+<br>
+
+### Modifier 사용 가이드라인
+
+- Modifier 클래스는 Block/Element 클래스와 반드시 함께 사용해야 됩니다. Modifier는 기존 Block/Element의 외형, 행동, 상태를 변경하는 역할만 해야하며, Block/Element의 전체 스타일을 대체해서는 안되기 때문입니다.
+
+<br>
+
+예를 들어, 아래의 마크업은 적합합니다. Modifier 클래스인 `search-form_theme_islands`가 그 대상인 기존의 Block 클래스 `search-form`와 함께 쓰였기 때문입니다.
+
+```html
+<form class="search-form search-form_theme_islands">
+	<input class="search-form__input" />
+
+	<button class="search-form__button">Search</button>
+</form>
+```
+
+<br>
+
+반면 아래 마크업은 적합하지 않습니다.
+
+```html
+<!-- Incorrect. The modified class `search-form` is missing -->
+<form class="search-form_theme_islands">
+	<input class="search-form__input" />
+
+	<button class="search-form__button">Search</button>
+</form>
+```
+
+<br>
+
+### Modifier의 종류
+
+#### Boolean
+
+Boolean Modifier는 존재 자체로 그 값이 `true`로 간주되는 Modifier 입니다. `disabled`, `focused` 등이 그 예입니다.
+
+```html
+<!-- `focused` Boolean modifier -->
+<form class="search-form search-form_focused">
+	<input class="search-form__input" />
+
+	<!-- `disabled` Boolean modifier -->
+	<button class="search-form__button search-form__button_disabled">
+		Search
+	</button>
+</form>
+```
+
+예를 들어, 위의 클래스 `search-form_focused`는 그 자체로 해당 요소가 focused 되었음을 나타냅니다.
+
+<br>
+
+#### Key-value
+
+Key-value Modifier는 이름과 값으로 구성됩니다. Modifier의 '이름 - 값' 관계는 밑줄(`_`) 1 개로 구분합니다.
+
+```
+block-name__element-name_modifier-name_modifier-value
+```
+
+아래는 예시 마크업 입니다.
+
+```html
+<!-- `theme` modifier with the value `islands` -->
+<form class="search-form search-form_theme_islands">
+	<input class="search-form__input" />
+
+	<!-- `size` modifier with the value `m` -->
+	<button class="search-form__button search-form__button_size_m">Search</button>
+</form>
+```
+
+<br>
+
+## Mix
+
+Mix는 서로 다른 레벨의 클래스를 섞어 사용하는 기술입니다. 예를 들어,
+
+```html
+<!-- `header` block -->
+<div class="header">
+	<div class="search-form header__search-form"></div>
+</div>
+```
+
+위와 같이 Block 클래스인 `search-form`과 Element 클래스 `header__search-form`을 함께 사용할 수 있습니다. 그런데, Mix는 왜 필요할까요?
+
+<br>
+
+Block 클래스인 `search-form`에는 `margin`, `position` 등의 속성을 이용해 Block의 위치나 마진을 지정할 수 없습니다. Block 클래스는 어디에서든 재사용할 수 있어야 하므로 외부 환경에 영향을 주면 안되기 때문입니다. 그럼, `search-form` Block의 위치나 마진은 어디에 지정해야 할까요? 바로 이런 경우에 Mix를 사용합니다. 함께 쓰인 Element 클래스인 `header__search-form`에 지정하면 됩니다. 이를 통해 `search-form` Block 클래스는 재사용성과 독립성을 유지하면서, 실제 DOM의 노드에는 위치나 마진을 지정할 수 있게 됩니다.
+
+<br>
+
+## 파일 구조
+
+위에서 살펴본 Block, Element, Modifier 클래스를 작성하는 파일은 어떻게 나누고, 디렉토리 구조는 어떻게 하는게 좋을까요? 이에 대해서도 몇 가지 방법론이 있습니다. 아래는 가장 추천되는 Nested 파일 구조를 구성하기 위한 항목들입니다.
+
+- Block마다 디렉토리가 필요하며, 디렉토리 이름은 Block 이름과 동일하게 합니다. 예를 들어, `header` Block은 `header/` 디렉토리 내에 있어야 합니다.
+
+- Element/Modifier 클래스의 디렉토리는 자신이 속한 Block 디렉토리 하위에 위치합니다.
+
+- Element 디렉토리의 이름은 2 개의 밑줄(`__`)과 Element 이름을 붙여서 만듭니다. 예를 들면, `header/__logo/` 이렇게요.
+
+- Modifier 디렉토리의 이름은 1 개의 밑줄(`_`)과 Modifier 이름을 붙여서 만듭니다. 예를 들면, `menu/_theme_islands/` 이렇게요.
+
+- Block, Element, Modifer 각각의 디렉토리에는 실제 요소를 구현하기 위한 CSS 파일과 JavaScript 파일이 위치합니다. 예를 들어, `header/` 디렉토리에는 `header.css` 파일과 `header.js` 파일이 있겠죠.
+
+<br>
+
+이 외에도 [Flat](https://en.bem.info/methodology/filestructure/#flat), [Flex](https://en.bem.info/methodology/filestructure/#flex) 파일 구조가 있습니다.
 
 <br>
 
