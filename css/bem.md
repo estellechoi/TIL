@@ -171,7 +171,7 @@ Block/Element의 외형, 상태, 행동 등을 정의하는 객체.
 Modifier 이름은 요소의 외형(`size-s`, `theme-islands`) 또는 요소의 상태(`disabled`, `focused`), 요소의 행동(`directions-left-top`)을 나타냅니다. Block/Element와는 하이픈 2 개(`--`)로 구분합니다.
 
 ```
-block-name__element-name--modifier-name
+block-name__element-name--modifier-value
 ```
 
 <br>
