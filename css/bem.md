@@ -295,3 +295,4 @@ Block 클래스인 `search-form`에는 `margin`, `position` 등의 속성을 이
 ### References
 
 - [BEM Documentation](https://en.bem.info/methodology/quick-start/)
+- [Semantic Class Naming](https://ukiahsmith.com/blog/semantic-class-naming/)
