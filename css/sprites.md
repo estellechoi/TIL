@@ -18,6 +18,8 @@
 
 아래와 같은 이미지가 Sprite 이미지 입니다.
 
+<br>
+
 ![sprite1](./../img/sprite1.gif)
 
 <br>
@@ -29,6 +31,8 @@ Image Sprites 기법을 사용해봅시다. 이 기법은 Sprite 이미지를 �
 ```html
 <img class="home" src="img_trans.gif" />
 ```
+
+<br>
 
 - `<img>` 태그의 `src` 속성 값은 비어있을 수 없으므로, 투명한 의미없는 이미지를 넣어주세요.
 
@@ -45,6 +49,8 @@ Image Sprites 기법을 사용해봅시다. 이 기법은 Sprite 이미지를 �
 ```
 
 > [MDN web docs의 `background` 속성 문법](https://developer.mozilla.org/ko/docs/Web/CSS/background)을 참고하세요. `background` 속성은 단축 표기를 위한 속성입니다.
+
+<br>
 
 - `width: 46px; height: 44px;` 실제 보여줄 이미지의 크기를 지정합니다.
 
@@ -114,6 +120,8 @@ Image Sprites 기법을 사용해봅시다. 이 기법은 Sprite 이미지를 �
 ## Hover 효과 사용하기
 
 Sprite 이미지를 사용하면 로딩 딜레이 없이 Hover 효과를 구현할 수 있습니다. 아래의 이미지를 사용해 구현해봅시다.
+
+<br>
 
 ![sprite2](./../img/sprite2.gif)
 
