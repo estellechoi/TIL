@@ -33,6 +33,7 @@
 ### CSS
 
 - [CSS 방법론: BEM(Block, Element, Modifier)](https://github.com/estellechoi/TIL/blob/master/css/bem.md)
+- [Image Sprites](https://github.com/estellechoi/TIL/blob/master/css/sprites.md)
 
 <br>
 
