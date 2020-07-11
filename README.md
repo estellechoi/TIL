@@ -2,17 +2,22 @@
 
 🌎 Today I learned, 오늘 새로 배운 것을 기록합니다.
 
-> \* marked document is under revision.
+> `*`-marked item is under revision.
 
 <br>
 
----
+### HTTP
 
-### WWW
-
+- [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/Http/rest.md)
+- [Some Tips for REST](https://github.com/estellechoi/TIL/blob/master/Http/restTips.md)
+- [REST API Security](https://github.com/estellechoi/TIL/blob/master/Http/restSecurity.md) \*
+- [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/Http/cookie.md)
+- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
 - [브라우저(Browser)](https://github.com/estellechoi/TIL/blob/master/www/browser.md)
 - [인터넷과 HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
 - [웹서버 (Web Server) 와 웹 어플리케이션 서버(Web Application Server)](https://github.com/estellechoi/TIL/blob/master/www/was.md)
+
+<br>
 
 ### JavaScript
 
@@ -23,13 +28,13 @@
 - [How Javascript works?](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
 - [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
 
-### HTTP
+<br>
 
-- [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/Http/rest.md)
-- [Some Tips for REST](https://github.com/estellechoi/TIL/blob/master/Http/restTips.md)
-- [REST API Security](https://github.com/estellechoi/TIL/blob/master/Http/restSecurity.md) \*
-- [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/Http/cookie.md)
-- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
+### CSS
+
+- [CSS 방법론: BEM(Block, Element, Modifier)](https://github.com/estellechoi/TIL/blob/master/css/bem.md)
+
+<br>
 
 ### DOM
 
@@ -39,9 +44,13 @@
 - [Locating DOM elements using selectors](https://github.com/estellechoi/TIL/blob/master/Dom/domSelector.md)
 - [How to create a DOM tree](https://github.com/estellechoi/TIL/blob/master/Dom/domcreation.md)
 
+<br>
+
 ### Security
 
 - Cross site scripting (XSS) \*
+
+<br>
 
 ### Database
 
@@ -50,6 +59,8 @@
 - [MySQL 쿼리 문법](https://github.com/estellechoi/TIL/blob/master/mySQL/query.md)
 - [Command 로 MySQL 데이터베이스 백업/복원하기](https://github.com/estellechoi/TIL/blob/master/mySQL/mysqldump.md) \*
 - [MySQL 파일 실행하기 (source)](https://github.com/estellechoi/TIL/blob/master/mySQL/source.md)
+
+<br>
 
 ### Markdown
 
