@@ -33,6 +33,11 @@
 ### CSS
 
 - [CSS 방법론: BEM(Block, Element, Modifier)](https://github.com/estellechoi/TIL/blob/master/css/bem.md)
+- [Visual Formatting Model](https://github.com/estellechoi/TIL/blob/master/css/vfm.md)
+- [박스 모델(Box Model)](https://github.com/estellechoi/TIL/blob/master/css/box.md)
+- [포지셔닝 규칙(Positioning schemes)](https://github.com/estellechoi/TIL/blob/master/css/positioning.md)
+- [블록 서식 컨텍스트(Block Formatting Context)](https://github.com/estellechoi/TIL/blob/master/css/bfc.md)
+- [인라인 서식 컨텍스트(Inline Formatting Context)](https://github.com/estellechoi/TIL/blob/master/css/ifc.md)
 - [Image Sprites](https://github.com/estellechoi/TIL/blob/master/css/sprites.md)
 
 <br>
