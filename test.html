@@ -5,21 +5,30 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<style>
-			.block {
-				border: 2px solid black;
+			body {
+				margin: 50px 0;
+				padding: 0;
 			}
 
-			.menu--side-bar {
-				width: 100px;
-				height: 250px;
-				background-color: pink;
+			.column {
+				background-color: tomato;
+				color: white;
+				margin: 0 1%;
+				width: 32%;
 				float: left;
+			}
+			/* a new block formatting context in the last column */
+			.column:last-child {
+				float: none;
+				overflow: hidden;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="block">
-			<div class="menu--side-bar">Floats</div>
+		<div class="container">
+			<div class="column">column 1</div>
+			<div class="column">column 2</div>
+			<div class="column">column 3</div>
 		</div>
 	</body>
 </html>

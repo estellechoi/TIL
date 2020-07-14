@@ -344,6 +344,62 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
+#### 컬럼 Drop 방지하기
+
+어떤 브라우저에서는 Multi-column 레이아웃의 마지막 컬럼이 다음 줄로 밀려나는 현상이 발생합니다. 이는 브라우저에서 각 컬럼의 `width` 값이 반올림되어 컬럼들의 너비의 합이 부모 박스의 너비를 초과하는 경우 발생합니다.
+
+<br>
+
+아래와 같이 3 개의 컬럼으로 구성된 Multi-column 레이아웃을 상상해봅시다.
+
+```html
+<div class="container">
+	<div class="column">column 1</div>
+	<div class="column">column 2</div>
+	<div class="column">column 3</div>
+</div>
+```
+
+```css
+.column {
+	background-color: green;
+	margin: 0 1%;
+	width: 31.33%;
+	float: left;
+}
+```
+
+> [W3C 명세](https://www.w3.org/TR/CSS2/box.html#margin-properties)에 따르면, `margin` 값에서 `%`를 사용하는 경우, 상위 요소의 `width` 값을 기준으로 계산합니다.
+
+<br>
+
+위의 경우, 각 컬럼의 너비와 좌우 마진 값을 더하면 `99.99%`가 되므로 문제가 없어보입니다. 하지만 어떤 브라우저에서는 컬럼의 너비 값을 반올림하여 계산하므로 전체 너비를 초과할 수 있습니다. 이런 경우 렌더링 결과는 아래와 같을 것입니다.
+
+![Column Dropping](./../img/column-drop.png)
+
+<br>
+
+컬럼 Drop 문제를 해결하기 위해 아래와 같은 CSS를 추가할 수 있습니다.
+
+```css
+.column:last-child {
+	float: none;
+	overflow: hidden; /* a new block formatting context in the last column */
+}
+```
+
+<br>
+
+마지막 컬럼이 새로운 블록 서식 컨텍스트를 생성함으로써 Float 요소인 이전 컬럼들이 위치하고 남은 공간을 차지하게 됩니다.
+
+![Column Drop Fixed](./../img/column-drop-fixed.png)
+
+<br>
+
+> 컬럼 Drop 문제를 방지하는 방법으로는 Flex Box가 더 적합하지만, 블록 서식 컨텍스트의 특징을 이해해보기 위한 예시입니다.
+
+<br>
+
 ### 인라인 서식 컨텍스트(Inline Formatting Context)
 
 인라인 서식 컨텍스트(Inline Formatting Context)에서는 박스들이 수평적으로 레이아웃 되는데요, 가장 위에서부터 하나 하나 왼쪽에서 오른쪽으로 배치됩니다.
