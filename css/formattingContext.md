@@ -34,7 +34,7 @@ Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니
 
 <br>
 
-### 블록 서식 컨텍스트(Block Formatting Context)
+### 1) 블록 서식 컨텍스트(Block Formatting Context)
 
 블록 서식 컨텍스트(Block Formatting Context)에서 박스들은 위에서 아래로 수직 배치됩니다. 부모 박스의 가장 위부터 하나의 박스가 위치하고 그 다음 다른 박스가 위치하는 식으로요.
 
@@ -400,7 +400,7 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-### 인라인 서식 컨텍스트(Inline Formatting Context)
+### 2) 인라인 서식 컨텍스트(Inline Formatting Context)
 
 [MDN 원문](https://developer.mozilla.org/en-US/docs/Web/CSS/Inline_formatting_context)에 따르면,
 
@@ -450,7 +450,7 @@ span {
 
 위 예시의 경우, `<span>` 태그에 의해 문자열이 잘리므로 3 개의 Inline Box가 생성됩니다. 이때 `<span>` 태그로 감싸고 있는 중간 박스를 제외하고, 양옆의 문자열로 이루어진 2 개의 Inline Box를 Inline Anonymous Box라고 합니다. 이와 같은 익명의 Inline Box들은 별도로 스타일을 지정할 수 없으며, 상위 박스의 스타일을 상속받게 됩니다.
 
-> 반면, 아시다시피 `<span>` 태그로 감싼 중간 박스는 독립적을 스타일을 지정할 수 있습니다.
+> 반면, 아시다시피 `<span>` 태그로 감싼 중간 박스는 독립적으로 스타일을 지정할 수 있습니다.
 
 <br>
 
@@ -476,7 +476,7 @@ Line Box의 높이는 [Line height calculations](https://www.w3.org/TR/CSS2/visu
 
 #### 세로 정렬: `vertical-align`
 
-Line Box 내에서 인라인 요소들의 정렬을 지정할 때는 `vertical-align` 속성을 사용합니다.
+Line Box 내에서 인라인 요소들의 정렬을 지정할 때는 `vertical-align` 속성을 사용합니다. `vertical-align` 속성의 값으로 `top`, `middle`, `bottom`, `baseline`를 지정할 수 있습니다.
 
 <br>
 
@@ -493,10 +493,6 @@ span {
 
 <br>
 
-`vertical-align` 속성의 값으로 `top`, `middle`, `bottom`, `baseline`를 지정할 수 있습니다.
-
-<br>
-
 #### 가로 정렬: `text-align`
 
 Line Box 내에서 인라인 요소들의 가로 정렬은 `text-align` 속성을 사용합니다.
@@ -509,7 +505,7 @@ Line Box 내에서 인라인 요소들의 가로 정렬은 `text-align` 속성�
 
 <br>
 
-### Relative 포지셔닝
+### 3) Relative 포지셔닝
 
 Normal flow를 따르거나 Float 요소인 박스는 Relative 포지셔닝이 가능합니다. Relative 포지셔닝을 위해서는 `position` 속성 값을 `relative`로 지정합니다. Relative 포지셔닝에 따라 배치된 박스는 다음 박스의 위치에 영향을 주지 않습니다.
 
