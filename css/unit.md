@@ -1,8 +1,21 @@
-# 단위: `px`, `%`, `em`, `rem`, `vw`, `vh`, `vmin`, `vmax`
+# 단위
 
 <br>
 
 ## 단위
+
+CSS에서 사용되는 단위에는 다음과 같은 것들이 있습니다.
+
+- `px`
+- `%`
+- `em`
+- `rem`
+- `vw`
+- `vh`
+- `vmin`
+- `vmax`
+
+<br>
 
 > [Test your skills: values and units | MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_tasks) 페이지에서 능숙도를 측정할 수 있습니다.
 
