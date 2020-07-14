@@ -26,13 +26,13 @@ Visual Formatting Model은 브라우저에서 어떻게 DOM 트리를 렌더링�
 
 ### 박스 모델(Box Model)
 
-> [박스 모델(Box Model) 글로 이동하기](https://github.com/estellechoi/TIL/blob/master/css/box.md)
+> [설명 보기](https://github.com/estellechoi/TIL/blob/master/css/box.md)
 
 <br>
 
 ### 포지셔닝 규칙(Positioning schemes)
 
-> [포지셔닝 규칙(Positioning schemes) 글로 이동하기](https://github.com/estellechoi/TIL/blob/master/css/positioning.md)
+> [설명 보기](https://github.com/estellechoi/TIL/blob/master/css/positioning.md)
 
 <br>
 
