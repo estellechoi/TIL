@@ -4,9 +4,7 @@
 
 ## Positioning schemes
 
-> CSS 2.1부터
-
-박스들은 아래의 3 가지 포지셔닝 계획(Positioning schemes)에 따라 레이아웃됩니다.
+HTML 요소들의 레이아웃은 아래의 3 가지 포지셔닝 계획(Positioning schemes)에 따라 결정됩니다.
 
 - Normal flow
 
@@ -22,23 +20,23 @@
 
 ## Normal flow
 
-Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니다. Floats 모델을 따르거나 Absolute 포지셔닝을 따르지 않는 모든 요소들은 Normal flow에 따라 레이아웃 되는데요, 이런 요소들은 자신이 블록(Block)인지 인라인(Inline) 요소인지에 따라 각각 블록/인라인 서식 문맥(Formatting Context)에 속하게 됩니다.
+Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니다. Floats 모델을 따르거나 Absolute 포지셔닝을 따르지 않는 모든 요소들은 Normal flow에 따라 레이아웃 되는데요, 이런 요소들은 자신이 블록(Block)인지 인라인(Inline) 요소인지에 따라 각각 블록/인라인 서식 컨텍스트(Formatting Context)에 속하게 됩니다.
 
-- 블록 서식 문맥(Block Formatting Context)
+- 블록 서식 컨텍스트(Block Formatting Context)
 
-- 인라인 서식 문맥(Inline Formatting Context)
+- 인라인 서식 컨텍스트(Inline Formatting Context)
 
 - 상대적 포지셔닝(Relative Positioning)
 
 <br>
 
-> 서식 문맥(Formatting Context)이란 HTML 요소들이 시각적으로 레이아웃/포지셔닝 되는 흐름, 환경을 나타내는 추상적인 개념입니다.
+> 서식 컨텍스트(Formatting Context)란 HTML 요소들이 시각적으로 레이아웃/포지셔닝 되는 흐름, 환경을 나타내는 추상적인 개념입니다.
 
 <br>
 
-### 블록 서식 문맥(Block Formatting Context)
+### 블록 서식 컨텍스트(Block Formatting Context)
 
-블록 서식 문맥(Block Formatting Context)에서 박스들은 수직적으로 레이아웃 됩니다. 부모 박스의 가장 위부터 하나의 박스가 위치하고 그 다음 다른 박스가 위치하는 식으로요.
+블록 서식 컨텍스트(Block Formatting Context)에서 박스들은 위에서 아래로 수직 배치됩니다. 부모 박스의 가장 위부터 하나의 박스가 위치하고 그 다음 다른 박스가 위치하는 식으로요.
 
 <br>
 
@@ -46,9 +44,9 @@ Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니
 
 <br>
 
-#### 블록 서식 문맥이 생성되는 경우
+#### 블록 서식 컨텍스트가 생성되는 경우
 
-[W3C](https://www.w3.org/TR/CSS2/visuren.html#block-formatting-contexts)에서 정의한 블록 서식 문맥이 생성되는 경우입니다.
+[W3C](https://www.w3.org/TR/CSS2/visuren.html#block-formatting-contexts)에서 정의한 블록 서식 컨텍스트가 생성되는 경우입니다.
 
 > Floats, absolutely positioned elements, inline-blocks, table-cells, table-captions, and elements with overflow other than `visible` (except when that value has been propagated to the viewport) establish new block formatting contexts.
 
@@ -64,13 +62,41 @@ Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니
 
 - `overflow` 값이 `visible` 아닌 경우
 
-위 항목 중 하나라도 해당되면 그 요소를 위한 블록 서식 문맥이 생성된다는 것입니다.
+<br>
+
+위 항목 중 하나라도 해당되면 블록 서식 컨텍스트가 생성된다는 것입니다.
+
+<br>
+
+#### 블록 서식 컨텍스트의 정렬 규칙
+
+> [W3C](https://www.w3.org/TR/CSS2/visuren.html#block-formatting-contexts)에 따르면,
+
+> In a block formatting context, each box’s left outer edge touches the left edge of the containing block (for right-to-left formatting, right edges touch). This is true even in the presence of floats (although a box’s line boxes may shrink due to the floats), unless the box establishes a new block formatting context (in which case the box itself may become narrower due to the floats).
+
+<br>
+
+위 원문의 내용은 두 가지 중요한 포인트를 기준으로 아래와 같이 나눠볼 수 있습니다.
+
+<br>
+
+먼저,
+
+> 블록 서식 컨텍스트 내에서 자식 박스들의 왼쪽 면은 그들의 부모 박스의 왼쪽 면과 접하게 됩니다. 이는 Floats 요소를 포함하고 있는 박스에도 마찬가지로 적용됩니다. 해당 박스의 텍스트들은 Floats 요소의 영향으로 원래 자리에서 밀려날 수 있지만, 박스 자체는 여전히 부모 박스의 왼쪽 면과 접해 있게 됩니다.
+
+![Float Align](./../img/float-align.png)
+
+<br>
+
+> 다만, 해당 박스가 새로운 블록 서식 컨텍스트를 생성하는 경우라면 부모 박스의 면과 접해있지 않고 Floats 요소에 의해 오른쪽으로 밀려나게 됩니다.
+
+위의 정렬 규칙을 이용하면 Text Wrapping 현상을 피할 수 있습니다. 관련 설명은 아래에서 자세하게 다루므로 지금은 생략하겠습니다.
 
 <br>
 
 #### 마진 중복(Margin Collapse)
 
-위 그림과 같이 위에서 아래로 수직 배치된 박스들 간의 간격은 `margin` 속성 값에 의해 정해집니다. 이때 중요한 것은 서로 인접한 두 박스 사이의 마진 값은 두 박스의 마진이 합해지는 것이 아니라 상쇄됩니다. (Collapse)
+위 그림과 같이 위에서 아래로 수직 배치된 박스들 간의 간격은 `margin` 속성 값에 의해 정해집니다. 이때 중요한 것은 서로 인접한 두 박스 사이의 마진 값은 두 박스의 마진이 더해진 값이 아니라는 것입니다. 대신 중복되어 상쇄됩니다. (Collapse)
 
 그림의 모든 박스들의 위/아래 `margin` 값이 `10px`이라고 가정해봅시다. 인접한 두 박스 사이의 간격은 얼마일까요 ?
 
@@ -80,15 +106,15 @@ Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니
 
 <br>
 
-`10px` 입니다. 두 박스의 마진 값을 합한 `20px`이 두 박스의 간격이 되어야할 것 같지만, 그렇지 않습니다. 이는 블록 서식 문맥의 규칙에 따라 인접한 두 블록 요소간의 마진이 중복되어 합쳐지기 때문입니다.
+`10px` 입니다. 두 박스의 마진 값을 더한 `20px`이 두 박스의 간격이 되어야할 것 같지만, 그렇지 않습니다. 이는 블록 서식 컨텍스트의 규칙에 따라 인접한 두 블록 요소간의 마진이 중복되어 합쳐지기 때문입니다.
 
 <br>
 
-##### 마진 중복(Margin Collapse) 피하기
+#### 마진 중복(Margin Collapse) 피하기
 
-마진 중복은 블록 서식 문맥 내에서 적용되는 특별한 규칙입니다. 하지만 블록 서식 문맥을 이용해서 마진 중복을 회피할 수 있습니다. 이게 무슨 말이냐고요?
+마진 중복은 블록 서식 컨텍스트 내에서 적용되는 특별한 규칙입니다. 하지만 블록 서식 컨텍스트을 이용해서 마진 중복을 피할 수 있습니다. 이게 무슨 말이냐고요?
 
-마진 중복은 <strong>같은 블록 문맥</strong> 내에 있는 블록들 사이에서 발생합니다. 만약 각각의 블록들이 서로 다른 블록 문맥에 속해있다면 서로 영향을 줄 수 없기 때문에 마진 중복이 발생하지 않습니다.
+마진 중복은 <strong>같은 블록 컨텍스트</strong> 내에 있는 블록들 사이에서 발생합니다. 만약 각각의 블록들이 서로 다른 블록 컨텍스트에 속해있다면 서로 영향을 줄 수 없기 때문에 마진 중복이 발생하지 않습니다.
 
 <br>
 
@@ -114,7 +140,7 @@ p {
 }
 ```
 
-위 예시에서는 `.block` 박스에 의해 블록 서식 문맥이 생성됩니다. 따라서 그 안에 속하는 각 `<p>` 요소들 간에는 마진 중복이 발생합니다.
+위 예시에서는 `.block` 박스에 의해 블록 서식 컨텍스트가 생성됩니다. 따라서 그 안에 속하는 각 `<p>` 요소들 간에는 마진 중복이 발생합니다.
 
 <br>
 
@@ -146,15 +172,15 @@ p {
 }
 ```
 
-어떤가요? 세 번째 `<p>` 요소는 새로운 블록 서식 문맥에 속하게 되면서 두 번째 `<p>` 요소와 마진 중복이 일어나지 않습니다. 따라서 두 요소의 간격은 `10px`이 아닌 `20px`이 됩니다.
+어떤가요? 세 번째 `<p>` 요소는 새로운 블록 서식 컨텍스트에 속하게 되면서 두 번째 `<p>` 요소와 마진 중복이 일어나지 않습니다. 따라서 두 요소의 간격은 `10px`이 아닌 `20px`이 됩니다.
 
 <br>
 
-#### Floats 요소들을 포함하기
+#### Floats 요소를 포함하기
 
-Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이 없습니다. Floats 요소들은 Normal flow에서 분리되어 나와 그들만의 방식으로 레이아웃 되기 때문입니다.
+Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이 없습니다. Floats 요소들은 Normal flow에서 분리되어 그들만의 방식으로 배치되기 때문입니다.
 
-아래와 같은 마크업은 어떻게 레이아웃 될까요?
+아래와 같은 마크업은 어떻게 렌더링 될까요?
 
 ```html
 <div class="block">
@@ -177,15 +203,15 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-![float](./../img/float.png)
+![float](./../img/float-left.png)
 
-결과는 위와 같습니다. `.menu--side-bar` 요소는 Floats 모델에 따라 더이상 `.block` 박스가 만들어낸 블록 문맥 내에 존재하지 않습니다. 따라서 `.block` 박스는 내부에 아무것도 포함하지 않은 빈 박스가 되며, 높이 값을 따로 지정하지 않았기 때문에 위와 같이 보이게 됩니다.
+결과는 위와 같습니다. `.menu--side-bar` 요소는 Floats 모델에 따라 더이상 `.block` 박스와 동일면 상에 존재하지 않습니다. 따라서 `.block` 박스는 내부에 아무것도 없는 빈 박스가 되며, 높이 값을 따로 지정하지 않았기 때문에 위와 같이 보이게 됩니다.
 
 <br>
 
-##### `clear`
+##### 방법 1: `clear`
 
-위와 같은 문제를 해결하는 가장 흔한 방법은 `clear` 속성을 사용하는 것입니다. Floats 모델을 따르는 요소 바로 다음 자리에 가상의 요소를 만들고 `clear` 속성 값을 부여하는 방법입니다. 이 방법을 사용하려면 아래의 CSS 내용을 추가하면 됩니다.
+위와 같은 문제를 해결하는 가장 흔한 방법은 `clear` 속성을 사용하는 것입니다. Floats 모델을 따르는 요소 바로 다음 자리에 가상의 요소를 만들고 `clear` 속성 값을 부여하는 방법입니다. 이 방법을 사용하려면 아래의 CSS를 추가하면 됩니다.
 
 ```css
 .menu--side-bar::after {
@@ -195,9 +221,9 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-##### 블록 서식 문맥을 사용하기
+##### 방법 2: 블록 서식 컨텍스트을 사용하기
 
-하지만 블록 서식 문맥을 사용하면 가상 요소와 `clear` 속성을 사용하지 않고 문제를 해결할 수 있습니다. 아래와 같이 한 줄의 스타일만으로요.
+하지만 블록 서식 컨텍스트를 사용하면 가상 요소와 `clear` 속성을 사용하지 않고 문제를 해결할 수 있습니다. 아래와 같이 한 줄의 스타일을 추가하는 것만으로요.
 
 ```css
 .block {
@@ -244,7 +270,7 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-위의 레이아웃은 블록 서식 문맥을 사용해서 구현할 수 있습니다. 예제로 알아봅시다.
+위의 레이아웃은 블록 서식 컨텍스트을 사용해서 구현할 수 있습니다. 예제로 알아봅시다.
 
 ```html
 <div class="block">
@@ -304,7 +330,7 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-주변의 텍스트들이 더이상 감싸면서 배치되지 않고, Float 요소의 오른쪽에 떨어져서 위치하게 됩니다. 실제로 텍스트를 담은 `.block p` 요소는 Float 요소의 아래에 계속 자리를 잡고있지 않고 Float 요소의 오른쪽에 붙어 위치하게 됩니다. 이는 블록 서식 문맥의 규칙 때문입니다.
+주변의 텍스트들이 더이상 감싸면서 배치되지 않고, Float 요소의 오른쪽에 떨어져서 위치하게 됩니다. 실제로 텍스트를 담은 `.block p` 요소는 Float 요소의 아래에 계속 자리를 잡고있지 않고 Float 요소의 오른쪽에 붙어 위치하게 됩니다. 이는 블록 서식 컨텍스트의 규칙 때문입니다.
 
 [W3C](https://www.w3.org/TR/CSS2/visuren.html#block-formatting-contexts)에 따르면,
 
@@ -312,13 +338,13 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-위의 원문에 따라, `.block p` 요소는 새로운 블록 서식 문맥을 생성하게 됩니다. 결과적으로 더이상 부모 블록의 가장 왼쪽에 접해서 위치하지 않고 형제 요소의 다음에 위치하게 됩니다.
+위의 원문에 따라, `.block p` 요소는 새로운 블록 서식 컨텍스트을 생성하게 됩니다. 결과적으로 더이상 부모 블록의 가장 왼쪽에 접해서 위치하지 않고 형제 요소의 다음에 위치하게 됩니다.
 
 <br>
 
-### 인라인 서식 문맥(Inline Formatting Context)
+### 인라인 서식 컨텍스트(Inline Formatting Context)
 
-인라인 서식 문맥(Inline Formatting Context)에서는 박스들이 수평적으로 레이아웃 되는데요, 가장 위에서부터 하나 하나 왼쪽에서 오른쪽으로 배치됩니다.
+인라인 서식 컨텍스트(Inline Formatting Context)에서는 박스들이 수평적으로 레이아웃 되는데요, 가장 위에서부터 하나 하나 왼쪽에서 오른쪽으로 배치됩니다.
 
 <br>
 
@@ -326,7 +352,7 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-인라인 서식 문맥에서는 양옆으로 인접한 두 박스들의 마진(`margin`), 테두리 선(`border`), 패딩(`padding`) 값은 서로 상쇄되지 않고 각자 자리를 차지합니다.
+인라인 서식 컨텍스트에서는 양옆으로 인접한 두 박스들의 마진(`margin`), 테두리 선(`border`), 패딩(`padding`) 값은 서로 상쇄되지 않고 각자 자리를 차지합니다.
 
 <br>
 
