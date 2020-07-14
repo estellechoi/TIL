@@ -54,6 +54,8 @@ span {
 
 > 반면, 아시다시피 `<span>` 태그로 감싼 중간 박스는 독립적으로 스타일을 지정할 수 있습니다.
 
+> 익명 박스에 대한 자세한 설명은 [여기](https://github.com/estellechoi/TIL/blob/master/css/box.md)를 참고하세요.
+
 <br>
 
 ## 라인 박스(Line Box)
