@@ -24,6 +24,18 @@ Visual Formatting Model은 브라우저에서 어떻게 DOM 트리를 렌더링�
 
 <br>
 
+### 박스 모델(Box Model)
+
+> [박스 모델(Box Model) 글로 이동하기](https://github.com/estellechoi/TIL/blob/master/css/box.md)
+
+<br>
+
+### Positioning schemes
+
+> [Positioning schemes 글로 이동하기](https://github.com/estellechoi/TIL/blob/master/css/positioning.md)
+
+<br>
+
 ## 뷰포트(Viewport)의 역할
 
 ### 뷰포트(Viewport)란?
