@@ -30,9 +30,9 @@ Visual Formatting Model은 브라우저에서 어떻게 DOM 트리를 렌더링�
 
 <br>
 
-### Positioning schemes
+### 포지셔닝 규칙(Positioning schemes)
 
-> [Positioning schemes 글로 이동하기](https://github.com/estellechoi/TIL/blob/master/css/positioning.md)
+> [포지셔닝 규칙(Positioning schemes) 글로 이동하기](https://github.com/estellechoi/TIL/blob/master/css/positioning.md)
 
 <br>
 
