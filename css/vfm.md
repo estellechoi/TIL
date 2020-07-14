@@ -1,5 +1,7 @@
 # Visual Formatting Model
 
+<br>
+
 ## Visual Formatting Model
 
 Visual Formatting Model은 브라우저에서 어떻게 DOM 트리를 렌더링하여 시각 매체를 통해 보여주는지 설명합니다. Visual Formatting Model에서 DOM 트리의 각 요소는 박스 모델(Box Model)에 따라 박스들을 생성하며, 박스들의 레이아웃은 아래의 항목들에 의해 결정됩니다.
