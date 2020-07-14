@@ -4,7 +4,7 @@
 
 ## 단위
 
-CSS에서 사용되는 단위에는 다음과 같은 것들이 있습니다.
+CSS에서 `width`, `font-size` 등의 속성 값을 지정할 때는 다음과 같은 단위들을 사용합니다.
 
 - `px`
 - `%`
@@ -17,7 +17,7 @@ CSS에서 사용되는 단위에는 다음과 같은 것들이 있습니다.
 
 <br>
 
-> [Test your skills: values and units | MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_tasks) 페이지에서 능숙도를 측정할 수 있습니다.
+> 이 외에도 다양한 단위들이 있습니다. 자세한 내용은 [여기](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units)를 참고하세요.
 
 <br>
 
@@ -322,6 +322,12 @@ html {
 	font-size: calc(18px + 0.25vw);
 }
 ```
+
+<br>
+
+## 기타
+
+> [Test your skills: values and units | MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_tasks) 페이지에서 능숙도를 측정할 수 있습니다.
 
 <br>
 
