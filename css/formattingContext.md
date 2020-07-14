@@ -402,29 +402,126 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 ### 인라인 서식 컨텍스트(Inline Formatting Context)
 
-인라인 서식 컨텍스트(Inline Formatting Context)에서는 박스들이 수평적으로 레이아웃 되는데요, 가장 위에서부터 하나 하나 왼쪽에서 오른쪽으로 배치됩니다.
+[MDN 원문](https://developer.mozilla.org/en-US/docs/Web/CSS/Inline_formatting_context)에 따르면,
+
+> The inline formatting context is part of the visual rendering of a web page. Inline boxes are laid out one after the other, in the direction sentences run in the writing mode in use.
+
+인라인 서식 컨텍스트(Inline Formatting Context)에서 요소들은 하나 하나 차례로 배치되는데, 배치되는 방향은 수평적/수직적 2 가지 쓰기 모드(Writing mode)에 따라 결정됩니다.
 
 <br>
 
-![IFC](./../img/ifc.png)
+```html
+<div class="horizontal">One <span>Two</span> Three</div>
+
+<div class="vertical">One <span>Two</span> Three</div>
+```
+
+```css
+div {
+	border: 5px solid black;
+}
+
+span {
+	border: 5px solid rebeccapurple;
+	padding-inline-start: 20px;
+	padding-inline-end: 40px;
+	margin-inline-start: 30px;
+	margin-inline-end: 10px;
+}
+
+.horizontal {
+	writing-mode: horizontal-tb;
+}
+
+.vertical {
+	writing-mode: vertical-rl;
+}
+```
 
 <br>
 
-인라인 서식 컨텍스트에서는 양옆으로 인접한 두 박스들의 마진(`margin`), 테두리 선(`border`), 패딩(`padding`) 값은 서로 상쇄되지 않고 각자 자리를 차지합니다.
+위 마크업과 CSS의 렌더링 결과는 이렇습니다.
+
+![Inline](./../img/inline2.png)
 
 <br>
 
-#### 상대적 포지셔닝(Relative Positioning)
+#### Inline Anonymous Box
+
+위 예시의 경우, `<span>` 태그에 의해 문자열이 잘리므로 3 개의 Inline Box가 생성됩니다. 이때 `<span>` 태그로 감싸고 있는 중간 박스를 제외하고, 양옆의 문자열로 이루어진 2 개의 Inline Box를 Inline Anonymous Box라고 합니다. 이와 같은 익명의 Inline Box들은 별도로 스타일을 지정할 수 없으며, 상위 박스의 스타일을 상속받게 됩니다.
+
+> 반면, 아시다시피 `<span>` 태그로 감싼 중간 박스는 독립적을 스타일을 지정할 수 있습니다.
 
 <br>
 
-### Floats
+#### Line Box
+
+여러 Inline 요소들이 모여 하나의 라인(Line)을 형성하는데, 이 직사각형 박스 모양의 라인을 Line Box 라고 합니다. Line Box 내에서 Inline 요소들이 차례로 배치되다가 해당 라인에 공간이 부족하면, 또 하나의 Line Box를 생성하고 그 안에 나머지 요소들이 배치됩니다. 이런 식으로 몇 개의 Line Box가 생성될 수 있습니다.
+
+> 가령, 한 단락의 텍스트들은 여러 개의 Line Box들을 생성하면서 아래와 같이 배치됩니다.
+
+![Line Box](./../img/linebox.png)
+
+<br>
+
+Line Box의 높이는 [Line height calculations](https://www.w3.org/TR/CSS2/visudet.html#line-height)에 따라 결정되며, 너비는 상위 요소와 Float 요소들에 의해 결정됩니다.
+
+<br>
+
+#### 마진 중복이 발생하나요?
+
+인라인 서식 컨텍스트에서는 마진 중복이 발생하지 않습니다. 양옆으로 인접한 두 박스들의 마진(`margin`), 테두리 선(`border`), 패딩(`padding`) 값은 서로 상쇄되지 않고 각자 자리를 차지합니다.
+
+<br>
+
+#### 세로 정렬: `vertical-align`
+
+Line Box 내에서 인라인 요소들의 정렬을 지정할 때는 `vertical-align` 속성을 사용합니다.
+
+<br>
+
+```css
+span {
+	font-size: 200%;
+	vertical-align: top;
+}
+```
+
+위와 같이 일부 인라인 요소의 폰트 사이즈를 늘려서 해당 요소가 속해있는 Line Box의 높이를 늘릴 수 있습니다. 이때 Line Box보다 높이 값이 작은 나머지 인라인 요소들은 `vertical-align: top`에 의해 아래와 같이 정렬됩니다. 렌더링 결과는 아래와 같습니다.
+
+![Vertical Align](./../img/vertical-align.png)
+
+<br>
+
+`vertical-align` 속성의 값으로 `top`, `middle`, `bottom`, `baseline`를 지정할 수 있습니다.
+
+<br>
+
+#### 가로 정렬: `text-align`
+
+Line Box 내에서 인라인 요소들의 가로 정렬은 `text-align` 속성을 사용합니다.
+
+<br>
+
+#### Float 요소의 영향
+
+같은 블록 서식 컨텍스트 내에 Float 요소와 인라인 요소가 함께 있을 때, 인라인 요소들이 형성하는 Line Box의 너비는 Float 요소가 차지하는 너비만큼 줄어듭니다. `writing-mode: vertical-rl` 경우라면, Float 요소가 차지하는 높이만큼 Line Box의 높이가 줄어듭니다.
+
+<br>
+
+### Relative 포지셔닝
+
+Normal flow를 따르거나 Float 요소인 박스는 Relative 포지셔닝이 가능합니다. Relative 포지셔닝을 위해서는 `position` 속성 값을 `relative`로 지정합니다. Relative 포지셔닝에 따라 배치된 박스는 다음 박스의 위치에 영향을 주지 않습니다.
+
+<br>
+
+## Floats
 
 `float` 모델을 따르는 박스들은 먼저 Normal flow에 따라 레이아웃되고, 그 후 Normal flow에서 빠져나와 왼쪽 혹은 오른쪽으로 옮겨집니다. 다른 요소들은 이 `float` 요소들의 사이사이에 흐르듯 레이아웃 됩니다.
 
 <br>
 
-### Absolute positioning
+## Absolute 포지셔닝
 
 `absolute` 포지셔닝을 따르는 박스는 애초에 Normal flow로부터 분리되어 완전히 독립적으로 레이아웃 됩니다. 따라서 형제 박스들의 레이아웃에 전혀 영향을 주지 않게 됩니다. `absolute` 박스는 부모 요소의 위치를 기준으로 지정된 위치에 레이아웃 됩니다.
 
@@ -432,17 +529,40 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 
 <br>
 
-## `position`
+### `position`
 
-`position` 속성의 값은 다음 중 하나입니다.
+> 자세한 내용은 [MDN 문서](https://developer.mozilla.org/en-US/docs/Web/CSS/position)를 참고하세요.
+
+<br>
+
+`position` 속성의 값은 다음 중 하나입니다. (`position` 속성을 지정하지 않은 경우) 기본값은 `static`입니다.
 
 - `static`
 - `relative`
 - `absolute`
 - `fixed`
+- `sticky`
 - `inherit`
 
-(`position` 속성을 지정하지 않은 경우) 기본값은 `static`입니다. `position` 값이 `static`이 아닌 요소들을 포지셔닝 되었다고(Positioned) 말하며, 포지셔닝 된 요소들은 4 개의 속성 값 `top`, `right`, `bottom`, `left`에 따라 레이아웃 됩니다.
+<br>
+
+`position` 속성 값에 의해 해당 요소의 포지셔닝이 결정됩니다. 다음은 포지셔닝의 종류입니다.
+
+- Positioned : `position` 속성 값이 `static`이 아닌 모든 요소
+
+  > Positioned 요소는 4 개의 속성 값 `top`, `right`, `bottom`, `left`에 따라 포지셔닝 됩니다.
+
+- Relatively positioned : `position` 속성 값이 `relative`인 요소
+
+- Absolutely positioned : `position` 속성 값이 `absolute`/`fixed`인 요소
+
+  > 해당 요소가 마진을 가지면, 마진 값은 they 박스 오프셋(Box offsets)에 포함됩니다. 또한, 이러한 요소들은 자신을 위한 새로운 블록 서식 컨텍스트를 생성합니다.
+
+- Stickily positioned : `position` 속성 값이 `sticky`인 요소
+
+<br>
+
+Positioned 요소가 아니거나, Relatively positioned 요소이면 Normal flow에 따라 배치됩니다. 간단하게, `position` 속성 값이 `static`/`relative`이면 Normal flow를 따릅니다.
 
 <br>
 
@@ -461,3 +581,8 @@ Floats 요소들만을 자식 요소로 가지고 있는 박스는 높이 값이
 - [Block formatting context | MDN](https://developer.mozilla.org/ko/docs/Web/Guide/CSS/Block_formatting_context)
 - [Understanding Block Formatting Contexts in CSS](https://www.sitepoint.com/understanding-block-formatting-contexts-in-css/)
 - [Positioning schemes | W3C Recommendation](https://www.w3.org/TR/CSS2/visuren.html#positioning-scheme)
+- [Block formatting context | MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context)
+- [Inline formatting context | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Inline_formatting_context)
+- [Visual formatting model | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Visual_formatting_model)
+- [CSS Positioned Layout | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning)
+- [position | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
