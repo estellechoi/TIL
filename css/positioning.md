@@ -1,10 +1,10 @@
-# Positioning schemes
+# 포지셔닝 규칙(Positioning schemes)
 
 <br>
 
-## Positioning schemes
+## 포지셔닝 규칙(Positioning schemes)
 
-HTML 요소들의 레이아웃은 아래의 3 가지 포지셔닝 계획(Positioning schemes)에 따라 결정됩니다.
+HTML 요소들의 레이아웃은 아래의 3 가지 포지셔닝 규칙(Positioning schemes)에 따라 결정됩니다.
 
 - Normal flow
 
