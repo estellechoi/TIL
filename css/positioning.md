@@ -22,11 +22,11 @@ HTML 요소들의 레이아웃은 아래의 3 가지 포지셔닝 규칙(Positio
 
 Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니다. Floats 모델을 따르거나 Absolute 포지셔닝을 따르지 않는 모든 요소들은 Normal flow에 따라 레이아웃 되는데요, 이런 요소들은 자신이 블록(Block)인지 인라인(Inline) 요소인지에 따라 각각 블록/인라인 서식 컨텍스트(Formatting Context)에 속하게 됩니다.
 
-- 1. 블록 서식 컨텍스트(Block Formatting Context)
+- 1\) 블록 서식 컨텍스트(Block Formatting Context)
 
-- 2. 인라인 서식 컨텍스트(Inline Formatting Context)
+- 2\) 인라인 서식 컨텍스트(Inline Formatting Context)
 
-- 3. 상대적 포지셔닝(Relative Positioning)
+- 3\) 상대적 포지셔닝(Relative Positioning)
 
 <br>
 
