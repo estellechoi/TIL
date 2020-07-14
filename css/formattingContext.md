@@ -70,7 +70,7 @@ Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니
 
 #### 블록 서식 컨텍스트의 정렬 규칙
 
-> [W3C](https://www.w3.org/TR/CSS2/visuren.html#block-formatting-contexts)에 따르면,
+[W3C](https://www.w3.org/TR/CSS2/visuren.html#block-formatting-contexts)에 따르면,
 
 > In a block formatting context, each box’s left outer edge touches the left edge of the containing block (for right-to-left formatting, right edges touch). This is true even in the presence of floats (although a box’s line boxes may shrink due to the floats), unless the box establishes a new block formatting context (in which case the box itself may become narrower due to the floats).
 
@@ -80,13 +80,15 @@ Normal flow는 박스들이 포지셔닝 되는 가장 기본적인 방식입니
 
 <br>
 
-먼저,
+##### 1)
 
-> 블록 서식 컨텍스트 내에서 자식 박스들의 왼쪽 면은 그들의 부모 박스의 왼쪽 면과 접하게 됩니다. 이는 Floats 요소를 포함하고 있는 박스에도 마찬가지로 적용됩니다. 해당 박스의 텍스트들은 Floats 요소의 영향으로 원래 자리에서 밀려날 수 있지만, 박스 자체는 여전히 부모 박스의 왼쪽 면과 접해 있게 됩니다.
+> 1. 블록 서식 컨텍스트 내에서 자식 박스들의 왼쪽 면은 그들의 부모 박스의 왼쪽 면과 접하게 됩니다. 이는 Floats 요소를 포함하고 있는 박스에도 마찬가지로 적용됩니다. 해당 박스의 텍스트들은 Floats 요소의 영향으로 원래 자리에서 밀려날 수 있지만, 박스 자체는 여전히 부모 박스의 왼쪽 면과 접해 있게 됩니다.
 
 ![Float Align](./../img/float-align.png)
 
 <br>
+
+##### 2)
 
 > 다만, 해당 박스가 새로운 블록 서식 컨텍스트를 생성하는 경우라면 부모 박스의 면과 접해있지 않고 Floats 요소에 의해 오른쪽으로 밀려나게 됩니다.
 
