@@ -21,7 +21,7 @@
 
 ### HTML
 
-- [DOCTYPE, `<head>` 태그](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
+- [DOCTYPE, `<head>` 태그, 검색엔진 최적화(Search Engine Optimization)](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
 
 <br>
 
