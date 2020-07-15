@@ -21,7 +21,7 @@
 
 ### HTML
 
-- [DOCTYPE & `<head>` 태그](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
+- [DOCTYPE, `<head>` 태그](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
 
 <br>
 
