@@ -1,4 +1,4 @@
-# DOCTYPE, `<head>` 태그
+# DOCTYPE, `<head>` 태그, 검색엔진 최적화(Search Engine Optimization)
 
 <br>
 
