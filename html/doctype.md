@@ -249,7 +249,7 @@ Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 �
 
 아래는 구글 검색결과 입니다. `<title>` 태그와 `<meta>` 태그의 `description` 속성 값으로 담겨있는 정보가 검색 결과에 그대로 노출되네요.
 
-![Tab](./../img/tab.png)
+![Search Result](./../img/search-google.png)
 
 <br>
 
