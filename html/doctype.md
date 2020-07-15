@@ -268,3 +268,4 @@ Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 �
 - [\<head\>: The Document Metadata (Header) element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)
 - [Sitelinks | Google Search Console Help](https://support.google.com/webmasters/answer/47334?hl=en)
 - [What are sitelinks and how can I get them?](https://www.searchenginewatch.com/2017/11/30/what-are-sitelinks-and-how-can-i-get-them/)
+- [입문자에게 추천하는 HTML, CSS 첫걸음 | HEROPY Tech](https://heropy.blog/2019/04/24/html-css-starter/)
