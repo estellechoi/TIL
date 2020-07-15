@@ -265,6 +265,6 @@ Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 �
 
 - [Document type declaration](https://en.wikipedia.org/wiki/Document_type_declaration)
 - [What’s in the head? Metadata in HTML | MDN](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML)
-- [<head>: The Document Metadata (Header) element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)
+- [\<head\>: The Document Metadata (Header) element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)
 - [Sitelinks | Google Search Console Help](https://support.google.com/webmasters/answer/47334?hl=en)
 - [What are sitelinks and how can I get them?](https://www.searchenginewatch.com/2017/11/30/what-are-sitelinks-and-how-can-i-get-them/)
