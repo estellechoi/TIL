@@ -53,6 +53,12 @@
 
 <br>
 
+### Image
+
+- [웹을 위한 이미지(Image)](https://github.com/estellechoi/TIL/blob/master/image/types.md)
+
+<br>
+
 ### Security
 
 - Cross site scripting (XSS) \*
