@@ -19,6 +19,12 @@
 
 <br>
 
+### HTML
+
+- [DOCTYPE & <head> 태그](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
+
+<br>
+
 ### JavaScript
 
 - [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)
