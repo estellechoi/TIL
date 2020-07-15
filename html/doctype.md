@@ -1,4 +1,4 @@
-# DOCTYPE & `<head>` 태그
+# DOCTYPE, `<head>` 태그
 
 <br>
 
