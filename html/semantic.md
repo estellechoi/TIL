@@ -818,6 +818,8 @@ abbr {
 
 ### `<ruby>` for Text annotation
 
+예시
+
 ```html
 <ruby> 明日 <rp>(</rp><rt>Ashita</rt><rp>)</rp> </ruby>
 ```
