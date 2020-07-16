@@ -569,13 +569,13 @@ hr {
 
   > 접근성 보조 기기는 페이지 안의 모든 링크들을 나열하는 단축키를 제공합니다.
 
-  > #### Not good
+  > <b>Not good</b>
   >
   > ```html
   > 저희 제품을 더 알아보시려면 <a href="/products">여기</a>를 클릭하세요.
   > ```
   >
-  > #### Good
+  > <b>Good</b>
   >
   > ```html
   > 저희의 <a href="/products">제품을 더 알아보세요</a>.
