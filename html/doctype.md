@@ -42,6 +42,18 @@ DOCTYPE은 HTML 문서의 버전 정보를 알려주는 역할을 합니다. 웹
 
 <br>
 
+예를 들어, 아래와 같이 `<html>` 태그 밖에 있는 내용은 문서의 범위에 해당하지 않으므로 웹 브라우저가 렌더링하지 않습니다.
+
+```html
+<html>
+	..
+</html>
+
+Hello.
+```
+
+<br>
+
 ### `lang` 속성
 
 문서의 주요 언어를 설정할 수 있습니다(설정해야 합니다). `<html>` 태그의 `lang` 속성을 사용하세요.
@@ -51,6 +63,10 @@ DOCTYPE은 HTML 문서의 버전 정보를 알려주는 역할을 합니다. 웹
 	..
 </html>
 ```
+
+<br>
+
+> `lang` 속성의 값으로는 지정하고자 하는 언어(-국가)의 [ISO 639-1 코드](https://ko.wikipedia.org/wiki/ISO_639-1_%EC%BD%94%EB%93%9C_%EB%AA%A9%EB%A1%9D)를 지정하면 됩니다.
 
 <br>
 
@@ -109,7 +125,7 @@ DOCTYPE은 HTML 문서의 버전 정보를 알려주는 역할을 합니다. 웹
 
 ### `<meta>` 태그
 
-HTML 문서(웹페이지)에 대한 정보를 검색엔진이나 브라우저에 제공합니다. `<title>` 태그와 같이 별도의 태그 문법을 갖고 있지 않은 모든 나머지 정보들(Metadata)이 `<meta>` 태그를 사용하여 저장됩니다. 웹페이지의 제작자, 내용, 키워드 등의 정보를 담고 있으며, 빈(Empty) 태그입니다.
+HTML 문서(웹페이지)에 대한 정보를 검색엔진이나 브라우저에 제공합니다. `<title>` 태그와 같이 별도의 태그 문법을 갖고 있지 않은 기타 정보들(Metadata)이 `<meta>` 태그를 사용하여 저장됩니다. 웹페이지의 제작자, 내용, 키워드 등의 정보를 담고 있으며, 빈(Empty) 태그입니다.
 
 <br>
 
@@ -133,27 +149,19 @@ started with developing web sites and applications."
 
 <br>
 
-### `<meta>` 태그의 속성들
+`<meta>` 태그의 속성에는 아래와 같은 것들이 있습니다.
 
-- `charset` : 문자 인코딩(Character encoding) 방식
+- `charset`
 
-- `name` : 검색엔진 등에 제공하기 위한 정보의 타입(Type)
+- `http-equiv`
 
-  > `author`, `description`, `keywords`, `viewport` 등
+- `name`
 
-- `content` : `name`/`http-equiv` 속성에 대한 값
+- `content`
 
 <br>
 
-### 도태된 `<meta>` 태그의 속성들
-
-`<meta>`의 많은 속성들이 더이상 사용되지 않습니다. 예를 들어, 아래와 같은 `keywords` 메타데이터는 이제 검색엔진에서 무시합니다.
-
-> ```html
-> <meta name="keywords" content="fill, in, your, keywords, here" />
-> ```
-
-원래 `keywords` 속성은 검색엔진에서 검색어와 해당 웹 페이지의 관련성을 결정하기 위해 고안되었지만, 이를 악용한 스팸 페이지들이 생겨남에 따라 더이상 사용되지 않게 되었습니다.
+자세한 내용은 MDN의 [<meta>: The Document-level Metadata element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)를 참고하세요. 이 글에서는 아래에서 별도의 Sub-title로 다룹니다.
 
 <br>
 
@@ -223,6 +231,79 @@ Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 �
 	href="https://developer.cdn.mozilla.net/static/img/favicon32.e02854fdcf73.png"
 />
 ```
+
+<br>
+
+## `<meta>` 태그의 속성들
+
+### 1) `charset`
+
+문자 인코딩(Character encoding) 방식을 지정합니다.
+
+> [Character encodings for beginners](https://www.w3.org/International/questions/qa-what-is-encoding), [Character encoding](https://en.wikipedia.org/wiki/Character_encoding)
+
+<br>
+
+`<meta charset />`은 `<head>` 태그 내에서 가장 첫 줄에 작성하는 것이 좋습니다. 그래야 `<title>` 태그의 내용을 포함해 모든 글자의 인코딩에 관여할 수 있기 때문입니다. 예를 들어, 아래에서 `"문서의 제목"` 글자들은 그 위에서 지정한 Character Set에 따라 UTF-8 방식으로 인코딩 됩니다.
+
+```html
+<head>
+	<meta charset="utf-8" />
+	<title>문서의 제목</title>
+</head>
+```
+
+<br>
+
+> 대표적으로 한글 인코딩이 가능한 방식에는 `UTF-8`, `EUC-KR` 2 가지가 있습니다. 참고로, `EUC-KR` 방식은 완성형 한글만 인식하기 때문에 한글 깨짐 이슈가 있습니다. 따라서 최근에는 조합형 한글 인코딩을 지원하는 `UTF-8` 방식이 주로 사용합니다.
+
+<br>
+
+### 2) `http-equiv`
+
+아래 마크업은 해당 HTML 문서가 Internet Explorer 브라우저에서 렌더링될 때, 최신 버전(`edge`) 방식으로 렌더링 하라는 뜻입니다.
+
+```html
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+```
+
+<br>
+
+### 3) `name`
+
+검색엔진 등에 제공하기 위한 정보의 타입(Type)을 지정합니다.
+
+- `author`, `description`, `keywords`, `viewport` 등
+
+<br>
+
+#### `name="viewport"`
+
+아래는 뷰포트(Viewport) - 문서가 렌더링되어 보여지는 영역에 대한 정보를 작성한 것입니다. 뷰포트의 가로 너비(`width`) 값을 디바이스 가로 너비에 맞춘다는 뜻입니다.
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+```
+
+<br>
+
+### 4) `content`
+
+`name`/`http-equiv` 속성에 대한 값을 지정합니다.
+
+<br>
+
+### 도태된 `<meta>` 태그의 속성들
+
+`<meta>`의 많은 속성들이 더이상 사용되지 않습니다. 예를 들어, 아래와 같은 `keywords` 메타데이터는 이제 검색엔진에서 무시합니다.
+
+> ```html
+> <meta name="keywords" content="fill, in, your, keywords, here" />
+> ```
+
+원래 `keywords` 속성은 검색엔진에서 검색어와 해당 웹 페이지의 관련성을 결정하기 위해 고안되었지만, 이를 악용한 스팸 페이지들이 생겨남에 따라 더이상 사용되지 않게 되었습니다.
 
 <br>
 
