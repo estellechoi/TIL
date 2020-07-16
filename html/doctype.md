@@ -146,19 +146,21 @@ HTML 문서(웹페이지)에 대한 정보를 검색엔진이나 브라우저에
 아래와 같이 사용합니다.
 
 ```html
-<!-- character encoding -->
-<meta charset="utf-8" />
+<head>
+	<!-- character encoding -->
+	<meta charset="utf-8" />
 
-<!-- author -->
-<meta name="author" content="Chris Mills" />
+	<!-- author -->
+	<meta name="author" content="Chris Mills" />
 
-<!-- description -->
-<meta
-	name="description"
-	content="The MDN Web Docs Learning Area aims to provide
+	<!-- description -->
+	<meta
+		name="description"
+		content="The MDN Web Docs Learning Area aims to provide
 complete beginners to the Web with all they need to know to get
 started with developing web sites and applications."
-/>
+	/>
+</head>
 ```
 
 <br>
@@ -229,7 +231,9 @@ started with developing web sites and applications."
 아래는 뷰포트(Viewport) - 문서가 렌더링되어 보여지는 영역에 대한 정보를 작성한 것입니다. 뷰포트의 가로 너비(`width`) 값을 디바이스 가로 너비에 맞춘다는 뜻입니다.
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 ```
 
 <br>
@@ -244,9 +248,11 @@ started with developing web sites and applications."
 
 `<meta>`의 많은 속성들이 더이상 사용되지 않습니다. 예를 들어, 아래와 같은 `keywords` 메타데이터는 이제 검색엔진에서 무시합니다.
 
-> ```html
-> <meta name="keywords" content="fill, in, your, keywords, here" />
-> ```
+```html
+<head>
+	<meta name="keywords" content="fill, in, your, keywords, here" />
+</head>
+```
 
 원래 `keywords` 속성은 검색엔진에서 검색어와 해당 웹 페이지의 관련성을 결정하기 위해 고안되었지만, 이를 악용한 스팸 페이지들이 생겨남에 따라 더이상 사용되지 않게 되었습니다.
 
@@ -274,7 +280,9 @@ started with developing web sites and applications."
 ### CSS
 
 ```html
-<link rel="stylesheet" href="home.css" />
+<head>
+	<link rel="stylesheet" href="home.css" />
+</head>
 ```
 
 <br>
@@ -284,7 +292,9 @@ started with developing web sites and applications."
 Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 등에서 해당 페이지를 상징하는 아이콘으로 주로 사용되며, `<title>` 태그에서 지정한 문서의 제목과 함께 노출됩니다. Favicon 이미지를 문서에 연결할 때 아래와 같이 `<link>` 태그를 사용합니다.
 
 ```html
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<head>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
 ```
 
 <br>
@@ -332,7 +342,7 @@ Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 �
 
 ## `<style>` 태그
 
-`<style>` 태그 안에는 CSS를 작성할 수 있습니다. 문서에 대한 정보를 담고 있는 태그는 아니지만, 브라우저 렌더링 프로세스를 고려하여 `<head>` 태그 내에 작성합니다.
+`<style>` 태그 안에는 CSS를 작성합니다. 문서에 대한 정보를 담고 있는 태그는 아니지만, 브라우저 렌더링 프로세스를 고려하여 `<head>` 태그 내에 작성합니다.
 
 ```html
 <head>
@@ -355,6 +365,20 @@ MIME(Multipurpose Internet Mail Extensions) Type, 쉽게 말해 미디어 타입
 참고로 HTML 5 부터는 위의 `type="text/css"`가 기본값이므로 생략합니다. 마찬가지로 `<link>` 태그를 이용하여 외부 CSS 파일을 연결할 때도, 외부 파일의 타입을 자동으로 검사하기 때문에 따로 명시하지 않습니다.
 
 > 현대적인 웹 문서에서 `type` 속성을 포함할 이유는 거의 존재하지 않습니다.
+
+<br>
+
+그냥 `type`을 명시하지 않고 이렇게 작성하면 됩니다.
+
+```html
+<head>
+	<style>
+		div {
+			color: tomato;
+		}
+	</style>
+</head>
+```
 
 <br>
 
