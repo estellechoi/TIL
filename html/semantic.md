@@ -270,13 +270,13 @@ IE 11 이하의 브라우저를 지원해야 한다면 `main` [role](https://dev
 
   > 예를 들어, 단계별 요리법, 내비게이션, 영양정보에서 비율의 내림차순으로 정렬한 원재료 목록 등에서요.
 
-  > 목록의 넘버링이 (순서로서의 의미를 가지기 보다) 법/기술 문서 등에서 단순한 인덱스의 역할만 한다면, `<ol>` 태그보다는 CSS의 `list-style-type` 속성을 사용하세요.
+- 목록의 넘버링이 (순서로서의 의미를 가지기 보다) 법/기술 문서 등에서 단순한 인덱스의 역할만 한다면, `<ol>` 태그보다는 CSS의 `list-style-type` 속성을 사용하세요.
 
 <br>
 
-### `<ol>`
+### `<ol>` 태그의 속성
 
-- `type` : 넘버링 타입 (`<li>` 태그에 별도로 `type` 속성을 명시하지 않으면 `<ol>` 태그의 `type` 속성이 적용됨)
+- `type` : 넘버링 타입 ()
 
   - `a` : lowercase letters
   - `A` : uppercase letters
@@ -284,7 +284,9 @@ IE 11 이하의 브라우저를 지원해야 한다면 `main` [role](https://dev
   - `I` : uppercase Roman numerals
   - `1` : numbers (default)
 
-- `reversed` : 역순 정렬 (`true`/`false` 또는 `reversed`)
+    > `<li>` 태그에 별도로 `type` 속성을 명시하지 않으면 `<ol>` 태그의 `type` 속성이 적용됨
+
+- `reversed` : 역순 정렬 (Boolean)
 
 - `start` : 아이템에 넘버링을 할 때 첫 번째 순서를 나타내는 숫자
   > `type` 값이 `A`와 같이 문자이더라도, `start` 속성 값은 `3`과 같이 숫자만 지정할 수 있습니다.
@@ -305,9 +307,9 @@ IE 11 이하의 브라우저를 지원해야 한다면 `main` [role](https://dev
 
 <br>
 
-### `<li>`
+### `<li>` 태그의 속성
 
-- `<li>` 태그의 `value` 속성은 해당 아이템을 시작으로 넘버링하는데 사용합니다.
+- `value` : 해당 아이템을 시작으로 넘버링하는데 사용합니다.
 
 ```html
 <ol>
