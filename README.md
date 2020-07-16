@@ -13,9 +13,9 @@
 - [REST API Security](https://github.com/estellechoi/TIL/blob/master/Http/restSecurity.md) \*
 - [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/Http/cookie.md)
 - [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
-- [브라우저(Browser)](https://github.com/estellechoi/TIL/blob/master/www/browser.md)
-- [인터넷과 HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
-- [웹서버 (Web Server) 와 웹 어플리케이션 서버(Web Application Server)](https://github.com/estellechoi/TIL/blob/master/www/was.md)
+- [Browser](https://github.com/estellechoi/TIL/blob/master/www/browser.md)
+- [Internet and HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
+- [Web Server / Web Application Server](https://github.com/estellechoi/TIL/blob/master/www/was.md)
 
 <br>
 
