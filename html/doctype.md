@@ -424,6 +424,8 @@ MIME(Multipurpose Internet Mail Extensions) Type, 쉽게 말해 미디어 타입
 - [Document type declaration](https://en.wikipedia.org/wiki/Document_type_declaration)
 - [What’s in the head? Metadata in HTML | MDN](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML)
 - [\<head\>: The Document Metadata (Header) element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)
+- [\<base\>: The Document Base URL element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base)
+- [\<meta\>: The Document-level Metadata element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)
 - [Sitelinks | Google Search Console Help](https://support.google.com/webmasters/answer/47334?hl=en)
 - [What are sitelinks and how can I get them?](https://www.searchenginewatch.com/2017/11/30/what-are-sitelinks-and-how-can-i-get-them/)
 - [입문자에게 추천하는 HTML, CSS 첫걸음 | HEROPY Tech](https://heropy.blog/2019/04/24/html-css-starter/)
