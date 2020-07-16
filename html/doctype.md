@@ -90,6 +90,8 @@ Hello.
 
 <br>
 
+아래와 같이 사용합니다. `<title>` 태그는 해당 HTML 문서의 제목 정보를 담고 있습니다.
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -99,11 +101,23 @@ Hello.
 </html>
 ```
 
-위에서 `<title>` 태그는 해당 HTML 문서의 제목 정보를 담고 있습니다.
+<br>
+
+아래의 태그들은 `<head>` 태그 내에서 문서에 대한 정보, 외부 리소스 연결, CSS, 기준 URL을 작성할 때 사용합니다.
+
+- `<title>`
+
+- `<meta>`
+
+- `<link>`
+
+- `<style>`
+
+- `<base>`
 
 <br>
 
-### `<title>` 태그
+## `<title>` 태그
 
 위에서 보았듯이 `<title>` 태그는 해당 HTML 문서의 제목 정보를 담고 있습니다. 이 정보는 브라우저에서 웹 페이지 탭에 노출됩니다.
 
@@ -123,7 +137,7 @@ Hello.
 
 <br>
 
-### `<meta>` 태그
+## `<meta>` 태그
 
 HTML 문서(웹페이지)에 대한 정보를 검색엔진이나 브라우저에 제공합니다. `<title>` 태그와 같이 별도의 태그 문법을 갖고 있지 않은 기타 정보들(Metadata)이 `<meta>` 태그를 사용하여 저장됩니다. 웹페이지의 제작자, 내용, 키워드 등의 정보를 담고 있으며, 빈(Empty) 태그입니다.
 
@@ -161,76 +175,7 @@ started with developing web sites and applications."
 
 <br>
 
-자세한 내용은 MDN의 [<meta>: The Document-level Metadata element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)를 참고하세요. 이 글에서는 아래에서 별도의 Sub-title로 다룹니다.
-
-<br>
-
-### `<link>` 태그
-
-외부 문서를 연결할 때 사용하는 태그입니다. HTML 외부에서 작성된 문서, 가령 CSS 파일이나 Favicon 이미지를 불러와 HTML 문서와 연결하기 위해 사용됩니다. 빈(Empty) 태그이며, 다음과 같은 속성들을 사용하여 외부 파일을 연결합니다.
-
-- `rel` (필수)
-
-- `href`
-
-<br>
-
-#### CSS
-
-```html
-<link rel="stylesheet" href="home.css" />
-```
-
-<br>
-
-#### Favicon
-
-Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 등에서 해당 페이지를 상징하는 아이콘으로 주로 사용되며, `<title>` 태그에서 지정한 문서의 제목과 함께 노출됩니다. Favicon 이미지를 문서에 연결할 때 아래와 같이 `<link>` 태그를 사용합니다.
-
-```html
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-```
-
-<br>
-
-> 주의 : Favicon 이미지는 보통 `.ico` 포맷을 사용합니다. 대부분의 최신 브라우저에서 `.gif`, `.png` 등의 이미지 포맷을 지원하지만, IE6과 같은 아주 오래된 브라우저에서도 Favicon 이미지를 보여주고 싶다면 `.ico` 포맷을 사용하세요...
-
-> 주의 : If your site uses a Content Security Policy (CSP) to enhance its security, the policy applies to the favicon. If you encounter problems with the favicon not loading, verify that the Content-Security-Policy header's img-src directive is not preventing access to it.
-
-<br>
-
-다양한 디바이스의 등장으로 현재는 아래와 같이 다양한 Favicon 타입들을 함께 고려해야 합니다.
-
-```html
-<!-- third-generation iPad with high-resolution Retina display: -->
-<link
-	rel="apple-touch-icon-precomposed"
-	sizes="144x144"
-	href="https://developer.cdn.mozilla.net/static/img/favicon144.a6e4162070f4.png"
-/>
-<!-- iPhone with high-resolution Retina display: -->
-<link
-	rel="apple-touch-icon-precomposed"
-	sizes="114x114"
-	href="https://developer.cdn.mozilla.net/static/img/favicon114.0e9fabd44f85.png"
-/>
-<!-- first- and second-generation iPad: -->
-<link
-	rel="apple-touch-icon-precomposed"
-	sizes="72x72"
-	href="https://developer.cdn.mozilla.net/static/img/favicon72.8ff9d87c82a0.png"
-/>
-<!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-<link
-	rel="apple-touch-icon-precomposed"
-	href="https://developer.cdn.mozilla.net/static/img/favicon57.a2490b9a2d76.png"
-/>
-<!-- basic favicon -->
-<link
-	rel="shortcut icon"
-	href="https://developer.cdn.mozilla.net/static/img/favicon32.e02854fdcf73.png"
-/>
-```
+자세한 내용은 MDN의 [<meta>: The Document-level Metadata element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)를 참고하세요.
 
 <br>
 
@@ -304,6 +249,138 @@ Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 �
 > ```
 
 원래 `keywords` 속성은 검색엔진에서 검색어와 해당 웹 페이지의 관련성을 결정하기 위해 고안되었지만, 이를 악용한 스팸 페이지들이 생겨남에 따라 더이상 사용되지 않게 되었습니다.
+
+<br>
+
+## `<link>` 태그
+
+현재 문서와 외부 문서를 연결할 때 사용하는 태그입니다. HTML 외부에서 작성된 문서, 가령 CSS 파일이나 Favicon 이미지를 불러와 HTML 문서와 연결하기 위해 사용됩니다. 빈(Empty) 태그이며, 다음과 같은 속성들을 사용하여 외부 파일을 연결합니다.
+
+- `rel` : 외부 리소스와의 관계 (필수)
+
+  > `rel` 속성의 값으로 가능한 [목록](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types)
+
+- `href` : 외부 리소스의 URL (절대/상대경로)
+
+- `crossorigin` : 리소스를 가져올 때 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)를 사용해야 하는지
+  > `anonymous` / `use-credentials`
+
+<br>
+
+자세한 내용은 [<link>: The External Resource Link element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link)을 참고하세요.
+
+<br>
+
+### CSS
+
+```html
+<link rel="stylesheet" href="home.css" />
+```
+
+<br>
+
+### Favicon
+
+Favicon은 "Favorites icon"의 약어입니다. 브라우저 탭과 북마크 등에서 해당 페이지를 상징하는 아이콘으로 주로 사용되며, `<title>` 태그에서 지정한 문서의 제목과 함께 노출됩니다. Favicon 이미지를 문서에 연결할 때 아래와 같이 `<link>` 태그를 사용합니다.
+
+```html
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+```
+
+<br>
+
+> 주의 : Favicon 이미지는 보통 `.ico` 포맷을 사용합니다. 대부분의 최신 브라우저에서 `.gif`, `.png` 등의 이미지 포맷을 지원하지만, IE6과 같은 아주 오래된 브라우저에서도 Favicon 이미지를 보여주고 싶다면 `.ico` 포맷을 사용하세요...
+
+> 주의 : If your site uses a Content Security Policy (CSP) to enhance its security, the policy applies to the favicon. If you encounter problems with the favicon not loading, verify that the Content-Security-Policy header's img-src directive is not preventing access to it.
+
+<br>
+
+다양한 디바이스의 등장으로 현재는 아래와 같이 다양한 Favicon 타입들을 함께 고려해야 합니다.
+
+```html
+<!-- third-generation iPad with high-resolution Retina display: -->
+<link
+	rel="apple-touch-icon-precomposed"
+	sizes="144x144"
+	href="https://developer.cdn.mozilla.net/static/img/favicon144.a6e4162070f4.png"
+/>
+<!-- iPhone with high-resolution Retina display: -->
+<link
+	rel="apple-touch-icon-precomposed"
+	sizes="114x114"
+	href="https://developer.cdn.mozilla.net/static/img/favicon114.0e9fabd44f85.png"
+/>
+<!-- first- and second-generation iPad: -->
+<link
+	rel="apple-touch-icon-precomposed"
+	sizes="72x72"
+	href="https://developer.cdn.mozilla.net/static/img/favicon72.8ff9d87c82a0.png"
+/>
+<!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+<link
+	rel="apple-touch-icon-precomposed"
+	href="https://developer.cdn.mozilla.net/static/img/favicon57.a2490b9a2d76.png"
+/>
+<!-- basic favicon -->
+<link
+	rel="shortcut icon"
+	href="https://developer.cdn.mozilla.net/static/img/favicon32.e02854fdcf73.png"
+/>
+```
+
+<br>
+
+## `<style>` 태그
+
+`<style>` 태그 안에는 CSS를 작성할 수 있습니다. 문서에 대한 정보를 담고 있는 태그는 아니지만, 브라우저 렌더링 프로세스를 고려하여 `<head>` 태그 내에 작성합니다.
+
+```html
+<head>
+	<style type="text/css">
+		div {
+			color: tomato;
+		}
+	</style>
+</head>
+```
+
+<br>
+
+### MIME Type
+
+MIME(Multipurpose Internet Mail Extensions) Type, 쉽게 말해 미디어 타입(Media Type)은 문서, 파일, 바이트 정렬 등의 특성과 포맷을 나타내는 기준을 말합니다. 위의 `type` 속성 값으로 사용된 `text/css`도 MIME Type 기준에 따라 작성된 것입니다.
+
+<br>
+
+참고로 HTML 5 부터는 위의 `type="text/css"`가 기본값이므로 생략합니다. 마찬가지로 `<link>` 태그를 이용하여 외부 CSS 파일을 연결할 때도, 외부 파일의 타입을 자동으로 검사하기 때문에 따로 명시하지 않습니다.
+
+> 현대적인 웹 문서에서 `type` 속성을 포함할 이유는 거의 존재하지 않습니다.
+
+<br>
+
+## `<base>` 태그
+
+문서 내의 모든 상대 경로(URL)가 사용할 기준 URL을 지정합니다. 문서에는 하나의 `<base>` 요소만 존재할 수 있습니다. 예를 들어, 아래의 경우 `<link>` 태그는 `<base>` 태그에 지정된 기준 경로를 참조하여, `./css/main.css` 경로에서 해당 파일을 찾습니다.
+
+```html
+<head>
+	<base href="./css/" />
+	<link rel="stylesheet" href="main.css" />
+</head>
+```
+
+<br>
+
+이렇게도 사용할 수 있어요.
+
+```html
+<head>
+	<base href="./image/" />
+</head>
+<body>
+	<img src="sample.png" alt="Sample Image" />
+</body>
+```
 
 <br>
 
