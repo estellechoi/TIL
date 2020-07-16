@@ -551,6 +551,38 @@ hr {
 
 - `<a>`
 
+- `<abbr>`
+
+- `<b>`
+
+- `<mark>`
+
+- `<em>`
+
+- `<strong>`
+
+- `<i>`
+
+- `<dfn>`
+
+- `<cite>`
+
+- `<q>`
+
+- `<u>`
+
+- `<code>`
+
+- `<kbd>`
+
+- `<sup>`, `<sub>`
+
+- `<time>`
+
+- `<span>`
+
+- `<br />`
+
 <br>
 
 ## `<a>`
@@ -598,21 +630,299 @@ hr {
 ### 보안
 
 - `target="_blank"`를 `rel="noreferrer"`/`rel="noopener"` 없이 사용하면 보안상 위험합니다. 웹사이트가 `window.opener` API 악용 공격에 취약해집니다.
-  > [Referer header: privacy and security concerns](https://developer.mozilla.org/ko/docs/Web/Security/Referer_header:_privacy_and_security_concerns), [Target="\_blank" - the most underestimated vulnerability ever](https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/)
+
+  > [Referer header: privacy and security concerns](https://developer.mozilla.org/ko/docs/Web/Security/Referer_header:_privacy_and_security_concerns)
+
+  > [Target="\_blank" - the most underestimated vulnerability ever](https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/)
 
 <br>
+
+## `<abbr>`
+
+> 약어. `title` 선택 속성을 사용하면 약어의 전체 설명을 제공할 수 있습니다. `title` 속성 값은 전체 설명만을 작성하며, 다른건 포함할 수 없습니다. 브라우저에서는 대개 마우스 커서를 올렸을 때 나타나는 툴팁(Tooltip)으로 표현합니다.
+
+> (Abbreviation)
+
 <br>
+
+- 다른 태그와 달리, `<abbr>` 요소의 `title` 속성은 약어에 대한 설명/확장 형태를 사람이 읽을 수 있는 형태로 나타내야 합니다.
+
+- 설명 없이 단순히 해당 글자가 준말임을 나타내기만 하려면 `<abbr>` 태그를 속성 없이 사용하세요.
+
 <br>
+
+### Styling
+
+예시입니다.
+
+```css
+abbr {
+	font-variant: all-small-caps;
+}
+```
+
 <br>
+
+### 예시
+
+```html
+<abbr title="Cascading Style Sheets">CSS</abbr>
+```
+
 <br>
+
+## `<b>`
+
+> 독자의 주의를 끌기 위해 사용합니다.
+
+> (Bring Attention)
+
 <br>
+
+- 특별한 중요성을 가지고 있지는 않지만 굵게 표시할 부분에 사용하세요.
+
+  > 다른 태그(`<strong>`, `<em>`, `<mark>` 등)이 적합하지 않은 경우 마지막 방법으로 사용하세요.
+
+- 제목을 만들기 위해 `<b>` 태그를 사용하지 마세요. (제목 태그는 `<h1>`-`<h6>`)
+
+- 단순히 굵은 글씨가 필요하다면 CSS의 `font-weight="bold"`를 사용하세요.
+
 <br>
+
+## `<mark>`
+
+> 글자를 하이라이트 표시합니다. (형광펜 효과)
+
 <br>
+
+- 표시만을 위한 용도로 사용하지 마세요. 시각적인 목적만 있다면 `<span>` 태그와 CSS를 대신 사용해야 합니다.
+
+- 인용문(`<q>`, `<blockquote>`) 내에서 사용할 수 있습니다.
+
+- 또는 문서 콘텐츠에서 사용자의 현재 행동과 관련 있는 부분을 나타낼 때 사용하세요.
+
 <br>
+
+## `<em>`
+
+> 텍스트의 강세, 주위 텍스트에 비해 강조된 부분을 나타냅니다. (`<em>` 요소를 중첩하면 더 큰 강세)
+
+> 기울임꼴(<i>italic</i>)로 표시됩니다.
+
+> (Emphasis)
+
 <br>
+
+- 문장의 의미에 영향을 미칠 수 있습니다.
+
+  > ("I <em>love</em> carrots." VS "I love <em>carrots</em>.")
+
+- 단순히 기울임꼴이 필요해서 `<em>`을 사용하면 안됩니다. 스크린 리더에서 구두 강조로 발음됩니다.
+
+  > 스타일링은 CSS `font-style` 속성을 사용하세요.
+
+- 저작물(책, 연극, 음악 등등)의 제목은 `<cite>` 태그를 사용하세요.
+
+- 다른 언어의 단어 등 주변과 다른 톤을 가진 텍스트에는 `<i>`를 사용하세요. (`<em>`은 콘텐츠를 강조합니다.)
+
+- 주변보다 훨씬 중요한 텍스트는 `<strong>` 태그로 강조하면 됩니다.
+
 <br>
+
+## `<strong>`
+
+> 중대하거나 긴급한 콘텐츠를 나타냅니다.
+
+> (Strong importance)
+
 <br>
+
+- 단순히 굵은 글씨가 필요해서 `<strong>` 태그를 사용하면 안됩니다. 스타일은 CSS로..
+
 <br>
+
+## `<i>`
+
+> 텍스트에서 어떤 이유로 주위와 구분해야 하는 부분, 주변과 톤이 다른 부분에 사용합니다. (기술 용어, 외국어 구절, 등장인물의 생각, 아이콘 등)
+
+> 기울임꼴(<i>italic</i>)로 표시됩니다.
+
+<br>
+
+- 단순히 기울임꼴을 적용하기 위한 용도로 사용해서는 안됩니다.
+
+- 강조하려는 텍스트가 다른 요소에 더 적합하지 않은지 고려하세요.
+  - `<em>` 태그는 강세를 나타냅니다.
+  - `<strong>` 태그는 보다 강한 강조를 나타냅니다.
+  - `<mark>` 태그는 관련성을 나타냅니다.
+  - `<cite>` 태그는 책, 공연, 음악 등 저작물의 이름을 나타냅니다.
+  - `<dfn>` 태그는 정의 대상인 용어를 나타냅니다.
+
+<br>
+
+## `<dfn>`
+
+> 현재 맥락이나 문장에서 정의하고 있는 용어를 나타냅니다.
+
+<br>
+
+## `<cite>`
+
+> 저작물의 출처를 표기할 때 사용하며, 제목을 반드시 포함해야 합니다.
+
+```html
+<p>More information can be found in <cite>[ISO-0000]</cite>.</p>
+```
+
+<br>
+
+- W3C 명세는 `<cite>` 요소로 저작물의 출처를 표기할 때 저작자도 표기할 수 있음을 명시하고 있습니다. 그러나 정반대로, WHATWG 명세는 사람 이름을 어떤 상황에서도 절대 포함하지 말아야 한다고 적혀있다는 점을 알아두는 것이 좋습니다.
+
+<br>
+
+## `<q>`
+
+> 짦은 인용문
+
+> (Quotation)
+
+<br>
+
+- 긴 인용문을 작성할 때는 `<blockquote>` 태그를 사용하여 인용문 블록을 형성하세요.
+
+<br>
+
+## `<u>`
+
+> 주석(Non-textual annotation)을 가지고 있음을 나타냅니다.
+
+> (Unarticulated Annotation)
+
+<br>
+
+- `<u>` 태그를 사용해 밑줄만 추가하거나, 책 제목 등을 강조해서는 안됩니다.
+
+  > 단순히 밑줄을 위해서는 CSS의 `text-decoration="underline"`을 사용하세요.
+
+- 유효한 사용처는 철자 오류 강조, [중국어의 고유명사 표시](https://en.wikipedia.org/wiki/Proper_name_mark) 등이 있습니다.
+
+<br>
+
+### `<ruby>` for Text annotation
+
+```html
+<ruby> 明日 <rp>(</rp><rt>Ashita</rt><rp>)</rp> </ruby>
+```
+
+![tag-ruby](./../img/tag-ruby.png) {: width="50" height="50"}
+
+<br>
+
+## `<code>`
+
+> 짧은 코드 조각을 나타냅니다.
+
+> Monospaced Font
+
+<br>
+
+## `<kbd>`
+
+> 키보드/음성 입력 등 임의의 장치를 사용한 사용자의 입력 부분을 나타냅니다.
+
+> (Keyboard Input)
+
+```html
+<p>
+	Please press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to re-render an
+	MDN page.
+</p>
+```
+
+<br>
+
+- CSS를 사용해서 키보드 형태의 스타일링을 통해 명확하게 바꿀 수 있습니다.
+
+<br>
+
+## `<sup>`, `<sub>`
+
+> 위 첨자(`<sup>`) / 아래 첨자(`<sub>`)
+
+> (Superscripted text, Subscripted text)
+
+```html
+X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
+```
+
+<br>
+
+## `<time>`
+
+> IE 지원 X
+
+> 시간의 특정 지점 또는 구간을 나타냅니다. `datetime` 속성을 지정하면 적절한 검색 결과, 알림 같은 특정 기능을 구현할 때 사용할 수 있습니다.
+
+```html
+<time datetime="2018-07-07">July 7</time>
+
+<time datetime="20:00">20:00</time>
+
+<time datetime="PT2H30M">2h 30m</time>
+```
+
+<br>
+
+- [유효한 `datetime` 값](https://developer.mozilla.org/ko/docs/Web/HTML/Element/time#%EC%9C%A0%ED%9A%A8%ED%95%9C%20datetime%20%EA%B0%92)을 사용하세요.
+
+<br>
+
+## `<span>`
+
+> 아무것도 나타내지 않습니다.
+
+<br>
+
+- 적절한 의미를 가진 다른 요소가 없을 때에만 사용해야 합니다.
+
+<br>
+
+## `<br />`
+
+> `<br />` 요소는 텍스트 블록에서 줄을 바꾼다는 하나의 명확한 목적만 가지고 있습니다.
+
+> (Break)
+
+<br>
+
+- 문단 사이에 여백을 두기 위한 용도로 `<br />`을 사용하지 마세요.
+
+- `<br />` 요소에 CSS `margin`을 적용하면 줄 간격을 늘릴 수 있겠지만 좋은 방법은 아닙니다. 줄 간격은 `line-height` 속성을 사용하세요.
+
+- 웹 접근성을 위해서는 `<br />` 대신 `<p>` 요소와 함께 CSS `margin` 속성 등을 조합해 간격을 조절하세요.
+
+<br>
+
+## Demarcating edits
+
+텍스트의 특정 부분이 수정되었음을 나타내는 태그들입니다.
+
+- `<del>`
+
+- `<ins>`
+
+<br>
+
+## `<del>`
+
+> 삭제된(변경된) 텍스트
+
+<br>
+
+## `<ins>`
+
+> 새로 추가된(변경된) 텍스트
+
 <br>
 <br>
 
@@ -634,3 +944,17 @@ hr {
 - [\<pre\>: The Preformatted Text element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre)
 - [\<blockquote\>: The Block Quotation element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote)
 - [\<a\>: The Anchor element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
+- [\<abbr\>: The Abbreviation element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr)
+- [\<b\>: The Bring Attention To element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b)
+- [\<mark\>: The Mark Text element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)
+- [\<em\>: The Emphasis element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em)
+- [\<strong\>: The Strong Importance element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong)
+- [\<i\>: The Idiomatic Text element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)
+- [\<dfn\>: The Definition element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn)
+- [\<cite\>: The Citation element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)
+- [\<u\>: The Unarticulated Annotation (Underline) element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u)
+- [\<ruby\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ruby)
+- [\<code\>: The Inline Code element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code)
+- [\<kbd\>: The Keyboard Input element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
+- [\<time\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time)
+- [\<br\>: The Line Break element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br)
