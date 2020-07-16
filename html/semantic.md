@@ -822,7 +822,7 @@ abbr {
 <ruby> 明日 <rp>(</rp><rt>Ashita</rt><rp>)</rp> </ruby>
 ```
 
-![tag-ruby](./../img/tag-ruby.png =70px)
+![tag-ruby](./../img/tag-ruby.png)
 
 <br>
 
