@@ -1525,12 +1525,27 @@ fieldset {
 
 - `max` : 지정하지 않으면 `1` 입니다.
 
+- `value` : 진행된 양을 나타냅니다. 이 값은 보통 JS를 사용하여 동적으로 조작합니다.
+
 <br>
 
 ### 예시
 
+아래는 동적 처리의 매우 간단한 예입니다.
+
 ```html
-<label> File progress: <progress max="100" value="70"> 70% </progress> </label>
+<body>
+	<label> File progress: <progress max="100" value="0"></progress> </label>
+
+	<script>
+		const progress = document.querySelector("progress");
+
+		const interval = setInterval(function () {
+			progress.value += 10;
+			if (progress.value >= 100) clearInterval(interval);
+		}, 1000);
+	</script>
+</body>
 ```
 
 ![progress](./../img/progress.png)
