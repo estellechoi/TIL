@@ -1466,8 +1466,6 @@ fieldset {
 
 ![select size](./../img/select-size.png)
 
-<br>
-
 ## `<datalist>`
 
 > `<input />` 요소에서 자동완성(Autocomplete) 기능을 제공할 때 선택 가능한 항목입니다. `id` 값을 `<input />` 요소의 `list` 속성에 연결합니다.
@@ -1515,15 +1513,11 @@ fieldset {
 
 ![optgroup](./../img/optgroup.png)
 
-<br>
-
 ## `<progress>`
 
 > 작업의 완료 정도를 나타냅니다. 브라우저에서 아래와 같이 보여집니다.
 
 ![progress](./../img/progress.png)
-
-<br>
 
 - 최솟값은 항상 `0`이며 `min` 속성을 지정할 수 없습니다.
 
