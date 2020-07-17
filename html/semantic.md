@@ -223,13 +223,15 @@
 
 - `<datalist>`
 
-- `<option>`
+- `<option>`/`<optgroup>`
 
 - `<textarea>`
 
 - `<output>`
 
 - `<progress>`
+
+- `<fieldset>`/`<legend>`
 
 <br>
 
@@ -1373,8 +1375,168 @@ Form 내에서 웹서버에 데이터를 제출(Submit)하는 버튼으로 사�
 > 하지만, 되도록 위의 방법을 사용하세요.
 
 <br>
+
+## `<textarea>`
+
+> 멀티라인 일반 텍스트 편집 영역입니다.
+
 <br>
+
+### 속성
+
+- `rows` : 작성할 수 있는 Line 수를 지정합니다.
+
+> [더 많은 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Element/textarea#%EC%86%8D%EC%84%B1)을 확인하세요. HTML 5에 추가된 속성들이 매우 다양합니다.
+
 <br>
+
+## `<fieldset>`/`<legend>`
+
+> - `<fieldset>` : 여러 입력 필드를 묶을 때 사용합니다.
+
+> - `<legend>` : `<fieldset>`의 제목을 지정합니다.
+
+```html
+<form>
+	<fieldset>
+		<legend>Choose coffee size</legend>
+		<label><input type="radio" name="size" />Small</label><br />
+		<label><input type="radio" name="size" />Big</label><br />
+		<label><input type="radio" name="size" />Super</label>
+	</fieldset>
+</form>
+```
+
+<br>
+
+### Styling
+
+`<fieldset>`은 기본 스타일 값을 가집니다. 예를 들어, 크롬 브라우저에서 `<fieldset>` 요소의 스타일 기본값은 아래와 같습니다.
+
+```css
+fieldset {
+	display: block;
+	min-inline-size: min-content;
+	margin-inline-start: 2px;
+	margin-inline-end: 2px;
+	padding-block-start: 0.35em;
+	padding-inline-start: 0.75em;
+	padding-inline-end: 0.75em;
+	padding-block-end: 0.625em;
+	border-width: 2px;
+	border-style: groove;
+	border-color: threedface;
+	border-image: initial;
+}
+```
+
+<br>
+
+`<legend>` 요소의 `display` 기본값 역시 `block` 인데요, `display: inline`으로 지정해도 `block`처럼 동작한다는 점에 주의하세요.
+
+<br>
+
+## `<select>`
+
+> 선택 기능을 지원합니다.
+
+<br>
+
+### 속성
+
+- `size` : 미리 보여줄 옵션의 수를 지정합니다. 값이 `2` 이상이면 선택창 토글이 아닌 스크롤 방식으로 보여줍니다.
+
+  > 기본값은 `1`
+
+- `multiple` : 2 개 이상의 옵션 선택을 허용합니다.
+
+<br>
+
+```html
+<form>
+	<select size="3" multiple>
+		<option value="Seoul">Seoul</option>
+		<option value="Tokyo">Tokyo</option>
+		<option value="Barcelona">Barcelona</option>
+		<option value="LA">LA</option>
+		<option value="Paris">Paris</option>
+	</select>
+</form>
+```
+
+<br>
+
+## `<datalist>`
+
+> `<input />` 요소에서 자동완성(Autocomplete) 기능을 제공할 때 선택 가능한 항목입니다. `id` 값을 `<input />` 요소의 `list` 속성에 연결합니다.
+
+```html
+<input type="text" list="cities" />
+
+<datalist id="cities">
+	<option>Seoul</option>
+	<option>Tokyo</option>
+	<option>Barcelona</option>
+	<option>LA</option>
+	<option>Paris</option>
+</datalist>
+```
+
+<br>
+
+## `<option>`/`<optgroup>`
+
+> `<optgroup>`은 `<option>` 요소들을 묶습니다.
+
+<br>
+
+- `value` 속성 값을 지정하지 않으면 내부 텍스트가 값으로 사용됩니다.
+
+<br>
+
+### 예시
+
+```html
+<form>
+	<select>
+		<optgroup label="Asia">
+			<option value="Seoul">Seoul</option>
+			<option value="Tokyo">Tokyo</option>
+		</optgroup>
+		<optgroup label="Europe">
+			<option value="Barcelona">Barcelona</option>
+			<option value="Paris">Paris</option>
+		</optgroup>
+	</select>
+</form>
+```
+
+<br>
+
+## `<progress>`
+
+> 작업의 완료 정도를 나타냅니다. 브라우저에서 아래와 같이 보여집니다.
+
+![progress](./../img/progress.png)
+
+<br>
+
+- 최솟값은 항상 `0`이며 `min` 속성을 지정할 수 없습니다.
+
+<br>
+
+### 속성
+
+- `max` : 지정하지 않으면 `1` 입니다.
+
+<br>
+
+### 예시
+
+```html
+<label> File progress: <progress max="100" value="70"> 70% </progress> </label>
+```
+
 <br>
 
 ---
@@ -1420,3 +1582,7 @@ Form 내에서 웹서버에 데이터를 제출(Submit)하는 버튼으로 사�
 - [\<input type="email" \/\> | MDN](https://developer.mozilla.org/ko/docs/Web/HTML/Element/input/email)
 - [\<label\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)
 - [\<button\>: The Button element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)
+- [\<textarea\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)
+- [\<fieldset\>: The Field Set element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset)
+- [\<legend\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend)
+- [\<progress\>: The Progress Indicator element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress)
