@@ -998,11 +998,210 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 > `<figcaption>` : `<figure>` 요소 내에서 사용하며, 이미지 등의 멀티미디어에 대한 설명을 작성합니다.
 
 <br>
+
+## Embedded content
+
+내장 콘텐츠를 삽입하는데 사용하는 태그들입니다.
+
+- `<iframe>`
+
 <br>
+
+## `<iframe>`
+
+> 현재 문서 안에 다른 HTML 페이지를 삽입합니다. (중첩 [브라우징 맥락](https://developer.mozilla.org/en-US/docs/Glossary/Browsing_context))
+
+> Inline 요소입니다.
+
+```html
+<iframe
+	id="inlineFrameExample"
+	title="Inline Frame Example"
+	src="https://www.openstreetmap.org"
+	width="300"
+	height="200"
+>
+</iframe>
+```
+
 <br>
+
+- 각각의 브라우징 맥락은 완전한 문서 환경이므로, 페이지에 `<iframe>`을 추가할 때마다 메모리 및 기타 컴퓨터 자원 사용량이 늘어납니다. 이론상으로는 원하는 만큼 `<iframe>`을 사용할 수 있지만, 성능 문제가 없는지 확인하세요.
+
 <br>
+
+### 속성
+
+- `name` : 프레임의 이름입니다. 이 이름을 사용해서 다른 요소(`<a>`, `<form>`, `<base>`)나 웹 API(`window.open()`)에서 해당 프레임을 타겟팅 할 수 있습니다.
+
+- `allowfullscreen`/`allow="fullscreen"`
+
+- `height`/`width`
+
+- `sandbox` : (보안을 위해) 프레임 콘텐츠에 대한 접근을 제한합니다. 속성 값에 따라 일부 접근만 허용할 수 있습니다.
+  - `allow-forms` : Form 제출을 허용합니다.
+  - `allow-scripts` : 프레임 문서의 JavaScript 동작을 허용합니다.
+  - `allow-same-origin` : 명시하지 않으면, 무조건 [동일 출처 정책](https://developer.mozilla.org/en-US/docs/Glossary/same-origin_policy)에 위배되는 리소스로 간주합니다.
+    > [`sandbox` 속성 값 모두 보기](https://developer.mozilla.org/ko/docs/Web/HTML/Element/iframe#sandbox)
+
 <br>
+
+## Scripting
+
+동적 콘텐츠를 제공하기 위해 스크립트 언어(JavaScript)의 동작을 지원하는 태그들입니다.
+
+- `<script>`
+
+- `<noscript>`
+
+- `<canvas>`
+
 <br>
+
+## `<canvas>`
+
+> 그래픽이나 애니메이션을 렌더링할 수 있는 영역을 나타냅니다. [Canvas API](https://developer.mozilla.org/ko/docs/Web/HTML/Canvas), [WebGL](https://developer.mozilla.org/ko/docs/Web/API/WebGL_API)을 사용하여 그래픽과 애니메이션을 구현할 수 있습니다.
+
+> Inline 요소입니다.
+
+<br>
+
+- 웹 접근성, 브라우저 호환성을 위해 대체 콘텐츠를 제공하세요.
+
+- `<canvas>` 요소의 크기는 CSS로 지정하지 마세요.
+  > 렌더링 과정에서 CSS에 지정한 크기에 맞추기 위해 이미지의 크기를 조절하므로, 최종 그래픽이 변형될 수 있습니다.
+  > `<canvas>` 태그의 `width`/`height` 속성을 사용하세요.
+
+<br>
+
+### 예시
+
+다음은 아주 간단한 예시입니다.
+
+```html
+<body>
+	<canvas id="canvas" width="200" height="150"> </canvas>
+
+	<script>
+		const canvas = document.querySelector("#canvas");
+		const ctx = canvas.getContext("2d");
+
+		ctx.fillStyle = "rgb(200, 0, 0)";
+		ctx.fillRect(10, 10, 50, 50); // draw a rectangle : fillRect(left, top, width, height);
+
+		ctx.fillStyle = "rgb(0, 0, 200, 0.5)";
+		ctx.fillRect(35, 35, 50, 50);
+	</script>
+</body>
+```
+
+<br>
+
+### 웹 접근성 - 대체 콘텐츠
+
+`<canvas>` 요소 자체는 비트맵에 불과하며 어떠한 정보도 제공하지 않습니다. [여기](https://developer.mozilla.org/ko/docs/Web/HTML/Element/canvas#%EB%8C%80%EC%B2%B4%20%EC%BD%98%ED%85%90%EC%B8%A0)에서 캔버스 접근성을 높이는 사용법을 알아보세요.
+
+<br>
+
+## `<script>`
+
+> Script 코드를 문서에 포함하거나 참조합니다.
+
+<br>
+
+- 브라우저가 HTML 문서 분석을 진행하다가 인라인 스크립트 또는 `async`, `defer`, `type="module"` 속성이 없는 `<script>` 태그를 만나면 해당 `<script>` 태그가 참조하는 JS 코드 실행하기 전까지 문서 분석을 중단합니다.
+
+<br>
+
+### 속성
+
+- `async` : 비동기적 실행 여부입니다. `src` 속성을 이용하여 외부 JS 파일을 참조할 때 사용할 수 있는 속성입니다.
+
+- `defer` : HTML 문서 파싱 후 JS 코드를 작동합니다.
+
+  > HTML 문서 분석 이후에, 그러나 `DOMContentLoaded` 발생 전에 JS 코드를 실행합니다.
+
+- `crossorigin`
+
+- `type` : 기본값은 `text/javascript` 입니다. 보통의 경우 생략하세요.
+
+<br>
+
+### 예시
+
+아래와 같이 `defer` 속성을 사용해 HTML 문서 분석이 완료된 후 JS 코드가 실행되도록 하거나,
+
+```html
+<head>
+	<script src="sample.js" defer></script>
+</head>
+<body>
+	..
+</body>
+```
+
+<br>
+
+`<script>` 태그를 `<body>` 내의 가장 하단부에 물리적으로 위치시킬 수 있습니다.
+
+```html
+<head></head>
+<body>
+	..
+	<script src="sample.js"></script>
+</body>
+```
+
+<br>
+
+## `<noscript>`
+
+> 브라우저가 JS를 지원하지 않거나, 사용자가 JS 동작을 비활성화한 경우 보여줄 HTML 구획을 정의합니다.
+
+```html
+<noscript>
+	<p>
+		Your Browser does not support JavaScript.
+	</p>
+</noscript>
+```
+
+<br>
+
+## Table content
+
+테이블 데이터를 표시하기 위한 태그들입니다.
+
+- `<table>`/`<caption>`/`<tr>`
+
+- `<th>`/`<td>`
+
+- `<colgroup>`/`<col>`
+
+- `<thead>`/`<tbody>`/`<tfoot>`
+
+<br>
+
+이 태그들에 대한 설명은 [여가에](./table.md) 별도로 정리했습니다.
+
+<br>
+
+## `<table>`
+
+- 내부에 `<caption>` 태그를 사용하여 테이블에 대한 명확하고 상세한 설명을 제공하세요. 스크린 리더 사용자가 테이블 내용을 확인할지, 넘어갈지 결정하는데 도움이 됩니다.
+
+- 화면 레이아웃을 잡기 위해 `<table>` 태그를 사용하지 마세요. 반드시 표를 만들 때만 사용합니다.
+
+<br>
+
+## `<th>`/`<td>`
+
+> (Table Header / Table Data)
+
+<br>
+
+- `<th>` 태그에 `scope` 속성을 지정하면 스크린 리더가 복잡한 표에서 잘못된 범위를 유추하는 것을 방지할 수 있습니다.
+
 <br>
 
 ---
@@ -1039,3 +1238,7 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 - [\<time\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time)
 - [\<br\>: The Line Break element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br)
 - [\<img\>: The Image Embed element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
+- [\<iframe\>: The Inline Frame element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
+- [\<canvas\>: The Graphics Canvas element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas)
+- [\<script\>: The Script element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
+- [\<noscript\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript)
