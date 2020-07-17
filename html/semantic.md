@@ -1,6 +1,6 @@
-# How to stay semantic
+# HTML tags - stay semantic
 
-> 시멘틱 마크업(Semantic Markup) 작성을 위한 팁들을 태그(Tag) 별로 나열하는 문서입니다.
+> HTML 태그(Tag)에 대한 설명과 시멘틱 마크업(Semantic Markup)을 위한 팁들을 태그(Tag) 별로 나열하는 문서입니다.
 
 <br>
 
@@ -940,6 +940,21 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 > 새로 추가된(변경된) 텍스트
 
 <br>
+
+## Image and multimedia
+
+이미지, 오디오, 비디오 등 멀티미디어 리소스를 지원하는 태그들입니다. 이 태그들에 대한 설명은 [여기에](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md) 별도로 정리했습니다.
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 
 ---
@@ -947,6 +962,7 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 ### References
 
 - [한눈에 보는 HTML 요소(Elements & Attributes) 총정리 | HEROPY Tech](https://heropy.blog/2019/05/26/html-elements/)
+- [HTML IMG의 srcset과 sizes 속성 | HEROPY Tech](https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/)
 - [\<h1\>–\<h6\>: The HTML Section Heading elements | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)
 - [HTML elements reference - Content sectioning | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#Content_sectioning)
 - [\<article\>: The Article Contents element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article)
@@ -974,3 +990,4 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 - [\<kbd\>: The Keyboard Input element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
 - [\<time\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time)
 - [\<br\>: The Line Break element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br)
+- [\<img\>: The Image Embed element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
