@@ -943,12 +943,54 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 ## Image and multimedia
 
-이미지, 오디오, 비디오 등 멀티미디어 리소스를 지원하는 태그들입니다. 이 태그들에 대한 설명은 [여기에](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md) 별도로 정리했습니다.
+이미지, 오디오, 비디오 등 멀티미디어 리소스를 지원하는 태그들입니다.
+
+- `<img>`
+
+- `<audio>`
+
+- `<video>`
+
+- `<figure>`/`<figcaption>`
 
 <br>
+
+이 태그들에 대한 설명은 [여기에](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md) 별도로 정리했습니다.
+
 <br>
+
+## `<img>`
+
+> 문서에 이미지를 삽입하는 태그입니다.
+
 <br>
+
+- `alt` 속성에 대체 텍스트를 제공해야 합니다.
+
 <br>
+
+## `<audio>`
+
+> 문서에 소리 콘텐츠를 포함할 때 사용합니다.
+
+<br>
+
+## `<audio>`
+
+> 비디오 플레이백을 지원하는 미디어 플레이어를 문서에 삽입합니다.
+
+<br>
+
+- 오디오 콘텐츠를 제공하려면 `<audio>` 태그를 사용하세요. 사용자 경험에 더 적합합니다.
+
+<br>
+
+## `<figure>`/`<figcaption>`
+
+> `<figure>` : 이미지나 삽화, 도표 등의 영역을 지정합니다.
+
+> `<figcaption>` : `<figure>` 요소 내에서 사용하며, 이미지 등의 멀티미디어에 대한 설명을 작성합니다.
+
 <br>
 <br>
 <br>
