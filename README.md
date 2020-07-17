@@ -27,7 +27,7 @@
 - [이미지와 멀티미디어 태그(Image and multimedia tags)](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md)
 - [테이블 태그(Table content tags)](https://github.com/estellechoi/TIL/blob/master/html/table.md)
 - [전역 속성(Global Attributes)](https://github.com/estellechoi/TIL/blob/master/html/attribute-global.md)
-- [HTML 특수기호(Entities)](https://github.com/estellechoi/TIL/blob/master/html/entity.md)
+- [특수기호(Entities)](https://github.com/estellechoi/TIL/blob/master/html/entity.md)
 - [How to stay with web-accessiblity highly achieved](https://github.com/estellechoi/TIL/blob/master/html/webaccess.md) \*
 
 <br>
