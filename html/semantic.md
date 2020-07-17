@@ -1464,6 +1464,8 @@ fieldset {
 </form>
 ```
 
+![select size](./../img/select-size.png)
+
 <br>
 
 ## `<datalist>`
@@ -1490,7 +1492,7 @@ fieldset {
 
 <br>
 
-- `value` 속성 값을 지정하지 않으면 내부 텍스트가 값으로 사용됩니다.
+- `<option>`의 `value` 속성 값을 지정하지 않으면 내부 텍스트가 값으로 사용됩니다.
 
 <br>
 
@@ -1510,6 +1512,8 @@ fieldset {
 	</select>
 </form>
 ```
+
+![optgroup](./../img/optgroup.png)
 
 <br>
 
