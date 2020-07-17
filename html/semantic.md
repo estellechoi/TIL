@@ -981,7 +981,7 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 <br>
 
-## `<audio>`
+## `<video>`
 
 > 비디오 플레이백을 지원하는 미디어 플레이어를 문서에 삽입합니다.
 
@@ -1258,6 +1258,20 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 - `form` : 부득이하게 `<form>` 요소의 외부에 작성해야 할 때 `<form>` 요소의 `id` 값을 이용해 연결합니다.
 
+- `maxlength` : 입력 값의 최대 길이(length)
+
+  > UTF-16 code 단위를 기준으로 합니다.
+
+- `max`/`min` : 숫자 입력 값의 최대/최소값
+
+  > Valid for `date`/`month`/`week`/`time`/`datetime-local`/`number`/`range` type.
+
+- `step` : 숫자 선택 값의 증/감량
+
+  > Valid for limited types like `number`
+
+- `multiple` : `type="file"`일 때 2 개 이상의 파일 업로드를 지원하기 위해 사용합니다.
+
 <br>
 
 ### `type` 속성
@@ -1269,11 +1283,93 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 ### 예시
 
 ```html
-<label for="email">Enter your Gmail address:</label>
+<form id="form-login">
+	<label for="email">Enter your Gmail address:</label>
+	<input type="email" id="email" pattern=".+@gmail.com" />
+</form>
 
-<input type="email" id="email" pattern=".+@gmail.com" />
+<input type="text" form="form-login" />
 ```
 
+<br>
+
+### 제출 버튼
+
+Form 내에서 웹서버에 데이터를 제출(Submit)하는 버튼으로 사용할 수 있는 목록입니다.
+
+- `<input type="submit"/>`
+
+- `<input type="image"/>`
+
+- `<button>`
+
+<br>
+
+#### `<input type="image"/>`
+
+이미지를 클릭하면 제출됩니다. `<input type="submit"/>` 요소와 같은 기능을 하면서 이미지를 제공할 수 있습니다.
+
+```html
+<form action="..">
+	<input type="image" src="./img/submit-btn.png" alt="Button Image" />
+</form>
+```
+
+<br>
+
+#### `<button type="submit">`
+
+`type` 속성 값을 별도로 지정하지 않으면 기본값은 `type="submit"` 입니다. 따라서 기본적으로 제출 기능을 합니다.
+
+<br>
+
+## `<button>`
+
+`<button>` 태그는 간단한 표준 버튼 기능이 필요한 곳이라면 Form과 상관없이 문서 어디에나 배치할 수 있습니다. Form 제출용 버튼이 아니라면 `type` 값을 `button`으로 지정하는걸 잊지 마세요.
+
+<br>
+
+### 속성
+
+- `type`
+
+  - `submit` : Form 제출
+  - `reset` : 초기화
+  - `button` : 단순 버튼
+
+- `form` : `<form>` 요소 외부에 작성할 때 연결하려는 `<form>`의 `id` 값을 지정합니다.
+
+<br>
+
+### `<button>` vs `<input />`
+
+`<button>` 요소는 `<input />` 요소보다 버튼에 스타일을 적용하기 훨씬 수월합니다. `<input />`은 버튼 내부에 `value` 속성을 이용하여 텍스트 값 밖에 지정할 수 없지만, `<button>`은 HTML 콘텐츠(`<em>`, `<strong>`, `<img>`)를 넣을 수 있습니다. 또한, `::after`, `::before` 의사 요소를 사용하는 복잡한 렌더링도 가능합니다.
+
+<br>
+
+## `<label>`
+
+> 입력 필드를 설명하는 요소입니다.
+
+- `<label>` 요소 내에 포함된 어떤 것을 눌러도 체크박스 체크/해제가 됩니다.
+
+```html
+<label><input type="checkbox" />I agree.</label>
+```
+
+<br>
+
+- `<label>` 요소 내에 포함된 텍스트를 클릭하면, 해당 요소의 `for` 속성으로 참조된 체크박스가 체크/해제 됩니다.
+  > 되도록 위의 방법을 사용하세요.
+
+```html
+<input type="checkbox" id="check-agreement" />
+<label for="check-agreement">I agree.</label>
+```
+
+<br>
+<br>
+<br>
 <br>
 
 ---
@@ -1317,3 +1413,5 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 - [\<form\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)
 - [\<input\>: The Input (Form Input) element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
 - [\<input type="email" \/\> | MDN](https://developer.mozilla.org/ko/docs/Web/HTML/Element/input/email)
+- [\<label\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)
+- [\<button\>: The Button element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)
