@@ -951,7 +951,13 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 - `<video>`
 
-- `<figure>`/`<figcaption>`
+- `<map>`
+
+- `<area>`
+
+- `<track>`
+
+> 멀티미디어 리소스가 보여질 영역을 나타내기 위해 `<figure>`/`<figcaption>` 태그를 사용합니다.
 
 <br>
 
