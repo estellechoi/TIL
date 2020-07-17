@@ -1515,9 +1515,7 @@ fieldset {
 
 ## `<progress>`
 
-> 작업의 완료 정도를 나타냅니다. 브라우저에서 아래와 같이 보여집니다.
-
-![progress](./../img/progress.png)
+> 작업의 완료 정도를 나타냅니다.
 
 - 최솟값은 항상 `0`이며 `min` 속성을 지정할 수 없습니다.
 
@@ -1534,6 +1532,8 @@ fieldset {
 ```html
 <label> File progress: <progress max="100" value="70"> 70% </progress> </label>
 ```
+
+![progress](./../img/progress.png)
 
 <br>
 
