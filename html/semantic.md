@@ -1266,7 +1266,7 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
   > UTF-16 code 단위를 기준으로 합니다.
 
-- `max`/`min` : 숫자 입력 값의 최대/최소값
+- `max`/`min` : 숫자 입력 값의 최댓값/최솟값
 
   > Valid for `date`/`month`/`week`/`time`/`datetime-local`/`number`/`range` type.
 
