@@ -4,7 +4,9 @@
 
 <br>
 
-## Content sectioning
+## HTML elements reference
+
+### Content sectioning
 
 다음은 콘텐츠를 구분할 때 사용하는 태그입니다.
 
@@ -32,7 +34,7 @@
 
 <br>
 
-### 예시
+#### 예시
 
 ```html
 <body>
@@ -70,6 +72,164 @@
 	</footer>
 </body>
 ```
+
+<br>
+
+### Text content
+
+문자 콘텐츠를 나타내는 태그입니다.
+
+- `<div>`
+
+- `<ul>`/`<ol>`/`<li>`
+
+- `<dl>`/`<dt>`/`<dd>`
+
+- `<p>`
+
+- `<hr />`
+
+- `<pre>`
+
+- `<blockquote>`
+
+<br>
+
+### Inline text semantics
+
+문자(텍스트)의 의미, 구조, 스타일 등을 정의하는 태그입니다.
+
+- `<a>`
+
+- `<abbr>`
+
+- `<b>`
+
+- `<mark>`
+
+- `<em>`
+
+- `<strong>`
+
+- `<i>`
+
+- `<dfn>`
+
+- `<cite>`
+
+- `<q>`
+
+- `<u>`
+
+- `<code>`
+
+- `<kbd>`
+
+- `<sup>`, `<sub>`
+
+- `<time>`
+
+- `<span>`
+
+- `<br />`
+
+<br>
+
+### Demarcating edits
+
+텍스트의 특정 부분이 수정되었음을 나타내는 태그들입니다.
+
+- `<del>`
+
+- `<ins>`
+
+<br>
+
+### Image and multimedia
+
+이미지, 오디오, 비디오 등 멀티미디어 리소스를 지원하는 태그들입니다.
+
+- `<img>`
+
+- `<audio>`
+
+- `<video>`
+
+- `<map>`
+
+- `<area>`
+
+- `<track>`
+
+> 멀티미디어 리소스가 보여질 영역을 나타내기 위해 `<figure>`/`<figcaption>` 태그를 사용합니다.
+
+<br>
+
+이 태그들에 대한 설명은 [여기에](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md) 별도로 정리했습니다.
+
+<br>
+
+### Embedded content
+
+내장 콘텐츠를 삽입하는데 사용하는 태그들입니다.
+
+- `<iframe>`
+
+<br>
+
+### Scripting
+
+동적 콘텐츠를 제공하기 위해 스크립트 언어(JavaScript)의 동작을 지원하는 태그들입니다.
+
+- `<script>`
+
+- `<noscript>`
+
+- `<canvas>`
+
+<br>
+
+### Table content
+
+테이블 데이터를 표시하기 위한 태그들입니다.
+
+- `<table>`/`<caption>`/`<tr>`
+
+- `<th>`/`<td>`
+
+- `<colgroup>`/`<col>`
+
+- `<thead>`/`<tbody>`/`<tfoot>`
+
+<br>
+
+이 태그들에 대한 설명은 [여가에](./table.md) 별도로 정리했습니다.
+
+<br>
+
+### Forms
+
+웹 서버에 데이터를 제출하기 위해 사용하는 양식(Form)을 구성하는 태그들입니다.
+
+- `<form>`
+
+- `<input />`
+
+- `<button>`
+
+- `<label>`
+
+- `<select>`
+
+- `<datalist>`
+
+- `<option>`
+
+- `<textarea>`
+
+- `<output>`
+
+- `<progress>`
 
 <br>
 
@@ -235,26 +395,6 @@ IE 11 이하의 브라우저를 지원해야 한다면 `main` [role](https://dev
 > - `<a href="mailto:...">` : 이 요소를 클릭하면, 각 플랫폼에서 지원하는 메일 쓰기 페이지/앱으로 이동합니다.
 
 > - `<a href="tel:...">` : 이 요소를 클릭하면, 각 플랫폼에서 지원하는 전화 앱으로 이동합니다.
-
-<br>
-
-## Text content
-
-문자 콘텐츠를 나타내는 태그입니다.
-
-- `<div>`
-
-- `<ul>`/`<ol>`/`<li>`
-
-- `<dl>`/`<dt>`/`<dd>`
-
-- `<p>`
-
-- `<hr />`
-
-- `<pre>`
-
-- `<blockquote>`
 
 <br>
 
@@ -554,46 +694,6 @@ hr {
 	<footer>—Aldous Huxley, <cite>Brave New World</cite></footer>
 </blockquote>
 ```
-
-<br>
-
-## Inline text semantics
-
-문자(텍스트)의 의미, 구조, 스타일 등을 정의하는 태그입니다.
-
-- `<a>`
-
-- `<abbr>`
-
-- `<b>`
-
-- `<mark>`
-
-- `<em>`
-
-- `<strong>`
-
-- `<i>`
-
-- `<dfn>`
-
-- `<cite>`
-
-- `<q>`
-
-- `<u>`
-
-- `<code>`
-
-- `<kbd>`
-
-- `<sup>`, `<sub>`
-
-- `<time>`
-
-- `<span>`
-
-- `<br />`
 
 <br>
 
@@ -919,16 +1019,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 <br>
 
-## Demarcating edits
-
-텍스트의 특정 부분이 수정되었음을 나타내는 태그들입니다.
-
-- `<del>`
-
-- `<ins>`
-
-<br>
-
 ## `<del>`
 
 > 삭제된(변경된) 텍스트
@@ -938,30 +1028,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 ## `<ins>`
 
 > 새로 추가된(변경된) 텍스트
-
-<br>
-
-## Image and multimedia
-
-이미지, 오디오, 비디오 등 멀티미디어 리소스를 지원하는 태그들입니다.
-
-- `<img>`
-
-- `<audio>`
-
-- `<video>`
-
-- `<map>`
-
-- `<area>`
-
-- `<track>`
-
-> 멀티미디어 리소스가 보여질 영역을 나타내기 위해 `<figure>`/`<figcaption>` 태그를 사용합니다.
-
-<br>
-
-이 태그들에 대한 설명은 [여기에](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md) 별도로 정리했습니다.
 
 <br>
 
@@ -996,14 +1062,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 > `<figure>` : 이미지나 삽화, 도표 등의 영역을 지정합니다.
 
 > `<figcaption>` : `<figure>` 요소 내에서 사용하며, 이미지 등의 멀티미디어에 대한 설명을 작성합니다.
-
-<br>
-
-## Embedded content
-
-내장 콘텐츠를 삽입하는데 사용하는 태그들입니다.
-
-- `<iframe>`
 
 <br>
 
@@ -1043,18 +1101,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
   - `allow-scripts` : 프레임 문서의 JavaScript 동작을 허용합니다.
   - `allow-same-origin` : 명시하지 않으면, 무조건 [동일 출처 정책](https://developer.mozilla.org/en-US/docs/Glossary/same-origin_policy)에 위배되는 리소스로 간주합니다.
     > [`sandbox` 속성 값 모두 보기](https://developer.mozilla.org/ko/docs/Web/HTML/Element/iframe#sandbox)
-
-<br>
-
-## Scripting
-
-동적 콘텐츠를 제공하기 위해 스크립트 언어(JavaScript)의 동작을 지원하는 태그들입니다.
-
-- `<script>`
-
-- `<noscript>`
-
-- `<canvas>`
 
 <br>
 
@@ -1168,24 +1214,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 <br>
 
-## Table content
-
-테이블 데이터를 표시하기 위한 태그들입니다.
-
-- `<table>`/`<caption>`/`<tr>`
-
-- `<th>`/`<td>`
-
-- `<colgroup>`/`<col>`
-
-- `<thead>`/`<tbody>`/`<tfoot>`
-
-<br>
-
-이 태그들에 대한 설명은 [여가에](./table.md) 별도로 정리했습니다.
-
-<br>
-
 ## `<table>`
 
 - 내부에 `<caption>` 태그를 사용하여 테이블에 대한 명확하고 상세한 설명을 제공하세요. 스크린 리더 사용자가 테이블 내용을 확인할지, 넘어갈지 결정하는데 도움이 됩니다.
@@ -1201,32 +1229,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 <br>
 
 - `<th>` 태그에 `scope` 속성을 지정하면 스크린 리더가 복잡한 표에서 잘못된 범위를 유추하는 것을 방지할 수 있습니다.
-
-<br>
-
-## Forms
-
-웹 서버에 데이터를 제출하기 위해 사용하는 양식(Form)을 구성하는 태그들입니다.
-
-- `<form>`
-
-- `<input />`
-
-- `<button>`
-
-- `<label>`
-
-- `<select>`
-
-- `<datalist>`
-
-- `<option>`
-
-- `<textarea>`
-
-- `<output>`
-
-- `<progress>`
 
 <br>
 
@@ -1351,6 +1353,8 @@ Form 내에서 웹서버에 데이터를 제출(Submit)하는 버튼으로 사�
 
 > 입력 필드를 설명하는 요소입니다.
 
+<br>
+
 - `<label>` 요소 내에 포함된 어떤 것을 눌러도 체크박스 체크/해제가 됩니다.
 
 ```html
@@ -1360,12 +1364,13 @@ Form 내에서 웹서버에 데이터를 제출(Submit)하는 버튼으로 사�
 <br>
 
 - `<label>` 요소 내에 포함된 텍스트를 클릭하면, 해당 요소의 `for` 속성으로 참조된 체크박스가 체크/해제 됩니다.
-  > 되도록 위의 방법을 사용하세요.
 
 ```html
 <input type="checkbox" id="check-agreement" />
 <label for="check-agreement">I agree.</label>
 ```
+
+> 하지만, 되도록 위의 방법을 사용하세요.
 
 <br>
 <br>
