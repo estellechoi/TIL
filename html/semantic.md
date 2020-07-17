@@ -1204,6 +1204,78 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 <br>
 
+## Forms
+
+웹 서버에 데이터를 제출하기 위해 사용하는 양식(Form)을 구성하는 태그들입니다.
+
+- `<form>`
+
+- `<input />`
+
+- `<button>`
+
+- `<label>`
+
+- `<select>`
+
+- `<datalist>`
+
+- `<option>`
+
+- `<textarea>`
+
+- `<output>`
+
+- `<progress>`
+
+<br>
+
+## `<form>`
+
+> Form 영역을 지정합니다.
+
+> [`<form>`의 속성들](https://developer.mozilla.org/ko/docs/Web/HTML/Element/form#%ED%8A%B9%EC%84%B1)을 확인하세요.
+
+<br>
+
+## `<input />`
+
+> 사용자가 값을 입력하는 부분입니다.
+
+<br>
+
+- 라이브러리를 사용하기 전에 적당한 `type` 속성이 있는지 [여기](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#types)에서 확인하세요. 명시하지 않는 경우 기본값은 `text`입니다.
+
+<br>
+
+### 속성
+
+- `type`
+
+  > 별도 정리
+
+- `autofocus` : 페이지가 로드될 때 자동으로 `focus()` 됩니다. 문서에서 하나의 `<input />` 요소에만 지정합니다.
+
+- `form` : 부득이하게 `<form>` 요소의 외부에 작성해야 할 때 `<form>` 요소의 `id` 값을 이용해 연결합니다.
+
+<br>
+
+### `type` 속성
+
+[`type` 속성으로 가능한 값 목록](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#types)을 확인하세요. 매우 중요합니다.
+
+<br>
+
+### 예시
+
+```html
+<label for="email">Enter your Gmail address:</label>
+
+<input type="email" id="email" pattern=".+@gmail.com" />
+```
+
+<br>
+
 ---
 
 ### References
@@ -1242,3 +1314,6 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 - [\<canvas\>: The Graphics Canvas element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas)
 - [\<script\>: The Script element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
 - [\<noscript\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript)
+- [<form>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)
+- [\<input\>: The Input (Form Input) element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+- [\<input type="email" \/\>](https://developer.mozilla.org/ko/docs/Web/HTML/Element/input/email)
