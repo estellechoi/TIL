@@ -141,8 +141,8 @@
 
 ### References
 
-- [\<table\>: The Table element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)
-- [\<th\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th)
-- [\<td\>: The Table Data Cell element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td)
-- [\<colgroup\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup)
-- [\<thead\>: The Table Head element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead)
+- [\<table\>: The Table element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)
+- [\<th\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th)
+- [\<td\>: The Table Data Cell element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td)
+- [\<colgroup\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup)
+- [\<thead\>: The Table Head element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead)
