@@ -8,7 +8,7 @@
 
 <br>
 
-## 상속되는 속성들(Properties)
+### 상속되는 속성들(Properties)
 
 다음은 대표적으로 스타일 상속이 일어나는 속성들입니다. 보통 Text 스타일을 위한 속성들이네요.
 
@@ -35,7 +35,7 @@
 
 <br>
 
-## 강제 상속: `inherit`
+### 강제 상속: `inherit`
 
 상속되지 않는 속성의 값들을 강제로 상속받게 할 수 있습니다. 어떤 속성에 대한 값으로 `inherit` 키워드를 사용하면 부모 요소로부터 해당 속성의 계산값([Computed value](https://developer.mozilla.org/en-US/docs/Web/CSS/computed_value))을 받아와서 사용합니다. CSS의 [all](https://developer.mozilla.org/ko/docs/Web/CSS/all) 단축 속성을 포함한 모든 속성에서 사용할 수 있습니다.
 
@@ -59,7 +59,7 @@
 
 <br>
 
-## 계단식(Cascading)
+## 계단식(Cascade)
 
 > CSS stands for Cascading Style Sheets.
 
