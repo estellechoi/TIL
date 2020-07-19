@@ -10,15 +10,15 @@ HTML 마크업에 따라 모든 요소들은 자신을 참조하는 박스(Box)�
 
 <br>
 
-### 최상위 박스(Principal Box)
+### Principal Box
 
-하나의 엘리먼트가 여러 개의 박스들을 생성할 수 있는데, 그 중 하나의 박스는 반드시 최상위 박스(Principal Box)가 됩니다. 예를 들어, `display: list-item` 속성 값을 가지는 요소는 최상위 박스와 그 하위의 자식 박스들을 생성합니다. 한편, `none`/`contents` 속성 값을 가지는 요소와 그 하위의 모든 요소들은 최상위 박스를 포함한 박스를 일절 생성하지 않습니다.
+하나의 엘리먼트가 여러 개의 박스들을 생성할 수 있는데, 그 중 하나의 박스는 반드시 최상위 박스, Principal Box가 됩니다. 예를 들어, `display: list-item` 속성 값을 가지는 요소는 최상위 박스와 그 하위의 자식 박스들을 생성합니다. 한편, `none`/`contents` 속성 값을 가지는 요소와 그 하위의 모든 요소들은 최상위 박스를 포함한 박스를 일절 생성하지 않습니다.
 
 <br>
 
-### 익명 박스(Anonymous Box)
+### Anonymous Box
 
-익명 박스(Anonymous Box)는 HTML 요소를 기반으로 하지 않는 박스입니다. HTML 요소를 기반으로 하지 않고 어떻게 박스가 생성될 수 있을까요? 자, 아래와 같이 텍스트만 담고 있는 HTML 요소가 있다고 상상해봅시다.
+Anonymous Box는 HTML 요소를 기반으로 하지 않는 박스입니다. HTML 요소를 기반으로 하지 않고 어떻게 박스가 생성될 수 있을까요? 자, 아래와 같이 텍스트만 담고 있는 HTML 요소가 있다고 상상해봅시다.
 
 ```html
 <div class="box">
@@ -43,7 +43,7 @@ HTML 마크업에 따라 모든 요소들은 자신을 참조하는 박스(Box)�
 }
 ```
 
-원래 이 박스의 내부에는 텍스트 밖에 없기 때문에 하위 박스가 존재하지 않아야 합니다. 하지만, 이 박스는 Flex 박스이기 때문에 내부의 텍스트 하나 하나를 담고 있는 익명 박스들이 생겨납니다. 그리고 이 익명 박스들이 Flex 아이템의 역할을 하면서 Flex 박스의 정렬 규칙에 따라 내부 텍스트들을 정렬할 수 있게 됩니다.
+원래 이 박스의 내부에는 텍스트 밖에 없기 때문에 하위 박스가 존재하지 않아야 합니다. 하지만, 이 박스는 Flex 박스이기 때문에 내부의 텍스트 하나 하나를 담고 있는 Anonymous Box들이 생겨납니다. 그리고 이 Anonymous Box들이 Flex 아이템의 역할을 하면서 Flex 박스의 정렬 규칙에 따라 내부 텍스트들을 정렬할 수 있게 됩니다.
 
 <br>
 
@@ -51,15 +51,77 @@ HTML 마크업에 따라 모든 요소들은 자신을 참조하는 박스(Box)�
 
 <br>
 
-참고로, 익명 박스는 일반적인 박스와 달리 참조할 수 있는 HTML 요소가 없기 때문에 독립적으로 스타일을 지정할 수 없습니다. 익명 박스는 자신이 속한 부모 박스의 스타일을 상속받게 됩니다.
+참고로, Anonymous Box는 일반적인 박스와 달리 참조할 수 있는 HTML 요소가 없기 때문에 독립적으로 스타일을 지정할 수 없습니다. Anonymous Box는 자신이 속한 부모 박스의 스타일을 상속받게 됩니다.
 
 <br>
 
-### 라인 박스(Line Box)
+### Line Box
 
-라인 박스(Line Box)는 한 줄의 텍스트들을 감싸는 박스입니다.
+Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
-> 라인 박스에 대한 자세한 설명은 [이 글](https://github.com/estellechoi/TIL/blob/master/css/formattingContext.md)의 Inline Formatting Context 부분에 있습니다.
+> Line Box에 대한 자세한 설명은 [이 글](https://github.com/estellechoi/TIL/blob/master/css/formattingContext.md)의 Inline Formatting Context 부분에 있습니다.
+
+<br>
+
+## 최대/최소 너비/높이
+
+- `max-width`/`max-height` : 기본값은 `none` 입니다.
+
+- `min-width`/`min-height` : 기본값은 `0` 입니다.
+
+<br>
+
+## 마진 상쇄(Margin Callapse)
+
+요소의 마진(Margin)은 기본적으로 아래의 경우에 중복되어 상쇄됩니다.
+
+<br>
+
+### 1) 인접한 형제(Adjacent siblings) 요소의 `margin-bottom`/`margin-top`이 만나는 곳
+
+- `margin-right`/`margin-left`가 접하는 곳에서는 마진 값이 상쇄되지 않고 보존됩니다.
+
+![block](./../img/block.png)
+
+<br>
+
+> 인라인(Inline) 요소의 `margin-top`/`margin-bottom` 값은 존재하지 않으며, 적용할 수도 없습니다.
+
+![inline](./../img/inline-box.png)
+
+<br>
+
+### 2) 부모 요소와 자식 요소의 `margin-top`/`margin-bottom`이 접하는 곳
+
+단, 아래의 경우에만요.
+
+- 부모 요소의 `border`가 없거나,
+
+![border-no](./../img/border-no.png)
+
+> 부모 요소에 `border`가 추가되면 아래와 같이 마진 상쇄 현상이 사라집니다 !
+
+![border-yes](./../img/border-yes.png)
+
+<br>
+
+- 부모 요소의 `padding`이 없거나,
+
+![padding-yes](./../img/padding-yes.png)
+
+<br>
+
+- 인라인 콘텐츠가 없는 경우에만요.
+
+![content](./../img/content.png)
+
+<br>
+
+> [더 많은 조건들 보기](https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing#%EB%B6%80%EB%AA%A8%20%EB%B0%8F%20%EB%A7%8F%EC%9D%B4/%EB%A7%89%EB%82%B4%20%EC%9A%94%EC%86%8C)
+
+<br>
+
+### 3) 빈 블록(Empty blocks)
 
 <br>
 
