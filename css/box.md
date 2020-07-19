@@ -73,7 +73,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 ## 마진 상쇄(Margin Callapse)
 
-요소의 마진(Margin)은 기본적으로 아래의 경우에 중복되어 상쇄됩니다.
+요소의 마진(Margin)은 기본적으로 아래의 경우에 중복되어 상쇄됩니다. 두 값 중 큰 값의 마진이 적용됩니다.
 
 <br>
 
@@ -85,7 +85,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 <br>
 
-> 인라인(Inline) 요소의 `margin-top`/`margin-bottom` 값은 존재하지 않으며, 적용할 수도 없습니다.
+> 인라인(Inline) 요소의 `margin-top`/`margin-bottom` 값은 존재하지 않으며, 적용할 수도 없습니다. 아래는 좌/우/위/아래 동일한 마진 값을 적용하였지만, 좌/우 마진만 적용된 것을 알 수 있죠.
 
 ![inline](./../img/inline-box.png)
 
@@ -97,23 +97,27 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 - 부모 요소의 `border`가 없거나,
 
-![border-no](./../img/border-no.png)
+![border-no](./../img/border-n.png)
 
 > 부모 요소에 `border`가 추가되면 아래와 같이 마진 상쇄 현상이 사라집니다 !
 
-![border-yes](./../img/border-yes.png)
+![border-yes](./../img/border-y.png)
 
 <br>
 
 - 부모 요소의 `padding`이 없거나,
 
-![padding-yes](./../img/padding-yes.png)
+> `padding`이 있으면 아래와 같이 마진 상쇄가 일어나지 않습니다.
+
+![padding-yes](./../img/padding-y.png)
 
 <br>
 
 - 인라인 콘텐츠가 없는 경우에만요.
 
-![content](./../img/content.png)
+> 콘텐츠가 있으면,
+
+![content](./../img/content-y.png)
 
 <br>
 
@@ -123,10 +127,13 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 ### 3) 빈 블록(Empty blocks)
 
+빈 블록, 즉 콘텐츠가 전혀 없고 `height` 값이 `0`인 블록들이 인접하면 모든 마진이 상쇄되므로, 가장 큰 값의 마진 하나만 남게 됩니다. 예를 들어, `margin` 값이 `50px`인 빈 블록 3개가 인접해 있으면 모두 상쇄되어 `50px`의 마진만 유효하게 됩니다.
+
 <br>
 
 ---
 
-### References
+### Reference
 
 - [Visual Formatting Model | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Visual_formatting_model)
+- [Mastering margin collapsing | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
