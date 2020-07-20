@@ -127,7 +127,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 ### 3) 빈 블록(Empty blocks)
 
-빈 블록, 즉 콘텐츠가 전혀 없고 `height` 값이 `0`인 블록들이 인접하면 모든 마진이 상쇄되므로, 가장 큰 값의 마진 하나만 남게 됩니다. 예를 들어, `margin` 값이 `50px`인 빈 블록 3개가 인접해 있으면 모두 상쇄되어 `50px`의 마진만 유효하게 됩니다.
+빈 블록, 즉 콘텐츠가 전혀 없고 `height` 값이 `0`인 블록들이 인접하면 모든 마진이 상쇄되므로, 가장 큰 값의 마진 하나만 남게 됩니다. 예를 들어, `margin` 값이 `50px`인 빈 블록 3개가 인접해 있으면 모두 상쇄되어 총 `50px`의 마진만 유효하게 됩니다.
 
 <br>
 
@@ -155,7 +155,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 #### 2) `box-sizing: border-box`
 
-`box-sizing: border-box` 속성 값을 적용하면 되는데요, 이는 박스를 사이징(Sizing)할 때 Content Box가 아닌 Border Box를 기준으로 하겠다는 의미입니다. 결과로, `padding` 값에 상관없이 `width`에 지정한 값이 박스의 전체 크기가 됩니다.
+`box-sizing: border-box` 속성 값을 사용하는 방법입니다. 이는 박스를 사이징(Sizing)할 때 Content Box가 아닌 Border Box를 기준으로 하겠다는 의미입니다. 결과로, `padding` 값에 상관없이 `width`에 지정한 값이 박스의 전체 크기가 됩니다. 대신 `padding` 값만큼 Content Box의 크기가 줄어듭니다.
 
 ```css
 .box {
