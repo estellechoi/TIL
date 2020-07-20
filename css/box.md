@@ -6,7 +6,7 @@
 
 웹 브라우저는 HTML 문서와 CSS 파일의 내용을 해석하여 캔버스에 그림을 그리듯 문서를 렌더링 합니다. 이 작업을 하기 위해서는 렌더링된 문서와 서식 구조를 나타내는 임시 구조물 같은 것을 형성해야 하는데, 이를 박스 트리(Box Tree)라고 합니다.
 
-HTML 마크업에 따라 모든 요소들은 자신을 참조하는 박스(Box)를 생성하는데요, 이때 CSS에서 지정한 `display` 속성 값에 따라 박스의 타입(Type)이 결정됩니다. 또한, 이 속성 값에 따라 박스를 생성하지 않는 경우도 있습니다. HTML 요소들이 담고 있는 글자들은 박스 내부의 텍스트 노드(Text Node)를 형성합니다.
+HTML 문서의 모든 요소들은 자신을 참조하는 박스(Box)를 갖게 되는데요, 이때 CSS의 `display` 속성 값에 따라 박스의 타입(Type)이 결정됩니다 - 크게 Block, Inline 유형이 있습니다. 한편, 박스를 생성하지 않는 경우도 있습니다. HTML 요소들이 담고 있는 글자들(`innerText`)은 박스 내부의 텍스트 노드(Text Node)를 형성합니다.
 
 <br>
 
@@ -18,7 +18,7 @@ HTML 마크업에 따라 모든 요소들은 자신을 참조하는 박스(Box)�
 
 ### Anonymous Box
 
-Anonymous Box는 HTML 요소를 기반으로 하지 않는 박스입니다. HTML 요소를 기반으로 하지 않고 어떻게 박스가 생성될 수 있을까요? 자, 아래와 같이 텍스트만 담고 있는 HTML 요소가 있다고 상상해봅시다.
+Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소를 참조하지 않고 어떻게 박스가 생성될 수 있을까요? 자, 아래와 같이 텍스트만 담고 있는 요소가 있다고 상상해봅시다.
 
 ```html
 <div class="box">
@@ -35,7 +35,7 @@ Anonymous Box는 HTML 요소를 기반으로 하지 않는 박스입니다. HTML
 
 <br>
 
-이 요소를 기반으로 하는 Flex 박스를 생성하려면 아래와 같은 CSS가 필요합니다.
+이 요소를 Flex 박스로 지정해볼게요.
 
 ```css
 .box {
@@ -43,7 +43,7 @@ Anonymous Box는 HTML 요소를 기반으로 하지 않는 박스입니다. HTML
 }
 ```
 
-원래 이 박스의 내부에는 텍스트 밖에 없기 때문에 하위 박스가 존재하지 않아야 합니다. 하지만, 이 박스는 Flex 박스이기 때문에 내부의 텍스트 하나 하나를 담고 있는 Anonymous Box들이 생겨납니다. 그리고 이 Anonymous Box들이 Flex 아이템의 역할을 하면서 Flex 박스의 정렬 규칙에 따라 내부 텍스트들을 정렬할 수 있게 됩니다.
+원래 이 박스의 내부에는 텍스트 밖에 없기 때문에 하위 박스가 존재하지 않아야 합니다. 하지만, 이 박스는 Flex 박스이기 때문에 내부의 텍스트 하나 하나를 감싸는 Anonymous Box들이 생겨납니다. 그리고 이 Anonymous Box들이 Flex 아이템의 역할을 하면서 Flex 박스의 정렬 규칙에 따라 내부 텍스트들을 정렬할 수 있게 됩니다.
 
 <br>
 
@@ -51,7 +51,7 @@ Anonymous Box는 HTML 요소를 기반으로 하지 않는 박스입니다. HTML
 
 <br>
 
-참고로, Anonymous Box는 일반적인 박스와 달리 참조할 수 있는 HTML 요소가 없기 때문에 독립적으로 스타일을 지정할 수 없습니다. Anonymous Box는 자신이 속한 부모 박스의 스타일을 상속받게 됩니다.
+참고로, Anonymous Box는 일반적인 박스와 달리 매칭되는 HTML 요소가 없기 때문에 독립적으로 스타일을 지정할 수 없습니다. Anonymous Box는 자신이 속한 부모 박스의 스타일을 상속받게 됩니다.
 
 <br>
 
@@ -63,7 +63,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 <br>
 
-## 최대/최소 너비/높이
+## 박스의 최대/최소 너비/높이
 
 - `max-width`/`max-height` : 기본값은 `none` 입니다.
 
@@ -73,11 +73,11 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 ## 마진 상쇄(Margin Callapse)
 
-요소의 마진(Margin)은 기본적으로 아래의 경우에 중복되어 상쇄됩니다. 두 값 중 큰 값의 마진이 적용됩니다.
+박스(요소)의 마진(Margin)은 기본적으로 아래의 경우에 중복되어 상쇄됩니다. 두 값 중 큰 값의 마진이 적용됩니다.
 
 <br>
 
-### 1) 인접한 형제(Adjacent siblings) 요소의 `margin-bottom`/`margin-top`이 만나는 곳
+### 1) 인접한 형제(Adjacent siblings) 요소의 `margin-bottom` - `margin-top`이 만나는 곳
 
 - `margin-right`/`margin-left`가 접하는 곳에서는 마진 값이 상쇄되지 않고 보존됩니다.
 
@@ -131,9 +131,47 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 <br>
 
+## 패딩(Padding)으로 인한 박스 크기 증가
+
+박스 내부에 패딩(Padding)이 생기면 `padding` 값만큼 박스의 전체 크기가 커집니다. 예를 들어, `width: 100px`인 박스에 `padding-left: 10px`이 추가되면, 이 박스의 전체 너비는 `110px`이 됩니다.
+
+<br>
+
+### 패딩을 추가해도 전체 너비가 커지지 않도록 하는 방법
+
+#### 1) `width` 값 직접 계산
+
+아래와 같이 좌/우 `padding` 값을 `10px`씩, 총 `20px`의 패딩을 추가하면서 박스의 전체 너비를 `100px`로 유지하려면, 그 값을 계산해서 `100 - 20 = 80px`을 `width` 값으로 지정합니다.
+
+```css
+.box {
+	height: 100px;
+	width: 80px;
+	padding: 0 10px;
+}
+```
+
+<br>
+
+#### 2) `box-sizing: border-box`
+
+`box-sizing: border-box` 속성 값을 적용하면 되는데요, 이는 박스를 사이징(Sizing)할 때 Content Box가 아닌 Border Box를 기준으로 하겠다는 의미입니다. 결과로, `padding` 값에 상관없이 `width`에 지정한 값이 박스의 전체 크기가 됩니다.
+
+```css
+.box {
+	height: 100px;
+	width: 100px;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+```
+
+<br>
+
 ---
 
 ### Reference
 
+- [The box model | MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model)
 - [Visual Formatting Model | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Visual_formatting_model)
 - [Mastering margin collapsing | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
