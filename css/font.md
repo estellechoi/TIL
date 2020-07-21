@@ -200,11 +200,11 @@ span {
 
 <br>
 
-- `grb()` 함수 : : Red, Green, Blue 값 지정
+- `rgb()` 함수 : : Red, Green, Blue 값 지정
 
 ```css
 span {
-	color: grb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 ```
 
@@ -214,7 +214,7 @@ span {
 
 ```css
 span {
-	color: grba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.5);
 }
 ```
 
