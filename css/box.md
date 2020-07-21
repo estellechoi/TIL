@@ -175,7 +175,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 #### 2) `box-sizing: border-box`
 
-`box-sizing: border-box` 속성 값을 사용하는 방법입니다. 이는 박스를 사이징(Sizing)할 때 Content Box가 아닌 Border Box를 기준으로 하겠다는 의미입니다. 결과로, `padding` 값에 상관없이 `width`에 지정한 값이 박스의 전체 크기가 됩니다. 대신 `padding` 값만큼 Content Box의 크기가 줄어듭니다.
+`box-sizing: border-box` 속성 값을 사용하는 방법입니다. 이는 박스를 사이징(Sizing)할 때 Content Box가 아닌 Border Box를 기준으로 하겠다는 의미입니다. 결과로, `padding` 값에 상관없이 `width`에 지정한 값이 박스의 전체 크기가 됩니다. 즉, 박스의 콘텐츠 영역뿐만 아니라 패딩, 보더까지 포함한 너비를 `width: 100px`로 하겠다는 뜻입니다. 대신 `padding` 값만큼 Content Box의 크기가 줄어듭니다.
 
 ```css
 .box {
@@ -190,7 +190,7 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 ## `box-sizing`
 
-박스를 사이징(Sizing)할 때 무엇을 기준으로 할지 지정하는 속성입니다. 속성 값으로 아래의 2가지가 올 수 있습니다.
+박스를 사이징(Sizing)할 때 무엇을 기준으로 할지 지정하는 속성입니다. 속성 값으로 아래의 2가지가 있습니다.
 
 - `content-box` (기본값)
 
@@ -212,13 +212,13 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 ### Padding Box
 
-위의 Content Box에 패딩 영역을 더한 부분은 Padding Box라고 합니다. 위 그림에서 Padding Box의 사이즈는 `340 * 340` 입니다.
+위의 Content Box에 녹색의 패딩 영역을 더한 부분은 Padding Box라고 합니다. 위 그림에서 Padding Box의 사이즈는 `340 * 340` 입니다.
 
 <br>
 
 ### Border Box
 
-위의 Padding Box에 보더 영역을 더한 부분은 Border Box라고 합니다. 위 그림에서 Border Box의 사이즈는 `350 * 350` 입니다.
+위의 Padding Box에 노란색 보더 영역을 더한 부분은 Border Box라고 합니다. 위 그림에서 Border Box의 사이즈는 `350 * 350` 입니다.
 
 <br>
 
