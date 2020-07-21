@@ -215,6 +215,8 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 위의 Content Box에 녹색의 패딩 영역을 더한 부분은 Padding Box라고 합니다. 위 그림에서 Padding Box의 사이즈는 `340 * 340` 입니다.
 
+> `padding-box` 속성값은 대부분의 브라우저에서 지원하지 않기 때문에 사용할 수 없다고 봅니다.
+
 <br>
 
 ### Border Box
