@@ -14,6 +14,10 @@
 
 5. 기타 변형 속성
 
+6. `animation`
+
+7. `@keyframes`
+
 <br>
 
 ## 1.`transition`
@@ -136,6 +140,7 @@ transition: property duration timing-function delay;
 #### 단축
 
 - `matrix(n, n, n, n, n, n)` : 위의 4 가지 변형(이동, 크기, 회전, 기울임) 단축 속성
+  > 위의 일반 함수들을 사용하여 CSS를 작성하더라도, 브라우저는 `matrix` 함수로 변환하여 변형을 계산합니다.
 
 <br>
 
@@ -324,6 +329,139 @@ img {
 ![transform-3d-per](./../img/transform-3d-per.png)
 
 <br>
+
+### `backface-visibility`
+
+값으로 올 수 있는 것들은 매우 단순합니다.
+
+- `visible`
+
+- `hidden`
+
+<br>
+
+아래 이미지에 마우스를 올렸을 때 이미지가 Y축을 중심으로 `180deg` 회전하도록 해볼게요.
+
+![princess](./../img/princess.png)
+
+<br>
+
+이렇게 CSS를 작성하면 되겠죠?
+
+```css
+img {
+	width: 150px;
+	transition: 1s;
+}
+
+img:hover {
+	transform: rotateY(180deg);
+}
+```
+
+<br>
+
+실제로 마우스를 올리면 아래와 같이 이미지가 회전되어 반전된 모습이 됩니다.
+
+![princess-rot](./../img/princess-rot.png)
+
+이때 반전된 모습, 즉 이미지의 뒷면이 보이는 이유는 `backface-visibility` 속성의 기본값이 `visible`이기 때문입니다. 반면, `backface-visibility` 속성 값을 `hidden`으로 명시하면 뒷면이 숨겨집니다.
+
+<br>
+
+## 6. `animation`
+
+`animation`은 다음 속성들의 단축 속성입니다. `@keyframes`로 지정한 애니메이션의 동작을 지정하는 속성인데요, 즉 `@keyframes` 규칙으로 선언한 애니메이션이 있어야 사용할 수 있죠.
+
+- `animation-name` : `@keyframes`의 이름 / 기본값 `none`
+
+- `animation-duration` : 지속 시간 / 기본값 `0s`
+
+- `animation-timing-function` : 타이밍 함수 / 기본값 `ease`
+
+- `animation-delay` : 대기 시간 / 기본값 `none`
+
+  > 음수 값을 사용하면 해당 시간만큼 애니메이션의 일부를 생략할 수 있습니다.
+
+- `animation-iteration-count` : 반복 횟수 / 기본값 `1`
+
+  - `1`, `2`, ..
+  - `infinite`
+
+- `animation-direction` : 반복 방향 / 기본값 `normal`
+
+  - `normal` : 정방향
+  - `reverse` : 역방향
+  - `alternate` : 왕복
+  - `alternate-reverse` : 역방향 왕복
+
+- `animation-fill-mode` : 애니메이션 전후 상태 / 기본값 `none`
+
+  - `none`
+  - `forwards` : 애니메이션이 끝나는 위치에 머무름
+  - `backwards` : 애니메이션이 시작하는 위치에서 대기함
+  - `both` : `forwards` + `backwards`
+
+- `animation-play-state` : 재생, 정지 설정 / 기본값 `running`
+  - `running`
+  - `paused`
+
+<br>
+
+아래는 작성 형식(순서)이고요, `animation-name`, `animation-duration` 2 가지는 필수값입니다.
+
+```
+animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+```
+
+<br>
+
+아래는 간단한 예시입니다.
+
+```css
+.box {
+	width: 100px;
+	height: 100px;
+	background: pink;
+	animation: sample 2s linear infinite both;
+}
+
+/* @keyframes 규칙(Rule) */
+@keyframes sample {
+	0% {
+		width: 200px;
+	}
+	100% {
+		width: 50px;
+	}
+}
+```
+
+<br>
+
+## 7. `@keyframes`
+
+`@keyframes`은 애니메이션의 중간 단계를 지정할 때 사용합니다. `transition` 속성보다 정교하게 애니메이션의 중간 단계들을 컨트롤 할 수 있습니다. 아래와 같이 애니메이션의 각 단계에서 요소가 어떻게 보일지 지정할 수 있죠.
+
+```css
+@keyframes slidein {
+	from {
+		margin-left: 100%;
+		width: 300%;
+	}
+
+	to {
+		margin-left: 0%;
+		width: 100%;
+	}
+}
+```
+
+이때 CSS 속성들을 지정한 각 단계를 Frame이라고 하며, 이 Frame들을 `@keyframes`로 묶어 이름을 부여합니다. 위에서는 2 개 Frame들을 묶어 `slidein`이라는 이름을 정해주었네요. 이렇게 묶은 `@keyframes`는 `animation` 속성을 이용하여 실제 애니메이션 효과를 구현합니다.
+
+각 프레임은 애니메이션이 진행되는 순서대로 나열 가능하며, `%`로 각 단계를 나타낼 수 있습니다.
+
+<br>
 <br>
 <br>
 <br>
@@ -336,3 +474,4 @@ img {
 - [transition-timing-function | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)
 - [transform | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)
 - [\<transform-function\> | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function)
+- [\@keyframes | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes)
