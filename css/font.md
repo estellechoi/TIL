@@ -68,7 +68,7 @@ CSS 기본 속성을 이용하며 폰트를 스타일링할 수 있습니다. �
 
 <br>
 
-값은 아래와 같이 작성하되, `font-size`, `font-family` 값은 필수로 포함하고 다른 값들은 생략할 수 있습니다. 또한, `line-height` 값은 `/`를 사용해서 `font-size` 값과 명확하게 구분하는 것이 문법입니다.
+값은 아래와 같이 작성하되, `font-size`, `font-family` 값은 필수로 포함하고 다른 값들은 생략할 수 있습니다. 또한, `line-height` 값은 `/`를 사용하여 `font-size` 값과 명확하게 구분하는 것이 문법입니다.
 
 ```css
 font: font-style font-weight font-size / line-height font-family;
@@ -83,6 +83,8 @@ font: font-style font-weight font-size / line-height font-family;
 	font: italic bold 20px / 1.5 "Arial", sans-serif;
 }
 ```
+
+<br>
 
 ---
 
