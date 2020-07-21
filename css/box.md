@@ -77,7 +77,8 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 - `flex` : 요소를 Flex Box로 지정함
 
-- 기타 - `table`, `table-cell` 등
+- 기타
+  > `table`, `table-cell` 등
 
 <br>
 
