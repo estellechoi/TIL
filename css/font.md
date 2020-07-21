@@ -184,21 +184,43 @@ font: font-style font-weight font-size / line-height font-family;
 
   > `#000000`(Black) - `#ffffff`(White)
 
+```css
+span {
+	color: #000000;
+}
+```
+
 - `grb()` 함수 : : Red, Green, Blue 값 지정
 
-  > `grb(255, 255, 255)`
+```css
+span {
+	color: grb(255, 255, 255);
+}
+```
 
 - `rgba()` 함수 : Red, Green, Blue, Opacity 값 지정
 
-  > `grba(255, 255, 255, 0.5)`
+```css
+span {
+	color: grba(255, 255, 255, 0.5);
+}
+```
 
 - `hsl()` 함수 : 색상, 채도, 명도 값 지정
 
-  > `hsl(120, 100%, 50%)`
+```css
+span {
+	color: hsl(120, 100%, 50%);
+}
+```
 
 - `hsla()` 함수 : 색상, 채도, 명도, Opacity 값 지정
 
-  > `hsla(120, 100%, 50%, 0.3)`
+```css
+span {
+	color: hsla(120, 100%, 50%, 0.3);
+}
+```
 
 <br>
 
