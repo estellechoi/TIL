@@ -10,7 +10,7 @@
 
 3. `transform`
 
-4. 변형 함수(Transform Function)
+4. `transform` - 변형 함수(Transform Function)
 
 <br>
 
@@ -91,9 +91,9 @@ transition: property duration timing-function delay;
 
 <br>
 
-## 4. 변형 함수(Transform Function)
+## 4. `transform` - 변형 함수(Transform Function)
 
-값으로는 [변형 함수](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function)를 지정합니다. 변형 함수는 2D 또는 3D 공간 내에서 요소를 회전하고, 크기를 바꾸고, 왜곡하고, 이동할 수 있습니다.
+`transform` 속성의 값으로는 [변형 함수](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function)를 지정합니다. 변형 함수는 2D 또는 3D 공간 내에서 요소를 회전하고, 크기를 바꾸고, 왜곡하고, 이동할 수 있습니다.
 
 <br>
 
