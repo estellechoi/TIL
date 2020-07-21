@@ -462,9 +462,6 @@ animation: name duration timing-function delay iteration-count direction fill-mo
 각 프레임은 애니메이션이 진행되는 순서대로 나열 가능하며, `%`로 각 단계를 나타낼 수 있습니다.
 
 <br>
-<br>
-<br>
-<br>
 
 ---
 
