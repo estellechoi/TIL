@@ -48,7 +48,7 @@ CSS 기본 속성을 이용하며 폰트를 스타일링할 수 있습니다. �
 
 <br>
 
-![font-weight](./../img/font-weight.jpg)
+![font-weight](./../img/font-weight.jpeg)
 
 <br>
 
