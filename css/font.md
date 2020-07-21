@@ -2,7 +2,9 @@
 
 <br>
 
-## 기본 속성
+## CSS 기본 속성
+
+CSS 기본 속성을 이용하며 폰트를 스타일링할 수 있습니다. 아래는 속성 목록입니다.
 
 - `font-style` : 기본값 `normal` / 폰트 기울기 지정
 
@@ -16,7 +18,7 @@
 
 <br>
 
-### `font-style`
+### 1) `font-style`
 
 - `normal`
 
@@ -28,7 +30,7 @@
 
 <br>
 
-### `font-weight`
+### 2) `font-weight`
 
 - `normal` : 보통 (`400`)
 
@@ -44,7 +46,7 @@
 
 `font-weight`의 값으로 사용되는 `100`-`900` 숫자들은 일반적으로 폰트 이름에서 아래와 같이 사용됩니다. 예를 들어, `Arial Black` 폰트는 두께 값이 `900`인 `Arial` 폰트라고 볼 수 있습니다.
 
-| Number | Font Name Tailfix             |
+| Number | Font Name Suffix              |
 | ------ | ----------------------------- |
 | `100`  | `Thin` (`Hairline`)           |
 | `200`  | `Extra Light` (`Ultra Light`) |
