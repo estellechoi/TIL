@@ -84,9 +84,9 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 ## 박스의 최대/최소 너비/높이
 
-- `max-width`/`max-height` : 기본값은 `none` 입니다.
+- `max-width`/`max-height` : 기본값은 `none`
 
-- `min-width`/`min-height` : 기본값은 `0` 입니다.
+- `min-width`/`min-height` : 기본값은 `0`
 
 <br>
 
