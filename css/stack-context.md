@@ -70,7 +70,7 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 `static`이 아닌 `position` 속성 값을 지정하면 새로운 쌓임 맥락이 생성되며, 해당 박스는 가장 위에 쌓이게 됩니다. 3번 박스에 `position: relative` 속성값을 추가해볼까요?
 
 ```css
-.div:nth-child(3) {
+.box:nth-child(3) {
 	position: relative;
 }
 ```
