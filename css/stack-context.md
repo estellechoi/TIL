@@ -149,6 +149,77 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 
 <br>
 
+### 4) `filter`
+
+이번에는 3번 박스에 아래와 같은 `filter` 속성 값을 지정합니다.
+
+```css
+.box:nth-child(3) {
+	filter: drop-shadow(16px 16px 20px red) invert(75%);
+}
+```
+
+<br>
+
+역시나 3번 박스가 가장 위에 쌓입니다.
+
+![box stack filter](./../img/box-stack-filter.png)
+
+<br>
+
+> [filter | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/filter)
+
+<br>
+
+### 5) `clip-path`
+
+3번 박스에 요소의 클리핑 범위를 지정하는 `clip-path` 속성 값을 아래와 같이 주었습니다.
+
+```css
+.box:nth-child(3) {
+	background-color: Aquamarine;
+	clip-path: ellipse(90px 50px at 10% 20%);
+}
+```
+
+> 시각적 확인을 돕기 위해 `background-color` 속성을 사용했습니다.
+
+<br>
+
+3번 박스가 가장 위에 쌓입니다.
+
+![box stack clip](./../img/box-stack-clip.png)
+
+<br>
+
+> [clip-path | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path)
+
+<br>
+
+### `mix-blend-mode`
+
+요소의 배경/부모 요소와의 혼합 모드를 지정하는 `mix-blend-mode` 속성 역시 새로운 쌓임 맥락을 생성합니다. 아래는 이 속성을 적용하기 전의 모습인데요, 적용 후 혼합된 모습을 확인하기 위해 부모 요소의 배경 색상을 `pink`로 지정하였습니다.
+
+![box stack mix-none](./../img/box-stack-mix-none.png)
+
+<br>
+
+`mix-blend-mode` 속성 값을 아래와 같이 지정하면,
+
+```css
+.box:nth-child(3) {
+	mix-blend-mode: difference;
+}
+```
+
+<br>
+
+아래와 같이 렌더링 됩니다. 단순히 혼합 스타일링만 적용되지 않고, 가장 위에 쌓이게 되었습니다.
+
+![box stack mix-none](./../img/box-stack-mix-none.png)
+
+<br>
+
 ## `z-index`
 
 `z-index`는 요소의 쌓임 순서를 결정합니다. 기본값은 `0`이고요, 값이 클 수록 위에 쌓입니다. 다만, `position` 속성을 가진 요소에만 적용된다는 점에 주의하세요.
