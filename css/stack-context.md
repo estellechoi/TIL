@@ -65,7 +65,7 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 
 <br>
 
-### Positioned 요소
+### 1) `position` 요소
 
 `static`이 아닌 `position` 속성 값을 지정하면 새로운 쌓임 맥락이 생성되며, 해당 박스는 가장 위에 쌓이게 됩니다. 3번 박스에 `position: relative` 속성값을 추가해볼까요?
 
@@ -94,6 +94,58 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 이때는 더 나중에 마크업 된 4번 박스가 더 위에 쌓이게 되죠.
 
 ![box stack 4](./../img/box-stack-4.png)
+
+<br>
+
+### 2) `opacity` 요소
+
+투명한 요소, 즉 `opacity` 속성 값이 `1` 미만인 요소 역시 새로운 쌓임 맥락을 생성합니다. 위의 5개 박스 모두 `position` 속성을 제거한 초기 상태로 되돌렸다고 가정하고요, 3번 박스에 아래와 같은 CSS를 적용해봅니다.
+
+```css
+.box:nth-child(3) {
+	background-color: Aquamarine;
+	opacity: 0.7;
+}
+```
+
+> `background-color` 속성은 쌓임과 전혀 상관이 없으며, 시각적으로 확인하는데 도움을 받기 위해 지정한 것입니다.
+
+<br>
+
+렌더링 결과는 아래와 같습니다. 투명한 요소인 3번 박스가 새로운 쌓임 맥락을 생성하면서 가장 위에 쌓였습니다.
+
+![box stack opacity](./../img/box-stack-opacity.png)
+
+<br>
+
+`opacity` 속성을 지워볼까요?
+
+```css
+.box:nth-child(3) {
+	background-color: Aquamarine;
+	/*   opacity: 0.7; */
+}
+```
+
+![box stack opacity-x](./../img/box-stack-opacity-x.png)
+
+<br>
+
+### 3) `transform`
+
+다시 5개 박스를 초기 상태로 돌립시다. 모두 같은 쌓임 맥락 상으로요. 이제 3번 박스에 아래와 같이 `transform` 속성을 적용해보세요.
+
+```css
+.box:nth-child(3) {
+	transform: rotate(0.5turn);
+}
+```
+
+<br>
+
+렌더링 결과는 아래와 같습니다. 3번 박스가 회전되었을 뿐만 아니라, 가장 위에 쌓이게 되었네요.
+
+![box stack transform](./../img/box-stack-transform.png)
 
 <br>
 
