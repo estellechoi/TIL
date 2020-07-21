@@ -303,7 +303,7 @@ img {
 
 <br>
 
-- #### `transfrom: perspective()` 함수와의 차이점
+#### `transfrom: perspective()` 함수와의 차이점
 
 `transfrom: perspective()` 함수는 변형 요소에 직접 지정하고, 기준점은 `transform-origin` 속성에 지정합니다. `perspective` 속성은 변형 요소의 상위 요소에 지정하고, 기준점은 `perspective-origin` 속성에 지정합니다. `perspective` 속성은 변형을 관찰하려는 요소가 여러 개일 때 사용합니다.
 
