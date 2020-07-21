@@ -13,7 +13,7 @@
 
 <br>
 
-## 박스 트리(Box Tree)
+## 1. 박스 트리(Box Tree)
 
 웹 브라우저는 HTML 문서와 CSS 파일의 내용을 해석하여 캔버스에 그림을 그리듯 문서를 렌더링 합니다. 이 작업을 하기 위해서는 렌더링된 문서와 서식 구조를 나타내는 임시 구조물 같은 것을 형성해야 하는데, 이를 박스 트리(Box Tree)라고 합니다.
 
@@ -74,7 +74,7 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 <br>
 
-## `display`
+## 2. `display`
 
 `display` 속성은 HTML 요소의 박스 타입을 지정합니다.
 
@@ -93,7 +93,7 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 <br>
 
-## 박스의 최대/최소 너비/높이
+## 3. 박스의 최대/최소 너비/높이
 
 - `max-width`/`max-height` : 기본값은 `none`
 
@@ -101,7 +101,7 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 <br>
 
-## 마진 상쇄(Margin Callapse)
+## 4. 마진 상쇄(Margin Callapse)
 
 박스(요소)의 마진(Margin)은 기본적으로 아래의 경우에 중복되어 상쇄됩니다. 두 값 중 큰 값의 마진이 적용됩니다.
 
@@ -161,7 +161,7 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 <br>
 
-## 패딩(Padding)으로 인한 박스 크기 증가
+## 5. 패딩(Padding)으로 인한 박스 크기 증가
 
 박스 내부에 패딩(Padding)이 생기면 `padding` 값만큼 박스의 전체 크기가 커집니다. 예를 들어, `width: 100px`인 박스에 `padding-left: 10px`이 추가되면, 이 박스의 전체 너비는 `110px`이 됩니다.
 
@@ -200,7 +200,7 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 <br>
 
-## `box-sizing`
+## 6. `box-sizing`
 
 박스를 사이징(Sizing)할 때 무엇을 기준으로 할지 지정하는 속성입니다. 속성 값으로 아래의 2가지가 있습니다.
 
