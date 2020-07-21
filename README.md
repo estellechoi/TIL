@@ -56,6 +56,7 @@
 - [폰트(Font)의 모든 것](https://github.com/estellechoi/TIL/blob/master/css/font.md) \*
 - [Stacking Context](https://github.com/estellechoi/TIL/blob/master/css/stack-context.md) \*
 - [Background](https://github.com/estellechoi/TIL/blob/master/css/background.md) \*
+- [애니메이션(Animation)](https://github.com/estellechoi/TIL/blob/master/css/animation.md) \*
 - [Image Sprites](https://github.com/estellechoi/TIL/blob/master/css/sprites.md)
 
 <br>
