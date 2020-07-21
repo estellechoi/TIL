@@ -176,9 +176,17 @@ font: font-style font-weight font-size / line-height font-family;
 
 `color`는 글자의 색을 지정하는 속성입니다.
 
-- 이름 : 브라우저에서 제공하는 이름 (`tomato`, `dodgerblue` 등)
+- 이름 : 브라우저에서 제공하는 이름
 
   > 정확하지 않으므로 실제 서비스에서 사용하지 마세요.
+
+```css
+span {
+	color: tomato;
+}
+```
+
+<br>
 
 - Hex Code : Hexadecimal colors (16진수(`0`-`9`, `a`-`f`) 사용)
 
@@ -190,6 +198,8 @@ span {
 }
 ```
 
+<br>
+
 - `grb()` 함수 : : Red, Green, Blue 값 지정
 
 ```css
@@ -197,6 +207,8 @@ span {
 	color: grb(255, 255, 255);
 }
 ```
+
+<br>
 
 - `rgba()` 함수 : Red, Green, Blue, Opacity 값 지정
 
@@ -206,6 +218,8 @@ span {
 }
 ```
 
+<br>
+
 - `hsl()` 함수 : 색상, 채도, 명도 값 지정
 
 ```css
@@ -213,6 +227,8 @@ span {
 	color: hsl(120, 100%, 50%);
 }
 ```
+
+<br>
 
 - `hsla()` 함수 : 색상, 채도, 명도, Opacity 값 지정
 
