@@ -20,6 +20,8 @@ CSS 기본 속성을 이용하며 폰트를 스타일링할 수 있습니다. �
 
 ### 1) `font-style`
 
+폰트의 기울기를 지정하는 속성입니다.
+
 - `normal` : 기본값
 
 - `italic`
@@ -31,6 +33,8 @@ CSS 기본 속성을 이용하며 폰트를 스타일링할 수 있습니다. �
 <br>
 
 ### 2) `font-weight`
+
+폰트의 두께를 지정하는 속성입니다.
 
 - `normal` : `400` / 기본값
 
@@ -165,6 +169,36 @@ font: font-style font-weight font-size / line-height font-family;
 	font: italic bold 20px / 1.5 "Arial", sans-serif;
 }
 ```
+
+<br>
+
+## `color`: 글자의 색상
+
+`color`는 글자의 색을 지정하는 속성입니다.
+
+- 이름 : 브라우저에서 제공하는 이름 (`tomato`, `dodgerblue` 등)
+
+  > 정확하지 않으므로 실제 서비스에서 사용하지 마세요.
+
+- Hex Code : Hexadecimal colors (16진수(`0`-`9`, `a`-`f`) 사용)
+
+  > `#000000`(Black) - `#ffffff`(White)
+
+- `grb()` 함수 : : Red, Green, Blue 값 지정
+
+  > `grb(255, 255, 255)`
+
+- `rgba()` 함수 : Red, Green, Blue, Opacity 값 지정
+
+  > `grba(255, 255, 255, 0.5)`
+
+- `hsl()` 함수 : 색상, 채도, 명도 값 지정
+
+  > `hsl(120, 100%, 50%)`
+
+- `hsla()` 함수 : 색상, 채도, 명도, Opacity 값 지정
+
+  > `hsla(120, 100%, 50%, 0.3)`
 
 <br>
 
