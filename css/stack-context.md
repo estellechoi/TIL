@@ -22,8 +22,6 @@ Stacking Context는 문서 어디에서나 다음 조건들 중 하나를 만족
 
 - `opacity` 속성 값이 `1` 미만인 경우
 
-  > [자세한 내용 보기](https://www.w3.org/TR/css-color-3/#transparency)
-
 - 아래의 속성들 중 하나라도 기본값이 아닌 경우
 
   - `mix-blend-mode` : 기본값 `normal`
@@ -33,9 +31,9 @@ Stacking Context는 문서 어디에서나 다음 조건들 중 하나를 만족
   - `clip-path` : 기본값 `none`
   - `mask`/`mask-image`/`mask-border` : 기본값 `none`
 
-- `isolation: isolate`
+* `isolation: isolate`
 
-- `-webkit-overflow-scrolling: touch`
+* `-webkit-overflow-scrolling: touch`
 
 <br>
 
@@ -131,6 +129,10 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 
 <br>
 
+> [`opacity` 자세히 알아보기](https://www.w3.org/TR/css-color-3/#transparency)
+
+<br>
+
 ### 3) `transform`
 
 다시 5개 박스를 초기 상태로 돌립시다. 모두 같은 쌓임 맥락 상으로요. 이제 3번 박스에 아래와 같이 `transform` 속성을 적용해보세요.
@@ -217,6 +219,10 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 아래와 같이 렌더링 됩니다. 단순히 혼합 스타일링만 적용되지 않고, 가장 위에 쌓이게 되었습니다.
 
 ![box stack mix-diff](./../img/box-stack-mix-diff.png)
+
+<br>
+
+> [mix-blend-mode | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode)
 
 <br>
 
