@@ -174,7 +174,7 @@ font: font-style font-weight font-size / line-height font-family;
 
 ## `color`: 글자의 색상
 
-`color`는 글자의 색을 지정하는 속성입니다.
+`color`는 글자의 색을 지정하는 속성입니다. 다음은 `color` 속성 값으로 사용할 수 있는 포맷의 목록입니다.
 
 - 이름 : 브라우저에서 제공하는 이름
 
