@@ -63,6 +63,24 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 <br>
 
+## `display`
+
+`display` 속성은 HTML 요소의 박스 타입을 지정합니다.
+
+- `block`
+
+- `inline`
+
+- `inline-block` : `<input />` 요소가 대표적
+
+- `none` : 박스 타입이 없음(요소가 사라짐)
+
+- `flex` : 요소를 Flex Box로 지정함
+
+- 기타 - `table`, `table-cell` 등
+
+<br>
+
 ## 박스의 최대/최소 너비/높이
 
 - `max-width`/`max-height` : 기본값은 `none` 입니다.
@@ -168,6 +186,40 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 
 <br>
 
+## `box-sizing`
+
+박스를 사이징(Sizing)할 때 무엇을 기준으로 할지 지정하는 속성입니다. 속성 값으로 아래의 2가지가 올 수 있습니다.
+
+- `content-box` (기본값)
+
+- `border-box`
+
+<br>
+
+`box-sizing` 속성을 정확하게 이해하려면 박스의 구성요소를 알아야 합니다. 아래는 HTML 문서가 렌더링된 후 박스의 `width`, `height`, `padding`, `margin`, `border`에 적용된 값을 나타내는 그림이며, 크롬 브라우저의 개발자 도구에서 확인할 수 있습니다.
+
+![sizing](./../img/box-sizing.png)
+
+<br>
+
+### Content Box
+
+위 그림에서 `300 * 300`로 사이즈가 표기된 파란 박스, 즉 마진, 보더, 패딩 값을 제외하고 순수 콘텐츠만 담고 있는 영역이 Content Box 입니다. `box-sizing` 속성의 기본값(`content-box`)이죠.
+
+<br>
+
+### Padding Box
+
+위의 Content Box에 패딩 영역을 더한 부분은 Padding Box라고 합니다. 위 그림에서 Padding Box의 사이즈는 `340 * 340` 입니다.
+
+<br>
+
+### Border Box
+
+위의 Padding Box에 보더 영역을 더한 부분은 Border Box라고 합니다. 위 그림에서 Border Box의 사이즈는 `350 * 350` 입니다.
+
+<br>
+
 ---
 
 ### Reference
@@ -175,3 +227,4 @@ Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
 - [The box model | MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model)
 - [Visual Formatting Model | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Visual_formatting_model)
 - [Mastering margin collapsing | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
+- [box-sizing | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)
