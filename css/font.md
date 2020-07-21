@@ -240,7 +240,62 @@ span {
 
 <br>
 
+## `text-decoration`: 글자 꾸미기
+
+글자에서 선을 넣어 꾸밀 수 있는 속성입니다.
+
+- `none` : 꾸밈 없음 / 기본값
+
+- `underline` : 밑줄
+
+- `overline` : 윗줄
+
+- `line-through` : (글자를 가로지르는) 중앙선
+  > `<del>` 요소로 텍스트를 감싸는 것과 시각적으로 같은 효과를 가집니다. 하지만 취소된, 삭제된 텍스트를 의미하고 싶다면 `<del>` 태그를 사용하는 것이 Sematic 합니다.
+
+<br>
+
+## `text-indent`: 글자 들여쓰기
+
+첫 번째 줄의 들여쓰기/내어쓰기를 지정합니다. 음수 값을 사용하면 내어쓰기가 됩니다.
+
+<br>
+
+### 예시
+
+```css
+p {
+	text-indent: 50px;
+}
+```
+
+<br>
+
+### `text-indent: -9999px`: 배경 이미지의 대체 텍스트 숨기기
+
+배경 이미지의 대체 텍스트를 숨기기 위해 `text-indent: -9999px` 속성값을 명시적으로 사용할 수 있습니다. CSS로 지정하는 배경 이미지의 경우 대체 텍스트는 아래와 같이 제공하는데요, 이 텍스트를 시각적으로 숨기기 위해 사용합니다.
+
+```html
+<div class="box">은색과 초록색이 은은하게 섞여있는 배경 이미지</div>
+```
+
+<br>
+
+## `letter-spacing`/`word-spacing`
+
+- `letter-spacing` : 자간
+
+- `word-spacing` : 단어 간격 (띄어쓰기 너비)
+
+<br>
+
+두 속성 모두 기본값은 `normal`(`0`) 이고요, 음수도 가능합니다.
+
+<br>
+
 ## 웹 폰트(Web Font)
+
+> [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
 
 <br>
 
@@ -251,3 +306,4 @@ span {
 - [font-style | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)
 - [font-weight | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight)
 - [line-height | MDN](https://developer.mozilla.org/ko/docs/Web/CSS/line-height)
+- [\@font-face | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
