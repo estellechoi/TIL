@@ -216,7 +216,7 @@ HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니�
 
 아래와 같이 렌더링 됩니다. 단순히 혼합 스타일링만 적용되지 않고, 가장 위에 쌓이게 되었습니다.
 
-![box stack mix-none](./../img/box-stack-mix-none.png)
+![box stack mix-diff](./../img/box-stack-mix-diff.png)
 
 <br>
 
