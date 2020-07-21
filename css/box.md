@@ -98,7 +98,7 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 
 ### 1) 인접한 형제(Adjacent siblings) 요소의 `margin-bottom` - `margin-top`이 만나는 곳
 
-- `margin-right`/`margin-left`가 접하는 곳에서는 마진 값이 상쇄되지 않고 보존됩니다.
+- `margin-right` - `margin-left`가 접하는 곳에서는 마진 값이 상쇄되지 않고 보존됩니다.
 
 ![block](./../img/block.png)
 
