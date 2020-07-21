@@ -12,6 +12,8 @@
 
 4. `transform` - 변형 함수(Transform Function)
 
+5. 기타 변형 속성
+
 <br>
 
 ## 1.`transition`
@@ -133,11 +135,169 @@ transition: property duration timing-function delay;
 
 #### 단축
 
-- `matrix(n, n, n, n. n, n)` : 위의 4 가지 변형(이동, 크기, 회전, 기울임) 단축 속성
+- `matrix(n, n, n, n, n, n)` : 위의 4 가지 변형(이동, 크기, 회전, 기울임) 단축 속성
+
+<br>
+
+> `tanslate(x, y)` 함수의 경우 `position` 속성을 사용해서 요소를 동일한 위치로 이동시킬 수 있습니다. 이 둘의 차이는 무엇일까요? 근본적으로 `position` 속성은 요소를 배치하기 위해 만들어진 속성이고, `tanslate(x, y)`는 요소를 이동시키기 위해 만들어진 속성입니다. 이는 변형 함수인 `tanslate(x, y)`를 사용하는 것이 애니메이션 구현에 최적화된 방법이라는 의미입니다. `position` 속성을 이용하여 애니메이션을 어떻게든 구현할 수는 있겠지만, 렌더링 과정에서 브라우저에 부담을 주기 때문에 각 속성의 목적에 맞게 사용하는 것이 좋습니다.
 
 <br>
 
 ### 2) 3D 변형 함수
+
+#### Translate
+
+- `translate3d(x, y, z)`: 각 축 이동
+
+- `translateZ(z)`: Z축 이동
+
+#### Scale
+
+- `scale3d(x, y, z)`: 각 축 크기 변경 / 단위 : (배수)
+
+- `scaleZ(z)`: Z축 크기 변경
+
+#### Rotate
+
+- `rotateX(x)`: X축을 중심으로 회전 / 단위 : `deg`
+
+- `rotateY(y)` : Y축을 중심으로 회전
+
+- `rotateZ(z)` : Z축을 중심으로 회전
+
+- `rotate3d(x, y, z, a)` : 단축 속성
+
+#### Perspective(원근법)
+
+- `perspective(n)` : 원근법 지정 (거리)
+  > `transform` 속성에서 여러 변형 함수를 함께 사용할 때 가장 앞단에 작성해야 적용된다는 점에 주의하세요.
+
+#### 단축
+
+- `matrix3d(n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n)` : 위의 변형(이동, 크기, 회전, 원근) 단축 속성
+
+<br>
+
+#### 예시
+
+아래는 이미지에 마우스를 올렸을 때 Y축을 중심으로 `180deg` 회전시키는 예시입니다.
+
+```css
+img {
+	width: 300px;
+	border: 1px solid lightgrey;
+	transition: 1s;
+}
+
+img:hover {
+	transform: perspective(500px) rotateY(180deg);
+}
+```
+
+<br>
+
+## 5. 기타 변형 속성
+
+아래는 변형과 관련된 속성 목록입니다.
+
+- `transform-origin` : 변형의 기준점
+
+- `transform-style` : 변형 요소의 자식 요소도 변형시킬지 여부
+
+- `perspective` : 하위 요소를 관찰할 원근 거리
+
+- `perspective-origin` : 원근 거리의 기준점
+
+- `backface-visibility` : 변형으로 인해 노출된 요소의 뒷면(반전된 모습) 숨김 여부
+
+<br>
+
+다음은 예시 코드입니다.
+
+```css
+.container {
+	padding: 70px;
+	perspective: 500px;
+	/* 원근 거리를 관찰하는 지점을 요소의 가운데로 지정하기 위해 요소의 너비와 일치시킴, 
+	기본값은 뷰포트 너비이고 이는 뷰포트의 중앙을 의미 */
+	width: 200px;
+}
+
+.grand {
+	width: 200px;
+	border: 3px solid pink;
+	transform: rotateX(-45deg);
+	transform-style: preserve-3d;
+}
+
+.parent {
+	width: 200px;
+	border: 3px solid tomato;
+	transform: rotateY(45deg);
+	transform-style: preserve-3d;
+}
+
+img {
+	width: 200px;
+	transform: rotateX(-20deg);
+}
+```
+
+<br>
+
+대략 아래와 같은 렌더링 결과를 얻을 수 있습니다.
+
+![transform-3d](./../img/transform-3d.png)
+
+<br>
+
+### `transform-origin`
+
+아래는 `transform-origin` 속성 값을 지정하는 기본 형식이고요, 기본값은 `50% 50% 0` 입니다.
+
+```
+transform-origin: x y z;
+```
+
+<br>
+
+예를 들어 아래와 같이 작성하면,
+
+```css
+img {
+	transform-origin: 100%;
+}
+
+img:hover {
+	transform: rotate(45deg);
+}
+```
+
+이미지에 마우스를 올렸을 때 `45deg` 회전하는데요, `100% 50% 0` 지점을 기준으로 회전하게 됩니다.
+
+<br>
+
+```css
+img {
+	transform-origin: 100% 100%;
+}
+```
+
+위와 같이 기준점을 수정하면, `100% 100% 0` 지점, 즉 요소의 우측 하단을 기준으로 회전하죠.
+
+<br>
+
+### `transform-style`
+
+다음을 값으로 할 수 있습니다.
+
+- `flat` : 3D 변형된 요소의 자식 요소의 3D 변형 불허 / 기본값
+
+- `preserve-3d` : 3D 변형된 요소의 자식 요소의 3D 변형 허용
+
+<br>
+
+###
 
 <br>
 
