@@ -297,8 +297,35 @@ img {
 
 <br>
 
-###
+### `perspective`
 
+<strong>하위 요소</strong>를 관찰할 원근 거리를 지정하는 속성입니다. 따라서 3D 변형을 관찰할 요소들의 상위 요소에 이 속성을 지정해야 합니다.
+
+<br>
+
+#### `transfrom: perspective()` 함수와의 차이점
+
+`transfrom: perspective()` 함수는 변형 요소에 직접 지정하고, 기준점은 `transform-origin` 속성에 지정합니다. `perspective` 속성은 변형 요소의 상위 요소에 지정하고, 기준점은 `perspective-origin` 속성에 지정합니다. `perspective` 속성은 변형을 관찰하려는 요소가 여러 개일 때 사용합니다.
+
+<br>
+
+### `perspective-origin`
+
+원근 거리의 기준점을 지정합니다. 기본값은 `50% 50%`이며, 각각 X축, Y축에서의 위치를 의미합니다.
+
+위에서 보았던 예시 CSS에 아래의 속성을 추가하면, 하위 요소들을 바라보는 기준점의 X축 위치가 `50%`에서 `0`으로 바뀝니다. 즉, 요소의 정중앙이 아닌 왼쪽에서 해당 요소를 관찰하게 되는데요. 렌더링 결과와 함께 확인해보세요.
+
+```css
+.pers {
+	perspective-origin: 0 50%;
+}
+```
+
+![transform-3d-per](./../img/transform-3d-per.png)
+
+<br>
+<br>
+<br>
 <br>
 
 ---
