@@ -43,20 +43,83 @@ Stacking Context는 문서 어디에서나 다음 조건들 중 하나를 만족
 
 <br>
 
-### Positioned 요소
+## Stacking Context 생성하기
 
-다음은 `margin-right: -30px;` 속성 값을 이용하여 5개의 박스를 겹치게 만든 모습입니다. 아래의 5개 박스 중 3번 박스에 `position` 속성 값을 지정하면 새로운 Stack Context가 생성되면서, 해당 박스는 가장 위에 쌓이게 됩니다.
+> Stacking Context, 이제부터는 MDN 문서 번역본에 따라 "쌓임 맥락"이라고 명칭하겠습니다.
 
-아래는 Stack Context 생성 전이구요.
+위의 쌓임 맥락이 생성되는 조건들에 따라 요소가 쌓이는 규칙을 아주 자세하게 알아볼게요.
+
+그 전에, 만약 동일한 조건에 의해 동일한 쌓임 맥락에 속하는 요소들끼리 겹치게 되면 어떤 순서로 쌓일까요? HTML 문서에서 더 나중에 작성된 요소일 수록 더 위에 쌓입니다.
+
+```html
+<div class="box">1</div>
+<div class="box">2</div>
+<div class="box">3</div>
+<div class="box">4</div>
+<div class="box">5</div>
+```
+
+<br>
+
+예를 들어, 위와 같이 마크업 하면 가장 마지막에 작성된 `<div class="box">5</div>` 요소가 가장 위에 쌓입니다. 아래는 쌓임을 확인하기 위해 `margin-right: -30px;` 속성 값을 이용하여 5개의 박스를 겹치게 만든 모습입니다.
 
 ![box stack](./../img/box-stack.png)
 
 <br>
 
-3번 박스에 `position: relative` 속성값을 추가하면, 해당 박스는 Positioned 요소가 되면서 새로운 쌓임 맥락, Stack Context를 생성합니다.
+### Positioned 요소
+
+`static`이 아닌 `position` 속성 값을 지정하면 새로운 쌓임 맥락이 생성되며, 해당 박스는 가장 위에 쌓이게 됩니다. 3번 박스에 `position: relative` 속성값을 추가해볼까요?
+
+```css
+.div:nth-child(3) {
+	position: relative;
+}
+```
+
+아래와 같이 3번 박스가 Z축의 가장 위에 배치됩니다.
 
 ![box stack positioned](./../img/box-stack-positioned.png)
 
+<br>
+
+아래와 같이 4번 박스에 `postion` 속성을 주면, 3번 박스와 같은 쌓임 맥락에 있게 됩니다.
+
+```css
+.box:nth-child(4) {
+	position: relative;
+}
+```
+
+<br>
+
+이때는 더 나중에 마크업 된 4번 박스가 더 위에 쌓이게 되죠.
+
+![box stack 4](./../img/box-stack-4.png)
+
+<br>
+
+## `z-index`
+
+`z-index`는 요소의 쌓임 순서를 결정합니다. 기본값은 `0`이고요, 값이 클 수록 위에 쌓입니다. 다만, `postion` 속성을 가진 요소에만 적용된다는 점에 주의하세요.
+
+위의 예시에서 3, 4번 박스는 같은 쌓임 맥락에 있습니다. 이때 `z-index` 속성을 이용하여 3번 박스가 4번 박스 위에 쌓이도록 새로운 쌓임 맥락을 생성할 수 있습니다. 아래와 같이 3번 박스에 `z-index: 1`을 추가해봅시다.
+
+```css
+.box:nth-child(3) {
+	position: relative;
+	z-index: 1;
+}
+```
+
+<br>
+
+이제 3번 박스의 `z-index` 값은 `1`, 4번 박스는 따로 지정하지 않았으므로 `0`이겠죠. 따라서 3번 박스가 4번 박스 위에 쌓입니다. 추가로, 4번 박스는 `position` 속성을 가진 요소이므로 그렇지 않은 5번 박스보다는 위에 쌓이게 됩니다.
+
+![box stack 3](./../img/box-stack-3.png)
+
+<br>
+<br>
 <br>
 
 ---
