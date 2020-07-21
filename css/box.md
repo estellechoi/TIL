@@ -16,6 +16,14 @@ HTML 문서의 모든 요소들은 자신을 참조하는 박스(Box)를 갖게 
 
 <br>
 
+### Line Box
+
+Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
+
+> Line Box에 대한 자세한 설명은 [이 글](https://github.com/estellechoi/TIL/blob/master/css/formattingContext.md)의 Inline Formatting Context 부분에 있습니다.
+
+<br>
+
 ### Anonymous Box
 
 Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소를 참조하지 않고 어떻게 박스가 생성될 수 있을까요? 자, 아래와 같이 텍스트만 담고 있는 요소가 있다고 상상해봅시다.
@@ -52,14 +60,6 @@ Anonymous Box는 매칭되는 HTML 요소가 없는 박스입니다. HTML 요소
 <br>
 
 참고로, Anonymous Box는 일반적인 박스와 달리 매칭되는 HTML 요소가 없기 때문에 독립적으로 스타일을 지정할 수 없습니다. Anonymous Box는 자신이 속한 부모 박스의 스타일을 상속받게 됩니다.
-
-<br>
-
-### Line Box
-
-Line Box는 한 줄의 텍스트들을 감싸는 박스입니다.
-
-> Line Box에 대한 자세한 설명은 [이 글](https://github.com/estellechoi/TIL/blob/master/css/formattingContext.md)의 Inline Formatting Context 부분에 있습니다.
 
 <br>
 
