@@ -20,6 +20,8 @@
 
 - `tabindex`
 
+- `itemprop`
+
 <br>
 
 ## `class`
@@ -106,7 +108,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 ## `hidden`
 
-해당 요소가 아직, 또는 더 이상 관련이 없음을 나타내는 Boolean 속성입니다. 브라우저는 `hidden` 속성을 가진 요소를 렌더링 하지 않습니다. 그 시각적 방식 외에도 스크린 리더 등 다른 모든 표시 방식에서 숨겨집니다.
+해당 요소가 아직, 또는 더 이상 관련이 없음을 나타내는 Boolean 속성입니다. 브라우저는 `hidden` 속성을 가진 요소를 렌더링 하지 않습니다. 시각적 방식 외에도 스크린 리더 등 다른 모든 표시 방식에서 숨겨집니다.
 
 <br>
 
@@ -150,6 +152,168 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 <br>
 
+## `itemprop`
+
+아이템에 속성(Property)을 추가하기 위해 사용합니다. 각 속성은 `이름 - 값` 쌍으로 구성되고요, 속성의 값으로는 일반적인 문자열(String) 또는 URL을 지정할 수 있습니다.
+
+> 주의 : `itemprop` 속성이 마크업된 문서의 실제 콘텐츠와 아이템 속성들로 구성된 데이터 구조는 서로 아무런 관계가 없습니다.
+
+<br>
+
+예를 들어 아래 요소에 `itemprop` 속성(Attribute)을 사용하여 속성(Property)을 부여하고 싶다면,
+
+```html
+<h1>Avatar</h1>
+```
+
+<br>
+
+아래와 같이 하세요. 요소의 내부 텍스트인 `Avatar`가 영화 제목을 의미하므로, `title`을 속성의 이름으로 지정해봅시다.
+
+```html
+<h1 itemprop="title">Avatar</h1>
+```
+
+`이름`에 해당하는 `title` 값을 `itemprop` 속성(Attribute)의 값으로 지정하면 됩니다. 이 속성(Property)의 `값`은 내부 텍스트인 `Avatar`가 됩니다.
+
+<br>
+
+### `itemscope`: 속성 그루핑
+
+여러 속성(Property)들을 하나의 그룹으로 묶을 수 있습니다. 그루핑하려는 속성들을 부여하려는 아이템 요소에 `itemscope` 속성을 지정하세요. 아래와 같이 `itemscope` 속성이 지정된 아이템 요소의 하위 요소들에 지정된 모든 속성(Property)들이 하나의 스코프(Scope)로 그루핑됩니다.
+
+```html
+<div itemscope itemtype="http://schema.org/Movie">
+	<h1 itemprop="title">Avatar</h1>
+	<span
+		>Director:
+		<span itemprop="director">James Cameron</span>
+		(born August 16, 1954)</span
+	>
+	<span itemprop="genre">Science fiction</span>
+	<a href="../movies/avatar-theatrical-trailer.html" itemprop="trailer"
+		>Trailer</a
+	>
+</div>
+```
+
+<br>
+
+하나의 그룹에 속하게 된 속성들로부터 아래와 같은 데이터 구조를 도출할 수 있습니다. 참고로, `<a>` 태그와 같이 URL을 포함하는 요소의 경우 내부 텍스트가 아닌 `href`의 값이 속성(Property)의 `값`에 해당하고요.
+
+| 이름     | 값                                       |
+| -------- | ---------------------------------------- |
+| title    | Avatar                                   |
+| director | James Cameron                            |
+| genre    | Science fiction                          |
+| trailer  | ../movies/avatar-theatrical-trailer.html |
+
+<br>
+
+`itemscope`으로 묶인 그룹 자체가 속성(Property)이 될 수도 있습니다.
+
+```html
+<div itemscope>
+	<p>Name: <span itemprop="name">Amanda</span></p>
+	<p>
+		Band:
+		<span itemprop="band" itemscope>
+			<span itemprop="name">Jazz Band</span>
+			(<span itemprop="size">12</span> players)</span
+		>
+	</p>
+</div>
+```
+
+위 마크업에서는 가장 상위의 아이템(Item)에 부여된 속성은 하나의 값이 아니고, 2 개의 하위 속성(Property)들로 이루어진 속성 그룹입니다. 위의 데이터 구조 전체를 객체 형태로 정리해보면 아래와 같습니다.
+
+```json
+{
+	"name": "Amanda",
+	"band": {
+		"name": "Jazz Band",
+		"size": 12
+	}
+}
+```
+
+<br>
+
+### `itemref` 속성을 사용해서 외부에 있는 속성들을 포함하기
+
+이는 `<input>`과 `<label>` 요소를 연결하는 방식과 거의 똑같습니다. 자신의 하위에 있지 않은 아이템 요소의 속성을 포함하려면 해당 요소의 `id`를 자신의 `itemref` 속성 값에 지정하는 방법으로 연결하세요.
+
+```html
+<div itemscope id="amanda" itemref="a b"></div>
+
+<p id="a">Name: <span itemprop="name">Amanda</span></p>
+<div id="b" itemprop="band" itemscope itemref="c"></div>
+<div id="c">
+	<p>Band: <span itemprop="name">Jazz Band</span></p>
+	<p>Size: <span itemprop="size">12</span> players</p>
+</div>
+```
+
+<br>
+
+### 같은 이름의 속성을 여러 개 포함하기
+
+아래의 예시와 같이 이름이 완전이 똑같은 속성을 여러 개 가질 수 있습니다.
+
+```html
+<div itemscope>
+	<p>Flavors in my favorite ice cream:</p>
+	<ul>
+		<li itemprop="flavor">Lemon sorbet</li>
+		<li itemprop="flavor">Apricot sorbet</li>
+	</ul>
+</div>
+```
+
+<br>
+
+### 같은 값을 가지는 속성들을 한 번에 지정하기
+
+아래와 같이 `orange`라는 같은 값을 가진 속성을 2 개 지정할 수 있습니다.
+
+```html
+<div itemscope>
+	<span
+		itemprop="favorite-color
+    favorite-fruit"
+		>orange</span
+	>
+</div>
+```
+
+<br>
+
+### `<meter>` 태그와 함께 사용하기
+
+```html
+<div
+	itemprop="aggregateRating"
+	itemscope
+	itemtype="http://schema.org/AggregateRating"
+>
+	<meter itemprop="ratingValue" min="0" value="3.5" max="5">Rated 3.5/5</meter>
+	(based on <span itemprop="reviewCount">11</span> reviews)
+</div>
+```
+
+<br>
+
+### `<time>` 태그와 함께 사용하기
+
+```html
+<div itemscope>
+	I was born on
+	<time itemprop="birthday" datetime="2009-05-10">May 10th 2009</time>.
+</div>
+```
+
+<br>
+
 ---
 
 ### References
@@ -157,3 +321,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 - [draggable | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable)
 - [hidden | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden)
 - [한눈에 보는 HTML 요소(Elements & Attributes) 총정리 | HEROPY Tech](https://heropy.blog/2019/05/26/html-elements/)
+- [itemprop | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/itemprop)
+- [WHATWG HTML Microdata feature](https://html.spec.whatwg.org/multipage/microdata.html#microdata)
+- [Getting started with schema.org using Microdata](https://schema.org/docs/gs.html)
+- [HTML Microdata | W3C Working Draft 26 April 2018](https://www.w3.org/TR/microdata/)
