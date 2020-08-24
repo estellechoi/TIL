@@ -59,6 +59,7 @@
 - [애니메이션(Animation)](https://github.com/estellechoi/TIL/blob/master/css/animation.md) \*
 - [`@` Rule과 미디어쿼리(Media Query)](https://github.com/estellechoi/TIL/blob/master/css/at-rule.md) \*
 - [Image Sprites](https://github.com/estellechoi/TIL/blob/master/css/sprites.md)
+- [Flex Box](https://github.com/estellechoi/TIL/blob/master/css/flex.md) \*
 
 <br>
 
