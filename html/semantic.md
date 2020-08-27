@@ -133,6 +133,8 @@
 
 - `<br />`
 
+- `<data>`
+
 <br>
 
 ### Demarcating edits
@@ -1018,6 +1020,21 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 - `<br />` 요소에 CSS `margin`을 적용하면 줄 간격을 늘릴 수 있겠지만 좋은 방법은 아닙니다. 줄 간격은 `line-height` 속성을 사용하세요.
 
 - 웹 접근성을 위해서는 `<br />` 대신 `<p>` 요소와 함께 CSS `margin` 속성 등을 조합해 간격을 조절하세요.
+
+<br>
+
+## `<data>`
+
+주어진 콘텐츠를 기계가 읽을 수 있는 해석본과 연결합니다. 아래 예제는 상품의 이름을 표시하면서, 각각의 상품 번호도 연결합니다.
+
+```html
+<div>신상품</div>
+<ul>
+	<li><data value="398">미니 케찹</data></li>
+	<li><data value="399">점보 케찹</data></li>
+	<li><data value="400">메가 점보 케찹</data></li>
+</ul>
+```
 
 <br>
 
