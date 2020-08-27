@@ -175,6 +175,8 @@
 
 - `<iframe>`
 
+- `<object>`
+
 <br>
 
 ### Scripting
@@ -284,9 +286,7 @@ IE 11 이하의 브라우저를 지원해야 한다면 `main` [role](https://dev
 이렇게요.
 
 ```html
-<main role="main">
-	...
-</main>
+<main role="main">...</main>
 ```
 
 <br>
@@ -1059,6 +1059,49 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 <br>
 
+## `<map>`
+
+이미지 맵을 정의하기 위해 사용합니다. `<area>` 태그와 함께 사용합니다. 이미지 맵이란, 이미지에서 클릭할 수 있는 링크 영역을 의미합니다.
+
+```html
+<map name="infographic">
+	<area
+		shape="poly"
+		coords="130,147,200,107,254,219,130,228"
+		href="https://developer.mozilla.org/docs/Web/HTML"
+		target="_blank"
+		alt="HTML"
+	/>
+	<area
+		shape="poly"
+		coords="130,147,130,228,6,219,59,107"
+		href="https://developer.mozilla.org/docs/Web/CSS"
+		target="_blank"
+		alt="CSS"
+	/>
+	<area
+		shape="poly"
+		coords="130,147,200,107,130,4,59,107"
+		href="https://developer.mozilla.org/docs/Web/JavaScript"
+		target="_blank"
+		alt="JavaScript"
+	/>
+</map>
+<img
+	usemap="#infographic"
+	src="/media/examples/mdn-info2.png"
+	alt="MDN infographic"
+/>
+```
+
+<br>
+
+### 속성
+
+- `name` : 이미지 맵의 이름, 문서의 다른 부분에서 해당 맵을 참조할 때 해쉬(`#`)를 붙여 사용
+
+<br>
+
 ## `<figure>`/`<figcaption>`
 
 > `<figure>` : 이미지나 삽화, 도표 등의 영역을 지정합니다.
@@ -1103,6 +1146,37 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
   - `allow-scripts` : 프레임 문서의 JavaScript 동작을 허용합니다.
   - `allow-same-origin` : 명시하지 않으면, 무조건 [동일 출처 정책](https://developer.mozilla.org/en-US/docs/Glossary/same-origin_policy)에 위배되는 리소스로 간주합니다.
     > [`sandbox` 속성 값 모두 보기](https://developer.mozilla.org/ko/docs/Web/HTML/Element/iframe#sandbox)
+
+<br>
+
+## `<object>`
+
+외부 리소스를 나타내기 위해 사용합니다. `<object>` 요소는 이미지, 새로운 브라우징 맥락, 플러그인으로 작동시키는 리소스 등으로 인식됩니다.
+
+```html
+<object
+	type="application/pdf"
+	data="/media/examples/In-CC0.pdf"
+	width="250"
+	height="200"
+></object>
+```
+
+`<object>` 태그의 `data`, `type`, `form`, `name`, `usemap` 속성을 제외한, 사실상 모든 속성들이 HTML5 이후로 Deprecated 되었습니다.
+
+<br>
+
+### 속성
+
+- `data` : 리소스 URL
+
+- `type` : 리소스 포맷/타입
+
+- `form` : 문서 내 `<form>` 태그의 `id` 값을 이 속성 값으로 지정하면, 해당 폼과 외부 리소스를 연결
+
+- `name` : 유효한 새로운 브라우징 맥락이 있다면, 브라우징 맥락의 이름 지정
+
+- `usemap` : 해쉬이름(`#`)을 사용하여 `<map>` 태그를 연결
 
 <br>
 
@@ -1208,9 +1282,7 @@ X<sup>4</sup> + Y<sup>2</sup>, H<sub>2</sub>O
 
 ```html
 <noscript>
-	<p>
-		Your Browser does not support JavaScript.
-	</p>
+	<p>Your Browser does not support JavaScript.</p>
 </noscript>
 ```
 
@@ -1599,3 +1671,5 @@ fieldset {
 - [\<fieldset\>: The Field Set element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset)
 - [\<legend\> | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend)
 - [\<progress\>: The Progress Indicator element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress)
+- [\<object\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object)
+- [\<map\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/map)
