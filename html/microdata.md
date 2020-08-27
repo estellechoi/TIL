@@ -1,4 +1,4 @@
-# 마이크로데이터와 Schema.org 시작하기
+# 마이크로데이터와 함께 Schema.org 시작하기
 
 > [Getting started with schema.org using Microdata](https://schema.org/docs/gs.html)를 번역한 글입니다.
 
