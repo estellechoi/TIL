@@ -31,7 +31,7 @@ Schema.org는 Google, Microsoft, Yandex, Yahoo! 등의 메이저 검색 엔진�
    - 3a. 날짜, 시간, 지속시간
    - 3b. Enumerations과 고전적인 레퍼런스
    - 3c. 암시적 정보
-   - 3d. Schema.org 확장하기
+   - 3d. Schema.org 더 알아보기
 
 <br>
 
@@ -346,9 +346,9 @@ Schema.org에서는 다양한 속성들의 값을 `Enumerations`로 지정할 �
 
 <br>
 
-#### Schema.org 확장하기
+#### Schema.org 더 알아보기
 
-대부분의 사이트와 기관들은 Schema.org 사용을 확대할 이유가 없을 것입니다. 하지만, Schema.org에서는 추가적인 속성이나 하위 타입들을 명시하는 방법들을 제공합니다. 관심 있다면 [schema.org extension mechanism](https://schema.org/docs/extension.html)을 읽어보세요.
+대부분의 사이트와 기관들은 Schema.org 사용을 확대할 이유가 없을 것입니다. 하지만, Schema.org에서는 추가적인 속성이나 하위 타입들을 명시하는 방법들을 제공합니다. 관심이 있다면 [schema.org extension mechanism](https://schema.org/docs/extension.html)을 읽어보세요.
 
 <br>
 
