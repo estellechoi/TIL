@@ -71,7 +71,7 @@ Schema.org는 Google, Microsoft, Yandex, Yahoo! 등의 메이저 검색 엔진�
 
 <br>
 
-`itemscope` 속성을 추가하는 것은 이 웹 페이지가 특정 아이템에 대한 정보를 담은 `<div>...</div>` 블록을 포함하고 있음을 명시하는 것입니다. 하지만 이 것만으로는 정보를 명시하기에 충분하지 않습니다. `itemtype` 속성을 함께 사용하여 아이템의 타입을 명시할 수 있습니다.
+`itemscope` 속성을 추가하는 것은 이 웹 페이지가 특정 아이템에 대한 정보를 담은 `<div>` 블록을 포함하고 있음을 명시하는 것입니다. 하지만 이 것만으로는 정보를 명시하기에 충분하지 않습니다. `itemtype` 속성을 함께 사용하여 아이템의 타입을 명시할 수 있습니다.
 
 ```html
 <div itemscope itemtype="http://schema.org/Movie">
@@ -84,13 +84,11 @@ Schema.org는 Google, Microsoft, Yandex, Yahoo! 등의 메이저 검색 엔진�
 
 이로써 위의 `<div>` 블록 내에 포함된 아이템이 "영화"에 대한 정보라는 것을 구체화했습니다. 아이템 타입은 URL 형태로 제공되며, 예제에서는 `http://schema.org/Movie`를 사용했습니다.
 
-This specifies that the item contained in the div is in fact a Movie, as defined in the schema.org type hierarchy. Item types are provided as URLs, in this case http://schema.org/Movie.
-
 <br>
 
 ### 1c. `itemprop`
 
-또 어떤 영화 아바타에 대한 추가적인 정보를 검색 엔진에 줄 수 있을까요? 영화라는 아이템은 배우, 감독, 별점 등 재미있는 속성(Property)들을 갖고있죠. 이러한 아이템의 속성들에 이름을 부여하기 위해 `itemprop` 태그 속성을 사용합니다. 예를 들어, 아이템에 영화 감독 속성을 추가하기 위해 감독의 이름을 감싸고 있는 태그에 `itemprop="director"` 속성 값을 추가하세요. ([`http://schema.org/Movie`](http://schema.org/Movie)에서 영화에 관련된 사용 가능한 속성들의 전체 리스트를 확인할 수 있습니다.)
+영화 아바타에 대한 또 어떤 추가적인 정보를 검색 엔진에 줄 수 있을까요? 영화라는 아이템은 배우, 감독, 별점 등 재미있는 속성(Property)들을 갖고있죠. 이러한 아이템의 속성들에 이름을 부여하기 위해 `itemprop` 태그 속성을 사용합니다. 예를 들어, 아이템에 영화 감독 속성을 추가하기 위해 감독의 이름을 감싸고 있는 태그에 `itemprop="director"` 속성 값을 추가하세요. ([여기](http://schema.org/Movie)에서 영화 아이템의 속성 이름으로 사용 가능한 전체 리스트를 확인할 수 있습니다.)
 
 ```html
 <div itemscope itemtype="http://schema.org/Movie">
@@ -106,15 +104,15 @@ This specifies that the item contained in the div is in fact a Movie, as defined
 </div>
 ```
 
-각 단어들에 `itemprop` 속성을 부여하기 위해 단어들을 감싸는 `<span>...</span>` 태그를 사용한 것에 주목하세요. `<span>` 태그는 페이지 레이아웃에 영향을 주지 않기 때문에 `itemprop` 속성을 추가할 때 유용합니다.
+각 단어들에 `itemprop` 속성을 부여하기 위해 단어들을 감싸는 `<span>` 태그를 사용한 것에 주목하세요. `<span>` 태그는 페이지 레이아웃에 영향을 주지 않기 때문에 `itemprop` 속성을 추가할 때 유용합니다.
 
-검색 엔진은 이제 `http://www.avatarmovie.com`이 단순히 URL일 뿐만 아니라, James Cameron 감독이 만든 공상과학 영화 아바타의 예고편 링크라는 정보를 인식할 수 있게 되었습니다.
+검색 엔진은 이제 `http://www.avatarmovie.com`이 단순한 URL이 아니라, James Cameron 감독이 만든 공상과학 영화 아바타의 예고편 링크라는 정보를 인식할 수 있게 되었습니다.
 
 <br>
 
 ### 1d. 아이템 속성의 값으로 다른 아이템 지정하기
 
-아이템의 속성(Itemprop) 값으로 또 다른 아이템을 지정할 수 있습니다. 자신의 속성 그룹을 갖고있는 또 하나의 아이템을 말이죠. 가령, 영화 감독이라는 속성의 값으로 `Person` 타입의 또 다른 아이템 자체를 지정할 수 있습니다. 이 `Person` 타입의 아이템은 `name`, `birthDate`와 같은 자신의 속성들을 포함할 것입니다. 속성의 값이 단순 문자열이나 URL이 아니라, 또 다른 아이템이라는 것을 명확히 하기 위해 이름을 지정하는 `itemprop`과 함께 `itemscope` 속성을 지정하세요.
+아이템의 속성(Itemprop) 값으로 문자열이나 URL이 아닌, 다른 아이템을 지정할 수 있습니다. 자신의 속성 그룹을 갖고있는 또 하나의 아이템을 말이죠. 가령, 영화 감독이라는 속성의 값으로 `Person` 타입의 또 다른 아이템을 지정할 수 있습니다. 이 `Person` 타입의 아이템은 `name`, `birthDate`와 같은 자신의 속성들을 포함할 것입니다. 속성의 값이 단순 문자열이나 URL이 아니라, 또 다른 아이템이라는 것을 명확히 하기 위해 이름을 지정하는 `itemprop`과 함께 `itemscope` 속성을 지정하세요.
 
 ```html
 <div itemscope itemtype="http://schema.org/Movie">
@@ -214,7 +212,7 @@ Schema.org 타입과 속성 키워드들을 사용하면 `itemscope`, `itemtype`
 
 <br>
 
-아래 예제는 2011년 5월 8일에 예정된 콘서트 정보를 담고 있는 HTML 마크업입니다. `Event` 타입의 아이템은 `name`, `description`, `date` 속성을 가질 수 있습니다.
+아래 예제는 2011년 5월 8일에 예정된 콘서트 정보를 담고 있는 HTML 마크업입니다. `Event` 타입의 아이템은 `name`, `description`, `startDate` 속성을 가질 수 있습니다.
 
 ```html
 <div itemscope itemtype="http://schema.org/Event">
@@ -230,7 +228,7 @@ Schema.org 타입과 속성 키워드들을 사용하면 `itemscope`, `itemtype`
 
 <br>
 
-`<time>` 태그와 `datetime` 속성을 사용하는 것과 비슷한 방법으로 지속시간 정보도 제공할 수 있습니다. 지속시간은 대문자 `P` 프리픽스와 `00H00M` 포맷을 사용하여 지정합니다. 아래는 1시간 30분이 걸리는 요리 시간 정보를 나타내는 마크업입니다.
+비슷한 방법으로 지속시간 정보도 제공할 수 있습니다. 지속시간은 대문자 `P` 프리픽스와 `00H00M` 포맷을 사용하여 지정합니다. 아래는 1시간 30분이 걸리는 요리 시간 정보를 나타내는 마크업입니다.
 
 ```html
 <time itemprop="cookTime" datetime="PT1H30M">1 1/2 hrs</time>
@@ -271,9 +269,7 @@ Schema.org 타입과 속성 키워드들을 사용하면 `itemscope`, `itemtype`
 
 <br>
 
-Schema.org provides enumerations for a handful of properties—typically wherever there are a limited number of typical values for a property, there is a corresponding enumeration specified in schema.org. In this case, the possible values for availability are specified in ItemAvailability.
-
-Schema.org에서는 많은 속성들의 값으로 사용할 수 있는 `Enumerations` 타입을 제공합니다. 전형적으로 가능한 속성의 값을 제한해야 하는 모든 경우에 Schema.org에서 적절한 `Enumerations`를 찾을 수 있을 것입니다. 위 경우 `availability` 속성의 값으로 가능한 값들은 [`ItemAvailability`](https://schema.org/ItemAvailability)에 명시되어 있습니다.
+Schema.org에서는 다양한 속성들의 값을 `Enumerations`로 지정할 수 있도롤 많은 타입을 제공합니다. 가능한 속성의 값을 제한해야 하는 거의 모든 경우에 Schema.org에서 적절한 `Enumerations` 링크를 찾을 수 있을 것입니다. 예로, `availability` 속성의 값으로 가능한 값들은 [`ItemAvailability`](https://schema.org/ItemAvailability)에 명시되어 있습니다.
 
 <br>
 
@@ -312,7 +308,7 @@ Schema.org에서는 많은 속성들의 값으로 사용할 수 있는 `Enumerat
 
 ### 3d. 암시적 정보: `<meta>` 태그와 `<content>` 속성을 사용하세요
 
-종종 어떤 정보들은 중요한 정보이기 때문에 마크업하는 것이 적절하지만, 시각적인 문제로 마크업하기 곤란합니다.
+종종 어떤 정보들은 중요한 정보이기 때문에 마크업하는 것이 적절하지만, 시각적인 문제로 마크업하기 곤란할 수 있습니다.
 
 이러한 정보들은 이미지를 통해 제공할 수 있습니다. 예로, 5점 중 4점의 별점을 나타내기 위해 별 이미지를 사용할 수 있겠죠. 혹은 영상의 시간을 나타내기 위해 `Flash` 객체를 사용하거나, 결제 통화를 페이지에 명시하지는 않으면서 포함시킬 수 있을 것입니다. 이와 같은 모든 경우에 `<meta>` 태그와 `content` 속성을 사용하세요. 아래의 예제를 보시죠. 5점 중 4점의 별점을 나타내는 이미지 예제입니다.
 
@@ -346,13 +342,13 @@ Schema.org에서는 많은 속성들의 값으로 사용할 수 있는 `Enumerat
 </div>
 ```
 
-이 기업은 최소로 사용해야 합니다. 마크업하기 곤란할 때만 `<meta>` 태그를 사용하세요.
+이 기법은 최소로 사용해야 합니다. 시각적으로 마크업하기 곤란할 때만 `<meta>` 태그를 사용하세요.
 
 <br>
 
 #### Schema.org 확장하기
 
-대부분의 사이트와 기관들은 Schema.org 아이템을 확장할 이유가 없을 것입니다. 하지만, Schema.org에서는 추가적인 속성이나 하위 타입들을 명시하는 방법들을 제공합니다. 관심 있다면 [schema.org extension mechanism](https://schema.org/docs/extension.html)을 읽어보세요.
+대부분의 사이트와 기관들은 Schema.org 사용을 확대할 이유가 없을 것입니다. 하지만, Schema.org에서는 추가적인 속성이나 하위 타입들을 명시하는 방법들을 제공합니다. 관심 있다면 [schema.org extension mechanism](https://schema.org/docs/extension.html)을 읽어보세요.
 
 <br>
 
