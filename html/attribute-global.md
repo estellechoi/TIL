@@ -154,11 +154,11 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 ## `itemprop`
 
-> [저의 다른 글](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)과 함께 읽어보세요. [Google Search](https://developers.google.com/search/docs/data-types/article)에서 키워드별 예제도 확인할 수 있습니다.
+> [저의 다른 글](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)과 함께 읽어보세요. 마이크로데이터(Microdata)가 무엇인지에 대해서도 알 수 있습니다. [Google Search](https://developers.google.com/search/docs/data-types/article)에서 키워드별 예제도 확인할 수 있습니다.
 
 <br>
 
-마이크로데이터(Microdata)에 속성(Property)을 가진 아이템(Item)을 추가하기 위해 사용합니다. 더 직관적으로 말하자면, 마크업 문서의 내용들을 데이터화하기 위해 사용하는 속성이고요, 검색엔진최적화(SEO)와 관련이 있습니다. 대소문자를 구분하며, 각 데이터 아이템은 `이름 - 값` 쌍으로 이루어진 속성(Itemprop)들로 구성됩니다. 속성의 값으로는 일반적인 문자열(String) 또는 URL을 지정할 수 있습니다.
+마이크로데이터(Microdata)를 사용하여 속성(Property)을 가진 아이템(Item)을 추가하기 위해 사용합니다. 더 직관적으로 말하자면, 마크업 문서의 내용들을 데이터화하기 위해 사용하는 속성이고요, 검색엔진최적화(SEO)와 관련이 있습니다. 대소문자를 구분하며, 각 데이터 아이템은 `이름 - 값` 쌍으로 이루어진 속성(Itemprop)들로 구성됩니다. 속성의 값으로는 일반적인 문자열(String) 또는 URL을 지정할 수 있습니다.
 
 > 주의 : `itemprop` 속성이 마크업된 문서의 실제 콘텐츠와 아이템 속성들로 구성된 데이터 구조는 서로 아무런 관계가 없습니다.
 
