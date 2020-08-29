@@ -357,3 +357,4 @@ Schema.org에서는 다양한 속성들의 값을 `Enumerations`로 지정할 �
 ### References
 
 - [Getting started with schema.org using Microdata](https://schema.org/docs/gs.html)
+- [Google Search - Reference](https://developers.google.com/search/docs/data-types/article)
