@@ -29,7 +29,7 @@
 - [전역 속성(Global Attributes)](https://github.com/estellechoi/TIL/blob/master/html/attribute-global.md)
 - [특수기호(Entities)](https://github.com/estellechoi/TIL/blob/master/html/entity.md)
 - [How to stay with web-accessiblity highly achieved](https://github.com/estellechoi/TIL/blob/master/html/webaccess.md) \*
-- [마이크로데이터와 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)
+- [마이크로데이터와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)
 
 <br>
 
