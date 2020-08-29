@@ -23,11 +23,11 @@
 
 - [DOCTYPE, `<head>` 태그, 검색엔진 최적화(Search Engine Optimization)](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
 - [블록(Block) / 인라인(Inline) 요소](https://github.com/estellechoi/TIL/blob/master/html/blockInline.md)
-- [HTML tags - stay semantic](https://github.com/estellechoi/TIL/blob/master/html/semantic.md)
 - [이미지와 멀티미디어 태그(Image and multimedia tags)](https://github.com/estellechoi/TIL/blob/master/html/multimedia.md)
 - [테이블 태그(Table content tags)](https://github.com/estellechoi/TIL/blob/master/html/table.md)
 - [전역 속성(Global Attributes)](https://github.com/estellechoi/TIL/blob/master/html/attribute-global.md)
 - [특수기호(Entities)](https://github.com/estellechoi/TIL/blob/master/html/entity.md)
+- [HTML tags - stay semantic](https://github.com/estellechoi/TIL/blob/master/html/semantic.md)
 - [How to stay with web-accessiblity highly achieved](https://github.com/estellechoi/TIL/blob/master/html/webaccess.md) \*
 - [마이크로데이터와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)
 
