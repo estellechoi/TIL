@@ -152,7 +152,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 <br>
 
-## `itemprop`
+## `itemprop` - 검색엔진최적화
 
 > 저의 번역글 [마이크로데이터(Microdata)를 사용하여 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)와 함께 읽어보세요.
 
