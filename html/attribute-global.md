@@ -158,7 +158,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 <br>
 
-마이크로데이터(Microdata)를 사용하여 속성(Property)을 가진 아이템(Item)을 추가하기 위해 사용합니다. 마이크로데이터가 무엇인지 모르시나요? [W3C Working Draft 26 April 2018](https://www.w3.org/TR/microdata/)에서는 마이크로데이터를 아래와 같이 정의합니다.
+HTML 문서에 속성(Property)을 가진 아이템(Item)을 추가하기 위해 사용하며, 마이크로데이터(Microdata) 모델의 일환으로 소개된 전역 속성(Attribute)입니다. 마이크로데이터가 무엇인지 모르시나요? [W3C Working Draft 26 April 2018](https://www.w3.org/TR/microdata/)에서는 마이크로데이터를 아래와 같이 정의합니다.
 
 > ... new HTML attributes to embed simple machine-readable data in HTML documents. It is similar to, but generally less expressive than RDFa, and does not support the same level of internationalization. It is simple to learn and process, but authors who need good internationalization support, or want to include structured content in their data should consider using RDFa. (or another format such as JSON-LD) instead.
 
