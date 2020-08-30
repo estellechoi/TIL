@@ -112,7 +112,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 <br>
 
-## `tabindex`
+## `tabindex` - 포커스 탐색
 
 `Tab` 키를 이용해 요소를 순차적으로 포커스(Focus) 탐색할 순서를 지정합니다. `tabindex="0"`인 요소들은 HTML 마크업 코드 순서대로 `Tab` 이동 순서가 지정됩니다. 보통 [대화형 콘텐츠](https://developer.mozilla.org/ko/docs/Web/Guide/HTML/Content_categories#%EB%8C%80%ED%99%94%ED%98%95_%EC%BD%98%ED%85%90%EC%B8%A0)들은 `tabindex="0"` 입니다. `tabindex` 속성이 없는 요소는 탐색할 수 없고요.
 
@@ -129,7 +129,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 ### `tabindex="-1"`
 
-어떤 대화형 콘텐츠 요소를 Tab 탐색에서 제외하고 싶으면, `tabindex="-1"`을 지정합니다. (Focus는 여전히 가능)
+어떤 대화형 콘텐츠 요소를 Tab 탐색에서 제외하고 싶으면, `tabindex="-1"`을 지정합니다. (포커스는 여전히 가능합니다.)
 
 <br>
 
