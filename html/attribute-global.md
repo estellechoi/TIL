@@ -154,11 +154,19 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 ## `itemprop`
 
-> [저의 다른 글](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)과 함께 읽어보세요. 마이크로데이터(Microdata)가 무엇인지에 대해서도 알 수 있습니다. [Google Search](https://developers.google.com/search/docs/data-types/article)에서는 키워드별 예제도 확인할 수 있습니다.
+> 저의 번역글 [마이크로데이터(Microdata)를 사용하여 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)와 함께 읽어보세요.
+
+> [Google Search](https://developers.google.com/search/docs/data-types/article)에서는 키워드별 예제도 확인할 수 있습니다.
 
 <br>
 
-마이크로데이터(Microdata)를 사용하여 속성(Property)을 가진 아이템(Item)을 추가하기 위해 사용합니다. 더 직관적으로 말하자면, 웹 문서의 내용들을 데이터화하기 위해 사용하는 속성이고요, 검색엔진최적화(SEO)와 관련이 있습니다. 대소문자를 구분하며, 각 데이터 아이템은 `이름 - 값` 쌍으로 이루어진 속성(Itemprop)들로 구성됩니다. 속성의 값으로는 일반적인 문자열(String) 또는 URL을 지정할 수 있습니다.
+마이크로데이터(Microdata)를 사용하여 속성(Property)을 가진 아이템(Item)을 추가하기 위해 사용합니다. 마이크로데이터가 무엇인지 모르시나요? [W3C Working Draft 26 April 2018](https://www.w3.org/TR/microdata/)에서는 마이크로데이터를 아래와 같이 정의합니다.
+
+> ... new HTML attributes to embed simple machine-readable data in HTML documents. It is similar to, but generally less expressive than RDFa, and does not support the same level of internationalization. It is simple to learn and process, but authors who need good internationalization support, or want to include structured content in their data should consider using RDFa. (or another format such as JSON-LD) instead.
+
+즉, 마이크로데이터란 HTML 문서에 검색엔진이 이해할 수 있는 간단한 데이터를 삽입하기 위해 고안된 속성(Attribute)들을 말합니다. RDFa와 비슷하지만 덜 구체적이며 국제화(Internationalization) 지원이 필요할 때는 적합하지 않고요, 대신 배우고 적용하기 쉽다는 장점이 있습니다. 국제화 혹은 구조화된 데이터가 필요하다면, 마이크로데이터보다는 RDFa, JSON-LD 등의 대체 방법들을 사용하는 것이 좋습니다.
+
+더 직관적으로 말하자면, 웹 문서의 내용들을 데이터화하여 검색엔진이 해당 문서를 잘 찾을 수 있도록 하는데 사용하는 속성이고요, 따라서 검색엔진최적화(SEO)에 기여합니다. 대소문자를 구분하며, 각 데이터 아이템은 `이름 - 값` 쌍으로 이루어진 속성(Itemprop)들로 구성됩니다. 속성의 값으로는 일반적인 문자열(String) 또는 URL을 지정할 수 있습니다.
 
 > 주의 : `itemprop` 속성이 마크업된 문서의 실제 콘텐츠와 아이템 속성들로 구성된 데이터 구조는 서로 아무런 관계가 없습니다.
 
@@ -382,3 +390,4 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 - [WHATWG HTML Microdata feature](https://html.spec.whatwg.org/multipage/microdata.html#microdata)
 - [Getting started with schema.org using Microdata](https://schema.org/docs/gs.html)
 - [HTML Microdata | W3C Working Draft 26 April 2018](https://www.w3.org/TR/microdata/)
+- [Microdata (HTML) | Wikipedia](<https://en.wikipedia.org/wiki/Microdata_(HTML)>)
