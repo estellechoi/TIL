@@ -156,7 +156,7 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 > 저의 번역글 [마이크로데이터(Microdata)를 사용하여 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)와 함께 읽어보세요.
 
-> [Google Search](https://developers.google.com/search/docs/data-types/article)에서는 키워드별 예제를 확인할 수 있습니다.
+> [Google Search](https://developers.google.com/search/docs/data-types/article)에서 키워드별 예제를 확인할 수 있습니다. 마이크로데이터/RDFa/JSON-LD 세 방법 모두 소개하고 있으며, 실제 프로젝트에 적용해볼 때 참고하면 도움이 됩니다.
 
 <br>
 
