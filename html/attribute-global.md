@@ -162,6 +162,8 @@ Boolean 속성입니다. 이 속성을 지정하면 해당 요소를 드래그(D
 
 > ... new HTML attributes to embed simple machine-readable data in HTML documents. It is similar to, but generally less expressive than RDFa, and does not support the same level of internationalization. It is simple to learn and process, but authors who need good internationalization support, or want to include structured content in their data should consider using RDFa. (or another format such as JSON-LD) instead.
 
+<br>
+
 즉, 마이크로데이터란 HTML 문서에 검색엔진이 이해할 수 있는 간단한 데이터를 삽입하기 위해 고안된 속성(Attribute)들을 말합니다. RDFa와 비슷하지만 덜 구체적이며 국제화(Internationalization) 지원이 필요할 때는 적합하지 않고요, 대신 배우고 적용하기 쉽다는 장점이 있습니다. 국제화 혹은 구조화된 데이터가 필요하다면, 마이크로데이터보다는 RDFa, JSON-LD 등의 대체 방법들을 사용하는 것이 좋습니다.
 
 > [Google Search](https://developers.google.com/search/docs/data-types/article)에서 키워드별 예제를 확인할 수 있습니다. 마이크로데이터/RDFa/JSON-LD 세 방법 모두 소개하고 있으며, 실제 프로젝트에 적용해볼 때 참고하면 도움이 됩니다.
