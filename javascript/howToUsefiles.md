@@ -36,7 +36,7 @@
 
 - `capture` : 이미지/영상 데이터를 캡쳐하기 위해 어떤 카메라를 사용할지 지정합니다.
 
-- `files` : 선택된 파일들에 접근할 수 있는 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList)에 접근할 수 있습니다.
+- `files` : 선택된 파일들에 접근할 수 있는 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList)에 객체를 반환합니다.
 
 - `multiple` : 사용자가 1 개 이상의 파일을 선택하도록 허용할지 여부를 지정합니다. (Boolean)
 
@@ -88,7 +88,7 @@
 
 ## `files`
 
-이 속성을 통해 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList) 객체에 접근할 수 있습니다. 이 객체는 선택된 모든 파일들의 리스트입니다.
+이 속성을 통해 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList) 객체에 접근할 수 있습니다. 이 객체는 선택된 각 파일의 정보가 담긴 `File` 객체로 구성된 리스트입니다.
 
 <br>
 
@@ -112,7 +112,7 @@ JS 코드에서 `HTMLInputElement.files` 속성은 `FileList` 객체를 반환�
 
 <br>
 
-## `<input type="file">` 사용과 관련된 몇가지 유의사항
+## `<input type="file">` 사용과 관련된 몇가지 가이드
 
 - 파일선택 요소를 디자인하기 위해 `<input type="file">`요소를 숨기는 경우가 많습니다. 이때 `visibility: hidden`이나 `display: none`을 사용하지 마세요. 보조기술이 파일선택 요소를 사용할 수 없다고 판단하기 때문입니다. 다른 대안들 중 하나를 사용하세요. `opacity: 0`도 괜찮죠.
 
@@ -136,6 +136,195 @@ function returnFileSize(number) {
 
 <br>
 
+## 드래그하여 파일 선택하기
+
+사용자가 파일을 드래그하여 웹 애플리케이션에 적용하도록 할 수 있습니다. 원하는 요소가 `dragenter`, `dragover`, `drop` 이벤트를 감지할 수 있도록 하면 됩니다.
+
+```javascript
+let dropbox;
+
+dropbox = document.getElementById("dropbox");
+dropbox.addEventListener("dragenter", dragenter, false);
+dropbox.addEventListener("dragover", dragover, false);
+dropbox.addEventListener("drop", drop, false);
+```
+
+<br>
+
+여기에서 `dragenter`/`dragover` 이벤트는 필요가 없으므로 아래와 같이 이벤트 전파와 동작을 막고요. `drop` 이벤트핸들러에서 `Event` 객체를 받아 `dataTransfer` 속성에 접근하면 사용자가 드래그하여 선택한 파일들의 리스트를 얻을 수 있습니다.
+
+```javascript
+function dragenter(e) {
+	e.stopPropagation();
+	e.preventDefault();
+}
+
+function dragover(e) {
+	e.stopPropagation();
+	e.preventDefault();
+}
+
+function drop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+
+	const dt = e.dataTransfer;
+	const files = dt.files;
+
+	handleFiles(files);
+}
+```
+
+<br>
+
+## 선택한 이미지 썸네일 보여주기
+
+- 사용자가 선택한 이미지 정보를 가지고있는 `File` 객체를 `<img>` 요소의 `file` 속성의 값으로 지정합니다.
+
+```javascript
+const file = input.files[0];
+const img = document.createElement("img");
+img.file = file;
+```
+
+<br>
+
+- 다음으로, `FileReader` 객체를 사용합니다. `FileReader` 객체는 원하는 이미지를 `<img>` 태그에 붙이고 로드하는 작업을 비동기로 처리하게 해주죠.
+
+```javascript
+const reader = new FileReader();
+reader.onload = (function (aImg) {
+	return function (e) {
+		aImg.src = e.target.result;
+	};
+})(img);
+reader.readAsDataURL(file);
+```
+
+- `FileReader` 객체의 `onload` 속성에 함수를 지정해줍니다.
+
+- `FileReader` 객체의 `readAsDataURL()` 메소드를 호출합니다. 이때 인자로 `File` 객체를 넣어주고요, 이 메소드를 호출하면 파일 "읽기" 작업이 시작됩니다. 이미지 파일 전체가 로드되면, 해당 파일은 `data: URL`로 바뀌어 `onload` 속성에 지정해두었던 콜백 함수로 전달됩니다.
+
+- 이제 콜백 함수에서 `<img>` 태그의 `src` 속성에 값을 넣는 코드를 추가해주면, 로드된 이미지가 화면에 썸네일로 표시됩니다.
+
+<br>
+
+## `URL.createObjectURL()`
+
+어떤 데이터를 참조할 때 사용할 URL이 필요하다면 `URL.createObjectURL()`/`URL.revokeObjectURL()` 메소드를 사용하세요. 심지어 사용자의 컴퓨터에 있는 로컬 파일을 포함한 모든 데이터에 대한 레퍼런스를 얻을 수 있습니다. `File` 객체가 있다고 가정했을 때, 해당 파일을 객체 URL로 참조할 수 있다는 말입니다.
+
+이렇게요.
+
+```javascript
+const objectURL = window.URL.createObjectURL(file);
+```
+
+<br>
+
+이 객체 URL의 값은 `File` 객체를 식별하는 문자열입니다. `createObjectURL()` 메소드를 호출할 때마다 고유한 객체 URL이 생성되는데요, 이미 동일한 파일에 대한 객체 URL을 생성한 적이 있더라도 새로운 객체 URL이 또 생성됩니다. 한편, 생성된 객체 URL은 사용이 끝나면 폐지되어야합니다. 문서가 언로드될 때 자동으로 폐지되기는 하지만, 만약 페이지가 해당 객체 URL을 동적으로 사용한다면 아래와 같이 `revokeObjectURL()` 메소드를 호출하여 직접 폐지시켜야 합니다.
+
+```javascript
+URL.revokeObjectURL(objectURL);
+```
+
+<br>
+
+## `URL.createObjectURL()` 사용하여 선택된 이미지 보여주기
+
+`객채 URL`을 `<img>` 태그의 `src` 속성의 값으로 지정하면 됩니다. `onload` 속성에는 객체 URL을 폐지하는 함수를 지정하고요.
+
+```javascript
+const img = document.createElement("img");
+img.src = URL.createObjectURL(input.files[i]);
+img.onload = function () {
+	URL.revokeObjectURL(input.src);
+};
+```
+
+## `URL.createObjectURL()` 사용하여 PDF 파일 보여주기
+
+객체 URL을 사용하여 이미지 외의 다양한 파일을 렌더링시킬 수 있습니다. `<iframe>` 요소를 통해 문서에 파일을 삽입하는 방식입니다. Firefox 브라우저에서는 `pdfjs.disabled` 값을 `false`로 지정해야 `<iframe>` 요소내에서 PDF 파일을 보여준다는 점에 주의하세요. 예제를 봅시다. 먼저 PDF 파일을 보여줄 `<iframe>` 요소가 필요하겠고요.
+
+```html
+<iframe id="viewer"></iframe>
+```
+
+<br>
+
+`<iframe>` 요소의 `src` 속성의 값으로 객체 URL을 지정합니다.
+
+```javascript
+const objUrl = URL.createObjectURL(file);
+const iframe = document.getElementById("viewer");
+iframe.setAttribute("src", objUrl);
+
+URL.revokeObjectURL(objUrl);
+```
+
+<br>
+
+## `URL.createObjectURL()` 사용하여 선택한 영상 재생하기
+
+바로 예제를 보죠. 위와 같은 방식입니다.
+
+```javascript
+const video = document.getElementById("video");
+const objUrl = URL.createObjectURL(file);
+video.src = objUrl;
+video.play();
+
+URL.revokeObjectURL(objUrl);
+```
+
+<br>
+
+## 선택한 파일을 비동기적으로 업로드하기
+
+`FileUpload` 함수 객체를 사용하면 사용자가 선택한 파일들을 서버로 전송할 수 있습니다. `FileUpload` 함수를 호출할 때 2 개의 인자가 필요한데요, 이미지 요소와 이미지 요소의 `file` 속성입니다. 아래는 선택한 파일을 서버로 전송하는 함수입니다.
+
+```javascript
+function FileUpload(img, file) {
+	const reader = new FileReader();
+	this.ctrl = createThrobber(img);
+	const xhr = new XMLHttpRequest();
+	this.xhr = xhr;
+
+	this.xhr.upload.addEventListener(
+		"progress",
+		(e) => {
+			if (e.lengthComputable)
+				this.ctrl.update(Math.round((e.loaded * 100) / e.total));
+		},
+		false
+	);
+
+	xhr.upload.addEventListener(
+		"load",
+		(e) => {
+			this.ctrl.update(100);
+			const canvas = this.ctrl.ctx.canvas;
+			canvas.parentNode.removeChild(canvas);
+		},
+		false
+	);
+
+	xhr.open(
+		"POST",
+		"http://demos.hacks.mozilla.org/paul/demos/resources/webservices/devnull.php"
+	);
+
+	xhr.overrideMimeType("text/plain; charset=x-user-defined-binary");
+
+	reader.onload = (evt) => {
+		xhr.send(evt.target.result);
+	};
+
+	reader.readAsBinaryString(file); // 파일을 이진문자열로 변환
+}
+```
+
+<br>
+
 ---
 
 ### References
@@ -143,3 +332,4 @@ function returnFileSize(number) {
 - [Using files from web applications | MDN](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications)
 - [Using the DOM File API in chrome code](https://developer.mozilla.org/ko/docs/Extensions/Using_the_DOM_File_API_in_chrome_code)
 - [\<input type="file"\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
+- [Hide content](https://www.a11yproject.com/posts/2013-01-11-how-to-hide-content/)
