@@ -36,7 +36,7 @@
 
 - `capture` : 이미지/영상 데이터를 캡쳐하기 위해 어떤 카메라를 사용할지 지정합니다.
 
-- `files` : 선택된 파일들에 접근할 수 있는 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList)에 객체를 반환합니다.
+- `files` : 선택된 파일들에 접근할 수 있는 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList) 객체를 반환합니다.
 
 - `multiple` : 사용자가 1 개 이상의 파일을 선택하도록 허용할지 여부를 지정합니다. (Boolean)
 
@@ -88,13 +88,15 @@
 
 ## `files`
 
-이 속성을 통해 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList) 객체에 접근할 수 있습니다. 이 객체는 선택된 각 파일의 정보가 담긴 `File` 객체로 구성된 리스트입니다.
+이 속성은 [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList) 객체를 반환합니다. `FileList` 객체는 선택된 모든 파일들의 정보를 담고있는데요, 각 파일에 대한 정보가 인덱싱되어 담겨있는 유사 배열 객체입니다. 완전히 배열처럼 사용하려면 [`Array.from()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from) 메소드를 사용하여 배열 객체로 바꾸어 사용하십시오. 또는 `FileList.item(index)` 메소드를 사용하여 특정 인덱스의 `File` 객체에 접근할 수 있습니다. `FileList[index]`와 같이 배열 객체의 문법을 사용해서 `File` 객체에 접근할 수도 있죠.
+
+> 유사 배열 객체란 `length` 속성과 인덱싱된 요소들을 가진 객체를 말합니다.
 
 <br>
 
 ### `FileList` 객체를 사용하여 파일에 대한 정보 얻기
 
-JS 코드에서 `HTMLInputElement.files` 속성은 `FileList` 객체를 반환합니다. 이 객체는 선택된 파일들로 구성된 배열과 같고요, 따라서 `length` 속성으로 선택된 파일들의 개수를 얻을 수 있습니다. 이 외에 다음과 같은 정보들을 얻을 수 있습니다.
+JS 코드에서 `HTMLInputElement.files` 속성은 `FileList` 객체를 반환합니다. 이 객체는 선택된 파일들로 구성된 유사 배열 객체이고요, 따라서 `length` 속성으로 선택된 파일들의 개수를 얻을 수 있습니다. 각 파일의 정보를 담고 있는 `File` 객체 역시 이 `FileList` 객체로부터 얻을 수 있습니다. 각 `File` 객체는 다음과 같은 정보들을 담고있고요.
 
 - `name` : 파일명
 
@@ -118,7 +120,7 @@ JS 코드에서 `HTMLInputElement.files` 속성은 `FileList` 객체를 반환�
 
 - 파일이 선택되는 시점에 어떤 작업을 수행하려면 `change` 이벤트리스너를 등록하세요.
 
-- 썸네일 이미지 미리보기가 필요하다면 `URL.createObjectURL()` 메소드를 호출하세요. 이때 인자는 `files` 속성이 반환한 `FileList` 객체의 배열 요소를 넣으세요. 예를 들면, `URL.createObjectURL(input.files[0])` 이런 식으로요. 이 메소드의 반환값을 `<img>` 태그의 `src` 요소에 지정하면 썸네일 이미지를 렌더링할 수 있습니다.
+- 썸네일 이미지 미리보기가 필요하다면 `URL.createObjectURL()` 메소드를 호출하세요. 이때 인자는 `files` 속성이 반환한 `FileList` 객체로부터 얻어진 `File` 객체를 넣으세요. 예를 들면, `URL.createObjectURL(input.files[0])` 이런 식으로요. 이 메소드의 반환값을 `<img>` 태그의 `src` 요소에 지정하면 썸네일 이미지를 렌더링할 수 있습니다.
 
 - `size` 속성을 통해 `byte` 단위의 파일 크기를 얻을 수 있는데요, 그 수가 크다면 아래와 같은 함수를 만들어 `KB`/`MB` 단위로 정제하는 것도 좋겠죠.
 
@@ -333,3 +335,4 @@ function FileUpload(img, file) {
 - [Using the DOM File API in chrome code](https://developer.mozilla.org/ko/docs/Extensions/Using_the_DOM_File_API_in_chrome_code)
 - [\<input type="file"\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
 - [Hide content](https://www.a11yproject.com/posts/2013-01-11-how-to-hide-content/)
+- [FileList](https://developer.mozilla.org/ko/docs/Web/API/FileList)
