@@ -108,21 +108,19 @@ JS 코드에서 `HTMLInputElement.files` 속성은 `FileList` 객체를 반환�
 
 <br>
 
+파일이 선택되는 시점에 어떤 작업을 수행하려면 `change` 이벤트리스너를 등록하세요.
+
+<br>
+
 ## `multiple`
 
 `multiple` 속성을 명시하면 1 개 이상의 파일들을 선택할 수 있도록 허용합니다. 한 번에 여러 개의 파일을 동시에 선택할 수 있습니다.
 
 <br>
 
-## `<input type="file">` 사용과 관련된 몇가지 가이드
+## 파일 사이즈 정제하기
 
-- 파일선택 요소를 디자인하기 위해 `<input type="file">`요소를 숨기는 경우가 많습니다. 이때 `visibility: hidden`이나 `display: none`을 사용하지 마세요. 보조기술이 파일선택 요소를 사용할 수 없다고 판단하기 때문입니다. 다른 대안들 중 하나를 사용하세요. `opacity: 0`도 괜찮죠.
-
-- 파일이 선택되는 시점에 어떤 작업을 수행하려면 `change` 이벤트리스너를 등록하세요.
-
-- 썸네일 이미지 미리보기가 필요하다면 `URL.createObjectURL()` 메소드를 호출하세요. 이때 인자는 `files` 속성이 반환한 `FileList` 객체로부터 얻어진 `File` 객체를 넣으세요. 예를 들면, `URL.createObjectURL(input.files[0])` 이런 식으로요. 이 메소드의 반환값을 `<img>` 태그의 `src` 요소에 지정하면 썸네일 이미지를 렌더링할 수 있습니다.
-
-- `size` 속성을 통해 `byte` 단위의 파일 크기를 얻을 수 있는데요, 그 수가 크다면 아래와 같은 함수를 만들어 `KB`/`MB` 단위로 정제하는 것도 좋겠죠.
+`size` 속성을 통해 `byte` 단위의 파일 크기를 얻을 수 있는데요, 그 수가 크다면 아래와 같은 함수를 만들어 `KB`/`MB` 단위로 정제하는 것도 좋겠죠.
 
 ```javascript
 function returnFileSize(number) {
@@ -135,6 +133,12 @@ function returnFileSize(number) {
 	}
 }
 ```
+
+<br>
+
+## 웹접근성
+
+파일선택 요소를 디자인하기 위해 `<input type="file">`요소를 숨기는 경우가 많습니다. 이때 `visibility: hidden`이나 `display: none`을 사용하지 마세요. 보조기술이 파일선택 요소를 사용할 수 없다고 판단하기 때문입니다. 다른 대안들 중 하나를 사용하세요. `opacity: 0`도 괜찮죠.
 
 <br>
 
@@ -211,9 +215,9 @@ reader.readAsDataURL(file);
 
 <br>
 
-## `URL.createObjectURL()`
+## `URL.createObjectURL()`로 객체 URL 얻기
 
-어떤 데이터를 참조할 때 사용할 URL이 필요하다면 `URL.createObjectURL()`/`URL.revokeObjectURL()` 메소드를 사용하세요. 심지어 사용자의 컴퓨터에 있는 로컬 파일을 포함한 모든 데이터에 대한 레퍼런스를 얻을 수 있습니다. `File` 객체가 있다고 가정했을 때, 해당 파일을 객체 URL로 참조할 수 있다는 말입니다.
+어떤 파일/데이터를 참조하기 위한 URL이 필요하다면 `URL.createObjectURL()`/`URL.revokeObjectURL()` 메소드를 사용하세요. 심지어 사용자의 컴퓨터에 있는 로컬 파일을 포함한 모든 데이터에 대한 레퍼런스를 얻을 수 있습니다.
 
 이렇게요.
 
@@ -223,7 +227,16 @@ const objectURL = window.URL.createObjectURL(file);
 
 <br>
 
-이 객체 URL의 값은 `File` 객체를 식별하는 문자열입니다. `createObjectURL()` 메소드를 호출할 때마다 고유한 객체 URL이 생성되는데요, 이미 동일한 파일에 대한 객체 URL을 생성한 적이 있더라도 새로운 객체 URL이 또 생성됩니다. 한편, 생성된 객체 URL은 사용이 끝나면 폐지되어야합니다. 문서가 언로드될 때 자동으로 폐지되기는 하지만, 만약 페이지가 해당 객체 URL을 동적으로 사용한다면 아래와 같이 `revokeObjectURL()` 메소드를 호출하여 직접 폐지시켜야 합니다.
+사용자가 업로드하기 위해 선택한 이미지 파일의 썸네일 미리보기가 필요할 때도 당연히 `URL.createObjectURL()` 메소드를 사용할 수 있습니다. 이때 인자는 `FileList` 유사 배열 객체로부터 얻어진 `File` 객체를 넣으세요. 예를 들면, `URL.createObjectURL(files[0])` 이런 식으로요. 이 메소드의 반환값은 해당 파일에 대한 "객체 URL"이고요, 이 반환값을 `<img>` 태그의 `src` 요소에 지정하면 썸네일 이미지를 렌더링할 수 있습니다. 위 예시에서 얻어낸 `objectURL`을 그대로 사용해보죠.
+
+```javascript
+const img = document.getElementById("target-image");
+img.src = objectURL;
+```
+
+<br>
+
+이 객체 URL의 값은 `File` 객체를 식별하는 문자열입니다. `createObjectURL()` 메소드를 호출할 때마다 해당 파일을 가리키는 고유한 객체 URL이 생성되는데요, 이미 동일한 파일에 대한 객체 URL을 생성한 적이 있더라도 새로운 객체 URL이 또 생성됩니다. 한편, 생성된 객체 URL은 사용이 끝나면 철회시켜야합니다. 기본적으로 문서가 언로드될 때 자동으로 철회되기는 합니다. 하지만, 만약 페이지가 해당 객체 URL을 동적으로 사용하고있다면 아래와 같이 `revokeObjectURL()` 메소드를 호출하여 직접 철회시켜야 합니다. 위 예시에서 사용했던 `objectURL`을 철회시켜봅시다.
 
 ```javascript
 URL.revokeObjectURL(objectURL);
@@ -231,21 +244,23 @@ URL.revokeObjectURL(objectURL);
 
 <br>
 
-## `URL.createObjectURL()` 사용하여 선택된 이미지 보여주기
+## 객체 URL을 사용하여 선택된 이미지 보여주기
 
-`객채 URL`을 `<img>` 태그의 `src` 속성의 값으로 지정하면 됩니다. `onload` 속성에는 객체 URL을 폐지하는 함수를 지정하고요.
+위에서 언급한대로, 객체 URL을 `<img>` 태그의 `src` 속성의 값으로 지정하면 됩니다. `<img>` 요소에 이미지가 완전히 로드되면 객체 URL을 철회하세요. `<img>` 요소의 `onload` 속성에 객체 URL을 철회하는 함수를 지정하면 됩니다.
 
 ```javascript
 const img = document.createElement("img");
 img.src = URL.createObjectURL(input.files[i]);
-img.onload = function () {
+img.onload = () => {
 	URL.revokeObjectURL(input.src);
 };
 ```
 
-## `URL.createObjectURL()` 사용하여 PDF 파일 보여주기
+## 객체 URL을 사용하여 PDF 파일 보여주기
 
-객체 URL을 사용하여 이미지 외의 다양한 파일을 렌더링시킬 수 있습니다. `<iframe>` 요소를 통해 문서에 파일을 삽입하는 방식입니다. Firefox 브라우저에서는 `pdfjs.disabled` 값을 `false`로 지정해야 `<iframe>` 요소내에서 PDF 파일을 보여준다는 점에 주의하세요. 예제를 봅시다. 먼저 PDF 파일을 보여줄 `<iframe>` 요소가 필요하겠고요.
+객체 URL을 사용하면 이미지 외의 다양한 파일들에 대한 미리보기를 제공할 수 있습니다. PDF 파일은 `<iframe>` 요소를 통해 문서에 삽입해서 보여주어야합니다. Firefox 브라우저에서는 `pdfjs.disabled` 값을 `false`로 지정해야 `<iframe>` 요소 내에서 PDF 파일을 렌더링한다는 점에 주의하세요.
+
+예제를 봅시다. 먼저 PDF 파일을 보여줄 `<iframe>` 요소가 필요하겠고요.
 
 ```html
 <iframe id="viewer"></iframe>
@@ -253,7 +268,7 @@ img.onload = function () {
 
 <br>
 
-`<iframe>` 요소의 `src` 속성의 값으로 객체 URL을 지정합니다.
+`<iframe>` 요소의 `src` 속성의 값으로 PDF 파일을 가리키는 객체 URL을 지정합니다.
 
 ```javascript
 const objUrl = URL.createObjectURL(file);
@@ -265,9 +280,9 @@ URL.revokeObjectURL(objUrl);
 
 <br>
 
-## `URL.createObjectURL()` 사용하여 선택한 영상 재생하기
+## 객체 URL을 사용하여 영상 재생하기
 
-바로 예제를 보죠. 위와 같은 방식입니다.
+바로 예제를 보죠. 위와 비슷한 방식입니다.
 
 ```javascript
 const video = document.getElementById("video");
@@ -280,9 +295,9 @@ URL.revokeObjectURL(objUrl);
 
 <br>
 
-## 선택한 파일을 비동기적으로 업로드하기
+## 선택한 파일을 비동기 업로드하기
 
-`FileUpload` 함수 객체를 사용하면 사용자가 선택한 파일들을 서버로 전송할 수 있습니다. `FileUpload` 함수를 호출할 때 2 개의 인자가 필요한데요, 이미지 요소와 이미지 요소의 `file` 속성입니다. 아래는 선택한 파일을 서버로 전송하는 함수입니다.
+이제 사용자가 선택한 파일들을 서버로 전송해봅시다. 아래는 선택한 파일을 서버로 전송하는 함수입니다.
 
 ```javascript
 function FileUpload(img, file) {
