@@ -83,7 +83,7 @@
 
 ### Deployment
 
-- [Deploying a React app to Github Pages](https://github.com/estellechoi/TIL/blob/master/deployment/deployingToGithubPages.md)
+- [How to deploy a React app to Github Pages](https://github.com/estellechoi/TIL/blob/master/deployment/deployingToGithubPages.md)
 
 <br>
 
