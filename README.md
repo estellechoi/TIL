@@ -81,6 +81,12 @@
 
 <br>
 
+### Deployment
+
+- [Deploying a React app to Github Pages](https://github.com/estellechoi/TIL/blob/master/deployment/deployingToGithubPages.md)
+
+<br>
+
 ### Security
 
 - Cross site scripting (XSS) \*
