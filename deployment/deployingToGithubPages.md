@@ -1,4 +1,6 @@
-# Deploying a React app to Github Pages
+# How to deploy a React app to Github Pages
+
+> If you don't have your own Github Pages hosted, see [here](https://pages.github.com/).
 
 <br>
 
