@@ -12,19 +12,6 @@
 
 <br>
 
-### HTTP
-
-- [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/Http/rest.md)
-- [Some Tips for REST](https://github.com/estellechoi/TIL/blob/master/Http/restTips.md)
-- [REST API Security](https://github.com/estellechoi/TIL/blob/master/Http/restSecurity.md) \*
-- [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/Http/cookie.md)
-- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
-- [Browser](https://github.com/estellechoi/TIL/blob/master/www/browser.md)
-- [Internet and HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
-- [Web Server / Web Application Server](https://github.com/estellechoi/TIL/blob/master/www/was.md)
-
-<br>
-
 ### HTML
 
 - [DOCTYPE, `<head>` 태그, 검색엔진 최적화(Search Engine Optimization)](https://github.com/estellechoi/TIL/blob/master/html/doctype.md)
@@ -36,18 +23,6 @@
 - [HTML tags - stay semantic](https://github.com/estellechoi/TIL/blob/master/html/semantic.md)
 - [How to stay with web-accessiblity highly achieved](https://github.com/estellechoi/TIL/blob/master/html/webaccess.md) \*
 - [마이크로데이터(Microdata)와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/html/microdata.md)
-
-<br>
-
-### JavaScript
-
-- [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)
-- [실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)](https://github.com/estellechoi/TIL/blob/master/javascript/executionContext.md)
-- [이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/javascript/event.md)
-- [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md) \*
-- [How Javascript works?](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
-- [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
-- [웹 애플리케이션에서 파일 사용하기](https://github.com/estellechoi/TIL/blob/master/javascript/howToUsefiles.md)
 
 <br>
 
@@ -71,6 +46,18 @@
 
 <br>
 
+### JavaScript
+
+- [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)
+- [실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)](https://github.com/estellechoi/TIL/blob/master/javascript/executionContext.md)
+- [이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/javascript/event.md)
+- [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md) \*
+- [How Javascript works?](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
+- [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
+- [웹 애플리케이션에서 파일 사용하기](https://github.com/estellechoi/TIL/blob/master/javascript/howToUsefiles.md)
+
+<br>
+
 ### DOM
 
 - [To read about DOM](https://github.com/estellechoi/TIL/blob/master/Dom/toRead.md)
@@ -84,6 +71,19 @@
 ### Image
 
 - [웹을 위한 이미지(Image)](https://github.com/estellechoi/TIL/blob/master/image/types.md)
+
+<br>
+
+### HTTP
+
+- [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/Http/rest.md)
+- [Some Tips for REST](https://github.com/estellechoi/TIL/blob/master/Http/restTips.md)
+- [REST API Security](https://github.com/estellechoi/TIL/blob/master/Http/restSecurity.md) \*
+- [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/Http/cookie.md)
+- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/Http/cors.md)
+- [Browser](https://github.com/estellechoi/TIL/blob/master/www/browser.md)
+- [Internet and HTTP](https://github.com/estellechoi/TIL/blob/master/www/http.md)
+- [Web Server / Web Application Server](https://github.com/estellechoi/TIL/blob/master/www/was.md)
 
 <br>
 
