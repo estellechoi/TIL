@@ -1,4 +1,4 @@
-# Intersection Observer
+# Intersection Observer API
 
 <br>
 
