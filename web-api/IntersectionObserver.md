@@ -26,7 +26,7 @@ const target = document.getElementById("animation-target");
 observer.observe(target);
 ```
 
-먼저 `IntersectionObserver`를 객체를 생성하면서 두 가지를 인자로 전달하는데요, 콜백함수와 옵션입니다. 그 다음, `IntersectionObserver` 객체의 `observe()` 메소드를 사용하여 관찰하고자 하는 엘리먼트를 등록하세요.
+먼저 `IntersectionObserver` 객체를 생성하면서 두 가지를 인자로 전달하는데요, 콜백함수와 옵션입니다. 그 다음, `IntersectionObserver` 객체의 `observe()` 메소드를 사용하여 관찰하고자 하는 엘리먼트를 등록하세요.
 
 <br>
 
@@ -35,11 +35,17 @@ observer.observe(target);
 첫 번째 인자로 `entries` 배열, 두 번째 인자로 `IntersectionObserver` 객체를 받습니다. `entries` 배열에 관찰하고 있는 모든 엘리먼트와 그에 대한 정보가 담겨있습니다. 아래와 같은 속성들을 사용할 수 있죠.
 
 - `target` : 타겟 엘리먼트
+
 - `time` : 노출/비노출된 시각
+
 - `isIntersecting` : 노출여부
+
 - `intersectionRatio` : 노출된 비율
+
 - `intersectionRect` : 노출된 영역
+
 - `boundingClientRect` : 타겟 엘리먼트의 `getBoundingClientRect()` 값
+
 - `rootBounds` : 기준 엘리먼트의 뷰포트 영역 값, 만약 옵션에서 지정하지 않았다면 브라우저 뷰포트 크기
 
 <br>
@@ -112,6 +118,10 @@ observer.observe(lazyImgs);
 
 <br>
 
+위의 콜백함수 부분을 보세요. 이미지 엘리먼트들이 화면에 노출되기 시작할 때 `src` 속성 값을 실제 로드할 이미지로 바꿔주는 코드가 실행되겠네요. 비로소 실제 이미지가 (게으르게) 로드됩니다.
+
+<br>
+
 ## 브라우저 호환성
 
 Internet Explorer에서는 `IntersectionObserver`를 지원하지 않기 때문에 IE 사용자들도 지원해야 한다면 [IntersectionObserver polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill)을 사용하세요. 이 Polyfill은 IE7까지 사용할 수 있습니다.
@@ -123,5 +133,5 @@ Internet Explorer에서는 `IntersectionObserver`를 지원하지 않기 때문�
 ### References
 
 - [IntersectionObserver | MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
-- [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+- [Intersection Observer API | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 - [Intersection Observer 간단 정리하기](https://medium.com/@pks2974/intersection-observer-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-fc24789799a3)
