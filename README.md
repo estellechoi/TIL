@@ -55,6 +55,7 @@
 - [How Javascript works?](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
 - [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
 - [웹 애플리케이션에서 파일 사용하기](https://github.com/estellechoi/TIL/blob/master/javascript/howToUsefiles.md)
+- [Intersection Observer](https://github.com/estellechoi/TIL/blob/master/javascript/IntersectionObserver.md)
 
 <br>
 
