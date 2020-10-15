@@ -59,7 +59,7 @@
 
 ### Web API
 
-- [Intersection Observer](https://github.com/estellechoi/TIL/blob/master/web-api/IntersectionObserver.md)
+- [Intersection Observer API](https://github.com/estellechoi/TIL/blob/master/web-api/IntersectionObserver.md)
 - [File API - 웹에서 파일 다루기](https://github.com/estellechoi/TIL/blob/master/web-api/howToUsefiles.md)
 - [이벤트 전파와 이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/web-api/event.md)
 
