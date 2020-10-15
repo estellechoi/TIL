@@ -48,14 +48,20 @@
 
 ### JavaScript
 
+- [네이티브 객체(Native Built-in Objects)](https://github.com/estellechoi/TIL/blob/master/javascript/native.md) \*
 - [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)
 - [실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)](https://github.com/estellechoi/TIL/blob/master/javascript/executionContext.md)
-- [이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/javascript/event.md)
 - [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md) \*
 - [How Javascript works?](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
 - [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
 - [웹 애플리케이션에서 파일 사용하기](https://github.com/estellechoi/TIL/blob/master/javascript/howToUsefiles.md)
-- [Intersection Observer](https://github.com/estellechoi/TIL/blob/master/javascript/IntersectionObserver.md)
+
+<br>
+
+### Web API
+
+- [Intersection Observer](https://github.com/estellechoi/TIL/blob/master/web-api/IntersectionObserver.md)
+- [이벤트 전파와 이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/web-api/event.md)
 
 <br>
 
