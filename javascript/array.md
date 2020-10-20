@@ -47,6 +47,84 @@
 
 <br>
 
+### 변경자 메서드
+
+아래의 변경자 메서드들은 배열을 수정합니다.
+
+- [`copyWithin()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) : 배열의 일부를 얕게 복사한 뒤, 동일한 배열의 다른 위치에 덮어쓰고 그 배열을 반환합니다.
+
+- [`fill()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) : 배열의 시작 인덱스부터 끝 인덱스의 이전까지 정적인 값 하나로 채웁니다.
+
+- [`pop()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) : 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.
+
+- [`shift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다.
+
+- [`unshift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) : 새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
+
+- [`push()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) : 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
+
+- [`reverse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) : 배열의 순서를 반전합니다.
+
+- [`sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) : 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability)가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+
+- [`splice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
+
+<br>
+
+### 접근자 메서드
+
+아래의 접근자 메서드들은 배열을 수정하지 않고, 기존 배열의 일부에 기반한 새로운 배열 또는 값을 반환합니다.
+
+- [`concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) : 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
+
+- [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : 주어진 함수의 테스트를 통과하는 요소들만 모아 새로운 배열로 반환합니다.
+
+- [`includes()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) : 배열이 특정 요소를 포함하고 있는지 판별합니다. `true`/`false`를 반환합니다.
+
+- [`indexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) : 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 `-1`을 반환합니다.
+
+- [`lastIndexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) : 배열에서 주어진 값을 발견할 수 있는 마지막 인덱스를 반환하고, 요소가 존재하지 않으면 `-1`을 반환합니다.
+
+- [`join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) : 인자로 전달된 문자열을 이용하여 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
+
+- [`slice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 어떤 배열의 시작 인덱스부터 마지막 인덱스까지(마지막 인덱스의 원소는 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다.
+
+- [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) : 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다. 각 원소는 `,`로 연결됩니다. `Object.prototype.toString()` 메서드를 재정의합니다.
+
+- [`toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString) : 배열의 요소를 나타내는 문자열을 반환하는데, `Date` 타입의 요소는 지역화된 문자열을 반환합니다. `Object.prototype.toLocaleString()` 메서드를 재정의합니다.
+
+<br>
+
+### 순회 메서드
+
+순회 메소드를 호출하면 배열의 `length`를 기억하므로, 아직 순회가 끝나지 않았을 때 요소를 더 추가하더라도 콜백이 호출되지 않습니다. 반드시 배열을 변형해야 한다면, 새로운 배열로 복사하세요.
+
+- [`forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) : 주어진 함수를 배열 요소 각각에 대해 실행합니다.
+
+- [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) : 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과(반환값)을 모아 새로운 배열을 반환합니다.
+
+- [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 결과값을 반환합니다. 리듀서 함수는 인자로 이전까지의 누적값과 현재값(`(accumulator, currentValue)`)를 받습니다.
+
+- [`reduceRight()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight) : 리듀서의 첫 번째 인자인 누적값에 대해 함수를 적용하고, 두 번째 인자인 현재값은 배열의 오른쪽에서 왼쪽(마지막에서 첫 번째 요소) 순으로 구성됩니다.
+
+- [`some()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) : 배열 안의 어떤 요소라도 주어진 판별 함수를 통과하면 `true`, 모든 요소가 통과하지 못하면 `false`를 반환합니다. 빈 배열에서 호출하면 무조건 `false`를 반환합니다.
+
+- [`every()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/every) : 배열 안의 모든 요소가 주어진 판별 함수를 통과하면 `true`, 하나라도 통과하지 못하면 `false`를 반환합니다. 빈 배열에서 호출하면 무조건 `true`를 반환합니다.
+
+- [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) : 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 `undefined`를 반환합니다.
+
+- [`findIndex()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) : 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 `-1`을 반환합니다.
+
+- [`keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys) : 배열의 각 인덱스를 키 값으로 가지는 새로운 `Array Iterator` 객체를 반환합니다.
+
+- [`entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries) : 배열의 요소에 대한 "키 - 값" 쌍을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
+
+- [`values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/values) : 배열의 각 요소에 대한 값을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
+
+- [`Array.prototype[Symbol.iterator]()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@iterator) : 기본값은 `values()` 입니다.
+
+<br>
+
 ## 3. JavaScript 배열의 특징
 
 JavaScript의 배열은 아래와 같은 특징을 가집니다.
@@ -55,7 +133,7 @@ JavaScript의 배열은 아래와 같은 특징을 가집니다.
 
 - 길이가 고정되어 있지 않습니다.
 
-- 배열 요소들의 타입이 고정되어있지 않습니다.
+- 배열 원소들의 타입이 고정되어있지 않습니다.
 
 <br>
 
@@ -73,20 +151,20 @@ console.log(arr.constructor === Array); // output : true
 
 ### 길이가 고정되어 있지 않습니다
 
-무슨 말이냐면, 배열의 길이가 언제든 인위적으로 변경될 수 있기 때문에 비어있는 요소가 존재할 수 있다는 말입니다. 가령 아래와 같은 배열이 가능한데요, 실제 존재하는 데이터는 4개이지만 이 배열의 길이를 확인해보면 값이 `9`입니다. 이처럼 JavaScript의 배열은 밀집도를 보장하지 않습니다. 이러한 특징이 적합하지 않은 상황에서는 형식화 배열(Typed array)를 사용하세요.
+무슨 말이냐면, 배열의 길이가 언제든 인위적으로 변경될 수 있기 때문에 비어있는 원소가 존재할 수 있다는 말입니다. 가령 아래와 같은 배열이 가능한데요, 실제 존재하는 데이터는 4개이지만 이 배열의 길이를 확인해보면 값이 `9`입니다. 이처럼 JavaScript의 배열은 밀집도를 보장하지 않습니다. 이러한 특징이 적합하지 않은 상황에서는 형식화 배열(Typed array)를 사용하세요.
 
 ```javascript
 const arr = [1, 2, 3, 4, , , , ,];
 console.log(arr.length); // output : 7
 ```
 
-> 위와 같이 배열 객체는 변수에 담아서 사용할 수 있고요, 배열의 인덱스 값은 `0`부터 시작하는 정수입니다. `arr[0]`으로 위 배열의 첫 번째 요소에 접근할 수 있습니다. 
+> 배열의 인덱스 값은 `0`부터 시작하는 정수입니다. `arr[0]`으로 위 배열의 첫 번째 원소에 접근할 수 있습니다.
 
 <br>
 
-### 배열 요소들의 타입이 고정되어있지 않습니다
+### 배열 원소들의 타입이 고정되어있지 않습니다
 
-아래와 같이 하나의 배열에 서로 다른 타입을 가진 요소들을 담을 수 있습니다. 배열의 각 요소에는 거의 모든 것을 저장할 수 있습니다. 문자열, 숫자, 객체, 다른 변수, .., 심지어 다른 배열도요.
+아래와 같이 하나의 배열에 서로 다른 타입을 가진 원소들을 담을 수 있습니다. 배열의 각 원소에는 거의 모든 것을 저장할 수 있습니다. 문자열, 숫자, 객체, 다른 변수, .., 심지어 다른 배열도요.
 
 ```javascript
 const arr2 = [7, "Hello", true, ["a", "b", "c"]];
@@ -96,7 +174,7 @@ const arr2 = [7, "Hello", true, ["a", "b", "c"]];
 
 #### 다중배열
 
-배열 내부의 배열은 다중배열이라고 하는데요, 대괄호 두개를 함께 연결하여 다른 배열 안에 있는 배열의 요소에 접근 할 수 있습니다. 위의 `arr2` 배열 내부에 속해있는 배열 `["a", "b", "c"]`의 마지막 요소인 `"c"`에 접근하려면 다음과 같은 방법이 유효합니다.
+배열 내부의 배열은 다중배열이라고 하는데요, 대괄호 두개를 함께 연결하여 다른 배열 안에 있는 배열의 원소에 접근 할 수 있습니다. 위의 `arr2` 배열 내부에 속해있는 배열 `["a", "b", "c"]`의 마지막 원소인 `"c"`에 접근하려면 다음과 같은 방법이 유효합니다.
 
 ```javascript
 const c = arr2[3][2];
@@ -117,7 +195,7 @@ console.log(c); // output: "c"
 
 ### 배열 리터럴 표기법
 
-아래와 같이 배열을 생성하면 배열 리터럴 표기법을 사용한 것입니다. 리터럴 표기법으로 배열을 생성하면 명시한 값들로 배열이 초기화되고요, 명시된 요소들의 수가 해당 배열의 길이가 됩니다. 네, 필요한 요소들을 열거하는 것만으로 배열 객체가 생성됩니다.
+아래와 같이 배열을 생성하면 배열 리터럴 표기법을 사용한 것입니다. 리터럴 표기법으로 배열을 생성하면 명시한 값들로 배열이 초기화되고요, 명시된 원소들의 수가 해당 배열의 길이가 됩니다. 네, 필요한 원소들을 열거하는 것만으로 배열 객체가 생성됩니다.
 
 ```javascript
 let cities = ["Seoul", "New York", "Barcelona"];
@@ -168,7 +246,7 @@ console.log(d); // output : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 #### 2 개 이상의 인자를 넘겨줄 때
 
-2 개 이상의 인자를 넘겨주면 각 인자가 생성된 배열의 요소들로 초기화됩니다. 넘겨준 인자의 수가 배열의 길이가 됩니다.
+2 개 이상의 인자를 넘겨주면 각 인자가 생성된 배열의 원소들로 초기화됩니다. 넘겨준 인자의 수가 배열의 길이가 됩니다.
 
 ```javascript
 let e = new Array(1, 2); // [1, 2]
