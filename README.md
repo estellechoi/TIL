@@ -11,6 +11,7 @@
 - [All You Need To Know About CSS-in-JS](https://medium.com/better-programming/all-you-need-to-know-about-css-in-js-984a72d48ebc)
 - [ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?](https://gomugom.github.io/is-class-only-a-syntactic-sugar/)
 - [자바스크립트의 메모리관리 | MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
+- [How JavaScript works: memory management + how to handle 4 common memory leaks](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
 
 <br>
 
