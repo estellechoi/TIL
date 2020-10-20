@@ -50,6 +50,7 @@
 ### JavaScript
 
 - [네이티브 객체(Native Built-in Objects)](https://github.com/estellechoi/TIL/blob/master/javascript/native.md) \*
+- [배열(Array)과 배열형 객체](https://github.com/estellechoi/TIL/blob/master/javascript/array.md)
 - [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)
 - [실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)](https://github.com/estellechoi/TIL/blob/master/javascript/executionContext.md)
 - [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md) \*
