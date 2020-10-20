@@ -342,7 +342,7 @@ if (typeof Array.isArray === undefined) {
 
 <br>
 
-> 위 방법도 100% 완벽하지는 않습니다. ES6 이상에서 `Symbol.toStringTag`를 사용하면 객체 타입을 조작(?)할 수 있기 때문이죠.
+사실 이 방법도 100% 완벽하지는 않습니다. ES6+ 에서 `Symbol.toStringTag`를 사용하면 객체 타입을 조작(?)할 수 있기 때문이죠. 어쨋든 IE8 이하의 구형 브라우저를 지원해야만 한다면 플랜B 정도로 알아두면 나쁘지 않을 것 같습니다.
 
 ```javascript
 class ArrayClass {
