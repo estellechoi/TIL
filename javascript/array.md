@@ -1,5 +1,14 @@
 # 인덱스 컬렉션(Indexed Collections) - 배열(Array)
 
+## 목차
+
+- 인덱스 컬렉션(Indexed Collections)
+- `Array`
+- JavaScript 배열의 특징
+- 배열 생성하기
+- 리터럴 vs 생성자
+- 배열 판별하기
+
 <br>
 
 ## 인덱스 컬렉션(Indexed Collections)
@@ -34,13 +43,35 @@
 
 ## `Array`
 
-`Array`는 리스트 형태의 객체입니다. 배열을 생성할 때 사용할 수 있고요, `Array`의 프로토타입은 배열을 탐색하고 변형시키는 메소드들을 제공합니다. JavaScript에서 배열은 아래와 같은 특징을 가집니다.
+`Array`는 리스트 형태의 객체입니다. JavaScript에는 명시적인 배열(Array) 자료형이 없기 때문에 배열을 다루기 위해서는 `Array` 객체를 사용해야 합니다. 배열을 생성할 때 사용할 수 있고요, `Array`의 `prototype`은 배열을 탐색하고 변형시키는 메소드들을 제공합니다.
+
+<br>
+
+## JavaScript 배열의 특징
+
+JavaScript의 배열은 아래와 같은 특징을 가집니다.
+
+- 배열은 객체입니다.
 
 - 길이가 고정되어 있지 않습니다.
 
 - 배열 요소들의 타입이 고정되어있지 않습니다.
 
 <br>
+
+### 배열은 객체입니다
+
+아래와 같이, 배열도 객체이므로 `typeof arr`의 반환값은 `object` 입니다.
+
+```javascript
+const arr = [1, 2, 3];
+console.log(typeof arr); // output : object
+console.log(arr.constructor === Array); // output : true
+```
+
+<br>
+
+### 길이가 고정되어 있지 않습니다
 
 무슨 말이냐면, 배열의 길이가 언제든 인위적으로 변경될 수 있기 때문에 비어있는 요소가 존재할 수 있다는 말입니다. 가령 아래와 같은 배열이 가능한데요, 실제 존재하는 데이터는 4개이지만 이 배열의 길이를 확인해보면 값이 `9`입니다. 이처럼 JavaScript의 배열은 밀집도를 보장하지 않습니다. 이러한 특징이 적합하지 않은 상황에서는 형식화 배열(Typed array)를 사용하세요.
 
@@ -49,11 +80,13 @@ const arr = [1, 2, 3, 4, , , , ,];
 console.log(arr.length); // output : 7
 ```
 
-> 위와 같이 배열 객체는 변수에 담아서 사용할 수 있고요, 배열의 인덱스 값은 정수입니다. `arr[0]`으로 위 배열의 첫 번째 요소에 접근할 수 있습니다. 
+> 위와 같이 배열 객체는 변수에 담아서 사용할 수 있고요, 배열의 인덱스 값은 `0`부터 시작하는 정수입니다. `arr[0]`으로 위 배열의 첫 번째 요소에 접근할 수 있습니다. 
 
 <br>
 
-또한, 아래와 같이 하나의 배열에 서로 다른 타입을 가진 요소들을 담을 수 있습니다. 배열의 각 요소에는 거의 모든 것을 저장할 수 있습니다. 문자열, 숫자, 객체, 다른 변수, .., 심지어 다른 배열도요.
+### 배열 요소들의 타입이 고정되어있지 않습니다
+
+아래와 같이 하나의 배열에 서로 다른 타입을 가진 요소들을 담을 수 있습니다. 배열의 각 요소에는 거의 모든 것을 저장할 수 있습니다. 문자열, 숫자, 객체, 다른 변수, .., 심지어 다른 배열도요.
 
 ```javascript
 const arr2 = [7, "Hello", true, ["a", "b", "c"]];
@@ -61,7 +94,7 @@ const arr2 = [7, "Hello", true, ["a", "b", "c"]];
 
 <br>
 
-### 다중배열
+#### 다중배열
 
 배열 내부의 배열은 다중배열이라고 하는데요, 대괄호 두개를 함께 연결하여 다른 배열 안에 있는 배열의 요소에 접근 할 수 있습니다. 위의 `arr2` 배열 내부에 속해있는 배열 `["a", "b", "c"]`의 마지막 요소인 `"c"`에 접근하려면 다음과 같은 방법이 유효합니다.
 
@@ -72,7 +105,7 @@ console.log(c); // output: "c"
 
 <br>
 
-## 배열 생성하기 - 리터럴과 생성자 함수
+## 배열 생성하기
 
 배열을 생성하는 방법에는 두 가지가 있습니다.
 
@@ -96,7 +129,7 @@ let cities = ["Seoul", "New York", "Barcelona"];
 
 ### `Array()` 생성자 함수
 
-`Array()`는 생성자 함수입니다. `Array` 객체의 생성과 초기화를 담당하는 함수죠.
+`Array()`는 생성자 함수입니다. 배열, 그러니까 `Array` 객체의 생성과 초기화를 담당하는 함수죠.
 
 ```javascript
 let a = new Array(); // []
@@ -104,28 +137,50 @@ let a = new Array(); // []
 
 <br>
 
-하나의 숫자(정수) 인자를 넘겨주면 그 숫자만큼의 길이를 가지는 배열이 생성됩니다. 하지만 이렇게 생성된 배열은 요소가 없는 빈 배열입니다.
+#### 하나의 인자를 넘겨줄 때
+
+하나의 숫자(정수) 인자를 넘겨주면 그 숫자 만큼의 길이를 가지는 배열이 생성됩니다. 하지만 이렇게 생성된 배열은 원소가 없는 빈 배열입니다. 원소가 존재하지 않기 때문에 어느 원소에 접근하든 반환값은 `undefined` 입니다. 이때 배열의 빈 공간들은 [`fill()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) 메소드로 채울 수 있습니다...
 
 ```javascript
 let b = new Array(3); // [empty × 3]
-console.log(b.length); // output : 3
+console.log(b[0]); // undefined
+console.log(b.length); // 3
 ```
 
 <br>
+
+인자를 하나만 넘겨주어 특정 길이를 가진 배열을 만들 때 주의할 점은 정수만 가능하다는 것입니다. 아래와 같이 부동소수점을 가진 숫자를 전달하면 에러가 발생합니다.
+
+```javascript
+const c = new Array(3.4); // RangeError: Invalid array length
+```
+
+<br>
+
+> 배열의 길이를 지정할 수 있다는 점과 [`keys()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/keys) 메소드를 이용하면 아래와 같은 트릭이 가능합니다.
+
+```javascript
+const d = [...new Array(10).keys()];
+console.log(d); // output : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+<br>
+
+#### 2 개 이상의 인자를 넘겨줄 때
 
 2 개 이상의 인자를 넘겨주면 각 인자가 생성된 배열의 요소들로 초기화됩니다. 넘겨준 인자의 수가 배열의 길이가 됩니다.
 
 ```javascript
-let c = new Array(1, 2); // [1, 2]
+let e = new Array(1, 2); // [1, 2]
 ```
 
 <br>
 
-### 리터럴 vs 생성자
+## 리터럴 vs 생성자
 
-리터럴과 생성자 함수. 둘 중 어느 방법이 더 좋은가요? 이 질문에 대해서는 널리 알려진 답(?)이 있습니다. [Oreilly사의 JavaScript Patterns](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=13680905)에서 소개된 내용이고, 이 책의 내용을 레퍼런스로 하는 블로그 글도 많습니다.
+리터럴과 생성자 함수. 둘 중 어느 방법이 더 좋은가요? 이 질문에 대해서는 널리 알려진 가이드(?)가 있습니다. [Oreilly사의 JavaScript Patterns](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=13680905)에서 소개된 내용이고, 이 책의 내용을 레퍼런스로 하는 블로그 글과 아티클도 많은 것 같습니다.
 
-결론적으로, 리터럴 패턴을 사용하는 것이 더 좋은 방법입니다. 많은 사람들이 이에 동의하는 근거는 다음과 같습니다.
+결론적으로, 리터럴 패턴을 사용하는 것이 (보통은) 더 좋습니다. 많은 사람들이 이에 동의하는 근거는 다음과 같습니다.
 
 - 리터럴 패턴이 더 직관적이고 코드도 깔끔합니다.
 
@@ -139,6 +194,106 @@ let arr = [];
 
 <br>
 
+- 생성자 함수는 인자를 받을 수 있는데, 이로 인해 예상 밖의 결과가 발생합니다.
+  > 위에서 살펴봤듯이, 인자를 하나만 전달면 배열의 길이가 되고, 2 개 이상을 전달하면 각각이 배열의 원소가 되고요.. 인자를 하나만 넘기는 경우 정수가 아닌 숫자를 전달하면 에러가 발생한다던가.. 아무튼 여러모로 신경쓸 것이 많이 비효율적입니다.
+
+<br>
+
+한 줄로 요약하자면, 리터럴 패턴의 표현이 더 명확하고 코드도 깔끔하면서 에러 발생의 가능성이 낮기 때문에 더 좋습니다.
+
+<br>
+
+## 배열 판별하기
+
+배열인지 판별할 수 있는 가장 확실한 방법은 `isArray()` 메소드를 사용하는 것입니다.
+
+<br>
+
+### `Array.isArray()`
+
+[`Array.isArray()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/isarray) 메소드를 사용하세요. 이 메소드는 인자가 배열이면 `true`를 반환합니다.
+
+```javascript
+const arr = [];
+Array.isArray(arr); // true
+
+const obj = {
+	length: 1,
+	0: 1,
+};
+Array.isArray(obj); // false
+```
+
+<br>
+
+### `Object.prototype.toString()`
+
+ES5의 `Array.isArray()` 메소드를 사용할 수 없는 구형 브라우저 환경을 지원해야 한다면 사용하세요. [`Object.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString) 메소드를 호출하는 방법입니다.
+
+```javascript
+const arr = [];
+const type = Object.prototype.toString.call(arr);
+console.log(type); // "[object Array]"
+```
+
+> MDN 문서에 따르면, 기본적으로 `toString()` 메소드는 `Object`에서 비롯된 모든 객체에 상속됩니다. 이 메소드가 사용자 지정 개체에서 재정의되지 않으면 `toString()`은 `"[object type]"`을 반환합니다. 여기서 `type`은 `object type`입니다.
+
+> `Function.prototype.call()`에 대한 [MDN 문서](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)를 확인하세요.
+
+<br>
+
+위의 예제를 응용하면 아래와 같이 `Array.isArray()` 메소드를 정의해서 사용할 수 있겠죠.
+
+```javascript
+if (typeof Array.isArray === "undefined") {
+	Array.isArray = function (obj) {
+		return Object.prototype.toString.call(obj) === "[object Array]";
+	};
+}
+```
+
+<br>
+
+> 위 방법도 100% 완벽하지는 않습니다. ES6 이상에서 `Symbol.toStringTag`를 사용하면 객체 타입을 조작(?)할 수 있기 때문이죠.
+
+```javascript
+class ArrayClass {
+	get [Symbol.toStringTag]() {
+		return "Array";
+	}
+}
+
+console.log(Object.prototype.toString.call(new ArrayClass())); // "[object Array]"
+```
+
+<br>
+
+### 쓸모없거나 좋지 못한 방법들
+
+- 배열에 `typeof` 연산자를 사용하면 `object`가 반환됩니다. 위에서 언급했듯이, JavaScript에서는 배열도 객체이기 때문이죠.
+
+```javascript
+console.log(typeof []); // output : object
+```
+
+<br>
+
+- [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) 연산자를 사용하는 것도 방법인 것처럼 보입니다만, 완벽하지 않습니다. 이 방법은 프레임에서 사용시 배열을 판별하지 못합니다.
+
+```javascript
+const FrameArray = window.frames[1].Array;
+const arr = new FrameArray(1, 1, 1);
+
+console.log(Array.isArray(arr)); // true
+console.log(arr instanceof Array); // false
+```
+
+<br>
+
+> StackOverFlow에서 [Difference between using Array.isArray and instanceof Array](https://stackoverflow.com/questions/22289727/difference-between-using-array-isarray-and-instanceof-array/22289869)를 주제로 한 논의가 있고요, 지금 이 글을 작성하는데에도 많은 도움이 되었습니다.
+
+<br>
+
 ---
 
 ### References
@@ -148,3 +303,6 @@ let arr = [];
 - [Array | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 - [Grammar and types | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Array_literals)
 - [Array() constructor | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Array)
+- [Array.prototype.fill() | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)
+- [리터럴과 생성자](https://github.com/yoosoo-won/yoosoo-won.github.io/wiki/%EB%A6%AC%ED%84%B0%EB%9F%B4%EA%B3%BC-%EC%83%9D%EC%84%B1%EC%9E%90)
+- [JavaScript typed arrays | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays)
