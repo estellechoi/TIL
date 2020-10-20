@@ -1,8 +1,8 @@
-# 인덱스 컬렉션(Indexed Collections) - 배열(Array)
+# 배열(Array)과 배열형 객체
 
 ## 목차
 
-- 인덱스 컬렉션(Indexed Collections)
+- 배열(Array)과 배열형 객체
 - `Array`
 - JavaScript 배열의 특징
 - 배열 생성하기
@@ -11,7 +11,7 @@
 
 <br>
 
-## 인덱스 컬렉션(Indexed Collections)
+## 배열(Array)과 배열형 객체
 
 아래는 [자바스크립트 표준 내장 객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) 중에서 인덱스 컬렉션(Indexed Collections)에 해당하는 객체들입니다. 인덱스 값으로 정렬된 데이터의 컬렉션(집합)을 나타내고요, 배열([형식화 배열(Typed Array)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) 포함)과 배열형 객체를 포함합니다.
 
