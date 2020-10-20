@@ -333,7 +333,7 @@ console.log(type); // "[object Array]"
 위의 예제를 응용하면 아래와 같이 `Array.isArray()` 메소드를 정의해서 사용할 수 있겠죠.
 
 ```javascript
-if (typeof Array.isArray === "undefined") {
+if (typeof Array.isArray === undefined) {
 	Array.isArray = function (obj) {
 		return Object.prototype.toString.call(obj) === "[object Array]";
 	};
