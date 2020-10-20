@@ -2,16 +2,16 @@
 
 ## 목차
 
-- 배열(Array)과 배열형 객체
-- `Array`
-- JavaScript 배열의 특징
-- 배열 생성하기
-- 리터럴 vs 생성자
-- 배열 판별하기
+- 1. 배열(Array)과 배열형 객체
+- 2. `Array`
+- 3. JavaScript 배열의 특징
+- 4. 배열 생성하기
+- 5. 리터럴 vs 생성자
+- 6. 배열 판별하기
 
 <br>
 
-## 배열(Array)과 배열형 객체
+## 1. 배열(Array)과 배열형 객체
 
 아래는 [자바스크립트 표준 내장 객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) 중에서 인덱스 컬렉션(Indexed Collections)에 해당하는 객체들입니다. 인덱스 값으로 정렬된 데이터의 컬렉션(집합)을 나타내고요, 배열([형식화 배열(Typed Array)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) 포함)과 배열형 객체를 포함합니다.
 
@@ -41,13 +41,13 @@
 
 <br>
 
-## `Array`
+## 2. `Array`
 
 `Array`는 리스트 형태의 객체입니다. JavaScript에는 명시적인 배열(Array) 자료형이 없기 때문에 배열을 다루기 위해서는 `Array` 객체를 사용해야 합니다. 배열을 생성할 때 사용할 수 있고요, `Array`의 `prototype`은 배열을 탐색하고 변형시키는 메소드들을 제공합니다.
 
 <br>
 
-## JavaScript 배열의 특징
+## 3. JavaScript 배열의 특징
 
 JavaScript의 배열은 아래와 같은 특징을 가집니다.
 
@@ -105,7 +105,7 @@ console.log(c); // output: "c"
 
 <br>
 
-## 배열 생성하기
+## 4. 배열 생성하기
 
 배열을 생성하는 방법에는 두 가지가 있습니다.
 
@@ -176,7 +176,7 @@ let e = new Array(1, 2); // [1, 2]
 
 <br>
 
-## 리터럴 vs 생성자
+## 5. 리터럴 vs 생성자
 
 리터럴과 생성자 함수. 둘 중 어느 방법이 더 좋은가요? 이 질문에 대해서는 널리 알려진 가이드(?)가 있습니다. [Oreilly사의 JavaScript Patterns](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=13680905)에서 소개된 내용이고, 이 책의 내용을 레퍼런스로 하는 블로그 글과 아티클도 많은 것 같습니다.
 
@@ -203,7 +203,7 @@ let arr = [];
 
 <br>
 
-## 배열 판별하기
+## 6. 배열 판별하기
 
 배열인지 판별할 수 있는 가장 확실한 방법은 `isArray()` 메소드를 사용하는 것입니다.
 
