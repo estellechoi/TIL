@@ -3,11 +3,13 @@
 ## 목차
 
 1. 배열(Array)과 배열형 객체
-2. `Array`
-3. JavaScript 배열의 특징
-4. 배열 생성하기
-5. 리터럴 vs 생성자
-6. 배열 판별하기
+2. `Array` 객체
+3. `Array` 인스턴스 속성
+4. `Array` 인스턴스 메소드
+5. JavaScript 배열의 특징
+6. 배열 생성하기
+7. 리터럴 vs 생성자
+8. 배열 판별하기
 
 <br>
 
@@ -41,15 +43,81 @@
 
 <br>
 
-## 2. `Array`
+## 2. `Array` 객체
 
 `Array`는 리스트 형태의 객체입니다. JavaScript에는 명시적인 배열(Array) 자료형이 없기 때문에 배열을 다루기 위해서는 `Array` 객체를 사용해야 합니다. 배열을 생성할 때 사용할 수 있고요, `Array.prototype`은 배열을 탐색하고 변형시키는 메소드들을 제공합니다.
 
 <br>
 
-### 변경자 메서드
+### 생성자
 
-아래의 변경자 메서드들은 배열을 수정합니다.
+- [`Array()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Array) : `Array` 객체를 생성합니다.
+
+모든 `Array` 인스턴스는 `Array.prototype`을 상속합니다. 다른 생성자와 마찬가지로, `Array()` 생성자의 프로토타입을 수정하면 모든 `Array` 인스턴스도 영향을 받습니다. 예를 들면, 새로운 메소드와 속성을 추가해 모든 `Array`를 확장할 수 있으므로, [폴리필(Polyfill)](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill)에 쓰입니다.
+
+그러나 배열 객체에 비표준 메소드를 추가하면 나중에 스스로, 혹은 JavaScript에 기능이 추가될 경우 문제가 될 수 있습니다.
+
+<br>
+
+### 정적 속성
+
+- `Array.length` : 값이 `1`인 Array 생성자의 길이 속성입니다.
+
+- [`get Array[@@species]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@species) : 파생 객체를 생성하는데 사용하는 생성자 함수입니다.
+
+<br>
+
+### 정적 메소드
+
+- [`Array.from()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
+
+- [`Array.isArray()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)
+
+- [`Array.of()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of)
+
+<br>
+
+#### `Array.from()`
+
+유사 배열(array-like) 또는 반복 가능한 객체(iterable object)로부터 새로운 `Array` 인스턴스를 생성합니다. 다음과 같은 경우에 `Array.from()` 메소드로 새 `Array` 객체를 만들 수 있습니다.
+
+- 유사 배열 객체 (`length` 속성과 인덱싱된 요소를 가진 객체)
+- [반복 가능한 객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) ([Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) 등 객체의 요소를 얻을 수 있는 객체)
+
+<br>
+
+#### `Array.isArray()`
+
+배열이면 `true`, 아니면 `false`를 반환합니다.
+
+<br>
+
+#### `Array.of()`
+
+전달인자의 개수나 데이터 타입에 관계없이 새 `Array` 인스턴스를 생성합니다. `Array.of()`와 `Array()` 생성자의 차이는 인자 1개를 전달했을 때의 처리 방법에 있습니다. `Array.of(7)`은 하나의 요소 `7`을 가진 배열을 생성하지만 `Array(7)`은 `length`가 `7`인 빈 배열을 생성합니다.
+
+```javascript
+Array.of(7); // [7]
+Array(7); // [ , , , , , , ]
+```
+
+<br>
+
+## 3. `Array` 인스턴스 속성
+
+- `Array.prototype.constructor` : 객체의 프로토타입을 생성하는 함수를 지정합니다.
+
+- `Array.prototype.length` : 배열의 원소 수를 나타냅니다.
+
+- `Array.prototype[@@unscopables]` : `with` 결속 범위로부터 제외하려는 속성 이름이 들어있는 기호입니다.
+
+<br>
+
+## 4. `Array` 인스턴스 메소드
+
+### 변경자 메소드
+
+아래의 변경자 메소드들은 배열을 수정합니다.
 
 <br>
 
@@ -73,9 +141,9 @@
 
 <br>
 
-### 접근자 메서드
+### 접근자 메소드
 
-아래의 접근자 메서드들은 배열을 수정하지 않고, 기존 배열의 일부에 기반한 새로운 배열 또는 값을 반환합니다.
+아래의 접근자 메소드들은 배열을 수정하지 않고, 기존 배열의 일부에 기반한 새로운 배열 또는 값을 반환합니다.
 
 <br>
 
@@ -93,13 +161,13 @@
 
 - [`slice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 어떤 배열의 시작 인덱스부터 마지막 인덱스까지(마지막 인덱스의 원소는 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다.
 
-- [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) : 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다. 각 원소는 `,`로 연결됩니다. `Object.prototype.toString()` 메서드를 재정의합니다.
+- [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) : 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다. 각 원소는 `,`로 연결됩니다. `Object.prototype.toString()` 메소드를 재정의합니다.
 
-- [`toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString) : 배열의 요소를 나타내는 문자열을 반환하는데, `Date` 타입의 요소는 지역화된 문자열을 반환합니다. `Object.prototype.toLocaleString()` 메서드를 재정의합니다.
+- [`toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString) : 배열의 요소를 나타내는 문자열을 반환하는데, `Date` 타입의 요소는 지역화된 문자열을 반환합니다. `Object.prototype.toLocaleString()` 메소드를 재정의합니다.
 
 <br>
 
-### 순회 메서드
+### 순회 메소드
 
 순회 메소드를 호출하면 배열의 `length`를 기억하므로, 아직 순회가 끝나지 않았을 때 요소를 더 추가하더라도 콜백이 호출되지 않습니다. 반드시 배열을 변형해야 한다면, 새로운 배열로 복사하세요.
 
@@ -131,7 +199,7 @@
 
 <br>
 
-## 3. JavaScript 배열의 특징
+## 5. JavaScript 배열의 특징
 
 JavaScript의 배열은 아래와 같은 특징을 가집니다.
 
@@ -220,7 +288,7 @@ console.log(arr[3]); // undefined
 
 <br>
 
-## 4. 배열 생성하기
+## 6. 배열 생성하기
 
 배열을 생성하는 방법에는 두 가지가 있습니다.
 
@@ -291,7 +359,7 @@ let e = new Array(1, 2); // [1, 2]
 
 <br>
 
-## 5. 리터럴 vs 생성자
+## 7. 리터럴 vs 생성자
 
 리터럴과 생성자 함수. 둘 중 어느 방법이 더 좋은가요? 이 질문에 대해서는 널리 알려진 가이드(?)가 있습니다. [Oreilly사의 JavaScript Patterns](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=13680905)에서 소개된 내용이고, 이 책의 내용을 레퍼런스로 하는 블로그 글과 아티클도 많은 것 같습니다.
 
@@ -322,7 +390,7 @@ let arr = [];
 
 <br>
 
-## 6. 배열 판별하기
+## 8. 배열 판별하기
 
 배열인지 판별할 수 있는 가장 확실한 방법은 `isArray()` 메소드를 사용하는 것입니다.
 
