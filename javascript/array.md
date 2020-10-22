@@ -2,6 +2,7 @@
 
 ## 목차
 
+```
 1. 배열(Array)과 배열형 객체
 2. `Array` 객체
 3. JavaScript 배열의 특징
@@ -10,6 +11,10 @@
 6. 배열 판별하기
 7. `Array` 인스턴스 속성
 8. `Array` 인스턴스 메소드
+9. 변경자 메소드
+10. 접근자 메소드
+11. 순회 메소드
+```
 
 <br>
 
@@ -478,6 +483,251 @@ console.log(arr instanceof Array); // false
 - [`values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/values) : 배열의 각 요소에 대한 값을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
 
 - [`Array.prototype[Symbol.iterator]()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@iterator) : 기본값은 `values()` 입니다.
+
+<br>
+
+## 9. 변경자 메소드
+
+변경자 메소드를 호출하면 배열이 수정됩니다. 배열의 원본을 유지해야한다면 주의하세요.
+
+<br>
+
+### [`copyWithin()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin)
+
+배열의 일부를 얕게 복사한 뒤, 동일한 배열의 다른 위치에 덮어쓰고 그 배열을 반환합니다. 이때 해당 배열의 길이를 바꾸지 않는다는 것에 주의하세요. 그러니까, 복사한 원소의 수만큼 다른 위치의 원소들을 덮어씁니다. 아래의 예제를 보죠. 이 메소드는 변경자 메소드이기 때문에(배열을 직접 수정하기 때문에) 원래 배열인 `arr`과 메소드의 반환 값이 동일하다는 점에 주목하세요.
+
+<br>
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const arr2 = arr.copyWithin(0, 3, 4);
+
+console.log(arr); // [4, 2, 3, 4, 5]
+console.log(arr2); // [4, 2, 3, 4, 5]
+```
+
+`arr.copyWithin(0, 3, 4)`의 의미는 이렇습니다.
+
+- `0`번 인덱스부터 (복사한 원소들로) 덮어씁니다.
+- `3`번 인덱스부터 복사합니다.
+- `4`번 인덱스 이전까지 복사합니다. (`4`번 인덱스 미포함)
+
+<br>
+
+> `arr`은 `const`로 선언한 변수이기 때문에 다른 값을 직접 할당해서 변경하는 것은 불가능합니다. 하지만 `Array` 인스턴스 메소드를 사용해서 수정하는 것은 가능합니다.
+
+<br>
+
+세 인자들의 값이 음수이면, 각각 배열의 뒤에서부터 카운트합니다. 예를 들어 첫 번째 인자의 값이 `-2`이면, 배열의 마지막에서 두 번째 원소부터 덮어씁니다.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+arr.copyWithin(-2, 0, 3);
+
+console.log(arr); // [1, 2, 3, 1, 2]
+```
+
+<br>
+
+### [`fill()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)
+
+배열의 시작 인덱스부터 끝 인덱스의 이전까지 정적인 값 하나로 채우고 그 배열을 반환합니다.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const arr2 = arr.fill(0, 1, 5);
+
+console.log(arr); // [1, 0, 0, 0, 0]
+console.log(arr2); // [1, 0, 0, 0, 0]
+```
+
+<br>
+
+이 메소드의 세 인자를 각각 `value`, `start`, `end`라고 칭해봅시다. 만약 `start`와 `end`의 값으로 음수를 지정하면 그 값은 각각 `start + this.length`, `end + this.length`가 됩니다. 시작과 끝 인덱스를 지정하지 않으면 기본값은 각각 `0`, `this.length` 입니다.
+
+<br>
+
+`value` 값으로 객체를 전달하면, 그 참조만 복사해서 배열을 채웁니다.
+
+```javascript
+const arr = new Array(3); // [ empty × 3 ]
+arr.fill({}); // [{}, {}, {}]
+arr[0].name = "Yujin"; // [{name: "Yujin"}, {name: "Yujin"}, {name: "Yujin"}]
+```
+
+<br>
+
+### [`pop()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)
+
+배열에서 마지막 요소를 제거하고 그 요소를 반환합니다. 빈 배열의 경우 `undefined`를 반환합니다.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const x = arr.pop();
+
+console.log(arr); // [1, 2, 3, 4]
+console.log(x); // 5
+```
+
+<br>
+
+`pop()` 메소드는 유사배열(array-like) 객체에도 사용할 수 있습니다. 인덱싱된 속성들과 `length` 속성을 가진 유사배열 객체를 만들어보겠습니다.
+
+```javascript
+const obj = {
+	0: 1,
+	1: 2,
+	2: 3,
+	length: 3,
+};
+
+console.log(Array.isArray(obj)); // false
+```
+
+<br>
+
+`call()` 또는 `apply()` 메소드를 사용해서 `Array.prototype.pop()` 메소드를 호출해봅니다.
+
+```javascript
+const x = Array.prototype.pop.call(obj);
+
+console.log(x); // 3
+console.log(obj); // {0: 1, 1: 2, length: 2}
+```
+
+<br>
+
+### [`shift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)
+
+배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다. `pop()`과 마찬가지로 유사배열 객체에 사용할 수 있습니다.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const x = arr.shift();
+
+console.log(arr); // [2, 3, 4, 5]
+console.log(x); // 1
+```
+
+<br>
+
+배열의 길이가 `0`인 경우 `undefined`를 반환합니다. 길이가 있더라도 빈 배열이면 역시나 `undefined`를 반환하고요, 배열의 길이는 수정됩니다.
+
+```javascript
+const arr = new Array(3); // [empty × 3]
+const x = arr.shift();
+
+console.log(x); // undefined
+console.log(arr.length); // 2
+```
+
+<br>
+
+### [`unshift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
+
+새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다. 유사배열 객체에 사용 가능합니다.
+
+```javascript
+const arr = [1, 2, 3];
+const length = arr.unshift(4, 5);
+
+console.log(arr); // [4, 5, 1, 2, 3];
+console.log(length); // 5
+```
+
+<br>
+
+### [`push()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+
+배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
+
+```javascript
+const arr = [1, 2, 3];
+const length = arr.push(4, 5);
+
+console.log(arr); // [1, 2, 3, 4, 5]
+console.log(length); // 5
+```
+
+<br>
+
+`call()` 또는 `apply()`를 사용하여 유사배열 객체에 사용할 수 있습니다.
+
+```javascript
+const obj = {
+	0: 1,
+	1: 2,
+	length: 2,
+};
+
+Array.prototype.push.call(obj, 3, 4);
+console.log(obj); // {0: 1, 1: 2, 2: 3, 3: 4, length: 4}
+
+Array.prototype.push.apply(obj, [5, 6]);
+console.log(obj); // {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, length: 6}
+```
+
+<br>
+
+### [`reverse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
+
+배열의 순서를 반전하고요,
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const arr2 = arr.reverse();
+
+console.log(arr); // [5, 4, 3, 2, 1]
+console.log(arr2); // [5, 4, 3, 2, 1]
+```
+
+<br>
+
+원본 배열을 변형하며 그 참조를 반환합니다. 따라서 아래의 `arr.push(0)`은 `arr`과 `arr2`에 모두 영향을 줍니다.
+
+```javascript
+arr.push(0);
+console.log(arr); // [5, 4, 3, 2, 1, 0]
+console.log(arr2); // [5, 4, 3, 2, 1, 0]
+```
+
+<br>
+
+### [`sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+
+배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability)가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+
+```javascript
+const months = ["March", "Jan", "Feb", "Dec"];
+months.sort();
+
+console.log(months); // ["Dec", "Feb", "Jan", "March"]
+```
+
+<br>
+
+숫자로 이루어진 배열을 `sort()` 해봅시다.
+
+```javascript
+const arr = [1, 30, 4, 21, 100000];
+arr.sort();
+
+console.log(arr); // [1, 100000, 21, 30, 4]
+```
+
+<br>
+
+### [`splice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+
+배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
+
+<br>
+
+## 10. 접근자 메소드
+
+<br>
+
+## 11. 순회 메소드
 
 <br>
 
