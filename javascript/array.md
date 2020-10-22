@@ -4,12 +4,12 @@
 
 1. 배열(Array)과 배열형 객체
 2. `Array` 객체
-3. `Array` 인스턴스 속성
-4. `Array` 인스턴스 메소드
-5. JavaScript 배열의 특징
-6. 배열 생성하기
-7. 리터럴 vs 생성자
-8. 배열 판별하기
+3. JavaScript 배열의 특징
+4. 배열 생성하기
+5. 리터럴 vs 생성자
+6. 배열 판별하기
+7. `Array` 인스턴스 속성
+8. `Array` 인스턴스 메소드
 
 <br>
 
@@ -103,103 +103,7 @@ Array(7); // [ , , , , , , ]
 
 <br>
 
-## 3. `Array` 인스턴스 속성
-
-- `Array.prototype.constructor` : 객체의 프로토타입을 생성하는 함수를 지정합니다.
-
-- `Array.prototype.length` : 배열의 원소 수를 나타냅니다.
-
-- `Array.prototype[@@unscopables]` : `with` 결속 범위로부터 제외하려는 속성 이름이 들어있는 기호입니다.
-
-<br>
-
-## 4. `Array` 인스턴스 메소드
-
-### 변경자 메소드
-
-아래의 변경자 메소드들은 배열을 수정합니다.
-
-<br>
-
-- [`copyWithin()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) : 배열의 일부를 얕게 복사한 뒤, 동일한 배열의 다른 위치에 덮어쓰고 그 배열을 반환합니다.
-
-- [`fill()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) : 배열의 시작 인덱스부터 끝 인덱스의 이전까지 정적인 값 하나로 채웁니다.
-
-- [`pop()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) : 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.
-
-- [`shift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다.
-
-- [`unshift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) : 새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
-
-- [`push()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) : 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
-
-- [`reverse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) : 배열의 순서를 반전합니다.
-
-- [`sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) : 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability)가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
-
-- [`splice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
-
-<br>
-
-### 접근자 메소드
-
-아래의 접근자 메소드들은 배열을 수정하지 않고, 기존 배열의 일부에 기반한 새로운 배열 또는 값을 반환합니다.
-
-<br>
-
-- [`concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) : 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
-
-- [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : 주어진 함수의 테스트를 통과하는 요소들만 모아 새로운 배열로 반환합니다.
-
-- [`includes()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) : 배열이 특정 요소를 포함하고 있는지 판별합니다. `true`/`false`를 반환합니다.
-
-- [`indexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) : 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 `-1`을 반환합니다.
-
-- [`lastIndexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) : 배열에서 주어진 값을 발견할 수 있는 마지막 인덱스를 반환하고, 요소가 존재하지 않으면 `-1`을 반환합니다.
-
-- [`join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) : 인자로 전달된 문자열을 이용하여 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
-
-- [`slice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 어떤 배열의 시작 인덱스부터 마지막 인덱스까지(마지막 인덱스의 원소는 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다.
-
-- [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) : 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다. 각 원소는 `,`로 연결됩니다. `Object.prototype.toString()` 메소드를 재정의합니다.
-
-- [`toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString) : 배열의 요소를 나타내는 문자열을 반환하는데, `Date` 타입의 요소는 지역화된 문자열을 반환합니다. `Object.prototype.toLocaleString()` 메소드를 재정의합니다.
-
-<br>
-
-### 순회 메소드
-
-순회 메소드를 호출하면 배열의 `length`를 기억하므로, 아직 순회가 끝나지 않았을 때 요소를 더 추가하더라도 콜백이 호출되지 않습니다. 반드시 배열을 변형해야 한다면, 새로운 배열로 복사하세요.
-
-<br>
-
-- [`forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) : 주어진 함수를 배열 요소 각각에 대해 실행합니다.
-
-- [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) : 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과(반환값)을 모아 새로운 배열을 반환합니다.
-
-- [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 결과값을 반환합니다. 리듀서 함수는 인자로 이전까지의 누적값과 현재값(`(accumulator, currentValue)`)를 받습니다.
-
-- [`reduceRight()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight) : 리듀서의 첫 번째 인자인 누적값에 대해 함수를 적용하고, 두 번째 인자인 현재값은 배열의 오른쪽에서 왼쪽(마지막에서 첫 번째 요소) 순으로 구성됩니다.
-
-- [`some()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) : 배열 안의 어떤 요소라도 주어진 판별 함수를 통과하면 `true`, 모든 요소가 통과하지 못하면 `false`를 반환합니다. 빈 배열에서 호출하면 무조건 `false`를 반환합니다.
-
-- [`every()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/every) : 배열 안의 모든 요소가 주어진 판별 함수를 통과하면 `true`, 하나라도 통과하지 못하면 `false`를 반환합니다. 빈 배열에서 호출하면 무조건 `true`를 반환합니다.
-
-- [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) : 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 `undefined`를 반환합니다.
-
-- [`findIndex()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) : 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 `-1`을 반환합니다.
-
-- [`keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys) : 배열의 각 인덱스를 키 값으로 가지는 새로운 `Array Iterator` 객체를 반환합니다.
-
-- [`entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries) : 배열의 요소에 대한 "키 - 값" 쌍을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
-
-- [`values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/values) : 배열의 각 요소에 대한 값을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
-
-- [`Array.prototype[Symbol.iterator]()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@iterator) : 기본값은 `values()` 입니다.
-
-<br>
-
-## 5. JavaScript 배열의 특징
+## 3. JavaScript 배열의 특징
 
 JavaScript의 배열은 아래와 같은 특징을 가집니다.
 
@@ -288,7 +192,7 @@ console.log(arr[3]); // undefined
 
 <br>
 
-## 6. 배열 생성하기
+## 4. 배열 생성하기
 
 배열을 생성하는 방법에는 두 가지가 있습니다.
 
@@ -359,7 +263,7 @@ let e = new Array(1, 2); // [1, 2]
 
 <br>
 
-## 7. 리터럴 vs 생성자
+## 5. 리터럴 vs 생성자
 
 리터럴과 생성자 함수. 둘 중 어느 방법이 더 좋은가요? 이 질문에 대해서는 널리 알려진 가이드(?)가 있습니다. [Oreilly사의 JavaScript Patterns](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=13680905)에서 소개된 내용이고, 이 책의 내용을 레퍼런스로 하는 블로그 글과 아티클도 많은 것 같습니다.
 
@@ -390,7 +294,7 @@ let arr = [];
 
 <br>
 
-## 8. 배열 판별하기
+## 6. 배열 판별하기
 
 배열인지 판별할 수 있는 가장 확실한 방법은 `isArray()` 메소드를 사용하는 것입니다.
 
@@ -478,6 +382,102 @@ console.log(arr instanceof Array); // false
 <br>
 
 > StackOverFlow에서 [Difference between using Array.isArray and instanceof Array](https://stackoverflow.com/questions/22289727/difference-between-using-array-isarray-and-instanceof-array/22289869)를 주제로 한 논의가 있고요, 지금 이 글을 작성하는데에도 많은 도움이 되었습니다.
+
+<br>
+
+## 7. `Array` 인스턴스 속성
+
+- `Array.prototype.constructor` : 객체의 프로토타입을 생성하는 함수를 지정합니다.
+
+- `Array.prototype.length` : 배열의 원소 수를 나타냅니다.
+
+- `Array.prototype[@@unscopables]` : `with` 결속 범위로부터 제외하려는 속성 이름이 들어있는 기호입니다.
+
+<br>
+
+## 8. `Array` 인스턴스 메소드
+
+### 변경자 메소드
+
+아래의 변경자 메소드들은 배열을 수정합니다.
+
+<br>
+
+- [`copyWithin()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) : 배열의 일부를 얕게 복사한 뒤, 동일한 배열의 다른 위치에 덮어쓰고 그 배열을 반환합니다.
+
+- [`fill()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) : 배열의 시작 인덱스부터 끝 인덱스의 이전까지 정적인 값 하나로 채웁니다.
+
+- [`pop()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) : 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.
+
+- [`shift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다.
+
+- [`unshift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) : 새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
+
+- [`push()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) : 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
+
+- [`reverse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) : 배열의 순서를 반전합니다.
+
+- [`sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) : 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability)가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+
+- [`splice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
+
+<br>
+
+### 접근자 메소드
+
+아래의 접근자 메소드들은 배열을 수정하지 않고, 기존 배열의 일부에 기반한 새로운 배열 또는 값을 반환합니다.
+
+<br>
+
+- [`concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) : 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
+
+- [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : 주어진 함수의 테스트를 통과하는 요소들만 모아 새로운 배열로 반환합니다.
+
+- [`includes()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) : 배열이 특정 요소를 포함하고 있는지 판별합니다. `true`/`false`를 반환합니다.
+
+- [`indexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) : 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 `-1`을 반환합니다.
+
+- [`lastIndexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) : 배열에서 주어진 값을 발견할 수 있는 마지막 인덱스를 반환하고, 요소가 존재하지 않으면 `-1`을 반환합니다.
+
+- [`join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) : 인자로 전달된 문자열을 이용하여 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
+
+- [`slice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 어떤 배열의 시작 인덱스부터 마지막 인덱스까지(마지막 인덱스의 원소는 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다.
+
+- [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) : 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다. 각 원소는 `,`로 연결됩니다. `Object.prototype.toString()` 메소드를 재정의합니다.
+
+- [`toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString) : 배열의 요소를 나타내는 문자열을 반환하는데, `Date` 타입의 요소는 지역화된 문자열을 반환합니다. `Object.prototype.toLocaleString()` 메소드를 재정의합니다.
+
+<br>
+
+### 순회 메소드
+
+순회 메소드를 호출하면 배열의 `length`를 기억하므로, 아직 순회가 끝나지 않았을 때 요소를 더 추가하더라도 콜백이 호출되지 않습니다. 반드시 배열을 변형해야 한다면, 새로운 배열로 복사하세요.
+
+<br>
+
+- [`forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) : 주어진 함수를 배열 요소 각각에 대해 실행합니다.
+
+- [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) : 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과(반환값)을 모아 새로운 배열을 반환합니다.
+
+- [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 결과값을 반환합니다. 리듀서 함수는 인자로 이전까지의 누적값과 현재값(`(accumulator, currentValue)`)를 받습니다.
+
+- [`reduceRight()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight) : 리듀서의 첫 번째 인자인 누적값에 대해 함수를 적용하고, 두 번째 인자인 현재값은 배열의 오른쪽에서 왼쪽(마지막에서 첫 번째 요소) 순으로 구성됩니다.
+
+- [`some()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) : 배열 안의 어떤 요소라도 주어진 판별 함수를 통과하면 `true`, 모든 요소가 통과하지 못하면 `false`를 반환합니다. 빈 배열에서 호출하면 무조건 `false`를 반환합니다.
+
+- [`every()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/every) : 배열 안의 모든 요소가 주어진 판별 함수를 통과하면 `true`, 하나라도 통과하지 못하면 `false`를 반환합니다. 빈 배열에서 호출하면 무조건 `true`를 반환합니다.
+
+- [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) : 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 `undefined`를 반환합니다.
+
+- [`findIndex()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) : 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 `-1`을 반환합니다.
+
+- [`keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys) : 배열의 각 인덱스를 키 값으로 가지는 새로운 `Array Iterator` 객체를 반환합니다.
+
+- [`entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries) : 배열의 요소에 대한 "키 - 값" 쌍을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
+
+- [`values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/values) : 배열의 각 요소에 대한 값을 가지는 새로운 `Array Iterator` 객체를 반환합니다.
+
+- [`Array.prototype[Symbol.iterator]()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@iterator) : 기본값은 `values()` 입니다.
 
 <br>
 
