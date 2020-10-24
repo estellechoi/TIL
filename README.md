@@ -56,7 +56,7 @@
 - [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/javascript/scope.md)
 - [실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)](https://github.com/estellechoi/TIL/blob/master/javascript/executionContext.md)
 - [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md) \*
-- [How Javascript works?](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
+- [JavaScript는 어떻게 동작하는가? - JS 엔진, 이벤트 루프, 콜백 큐, 비동기 콜백, Promise](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md) \*
 - [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
 
 <br>
