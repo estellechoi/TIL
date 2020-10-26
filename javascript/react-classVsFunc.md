@@ -1,4 +1,4 @@
-# React Class vs Function 컴포넌트
+# [React] Class vs Function 컴포넌트
 
 ## 목차
 
