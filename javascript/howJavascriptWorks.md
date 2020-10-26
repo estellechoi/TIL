@@ -1,4 +1,4 @@
-# JavaScript는 어떻게 동작하는가? - JS 엔진, 이벤트 루프, 콜백 큐, 비동기 콜백, Promise
+# JavaScript는 어떻게 동작하는가? - JS 엔진, 이벤트 루프, 콜백 큐
 
 > [이 블로그 시리즈](https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf)를 비롯한 기타 자료들을 읽으면서 학습한 내용을 정리했습니다.
 
@@ -659,7 +659,7 @@ async function loadData() {
 
 <br>
 
-## JavaScript Working Process
+## JavaScript 동작 프로세스
 
 ![Javascript working process](./../img/javascript.png)
 
