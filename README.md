@@ -58,6 +58,7 @@
 - [JavaScript는 어떻게 동작하는가? - JS 엔진, 이벤트 루프, 콜백 큐](https://github.com/estellechoi/TIL/blob/master/javascript/howJavascriptWorks.md)
 - [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/javascript/v8.md) \*
 - [Node.js](https://github.com/estellechoi/TIL/blob/master/javascript/nodejs.md) \*
+- [[React] Class vs Function 컴포넌트](https://github.com/estellechoi/TIL/blob/master/javascript/react-classVsFunc.md)
 
 <br>
 
