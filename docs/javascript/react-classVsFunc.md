@@ -7,7 +7,8 @@
 2. Class와 Function 컴포넌트에 데이터(props) 전달하기
 3. Class 컴포넌트에서 state 사용하기
 4. Function 컴포넌트와 useState Hook
-5. Class 컴포넌트의 라이프사이클
+5. Class 컴포넌트에서 라이프사이클 다루기
+6. Function 컴포넌트에서 useEffect Hook으로 라이프사이클 다루기
 ```
 
 <br>
@@ -291,7 +292,7 @@ class Comp extends React.Component {
 
 - `componentWillUpdate(nextProps, nextState)`
 
-- `render()` :마운트(Mount) 시점에 호출되었던 `render()`와 동일한 함수입니다.
+- `render()` : 마운트(Mount) 시점에 호출되었던 `render()`와 동일한 함수입니다.
 
 - `componentDidUpdate(preProps, preState)`
 
@@ -309,6 +310,77 @@ class Comp extends React.Component {
 
 <br>
 
+## 6. Function 컴포넌트에서 `useEffect` Hook으로 라이프사이클 다루기
+
+위에서 보았듯이, Class 컴포넌트는 각 라이프사이클 단계마다 원하는 로직을 지정할 수 있도록 함수들을 제공합니다. 하지만 Function 컴포넌트에서는 이 함수들을 사용할 수 없죠. 애초에 `class`가 아닌 `function` 이기 때문에 `React.Component` 클래스를 상속받을 수 없으니까요. 그럼 Function 컴포넌트에서는 어떻게 각 라이프사이클 단계에 접근해서 컴포넌트를 컨트롤할까요? `useEffect` Hook을 사용합니다.
+
+<br>
+
+아래 예제는 위에서 사용했던 Class 컴포넌트 예제입니다. 이 컴포넌트를 Function 컴포넌트로 전환하면서 `useEffect` Hook을 사용해보죠.
+
+```javascript
+class Comp extends React.Component {
+	componentWillMount() {
+		console.log(`%ccomponentWillMount`, "color: dodgerblue");
+	}
+
+	render() {
+		console.log(`%crender`, "color: purple");
+		return <div></div>;
+	}
+}
+```
+
+<br>
+
+먼저 `useEffect` Hook을 사용하기 위해 `import` 합니다.
+
+```javascript
+import React, { useEffect } from "react";
+```
+
+<br>
+
+Function 컴포넌트로 전환하기 위해 `function` 함수 선언식을 사용해 컴포넌트를 만들고요. 더이상 `render()` 함수를 사용할 수도, 필요도 없으므로 지웁니다. `componentWillMount()`도 사용할 수 없으므로 일단 주석처리 합니다.
+
+```javascript
+function Comp() {
+	// componentWillMount() {
+	// 	console.log(`%ccomponentWillMount`, "color: dodgerblue");
+	// }
+	useEffect();
+
+	return <div></div>;
+}
+```
+
+<br>
+
+그리고 `useEffect()`를 실행시켜보죠. 첫 번째 인자로 함수를 전달합니다.
+
+```javascript
+function Comp() {
+	// componentWillMount() {
+	// 	console.log(`%ccomponentWillMount`, "color: dodgerblue");
+	// }
+
+	useEffect(() => {
+		console.log("%cuseEffect() was called", "color: pink");
+	});
+
+	console.log("%crender", "color: purple");
+	return <div></div>;
+}
+```
+
+<br>
+
+콘솔 출력 결과는 아래와 같습니다.
+
+<img src="./../img/react-useEffect-log.png" alt="React useEffect log" width="700" />
+
+<br>
+
 ---
 
 ### References
@@ -316,5 +388,6 @@ class Comp extends React.Component {
 - [React Top-Level API | React](https://reactjs.org/docs/react-api.html)
 - [Components and Props | React](https://reactjs.org/docs/components-and-props.html)
 - [Using the State Hook | React](https://reactjs.org/docs/hooks-state.html)
+- [Using the Effect Hook | React](https://reactjs.org/docs/hooks-effect.html)
 - [React.Component | React](https://reactjs.org/docs/react-component.html#constructor)
 - [React component lifecycle, API 정리](https://gseok.gitbooks.io/react/content/bd80-bd84-bd80-bd84-c9c0-c2dd-b4e4/react-component-lifecycle-api-c815-b9ac.html)
