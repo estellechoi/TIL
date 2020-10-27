@@ -257,7 +257,7 @@ class Comp extends React.Component {
 
 콘솔 출력 결과는 다음과 같습니다.
 
-![React Lifecycle Log](./../img/react-lifecyclelog.png)
+<img src="./../img/react-lifecyclelog.png" alt="React Lifecycle Log" width="400"/>
 
 <br>
 
