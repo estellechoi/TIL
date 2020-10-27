@@ -386,6 +386,8 @@ function Comp() {
 
 `useEffect`는 Function 컴포넌트에서 각 라이프사이클 단계에 접근하여 원하는 일을 처리할 수 있도록 해줍니다. 이 `useEffect`에 대해 자세히 알아봅시다.
 
+<br>
+
 ### `useEffect`는 여러번 사용해도 됩니다
 
 아래와 같이 `useEffect`는 여러번 사용할 수 있습니다. 기본적으로 코드를 작성한 순서대로 `useEffect()` 함수들이 실행되고요.
