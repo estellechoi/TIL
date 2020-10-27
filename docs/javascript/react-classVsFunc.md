@@ -255,9 +255,11 @@ class Comp extends React.Component {
 
 <br>
 
-콘솔 출력 결과는 다음과 같습니다.
+콘솔 출력 결과는 다음과 같습니다. 호출된 순서를 확인해보세요.
 
-<img src="./../img/react-lifecyclelog.png" alt="React Lifecycle Log" width="800"/>
+<br>
+
+<img src="./../img/react-lifecyclelog.png" alt="React Lifecycle Log" width="700"/>
 
 <br>
 
