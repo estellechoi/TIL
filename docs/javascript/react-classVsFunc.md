@@ -221,15 +221,21 @@ function Comp({ name, number }) {
 
 <br>
 
-## 5. 컴포넌트 라이프사이클
+## 5. Class 컴포넌트에서 라이프사이클 다루기
 
-아래는 React 컴포넌트의 라이프사이클을 나타내는 그림입니다. 컴포넌트가 최초 렌더링될 때 각 라이프사이클 함수들이 호출되는 순서를 나타냅니다. `componentWillMount()` 호출 이전의 `constructor()`에서는 `state` 값을 초기화하고요, `props`는 `super()`의 인자로 넘깁니다. 이 작업들은 원래 `getDefaultProp()`-`getInitialState()` 함수가 차례로 호출되면서 처리했었는데 현재는 Deprecated 되었습니다. 대신 `constructor()`에서 처리하죠. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행됩니다.
+아래는 React 컴포넌트의 라이프사이클을 나타내는 그림입니다. Class 컴포넌트가 최초 렌더링될 때 각 라이프사이클 함수들이 호출되는 순서를 나타냅니다.
 
-![Class Lifecycle](./../img/react.png)
+![Class Lifecycle](./../img/react-class-lifecycle.png)
 
 <br>
 
-위의 라이프사이클 함수들은 아래의 `ReactDOM.render()`가 호출된 이후 차례로 호출됩니다.
+### Mount
+
+`componentWillMount()` 호출 이전의 `constructor()`에서는 `state` 값을 초기화하고요, `props`는 `super()`의 인자로 넘깁니다. 이 작업들은 원래 `getDefaultProp()`-`getInitialState()` 함수가 차례로 호출되면서 처리했었는데 현재는 Deprecated 되었습니다. 대신 `constructor()`에서 처리하죠. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행됩니다.
+
+<br>
+
+위의 마운트(Mount) 관련 라이프사이클 함수들은 아래의 `ReactDOM.render()`가 호출된 이후 차례로 호출됩니다.
 
 ```javascript
 const root = document.getElementById("root");
@@ -260,6 +266,12 @@ class Comp extends React.Component {
 <br>
 
 <img src="./../img/react-lifecyclelog.png" alt="React Lifecycle Log" width="700"/>
+
+<br>
+
+### Update
+
+`setState()`가 호출되면 업데이트(Update) 사이클 함수들이 차례로 호출됩니다. 이때 호출되는 `render()`는 마운트(Mount) 시점에 호출되었던 `render()` 함수입니다.
 
 <br>
 
