@@ -341,15 +341,10 @@ import React, { useEffect } from "react";
 
 <br>
 
-Function 컴포넌트로 전환하기 위해 `function` 함수 선언식을 사용해 컴포넌트를 만들고요. 더이상 `render()` 함수를 사용할 수도, 필요도 없으므로 지웁니다. `componentWillMount()`도 사용할 수 없으므로 일단 주석처리 합니다.
+Function 컴포넌트로 전환하기 위해 `function` 함수 선언식을 사용해 컴포넌트를 만들고요. 더이상 `render()` 함수를 사용할 수도, 필요도 없으므로 지웁니다. `componentWillMount()`도 사용할 수 없으므로 지울게요.
 
 ```javascript
 function Comp() {
-	// componentWillMount() {
-	// 	console.log(`%ccomponentWillMount`, "color: dodgerblue");
-	// }
-	useEffect();
-
 	return <div></div>;
 }
 ```
@@ -360,24 +355,21 @@ function Comp() {
 
 ```javascript
 function Comp() {
-	// componentWillMount() {
-	// 	console.log(`%ccomponentWillMount`, "color: dodgerblue");
-	// }
-
 	useEffect(() => {
 		console.log("%cuseEffect() was called", "color: pink");
 	});
 
 	console.log("%crender", "color: purple");
-	return <div></div>;
+
+	return <div>{console.log("%crendering", "color: red")}</div>;
 }
 ```
 
 <br>
 
-콘솔 출력 결과는 아래와 같습니다.
+콘솔 출력 결과는 아래와 같습니다. `console.log("%crender", "color: purple")`이 먼저 실행되고, JSX가 렌더링되면서 `console.log("%crendering", "color: red")`가 실행되고요, 마지막으로 `useEffect()` Hook이 렌더링 후에 실행되네요.
 
-<img src="./../img/react-useEffect-log.png" alt="React useEffect log" width="700" />
+<img src="./../img/react-func-comp.png" alt="React useEffect log" width="700" />
 
 <br>
 
