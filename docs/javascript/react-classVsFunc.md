@@ -229,18 +229,30 @@ function Comp({ name, number }) {
 
 <br>
 
-### Mount
+### 마운트(Mount)
 
-`componentWillMount()` 호출 이전의 `constructor()`에서는 `state` 값을 초기화하고요, `props`는 `super()`의 인자로 넘깁니다. 이 작업들은 원래 `getDefaultProp()`-`getInitialState()` 함수가 차례로 호출되면서 처리했었는데 현재는 Deprecated 되었습니다. 대신 `constructor()`에서 처리하죠. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행됩니다.
-
-<br>
-
-위의 마운트(Mount) 관련 라이프사이클 함수들은 아래의 `ReactDOM.render()`가 호출된 이후 차례로 호출됩니다.
+아래와 같이 `ReactDOM.render()`가 호출되면 마운트(Mount) 함수들이 차례로 호출됩니다.
 
 ```javascript
 const root = document.getElementById("root");
 ReactDOM.render(<App />, root);
 ```
+
+<br>
+
+다음은 마운트 함수들입니다.
+
+- `constructor()`
+
+- `componentWillMount()`
+
+- `render()`
+
+- `componentDidMount()`
+
+<br>
+
+`componentWillMount()` 호출 이전의 `constructor()`에서는 `state` 값을 초기화하고요, `props`는 `super()`의 인자로 넘깁니다. 이 작업들은 원래 `getDefaultProp()`-`getInitialState()` 함수가 차례로 호출되면서 처리했었는데 현재는 Deprecated 되었습니다. 대신 `constructor()`에서 처리하죠. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행됩니다.
 
 <br>
 
@@ -269,9 +281,31 @@ class Comp extends React.Component {
 
 <br>
 
-### Update
+### 업데이트(Update)
 
-`setState()`가 호출되면 업데이트(Update) 사이클 함수들이 차례로 호출됩니다. 이때 호출되는 `render()`는 마운트(Mount) 시점에 호출되었던 `render()` 함수입니다.
+`setProps()`/`setState()`가 호출되어서 컴포넌트가 다시 렌더링되어야하는 경우, 아래의 업데이트(Update) 사이클 함수들이 차례로 호출됩니다.
+
+- `componentWillReceiveProps(nextProps)` : `setProps()` 호출시 이 함수부터 차례로 호출됩니다.
+
+- `shouldComponentUpdate(nextProps, nextState)` : `setState()` 호출시 이 함수부터 차례로 호출됩니다.
+
+- `componentWillUpdate(nextProps, nextState)`
+
+- `render()` :마운트(Mount) 시점에 호출되었던 `render()`와 동일한 함수입니다.
+
+- `componentDidUpdate(preProps, preState)`
+
+<br>
+
+> 위 그림에서 `componentWillReceiveProps(nextProps)`는 생략했습니다.
+
+<br>
+
+### 언마운트(Unmount)
+
+컴포넌트가 DOM에서 제거될 때 호출됩니다.
+
+- `componentWillUnmount()`
 
 <br>
 
