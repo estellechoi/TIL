@@ -369,7 +369,33 @@ function Comp() {
 
 콘솔 출력 결과는 아래와 같습니다. `console.log("%crender", "color: purple")`이 먼저 실행되고, JSX가 렌더링되면서 `console.log("%crendering", "color: red")`가 실행되고요, 마지막으로 `useEffect()` Hook이 렌더링 후에 실행되네요.
 
+<br>
+
 <img src="./../img/react-func-comp.png" alt="React useEffect log" width="700" />
+
+<br>
+
+그러니까, 컴포넌트 렌더링 후에 어떤 일을 처리하고 싶다면 Function 컴포넌트에서는 `componentDidMount()` 대신 `useEffect()`를 사용하면 됩니다. 그런데 이 `useEffect()`는 `componentDidMount()`와 완전히 동일하지는 않습니다. `state`의 업데이트가 일어날 때마다 렌더링 직후 함께 호출되거든요. 오히려 `componentDidMount()` + `componentDidUpdate()`를 합한 것과 비슷한 역할을 합니다.
+
+<br>
+
+`useEffect()`는 아래와 같이 여러번 사용해도 됩니다.
+
+```javascript
+function Comp() {
+	useEffect(() => {
+		console.log("%cuseEffect() was called", "color: pink"); // 3
+	});
+
+	useEffect(() => {
+		console.log("%cuseEffect() was called", "color: orange"); // 4
+	});
+
+	console.log("%crender", "color: purple"); // 1
+
+	return <div>{console.log("%crendering", "color: red")}</div>; // 2
+}
+```
 
 <br>
 
