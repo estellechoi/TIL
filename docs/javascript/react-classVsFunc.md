@@ -223,7 +223,7 @@ function Comp({ name, number }) {
 
 ## 5. Class 컴포넌트의 라이프사이클
 
-아래는 Class 컴포넌트의 라이프사이클을 나타내는 그림입니다. 기본적으로 컴포넌트가 최초 렌더링될 때 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클 함수들이 호출됩니다.
+아래는 Class 컴포넌트의 라이프사이클을 나타내는 그림입니다. 기본적으로 컴포넌트가 최초 렌더링될 때 각 라이프사이클 함수들이 호출되는 순서를 나타냅니다.
 
 <br>
 
@@ -231,29 +231,37 @@ function Comp({ name, number }) {
 
 <br>
 
-만약 렌더링 직전, 그러니까 컴포넌트 마운팅이 시작되기 직전에 무언가 처리하고 싶다면 `componentWillMount()` 함수를 오버라이드하면 되겠죠. 아래 예제를 보죠.
+`componentWillMount()` 이전의 `getDefaultProp()`, `getInitialState()`는 Deprecated 되었습니다. 대신 `constructor()`에서 이 Deprecated 함수들의 일을 처리하는데요, `state` 초기화를 하고요, `props`는 `super()`의 인자로 넘깁니다. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행되죠.
+
+<br>
+
+위의 라이프사이클 함수들은 아래의 `ReactDOM.render()`가 호출된 이후 차례로 호출됩니다.
+
+```javascript
+const root = document.getElementById("root");
+ReactDOM.render(<App />, root);
+```
+
+<br>
+
+만약 렌더링 직전, 그러니까 컴포넌트 마운팅이 시작될 때 무언가 처리하고 싶다면 `componentWillMount()` 함수를 오버라이드하면 되겠죠. 아래 예제를 보세요.
 
 ```javascript
 class Comp extends React.Component {
-	state = {
-		name: this.props.name, // "Yujin" 이라고 가정
-	};
-
 	componentWillMount() {
-		console.log(`%c${this.state.name}`, "color: dodgerblue");
-		this.setState({ name: "Yongki" });
+		console.log(`%ccomponentWillMount`, "color: dodgerblue");
 	}
 
 	render() {
-		console.log(`%c${this.state.name}`, "color: tomato");
-		return <div>{this.state.name}</div>;
+		console.log(`%crender`, "color: purple");
+		return <div></div>;
 	}
 }
 ```
 
 <br>
 
-위 컴포넌트가 생성될 때 콘솔 출력 결과는 아래와 같습니다.
+콘솔 출력 결과는 아래와 같습니다.
 
 ![React Lifecycle Log](./../img/react-lifecycle-log.png)
 
@@ -266,3 +274,4 @@ class Comp extends React.Component {
 - [React Top-Level API | React](https://reactjs.org/docs/react-api.html)
 - [Components and Props | React](https://reactjs.org/docs/components-and-props.html)
 - [Using the State Hook | React](https://reactjs.org/docs/hooks-state.html)
+- [React component lifecycle, API 정리](https://gseok.gitbooks.io/react/content/bd80-bd84-bd80-bd84-c9c0-c2dd-b4e4/react-component-lifecycle-api-c815-b9ac.html)
