@@ -3,15 +3,16 @@
 ## 목차
 
 ```
-1. Class와 Function 컴포넌트의 렌더링 방법
+1. Class와 Function 컴포넌트의 렌더링
 2. Class와 Function 컴포넌트에 데이터(props) 전달하기
 3. Class 컴포넌트에서 state 사용하기
 4. Function 컴포넌트와 useState Hook
+5. Class 컴포넌트의 라이프사이클
 ```
 
 <br>
 
-## 1. Class와 Function 컴포넌트의 렌더링 방법
+## 1. Class와 Function 컴포넌트의 렌더링
 
 ### Class
 
@@ -217,6 +218,42 @@ function Comp({ name, number }) {
 	);
 }
 ```
+
+<br>
+
+## 5. Class 컴포넌트의 라이프사이클
+
+아래는 Class 컴포넌트의 라이프사이클을 나타내는 그림입니다. 기본적으로 컴포넌트가 최초 렌더링될 때 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클 함수들이 호출됩니다.
+
+![Class Lifecycle](./../img/react-lifecycle.png)
+
+<br>
+
+만약 렌더링 직전, 그러니까 컴포넌트 마운팅이 시작되기 직전에 무언가 처리하고 싶다면 `componentWillMount()` 함수를 오버라이드하면 되겠죠. 아래 예제를 보죠.
+
+```javascript
+class Comp extends React.Component {
+	state = {
+		name: this.props.name, // "Yujin" 이라고 가정
+	};
+
+	componentWillMount() {
+		console.log(`%c${this.state.name}`, "color: dodgerblue");
+		this.setState({ name: "Yongki" });
+	}
+
+	render() {
+		console.log(`%c${this.state.name}`, "color: tomato");
+		return <div>{this.state.name}</div>;
+	}
+}
+```
+
+<br>
+
+위 컴포넌트가 생성될 때 콘솔 출력 결과는 아래와 같습니다.
+
+![React Lifecycle Log](./../img/react-lifecycle-log.png)
 
 <br>
 
