@@ -221,17 +221,17 @@ function Comp({ name, number }) {
 
 <br>
 
-## 5. Class 컴포넌트의 라이프사이클
+## 5. 컴포넌트 라이프사이클
 
-아래는 Class 컴포넌트의 라이프사이클을 나타내는 그림입니다. 기본적으로 컴포넌트가 최초 렌더링될 때 각 라이프사이클 함수들이 호출되는 순서를 나타냅니다.
-
-<br>
-
-![Class Lifecycle](./../img/react-lifecycle.png)
+아래는 React 컴포넌트의 라이프사이클을 나타내는 그림입니다. 컴포넌트가 최초 렌더링될 때 각 라이프사이클 함수들이 호출되는 순서를 나타냅니다.
 
 <br>
 
-`componentWillMount()` 이전의 `getDefaultProp()`, `getInitialState()`는 Deprecated 되었습니다. 대신 `constructor()`에서 이 Deprecated 함수들의 일을 처리하는데요, `state` 초기화를 하고요, `props`는 `super()`의 인자로 넘깁니다. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행되죠.
+![Class Lifecycle](./../img/react.png)
+
+<br>
+
+`componentWillMount()` 호출 이전의 `constructor()`에서는 `state` 값을 초기화하고요, `props`는 `super()`의 인자로 넘깁니다. 이 작업들은 원래 `getDefaultProp()`-`getInitialState()` 함수가 차례로 호출되면서 처리했었는데 현재는 Deprecated 되었습니다. 대신 `constructor()`에서 처리하죠. 그 다음 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클이 진행됩니다.
 
 <br>
 
@@ -244,7 +244,7 @@ ReactDOM.render(<App />, root);
 
 <br>
 
-만약 렌더링 직전, 그러니까 컴포넌트 마운팅이 시작될 때 무언가 처리하고 싶다면 `componentWillMount()` 함수를 오버라이드하면 되겠죠. 아래 예제를 보세요.
+만약 렌더링 직전, 컴포넌트 마운팅이 시작될 때 무언가 처리하고 싶다면 `componentWillMount()` 함수를 오버라이드하면 되겠죠. 아래 예제를 보세요.
 
 ```javascript
 class Comp extends React.Component {
@@ -274,4 +274,5 @@ class Comp extends React.Component {
 - [React Top-Level API | React](https://reactjs.org/docs/react-api.html)
 - [Components and Props | React](https://reactjs.org/docs/components-and-props.html)
 - [Using the State Hook | React](https://reactjs.org/docs/hooks-state.html)
+- [React.Component | React](https://reactjs.org/docs/react-component.html#constructor)
 - [React component lifecycle, API 정리](https://gseok.gitbooks.io/react/content/bd80-bd84-bd80-bd84-c9c0-c2dd-b4e4/react-component-lifecycle-api-c815-b9ac.html)
