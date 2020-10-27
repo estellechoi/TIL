@@ -225,6 +225,8 @@ function Comp({ name, number }) {
 
 아래는 Class 컴포넌트의 라이프사이클을 나타내는 그림입니다. 기본적으로 컴포넌트가 최초 렌더링될 때 `componentWillMount()`-`render()`-`componentDidMount()` 순으로 라이프사이클 함수들이 호출됩니다.
 
+<br>
+
 ![Class Lifecycle](./../img/react-lifecycle.png)
 
 <br>
