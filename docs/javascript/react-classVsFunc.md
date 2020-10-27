@@ -224,7 +224,7 @@ function Comp({ name, number }) {
 
 ## 5. Class 컴포넌트에서 라이프사이클 다루기
 
-아래는 React 컴포넌트의 라이프사이클을 나타내는 그림입니다. Class 컴포넌트가 최초 렌더링될 때 각 라이프사이클 함수들이 호출되는 순서를 나타냅니다.
+아래는 React 컴포넌트의 라이프사이클을 나타내는 그림입니다.
 
 ![Class Lifecycle](./../img/react-class-lifecycle.png)
 
@@ -232,7 +232,7 @@ function Comp({ name, number }) {
 
 ### 마운트(Mount)
 
-아래와 같이 `ReactDOM.render()`가 호출되면 마운트(Mount) 함수들이 차례로 호출됩니다.
+아래와 같이 `ReactDOM.render()`가 호출되면 마운트(Mount) 함수들이 차례로 호출됩니다. Class 컴포넌트가 최초 렌더링될 때 호출되는 함수들이죠.
 
 ```javascript
 const root = document.getElementById("root");
@@ -310,22 +310,24 @@ class Comp extends React.Component {
 
 <br>
 
-## 6. Function 컴포넌트에서 `useEffect` Hook으로 라이프사이클 다루기
+## 6. Function 컴포넌트에서 라이프사이클 다루기
 
 위에서 보았듯이, Class 컴포넌트는 각 라이프사이클 단계마다 원하는 로직을 지정할 수 있도록 함수들을 제공합니다. 하지만 Function 컴포넌트에서는 이 함수들을 사용할 수 없죠. 애초에 `class`가 아닌 `function` 이기 때문에 `React.Component` 클래스를 상속받을 수 없으니까요. 그럼 Function 컴포넌트에서는 어떻게 각 라이프사이클 단계에 접근해서 컴포넌트를 컨트롤할까요? `useEffect` Hook을 사용합니다.
 
 <br>
+
+### `useEffect` 사용하기
 
 아래 예제는 위에서 사용했던 Class 컴포넌트 예제입니다. 이 컴포넌트를 Function 컴포넌트로 전환하면서 `useEffect` Hook을 사용해보죠.
 
 ```javascript
 class Comp extends React.Component {
 	componentWillMount() {
-		console.log(`%ccomponentWillMount`, "color: dodgerblue");
+		console.log("%ccomponentWillMount", "color: dodgerblue");
 	}
 
 	render() {
-		console.log(`%crender`, "color: purple");
+		console.log("%crender", "color: purple");
 		return <div></div>;
 	}
 }
@@ -375,9 +377,11 @@ function Comp() {
 
 <br>
 
-그러니까, 컴포넌트 렌더링 후에 어떤 일을 처리하고 싶다면 Function 컴포넌트에서는 `componentDidMount()` 대신 `useEffect()`를 사용하면 됩니다. 그런데 이 `useEffect()`는 `componentDidMount()`와 완전히 동일하지는 않습니다. `state`의 업데이트가 일어날 때마다 렌더링 직후 함께 호출되거든요. 오히려 `componentDidMount()` + `componentDidUpdate()`를 합한 것과 비슷한 역할을 합니다.
+그러니까, 컴포넌트 렌더링 후에 어떤 일을 처리하고 싶다면 Function 컴포넌트에서는 `componentDidMount()` 대신 `useEffect()`를 사용하면 됩니다. 그런데 이 `useEffect()`는 `componentDidMount()`와 완전히 동일하지는 않습니다. `state`의 업데이트가 일어날 때마다 렌더링 직후 함께 호출되거든요. 오히려 `componentDidMount()` + `componentDidUpdate()`를 합한 것과 비슷한 역할을 하네요.
 
 <br>
+
+### `useEffect` 심화
 
 `useEffect()`는 아래와 같이 여러번 사용해도 됩니다.
 
