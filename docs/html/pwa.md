@@ -32,7 +32,7 @@ PWA의 장점은 편리함과 접근성을 모두 잡을 수 있다는 것입니
 
 ## PWA 제공하기
 
-> Android Chrome 기준으로 정리했습니다. iOS용 Chrome에서는 PWA가 지원되지 않습니다. 다른 브라우저/iOS에서 PWA를 지원하려면 각 회사의 가이드를 참고하세요.
+> Android Chrome 기준으로 정리했습니다. iOS용 Chrome에서는 PWA가 지원되지 않습니다. iOS에서 PWA를 지원하려면 <a href="#iOS에서의 PWA">여기</a>를, 다른 브라우저에서 PWA를 지원하려면 각 회사의 가이드를 참고하세요.
 
 <br>
 
