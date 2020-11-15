@@ -8,32 +8,34 @@
 
 <br>
 
-## Chrome에서 PWA 제공하기
+## PWA 제공하기
 
-다음은 Chrome 브라우저에서 웹사이트를 PWA로서 제공하기 위한 최소 조건입니다. 아래 조건들이 충족되고, 사용자의 OS에 아직 웹앱이 설치되어 있지 않다면 브라우저는 사용자가 PWA를 설치하도록 유도하는 UI를 제공하고요, `beforeinstallprompt` 이벤트가 발생합니다. 이 이벤트를 사용하면 사용자가 웹사이트를 앱으로 설치하도록 유도하는 과정을 커스텀할 수 있습니다.
+다음은 웹사이트를 PWA로서 제공하기 위한 조건들입니다. 아래 조건들이 충족되고, 사용자의 OS에 아직 PWA가 설치되어 있지 않다면 브라우저는 사용자가 PWA를 설치하도록 유도합니다.
 
 - HTTPS 통신을 해야합니다.
 
 - [`manifest.webmanifest`(`manifest.json`)](https://web.dev/add-manifest/)파일을 포함해야하고, 이 파일은 최소 아래의 항목들을 포함해야합니다.
 
   - `name` 또는 `short_name`
-  - `icons` (`192px`과 `512px` 사이즈의 아이콘을 반드시 포함)
+  - `icons`
   - `start_url`
-  - `display` (`fullscreen`/`standalone`/`minimal-ui` 중 하나로 지정)
+  - `display`
   - `prefer_related_applications`를 포함하지 않거나, 값을 `false`로 지정
     > Android에서 `related_applications` 항목을 지정하고, `prefer_related_applications` 값을 `true`로 지정하면, 해당 Android 앱 설치를 유도하기 위해 자동으로 구글플레이스토어로 이동하게 됩니다.
 
-- `fetch` 핸들러를 포함한 `serviceWorker.js` 설정파일을 포함해야합니다.
+- `service-worker.js` 설정파일을 포함해야하고, 이 파일은 `fetch` 핸들러를 포함해야합니다.
 
 <br>
 
 그러니까, 정리해보면 다음과 같네요.
 
-- HTTS 통신이어야 하고,
+1. HTTPS 통신을 하고,
 
-- `manifest.webmanifest`(`manifest.json`) 파일로 뭔가를 설정하고,
+2. `manifest.webmanifest` 파일로 뭔가를 설정하고,
 
-- `serviceWorker.js` 파일도 필요하다.
+3. `service-worker.js` 파일도 필요하다.
+
+<br>
 
 > 브라우저마다 위의 기준에 약간의 차이가 있습니다. 각 브라우저의 기준을 확인하세요. ([Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements)/[Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready)/[Opera](https://dev.opera.com/articles/installable-web-apps/)/[Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/)/[UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56))
 
@@ -41,7 +43,9 @@
 
 ## `manifest.webmanifest`(`manifest.json`)
 
-`manifest.webmanifest`(`manifest.json`) 파일은 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA가 설치되면 사용자들은 마치 네이티브 앱처럼 웹앱을 사용할 수 있게 되는데요, 우리의 웹앱이 사용자의 디바이스에서 어떤식으로 보여야하는지를 설정할 수 있죠. 그러니까, PWA 설정파일이라고 보면 되고요, 아래와 같이 `<head>` 태그에 `manifest.webmanifest` 파일을 포함시키면 브라우저가 우리 웹사이트의 PWA에 대한 설정 정보들을 전달받습니다.
+`manifest.webmanifest`(`manifest.json`) 파일은 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA가 설치되면 사용자들은 마치 네이티브 앱처럼 웹앱을 사용할 수 있게 되는데요, 우리의 웹앱이 사용자의 디바이스에서 어떤식으로 보여야하는지를 설정할 수 있죠. 그러니까, PWA 설정파일이라고 보면 됩니다. 아래와 같이 `<head>` 태그에 `manifest.webmanifest` 파일을 포함시키면 브라우저가 웹사이트의 PWA에 대한 설정 정보들을 전달받죠.
+
+<br>
 
 ```html
 <link rel="manifest" href="/manifest.webmanifest" />
@@ -49,11 +53,13 @@
 
 > 만약 `credentials`가 필요하다면 위 태그에 `crossorigin="use-credentials"` 속성값을 추가하세요.
 
-> `manifest.webmanifest` 파일은 Chrome/Edge/Firefox/UC Browser/Opera/Samsung 브라우저에서 지원됩니다. Safari에서는 부분적으로 지원하고요.
+> `manifest.webmanifest` 파일은 Chrome/Edge/Firefox/UC Browser/Opera/Samsung 브라우저에서 지원됩니다. Safari에서는 부분 지원하고요.
 
 <br>
 
-`manifest.webmanifest` 파일은 기본적으로 아래와 같은 항목들을 가집니다.
+### 설정 예시
+
+`manifest.webmanifest` 파일은 기본적으로 아래와 같은 항목들을 가집니다. (대충 이렇게 생겼습니다)
 
 ```json
 {
@@ -118,6 +124,8 @@
 
 <br>
 
+#### Android maskable icons
+
 Android에서 [maskable icons](https://web.dev/maskable-icon/)를 사용하려면 해당 아이콘 정보에 `purpose` 속성을 추가하고, 값은 `any maskable`로 지정하세요.
 
 ```json
@@ -135,7 +143,7 @@ Android에서 [maskable icons](https://web.dev/maskable-icon/)를 사용하려�
 
 <br>
 
-> Android Chrome에서 디바이스에 따라 아이콘 이미지의 크기를 최적화하려면 `192 * 192 px` / `512 * 512 px` 사이즈의 이미지를 반드시 지정해야합니다. 만약 Android에서 디바이스 크기에 따라 최적화된 픽셀(`px`) 경험을 제공하려면 아이콘 이미지의 사이즈를 `48dp`로 지정하세요. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px`, .. 등으로 변환되죠.
+> Android Chrome에서 디바이스 크기에 따라 아이콘 사이즈를 자동으로 핏되게 하려면 `192 * 192 px` / `512 * 512 px` 사이즈의 이미지를 반드시 지정해야합니다. 만약 Android에서 디바이스 크기에 따라 최적화된 픽셀(`px`) 경험을 제공하려면 아이콘 이미지의 사이즈를 `48dp`로 지정하세요. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px`, .. 등으로 변환되죠.
 
 <br>
 
@@ -147,7 +155,7 @@ PWA가 실행될 때 앱을 시작할 페이지 URL입니다.
 
 ### `scope`
 
-PWA 내에서 실행될 페이지들의 URL 범위를 지정합니다. 저장한 URL 범위 밖으로 이동하면 PWA를 벗어나서 브라우저로 이동합니다.
+PWA에 속하는 페이지들의 URL 범위를 지정합니다. 지장한 URL 범위 밖의 페이지들은 PWA에 속하지 않는 것으로 간주됩니다.
 
 - `scope`을 지정하지 않으면, `manifest.json` 파일이 위치한 디렉토리가 `scope`의 값으로 사용됩니다.
 
@@ -228,7 +236,179 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
+## Service Worker
+
+Service Worker의 역할 중 하나는 웹앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있죠. Service Worker는 대부분의 브라우저에 내장되어 있는 기능이고요, 개발자는 약간의 JavaScript 코드를 추가하여 Service Worker가 무슨 일을 할지 지정할 수 있습니다.
+
+### Service Worker 등록
+
+처음 앱이 로드될 때 아래와 같이 (`serviceWorker`를 지원하는 브라우저라면) `service-worker.js` 파일을 등록합니다.
+
+```javascript
+window.addEventListener("load", () => {
+	if ("serviceWorker" in navigator) {
+		navigator.serviceWorker.register("service-worker.js");
+	}
+});
+```
+
+<br>
+
+### 오프라인 Fallback 페이지 커스텀하기
+
+Service Worker를 사용하면 오프라인 Fallback 페이지를 커스텀할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 우리가 커스텀한 UX를 제공할 수 있죠. Service Worker를 이용하여 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 미리 캐싱하도록 한다는 아이디어입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드입니다.
+
+```javascript
+/*
+Copyright 2015, 2019, 2020 Google LLC. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+// Incrementing OFFLINE_VERSION will kick off the install event and force
+// previously cached resources to be updated from the network.
+const OFFLINE_VERSION = 1;
+const CACHE_NAME = "offline";
+// Customize this with a different URL if needed.
+const OFFLINE_URL = "offline.html";
+
+self.addEventListener("install", (event) => {
+	event.waitUntil(
+		(async () => {
+			const cache = await caches.open(CACHE_NAME);
+			// Setting {cache: 'reload'} in the new request will ensure that the
+			// response isn't fulfilled from the HTTP cache; i.e., it will be from
+			// the network.
+			await cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
+		})()
+	);
+	// Force the waiting service worker to become the active service worker.
+	self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+	event.waitUntil(
+		(async () => {
+			// Enable navigation preload if it's supported.
+			// See https://developers.google.com/web/updates/2017/02/navigation-preload
+			if ("navigationPreload" in self.registration) {
+				await self.registration.navigationPreload.enable();
+			}
+		})()
+	);
+
+	// Tell the active service worker to take control of the page immediately.
+	self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+	// We only want to call event.respondWith() if this is a navigation request
+	// for an HTML page.
+	if (event.request.mode === "navigate") {
+		event.respondWith(
+			(async () => {
+				try {
+					// First, try to use the navigation preload response if it's supported.
+					const preloadResponse = await event.preloadResponse;
+					if (preloadResponse) {
+						return preloadResponse;
+					}
+
+					// Always try the network first.
+					const networkResponse = await fetch(event.request);
+					return networkResponse;
+				} catch (error) {
+					// catch is only triggered if an exception is thrown, which is likely
+					// due to a network error.
+					// If fetch() returns a valid HTTP response with a response code in
+					// the 4xx or 5xx range, the catch() will NOT be called.
+					console.log("Fetch failed; returning offline page instead.", error);
+
+					const cache = await caches.open(CACHE_NAME);
+					const cachedResponse = await cache.match(OFFLINE_URL);
+					return cachedResponse;
+				}
+			})()
+		);
+	}
+
+	// If our if() condition is false, then this fetch handler won't intercept the
+	// request. If there are any other fetch handlers registered, they will get a
+	// chance to call event.respondWith(). If no fetch handlers call
+	// event.respondWith(), the request will be handled by the browser as if there
+	// were no service worker involvement.
+});
+```
+
+<br>
+
+오프라인 페이지(`offline.html`)이 제대로 작동하려면 필요한 모든 리소스들도 미리 캐싱되어야 합니다. 가장 간단한 방법은 오프라인 페이지에 필요한 CSS와 JavaScript를 메인 페이지에 직접 포함시키는 것입니다. 따로 불러올 필요가 없도록 말이죠.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>You are offline</title>
+
+		<!-- 인라인 스타일 -->
+		<style>
+			body {
+				font-family: helvetica, arial, sans-serif;
+				margin: 2em;
+			}
+
+			h1 {
+				font-style: italic;
+				color: #373fff;
+			}
+
+			p {
+				margin-block: 1rem;
+			}
+
+			button {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>네트워크 연결이 불안정합니다.</h1>
+
+		<p>페이지를 새로고침하려면 아래 버튼을 클릭하세요.</p>
+		<button type="button">⤾</button>
+
+		<!-- 인라인 JavaScript -->
+		<script>
+			document.querySelector("button").addEventListener("click", () => {
+				window.location.reload();
+			});
+		</script>
+	</body>
+</html>
+```
+
+<br>
+
+### `CacheStorage` API
+
+[CacheStorage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하면 브라우저 캐싱을 JavaScript 코드로 컨트롤할 수 있습니다. 자세한 내용은 [The Cache Storage API](https://web.dev/service-workers-cache-storage/#the-cache-storage-api)를 참고하세요.
+
+<br>
+
 ## PWA 설치 유도하기
+
+> Safari는 아래 이벤트를 지원하지 않습니다.
 
 대부분의 브라우저는 PWA 설치를 유도하는 알림을 자동으로 띄워줍니다. PWA 설치를 유도하는 UI를 커스텀하고 싶다면 `beforeinstallprompt` 이벤트가 발생했을 때 `preventDefault()`를 호출해서 브라우저가 자체적으로 띄우는 알림을 제거해야합니다. 그리고 `appinstalled` 이벤트를 사용하여 앱이 설치되면 해당 UI를 숨기세요.
 
@@ -349,13 +529,47 @@ window.addEventListener("DOMContentLoaded", () => {
 
 <br>
 
+## PWA와 네이티브 앱
+
+만약 별도로 네이티브 앱을 제공한다면, 네이티브 앱이 사용자의 디바이스에 설치되었는지 확인할 수 있습니다. 네이티브 앱 설치여부에 따라 PWA 설치를 유도하거나, 유도하지 않을 수 있죠. 아래 문서를 참고하세요.
+
+- [Is your app installed? getInstalledRelatedApps() will tell you!](https://web.dev/get-installed-related-apps/)
+
+<br>
+
+PWA와 네이티브 앱을 적절하게 블렌딩 하여 사용자들에게 심리스한 경험을 제공할 수 있습니다. 아래 영상을 보세요.
+
+- [Blending PWA into native environments (Chrome Dev Summit 2019)](https://www.youtube.com/watch?v=V7YX4cZ_Cto&feature=youtu.be)
+
+<br>
+
+PWA를 실행시키는 Android 앱을 빠르게 빌딩하고 싶다면 [Trusted Web Activity](https://developers.google.com/web/android/trusted-web-activity)를 사용하세요. 구글플레이스토어에 PWA를 노출시킬 수 있죠. 아래 글과 가이드를 참고하세요.
+
+- [Using a PWA in your Android app](https://web.dev/using-a-pwa-in-your-android-app/)
+
+- [Trusted Web Activities Quick Start Guide](https://developers.google.com/web/android/trusted-web-activity/quick-start)
+
+<br>
+
+## 푸시알림 제공하기
+
+아래 문서를 참고하세요.
+
+- [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)
+
+<br>
+
 ## PWA 검사하기
 
-아래의 툴들을 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지 검사할 수 있습니다.
+아래의 툴/체크리스트를 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹사이트에 접속하는지 검사할 수 있습니다.
 
 - Chrome 개발자도구의 Application 탭에서 Manifest 메뉴
 
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
+
+- [Measuring Impact](https://pwa-book.awwwards.com/chapter-8)
+
+- [What makes a good Progressive Web App?](https://web.dev/pwa-checklist/)
 
 <br>
 
@@ -363,8 +577,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 ### References
 
+- [Progressive Web Apps](https://web.dev/progressive-web-apps/)
 - [What does it take to be installable?](https://web.dev/install-criteria/)
 - [How to provide your own in-app install experience](https://web.dev/customize-install/)
 - [Add a web app manifest](https://web.dev/add-manifest/)
+- [Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/)
 - [PWA case studies](https://www.pwastats.com)
 - [PWA 코드랩 가이드라인](https://euncho.medium.com/pwa-%EC%BD%94%EB%93%9C%EB%9E%A9-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8-597049b2df40)
