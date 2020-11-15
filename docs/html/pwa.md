@@ -8,11 +8,33 @@ PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 쉽게 �
 
 <br>
 
-PWA의 장점은 편리함과 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리한 UX를 제공하면서, 웹의 검색엔진을 통해 쉽게 접근할 수 있죠. iOS의 앱스토어나 구글 플레이스토어로 이동하여 앱을 검색하고 다운로드할 필요 없이 사용하던 웹사이트를 바로 앱처럼 디바이스에 추가하여 사용할 수 있죠.
+PWA의 장점은 편리함과 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리한 UX를 제공하면서, 웹의 검색엔진을 통해 쉽게 접근할 수 있죠. iOS의 앱스토어나 Android 플레이스토어로 이동하여 앱을 검색하고 다운로드할 필요 없이 사용하던 웹사이트를 바로 앱처럼 디바이스에 추가하여 사용할 수 있죠.
+
+<br>
+
+> FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
+
+<br>
+
+### PWA 지원현황
+
+- iOS 11.3부터 지원
+
+- Chrome 45부터 지원 (iOS용 제외)
+
+- MS Edge
+
+<br>
+
+> [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)에서 Android와 iOS에서의 PWA 지원 현황을 비교해보세요.
 
 <br>
 
 ## PWA 제공하기
+
+> Android Chrome 기준으로 정리했습니다. iOS용 Chrome에서는 PWA가 지원되지 않습니다. 다른 브라우저/iOS에서 PWA를 지원하려면 각 회사의 가이드를 참고하세요.
+
+<br>
 
 다음은 웹 애플리케이션을 PWA로서 제공하기 위한 조건들입니다. 아래 조건들이 충족되고, 사용자의 OS에 아직 PWA가 설치되어 있지 않다면 브라우저는 사용자가 PWA를 설치하도록 유도합니다.
 
@@ -555,7 +577,94 @@ PWA를 실행시키는 Android 앱을 빠르게 빌딩하고 싶다면 [Trusted 
 
 아래 문서를 참고하세요.
 
+- [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/codelabs/push-notifications/)
+
 - [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)
+
+<br>
+
+## iOS에서의 PWA
+
+iOS에서는 `manifest.json` 파일대신 아래의 태그들을 `<head>` 내에 추가함으로써 PWA를 적용할 수 있습니다.
+
+- `<link rel="apple-touch-icon" href="touch-icon-iphone.png" />`
+
+- `<link rel="apple-touch-startup-image" href="/launch.png" />`
+
+- `<meta name="apple-mobile-web-app-title" content="AppTitle" />`
+
+- `<meta name="apple-mobile-web-app-capable" content="yes" />`
+
+- `<meta name="apple-mobile-web-app-status-bar-style" content="black" />`
+
+<br>
+
+### 아이콘
+
+```html
+<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png" />
+<link
+	rel="apple-touch-icon"
+	sizes="180x180"
+	href="touch-icon-iphone-retina.png"
+/>
+<link
+	rel="apple-touch-icon"
+	sizes="167x167"
+	href="touch-icon-ipad-retina.png"
+/>
+```
+
+> `<link>` 태그를 사용하여 아이콘을 지정하지 않으면, 웹사이트의 루트 디렉토리에서 `apple-touch-icon` Prefix를 포함한 파일을 찾아서 아이콘으로 사용합니다. 만약 `50 * 50 px` 사이즈의 디바이스라면 다음의 우선순위대로 파일을 탐색하여 아이콘으로 사용합니다. 1) `apple-touch-icon-80x80.png` 2) `apple-touch-icon.png`.
+
+<br>
+
+### PWA 로딩 화면(Launch Screen)
+
+```html
+<link rel="apple-touch-startup-image" href="/launch.png" />
+```
+
+<br>
+
+### 앱 이름
+
+별도로 지정하지 않으면 `<title>` 태그에 지정한 이름을 사용합니다.
+
+```html
+<meta name="apple-mobile-web-app-title" content="AppTitle" />
+```
+
+<br>
+
+### `standalone` 모드 (브라우저 UI 제거하기)
+
+아래와 같이 `<meta>` 태그를 지정하면 PWA가 `standalone` 모드로 전환되고요, 주소창, 하단 컨트롤러 등의 모든 브라우저 UI를 제거합니다.
+
+```html
+<meta name="apple-mobile-web-app-capable" content="yes" />
+```
+
+<br>
+
+### 상태바 스타일링
+
+PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있습니다. 가령, 아래와 같이 값을 `black`으로 지정하면 상태바가 검정색으로 스타일링됩니다.
+
+```html
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+```
+
+<br>
+
+가능한 값은 아래의 세 가지입니다. 별도로 지정하지 않으면 기본값은 `default`입니다.
+
+- `default` : 회색
+
+- `black` : 검정
+
+- `black-translucent` : 상태바의 색이 없어지고(투명), 앱 콘텐츠 위로 올라감
 
 <br>
 
@@ -564,6 +673,8 @@ PWA를 실행시키는 Android 앱을 빠르게 빌딩하고 싶다면 [Trusted 
 아래의 툴/체크리스트를 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹사이트에 접속하는지 검사할 수 있습니다.
 
 - Chrome 개발자도구의 Application 탭에서 Manifest 메뉴
+
+- [Chrome Flags](chrome://flags/) "Bypass user engagement checks"
 
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
 
@@ -583,4 +694,11 @@ PWA를 실행시키는 Android 앱을 빠르게 빌딩하고 싶다면 [Trusted 
 - [Add a web app manifest](https://web.dev/add-manifest/)
 - [Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/)
 - [PWA case studies](https://www.pwastats.com)
+- [F.I.R.E.: An Introduction to Progressive Web Apps](https://www.punchkick.com/software/2019/01/29/what-are-progressive-web-apps)
 - [PWA 코드랩 가이드라인](https://euncho.medium.com/pwa-%EC%BD%94%EB%93%9C%EB%9E%A9-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8-597049b2df40)
+- [PWA를 구성하는 기술들](https://euncho.medium.com/pwa%EB%A5%BC-%EA%B5%AC%EC%84%B1%ED%95%98%EB%8A%94-%EA%B8%B0%EC%88%A0%EB%93%A4-a5be57df5575)
+- [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)
+- [Don’t use iOS meta tags irresponsibly in your Progressive Web Apps](https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb)
+- [Supported Meta Tags | Safari HTML Reference](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html)
+- [Configuring Web Applications | Safari HTML Reference](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html)
+- [6 Tips to make your iOS PWA feel like a native app](https://www.netguru.com/codestories/pwa-ios)
