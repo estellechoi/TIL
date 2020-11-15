@@ -702,3 +702,4 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 - [Supported Meta Tags | Safari HTML Reference](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html)
 - [Configuring Web Applications | Safari HTML Reference](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html)
 - [6 Tips to make your iOS PWA feel like a native app](https://www.netguru.com/codestories/pwa-ios)
+- [Encouraging iOS users to install your Progressive Web Apps in Ember](https://dockyard.com/blog/2017/09/27/encouraging-pwa-installation-on-ios)
