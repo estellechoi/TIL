@@ -259,7 +259,7 @@ renderer.render(scene, camera);
 
 아래와 같이 되었나요?
 
-<img src="./../img/stone-static.png" alt="예제 결과물 스크린샷" />
+<img src="./../img/mesh-static.png" alt="예제 결과물 스크린샷" />
 
 <br />
 
