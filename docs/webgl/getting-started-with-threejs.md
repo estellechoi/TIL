@@ -95,7 +95,7 @@ const renderer = new THREE.WebGLRenderer({
 const WIDTH = 300;
 const HEIGHT = 300;
 
-// 사이즈 지정
+// 사이즈 지정 (px)
 renderer.setSize(WIDTH, HEIGHT);
 ```
 
@@ -295,5 +295,11 @@ update();
 ### References
 
 - [three.js docs](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
+
+<br />
+
+### Images from
+
 - [WebGL and Javascript: Drawing Simple 3D Shapes using Three.js](https://wowmoron.wordpress.com/2013/10/21/webgl-and-javascript-drawing-simple-3d-shapes-using-three-js/)
 - [WebGL Materials](https://steelcase.clara.io/learn/user-guide/lighting_shading/materials/material_types/webgl_materials)
+- [Chapter 9. Viewing the Scene](https://techpubs.jurassic.nl/manuals/nt/developer/Cos3C_PG/sgi_html/ch09.html)
