@@ -33,33 +33,59 @@ WebGL 라이브러리인 three.js를 사용하면 비교적 쉽게 3D 애니메�
 이제 본격적으로 시작해봅시다. 아래와 같이 기본적인 마크업을 하고요.
 
 ```html
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Three.js example</title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-			}
-		</style>
-	</head>
-	<body>
-		<!-- 우리의 결과물이 담길 곳-->
-		<div id="three"></div>
-	</body>
-</html>
+<!-- 우리의 결과물이 담길 곳-->
+<div id="three"></div>
 ```
 
 <br />
 
-아래와 같이 three.js 라이브러리를 포함시키세요. [three.js](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)를 다운로드 받고, `js` 디렉토리에 위치시킵니다.
+### three.js 설치하기
+
+#### NPM
+
+아래와 같이 NPM으로 설치해서 사용할 수 있습니다.
+
+```
+npm install --save three
+```
+
+<br />
+
+```javascript
+import * as THREE from "three";
+```
+
+<br />
+
+`controls`, `loaders`, `post-processing effects` 등의 인기있는 기능들이 모두 `three` 모듈에서 직접 제공되지는 않습니다. 대신, 하위 디렉토리인 [`three/examples/jsm`](https://github.com/mrdoob/three.js/tree/dev/examples/jsm)에서 얻을 수 있죠. 예를 들어, `OrbitControls` 객체를 사용하려면 아래와 같이 해당 객체가 속한 하위 디렉토리로부터 해당 파일을 직접 임포트해야합니다.
+
+<br />
+
+```javascript
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+```
+
+#### CDN
+
+CDN을 사용할 수도 있습니다. `<VERSION>` 부분에는 사용하고자하는 라이브러리 버전을 넣어주세요. 다른 파일들을 임포트할 때도 동일한 버전을 참조해야합니다. 모듈을 사용하므로 `<script>` 태그에 `type="module"`을 명시하고요.
+
+```html
+<script type="module">
+	import * as THREE from "https://unpkg.com/three@<VERSION>/build/three.module.js";
+	import { OrbitControls } from "https://unpkg.com/three@<VERSION>/examples/jsm/controls/OrbitControls.js";
+</script>
+```
+
+<br />
+
+#### Static hosting
+
+혹은 [three.js](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)를 다운로드 받고, `js` 디렉토리에 위치시킨 후, 아래와 같이 직접 참조해서 빠르게 사용해볼 수 있습니다.
 
 ```html
 <script src="js/three.js"></script>
 <script>
-	// 앞으로 이곳에 코드를 작성할거에요.
+	// 이곳에 코드를 작성할거에요.
 </script>
 ```
 
