@@ -4,6 +4,12 @@
 
 <br />
 
+## WebGL
+
+> [Browser support 확인하기](https://threejs.org/docs/index.html#manual/en/introduction/Browser-support)
+
+<br />
+
 ## 무대, 물체, 카메라, 빛
 
 WebGL 라이브러리인 three.js를 사용하면 비교적 쉽게 3D 애니메이션을 구현할 수 있습니다. 4가지 개념만 이해하면, 라이브러리에서 제공하는 객체와 함수를 사용하여 간단한 애니메이션을 뚝 딱 뚝 딱 만들어낼 수 있죠. 그 4가지 개념이 무엇이냐면,
