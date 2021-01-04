@@ -52,7 +52,7 @@ Big O는 알고리즘의 시간복잡도를 표기하는 방법 중 하나입니
 
 <br>
 
-<img src="./../img/big-o.png" alt="Big O" width="300" />
+<img src="./../img/big-o.png" alt="Big O" width="500" />
 
 <br>
 
