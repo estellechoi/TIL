@@ -21,6 +21,12 @@
 
 <br>
 
+### Algorithm
+
+- [Flutter setup for Mac OS](./docs/flutter/setup.md)
+
+<br>
+
 ### WebGL
 
 - [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
