@@ -21,7 +21,7 @@
 
 <br>
 
-### Algorithm
+### Flutter
 
 - [Flutter setup for Mac OS](./docs/flutter/setup.md)
 
