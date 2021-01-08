@@ -89,7 +89,7 @@ It's saying that you need to install Xcode, Flutter and Dart plugin for Android 
 
 ### Xcode Installation
 
-To developt iOS app using Flutter, Xcode 9.0^ is necessary. Just follow the above printed guide. Install Xcode via the App Store, and run the below command.
+To develop iOS app using Flutter, Xcode 9.0^ is necessary. Just follow the above printed guide. Install Xcode via the App Store, and run the below command.
 
 ```zsh
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
@@ -138,7 +138,7 @@ Yay, it's got installed.
 
 ### iOS simulator
 
-To prepare to run and test your Flutter app on the iOS simulator, check the Simulator works. You can open the Simulator with the following command.
+To prepare to run and test your Flutter app on the iOS simulator, check if the Simulator works. You can open the Simulator with the following command.
 
 ```zsh
 open -a Simulator
