@@ -171,7 +171,7 @@ Install Android Studio via its offical site or homebrew. Run the Android Studio,
 This time, go to `Configure > Plugins`, search `Flutter` and install the plugin. Dart plugin is included in the Flutter plugin so you don't need to go through any process to install Dart plugin. Now, run the following command to agree all SDK package licenses.
 
 ```zsh
-flutter doctor --android--licenses
+flutter doctor --android-licenses
 ```
 
 <br>
