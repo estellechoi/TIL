@@ -160,7 +160,19 @@ sudo gem install cocoapods
 
 ## Android Setup
 
+### Android SDK Installation
+
 Install Android Studio via its offical site or homebrew. Run the Android Studio, and go to `Configure > SDK Manager`. Now, install Android SDK, Android SDK Command-line Tools, and Android SDK Build-Tools by checking them all if not checked.
+
+<br>
+
+### Flutter and Dart Plugin Installation
+
+This time, go to `Configure > Plugins`, search `Flutter` and install the plugin. Dart plugin is included in the Flutter plugin so you don't need to go through any process to install Dart plugin. Now, run the following command to agree all SDK package licenses.
+
+```zsh
+flutter doctor --android--licenses
+```
 
 <br>
 
