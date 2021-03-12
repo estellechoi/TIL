@@ -181,3 +181,7 @@ flutter doctor --android-licenses
 ### References
 
 - [macOS install | Flutter](https://flutter.dev/docs/get-started/install/macos)
+- [Building a web application with Flutter | Flutter](https://flutter.dev/docs/get-started/web)
+- [가상 기기 만들기 및 관리하기 | Android Studio](https://developer.android.com/studio/run/managing-avds)
+- [앱 버전 지정 | Android Studio](https://developer.android.com/studio/publish/versioning)
+- [Flutter's build modes | Flutter](https://flutter.dev/docs/testing/build-modes)
