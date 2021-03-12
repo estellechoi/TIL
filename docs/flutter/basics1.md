@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
 
 <br>
 
-`MaterialApp` 위젯의 인스턴스를 생성할 때 `title`과 `home`의 값을 인자로 넘겨봅시다. `title` 값은 위젯의 제목으로 사용되고요, `home` 값은 해당 위젯이 실제 스크린에 어떻게 렌더링될지 결정합니다. 따라서 또 다른 하위 위젯을 `home`의 값으로 지정해주면 됩니다. Material 라이브러리의 `Scaffold`라는 위젯을 사용해보죠.
+`MaterialApp` 위젯의 인스턴스를 생성할 때 `title`과 `home` 속성을 지정하여 인자로 넘겨봅시다. `title` 값은 위젯의 제목으로 사용되고요, `home` 값은 해당 위젯이 실제 스크린에 어떻게 렌더링될지 결정합니다. 따라서 또 다른 하위 위젯을 `home`의 값으로 지정해주면 됩니다. Material 라이브러리의 `Scaffold` 위젯을 사용해보죠.
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -121,7 +121,6 @@ class MyApp extends StatelessWidget {
 dependencies:
   flutter:
     sdk: flutter
-
   table_calendar: ^2.3.3
 ```
 
@@ -147,6 +146,10 @@ import 'package:table_calendar/table_calendar.dart';
 
 Stateful 위젯을 만들기 위해서는 최소 2 개의 클래스가 필요합니다. `StatefulWidget` 그리고 `State` 클래스입니다.
 Android Studio 편집기를 사용하신다면, `stful`을 입력하고 엔터 키를 눌러 자동완성 기능을 사용할 수 있습니다. 2 개의 클래스가 만들어지는데요, 첫 번째 클래스의 이름을 `TableCalendar`, 두 번째 클래스의 이름을 `_TableCanlendarState`라고 작성해볼게요. `TableCalendar` 위젯은 `StatefulWidget` 클래스이고, `_TableCanlendarState` 위젯은 `State` 클래스입니다.
+
+<br>
+
+> By default, the name of the State class is prefixed with an underbar. Prefixing an identifier with an underscore enforces privacy in the Dart language and is a recommended best practice for State objects.
 
 <br>
 
@@ -250,7 +253,9 @@ class MyApp extends StatelessWidget {
 
 이제 iOS 시뮬레이터를 사용하여 앱을 실행하면 아래와 같은 화면을 보실 수 있습니다 !
 
-![Flutter App Ex](/img/flutter-app-ex-1.png)
+<div style="display: flex; justify-content: center;">
+  ![Flutter App Ex](./../img/flutter-app-ex-1.png)
+</div>
 
 <br>
 
