@@ -254,7 +254,7 @@ class MyApp extends StatelessWidget {
 이제 iOS 시뮬레이터를 사용하여 앱을 실행하면 아래와 같은 화면을 보실 수 있습니다 !
 
 <div style="display: flex; justify-content: center;">
-  <img src="./../img/flutter-app-ex-1.png" alt="스크린 예시" />
+  <img src="./../img/flutter-app-ex-1.png" alt="스크린 예시" width="400" />
 </div>
 
 <br>
