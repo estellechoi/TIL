@@ -24,7 +24,7 @@
 ### Flutter
 
 - [Flutter setup for Mac OS](./docs/flutter/setup.md)
-- [Flutter 사용법 1](./docs/flutter/basics1.md)
+- [Flutter 튜토리얼 1 : Stateful/Stateless 위젯, 무한 스크롤, 콜백](./docs/flutter/basics1.md)
 
 <br>
 
