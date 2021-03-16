@@ -138,7 +138,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 <br>
 
-## Stateful/Stateless Widget
+## Stateful/Stateless 위젯
 
 위에서 임포트한  `table_calendar` 라이브러리를 사용하여 `TableCalendar`라는 이름의 Stateful 위젯을 만들어봅시다. Stateful 위젯은 Stateless 위젯과는 달리 State의 값이 바뀔 때마다 바뀐 값을 반영하여 다시 렌더링되는 위젯입니다. React의 `useState`와 유사한 개념이죠. 최상위 위젯인 `MyApp` 클래스가 `StatelessWidget` 클래스를 상속했던 것을 기억하시나요? 네, `MyApp`은 Stateless 위젯입니다.
 
@@ -288,7 +288,7 @@ body: MyList()
 
 <br>
 
-이제 `MyApp` 클래스에서 벗어나셔서 `TableCalendar` 위젯을 만들었을 때처럼 새로운 Stateful 위젯을 생성하세요. 
+이제 `MyApp` 클래스에서 벗어나셔서 `TableCalendar` 위젯을 만들었을 때처럼 새로운 Stateful 위젯을 생성하세요. 이 위젯의 이름을 `MyList`로 합니다.
 
 ```dart
 class MyList extends StatefulWidget {
@@ -307,7 +307,7 @@ class _MyListState extends State<MyList> {
 
 <br>
 
-이제 `_MyListState` 클래스 내에 `ListTile` 위젯을 반환하는 `_buildRow`라는 이름의 함수를 만드세요. `String` 타입을 인자로 받도록 하시고요. `ListTile` 인스턴스에 지정할 속성은 아래 예시 코드를 참고해주세요.
+`_MyListState` 클래스 내에 `ListTile` 위젯을 반환하는 `_buildRow`라는 이름의 함수를 만드세요. `String` 타입을 인자로 받도록 하시고요. `ListTile` 인스턴스에 지정할 속성은 아래 예시 코드를 참고해주세요.
 
 > `Text` 위젯의 두 번째 인자에 style 속성을 지정할 수 있습니다. 이 때 값으로 `TextStyle` 위젯을 사용할 수 있죠.
 
@@ -315,6 +315,7 @@ class _MyListState extends State<MyList> {
 
 ```dart
 class _MyListState extends State<MyList> {
+  // returns ListTile
   Widget _buildRow(String text) {
     return ListTile(
       title: Text(text, style: TextStyle(fontSize: 18.0))
@@ -379,7 +380,7 @@ class _MyListState extends State<MyList> {
 
 <br>
 
-<img src="./../img/hinoki2.png" alt="flutter app" />
+<img src="./../img/hinoki2.png" alt="flutter app" width="400" />
 
 <br>
 
@@ -442,7 +443,7 @@ flutter: Donghyun
 
 이제 앱을 실행하고 스크롤을 해보세요.
 
-<img src="./../img/hinoki3.png" alt="Flutter app" />
+<img src="./../img/hinoki3.png" alt="Flutter app" width="400" />
 
 
 <br>
