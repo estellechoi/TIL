@@ -1,4 +1,4 @@
-# Flutter 사용법
+# Flutter 튜토리얼 1
 
 > [Flutter](https://flutter.dev/docs/get-started/codelab) 공식문서를 요약/번역한 튜토리얼 문서입니다. 이 튜토리얼에서는 간단한 캘린더 앱을 만들어볼 건데요, 이름은 Hinoki Calendar라고 하겠습니다.
 
