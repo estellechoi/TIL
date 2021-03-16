@@ -254,10 +254,199 @@ class MyApp extends StatelessWidget {
 이제 iOS 시뮬레이터를 사용하여 앱을 실행하면 아래와 같은 화면을 보실 수 있습니다 !
 
 <div style="display: flex; justify-content: center;">
-  <img src="./../img/flutter-app-ex-1.png" alt="스크린 예시" width="400" />
+  <img src="./../img/hinoki1.png" alt="스크린 예시" width="400" />
 </div>
 
 <br>
+
+## `FloatingActionButton` 위젯
+
+우측 하단의 파란색 버튼은 역시 Material 라이브러리에서 제공하는 위젯입니다. `Scaffold` 위젯 인스턴스를 생성할 때 `appBar`와 `body` 속성을 사용했었죠. `floatingActionButton` 속성을 추가하고 값으로 `FloatingActionButton` 위젯을 지정해보세요. 아래는 State 값을 변경시키는 `_incrementCounter`라는 함수가 있다고 가정한 예시 코드입니다.
+
+> State 값을 변경시키는건 뒤에서 다룹니다.
+
+<br>
+
+```dart
+floatingActionButton: FloatingActionButton(
+  onPressed: _incrementCounter,
+  tooltip: 'Increment',
+  child: Icon(Icons.add),
+)
+```
+
+<br>
+
+
+## `ListView` 위젯을 사용하여 무한 스크롤 UI 구현하기
+
+이번에는 무한 스크롤 UI를 만들어보겠습니다. 리스트 형태의 UI는 Material 라이브러리의 `ListView` 위젯을 사용합니다. 일단 `Scaffold` 위젯의 `body` 속성에 지정했던 `TableCalendar` 위젯은 잠시 지워보시고요. 대신 `MyList`라는 이름의 위젯을 지정하세요. (아직 이 위젯은 존재하지 않습니다)
+
+```dart
+body: MyList()
+```
+
+<br>
+
+이제 `MyApp` 클래스에서 벗어나셔서 `TableCalendar` 위젯을 만들었을 때처럼 새로운 Stateful 위젯을 생성하세요. 
+
+```dart
+class MyList extends StatefulWidget {
+  @override
+  _MyListState createState() => _MyListState();
+}
+
+class _MyListState extends State<MyList> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+```
+
+<br>
+
+이제 `_MyListState` 클래스 내에 `ListTile` 위젯을 반환하는 `_buildRow`라는 이름의 함수를 만드세요. `String` 타입을 인자로 받도록 하시고요. `ListTile` 인스턴스에 지정할 속성은 아래 예시 코드를 참고해주세요.
+
+> `Text` 위젯의 두 번째 인자에 style 속성을 지정할 수 있습니다. 이 때 값으로 `TextStyle` 위젯을 사용할 수 있죠.
+
+<br>
+
+```dart
+class _MyListState extends State<MyList> {
+  Widget _buildRow(String text) {
+    return ListTile(
+      title: Text(text, style: TextStyle(fontSize: 18.0))
+    )
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+```
+
+<br>
+
+이제 본격적으로 `build` 메소드 부분을 건드려보겠습니다. 아래와 같이 `ListView` 위젯을 반환하도록 작성하시고요.
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // ...
+    );
+  }
+```
+
+
+<br>
+
+`padding` 속성을 사용해서 여백 크기를 지정할 수 있습니다.
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.all(16.0)
+    );
+  }
+```
+
+<br>
+
+`itemBuilder` 속성은 리스트 UI의 각 아이템 부분에 무엇을 보여줄지 결정합니다. 위에서 만들었던 `_buildRow` 함수를 사용해보죠. `ListTile` 위젯을 반환하는 함수였죠. 
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.all(16.0),
+      itemBuilder: (context, i) {
+        return _buildRow('This is a row.');
+      }
+    );
+  }
+```
+
+<br>
+
+자 이제 간단한 `MyList` 위젯이 완성되었습니다. 여기까지 하고 앱을 실행시켜볼까요? 시뮬레이터 내에서 마우스를 사용하여 스크롤해보세요.
+
+> `Scaffold` 위젯의 `body` 속성에 `MyList` 위젯을 지정해야 합니다.
+
+<br>
+
+<img src="./../img/hinoki2.png" alt="flutter app" />
+
+<br>
+
+## `itemBuilder` 속성으로 콜백 알아보기
+
+`ListView.builder`의 `itemBuilder` 속성을 사용하여 리스트의 아이템마다 다른 내용을 보여주도록 할 수 있습니다. `itemBuilder` 속성은 JavaScript의 `map` 메소드처럼 작동합니다. 콜백 함수의 인자로 컨텍스트와 인덱스를 받고 최종적으로 남길 내용을 반환하는 방식이죠.
+
+<br>
+
+`_rowItems`라는 이름의 배열을 만들고, 배열의 요소들을 원하는 값으로 채워주세요. 단, `_buildRow` 함수를 사용하기 위해 요소들의 값은 `String` 타입을 지켜줍니다. 먼저, 콜백의 두 번째 인자인 인덱스 값(`i`)을 사용해서 `_rowItems` 배열의 값들을 콘솔에 출력해볼게요.
+
+```dart
+  final _rowItems = ['Yujin', 'Yongki', 'Yubin', 'Donghyun'];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.all(16.0),
+      itemBuilder: (context, i) {
+        if (i < 4) print(_rowItems[i]);
+        return _buildRow('This is a row.');
+      }
+    );
+  }
+```
+
+<br>
+
+아래와 같이 콘솔에 내용이 출력됩니다.
+
+```bash
+flutter: Yujin
+flutter: Yongki
+flutter: Yubin
+flutter: Donghyun
+```
+
+<br>
+
+이제 무한 스크롤 UI를 위해 코드를 조금 수정해볼게요. `_rowItems`의 초기값을 빈 배열(`[]`)로 수정하시고요, `itemBuilder` 속성의 콜백 함수에서 인덱스 `i`의 값이 `_rowItems` 배열의 길이 이상일 때 `['Yujin', 'Yongki', 'Yubin', 'Donghyun']`를 추가해주세요. 기존 배열에 새로운 배열의 요소들을 추가하는 경우이므로 `addAll()` 메소드를 사용하시면 됩니다. JavaScript의 `concat()` 메소드와 비슷하죠.
+
+```dart
+  final _rowItems = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.all(16.0),
+      itemBuilder: (context, i) {
+        if (i >= _rowItems.length) {
+          _rowItems.addAll(['Yujin', 'Yongki', 'Yubin', 'Donghyun'].cast<String>());
+        }
+        return _buildRow(_rowItems[i]);
+      }
+    );
+  }
+```
+
+<br>
+
+이제 앱을 실행하고 스크롤을 해보세요.
+
+<img src="./../img/hinoki3.png" alt="Flutter app" />
+
+
+<br>
+
 
 ---
 
