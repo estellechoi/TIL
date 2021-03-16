@@ -334,6 +334,12 @@ class _MyListState extends State<MyList> {
 이제 본격적으로 `build` 메소드 부분을 건드려보겠습니다. 아래와 같이 `ListView` 위젯을 반환하도록 작성하시고요.
 
 ```dart
+  Widget _buildRow(String text) {
+    return ListTile(
+      title: Text(text, style: TextStyle(fontSize: 18.0))
+    )
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -348,6 +354,12 @@ class _MyListState extends State<MyList> {
 `padding` 속성을 사용해서 여백 크기를 지정할 수 있습니다.
 
 ```dart
+  Widget _buildRow(String text) {
+    return ListTile(
+      title: Text(text, style: TextStyle(fontSize: 18.0))
+    )
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -361,6 +373,12 @@ class _MyListState extends State<MyList> {
 `itemBuilder` 속성은 리스트 UI의 각 아이템 부분에 무엇을 보여줄지 결정합니다. 위에서 만들었던 `_buildRow` 함수를 사용해보죠. `ListTile` 위젯을 반환하는 함수였죠. 
 
 ```dart
+  Widget _buildRow(String text) {
+    return ListTile(
+      title: Text(text, style: TextStyle(fontSize: 18.0))
+    )
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -393,6 +411,12 @@ class _MyListState extends State<MyList> {
 `_rowItems`라는 이름의 배열을 만들고, 배열의 요소들을 원하는 값으로 채워주세요. 단, `_buildRow` 함수를 사용하기 위해 요소들의 값은 `String` 타입을 지켜줍니다. 먼저, 콜백의 두 번째 인자인 인덱스 값(`i`)을 사용해서 `_rowItems` 배열의 값들을 콘솔에 출력해볼게요.
 
 ```dart
+  Widget _buildRow(String text) {
+    return ListTile(
+      title: Text(text, style: TextStyle(fontSize: 18.0))
+    )
+  }
+
   final _rowItems = ['Yujin', 'Yongki', 'Yubin', 'Donghyun'];
 
   @override
@@ -423,6 +447,12 @@ flutter: Donghyun
 이제 무한 스크롤 UI를 위해 코드를 조금 수정해볼게요. `_rowItems`의 초기값을 빈 배열(`[]`)로 수정하시고요, `itemBuilder` 속성의 콜백 함수에서 인덱스 `i`의 값이 `_rowItems` 배열의 길이 이상일 때 `['Yujin', 'Yongki', 'Yubin', 'Donghyun']`를 추가해주세요. 기존 배열에 새로운 배열의 요소들을 추가하는 경우이므로 `addAll()` 메소드를 사용하시면 됩니다. JavaScript의 `concat()` 메소드와 비슷하죠.
 
 ```dart
+  Widget _buildRow(String text) {
+    return ListTile(
+      title: Text(text, style: TextStyle(fontSize: 18.0))
+    )
+  }
+
   final _rowItems = [];
 
   @override
