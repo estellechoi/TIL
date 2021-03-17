@@ -163,3 +163,5 @@ function logSomething(str: string): void {
 ---
 
 ### References
+
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
