@@ -12,10 +12,10 @@ Install Flutter SDK from [Flutter official site](https://flutter.dev/docs/get-st
 
 2. Unzip the file and extract it in the desired directory.
 
-3. Add the downloaded Flutter tool to your path. Just copy and paste the below command.
+3. Add the downloaded Flutter tool to your path. If you moved your Flutter tool into `$HOME`, just copy and paste the below command.
 
 ```zsh
-export PATH="$PATH:`pwd`/flutter/bin"
+export PATH="$PATH:$HOME/flutter/bin"
 ```
 
 <br>
