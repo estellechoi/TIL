@@ -94,13 +94,7 @@ const Text.rich(
 
 ### [`Row`](https://api.flutter.dev/flutter/widgets/Row-class.html)
 
-- 자식 위젯들을 수평으로 배치합니다.
-
-<br>
-
-#### `Row`
-
-- 자식 위젯을 `Expanded` 위젯으로 묶으면 수평으로 한 줄을 다 차지하게 됩니다. `Align`/`Center` 위젯을 사용하여 아이템들을 정렬할 수 있고요.
+자식 위젯들을 수평으로 배치합니다. 자식 위젯을 `Expanded` 위젯으로 묶으면 수평으로 한 줄을 다 차지하게 됩니다. `Align`/`Center` 위젯을 사용하여 아이템들을 정렬할 수 있고요.
 
 ```dart
 Row(
@@ -131,13 +125,7 @@ Row(
 
 ### [`Column`](https://api.flutter.dev/flutter/widgets/Column-class.html)
 
-- 자식 위젯들을 수평으로 배치합니다.
-
-<br>
-
-#### `Column`
-
-- 자식 위젯을 `Expanded` 위젯으로 묶으면 수직으로 한 줄을 다 차지하게 됩니다. `Align`/`Center` 위젯을 사용하여 아이템들을 정렬할 수 있고요.
+자식 위젯들을 수평으로 배치합니다. 자식 위젯을 `Expanded` 위젯으로 묶으면 수직으로 한 줄을 다 차지하게 됩니다. `Align`/`Center` 위젯을 사용하여 아이템들을 정렬할 수 있고요.
 
 <br>
 
@@ -166,13 +154,11 @@ Column(
 
 ### [`Stack`](https://api.flutter.dev/flutter/widgets/Stack-class.html)
 
-- 자식 위젯을 박스 모서리 기준으로 배치합니다. 여러 위젯들을 겹치게 배치해야할 때 유용합니다. `Stack` 위젯은 모든 자식들을 포함하기 위해 자신의 크기를 자동으로 조절하고요, 첫 번째 자식이 가장 아래에 쌓이게 됩니다. CSS의 `position` 속성과 비슷하죠. 위젯간 쌓임 알고리즘에 대해 더 알고싶으시면 [`RenderStack` 문서](https://api.flutter.dev/flutter/rendering/RenderStack-class.html)를 확인하세요.
-
-- `Stack` 위젯의 모든 자식 위젯은 `positioned`/`non-positioned` 2 가지 상태를 가집니다. `Positioned` 위젯으로 감싸진 자식은 `positioned` 상태가 되죠. 이후 `positioned` 상태의 자식들은 `Stack` 위젯의 각 모서리를 기준으로 다시 배치됩니다.
+자식 위젯을 박스 모서리 기준으로 배치합니다. 여러 위젯들을 겹치게 배치해야할 때 유용합니다. `Stack` 위젯은 모든 자식들을 포함하기 위해 자신의 크기를 자동으로 조절하고요, 첫 번째 자식이 가장 아래에 쌓이게 됩니다. CSS의 `position` 속성과 비슷하죠. 위젯간 쌓임 알고리즘에 대해 더 알고싶으시면 [`RenderStack` 문서](https://api.flutter.dev/flutter/rendering/RenderStack-class.html)를 확인하세요.
 
 <br>
 
-#### `Stack`
+`Stack` 위젯의 모든 자식 위젯은 `positioned`/`non-positioned` 2 가지 상태를 가집니다. `Positioned` 위젯으로 감싸진 자식은 `positioned` 상태가 되죠. 이후 `positioned` 상태의 자식들은 `Stack` 위젯의 각 모서리를 기준으로 다시 배치됩니다.
 
 ```dart
 Stack(
@@ -501,4 +487,5 @@ State 정보를 저장하고 있는 객체가 더이상 필요하지 않을 때,
 
 ### References
 
-- [Write your first Flutter app, part 1](https://flutter.dev/docs/get-started/codelab)
+- [Introduction to widgets](https://flutter.dev/docs/development/ui/widgets-intro)
+- [Layouts in Flutter](https://flutter.dev/docs/development/ui/layout)
