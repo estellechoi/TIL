@@ -305,13 +305,15 @@ flutter build appbundle
 
 <br>
 
-#### 고유 번들 ID 등록
+#### 1) 고유 번들 ID 등록
 
 모든 iOS 앱은 Apple에 등록된 고유값인 번들 ID와 연결 됩니다. [Apple Developer](https://developer.apple.com/)의 Account 페이지에서 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/) 항목을 엽니다. 여기에서 `+`를 클릭하여 새로운 번들 ID를 생성합니다.
 
 <br>
 
-#### App Store Connect에 앱 레코드 생성
+#### 2) App Store Connect에 앱 레코드 생성
+
+...
 
 <br>
 
