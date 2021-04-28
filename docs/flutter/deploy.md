@@ -2,7 +2,7 @@
 
 <br>
 
-## Android 앱 배포
+## Android 앱으로 배포하기
 
 1. 런처 아이콘 추가하기
 2. 앱 서명하기
@@ -16,31 +16,31 @@
 
 ### 1. 런처 아이콘 추가하기
 
-공식문서에서 추천하는 [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) 라이브러리를 사용하여 런처 아이콘을 관리하거나 직접 지정할 수 있습니다. 런처 아이콘을 직접 지정하려면 아래의 스텝을 따르시면 됩니다.
+공식문서에서 추천하는 [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) 라이브러리를 사용하여 런처 아이콘을 관리할 수 있습니다. 라이브러리를 사용하지 않고 런처 아이콘을 직접 지정하려면 아래의 스텝을 따르시면 됩니다.
 
 <br>
 
 #### 1) `/android/app/src/main/res/` 경로에 디렉토리를 만들고 아이콘 파일을 넣습니다.
 
-[Image Asset Studio 실행하기](https://developer.android.com/studio/write/image-asset-studio?hl=ko#access) 문서에 따라 Android Studio 에디터를 사용하면 Image Asset Studio를 사용하여 런처 아이콘을 쉽게 추가할 수 있습니다. Image Asset Studio의 Launcher icon generator를 사용하여 이미 작업한 아이콘 파일을 Android 규격에 맞는 아이콘으로 생성할 수 있기 때문입니다.
+Android Studio 에디터를 사용하면 [Image Asset Studio 실행하기](https://developer.android.com/studio/write/image-asset-studio?hl=ko#access) 문서에 따라 런처 아이콘을 쉽게 추가할 수 있습니다. Image Asset Studio의 Launcher Icon Generator를 사용하여 Android 규격에 맞는 아이콘을 생성할 수 있기 때문입니다. 이미 작업한 아이콘 파일을 기반으로 각 디바이스 크기와 해상도에 맞는 아이콘들이 생성됩니다.
 
-Android Studio 에디터를 사용하지 않고 각 아이콘 파일들을 직접 만들었다면 `/android/app/src/main/res/` 경로에 아이콘 파일들을 넣어주면 됩니다. 아이콘 파일을 넣을 디렉토리는 [configuration qualifiers](https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources)에 따라 `<resources_name>-<config_qualifier>` 형식으로 이름을 지정합니다. 예를 들어 `mipmap-hdpi`와 같이 디렉토리를 명명하면 됩니다. `mipmap`은 각기 다른 디바이스 해상도에 맞춘 아이콘 파일을 의미하고요, `hdpi`는 화면 밀도를 나타내는 개별 구성 중 하나이죠.
-
-<br>
-
-> `mipmap`은 [`drawable`(드로어블)](https://developer.android.com/guide/topics/resources/drawable-resource) 파일 중에서 런처아이콘을 관리하기 위한 리소스를 의미합니다. `drawable` 리소스란 말그대로 화면에 그릴 수 있는 그래픽 파일을 의미하는데요, `png`, `gif`와 같은 비트맵 파일들이 `drawable` 리소스에 해당합니다.
+Android Studio 에디터를 사용하지 않고 해상도별 아이콘 파일들을 직접 만들었다면 `/android/app/src/main/res/` 경로에 아이콘 파일들을 넣어주면 됩니다. 아이콘 파일을 넣을 디렉토리는 [configuration qualifiers](https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources)에 따라 `<resources_name>-<config_qualifier>` 형식으로 이름을 정합니다. 예를 들어 `mipmap-hdpi`와 같이 디렉토리 이름을 정하면 됩니다. `mipmap`은 각기 다른 디바이스 해상도에 맞춘 아이콘 파일을 의미하고요, `hdpi`는 화면 밀도를 나타내는 한정자(Qualifier) 중 하나이죠.
 
 <br>
 
-> 여러 한정자(Qualifier)를 추가할 때는 [구성 한정자 이름](https://developer.android.com/guide/topics/resources/providing-resources#table2) 표에 나열된 순서로 배치해야 합니다. 한정자의 순서가 잘못 지정되면 해당 리소스가 무시됩니다.
-
-<br>
-
-기본적으로 아래와 같이 Flutter 아이콘들이 기본적으로 세팅되어있기 때문에 각 해상도에 맞는 런처 아이콘 파일들로 교체해주기만 하면 됩니다.
+기본적으로 아래와 같이 디렉토리들이 구성되어있고, 각 규격에 맞는 Flutter 아이콘들이 세팅되어있습니다. 각 해상도에 맞는 런처 아이콘 파일들로 교체해주기만 하면 되죠.
 
 <br>
 
 <img src="./../img/android-deploy1.png" width="300" />
+
+<br>
+
+> `mipmap`은 [`drawable`(드로어블)](https://developer.android.com/guide/topics/resources/drawable-resource) 리소스 중에서 런처아이콘을 관리하기 위한 리소스를 의미합니다. `drawable` 리소스란 말그대로 화면에 그릴 수 있는 그래픽 파일을 의미하는데요, `png`, `gif`와 같은 비트맵 파일들이 `drawable` 리소스에 해당합니다.
+
+<br>
+
+> 여러 한정자(Qualifier)를 추가할 때는 [구성 한정자 이름](https://developer.android.com/guide/topics/resources/providing-resources#table2) 표에 나열된 순서로 배치해야 합니다. 한정자의 순서가 잘못 지정되면 해당 리소스가 무시됩니다.
 
 <br>
 
@@ -275,8 +275,41 @@ flutter build appbundle
 
 <br>
 
-## iOS 앱 배포
+## iOS 앱으로 배포하기
 
+> [Apple의 App Store 심사 지침](https://developer.apple.com/app-store/review/)
+
+1. [Apple Developer Program](https://developer.apple.com/programs/) 등록하기
+2. App Store Connect에서 앱 등록하기
+
+<br>
+
+### 1. Apple Developer Program 등록하기
+
+[Apple Developer Program](https://developer.apple.com/programs/)에서 비용을 지불하고 개발자 계정으로 등록하세요. 2021년 4월 기준 연 129,000 원의 비용을 지불해야합니다. 결제가 완료되면 개발자 승인이 완료되기까지 기다려야하고요, 보통 48시간 이내 승인 완료 이메일을 받게 됩니다. 승인이 완료되면 [Apple Developer](https://developer.apple.com/)홈페이지에서 Account 페이지로 이동하시고요, 왼쪽 메뉴바의 Program Resources 섹션에 개발자 계정만 접근할 수 있는 항목들이 생긴 것을 확인할 수 있습니다.
+
+<br>
+
+### 2. App Store Connect에서 앱 등록하기
+
+[App Store Connect](https://developer.apple.com/kr/support/app-store-connect/)는 앱의 라이프사이클을 관리할 수 있는 곳입니다. 앱의 이름과 설명을 정하고 스크린샷 추가, 가격 설정 등을 완료한 후 앱스토어와 TestFlight에 출시하게 되죠. 앱을 등록할 때는 아래의 두 단계를 거쳐야합니다.
+
+- 고유 번들 ID 등록
+- App Store Connect에 앱 레코드 생성
+
+<br>
+
+#### 고유 번들 ID 등록
+
+모든 iOS 앱은 Apple에 등록된 고유값인 번들 ID와 연결 됩니다. [Apple Developer](https://developer.apple.com/)의 Account 페이지에서 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/) 항목을 엽니다. 여기에서 `+`를 클릭하여 새로운 번들 ID를 생성합니다.
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 
