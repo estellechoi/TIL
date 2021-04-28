@@ -380,9 +380,13 @@ Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Ass
 
 ### 5. 빌드 아카이브 생성하기
 
+이제 빌드 아카이브를 생성하여 App Store Connect에 빌드를 업로드하면 됩니다.
+
+<br>
+
 #### 앱 빌드하기
 
-이제 빌드 아카이브를 생성하여 App Store Connect에 빌드를 업로드하면 됩니다. 앱 스토어나 TestFlight에서 사용자에게 앱을 사용하게 할 준비가 되면 릴리즈(release) 빌드로 준비해야 합니다. 아래 명령어를 사용하여 iOS 앱을 빌드합니다. `flutter build` 명령어는 `--release`를 기본 옵션값으로 합니다.
+앱 스토어나 TestFlight에서 사용자에게 앱을 사용하게 할 준비가 되면 릴리즈(release) 빌드로 준비해야 합니다. 아래 명령어를 사용하여 iOS 앱을 빌드합니다. `flutter build` 명령어는 `--release`를 기본 옵션값으로 합니다.
 
 ```
 flutter build ios
