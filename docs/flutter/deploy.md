@@ -284,6 +284,9 @@ flutter build appbundle
 
 1. [Apple Developer Program](https://developer.apple.com/programs/) 등록하기
 2. App Store Connect에서 앱 등록하기
+3. Xcode 프로젝트 설정하기
+4. 앱 아이콘 추가하기
+5. 빌드 아카이브 생성하기
 
 <br>
 
@@ -307,13 +310,102 @@ flutter build appbundle
 모든 iOS 앱은 Apple에 등록된 고유값인 번들 ID와 연결 됩니다. [Apple Developer](https://developer.apple.com/)의 Account 페이지에서 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/) 항목을 엽니다. 여기에서 `+`를 클릭하여 새로운 번들 ID를 생성합니다.
 
 <br>
+
+#### App Store Connect에 앱 레코드 생성
+
 <br>
+
+### 3. Xcode 프로젝트 설정하기
+
+> [Prepare for app distribution](https://help.apple.com/xcode/mac/current/#/dev91fe7130a) 문서를 참고하세요.
+
 <br>
+
+이 단계에서는 앱의 기본적인 사항들을 설정할겁니다. Flutter 프로젝트의 `/ios` 디렉토리 내의 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다.
+
 <br>
+
+<img src="./../img/xcode.png" width="1000" />
+
 <br>
+
+좌측의 `Runner`를 더블클릭하여 열어줍니다. `TARGETS` 섹션에 다시 `Runner`가 선택되어있는지 확인하시고요. General 탭을 선택하여 기본 사항들부터 설정해봅시다.
+
 <br>
+
+<img src="./../img/xcode2.png" width="1000" />
+
 <br>
+
+#### 1) General
+
+- `Display Name` : 홈 스크린 등에 표시될 앱의 이름
+
+- `Bundle Identifier` : App Store Connect에서 등록한 번들 ID
+
+- `Deployment Info` : 앱이 지원할 최소 iOS 버전
+  > Flutter는 iOS 8.0 이상을 지원합니다. 만일 iOS 8에서 사용할 수 없는 Objective-C나 Swift 코드로 된 API를 사용한다면 이 설정을 적합하게 수정하세요.
+
 <br>
+
+#### 2) Signing & Capabilities
+
+- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝을 자동으로 관리하는지에 대한 여부
+
+  > 대부분 기본설정인 `true`면 충분합니다.
+
+- `Team` : Apple Developer 계정에 등록된 팀
+
+<br>
+
+> 앱 서명에 대한 자세한 내용은 [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
+
+<br>
+
+### 4. 앱 아이콘 추가하기
+
+Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Assets.xcassets` 디렉토리를 엽니다. 여기에서 기본 아이콘을 원하는 앱 아이콘으로 교체하시고요, 앱을 iOS 이뮬레이터로 실행시켜서 아이콘이 변경되었는지 확인하세요.
+
+<br>
+
+<img src="./../img/xcode3.png" width="1000" />
+
+<br>
+
+> [App Icon](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/) 가이드라인 문서를 참고하세요.
+
+<br>
+
+### 5. 빌드 아카이브 생성하기
+
+#### 앱 빌드하기
+
+이제 빌드 아카이브를 생성하여 App Store Connect에 빌드를 업로드하면 됩니다. 앱 스토어나 TestFlight에서 사용자에게 앱을 사용하게 할 준비가 되면 릴리즈(release) 빌드로 준비해야 합니다. 아래 명령어를 사용하여 iOS 앱을 빌드합니다. `flutter build` 명령어는 `--release`를 기본 옵션값으로 합니다.
+
+```
+flutter build ios
+```
+
+<br>
+
+> Xcode에서 릴리즈 모드 설정을 새로 고치도록 하려면 Xcode를 껐다 다시 켜세요. Xcode 8.3 이상에서는 필요하지 않습니다.
+
+<br>
+
+#### 앱 버전 설정하기
+
+이제 Xcode에서 앱 버전을 설정하고 빌드하면 되는데요, Xcode 상단 메뉴에서 `Product > Scheme > Runner` 를 선택합니다. 다음은 `Product > Destination > Generic iOS Device` 를 선택합니다. 이제 `TARGETS`에 `Runner`가 선택된 상태에서 `General` 메뉴의 `Version` 항목을 원하는 버전으로 변경합니다. `Build` 에는 App Store Connect에서 추적 가능한 고유 빌드 번호를 작성하세요. 각 업로드에는 고유한 빌드 번호가 필요합니다.
+
+<br>
+
+#### 빌드 아카이브를 생성하기
+
+Xcode 상단 메뉴에서 `Product > Archive` 를 선택하세요. Xcode 관리자 새 창이 뜨면, 사이드바에서 iOS 앱을 선택한 다음 방금 생성한 아카이브를 선택합니다. 우측의 `Validate app` 버튼을 클릭합니다. 유효성을 검사가 끝나면 `Distribute App` 버튼을 클릭하세요. [App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/gettingstarted)의 앱 세부정보 페이지로 들어가서 활동내역 탭으로 제출된 빌드 상태를 볼 수 있습니다.
+
+<br>
+
+TestFlight의 테스터에게 배포할 수 있음을 알리는 이메일을 30분 이내에 받을 수 있습니다. 그런 뒤에 당신은 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
+
 <br>
 
 ---
