@@ -277,7 +277,9 @@ flutter build appbundle
 
 ## iOS 앱으로 배포하기
 
-> [Apple의 App Store 심사 지침](https://developer.apple.com/app-store/review/)
+> [Apple의 App Store 심사 지침](https://developer.apple.com/app-store/review/)을 확인하고 진행해주세요.
+
+<br>
 
 1. [Apple Developer Program](https://developer.apple.com/programs/) 등록하기
 2. App Store Connect에서 앱 등록하기
@@ -286,13 +288,13 @@ flutter build appbundle
 
 ### 1. Apple Developer Program 등록하기
 
-[Apple Developer Program](https://developer.apple.com/programs/)에서 비용을 지불하고 개발자 계정으로 등록하세요. 2021년 4월 기준 연 129,000 원의 비용을 지불해야합니다. 결제가 완료되면 개발자 승인이 완료되기까지 기다려야하고요, 보통 48시간 이내 승인 완료 이메일을 받게 됩니다. 승인이 완료되면 [Apple Developer](https://developer.apple.com/)홈페이지에서 Account 페이지로 이동하시고요, 왼쪽 메뉴바의 Program Resources 섹션에 개발자 계정만 접근할 수 있는 항목들이 생긴 것을 확인할 수 있습니다.
+[Apple Developer Program](https://developer.apple.com/programs/)에서 비용을 지불하고 개발자 계정으로 등록하세요. 2021년 4월 기준 연 129,000 원의 비용을 지불해야합니다. 결제가 완료되면 개발자 승인이 완료되기까지 기다려야하고요, 보통 48시간 이내 승인 완료 이메일을 받게 됩니다. 승인이 완료되면 [Apple Developer](https://developer.apple.com/) 홈페이지에서 Account 페이지로 이동합니다. 왼쪽 메뉴바의 Program Resources 섹션에 개발자 계정만 접근할 수 있는 항목들이 생긴 것을 확인할 수 있습니다.
 
 <br>
 
 ### 2. App Store Connect에서 앱 등록하기
 
-[App Store Connect](https://developer.apple.com/kr/support/app-store-connect/)는 앱의 라이프사이클을 관리할 수 있는 곳입니다. 앱의 이름과 설명을 정하고 스크린샷 추가, 가격 설정 등을 완료한 후 앱스토어와 TestFlight에 출시하게 되죠. 앱을 등록할 때는 아래의 두 단계를 거쳐야합니다.
+[App Store Connect](https://developer.apple.com/kr/support/app-store-connect/)는 앱의 라이프사이클을 관리할 수 있는 곳입니다. 앱의 이름과 설명을 정하고 스크린샷 추가, 가격 설정 등을 완료한 후 앱스토어와 TestFlight에 출시하게 되죠. 앱을 등록하려면 아래의 두 단계를 거쳐야합니다.
 
 - 고유 번들 ID 등록
 - App Store Connect에 앱 레코드 생성
