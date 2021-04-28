@@ -378,7 +378,7 @@ Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Ass
 
 <br>
 
-### 5. 빌드 아카이브 생성하기
+### 5. 빌드 아카이브 생성하고 배포하기
 
 이제 빌드 아카이브를 생성하여 App Store Connect에 빌드를 업로드하면 됩니다.
 
@@ -410,7 +410,9 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 선택하세요. Xcode 관리�
 
 <br>
 
-TestFlight의 테스터에게 배포할 수 있음을 알리는 이메일을 30분 이내에 받을 수 있습니다. 그런 뒤에 당신은 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
+#### 앱 출시!
+
+TestFlight의 테스터에게 배포할 수 있음을 알리는 이메일을 30분 이내에 받을 수 있습니다. 그런 뒤에 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
 
 <br>
 
@@ -420,4 +422,4 @@ TestFlight의 테스터에게 배포할 수 있음을 알리는 이메일을 30�
 
 - [Android 앱 출시 준비하기 | Flutter](https://flutter-ko.dev/docs/deployment/android#%EB%9F%B0%EC%B2%98-%EC%95%84%EC%9D%B4%EC%BD%98-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)
 - [앱을 전 세계적으로 게시하고, 관리하고, 배포하는 방법 | Google Play](https://developer.android.com/distribute/best-practices/launch)
-- [iOS 앱 출시 준비하기](https://flutter-ko.dev/docs/deployment/ios)
+- [iOS 앱 출시 준비하기 | Flutter](https://flutter-ko.dev/docs/deployment/ios)
