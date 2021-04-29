@@ -395,11 +395,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-좌측의 `Runner`를 더블클릭하여 열어줍니다. `TARGETS` 섹션에 다시 `Runner`가 선택되어있는지 확인하시고요. General 탭을 선택하여 기본 사항들부터 설정해봅시다.
-
-<br>
-
-<img src="./../img/xcode2.png" width="1000" />
+좌측의 `Runner`를 더블클릭하여 열어줍니다. `TARGETS` 섹션에 다시 `Runner`가 선택되어있는지 확인하시고,기본 사항들을 설정해봅시다. 탭별로 정리하면,
 
 <br>
 
@@ -425,6 +421,10 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 <br>
 
 > 앱 서명에 대한 자세한 내용은 [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
+
+<br>
+
+<img src="./../img/xcode2.png" width="1000" />
 
 <br>
 
