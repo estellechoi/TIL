@@ -660,7 +660,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-<img src="./../img/xcode14.png" width="700" />
+<img src="./../img/xcode18.png" width="700" />
 
 <br>
 
