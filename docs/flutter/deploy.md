@@ -333,7 +333,7 @@ flutter build appbundle
 
 <br>
 
-<img src="./../img/ios3.png" width="1000" />
+<img src="./../img/ios6.png" width="1000" />
 
 <br>
 
@@ -357,7 +357,7 @@ flutter build appbundle
 
 <br>
 
-위 단계를 통해 앱이 생성되면 아래와 같이 앱의 상세정보 페이지로 자동 이동됩니다. 이 페이지는 App Store Connect의 `나의 앱` 페이지에서 등록한 앱 항목을 클릭하여 접근할 수 있습니다. 사이드 바의 `앱 정보` 메뉴로 이동하여 번들 ID에 위 단계에서 선택한 고유 앱 ID가 잘 들어있는지 확인하세요.
+위 단계를 통해 앱이 생성되면 아래와 같이 앱의 상세정보 페이지로 자동 이동됩니다. 이 페이지는 App Store Connect의 `나의 앱` 페이지에서 등록한 앱 항목을 클릭하여 접근할 수도 있습니다. 사이드 바의 `앱 정보` 메뉴로 이동하여 번들 ID에 위 단계에서 선택한 고유 앱 ID가 잘 들어있는지 확인하세요.
 
 <br>
 
@@ -415,7 +415,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode2.png" width="1000" />
+<img src="./../img/xcode11.png" width="1000" />
 
 <br>
 
@@ -437,7 +437,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode6.png" width="1000" />
+<img src="./../img/xcode13.png" width="1000" />
 
 <br>
 
@@ -445,7 +445,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode5.png" width="500" />
+<img src="./../img/xcode5.png" width="300" />
 
 <br>
 
@@ -453,7 +453,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode7.png" width="500" />
+<img src="./../img/xcode7.png" width="300" />
 
 <br>
 
@@ -479,7 +479,7 @@ Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Ass
 
 <br>
 
-<img src="./../img/xcode9.png" width="700" />
+<img src="./../img/xcode12.png" width="700" />
 
 <br>
 
