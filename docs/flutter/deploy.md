@@ -700,7 +700,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 ### Apple 푸시 알림(APN) 사용하기
 
-Apple 푸시 알림(APN) 서비스를 사용하기 위해서는 Xcode 프로젝트 설정시 프로비저닝 프로필을 자동으로 생성하지 않고, 직접 만들어서 Import 해야합니다. Xcode에서 자동으로 생성하면 APN에 필요한 `aps-environment` 권한이 포함되지 않기 때문이죠. [Create Provisioning Profile](https://developer.apple.com/forums/thread/47806) 문서를 참고하여 프로비저닝 프로필을 생성할 수 있는데요, 프로비저닝 프로필을 만들 때 필요한 CSR 파일을 먼저 준비해봅시다.
+Apple 푸시 알림(APN) 서비스를 사용하기 위해서는 Xcode 프로젝트 설정시 프로비저닝 프로필을 자동으로 생성하지 않고, 직접 만들어서 Import 해야합니다. Xcode에서 자동으로 생성하면 APN에 필요한 `aps-environment` 권한이 포함되지 않기 때문이죠. [Create Provisioning Profile](https://developer.apple.com/forums/thread/47806) 문서를 참고하여 프로비저닝 프로필을 생성할 수 있고요, 또한 APN 인증서를 발급받아야합니다. APN 인증서를 생성할 때 필요한 CSR 파일을 먼저 준비해봅시다.
 
 <br>
 
@@ -736,7 +736,7 @@ CSR 파일은 일종의 개발자 인증서입니다. 맥에서 `키체인 접�
 
 <br>
 
-인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR(Certificate Signing Request) 파일을 업로드하는 페이지가 나타납니다. CSR 파일을 업로드하고 프로필 생성을 완료하면 됩니다. 프로비저닝 프로필 생성이 완료되면 `Download` 버튼을 클릭하여 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 키체인에 등록됩니다.
+인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR(Certificate Signing Request) 파일을 업로드하는 페이지가 나타납니다. CSR 파일을 업로드하고 인증서 생성을 완료하면 됩니다. 인증서 생성이 완료되면 `Download` 버튼을 클릭하여 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 키체인에 등록됩니다.
 
 <br>
 
@@ -746,7 +746,7 @@ CSR 파일은 일종의 개발자 인증서입니다. 맥에서 `키체인 접�
 
 ### 3) 서버용 APNS 인증서 발급
 
-키체인에서 방금 등록된 프로필을 선택하여 Export 합니다. 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장하면 됩니다.
+키체인에서 방금 등록된 인증서를 선택하여 Export 합니다. 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장하면 됩니다.
 
 <br>
 
@@ -754,7 +754,7 @@ CSR 파일은 일종의 개발자 인증서입니다. 맥에서 `키체인 접�
 
 <br>
 
-그 다음, 키체인에서 이 프로필의 키를 찾아 Export 합니다. 이름을 `key`로 작성하고 `.p12` 확장자로 저장합니다.
+그 다음, 키체인에서 이 인증서의 키를 찾아 Export 합니다. 이름을 `key`로 작성하고 `.p12` 확장자로 저장합니다.
 
 <br>
 
@@ -778,7 +778,7 @@ openssl rsa -in key.pem -out key.unencrypted.pem
 
 <br>
 
-이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 최종 APNS에 사용될 인증서를 만들어주는 작업입니다.
+이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 APN에 사용될 인증서를 만들어주는 작업입니다.
 
 ```
 cat cert.pem key.unencrypted.pem > apns.pem
