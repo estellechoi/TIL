@@ -375,15 +375,19 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-`Preferences`의 `Accounts` 탭에서 Apple 개발자 계정으로 로그인되어있는지 확인하시고요, 로그인되어있지 않다면 왼쪽 하단의 `+` 버튼을 클릭하여 계저을 추가해주세요.
+`Preferences` 창을 열고 `Accounts` 탭에서 Apple 개발자 계정으로 로그인되어있는지 확인하시고요, 로그인되어있지 않다면 왼쪽 하단의 `+` 버튼을 클릭하여 계정을 추가해주세요.
 
 <br>
 
-<img src="./../img/xcode_account1.png" width="600" />
+<img src="./../img/xcode_account1.png" width="700" />
 
 <br>
 
-<img src="./../img/xcode_account2.png" width="600" />
+<img src="./../img/xcode_account2.png" width="700" />
+
+<br>
+
+계정을 추가한 후 창을 닫고 Xcode 메인 창으로 돌아옵니다.
 
 <br>
 
