@@ -644,7 +644,7 @@ flutter build ios
 
 <br>
 
-<img src="./../img/macos.png" width="300" />
+<img src="./../img/macos.png" width="500" />
 
 <br>
 
