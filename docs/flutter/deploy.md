@@ -395,7 +395,11 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-좌측의 `Runner`를 더블클릭하여 열어줍니다. `TARGETS` 섹션에 다시 `Runner`가 선택되어있는지 확인하시고,기본 사항들을 설정해봅시다. 탭별로 정리하면,
+좌측의 `Runner`를 더블클릭하여 열어줍니다. `TARGETS` 섹션에 다시 `Runner`가 선택되어있는지 확인하시고요, 기본 사항들을 설정해봅시다.
+
+<br>
+
+탭별로 정리하면,
 
 <br>
 
@@ -406,21 +410,8 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 - `Bundle Identifier` : App Store Connect에서 등록한 번들 ID
 
 - `Deployment Info` : 앱이 지원할 최소 iOS 버전
+
   > Flutter는 iOS 8.0 이상을 지원합니다. 만일 iOS 8에서 사용할 수 없는 Objective-C나 Swift 코드로 된 API를 사용한다면 이 설정을 적합하게 수정하세요.
-
-<br>
-
-#### 2) Signing & Capabilities
-
-- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝을 자동으로 관리하는지에 대한 여부
-
-  > 대부분 기본설정인 `true`면 충분합니다.
-
-- `Team` : Apple Developer 계정에 등록된 팀
-
-<br>
-
-> 앱 서명에 대한 자세한 내용은 [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
 
 <br>
 
@@ -428,9 +419,47 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
+#### 2) Signing & Capabilities
+
+- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝을 자동으로 관리하는지에 대한 여부
+
+  > 대부분 기본설정인 체크 상태면 충분합니다.
+
+- `Team` : Apple Developer에 등록된 팀 계정
+
+<br>
+
+> 앱 서명에 대한 자세한 내용은 [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
+
+<br>
+
+저의 경우, 공식문서와 다르게 경고가 나타났습니다. `Automatically manage signing` 항목을 체크하면 Xcode 내에서 프로비저닝 프로필(provisioining profile)이 자동으로 생성되는데요, 프로필 생성에 실패했다는 내용이었습니다. 상세내용을 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로필을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 선택하라는 설명입니다.
+
+<br>
+
+<img src="./../img/xcode6.png" width="1000" />
+
+<br>
+
+위 스크린샷에 표시한 왼쪽 상단을 클릭해보세요. 아직 디바이스를 연결하지 않았기 때문에 `No device connected to 'My Mac'...` 문구를 확인할 수 있습니다.
+
+<br>
+
+<img src="./../img/xcode5.png" width="500" />
+
+<br>
+
+디바이스를 등록하기위해 iPhone과 같은 iOS 디바이스를 케이블을 사용하여 맥북에 연결하세요. 다시 같은 곳을 클릭하면 iOS Device 섹션에 방금 연결한 디바이스가 생긴 것을 확인할 수 있습니다. 클릭하여 선택한 후, 경고 문구 아래의 `Try Again` 버튼을 클릭하세요. 새로운 경고 문구와 버튼이 생기면, 개발자 계정에 해당 디바이스를 등록하기 위해 버튼을 클릭하세요.
+
+<br>
+
+<img src="./../img/xcode7.png" width="500" />
+
+<br>
+
 ### 4. 앱 아이콘 추가하기
 
-Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Assets.xcassets` 디렉토리를 엽니다. 여기에서 기본 아이콘을 원하는 앱 아이콘으로 교체하시고요, 앱을 iOS 이뮬레이터로 실행시켜서 아이콘이 변경되었는지 확인하세요.
+Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Assets.xcassets` 디렉토리를 엽니다. 여기에서 앱 아이콘을 원하는 아이콘으로 교체합니다. 교체 후에는 앱을 iOS 이뮬레이터로 실행시켜서 아이콘이 변경되었는지 확인하세요.
 
 <br>
 
@@ -438,7 +467,156 @@ Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Ass
 
 <br>
 
-> [App Icon](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/) 가이드라인 문서를 참고하세요.
+앱 아이콘은 Apple의 Human Interface Guidelines의 [App Icon](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/) 문서를 참고하여 가이드라인을 준수하는 아이콘으로 준비해야 합니다. 특히 Apple의 앱 유효성 심사를 통과하기 위해 iOS 디바이스별 해상도 규격에 맞는 지정된 사이즈의 아이콘 파일들을 모두 제공하는 것이 중요합니다. 기본으로 들어있는 `AppIcon`을 클릭해보면 Flutter 로고 아이콘들이 사이즈별로 나타납니다.
+
+<br>
+
+<img src="./../img/xcode8.png" width="1000" />
+
+<br>
+
+가장 큰 사이즈인 (App Store용) `1024px * 1024px` 크기의 이미지 파일 하나를 준비하고, [App Icon Generator](https://appicon.co/)와 같은 외부 도구를 사용하여 나머지 사이즈의 아이콘 파일들을 생성하는 것이 편리합니다. 아래 스크린샷과 같이 `Assets.xcaseets` 디렉토리 내에 아이콘 파일들이 담긴 디렉토리를 넣어주면 됩니다.
+
+<br>
+
+<img src="./../img/xcode9.png" width="700" />
+
+<br>
+
+아이콘 파일들과 함께 `Contents.json` 파일을 함께 넣어야하는데요, 사이즈별로 참조할 이미지 파일을 명시한 파일입니다. 파일 내용은 아래 예시를 참고하세요.
+
+```
+{
+  "images" : [
+    {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-20x20@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-20x20@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-29x29@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-29x29@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-29x29@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-40x40@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-40x40@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-60x60@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-60x60@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-20x20@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-20x20@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-29x29@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-29x29@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-40x40@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-40x40@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-76x76@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-76x76@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-83.5x83.5@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Icon-App-1024x1024@1x.png",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
+```
+
+<br>
+
+Xcode에서 확인해보면, 아래 스크린샷과 같이 사이즈별로 참조된 이미지들이 보입니다.
+
+<br>
+
+<img src="./../img/xcode10.png" width="1000" />
 
 <br>
 
