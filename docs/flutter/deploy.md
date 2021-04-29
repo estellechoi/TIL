@@ -445,7 +445,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode5.png" width="300" />
+<img src="./../img/xcode5.png" width="240" />
 
 <br>
 
@@ -453,7 +453,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode7.png" width="300" />
+<img src="./../img/xcode7.png" width="240" />
 
 <br>
 
@@ -628,7 +628,7 @@ Xcode에서 확인해보면, 아래 스크린샷과 같이 사이즈별로 참�
 
 #### 앱 빌드하기
 
-앱 스토어나 TestFlight에서 사용자에게 앱을 사용하게 할 준비가 되면 릴리즈(release) 빌드로 준비해야 합니다. 아래 명령어를 사용하여 iOS 앱을 빌드합니다. `flutter build` 명령어는 `--release`를 기본 옵션값으로 합니다.
+아래 명령어를 사용하여 iOS 앱을 앱을 릴리즈(release) 모드로 빌드합니다. `flutter build` 명령어는 `--release`를 기본 옵션으로 합니다.
 
 ```
 flutter build ios
@@ -637,6 +637,14 @@ flutter build ios
 <br>
 
 > Xcode에서 릴리즈 모드 설정을 새로 고치도록 하려면 Xcode를 껐다 다시 켜세요. Xcode 8.3 이상에서는 필요하지 않습니다.
+
+<br>
+
+앱 빌드 중에 아래와 같은 창이 뜰 수 있습니다. 맥북을 열 때 사용하는 암호를 입력하신 후 `항상 허용`을 클릭합니다.
+
+<br>
+
+<img src="./../img/macos.png" width="300" />
 
 <br>
 
