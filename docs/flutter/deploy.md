@@ -421,9 +421,9 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 #### 2) Signing & Capabilities
 
-- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝을 자동으로 관리하는지에 대한 여부
+- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝 프로필(provisioining profile)을 자동으로 관리하는지에 대한 여부
 
-  > 대부분 기본설정인 체크 상태면 충분합니다.
+  > 기본설정인 체크 상태로 충분할 수 있지만, 푸시 알림(Push Notification)과 같은 일부 서비스를 사용하려면 프로비저닝 프로필을 수동으로 생성해야 합니다.
 
 - `Team` : Apple Developer에 등록된 팀 계정
 
@@ -433,7 +433,11 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-저의 경우, 공식문서와 다르게 경고가 나타났습니다. `Automatically manage signing` 항목을 체크하면 Xcode 내에서 프로비저닝 프로필(provisioining profile)이 자동으로 생성되는데요, 프로필 생성에 실패했다는 내용이었습니다. 상세내용을 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로필을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 선택하라는 설명입니다.
+> 푸시 알림 등의 서비스 사용을 위해 프로비저닝 프로필을 수동으로 생성해야한다면 [Apple 푸시 알림(APN) 사용하기](#apn) 섹션을 참고하세요.
+
+<br>
+
+`Automatically manage signing` 항목을 체크하면 Xcode 내에서 프로비저닝 프로필이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 프로필 생성에 실패했다는 경고가 나타났습니다. 상세내용을 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로필을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 선택하라는 설명입니다.
 
 <br>
 
@@ -680,7 +684,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-유효성을 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store에 앱을 제출합니다. [App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/gettingstarted)의 앱 세부정보 페이지로 들어가서 활동내역 탭으로 제출된 빌드 상태를 볼 수 있습니다.
+유효성을 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store에 앱을 제출하고 기다립니다. 30분내로 결과를 알리는 이메일을 받을 수 있습니다.
 
 <br>
 
@@ -690,8 +694,138 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 #### 앱 출시!
 
-TestFlight의 테스터에게 배포할 수 있음을 알리는 이메일을 30분 이내에 받을 수 있습니다. 그런 뒤에 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
+앱 제출이 완료되면 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
 
+<br>
+
+### Apple 푸시 알림(APN) 사용하기
+
+<div id="apn"></div>
+
+Apple 푸시 알림(APN) 서비스를 사용하기 위해서는 Xcode 프로젝트 설정시 프로비저닝 프로필을 자동으로 생성하지 않고, 직접 만들어서 Import 해야합니다. Xcode에서 자동으로 생성하면 APN에 필요한 `aps-environment` 권한이 포함되지 않기 때문이죠. [Create Provisioning Profile](https://developer.apple.com/forums/thread/47806) 문서를 참고하여 프로비저닝 프로필을 생성할 수 있는데요, 프로비저닝 프로필을 만들 때 필요한 CSR 파일을 먼저 준비해봅시다.
+
+<br>
+
+> 자세한 내용은 [Configuring Remote Notification Support](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1) 문서를 참고하세요.
+
+<br>
+
+#### 1) CSR 파일 만들기
+
+CSR 파일은 일종의 개발자 인증서입니다. 맥에서 `키체인 접근(Keychain Access)`를 사용하여 만들 수 있습니다. `키체인 접근` 프로그램을 열고 상단 툴바에서 `인증서 지원 > 인증 기관에서 인증서 요청...`을 선택합니다. 그 다음 나타난 `인증서 지원` 창에서 Apple 계정 이메일과 이름을 입력하고, 요청항목에서 `디스크에 저장됨`을 선택, `본인이 키 쌍 정보 지정`을 체크하고 `계속` 버튼을 클릭합니다.
+
+<br>
+
+<img src="./../img/ios11.png" width="700" />
+
+<br>
+
+키의 크기와 알고리즘을 설정하고 CSR을 생성합니다.
+
+<br>
+
+<img src="./../img/ios12.png" width="700" />
+
+<br>
+
+### 2) APN 인증서 만들기
+
+`Create Certificate`를 클릭하여 인증서 생성을 시작합니다. Services 섹션의 `Apple Push Notification service SSL (Sandbox & Production)`을 선택하고 `Continue` 버튼을 클릭합니다.
+
+<br>
+
+<img src="./../img/ios8.png" width="1000" />
+
+<br>
+
+인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR(Certificate Signing Request) 파일을 업로드하는 페이지가 나타납니다. CSR 파일을 업로드하고 프로필 생성을 완료하면 됩니다. 프로비저닝 프로필 생성이 완료되면 `Download` 버튼을 클릭하여 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 키체인에 등록됩니다.
+
+<br>
+
+<img src="./../img/ios9.png" width="1000" />
+
+<br>
+
+### 3) 서버용 APNS 인증서 발급
+
+키체인에서 방금 등록된 프로필을 선택하여 Export 합니다. 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장하면 됩니다.
+
+<br>
+
+<img src="./../img/ios15.png" width="500" />
+
+<br>
+
+그 다음, 키체인에서 이 프로필의 키를 찾아 Export 합니다. 이름을 `key`로 작성하고 `.p12` 확장자로 저장합니다.
+
+<br>
+
+<img src="./../img/ios16.png" width="500" />
+
+<br>
+
+키의 경우 아래 명령어를 사용하여 `.pem` 확장자로 형식을 변환해줍니다. Export시 입력했던 비밀번호를 체크하고 PEM 암호 문구(`PEM pass phrase`)를 설정해주는 단계가 있습니다.
+
+```
+openssl pkcs12 -nocerts -out key.pem -in key.p12
+```
+
+<br>
+
+이제 변환된 `key.pem` 파일을 사용하여 `key.unencrypted.pem`을 만듭니다. 이 단계에서 바로 위에서 설정한 비밀번호가 필요합니다.
+
+```
+openssl rsa -in key.pem -out key.unencrypted.pem
+```
+
+<br>
+
+이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 최종 APNS에 사용될 인증서를 만들어주는 작업입니다.
+
+```
+cat cert.pem key.unencrypted.pem > apns.pem
+```
+
+<br>
+
+### 4) 프로비저닝 프로필
+
+Apple Developer 사이트의 Account > [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `Generate a profile` 버튼을 클릭하여 프로필 생성을 시작합니다.
+
+<br>
+
+`App Store`를 선택하고 `Continue` 버튼을 클릭합니다. 그 다음, 앱 ID와 인증서를 차례로 선택하고 프로비저닝 프로필 생성을 완료해줍니다.
+
+<br>
+
+### 5) Xcode 프로젝트 설정하기
+
+생성된 프로비저닝 프로필은 Xcode에서 바로 Download하여 서명에 포함시킬 수 있습니다. 프로비저닝 프로필을 설정하고, 아래 스크린샷에 표시한 왼쪽 상단의 `+ Capability` 버튼을 클릭하여 `Push Notification`을 포함하여 필요한 서비스들을 추가해줍니다.
+
+<br>
+
+<img src="./../img/ios20.png" width="1000" />
+
+<br>
+
+<img src="./../img/ios21.png" width="1000" />
+
+<br>
+
+그 다음 `Build Phrases` 탭으로 이동하여 `Link Binary With Libraries` 섹션에 아래 스크린샷에 표시한 항목들을 추가합니다.
+
+<br>
+
+<img src="./../img/ios22.png" width="1000" />
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+<br>
 <br>
 
 ---
@@ -701,3 +835,6 @@ TestFlight의 테스터에게 배포할 수 있음을 알리는 이메일을 30�
 - [Android 앱 출시 준비하기 | Flutter](https://flutter-ko.dev/docs/deployment/android#%EB%9F%B0%EC%B2%98-%EC%95%84%EC%9D%B4%EC%BD%98-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)
 - [앱을 전 세계적으로 게시하고, 관리하고, 배포하는 방법 | Google Play](https://developer.android.com/distribute/best-practices/launch)
 - [iOS 앱 출시 준비하기 | Flutter](https://flutter-ko.dev/docs/deployment/ios)
+- [Configuring Remote Notification Support | Apple Developer](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1)
+- [언인스톨 트래킹 APNS(Apple Push Notification Service)](https://support.singular.net/hc/ko/articles/360000269811-%EC%96%B8%EC%9D%B8%EC%8A%A4%ED%86%A8-%ED%8A%B8%EB%9E%98%ED%82%B9-APNS-Apple-Push-Notification-Service-)
+- [iOS Notification 만들기](http://throughkim.kr/2016/12/27/ios-notification/)
