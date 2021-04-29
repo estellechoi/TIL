@@ -650,13 +650,41 @@ flutter build ios
 
 #### 앱 버전 설정하기
 
-이제 Xcode에서 앱 버전을 설정하고 빌드하면 되는데요, Xcode 상단 메뉴에서 `Product > Scheme > Runner` 를 선택합니다. 다음은 `Product > Destination > Generic iOS Device` 를 선택합니다. 이제 `TARGETS`에 `Runner`가 선택된 상태에서 `General` 메뉴의 `Version` 항목을 원하는 버전으로 변경합니다. `Build` 에는 App Store Connect에서 추적 가능한 고유 빌드 번호를 작성하세요. 각 업로드에는 고유한 빌드 번호가 필요합니다.
+이제 Xcode에서 앱 버전을 설정하고 빌드하면 되는데요, Xcode 상단 메뉴에서 `Product > Scheme > Runner` 를 선택합니다. 다음은 `Product > Destination`에서 `Generic iOS Device` 또는 `Any iOS Device`를 선택합니다. 이제 `TARGETS`에 `Runner`가 선택된 상태에서 `General` 메뉴의 `Version` 항목을 원하는 버전으로 변경합니다. `Build` 에는 App Store Connect에서 추적 가능한 고유 빌드 번호를 작성하면 됩니다. 각 업로드에는 고유한 빌드 번호가 필요한데요, 첫 업로드라면 기본값인 `1`을 그래도 사용해도 무방합니다.
 
 <br>
 
 #### 빌드 아카이브를 생성하기
 
-Xcode 상단 메뉴에서 `Product > Archive` 를 선택하세요. Xcode 관리자 새 창이 뜨면, 사이드바에서 iOS 앱을 선택한 다음 방금 생성한 아카이브를 선택합니다. 우측의 `Validate app` 버튼을 클릭합니다. 유효성을 검사가 끝나면 `Distribute App` 버튼을 클릭하세요. [App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/gettingstarted)의 앱 세부정보 페이지로 들어가서 활동내역 탭으로 제출된 빌드 상태를 볼 수 있습니다.
+Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcode organizer 창이 뜹니다.
+
+<br>
+
+<img src="./../img/xcode14.png" width="700" />
+
+<br>
+
+방금 생성한 아카이브를 선택합니다. 그리고 우측의 `Validate app` 버튼을 클릭하여 앱 유효성 검사를 시작합니다. 단계를 거치다보면 아래와 같은 경고 문구가 나올 수 있습니다. Apple Distribution 인증서를 발급받지 않았기 때문이죠. 인증서를 생성해야 하므로 `Generate an Apple Distribution certificate`에 체크하고 `Next` 버튼을 클릭합니다.
+
+<br>
+
+<img src="./../img/xcode16.png" width="700" />
+
+<br>
+
+인증서가 생성되면 아래와 같은 창을 보실 수 있고요, 안내 문구에 따라 인증서를 Export하고 안전한 곳에 보관하신 후 `Next` 버튼을 클릭하세요.
+
+<br>
+
+<img src="./../img/xcode17.png" width="700" />
+
+<br>
+
+유효성을 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store에 앱을 제출합니다. [App Store Connect](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/gettingstarted)의 앱 세부정보 페이지로 들어가서 활동내역 탭으로 제출된 빌드 상태를 볼 수 있습니다.
+
+<br>
+
+> 자세한 내용은 [Validate an archive of your app](https://help.apple.com/xcode/mac/current/#/dev37441e273), [Upload an app to App Store Connect](https://help.apple.com/xcode/mac/current/#/dev442d7f2ca) 문서를 참고하세요.
 
 <br>
 
