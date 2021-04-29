@@ -307,7 +307,7 @@ flutter build appbundle
 
 #### 1) 고유 번들 ID 등록
 
-모든 iOS 앱은 Apple에 등록된 고유값인 번들 ID와 연결 됩니다. [Apple Developer](https://developer.apple.com/)의 Account 페이지에서 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/) 항목을 열고, `Identifiers` 메뉴로 이동합니다. 여기에서 `+` 또는 `Register an App ID` 버튼을 클릭하고, `App IDs`에 체크한 후 `Continue` 버튼을 클릭하세요.
+모든 iOS 앱은 Apple에 등록된 고유값인 번들 ID와 연결 됩니다. [Apple Developer](https://developer.apple.com/)의 Account 페이지에서 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/) 항목을 열고, `Identifiers` 메뉴로 이동합니다. 여기에서 `+` 또는 `Register an App ID` 버튼을 클릭하여 아래 페이지로 이동합니다. `App IDs`에 체크한 후 `Continue` 버튼을 클릭하세요.
 
 <br>
 
@@ -315,7 +315,7 @@ flutter build appbundle
 
 <br>
 
-앱을 위한 ID를 생성하기 위해 `App`을 선택한 후 `Continue` 버튼을 클릭합니다.
+아래 페이지에서는 `App`을 선택한 후 `Continue` 버튼을 클릭합니다.
 
 <br>
 
@@ -323,7 +323,7 @@ flutter build appbundle
 
 <br>
 
-이 단계에서는 세 가지 항목을 입력하고 `Continue`, `Register` 버튼을 차례로 클립하면 앱 ID가 생성됩니다.
+아래 페이지에서는 다음의 세 가지 항목을 입력합니다. 입력 후 `Continue`, `Register` 버튼을 차례로 클릭하여 앱 ID를 생성합니다.
 
 - Description : 앱 ID에 대한 설명을 작성합니다.
 - Bundle ID : `Explicit`을 선택하고 앱 ID를 입력합니다. 하단 가이드를 참고하여 `com.domain.appname` 형태로 작성합니다.
@@ -345,15 +345,17 @@ flutter build appbundle
 
 <br>
 
-나타난 폼 양식에 앱 정보를 입력하고 제출합니다. 플랫폼에 iOS를 체크하시고요, SKU는 [Stock-keeping Unit](https://en.wikipedia.org/wiki/Stock_keeping_unit)의 약자로 기업에서 만든 제품 일련번호 정도로 생각하시면 됩니다. Stack Overflow에 [iTunes Connect: How to choose a good SKU?](https://stackoverflow.com/questions/8710512/itunes-connect-how-to-choose-a-good-sku)를 주제로한 논의가 있으니 참고하세요.
+나타난 폼 양식에 앱 정보를 입력하고 제출합니다. 플랫폼에 iOS를 체크하시고요, SKU는 [Stock-keeping Unit](https://en.wikipedia.org/wiki/Stock_keeping_unit)의 약자로 기업에서 만든 제품 일련번호로 생각하시면 됩니다. 앱을 출시하는 팀/회사의 입장에서 해당 앱을 식별할 수 있는 번호를 입력하면 됩니다.
 
 <br>
+
+> Stack Overflow에 [iTunes Connect: How to choose a good SKU?](https://stackoverflow.com/questions/8710512/itunes-connect-how-to-choose-a-good-sku)를 주제로한 논의가 있으니 참고하세요.
 
 > 참고로 Flutter는 현재 tvOS를 지원하지 않습니다.
 
 <br>
 
-위 단계를 통해 앱이 생성되면 앱의 상세정보 페이지로 자동으로 이동됩니다. 이 페이지는 `나의 앱` 페이지에서 지정한 이름의 앱 항목을 클릭하여 접근할 수 있습니다. 사이드 바의 `앱 정보` 메뉴로 이동하여 번들 ID에 위 단계에서 선택한 고유 앱 ID가 들어있는지 확인하세요.
+위 단계를 통해 앱이 생성되면 아래와 같이 앱의 상세정보 페이지로 자동 이동됩니다. 이 페이지는 `나의 앱` 페이지에서 지정한 이름의 앱 항목을 클릭하여 접근할 수 있습니다. 사이드 바의 `앱 정보` 메뉴로 이동하여 번들 ID에 위 단계에서 선택한 고유 앱 ID가 들어있는지 확인하세요.
 
 <br>
 
@@ -367,7 +369,7 @@ flutter build appbundle
 
 <br>
 
-이 단계에서는 앱의 기본적인 사항들을 설정할겁니다. Flutter 프로젝트의 `/ios` 디렉토리 내의 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다. Apple 개발자 계정으로 로그인되어있는지 확인하시고요, 로그인되어있지 않다면 Xcode 환경설정에서 로그인을 진행해주세요.
+App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계에서 설정해야하는 사항들이 있습니다. 이 단계에서 해당 사항들을 설정합니다. 앱의 Flutter 프로젝트의 `/ios` 디렉토리 내의 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다. Apple 개발자 계정으로 로그인되어있는지 확인하시고요, 로그인되어있지 않다면 Xcode 환경설정에서 로그인을 진행해주세요.
 
 <br>
 
