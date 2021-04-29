@@ -371,7 +371,19 @@ flutter build appbundle
 
 <br>
 
-App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계에서 설정해야하는 사항들이 있습니다. 이 단계에서 해당 사항들을 설정합니다. 앱의 Flutter 프로젝트의 `/ios` 디렉토리 내의 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다. Apple 개발자 계정으로 로그인되어있는지 확인하시고요, 로그인되어있지 않다면 Xcode 환경설정에서 로그인을 진행해주세요.
+App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계에서 설정해야하는 사항들이 있습니다. 이 단계에서 해당 사항들을 설정합니다. 앱의 Flutter 프로젝트의 `/ios` 디렉토리 내의 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다.
+
+<br>
+
+`Preferences`의 `Accounts` 탭에서 Apple 개발자 계정으로 로그인되어있는지 확인하시고요, 로그인되어있지 않다면 왼쪽 하단의 `+` 버튼을 클릭하여 계저을 추가해주세요.
+
+<br>
+
+<img src="./../img/xcode_account1.png" width="600" />
+
+<br>
+
+<img src="./../img/xcode_account2.png" width="600" />
 
 <br>
 
