@@ -433,7 +433,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-> 푸시 알림 등의 서비스 사용을 위해 프로비저닝 프로필을 수동으로 생성해야한다면 [Apple 푸시 알림(APN) 사용하기](#apn) 섹션을 참고하세요.
+> 푸시 알림 등의 서비스 사용을 위해 프로비저닝 프로필을 수동으로 생성해야한다면 [Apple 푸시 알림(APN) 사용하기](#user-content-apple-푸시-알림apn-사용하기) 섹션을 참고하세요.
 
 <br>
 
@@ -699,8 +699,6 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 <br>
 
 ### Apple 푸시 알림(APN) 사용하기
-
-<div id="apn"></div>
 
 Apple 푸시 알림(APN) 서비스를 사용하기 위해서는 Xcode 프로젝트 설정시 프로비저닝 프로필을 자동으로 생성하지 않고, 직접 만들어서 Import 해야합니다. Xcode에서 자동으로 생성하면 APN에 필요한 `aps-environment` 권한이 포함되지 않기 때문이죠. [Create Provisioning Profile](https://developer.apple.com/forums/thread/47806) 문서를 참고하여 프로비저닝 프로필을 생성할 수 있는데요, 프로비저닝 프로필을 만들 때 필요한 CSR 파일을 먼저 준비해봅시다.
 
