@@ -439,11 +439,17 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 - `Team` : Apple Developer Program에 등록된 개발자(팀) 계정
 
+- `Automatically manage signing` : Xcode가 서명 및 프로비저닝 프로파일(Provisioining profile)을 자동으로 관리하는지에 대한 여부
+
 <br>
 
-###### 디바이스 등록
+이 두 항목은 아래에서 자세하게 다뤄보겠습니다.
 
-이 섹션은 `Team` 항목을 선택하면, `Automatically manage signing` 항목이 기본으로 체크되어있기 때문에 Xcode 내에서 프로비저닝 프로파일(Provisioning Profile)이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 Status 부분에 아래 스크린샷과 같이 경고가 나타났습니다. 경고 문구를 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로비저닝 프로파일을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 하라는 설명입니다.
+<br>
+
+##### `Team`
+
+`Team` 항목을 선택하면, `Automatically manage signing` 항목이 기본으로 체크되어있기 때문에 Xcode 내에서 프로비저닝 프로파일(Provisioning Profile)이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 Status 부분에 아래 스크린샷과 같이 경고가 나타났습니다. 경고 문구를 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로비저닝 프로파일을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 하라는 설명입니다.
 
 <br>
 
@@ -467,9 +473,9 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-- `Automatically manage signing` : Xcode가 서명 및 프로비저닝 프로파일(Provisioining profile)을 자동으로 관리하는지에 대한 여부
+##### `Automatically manage signing`
 
-  > 기본설정인 체크 상태로도 충분하지만, Apple Pay, Apple Push Notification Service, Apple Wallet, MDM(모바일 기기 관리)과 같은 서비스를 사용하려면 서비스용 인증서를 별도로 요청한 후 프로비저닝 프로파일에 포함해야하므로 체크를 해제합니다. [Apple Developer](https://developer.apple.com/account/resources/certificates/list)에서 서비스용 인증서와 프로비저닝 프로파일을 생성한 후 Import하는 방식으로 서명과 권한 설정을 수동으로 관리해야하죠.
+기본설정인 체크 상태로도 충분하지만, Apple Pay, Apple Push Notification Service, Apple Wallet, MDM(모바일 기기 관리)과 같은 서비스를 사용하려면 서비스용 인증서를 별도로 요청한 후 프로비저닝 프로파일에 포함해야하므로 체크를 해제합니다. [Apple Developer](https://developer.apple.com/account/resources/certificates/list)에서 서비스용 인증서와 프로비저닝 프로파일을 생성한 후 Import하는 방식으로 서명과 권한 설정을 수동으로 관리해야하죠.
 
 <br>
 
