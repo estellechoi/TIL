@@ -408,7 +408,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 #### 1) General
 
-##### Identity
+#### Identity
 
 - `Display Name` : 홈 스크린 등에 표시될 앱의 이름
 
@@ -416,7 +416,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-##### Deployment
+#### Deployment
 
 - `iOS 9.0` : 앱이 지원할 최소 iOS 버전 및 플랫폼
 
@@ -458,7 +458,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-##### Signing
+#### Signing
 
 - `Team` : Apple Developer Program에 등록된 개발자(팀) 계정
 
