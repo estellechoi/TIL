@@ -285,8 +285,9 @@ flutter build appbundle
 1. Apple Developer Program 등록하기
 2. App Store Connect에서 앱 등록하기
 3. Xcode 프로젝트 설정하기
-4. 앱 아이콘 추가하기
-5. 빌드 아카이브 생성하기
+4. 프로비저닝 프로파일(Provisioning Profile) 준비하기
+5. 앱 아이콘 추가하기
+6. 빌드 아카이브 생성하기
 
 <br>
 
@@ -482,7 +483,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 ```
 * 프로비저닝 프로파일(Provisioining profile)이란?
 
-프로비저닝 프로파일(Provisioining profile)은 말그대로 "권한 설정" 프로파일입니다. iOS 디바이스들을 개발자의 Apple 인증서와 연결하여 앱 설치를
+프로비저닝 프로파일(Provisioining profile)은 말그대로 "권한 설정" 프로파일입니다. iOS 디바이스들을 개발자가 발급받은 Apple 인증서와 연결하여 앱 설치를
 허용하는 역할을 합니다. 이는 "오직 Apple만이 Apple의 하드웨어에서 어떤 소프트웨어가 동작하도록 허락할 수 있다"는 원칙때문에 반드시 필요한 역할입니다.
 어떤 사용자라도 자신의 iOS 디바이스에서 앱을 실행하려면, 자신의 디바이스가 개발자를 신뢰할 수 있는지 알아야 앱 설치를 진행할지 말지 결정할 수 있습니다.
 ```
@@ -490,16 +491,143 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 <img src="./../img/profile.png" width="600" />
 
 ```
-프로비저닝 프로파일은 앱 ID와 각종 인증서들을 구성하여 만듭니다. 따라서 앱 정보와 (인증서를 받은) 개발자 정보, 앱을 개발한 디바이스 정보를 담고있죠.
+프로비저닝 프로파일은 앱 번들 ID와 각종 필요한 인증서들을 구성하여 만듭니다. 따라서 앱 정보와 (인증서를 받은) 개발자 정보, 앱을 개발한 디바이스 정보를 담고있죠.
 ```
 
 <br>
 
-이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 `Automatically manage signing` 항목의 체크를 해제합니다. 그리고 APNs 인증서와 프로비저닝 프로파일을 준비해봅시다.
+이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 `Automatically manage signing` 항목의 체크를 해제합니다. 앱 번들 ID는 위에서 등록하였으므로 건너뛰고, APNs 인증서를 발급받은 후 프로비저닝 프로파일을 준비해봅시다.
 
 <br>
 
-### 4. 앱 아이콘 추가하기
+### 4. 프로비저닝 프로파일(Provisioning Profile) 준비하기
+
+> 자세한 내용은 [Create Provisioning Profile](https://developer.apple.com/forums/thread/47806) 문서를 참고하세요. APNs에 대한 자세한 설명은 [Configuring Remote Notification Support](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1) 문서를 참고하세요.
+
+<br>
+
+#### 1) APNs 인증서 생성하기
+
+APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list)에서 생성합니다. 그 전에 인증서 생성시 제출해야하는 CSR(CertificateSigningRequest) 파일을 준비해야합니다. CSR 파일은 말그대로 인증서를 요청하는 파일로, 인증서를 요청하는 개발자에 대한 정보를 담은 파일입니다. CSR 파일은 개발자가 보유한 맥을 사용하여 만들 수 있습니다.
+
+<br>
+
+맥에서 `키체인 접근(Keychain Access)` 프로그램을 열고 상단 툴바의 가장 왼쪽에 있는 `Keychain Access`를 클릭합니다. 그 다음 `인증서 지원 > 인증 기관에서 인증서 요청...`을 선택합니다. 그 다음 나타난 `인증서 지원` 창에서 Apple Developer Program에 등록된 Apple 계정 이메일과 이름을 입력합니다. 요청항목에서는 `디스크에 저장됨`을 선택, `본인이 키 쌍 정보 지정`을 체크하고 `계속` 버튼을 클릭합니다.
+
+<br>
+
+<img src="./../img/ios11.png" width="700" />
+
+<br>
+
+키의 크기와 키 생성시 사용할 알고리즘을 설정하고 CSR 파일 생성을 진행합니다.
+
+<br>
+
+<img src="./../img/ios12.png" width="700" />
+
+<br>
+
+### 2) APN 인증서 만들기
+
+`Create Certificate`를 클릭하여 인증서 생성을 시작합니다. Services 섹션의 `Apple Push Notification service SSL (Sandbox & Production)`을 선택하고 `Continue` 버튼을 클릭합니다.
+
+<br>
+
+<img src="./../img/ios8.png" width="1000" />
+
+<br>
+
+인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR(Certificate Signing Request) 파일을 업로드하는 페이지가 나타납니다. CSR 파일을 업로드하고 인증서 생성을 완료하면 됩니다. 인증서 생성이 완료되면 `Download` 버튼을 클릭하여 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 키체인에 등록됩니다.
+
+<br>
+
+<img src="./../img/ios9.png" width="1000" />
+
+<br>
+
+### 3) 서버용 APNS 인증서 발급
+
+키체인에서 방금 등록된 인증서를 선택하여 Export 합니다. 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장하면 됩니다.
+
+<br>
+
+<img src="./../img/ios15.png" width="500" />
+
+<br>
+
+그 다음, 키체인에서 이 인증서의 키를 찾아 Export 합니다. 이름을 `key`로 작성하고 `.p12` 확장자로 저장합니다.
+
+<br>
+
+<img src="./../img/ios16.png" width="500" />
+
+<br>
+
+키의 경우 아래 명령어를 사용하여 `.pem` 확장자로 형식을 변환해줍니다. Export시 입력했던 비밀번호를 체크하고 PEM 암호 문구(`PEM pass phrase`)를 설정해주는 단계가 있습니다.
+
+```
+openssl pkcs12 -nocerts -out key.pem -in key.p12
+```
+
+<br>
+
+이제 변환된 `key.pem` 파일을 사용하여 `key.unencrypted.pem`을 만듭니다. 이 단계에서 바로 위에서 설정한 비밀번호가 필요합니다.
+
+```
+openssl rsa -in key.pem -out key.unencrypted.pem
+```
+
+<br>
+
+이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 APN에 사용될 인증서를 만들어주는 작업입니다.
+
+```
+cat cert.pem key.unencrypted.pem > apns.pem
+```
+
+<br>
+
+### 4) 프로비저닝 프로필
+
+Apple Developer 사이트의 Account > [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `Generate a profile` 버튼을 클릭하여 프로필 생성을 시작합니다.
+
+<br>
+
+`App Store`를 선택하고 `Continue` 버튼을 클릭합니다. 그 다음, 앱 ID와 인증서를 차례로 선택하고 프로비저닝 프로필 생성을 완료해줍니다.
+
+<br>
+
+### 5) Xcode 프로젝트 설정하기
+
+생성된 프로비저닝 프로필은 Xcode에서 바로 Download하여 서명에 포함시킬 수 있습니다. 프로비저닝 프로필을 설정하고, 아래 스크린샷에 표시한 왼쪽 상단의 `+ Capability` 버튼을 클릭하여 `Push Notification`을 포함하여 필요한 서비스들을 추가해줍니다.
+
+<br>
+
+<img src="./../img/ios20.png" width="1000" />
+
+<br>
+
+<img src="./../img/ios21.png" width="1000" />
+
+<br>
+
+그 다음 `Build Phrases` 탭으로 이동하여 `Link Binary With Libraries` 섹션에 아래 스크린샷에 표시한 항목들을 추가합니다.
+
+<br>
+
+<img src="./../img/ios22.png" width="1000" />
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+<br>
+
+### 5. 앱 아이콘 추가하기
 
 Xcode 프로젝트의 좌측 탐색기에서 `/Runner` 디렉토리 내의 `/Assets.xcassets` 디렉토리를 엽니다. 여기에서 앱 아이콘을 원하는 아이콘으로 교체합니다. 교체 후에는 앱을 iOS 이뮬레이터로 실행시켜서 아이콘이 변경되었는지 확인하세요.
 
@@ -662,7 +790,7 @@ Xcode에서 확인해보면, 아래 스크린샷과 같이 사이즈별로 참�
 
 <br>
 
-### 5. 빌드 아카이브 생성하고 배포하기
+### 6. 빌드 아카이브 생성하고 배포하기
 
 이제 빌드 아카이브를 생성하여 App Store Connect에 빌드를 업로드하면 됩니다.
 
@@ -734,133 +862,6 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 앱 제출이 완료되면 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
 
-<br>
-
-### Apple 푸시 알림(APN) 사용하기
-
-Apple 푸시 알림(APN) 서비스를 사용하기 위해서는 Xcode 프로젝트 설정시 프로비저닝 프로필을 자동으로 생성하지 않고, 직접 만들어서 Import 해야합니다. Xcode에서 자동으로 생성하면 APN에 필요한 `aps-environment` 권한이 포함되지 않기 때문이죠. [Create Provisioning Profile](https://developer.apple.com/forums/thread/47806) 문서를 참고하여 프로비저닝 프로필을 생성할 수 있고요, 또한 APN 인증서를 발급받아야합니다. APN 인증서를 생성할 때 필요한 CSR 파일을 먼저 준비해봅시다.
-
-<br>
-
-> 자세한 내용은 [Configuring Remote Notification Support](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1) 문서를 참고하세요.
-
-<br>
-
-#### 1) CSR 파일 만들기
-
-CSR 파일은 일종의 개발자 인증서입니다. 맥에서 `키체인 접근(Keychain Access)`를 사용하여 만들 수 있습니다. `키체인 접근` 프로그램을 열고 상단 툴바에서 `인증서 지원 > 인증 기관에서 인증서 요청...`을 선택합니다. 그 다음 나타난 `인증서 지원` 창에서 Apple 계정 이메일과 이름을 입력하고, 요청항목에서 `디스크에 저장됨`을 선택, `본인이 키 쌍 정보 지정`을 체크하고 `계속` 버튼을 클릭합니다.
-
-<br>
-
-<img src="./../img/ios11.png" width="700" />
-
-<br>
-
-키의 크기와 알고리즘을 설정하고 CSR을 생성합니다.
-
-<br>
-
-<img src="./../img/ios12.png" width="700" />
-
-<br>
-
-### 2) APN 인증서 만들기
-
-`Create Certificate`를 클릭하여 인증서 생성을 시작합니다. Services 섹션의 `Apple Push Notification service SSL (Sandbox & Production)`을 선택하고 `Continue` 버튼을 클릭합니다.
-
-<br>
-
-<img src="./../img/ios8.png" width="1000" />
-
-<br>
-
-인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR(Certificate Signing Request) 파일을 업로드하는 페이지가 나타납니다. CSR 파일을 업로드하고 인증서 생성을 완료하면 됩니다. 인증서 생성이 완료되면 `Download` 버튼을 클릭하여 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 키체인에 등록됩니다.
-
-<br>
-
-<img src="./../img/ios9.png" width="1000" />
-
-<br>
-
-### 3) 서버용 APNS 인증서 발급
-
-키체인에서 방금 등록된 인증서를 선택하여 Export 합니다. 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장하면 됩니다.
-
-<br>
-
-<img src="./../img/ios15.png" width="500" />
-
-<br>
-
-그 다음, 키체인에서 이 인증서의 키를 찾아 Export 합니다. 이름을 `key`로 작성하고 `.p12` 확장자로 저장합니다.
-
-<br>
-
-<img src="./../img/ios16.png" width="500" />
-
-<br>
-
-키의 경우 아래 명령어를 사용하여 `.pem` 확장자로 형식을 변환해줍니다. Export시 입력했던 비밀번호를 체크하고 PEM 암호 문구(`PEM pass phrase`)를 설정해주는 단계가 있습니다.
-
-```
-openssl pkcs12 -nocerts -out key.pem -in key.p12
-```
-
-<br>
-
-이제 변환된 `key.pem` 파일을 사용하여 `key.unencrypted.pem`을 만듭니다. 이 단계에서 바로 위에서 설정한 비밀번호가 필요합니다.
-
-```
-openssl rsa -in key.pem -out key.unencrypted.pem
-```
-
-<br>
-
-이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 APN에 사용될 인증서를 만들어주는 작업입니다.
-
-```
-cat cert.pem key.unencrypted.pem > apns.pem
-```
-
-<br>
-
-### 4) 프로비저닝 프로필
-
-Apple Developer 사이트의 Account > [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `Generate a profile` 버튼을 클릭하여 프로필 생성을 시작합니다.
-
-<br>
-
-`App Store`를 선택하고 `Continue` 버튼을 클릭합니다. 그 다음, 앱 ID와 인증서를 차례로 선택하고 프로비저닝 프로필 생성을 완료해줍니다.
-
-<br>
-
-### 5) Xcode 프로젝트 설정하기
-
-생성된 프로비저닝 프로필은 Xcode에서 바로 Download하여 서명에 포함시킬 수 있습니다. 프로비저닝 프로필을 설정하고, 아래 스크린샷에 표시한 왼쪽 상단의 `+ Capability` 버튼을 클릭하여 `Push Notification`을 포함하여 필요한 서비스들을 추가해줍니다.
-
-<br>
-
-<img src="./../img/ios20.png" width="1000" />
-
-<br>
-
-<img src="./../img/ios21.png" width="1000" />
-
-<br>
-
-그 다음 `Build Phrases` 탭으로 이동하여 `Link Binary With Libraries` 섹션에 아래 스크린샷에 표시한 항목들을 추가합니다.
-
-<br>
-
-<img src="./../img/ios22.png" width="1000" />
-
-<br>
-
-<br>
-
-<br>
-
-<br>
 <br>
 <br>
 
