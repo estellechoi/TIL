@@ -442,11 +442,11 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/ios20.png" width="1000" />
+<img src="./../img/xcode20.png" width="1000" />
 
 <br>
 
-<img src="./../img/ios21.png" width="1000" />
+<img src="./../img/xcode21.png" width="1000" />
 
 <br>
 
@@ -454,7 +454,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/ios22.png" width="1000" />
+<img src="./../img/xcode22.png" width="1000" />
 
 <br>
 
