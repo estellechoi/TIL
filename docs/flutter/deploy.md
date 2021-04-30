@@ -899,7 +899,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-앱 정보를 확인하고 `Validate` 버튼을 클릭합니다. 참고로 ENTITLEMENTS 섹션의 `aps-environment` 항목은 APNs 인증서가 포함되었기때문에 부여된 권한입니다.
+앱 정보를 확인하고 `Validate` 버튼을 클릭합니다. 참고로 ENTITLEMENTS 섹션의 `aps-environment` 항목은 APNs 인증서가 포함되었기 때문에 부여된 권한입니다.
 
 <br>
 
@@ -907,7 +907,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-유효성을 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store에 앱을 제출하고 기다립니다. 30분내로 결과를 알리는 이메일을 받을 수 있습니다.
+유효성 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store에 앱을 제출하고 기다립니다. 30분내로 결과를 알리는 이메일을 받을 수 있습니다.
 
 <br>
 
