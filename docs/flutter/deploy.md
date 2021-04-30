@@ -282,7 +282,7 @@ flutter build appbundle
 
 <br>
 
-1. [Apple Developer Program](https://developer.apple.com/programs/) 등록하기
+1. Apple Developer Program 등록하기
 2. App Store Connect에서 앱 등록하기
 3. Xcode 프로젝트 설정하기
 4. 앱 아이콘 추가하기
