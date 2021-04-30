@@ -508,13 +508,13 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-#### 1) APNs 인증서 생성하기
+#### 1) CSR(CertificateSigningRequest) 파일 만들기
 
-APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list)에서 생성합니다. 그 전에 인증서 생성시 제출해야하는 CSR(CertificateSigningRequest) 파일을 준비해야합니다. CSR 파일은 말그대로 인증서를 요청하는 파일로, 인증서를 요청하는 개발자에 대한 정보를 담은 파일입니다. CSR 파일은 개발자가 보유한 맥을 사용하여 만들 수 있습니다.
+APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list)에서 생성합니다. 그 전에 인증서 생성시 제출해야하는 CSR(CertificateSigningRequest) 파일을 준비해야합니다. CSR 파일은 말그대로 인증서 서명을 요청하는 파일로, 인증서를 요청하는 개발자에 대한 정보를 담은 파일입니다. 때문에 CSR 파일은 개발자가 보유한 맥을 통해서만 만들 수 있고요, 생성 과정에서 개발자의 Apple 계정 정보가 요구됩니다. 한 번 생성한 CSR 파일은 인증서를 요청할 때마다 사용할 수 있습니다.
 
 <br>
 
-맥에서 `키체인 접근(Keychain Access)` 프로그램을 열고 상단 툴바의 가장 왼쪽에 있는 `Keychain Access`를 클릭합니다. 그 다음 `인증서 지원 > 인증 기관에서 인증서 요청...`을 선택합니다. 그 다음 나타난 `인증서 지원` 창에서 Apple Developer Program에 등록된 Apple 계정 이메일과 이름을 입력합니다. 요청항목에서는 `디스크에 저장됨`을 선택, `본인이 키 쌍 정보 지정`을 체크하고 `계속` 버튼을 클릭합니다.
+맥에서 `키체인 접근(Keychain Access)` 프로그램을 열고 상단 툴바의 가장 왼쪽에 있는 프로그램명(`Keychain Access`)를 클릭합니다. `인증서 지원 > 인증 기관에서 인증서 요청...`을 선택합니다. 그 다음 나타난 `인증서 지원` 창에서 Apple Developer Program에 등록된 Apple 계정 이메일과 이름을 입력합니다. 요청 항목에서는 `디스크에 저장됨`을 선택, `본인이 키 쌍 정보 지정`을 체크하고 `계속` 버튼을 클릭합니다.
 
 <br>
 
@@ -522,7 +522,7 @@ APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](http
 
 <br>
 
-키의 크기와 키 생성시 사용할 알고리즘을 설정하고 CSR 파일 생성을 진행합니다.
+키의 크기와 키 생성시 사용할 알고리즘을 설정하고 `계속` 버튼을 클릭하여 CSR 파일 생성을 진행합니다.
 
 <br>
 
@@ -530,9 +530,9 @@ APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](http
 
 <br>
 
-### 2) APN 인증서 만들기
+### 2) APNs 인증서 생성하기
 
-`Create Certificate`를 클릭하여 인증서 생성을 시작합니다. Services 섹션의 `Apple Push Notification service SSL (Sandbox & Production)`을 선택하고 `Continue` 버튼을 클릭합니다.
+Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list)에서 `+` 또는 `Create Certificate` 버튼을 클릭하여 인증서 생성을 시작합니다. APNs 사용을 위해 해당 권한 정보를 담은 인증서를 생성할 것이므로, Services 섹션의 `Apple Push Notification service SSL (Sandbox & Production)`을 선택하고 `Continue` 버튼을 클릭합니다.
 
 <br>
 
@@ -540,11 +540,19 @@ APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](http
 
 <br>
 
-인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR(Certificate Signing Request) 파일을 업로드하는 페이지가 나타납니다. CSR 파일을 업로드하고 인증서 생성을 완료하면 됩니다. 인증서 생성이 완료되면 `Download` 버튼을 클릭하여 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 키체인에 등록됩니다.
+인증서를 위한 앱 ID를 선택하고 `Continue` 버튼을 클릭하면, 아래와 같이 CSR 파일을 업로드하라는 페이지가 나타납니다. 위 단계에서 만들었던 CSR 파일을 업로드하고 인증서 생성을 완료하면 됩니다.
 
 <br>
 
 <img src="./../img/ios9.png" width="1000" />
+
+<br>
+
+인증서 생성이 완료되면 `Download` 버튼을 클릭하여 맥에 다운로드하시고요, 다운로드한 파일을 더블클릭하여 실행하면 맥의 `키체인 접근` 프로그램에 등록됩니다. 프로그램을 열어 확인해보면 아래 스크린샷과 같이 `Apple Push Services` 인증서와 개인 키(Private Key)를 확인할 수 있습니다.
+
+<br>
+
+<img src="./../img/keychain.png" width="1000" />
 
 <br>
 
