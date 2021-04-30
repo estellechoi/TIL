@@ -489,7 +489,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/provisioning_profile.png" width="700" />
+<img src="./../img/profile.png" width="600" />
 
 <br>
 
