@@ -399,19 +399,25 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-탭별로 정리하면,
+탭별로 입력해야할 주요 항목들을 정리하면,
 
 <br>
 
 #### 1) General
 
+##### Identity
+
 - `Display Name` : 홈 스크린 등에 표시될 앱의 이름
 
 - `Bundle Identifier` : App Store Connect에서 등록한 번들 ID
 
-- `Deployment Info` : 앱이 지원할 최소 iOS 버전
+<br>
 
-  > Flutter는 iOS 8.0 이상을 지원합니다. 만일 iOS 8에서 사용할 수 없는 Objective-C나 Swift 코드로 된 API를 사용한다면 이 설정을 적합하게 수정하세요.
+##### Deployment
+
+- `iOS 9.0` : 앱이 지원할 최소 iOS 버전 및 플랫폼
+
+  > 공식 문서에 따르면, Flutter는 iOS 8.0 이상을 지원합니다. Objective-C나 Swift 코드로 된 API를 사용한다면 지원 버전을 고려하여 이 설정을 적합하게 수정하세요.
 
 <br>
 
@@ -421,11 +427,13 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 #### 2) Signing & Capabilities
 
-- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝 프로필(provisioining profile)을 자동으로 관리하는지에 대한 여부
+##### Signing
 
-  > 기본설정인 체크 상태로 충분할 수 있지만, 푸시 알림(Push Notification)과 같은 일부 서비스를 사용하려면 프로비저닝 프로필을 수동으로 생성해야 합니다.
+- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝 프로파일(provisioining profile)을 자동으로 관리하는지에 대한 여부
 
-- `Team` : Apple Developer에 등록된 팀 계정
+  > 기본설정인 체크 상태로 충분할 수 있지만, 푸시 알림(APN)과 같은 일부 서비스를 사용하려면 권할 설정을 위해 프로비저닝 프로파일을 수동으로 생성해야 합니다. 푸시 알림 등의 서비스 사용을 위해 프로비저닝 프로필을 수동으로 생성해야한다면 [Apple 푸시 알림(APN) 사용하기](#user-content-apple-푸시-알림apn-사용하기) 섹션을 참고하세요.
+
+- `Team` : Apple Developer에 등록된 개발자(팀) 계정
 
 <br>
 
@@ -433,11 +441,9 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-> 푸시 알림 등의 서비스 사용을 위해 프로비저닝 프로필을 수동으로 생성해야한다면 [Apple 푸시 알림(APN) 사용하기](#user-content-apple-푸시-알림apn-사용하기) 섹션을 참고하세요.
+##### 디바이스 등록
 
-<br>
-
-`Automatically manage signing` 항목을 체크하면 Xcode 내에서 프로비저닝 프로필이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 프로필 생성에 실패했다는 경고가 나타났습니다. 상세내용을 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로필을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 선택하라는 설명입니다.
+`Automatically manage signing` 항목을 체크하면 Xcode 내에서 프로비저닝 프로파일이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 Status 부분에 프로파일 생성에 실패했다는 경고가 나타났습니다. 경고 문구를 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로비저닝 프로파일을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 하라는 설명입니다.
 
 <br>
 
@@ -836,3 +842,4 @@ Apple Developer 사이트의 Account > [Certificates, Identifiers & Profiles](ht
 - [Configuring Remote Notification Support | Apple Developer](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1)
 - [언인스톨 트래킹 APNS(Apple Push Notification Service)](https://support.singular.net/hc/ko/articles/360000269811-%EC%96%B8%EC%9D%B8%EC%8A%A4%ED%86%A8-%ED%8A%B8%EB%9E%98%ED%82%B9-APNS-Apple-Push-Notification-Service-)
 - [iOS Notification 만들기](http://throughkim.kr/2016/12/27/ios-notification/)
+- [코드사이닝, 인증서, 프로비저닝 프로파일이란?](https://medium.com/jinshine-%EA%B8%B0%EC%88%A0-%EB%B8%94%EB%A1%9C%EA%B7%B8/%EC%BD%94%EB%93%9C%EC%82%AC%EC%9D%B4%EB%8B%9D-%EC%9D%B8%EC%A6%9D%EC%84%9C-%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%9E%80-2bd2c652d00f)
