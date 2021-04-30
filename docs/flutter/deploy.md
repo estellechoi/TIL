@@ -552,7 +552,7 @@ Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.appl
 
 <br>
 
-<img src="./../img/keychain.png" width="1000" />
+<img src="./../img/keychain.png" width="800" />
 
 <br>
 
