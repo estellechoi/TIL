@@ -436,6 +436,28 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
+#### Capabilities
+
+왼쪽 상단의 `+ Capability` 버튼을 클릭하여 `Push Notification` 등 필요한 서비스들을 추가해줍니다.
+
+<br>
+
+<img src="./../img/ios20.png" width="1000" />
+
+<br>
+
+<img src="./../img/ios21.png" width="1000" />
+
+<br>
+
+그 다음 `Build Phrases` 탭으로 이동하여 `Link Binary With Libraries` 섹션에 아래 스크린샷에 표시한 항목들을 추가합니다.
+
+<br>
+
+<img src="./../img/ios22.png" width="1000" />
+
+<br>
+
 ##### Signing
 
 - `Team` : Apple Developer Program에 등록된 개발자(팀) 계정
@@ -530,7 +552,7 @@ APNs 인증서는 Apple Developer의 [Certificates, Identifiers & Profiles](http
 
 <br>
 
-### 2) APNs 인증서 생성하기
+#### 2) APNs 인증서 생성하기
 
 Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list)에서 `+` 또는 `Create Certificate` 버튼을 클릭하여 인증서 생성을 시작합니다. APNs 사용을 위해 해당 권한 정보를 담은 인증서를 생성할 것이므로, Services 섹션의 `Apple Push Notification service SSL (Sandbox & Production)`을 선택하고 `Continue` 버튼을 클릭합니다.
 
@@ -556,25 +578,25 @@ Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.appl
 
 <br>
 
-### 3) 서버용 APNS 인증서 발급
+#### 3) 서버용 APNs 인증서 생성하기
 
-키체인에서 방금 등록된 인증서를 선택하여 Export 합니다. 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장하면 됩니다.
-
-<br>
-
-<img src="./../img/ios15.png" width="500" />
+`키체인 접근` 프로그램에서 방금 등록된 인증서를 선택하여 다른 디렉토리로 Export 합니다. 저는 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장했습니다.
 
 <br>
 
-그 다음, 키체인에서 이 인증서의 키를 찾아 Export 합니다. 이름을 `key`로 작성하고 `.p12` 확장자로 저장합니다.
+<img src="./../img/ios15.png" width="400" />
 
 <br>
 
-<img src="./../img/ios16.png" width="500" />
+그 다음, 이 인증서의 키 역시 같은 디렉토리로 Export 합니다. 이름을 `key`로 작성하고 (`.pem` 확장자가 비활성 상태이므로) `.p12` 확장자로 저장합니다. 키의 경우 Export시 비밀번호를 설정해야 합니다.
 
 <br>
 
-키의 경우 아래 명령어를 사용하여 `.pem` 확장자로 형식을 변환해줍니다. Export시 입력했던 비밀번호를 체크하고 PEM 암호 문구(`PEM pass phrase`)를 설정해주는 단계가 있습니다.
+<img src="./../img/ios16.png" width="400" />
+
+<br>
+
+키의 경우 `.p12` 확장자로 저장했기 때문에 아래 명령어를 사용하여 `.pem` 확장자로 변환해줍니다. Export시 입력했던 비밀번호를 입력하여 Validation을 완료한 후, PEM 암호 문구(`PEM pass phrase`)를 다시 설정해주는 단계가 있습니다.
 
 ```
 openssl pkcs12 -nocerts -out key.pem -in key.p12
@@ -582,7 +604,7 @@ openssl pkcs12 -nocerts -out key.pem -in key.p12
 
 <br>
 
-이제 변환된 `key.pem` 파일을 사용하여 `key.unencrypted.pem`을 만듭니다. 이 단계에서 바로 위에서 설정한 비밀번호가 필요합니다.
+이제 변환된 `key.pem` 파일을 사용하여 `key.unencrypted.pem`을 만듭니다. 이 단계에서 바로 위에서 설정한 PEM 암호 문구가 필요합니다.
 
 ```
 openssl rsa -in key.pem -out key.unencrypted.pem
@@ -590,7 +612,7 @@ openssl rsa -in key.pem -out key.unencrypted.pem
 
 <br>
 
-이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 APN에 사용될 인증서를 만들어주는 작업입니다.
+이제 마지막으로 `key.unencrypted.pem`과 `cert.pem`을 합쳐 APNs에 사용될 서버용 인증서를 만들어줍니다. `apns.pem` 파일이 생성되면 완료입니다.
 
 ```
 cat cert.pem key.unencrypted.pem > apns.pem
@@ -598,35 +620,39 @@ cat cert.pem key.unencrypted.pem > apns.pem
 
 <br>
 
-### 4) 프로비저닝 프로필
+#### 4) 프로비저닝 프로파일 생성하기
 
-Apple Developer 사이트의 Account > [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `Generate a profile` 버튼을 클릭하여 프로필 생성을 시작합니다.
-
-<br>
-
-`App Store`를 선택하고 `Continue` 버튼을 클릭합니다. 그 다음, 앱 ID와 인증서를 차례로 선택하고 프로비저닝 프로필 생성을 완료해줍니다.
+이제 앱 번들 ID와 필요한 인증서가 모두 준비되었기 때문에 프로비저닝 프로파일을 생성할 수 있습니다. Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `+` 또는 `Generate a profile` 버튼을 클릭하여 프로필 생성을 시작합니다.
 
 <br>
 
-### 5) Xcode 프로젝트 설정하기
-
-생성된 프로비저닝 프로필은 Xcode에서 바로 Download하여 서명에 포함시킬 수 있습니다. 프로비저닝 프로필을 설정하고, 아래 스크린샷에 표시한 왼쪽 상단의 `+ Capability` 버튼을 클릭하여 `Push Notification`을 포함하여 필요한 서비스들을 추가해줍니다.
-
-<br>
-
-<img src="./../img/ios20.png" width="1000" />
-
-<br>
-
-<img src="./../img/ios21.png" width="1000" />
-
-<br>
-
-그 다음 `Build Phrases` 탭으로 이동하여 `Link Binary With Libraries` 섹션에 아래 스크린샷에 표시한 항목들을 추가합니다.
+테스트 배포를 위해 `iOS App Development`를 선택하고 `Continue` 버튼을 클릭합니다.
 
 <br>
 
 <img src="./../img/ios22.png" width="1000" />
+
+<br>
+
+그 다음 앱 ID를 선택하고 계속합니다.
+
+<br>
+
+<img src="./../img/ios23.png" width="1000" />
+
+<br>
+
+선택 가능한 인증서 목록 중 포함시킬 인증서를 선택한 후 `Continue` 버튼을 클릭하여 프로비저닝 프로파일 생성을 완료해줍니다.
+
+<br>
+
+<img src="./../img/ios24.png" width="1000" />
+
+<br>
+
+#### 5) Xcode에서 프로비저닝 프로파일 불러오기
+
+Xcode에서 생성된 프로비저닝 프로파일을 바로 Download하여 서명에 포함시킬 수 있습니다. 사용할 프로비저닝 프로파일을 선택하여 Download하여 서명에 포함시키면, 프로비저닝 프로파일에 연결된 인증서 정보가 함께 표시됩니다.
 
 <br>
 
