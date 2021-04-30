@@ -875,7 +875,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-방금 생성한 아카이브를 선택합니다. 그리고 우측의 `Validate app` 버튼을 클릭하여 앱 유효성 검사를 시작합니다. 단계를 거치다보면 아래와 같은 경고 문구가 나올 수 있습니다. Apple Distribution 인증서를 발급받지 않았기 때문이죠. 인증서를 생성해야 하므로 `Generate an Apple Distribution certificate`에 체크하고 `Next` 버튼을 클릭합니다.
+방금 생성한 아카이브를 선택합니다. 그리고 우측의 `Validate app` 버튼을 클릭하여 앱 유효성 검사를 시작합니다. 단계를 거치다보면 아래와 같은 경고 문구가 나올 수 있습니다. Distribution 인증서를 발급받지 않았기 때문이죠. 인증서를 생성해야 하므로 `Generate an Apple Distribution certificate`에 체크하고 `Next` 버튼을 클릭합니다.
 
 <br>
 
@@ -888,6 +888,22 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 <br>
 
 <img src="./../img/xcode17.png" width="700" />
+
+<br>
+
+이미 Distribution 인증서가 있다면 아래와 같은 화면을 볼 수 있습니다. Runner.app 항목에 사용할 프로비저닝 프로파일의 이름을 선택하고 `Next` 버튼을 클릭하세요.
+
+<br>
+
+<img src="./../img/ios31.png" width="700" />
+
+<br>
+
+앱 정보를 확인하고 `Validate` 버튼을 클릭합니다. 참고로 ENTITLEMENTS 섹션의 `aps-environment` 항목은 APNs 인증서가 포함되었기때문에 부여된 권한입니다.
+
+<br>
+
+<img src="./../img/ios32.png" width="700" />
 
 <br>
 
