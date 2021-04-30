@@ -580,6 +580,10 @@ Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.appl
 
 #### 3) 서버용 APNs 인증서 생성하기
 
+> 이 단계는 지금은 건너뛰어도 됩니다.
+
+<br>
+
 `키체인 접근` 프로그램에서 방금 등록된 인증서를 선택하여 다른 디렉토리로 Export 합니다. 저는 아래와 같이 `cert`로 이름을 작성하고 `.pem` 확장자로 저장했습니다.
 
 <br>
