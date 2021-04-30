@@ -431,36 +431,19 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 서명과 권한 설정을 하는 탭입니다.
 
-<br>
-
 > 서명에 대한 자세한 내용은 [인증서](https://developer.apple.com/kr/support/certificates/), [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
 
 <br>
 
 ##### Signing
 
-- `Automatically manage signing` : Xcode가 서명 및 프로비저닝 프로파일(Provisioining profile)을 자동으로 관리하는지에 대한 여부
-
-  > 기본설정인 체크 상태로도 충분하지만, Apple Pay, Apple Push Notification Service, Apple Wallet, MDM(모바일 기기 관리)과 같은 서비스를 사용하려면 서비스용 인증서를 별도로 요청한 후 프로비저닝 프로파일에 포함해야하므로 체크를 해제합니다. [Apple Developer](https://developer.apple.com/account/resources/certificates/list)에서 서비스용 인증서와 프로비저닝 프로파일을 생성한 후 Import하는 방식으로 서명과 권한 설정을 수동으로 관리해야하죠. 이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 이 항목의 체크를 해제합니다.
-
 - `Team` : Apple Developer Program에 등록된 개발자(팀) 계정
 
 <br>
 
-```
-프로비저닝 프로파일(Provisioining profile)이란?
+###### 디바이스 등록
 
-프로비저닝 프로파일(Provisioining profile)은 말그대로 권한 설정 프로파일입니다.
-iOS 디바이스들을 Apple 인증서와 연결하여 앱 설치를 허용하는 역할을 합니다.
-이는 "오직 Apple만이 Apple의 하드웨어에서 어떤 소프트웨어가 동작하도록 허락할 수 있다"는 원칙때문에 반드시 필요한 역할이죠.
-어떤 사용자라도 자신의 iOS 디바이스에서 앱을 실행하려면, 자신의 디바이스가 개발자를 신뢰할 수 있는지 알아야 앱 설치를 진행할지 말지 결정할 수 있습니다.
-```
-
-<br>
-
-##### 디바이스 등록
-
-`Automatically manage signing` 항목을 체크하면 Xcode 내에서 프로비저닝 프로파일이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 Status 부분에 프로파일 생성에 실패했다는 경고가 나타났습니다. 경고 문구를 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로비저닝 프로파일을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 하라는 설명입니다.
+이 섹션은 `Team` 항목을 선택하면, `Automatically manage signing` 항목이 기본으로 체크되어있기 때문에 Xcode 내에서 프로비저닝 프로파일(Provisioning Profile)이 자동으로 생성됩니다. 저의 경우, 공식문서와는 다르게 Status 부분에 아래 스크린샷과 같이 경고가 나타났습니다. 경고 문구를 읽어보면, Apple 개발자 계정에 등록된 디바이스가 없기 때문에 프로비저닝 프로파일을 생성하는데 실패했다, 디바이스를 연결하고 Xcode가 해당 디바이스를 등록하도록 하라는 설명입니다.
 
 <br>
 
@@ -481,6 +464,27 @@ iOS 디바이스들을 Apple 인증서와 연결하여 앱 설치를 허용하�
 <br>
 
 <img src="./../img/xcode7.png" width="240" />
+
+<br>
+
+- `Automatically manage signing` : Xcode가 서명 및 프로비저닝 프로파일(Provisioining profile)을 자동으로 관리하는지에 대한 여부
+
+  > 기본설정인 체크 상태로도 충분하지만, Apple Pay, Apple Push Notification Service, Apple Wallet, MDM(모바일 기기 관리)과 같은 서비스를 사용하려면 서비스용 인증서를 별도로 요청한 후 프로비저닝 프로파일에 포함해야하므로 체크를 해제합니다. [Apple Developer](https://developer.apple.com/account/resources/certificates/list)에서 서비스용 인증서와 프로비저닝 프로파일을 생성한 후 Import하는 방식으로 서명과 권한 설정을 수동으로 관리해야하죠.
+
+<br>
+
+```
+* 프로비저닝 프로파일(Provisioining profile)이란?
+
+프로비저닝 프로파일(Provisioining profile)은 말그대로 권한 설정 프로파일입니다.
+iOS 디바이스들을 Apple 인증서와 연결하여 앱 설치를 허용하는 역할을 합니다.
+이는 "오직 Apple만이 Apple의 하드웨어에서 어떤 소프트웨어가 동작하도록 허락할 수 있다"는 원칙때문에 반드시 필요한 역할입니다.
+어떤 사용자라도 자신의 iOS 디바이스에서 앱을 실행하려면, 자신의 디바이스가 개발자를 신뢰할 수 있는지 알아야 앱 설치를 진행할지 말지 결정할 수 있습니다.
+```
+
+<br>
+
+이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 `Automatically manage signing` 항목의 체크를 해제합니다.
 
 <br>
 
