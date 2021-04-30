@@ -861,7 +861,7 @@ flutter build ios
 
 #### 앱 버전 설정하기
 
-이제 Xcode에서 앱 버전을 설정하고 빌드하면 되는데요, Xcode 상단 메뉴에서 `Product > Scheme > Runner` 를 선택합니다. 다음은 `Product > Destination`에서 `Generic iOS Device` 또는 `Any iOS Device`를 선택합니다. 이제 `TARGETS`에 `Runner`가 선택된 상태에서 `General` 메뉴의 `Version` 항목을 원하는 버전으로 변경합니다. `Build` 에는 App Store Connect에서 추적 가능한 고유 빌드 번호를 작성하면 됩니다. 각 업로드에는 고유한 빌드 번호가 필요한데요, 첫 업로드라면 기본값인 `1`을 그래도 사용해도 무방합니다.
+이제 Xcode에서 앱 버전을 설정하고 빌드하면 되는데요, Xcode 상단 메뉴에서 `Product > Scheme > Runner` 를 선택합니다. 다음은 `Product > Destination`에서 `Generic iOS Device` 또는 `Any iOS Device`를 선택합니다. 이제 `TARGETS`에 `Runner`가 선택된 상태에서 `General` 메뉴의 `Version` 항목을 원하는 버전으로 변경합니다. `Build` 에는 App Store Connect에서 추적 가능한 고유 빌드 번호를 작성하면 됩니다. 각 업로드에는 고유한 빌드 번호가 필요한데요, 첫 업로드라면 기본값인 `1`을 그대로 사용해도 무방합니다.
 
 <br>
 
