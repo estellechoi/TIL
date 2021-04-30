@@ -487,13 +487,15 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 어떤 사용자라도 자신의 iOS 디바이스에서 앱을 실행하려면, 자신의 디바이스가 개발자를 신뢰할 수 있는지 알아야 앱 설치를 진행할지 말지 결정할 수 있습니다.
 ```
 
-<br>
-
 <img src="./../img/profile.png" width="600" />
 
+```
+프로비저닝 프로파일은 앱 ID와 각종 인증서들을 구성하여 만듭니다. 따라서 앱 정보와 (인증서를 받은) 개발자 정보, 앱을 개발한 디바이스 정보를 담고있죠.
+```
+
 <br>
 
-이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 `Automatically manage signing` 항목의 체크를 해제합니다.
+이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 `Automatically manage signing` 항목의 체크를 해제합니다. 그리고 APNs 인증서와 프로비저닝 프로파일을 준비해봅시다.
 
 <br>
 
