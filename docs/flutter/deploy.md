@@ -331,6 +331,8 @@ flutter build appbundle
 
 - `Capabilities` : 앱에서 사용중인 서비스를 체크합니다. 앱 ID 발급 이후에도 자유롭게 변경이 가능합니다.
 
+> 이 튜토리얼에서는 Access WiFi Information, HealthKit, Push Notifications, Sign In with Apple 서비스를 체크해보겠습니다.
+
 <br>
 
 <img src="./../img/ios6.png" width="1000" />
@@ -427,17 +429,27 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 #### 2) Signing & Capabilities
 
+서명과 권한 설정을 하는 탭입니다.
+
+<br>
+
 ##### Signing
 
-- `Automatically manage signing` : Xcode가 앱 서명 및 프로비저닝 프로파일(provisioining profile)을 자동으로 관리하는지에 대한 여부
+- `Automatically manage signing` : Xcode가 서명 및 프로비저닝 프로파일(Provisioining profile)을 자동으로 관리하는지에 대한 여부
 
-  > 기본설정인 체크 상태로 충분할 수 있지만, 푸시 알림(APN)과 같은 일부 서비스를 사용하려면 권할 설정을 위해 프로비저닝 프로파일을 수동으로 생성해야 합니다. 푸시 알림 등의 서비스 사용을 위해 프로비저닝 프로필을 수동으로 생성해야한다면 [Apple 푸시 알림(APN) 사용하기](#user-content-apple-푸시-알림apn-사용하기) 섹션을 참고하세요.
+  > 기본설정인 체크 상태로도 충분하지만, Apple Pay, Apple Push Notification Service, Apple Wallet, MDM(모바일 기기 관리)과 같은 서비스를 사용하려면 서비스용 인증서를 별도로 요청한 후 프로비저닝 프로파일에 포함해야하므로 체크를 해제해야합니다. [Apple Developer](https://developer.apple.com/account/resources/certificates/list)에서 서비스용 인증서와 프로비저닝 프로파일을 생성한 후 Import하는 방식으로 서명과 권한 설정을 수동으로 관리합니다. 이 튜토리얼은 APNs(Apple Push Notification Service) 서비스를 포함하는 앱 배포를 가정하므로 이 항목의 체크를 해제합니다.
 
 - `Team` : Apple Developer에 등록된 개발자(팀) 계정
 
 <br>
 
-> 앱 서명에 대한 자세한 내용은 [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
+> 서명에 대한 자세한 내용은 [인증서](https://developer.apple.com/kr/support/certificates/), [Create, export, and delete signing certificates](https://help.apple.com/xcode/mac/current/#/dev154b28f09) 문서를 참고하세요.
+
+<br>
+
+##### 프로비저닝 프로파일(Provisioining profile)
+
+프로비저닝 프로파일(Provisioining profile)은 말그대로 권한 설정 프로파일입니다. iOS 디바이스들을 Apple 인증서와 연결하여 앱 설치를 허용하는 역할을 합니다. 이는 "오직 Apple만이 Apple의 하드웨어에서 어떤 소프트웨어가 동작하도록 허락할 수 있다"는 원칙때문에 반드시 필요한 역할이죠. 어떤 사용자라도 자신의 iOS 디바이스에서 앱을 실행하려면, 자신의 디바이스가 개발자를 신뢰할 수 있는지 알아야 앱 설치를 진행할지 말지 결정할 수 있습니다.
 
 <br>
 
@@ -840,6 +852,7 @@ Apple Developer 사이트의 Account > [Certificates, Identifiers & Profiles](ht
 - [앱을 전 세계적으로 게시하고, 관리하고, 배포하는 방법 | Google Play](https://developer.android.com/distribute/best-practices/launch)
 - [iOS 앱 출시 준비하기 | Flutter](https://flutter-ko.dev/docs/deployment/ios)
 - [Configuring Remote Notification Support | Apple Developer](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1)
+- [인증서 | Apple Developer](https://developer.apple.com/kr/support/certificates/)
 - [언인스톨 트래킹 APNS(Apple Push Notification Service)](https://support.singular.net/hc/ko/articles/360000269811-%EC%96%B8%EC%9D%B8%EC%8A%A4%ED%86%A8-%ED%8A%B8%EB%9E%98%ED%82%B9-APNS-Apple-Push-Notification-Service-)
 - [iOS Notification 만들기](http://throughkim.kr/2016/12/27/ios-notification/)
 - [코드사이닝, 인증서, 프로비저닝 프로파일이란?](https://medium.com/jinshine-%EA%B8%B0%EC%88%A0-%EB%B8%94%EB%A1%9C%EA%B7%B8/%EC%BD%94%EB%93%9C%EC%82%AC%EC%9D%B4%EB%8B%9D-%EC%9D%B8%EC%A6%9D%EC%84%9C-%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%9E%80-2bd2c652d00f)
