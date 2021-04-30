@@ -907,7 +907,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-유효성 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store에 앱을 제출하고 기다립니다. 30분내로 결과를 알리는 이메일을 받을 수 있습니다.
+유효성 검사가 끝나면 `Distribute App` 버튼을 클릭하여 App Store Connect에 앱을 제출하고 기다립니다. 30분내로 결과를 알리는 이메일을 받을 수 있습니다.
 
 <br>
 
@@ -917,9 +917,32 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 #### 4) 앱 출시!
 
-앱 제출이 완료되면 TestFlight로 출시할지, 아니면 앱을 앱 스토어에 출시할지 선택할 수 있습니다.
+App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect](https://appstoreconnect.apple.com/) 사이트의 `나의 앱` > 등록된 앱 항목을 클릭하여 세부정보 페이지로 이동합니다. 앱을 TestFlight로 출시하기 위해 TestFlight 탭으로 이동합니다.
 
 <br>
+
+<img src="./../img/appstoreconnect.png" width="1000" />
+
+<br>
+
+`수출 규정 관련 문서가 누락됨`이라는 경고 문구가 보입니다. 우측의 `관리`를 클릭하면 아래와 같은 팝업창이 나타납니다. 앱이 암호화를 사용하는 경우 정식 수출 승인을 받아야 한다는 내용입니다. 해당되지 않는 경우(수출 규정 면제 대상인 경우), `아니요`를 선택하고 `내부 테스트 시작` 버튼을 클릭합니다. `아니요`를 선택하면 나타나는 하단 안내 문구에 따라 프로젝트 코드에 해당 속성을 미리 지정해놓을 수 있습니다. [Add export compliance keys](https://help.apple.com/xcode/mac/current/#/dev0dc15d044) 문서를 참고하여 설정할 수 있습니다.
+
+<br>
+
+> Google Play Console 고객센터의 [수출 규정 준수](https://support.google.com/googleplay/android-developer/answer/113770?hl=ko) 문서에 따르면, 미국 회사의 서버에 호스팅되는 앱이 미국 외부로 다운로드되는 경우 수출로 간주합니다. 미국 회사인 Apple의 서버에 앱이 호스팅되므로, 미국 외 국가의 사용자가 앱을 다운로드하는 경우 이를 수출로 본다는 의미입니다.
+
+<br>
+
+<img src="./../img/appstoreconnect2.png" width="1000" />
+
+<br>
+
+이제 아래와 같이 `처리 중` 상태로 변경되었다면, 기다림 후에 TestFlight에서 앱을 다운로드하실 수 있습니다.
+
+<br>
+
+<img src="./../img/appstoreconnect3.png" width="1000" />
+
 <br>
 
 ---
