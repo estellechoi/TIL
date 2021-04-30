@@ -578,7 +578,7 @@ Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.appl
 
 <br>
 
-APNs 인증서를 발급받으면 미리 등록한 APP ID 정보에 해당 인증서가 자동으로 반영됩니다. 이를 확인하기 위해 Apple Developer의 [Identifiers](https://developer.apple.com/account/resources/identifiers/list) 메뉴로 이동한 후, 위 단계에서 등록한 앱 ID를 클릭하여 설정 페이지로 이동합니다. Capabilities 섹션에서 `Push Notifications` 부분으로 스크롤하면 우측에 `Certificates (1)` 문구가 생긴 것을 확인할 수 있습니다.
+APNs 인증서를 발급받으면 미리 등록한 APP ID 정보에 해당 인증서가 자동으로 반영됩니다. 이를 확인하기 위해 Apple Developer의 [Identifiers](https://developer.apple.com/account/resources/identifiers/list) 메뉴로 이동한 후, 등록된 앱 ID를 클릭하여 설정 페이지로 이동합니다. Capabilities 섹션에서 `Push Notifications` 부분으로 스크롤하면 우측에 `Certificates (1)` 문구가 생긴 것을 확인할 수 있습니다.
 
 <br>
 
