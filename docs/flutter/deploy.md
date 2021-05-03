@@ -1004,7 +1004,7 @@ HTTPS를 호출하는 정도의 일반적인 앱의 경우 License Exception ENC
 
 <br>
 
-##### 자가검진
+#### 수출 규정 준수 정보 팝업창의 질문에 답함으로써 자가검진
 
 수출 규정 준수 정보 팝업창의 질문에 차례로 답하면 됩니다. HTTPS를 포함한 암호화를 하나라도 사용하는 경우 아래와 같이 `예`를 선택하고 다음으로 넘어가세요.
 
@@ -1054,7 +1054,7 @@ HTTPS를 호출하는 정도의 일반적인 앱의 경우 License Exception ENC
 
 <br>
 
-##### 자가 분류 보고서 제출
+#### 미국 정부에 연간 자가 분류 보고서 제출
 
 BIS 사이트의 [How to file an Annual Self-Classification Report](https://www.bis.doc.gov/index.php/policy-guidance/encryption/4-reports-and-reviews/a-annual-self-classification) 페이지를 참고하여 자가 분류 보고서를 제출합니다.
 
