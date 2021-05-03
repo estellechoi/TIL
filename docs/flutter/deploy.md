@@ -1018,6 +1018,10 @@ HTTPS를 호출하는 정도의 일반적인 앱의 경우 License Exception ENC
 
 <br>
 
+<img src="./../img/appstoreconnect18.png" width="1000" />
+
+<br>
+
 이제 아래와 같이 `처리 중`으로 상태가 변경됩니다.
 
 <br>
