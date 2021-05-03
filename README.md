@@ -29,7 +29,8 @@
 - [Stateful/Stateless 위젯](./docs/flutter/stful.md)
 - [Flutter 위젯(Widget)](./docs/flutter/widgets.md)
 - [Flutter 라우팅(Routing)](./docs/flutter/route.md)
-- [Flutter 프로젝트를 Android / iOS 앱으로 배포하기](./docs/flutter/deploy.md)
+- [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, 미국 수출 규정](./docs/flutter/deploy.md)
+- [Flutter 프로젝트를 Android 앱으로 배포하기](./docs/flutter/deploy_android.md)
 
 <br>
 
