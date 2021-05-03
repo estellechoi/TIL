@@ -875,7 +875,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-방금 생성한 아카이브를 선택합니다. 그리고 우측의 `Validate app` 버튼을 클릭하여 앱 유효성 검사를 시작합니다. 단계를 거치다보면 아래와 같은 경고 문구가 나올 수 있습니다. Distribution 인증서를 발급받지 않았기 때문이죠. 인증서를 생성해야 하므로 `Generate an Apple Distribution certificate`에 체크하고 `Next` 버튼을 클릭합니다.
+방금 생성한 아카이브를 선택합니다. 그리고 우측의 `Validate app` 버튼을 클릭하여 앱 유효성 검사를 시작합니다. 단계를 거치다보면 아래와 같은 경고 문구가 나올 수 있습니다. 전 단계에서 프로비저닝 프로파일을 자동으로 생성한 경우 Distribution 인증서를 따로 발급받지 않았기 때문일 수 있습니다. 이 경고 문구가 나타났다면, 인증서를 생성해야 하므로 `Generate an Apple Distribution certificate`에 체크하고 `Next` 버튼을 클릭합니다.
 
 <br>
 
@@ -937,11 +937,19 @@ App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect
 
 <br>
 
-이제 아래와 같이 `처리 중` 상태로 변경되었다면, 기다림 후에 TestFlight에서 앱을 다운로드하실 수 있습니다.
+이제 아래와 같이 `처리 중`으로 상태가 변경됩니다.
 
 <br>
 
 <img src="./../img/appstoreconnect3.png" width="1000" />
+
+<br>
+
+기다리면 아래와 같이 `제출 준비 완료` 상태가 됩니다.
+
+<br>
+
+<img src="./../img/appstoreconnect4.png" width="1000" />
 
 <br>
 
