@@ -366,7 +366,7 @@ cat cert.pem key.unencrypted.pem > apns.pem
 
 <br>
 
-테스트 기기에서 개발중인 앱의 테스트를 위해 Development 섹션의 `iOS App Development`를 선택하고 `Continue` 버튼을 클릭합니다.
+먼저, 테스트 기기에서 개발중인 앱의 테스트를 위해 Development 섹션의 `iOS App Development`를 선택하고 `Continue` 버튼을 클릭합니다.
 
 <br>
 
