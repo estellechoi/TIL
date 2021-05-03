@@ -983,6 +983,8 @@ App Store Connect에 업로드된 응용 프로그램은 미국의 Apple 서버�
 
 상품이 [`Category 5, Part 2`](https://bis.doc.gov/index.php/documents/new-encryption/1652-cat-5-part-2-quick-reference-guide/file)에 명시된 항목으로 분류되는 경우, 면제 대상([License Exception ENC](https://www.law.cornell.edu/cfr/text/15/740.17)) 조건 중 어느 항목에 해당하는지 확인한 후, 해당하는 조건에 따라 상품 분류를 요청하거나 자가 분류 보고서를 제출해야한다는 내용입니다. 면제 대상 조건에 해당하더라도 미국 정부에 필요한 서류를 제출해야 최종적으로 수출 승인 면제를 받는다고 볼 수 있습니다.
 
+정리하면, HTTPS를 호출하는 정도의 일반적인 앱의 경우 License Exception ENC 조건에 해당하고요, 미국 정부에 연간 [자가 분류 보고서](https://www.bis.doc.gov/index.php/policy-guidance/encryption/4-reports-and-reviews/a-annual-self-classification)를 제출해야 최종적으로 수출법 면제 대상으로 인정받습니다.
+
 <br>
 
 > `Category 5, Part 2`는 미국 상무부에서 수출통제분류번호(ECCN) 부여를 위해 사용하는 상품 분류 기준인 Commerce Control List(CCL)의 상품 카테고리 중 하나입니다. App Store에 출시하는 앱이 암호화를 사용하면 여기에 해당합니다.
@@ -990,10 +992,6 @@ App Store Connect에 업로드된 응용 프로그램은 미국의 Apple 서버�
 <br>
 
 <img src="./../img/us_law.png" width="800" />
-
-<br>
-
-HTTPS를 호출하는 정도의 일반적인 앱의 경우 License Exception ENC 조건에 해당하고요, 미국 정부에 연간 [자가 분류 보고서](https://www.bis.doc.gov/index.php/policy-guidance/encryption/4-reports-and-reviews/a-annual-self-classification)를 제출해야 최종적으로 수출법 면제 대상으로 인정받습니다.
 
 <br>
 
