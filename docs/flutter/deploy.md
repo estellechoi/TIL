@@ -953,19 +953,39 @@ App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect
 
 <br>
 
-이제 제출할 빌드의 앱 아이콘을 클릭하여 세부정보 페이지로 이동합니다. `테스트 정보` 탭에서 아래로 스크롤하면 아래와 같이 테스터를 추가하는 항목이 있습니다. 테스터를 추가하고 빌드를 제출합니다.
+이제 왼쪽 사이드바의 `내부 그룹` 섹션의 `App Store Connect 사용자` 메뉴로 이동합니다. 여기에서 내부 테스터를 추가하면 됩니다.
 
 <br>
 
-<img src="./../img/appstoreconnect7.png" width="1000" />
+<img src="./../img/appstoreconnect8.png" width="1000" />
 
 <br>
 
-다시 빌드 항목이 있는 페이지로 이동하면, 아래와 같이 `심사 대기 중`으로 상태가 변경되어 있습니다.
+내부 테스터를 추가하려면 [사용자 및 엑세스](https://appstoreconnect.apple.com/access/users) 페이지에서 추가합니다. 사용자를 추가하면 초대 이메일이 발송됩니다.
 
 <br>
 
-<img src="./../img/appstoreconnect6.png" width="1000" />
+<img src="./../img/appstoreconnect9.png" width="1000" />
+
+<br>
+
+<img src="./../img/appstoreconnect10.png" width="1000" />
+
+<br>
+
+다시 앱 > `내부 그룹` > `App Store Connect 사용자` 메뉴로 돌아와서 테스터를 추가하면, 테스터에게 초대 이메일이 발송됩니다.
+
+<br>
+
+<img src="./../img/appstoreconnect11.png" width="1000" />
+
+<br>
+
+초대된 테스터는 아래와 같은 이메일을 받게됩니다. 이메일을 모바일에서 확인하면 링크를 통해 바로 TestFlight에서 앱을 다운로드한 후 테스트할 수 있습니다.
+
+<br>
+
+<img src="./../img/appstoreconnect11.png" width="1000" />
 
 <br>
 
