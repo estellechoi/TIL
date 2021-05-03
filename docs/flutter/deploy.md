@@ -981,7 +981,7 @@ App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect
 
 <br>
 
-초대된 테스터는 아래와 같은 이메일을 받게됩니다. 이메일을 모바일에서 확인하면 링크를 통해 바로 TestFlight에서 앱을 다운로드한 후 테스트할 수 있습니다.
+초대된 테스터는 아래와 같은 이메일을 받게됩니다. 이메일을 모바일에서 확인하면 `View in TestFlight` 버튼을 클릭하여 바로 TestFlight 앱으로 이동한 후 앱을 다운로드하고 테스트할 수 있습니다. TestFlight 앱이 없다면 Apple App Store에서 TestFlight 앱을 다운로드한 후 진행합니다.
 
 <br>
 
