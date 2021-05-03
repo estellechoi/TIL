@@ -915,7 +915,7 @@ Xcode 상단 메뉴에서 `Product > Archive` 를 클릭하고 기다리면 Xcod
 
 <br>
 
-#### 4) 앱 출시!
+#### 4) 미국 수출 규정 검토
 
 App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect](https://appstoreconnect.apple.com/) 사이트의 `나의 앱` > 등록된 앱 항목을 클릭하여 세부정보 페이지로 이동합니다. 앱을 TestFlight로 출시하기 위해 TestFlight 탭으로 이동합니다.
 
