@@ -953,6 +953,22 @@ App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect
 
 <br>
 
+이제 제출할 빌드의 앱 아이콘을 클릭하여 세부정보 페이지로 이동합니다. `테스트 정보` 탭에서 아래로 스크롤하면 아래와 같이 테스터를 추가하는 항목이 있습니다. 테스터를 추가하고 빌드를 제출합니다.
+
+<br>
+
+<img src="./../img/appstoreconnect4.png" width="1000" />
+
+<br>
+
+다시 빌드 항목이 있는 페이지로 이동하면, 아래와 같이 `심사 대기 중`으로 상태가 변경되어 있습니다.
+
+<br>
+
+<img src="./../img/appstoreconnect4.png" width="1000" />
+
+<br>
+
 ---
 
 ### References
@@ -966,3 +982,4 @@ App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect
 - [언인스톨 트래킹 APNS(Apple Push Notification Service)](https://support.singular.net/hc/ko/articles/360000269811-%EC%96%B8%EC%9D%B8%EC%8A%A4%ED%86%A8-%ED%8A%B8%EB%9E%98%ED%82%B9-APNS-Apple-Push-Notification-Service-)
 - [iOS Notification 만들기](http://throughkim.kr/2016/12/27/ios-notification/)
 - [코드사이닝, 인증서, 프로비저닝 프로파일이란?](https://medium.com/jinshine-%EA%B8%B0%EC%88%A0-%EB%B8%94%EB%A1%9C%EA%B7%B8/%EC%BD%94%EB%93%9C%EC%82%AC%EC%9D%B4%EB%8B%9D-%EC%9D%B8%EC%A6%9D%EC%84%9C-%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%9E%80-2bd2c652d00f)
+- [Distribute an app using TestFlight (iOS, tvOS, watchOS) | Xcode Help](https://help.apple.com/xcode/mac/current/#/dev2539d985f)
