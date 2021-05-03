@@ -1080,7 +1080,7 @@ BIS 사이트의 [How to file an Annual Self-Classification Report](https://www.
 
 <br>
 
-위 페이지에서 자가 분류 보고서의 샘플 파일을 제공하므로 다운로드 받은 후 내용을 작성하시고요, `csv` 파일로 내보낸 후 제출하면 됩니다. [BIS Annual Self-Classification Report Generator](https://annual-self-classification-report.github.io/)를 사용해도 됩니다.
+위 페이지에서 자가 분류 보고서의 샘플 파일을 제공하므로 다운로드 받은 후 내용을 작성하는 것이 좋습니다. 다운로드 파일은 아래 스크린샷과 같이 생겼습니다. 작성 후에는 `csv` 파일로 내보낸 후 제출하면 됩니다. [BIS Annual Self-Classification Report Generator](https://annual-self-classification-report.github.io/)를 사용해도 됩니다.
 
 <br>
 
@@ -1088,13 +1088,23 @@ BIS 사이트의 [How to file an Annual Self-Classification Report](https://www.
 
 <br>
 
-- ECCN : 미 상무부의 수출통제분류번호.
+일부 항목은 어떤 내용을 기입해야할지 명확하지 않을 수 있습니다. 대표적으로 아래의 세 항목에 대한 설명을 남깁니다.
+
+- ECCN : 미 상무부의 수출통제분류번호
 
   > [Supplement No. 8 to Part 742—Self-Classification Report for Encryption Items](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&SID=4150cfbf028e9a85574385383a581f47&h=L&mc=true&n=pt15.2.742&r=PART&ty=HTML#ap15.2.742_119.6)를 참고하여 작성합니다. StackOverflow의 [Annual Self-Classification Report](https://stackoverflow.com/questions/48462206/annual-self-classification-report/48462458#48462458)에 대한 답변을 참고하는 것도 좋습니다.
 
 - NON-U.S. COMPONENTS : 미국 외 국가의 벤더가 만든 암호화 컴포넌트를 사용하여 암호화 상품을 만들었는지 여부 (`NO`/`YES`)
 
-- NON-U.S. MANUFACTURING LOCATIONS : 암호화 상품이 미국 외 국가에서 만들어졌다면 도시와 국가명 기입, 그렇지 않다면 `NONE`(`N/A`) 기입
+- NON-U.S. MANUFACTURING LOCATIONS : 암호화 상품이 미국 외 국가에서 만들어졌다면 도시와 국가명 기입, 그렇지 않다면 `NONE`(`N/A`)
+
+<br>
+
+저는 아래와 같이 작성했습니다.
+
+<br>
+
+<img src="./../img/us_law_4.png" width="1000" />
 
 <br>
 
