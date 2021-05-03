@@ -362,11 +362,11 @@ cat cert.pem key.unencrypted.pem > apns.pem
 
 ### 4) 프로비저닝 프로파일 생성하기
 
-이제 앱 번들 ID와 필요한 인증서가 모두 준비되었기 때문에 프로비저닝 프로파일을 생성할 수 있습니다. Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `+` 또는 `Generate a profile` 버튼을 클릭하여 프로필 생성을 시작합니다.
+이제 앱 번들 ID와 필요한 인증서가 모두 준비되었기 때문에 프로비저닝 프로파일을 생성할 수 있습니다. Apple Developer의 [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) > [Profiles](https://developer.apple.com/account/resources/profiles/list) 메뉴로 이동합니다. `+` 또는 `Generate a profile` 버튼을 클릭하여 프로파일 생성을 시작합니다.
 
 <br>
 
-테스트 배포를 위해 `iOS App Development`를 선택하고 `Continue` 버튼을 클릭합니다.
+테스트 기기에서 개발중인 앱의 테스트를 위해 Development 섹션의 `iOS App Development`를 선택하고 `Continue` 버튼을 클릭합니다.
 
 <br>
 
@@ -387,6 +387,10 @@ cat cert.pem key.unencrypted.pem > apns.pem
 <br>
 
 <img src="./../img/ios24.png" width="1000" />
+
+<br>
+
+App Store와 TestFlight에 앱 출시를 위해 프로비저닝 프로파일을 하나 더 생성합니다. 이번에는 `+` 버튼을 클릭하고, Distribution 섹션의 `App Store`를 선택합니다. 이후 과정은 위와 동일하게 진행합니다.
 
 <br>
 
