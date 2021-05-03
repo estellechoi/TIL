@@ -997,7 +997,7 @@ App Store Connect에 업로드된 응용 프로그램은 미국의 Apple 서버�
 
 <br>
 
-내부 테스터를 추가하려면 [사용자 및 엑세스](https://appstoreconnect.apple.com/access/users) 페이지에서 추가합니다. 사용자를 추가하면 초대 이메일이 발송됩니다.
+앱을 빌드한 계정 외에 다른 Apple 사용자를 내부 테스터로 지정하려면 [사용자 및 엑세스](https://appstoreconnect.apple.com/access/users) 페이지에서 추가합니다. 역할을 부여하고 테스트를 요청할 앱을 선택한 후 사용자를 추가하면 초대 이메일이 발송됩니다.
 
 <br>
 
