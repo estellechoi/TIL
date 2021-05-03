@@ -1104,7 +1104,7 @@ BIS 사이트의 [How to file an Annual Self-Classification Report](https://www.
 
 <br>
 
-<img src="./../img/us_law_4.png" width="1000" />
+<img src="./../img/us_law_5.png" width="1000" />
 
 <br>
 
