@@ -37,6 +37,7 @@
 <img src="./../img/ios.png" width="1000" />
 
 <br>
+<br>
 
 아래 페이지에서는 `App`을 선택한 후 `Continue` 버튼을 클릭합니다.
 
@@ -44,6 +45,7 @@
 
 <img src="./../img/ios2.png" width="1000" />
 
+<br>
 <br>
 
 아래 페이지에서는 다음의 세 가지 항목을 입력합니다. 입력 후 `Continue`, `Register` 버튼을 차례로 클릭하여 앱 ID를 생성합니다.
@@ -54,12 +56,15 @@
 
 - `Capabilities` : 앱에서 사용중인 서비스를 체크합니다. 앱 ID 발급 이후에도 자유롭게 변경이 가능합니다.
 
+<br>
+
 > 이 튜토리얼에서는 Access WiFi Information, HealthKit, Push Notifications, Sign In with Apple 서비스를 체크해보겠습니다.
 
 <br>
 
 <img src="./../img/ios6.png" width="1000" />
 
+<br>
 <br>
 
 ### 2) App Store Connect에 앱 레코드 생성
@@ -80,6 +85,7 @@
 
 > 참고로 Flutter는 현재 tvOS를 지원하지 않습니다.
 
+<br>
 <br>
 
 위 단계를 통해 앱이 생성되면 아래와 같이 앱의 상세정보 페이지로 자동 이동됩니다. 이 페이지는 App Store Connect의 `나의 앱` 페이지에서 등록한 앱 항목을 클릭하여 접근할 수도 있습니다. 사이드 바의 `앱 정보` 메뉴로 이동하여 번들 ID에 위 단계에서 선택한 고유 앱 ID가 잘 들어있는지 확인하세요.
@@ -130,7 +136,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 ### 1) General
 
-### Identity
+#### Identity
 
 - `Display Name` : 홈 스크린 등에 표시될 앱의 이름
 
@@ -138,7 +144,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-### Deployment
+#### Deployment
 
 - `iOS 9.0` : 앱이 지원할 최소 iOS 버전 및 플랫폼
 
@@ -158,7 +164,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-### Capabilities
+#### Capabilities
 
 왼쪽 상단의 `+ Capability` 버튼을 클릭하여 `Push Notification` 등 필요한 서비스들을 추가해줍니다.
 
@@ -168,7 +174,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-<img src="./../img/xcode21.png" width="1000" />
+<img src="./../img/xcode21.png" width="800" />
 
 <br>
 
@@ -180,7 +186,7 @@ App Store Connect에서 관리하는 앱 정보와는 별도로, 개발 단계�
 
 <br>
 
-### Signing
+#### Signing
 
 - `Team` : Apple Developer Program에 등록된 개발자(팀) 계정
 
