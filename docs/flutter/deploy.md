@@ -985,7 +985,7 @@ App Store Connect로 부터 결과 이메일을 받았다면, [App Store Connect
 
 <br>
 
-<img src="./../img/appstoreconnect11.png" width="1000" />
+<img src="./../img/appstoreconnect12.png" width="700" />
 
 <br>
 
