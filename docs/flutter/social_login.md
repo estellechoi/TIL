@@ -28,7 +28,7 @@ Flutter 앱에서 Apple 로그인을 구현하려면 Firebase 프로젝트와 �
 
 ### 1) Apple Developer Program 등록
 
-Sign in with Apple을 포함한 Apple 서비스를 개발중인 앱에서 이용하려면 고유한 앱 번들 ID가 필요합니다. 이를 위해 개발자(팀)의 Apple 계정을 개발자 계정으로 전환해야합니다. [Apple Developer Program 등록하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-apple-developer-program-등록하기)를 참고하여 개발자 계정으로 등록하세요. 이 단계에서 비용이 발생하고, 승인까지 시간이 소요될 수 있습니다.
+Sign in with Apple을 포함한 Apple 서비스를 이용하려면 고유한 앱 번들 ID가 필요합니다. 이를 위해 개발자(팀)의 Apple 계정을 개발자 계정으로 전환해야합니다. [Apple Developer Program 등록하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-apple-developer-program-등록하기)를 참고하여 개발자 계정으로 등록하세요. 이 단계에서 비용이 발생하고, 승인까지 시간이 소요될 수 있습니다.
 
 <br>
 
