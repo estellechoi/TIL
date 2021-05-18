@@ -10,9 +10,13 @@
 2. Firebase 프로젝트 생성하기
 3. Firebase에 iOS 앱 등록하기
 4. Flutter 프로젝트에 Firebase 구성 파일 추가하기
-5. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
-6. Firebase 콘솔에서 Apple 로그인 사용 설정하기
+5. Firebase 콘솔에서 Apple 로그인 사용 설정하기
+6. Firebase 프로젝트 호스팅하기
 7. Apple Developer에서 서비스 ID 생성하기
+8. Sign in with Apple 서비스 설정하기
+9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
+10. `sign_in_with_apple` 라이브러리 추가하기
+11. Apple 로그인 구현하기
 
 <br>
 
@@ -136,26 +140,7 @@ Flutter 프로젝트의 루트 경로를 기준으로 `ios/Runner.xcworkspace` �
 
 <br>
 
-## 5. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
-
-Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/projects/firebaseextended/flutterfire/)를 사용하여 Firebase API 등 다양한 플랫폼별 서비스에 접근할 수 있습니다. 각 Firebase 서비스에 필요한 라이브러리를 추가하는 방식인데, 이러한 라이브러리들을 총칭하여 FlutterFire라고 부릅니다. Flutter 프로젝트의 경우 FlutterFire 라이브러리들을 프로젝트에 추가하면 iOS, Android 버전 모두에서 사용됩니다.
-
-<br>
-
-일반적으로 아래의 라이브러리들이 필요합니다. 프로젝트의 `pubspec.yaml` 파일에 추가하여 라이브러리를 설치합니다.
-
-- [`firebase_core`](https://pub.dev/packages/firebase_core) : Firebase Core API 사용을 위해 모든 Firebase 앱에 필요합니다.
-
-- [`firebase_auth`](https://pub.dev/packages/firebase_auth) : 이메일/비밀번호 계정, 전화번호 인증, 소셜로그인 등 사용자 인증 서비스인 [Firebase Authentication API](https://firebase.google.com/products/auth/) 사용을 위해 필요합니다.
-
-- [`cloud_firestore`](https://pub.dev/packages/cloud_firestore) : 데이터베이스인 [Cloud Firestore API](https://firebase.google.com/docs/firestore/) 사용을 위해 필요합니다.
-
-- [`firebase_analytics`](https://pub.dev/packages/firebase_analytics) : Firebase 프로젝트 생성시 Google Analytics(GA) 사용 설정한 경우 필요합니다. 이 라이브러리를 추가하는 경우, 앱을 실행하여 Firebase를 성공적으로 통합했다는 확인을 Firebase에 보냅니다.
-  > `firebase_analytics` 라이브러리를 사용하려면 추가작업이 필요합니다. [예시 프로젝트](https://github.com/FirebaseExtended/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics/example)와 iOS 앱을 위한 [Google 애널리틱스 시작하기](https://firebase.google.com/docs/analytics/get-started?platform=ios&hl=ko) 문서를 참고하여 마무리하세요.
-
-<br>
-
-## 6. Firebase 콘솔에서 Apple 로그인 사용 설정하기
+## 5. Firebase 콘솔에서 Apple 로그인 사용 설정하기
 
 다시 Firebase 콘솔의 프로젝트 관리 페이지로 돌아옵니다. 왼쪽 메뉴바에서 `Authentication` 메뉴를 클릭하여 이동한 후 `시작하기` 버튼을 클릭합니다.
 
@@ -207,6 +192,90 @@ Android 앱에서도 Apple 로그인을 사용하려면 아래 항목들을 작�
 <br>
 
 <img src="./../img/firebase15.png" alt="firebase" />
+
+<br>
+
+## 6. Firebase 프로젝트 호스팅하기
+
+이제 Firebase 앱 도메인을 사용하기 위해 Firebase 프로젝트를 호스팅해야합니다. 좌측 메뉴바에서 `Hosting` 메뉴로 이동하고 `시작하기` 버튼을 클릭합니다.
+
+<br>
+
+<img src="./../img/firebase24.png" alt="firebase" />
+
+<br>
+<br>
+
+Firebase 호스팅을 통해 앱을 호스팅하려면 Firebase CLI를 설치해야합니다. 안내에 따라 NPM을 사용하여 `firebase-tools`를 전역 설치합니다.
+
+```
+npm install -g firebase-tools
+```
+
+<br>
+
+<img src="./../img/firebase25.png" alt="firebase" />
+
+<br>
+<br>
+
+설치를 완료했으면 `다음` 버튼을 클릭하고 안내에 따라 Flutter 프로젝트의 루트 경로에서 다음 명령어를 차례로 실행합니다.
+
+<br>
+
+<img src="./../img/firebase26.png" alt="firebase" />
+
+<br>
+<br>
+
+- Google 계정에 로그인
+
+```
+firebase login
+```
+
+<br>
+
+- 프로젝트 시작
+
+```
+firebase init
+```
+
+<br>
+
+<img src="./../img/firebase27.png" alt="firebase" />
+
+<br>
+<br>
+
+`firebase init` 명령어를 실행하면 아래 스크린샷과 같이 몇 가지 질문에 답을 해야하고요, 프로젝트에 맞게 답을 선택합니다.
+
+<br>
+
+<img src="./../img/firebase28.png" alt="firebase" />
+
+<br>
+<br>
+
+완료했으면 Firebase 호스팅 설정 화면으로 돌아와서 `다음` 버튼을 클릭합니다. 안내에 따라 명령어를 사용하여 Firebase 프로젝트를 배포합니다.
+
+```
+firebase deploy
+```
+
+<br>
+
+배포가 완료되면 웹브라우저에서 Firebase 앱 도메인을 열고 확인합니다. 아래와 같은 화면이 뜨면 성공입니다.
+
+<br>
+
+<img src="./../img/firebase28.png" alt="firebase" />
+
+<br>
+<br>
+
+> [Use Firebase to host your Flutter app on the web](https://medium.com/flutter/must-try-use-firebase-to-host-your-flutter-app-on-the-web-852ee533a469#d31b) 문서를 참고하면 도움이 됩니다.
 
 <br>
 
@@ -266,6 +335,278 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 <br>
 
 입력을 완료했으면 `Next`, `Done`을 클릭하여 완료하고, 다시 우측 상단의 `Continue`, `Save` 버튼을 클릭하여 마무리합니다.
+
+<br>
+
+## 8. Sign in with Apple 서비스 설정하기
+
+[Apple Developer > Certificates, Identifiers & Profile > More](https://developer.apple.com/account/resources/services/list) 메뉴로 이동하여 Sign in with Apple 서비스를 설정합니다. `Configure` 버튼을 클릭하여 시작하세요.
+
+<br>
+
+<img src="./../img/firebase30.png" alt="firebase" />
+
+<br>
+<br>
+
+`+` 버튼을 클릭하면 아래와 같은 창이 나타납니다. `Domains and Subdomains`에는 위에서 호스팅한 Firebase 앱 도메인 주소를 작성하고요, `Email Address` 항목에는 사용자를 대상으로 이메일 커뮤니케이션을 진행할 이메일 주소를 입력합니다.
+
+<br>
+
+<img src="./../img/firebase31.png" alt="firebase" />
+
+<br>
+<br>
+
+완료하면 아래와 같이 도메인과 이메일 주소가 등록된 것을 확인할 수 있습니다. 이전에는 도메인 검증을 위해 `Download` 버튼을 사용해 `apple-developer-domain-association.txt` 파일을 가져오고 Flutter 프로젝트에 포함시킨 후 Firebase 앱을 배포하는 과정이 있었지만, 현재는 이 과정이 생략되었으므로 여기에서 마무리하면 됩니다. 등록한 도메인이 `TLS 1.2` 이상을 지원하는 것으로 자동 검증이 됩니다. StackOverflow의 [Sign in with Apple: Not able to download apple-developer-domain-association.txt](https://stackoverflow.com/questions/61523793/sign-in-with-apple-not-able-to-download-apple-developer-domain-association-txt) 페이지가 도움이 되었습니다.
+
+<br>
+
+<img src="./../img/firebase32.png" alt="firebase" />
+
+<br>
+<br>
+
+> 도메인 주소 위에 커서를 올리면 `Reverify SPF` 버튼이 나타납니다.
+
+<br>
+
+## 9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
+
+이제 Flutter 프로젝트에 필요한 라이브러리들을 설치하고 라이브러리를 사용하여 Apple 로그인을 구현하면 됩니다. Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/projects/firebaseextended/flutterfire/)를 사용하여 Firebase API 등 다양한 플랫폼별 서비스에 접근할 수 있습니다. 각 Firebase 서비스에 필요한 라이브러리를 추가하는 방식인데, 이러한 라이브러리들을 총칭하여 FlutterFire라고 부릅니다. Flutter 프로젝트의 경우 FlutterFire 라이브러리들을 프로젝트에 추가하면 iOS, Android 버전 모두에서 사용됩니다.
+
+<br>
+
+일반적으로 아래의 라이브러리들이 필요합니다. 프로젝트의 `pubspec.yaml` 파일에 추가하여 라이브러리를 설치합니다.
+
+- [`firebase_core`](https://pub.dev/packages/firebase_core) : Firebase Core API 사용을 위해 모든 Firebase 앱에 필요합니다.
+
+- [`firebase_auth`](https://pub.dev/packages/firebase_auth) : 이메일/비밀번호 계정, 전화번호 인증, 소셜로그인 등 사용자 인증 서비스인 [Firebase Authentication API](https://firebase.google.com/products/auth/) 사용을 위해 필요합니다. Apple 로그인시 `idToken`을 통한 Firebase Authentication 인증에 사용됩니다.
+
+- [`cloud_firestore`](https://pub.dev/packages/cloud_firestore) : 데이터베이스인 [Cloud Firestore API](https://firebase.google.com/docs/firestore/) 사용을 위해 필요합니다.
+
+- [`firebase_analytics`](https://pub.dev/packages/firebase_analytics) : Firebase 프로젝트 생성시 Google Analytics(GA) 사용 설정한 경우 필요합니다. 이 라이브러리를 추가하는 경우, 앱을 실행하여 Firebase를 성공적으로 통합했다는 확인을 Firebase에 보냅니다.
+  > `firebase_analytics` 라이브러리를 사용하려면 추가작업이 필요합니다. [예시 프로젝트](https://github.com/FirebaseExtended/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics/example)와 iOS 앱을 위한 [Google 애널리틱스 시작하기](https://firebase.google.com/docs/analytics/get-started?platform=ios&hl=ko) 문서를 참고하여 마무리하세요.
+
+<br>
+
+## 10. `sign_in_with_apple` 라이브러리 추가하기
+
+Flutter 프로젝트 코드에서 Apple 로그인 구현은 [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple) 라이브러리를 사용합니다. `pubspec.yaml` 파일에 라이브러리를 추가하여 설치해주세요.
+
+<br>
+
+## 11. Apple 로그인 구현하기
+
+이제 필요한 곳에서 라이브러리를 사용하여 구현하면 됩니다. 아래는 [Flutter Firebase Authentication: Apple Sign In](https://dev.to/offlineprogrammer/flutter-firebase-authentication-apple-sign-in-1m64#app-implementation) 문서의 App Implementation 섹션을 참고하여 작성한 예제 코드입니다.
+
+<br>
+
+아래의 예제 코드는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다.
+
+<br>
+
+### 1) `main()` 메소드에서 Firebase 초기화하기
+
+`main.dart` 파일의 `main()` 메소드에서 아래와 같이 `WidgetsFlutterBinding.ensureInitialized()`를 호출하고, 그 다음 `Firebase.initializeApp()`을 호출합니다. `WidgetsFlutterBinding.ensureInitialized()`는 비동기 작업 이후에 `runApp()`을 실행해야하는 경우 추가하는 코드입니다. Flutter 엔진과 위젯 바인딩을 미리 완료시키는 역할을 합니다.
+
+```dart
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+```
+
+<br>
+
+### 2) `AuthProvider` 만들기
+
+이제 Firebase 인증 메소드를 모아둘 `AuthProvider` 클래스를 만듭니다. `auth_provider.dart` 파일을 생성하고, 아래 코드를 참고하여 작성해주세요. 저는 `signinWithApple()` 메소드와 `signout()` 메소드를 만들었습니다. `main.dart`에서 `AuthProvider` 클래스의 변화를 감지할 수 있도록 `ChangeNotifier`를 [`mixins`](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins)로 추가합니다.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
+class AuthProvider with ChangeNotifier {
+  final FirebaseAuth _firebaseAuth;
+
+  AuthProvider(this._firebaseAuth);
+
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+
+  // Signout
+  Future signout() async {
+    await _firebaseAuth.signOut();
+  }
+
+  // Signin with Apple
+  Future<User?> signinWithApple() async {
+    try {
+      // Apple 로그인 후 반환된 `credential` 객체를 가져옵니다
+      final AuthorizationCredentialAppleID credential =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      // 위에서 가져온 `credential` 객체를 사용하여 `oauthCredential` 객체를 생성합니다.
+      final OAuthCredential oauthCredential =
+          OAuthProvider('apple.com').credential(
+        idToken: credential.identityToken,
+        // rawNonce: rawNonce,
+      );
+
+      // `oauthCredential` 객체를 사용하여 Firebase에 로그인 시키고
+      // 결과 정보를 담은 `authResult` 객체를 가져옵니다.
+      final UserCredential authResult =
+          await _firebaseAuth.signInWithCredential(oauthCredential);
+
+      final String displayName =
+          '${credential.givenName} ${credential.familyName}';
+      final String userEmail = '${credential.email}';
+
+      // `authResult` 객체에서 사용자 정보를 가져옵니다.
+      final User? firebaseUser = authResult.user;
+
+      await firebaseUser?.updateProfile(displayName: displayName);
+      await firebaseUser?.updateEmail(userEmail);
+
+      return firebaseUser;
+    } catch (e) {
+      print(e);
+    }
+  }
+}
+```
+
+<br>
+
+### 3) Apple 로그인 버튼 위젯 구현하기
+
+버튼을 클릭하면 `AuthProvider`의 `signinWithApple()` 메소드가 호출되도록 구현합니다. `provider` 라이브러리를 임포트하여 사용합니다. `HinokiButton`은 별도로 만들어둔 버튼 위젯입니다.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import './../../utils/auth_provider.dart';
+import './../buttons/hinoki_button.dart';
+
+class SignInWithAppleButton extends StatefulWidget {
+  final ValueChanged<User?> onSuccess;
+
+  SignInWithAppleButton({required this.onSuccess});
+
+  @override
+  _SignInWithAppleButtonState createState() => _SignInWithAppleButtonState();
+}
+
+class _SignInWithAppleButtonState extends State<SignInWithAppleButton> {
+  Future signinWithApple(BuildContext context) async {
+    final User? firebaseUser =
+        await context.read<AuthProvider>().signinWithApple();
+
+    widget.onSuccess(firebaseUser);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return HinokiButton(
+      label: 'Sign in with Apple',
+      onPressed: () {
+        signinWithApple(context);
+      },
+    );
+  }
+}
+
+```
+
+<br>
+
+### 4) `main.dart`에서 `AuthProvider` 클래스의 변화 감지하기
+
+> 이 단계는 건너뛰어도 됩니다.
+
+<br>
+
+다시 `main.dart` 파일로 돌아와서 루트 클래스의 `build()` 메소드로 이동합니다. 여기에서 `AuthProvider` 인스턴스를 등록하고 변화를 감지하는 코드를 작성합니다.
+
+```dart
+@override
+void initState() {
+  super.initState();
+  // 이 부분은 Router를 설정합니다. 이 문서는 Apple 로그인 구현을 다루기 때문에 설명하지 않습니다.
+  _routerDelegate = AppRouterDelegate(appState);
+  _routerDelegate.setNewRoutePath(homePageConfig);
+  _backButtonDispatcher = AppBackButtonDispatcher(_routerDelegate);
+}
+
+@override
+Widget build(BuildContext context) {
+  return MaterialApp.router(
+      title: 'Hinoki',
+      routerDelegate: _routerDelegate,
+      routeInformationParser: _routeInformationParser,
+      backButtonDispatcher: _backButtonDispatcher);
+}
+```
+
+<br>
+
+`provider` 라이브러리를 임포트합니다.
+
+```dart
+import 'package:provider/provider.dart';
+```
+
+<br>
+
+`build()` 메소드에서 반환하는 위젯을 `MultiProvider` 위젯으로 감쌉니다.
+
+```dart
+@override
+Widget build(BuildContext context) {
+  return MultiProvider(
+      providers: [
+        // ...
+      ],
+      child: MaterialApp.router(
+          title: 'Hinoki',
+          routerDelegate: _routerDelegate,
+          routeInformationParser: _routeInformationParser,
+          backButtonDispatcher: _backButtonDispatcher));
+}
+```
+
+<br>
+
+이제 `MultiProvider` 위젯의 `providers` 속성에 `ChangeNotifierProvider`와 `StreamProvider`를 추가합니다.
+
+- `ChangeNotifierProvider` : `FirebaseAuth.instance` 인스턴스를 사용하여 생성한 `AuthProvider` 인스턴스를 반환합니다.
+
+- `StreamProvider` : `AuthProvider` 인스턴스의 변경을 감지합니다.
+
+<br>
+
+```dart
+providers: [
+  ChangeNotifierProvider(
+    create: (BuildContext ctx) => AuthProvider(FirebaseAuth.instance),
+  ),
+  StreamProvider(
+      create: (BuildContext ctx) =>
+          context.read<AuthProvider>().authStateChanges,
+      initialData: null)
+]
+```
 
 <br>
 
