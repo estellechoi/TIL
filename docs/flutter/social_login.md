@@ -91,11 +91,11 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 `iOS` 아이콘을 클릭하여 앱 등록을 시작하면 아래 스크린샷과 같이 폼 양식이 나타납니다. 각 항목에 입력해야할 내용은 다음과 같습니다.
 
-- iOS 번들 ID : [Apple Developer](https://developer.apple.com/account/resources/identifiers/list/bundleId)에서 생성한 앱의 고유 번들 ID를 입력합니다. 아직 앱 ID가 없다면 [1. 선행 작업하기](#user-content-2-고유-앱-번들-id-등록)로 돌아가서 앱 ID를 생성해주세요.
+- `iOS 번들 ID` : [Apple Developer](https://developer.apple.com/account/resources/identifiers/list/bundleId)에서 생성한 앱의 고유 번들 ID를 입력합니다. 아직 앱 ID가 없다면 [1. 선행 작업하기](#user-content-2-고유-앱-번들-id-등록)로 돌아가서 앱 ID를 생성해주세요.
 
-- 앱 닉네임 : Firebase 콘솔에서 관리자만 볼 수 있는 편의용 이름입니다.
+- `앱 닉네임` : Firebase 콘솔에서 관리자만 볼 수 있는 편의용 이름입니다.
 
-- App Store ID : 아직 App Store ID가 없다면 추후에 프로젝트 설정에서 추가할 수 있습니다.
+- `App Store ID` : 아직 App Store ID가 없다면 추후에 프로젝트 설정에서 추가할 수 있습니다.
   > 여기에서는 건너뛰겠습니다.
 
 <br>
@@ -115,7 +115,7 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 ## 4. Firebase 구성 파일 추가하기
 
-Flutter 프로젝트와 Firebase를 연결하기 위해 Firebase에서 제공하는 iOS용 구성 파일을 프로젝트에 추가해야합니다. `GoogleService-Info.plist` 다운로드 버튼을 클릭하여 파일(`GoogleService-Info.plist`)을 저장합니다.
+이제 Firebase 프로젝트에 방금 등록한 iOS 앱과 개발중인 Flutter 프로젝트를 연결합니다. Firebase에서 제공하는 iOS용 구성 파일을 Flutter 프로젝트의 지정된 경로에 추가하면 됩니다. `GoogleService-Info.plist` 다운로드 버튼을 클릭하여 파일(`GoogleService-Info.plist`)을 저장합니다.
 
 <br>
 
@@ -124,7 +124,11 @@ Flutter 프로젝트와 Firebase를 연결하기 위해 Firebase에서 제공하
 <br>
 <br>
 
-파일 이름이 변경되지 않도록 주의하시고요, 다운로드한 파일을 프로젝트의 `Runner/Runner` 경로에 추가합니다. Flutter 프로젝트의 루트 경로를 기준으로 `ios/Runner.xcworkspace` 파일을 실행하여 Xcode를 열고, `Runner/Runner` 경로에서 마우스 우클릭 후 `Add Files to "Runner" ...`를 선택하여 추가하면 됩니다. 이때 Finder나 다른 에디터를 사용하지않고 Xcode를 사용하여 파일을 추가하는 것이 중요합니다. 그래야 파일이 Xcode 프로젝트에 연결됩니다.
+파일 이름이 변경되지 않도록 주의하시고요, 다운로드한 파일을 프로젝트의 `Runner/Runner` 경로에 추가합니다. 이때 Finder나 다른 에디터를 사용하지않고 Xcode를 사용하여 파일을 추가하는 것이 중요합니다. 그래야 파일이 Xcode 프로젝트에 연결됩니다.
+
+<br>
+
+Flutter 프로젝트의 루트 경로를 기준으로 `ios/Runner.xcworkspace` 파일을 실행하여 Xcode를 열고, `Runner/Runner` 경로에서 마우스 우클릭 후 `Add Files to "Runner" ...`를 선택하여 추가하면 됩니다.
 
 <br>
 
