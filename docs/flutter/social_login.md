@@ -241,6 +241,7 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 <img src="./../img/firebase6.png" alt="firebase" />
 
 <br>
+<br>
 
 서비스 ID의 상세정보 페이지로 이동하면 `Sign in with Apple` 항목이 있습니다. `ENABLED`에 체크합니다.
 
