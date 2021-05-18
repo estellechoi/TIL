@@ -150,7 +150,8 @@ Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/proje
 
 - [`cloud_firestore`](https://pub.dev/packages/cloud_firestore) : 데이터베이스인 [Cloud Firestore API](https://firebase.google.com/docs/firestore/) 사용을 위해 필요합니다.
 
-- [`firebase_analytics`](https://pub.dev/packages/firebase_analytics) : Firebase 프로젝트 생성시 Google Analytics(GA) 사용 설정한 경우 필요합니다. 이 라이브러리를 추가하는 경우, 앱을 실행하여 Firebase를 성공적으로 통합했다는 확인을 Firebase에 보냅니다. `firebase_analytics` 라이브러리를 사용하려면 추가작업이 필요한데요, [예시 프로젝트](https://github.com/FirebaseExtended/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics/example)와 iOS 앱을 위한 [Google 애널리틱스 시작하기](https://firebase.google.com/docs/analytics/get-started?platform=ios&hl=ko) 문서를 참고하여 마무리합니다.
+- [`firebase_analytics`](https://pub.dev/packages/firebase_analytics) : Firebase 프로젝트 생성시 Google Analytics(GA) 사용 설정한 경우 필요합니다. 이 라이브러리를 추가하는 경우, 앱을 실행하여 Firebase를 성공적으로 통합했다는 확인을 Firebase에 보냅니다.
+  > `firebase_analytics` 라이브러리를 사용하려면 추가작업이 필요합니다. [예시 프로젝트](https://github.com/FirebaseExtended/flutterfire/tree/master/packages/firebase_analytics/firebase_analytics/example)와 iOS 앱을 위한 [Google 애널리틱스 시작하기](https://firebase.google.com/docs/analytics/get-started?platform=ios&hl=ko) 문서를 참고하여 마무리하세요.
 
 <br>
 
