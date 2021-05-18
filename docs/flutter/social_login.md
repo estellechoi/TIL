@@ -38,7 +38,7 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 <br>
 
-> 아직 앱 ID가 없어 새로 ID를 생성하는 경우라면, 이 단계에서 Capabilites 섹션에서 Sign in with Apple 항목을 `ENABLED`로 체크하고 다음 단계는 건너뜁니다. 이미 앱 ID가 있다면, 이 단계는 건너뛰고 다음 단계에 따라 Capabilites 섹션을 수정합니다.
+새로 앱 ID를 생성하는 경우라면, 이 단계에서 Capabilites 목록 중 Sign in with Apple 항목을 `ENABLED`로 체크하고 다음 단계는 건너뜁니다. 이미 앱 ID가 있다면, 이 단계는 건너뛰고 다음 단계에 따라 Capabilites 섹션을 수정합니다.
 
 <br>
 
