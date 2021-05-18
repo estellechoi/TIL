@@ -9,8 +9,8 @@
 1. 선행 작업하기
 2. Firebase 프로젝트 생성하기
 3. Firebase에 iOS 앱 등록하기
-4. Firebase 구성 파일 추가하기
-5. FlutterFire 라이브러리 추가하기
+4. Flutter 프로젝트에 Firebase 구성 파일 추가하기
+5. FlutterFire(라이브러리) 추가하기
 6. Firebase 콘솔에서 Apple 로그인 사용 설정하기
 7. Apple Developer에서 서비스 ID 생성하기
 
@@ -113,7 +113,7 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 <br>
 
-## 4. Firebase 구성 파일 추가하기
+## 4. Flutter 프로젝트에 Firebase 구성 파일 추가하기
 
 이제 Firebase 프로젝트에 방금 등록한 iOS 앱과 개발중인 Flutter 프로젝트를 연결합니다. Firebase에서 제공하는 iOS용 구성 파일을 Flutter 프로젝트의 지정된 경로에 추가하면 됩니다. `GoogleService-Info.plist` 다운로드 버튼을 클릭하여 파일(`GoogleService-Info.plist`)을 저장합니다.
 
