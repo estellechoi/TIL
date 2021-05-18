@@ -18,7 +18,7 @@
 
 ## 1. 선행 작업하기
 
-Flutter 앱에서 Apple 로그인을 구현하려면 Firebase 프로젝트와 앱을 연결하고 Apple Developer에서 생성하는 서비스 ID가 필요합니다. 또 이 작업을 위해서는 Flutter 앱이 Apple Developer에 등록된 고유 번들 ID를 갖고있어야합니다. 이 문서는 이러한 선행작업을 포함하는 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하고 아래 단계들을 따라가는 것이 좋습니다. 선행 작업들을 목록화하면 다음과 같습니다.
+Flutter 앱에서 Apple 로그인을 구현하려면 Firebase 프로젝트와 앱을 연결하고 Apple Developer에서 생성하는 서비스 ID가 필요합니다. 또 이 작업을 위해서는 몇 가지 선행 작업이 완료되어야합니다. 이 문서는 이러한 선행작업을 포함하는 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하고 아래 단계들을 따라가는 것이 좋습니다. 선행 작업들을 목록화하면 다음과 같습니다.
 
 - [Apple Developer Program 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-apple-developer-program-등록하기)
 
