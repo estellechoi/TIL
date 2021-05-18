@@ -66,7 +66,7 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 ## 2. Firebase 프로젝트 생성하기
 
-Google [Firebase 콘솔](https://console.firebase.google.com/u/0/)에서 `프로젝트 만들기` 버튼을 클릭하여 프로젝트를 생성합니다. 보통 Firebase 콘솔에 표시될 프로젝트 이름으로 정합니다. 프로젝트 이름을 기반으로 고유한 프로젝트 ID가 생성되고 하단에 보여집니다. 프로젝트 생성이 완료되면 해당 프로젝트의 메인보드 화면으로 자동 이동됩니다. 이 화면은 [Firebase 콘솔의 프로젝트 목록](https://console.firebase.google.com/u/0/)에서 생성한 프로젝트를 클릭하여 접근할 수 있습니다.
+선행 작업을 완료했다면 Google [Firebase 콘솔](https://console.firebase.google.com/u/0/)에서 `프로젝트 만들기` 버튼을 클릭하여 프로젝트를 생성합니다. 보통 Firebase 콘솔에 표시될 프로젝트 이름으로 정합니다. 프로젝트 이름을 기반으로 고유한 프로젝트 ID가 생성되고 하단에 보여집니다. 프로젝트 생성이 완료되면 해당 프로젝트의 메인보드 화면으로 자동 이동됩니다. 이 화면은 [Firebase 콘솔의 프로젝트 목록](https://console.firebase.google.com/u/0/)에서 생성한 프로젝트를 클릭하여 접근할 수 있습니다.
 
 <br>
 
