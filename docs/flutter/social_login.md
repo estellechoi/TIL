@@ -6,13 +6,37 @@
 
 <br>
 
-## 1. Firebase 프로젝트 생성하기
+1. 선행 작업하기
+2. Firebase 프로젝트 생성하기
+3. Firebase에 iOS 앱 등록하기
+4. Firebase 구성 파일 추가하기
+5. FlutterFire 라이브러리 추가하기
+6. Firebase 콘솔에서 Apple 로그인 사용 설정하기
+7. Apple Developer에서 서비스 ID 생성하기
+
+<br>
+
+## 1. 선행 작업하기
+
+Flutter 앱에서 Apple 로그인을 구현하려면 Firebase 프로젝트와 앱을 연결하고 Apple Developer에서 생성하는 서비스 ID가 필요합니다. 또 이 작업을 위해서는 Flutter 앱이 Apple Developer에 등록된 고유 번들 ID를 갖고있어야합니다. 이 문서는 이러한 선행작업을 포함하는 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하고 아래 단계들을 따라가는 것이 좋습니다. 선행 작업들을 목록화하면 다음과 같습니다.
+
+- [Apple Developer Program 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-apple-developer-program-등록하기)
+
+- [Apple Developer에서 고유 앱 번들 ID 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-고유-번들-id-등록)
+
+- [Apple Developer > Identifiers](https://developer.apple.com/account/resources/identifiers/list)에서 앱 ID Capabilities 섹션에서 Sign in with Apple 항목 체크
+
+- [Xcode 프로젝트 Signing & Capabilities](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-2-signing--capabilities)에 Sign in with Apple 추가
+
+<br>
+
+## 2. Firebase 프로젝트 생성하기
 
 Google [Firebase 콘솔](https://console.firebase.google.com/u/0/)에서 `프로젝트 만들기` 버튼을 클릭하여 프로젝트를 생성합니다. 보통 Firebase 콘솔에 표시될 프로젝트 이름으로 정합니다. 프로젝트 이름을 기반으로 고유한 프로젝트 ID가 생성되고 하단에 보여집니다. 프로젝트 생성이 완료되면 해당 프로젝트의 메인보드 화면으로 자동 이동됩니다. 이 화면은 [Firebase 콘솔의 프로젝트 목록](https://console.firebase.google.com/u/0/)에서 생성한 프로젝트를 클릭하여 접근할 수 있습니다.
 
 <br>
 
-## 2. Firebase에 iOS 앱 등록하기
+## 3. Firebase에 iOS 앱 등록하기
 
 이제 위에서 생성한 Firebase 프로젝트에 Apple 로그인을 적용할 iOS 앱을 등록해야 합니다. 프로젝트 메인보드 페이지에서 `iOS` 아이콘을 클릭합니다.
 
@@ -50,7 +74,7 @@ Google [Firebase 콘솔](https://console.firebase.google.com/u/0/)에서 `프로
 
 <br>
 
-## 3. Firebase 구성 파일 추가하기
+## 4. Firebase 구성 파일 추가하기
 
 Flutter 프로젝트와 Firebase를 연결하기 위해 Firebase에서 제공하는 iOS용 구성 파일을 프로젝트에 추가해야합니다. `GoogleService-Info.plist` 다운로드 버튼을 클릭하여 파일(`GoogleService-Info.plist`)을 저장합니다.
 
@@ -69,7 +93,7 @@ Flutter 프로젝트와 Firebase를 연결하기 위해 Firebase에서 제공하
 
 <br>
 
-## 4. FlutterFire 라이브러리 추가하기
+## 5. FlutterFire 라이브러리 추가하기
 
 Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/projects/firebaseextended/flutterfire/)를 사용하여 Firebase API 등 다양한 플랫폼별 서비스에 접근할 수 있습니다. 각 Firebase 서비스에 필요한 라이브러리를 추가하는 방식인데, 이러한 라이브러리들을 총칭하여 FlutterFire라고 부릅니다. Flutter 프로젝트의 경우 FlutterFire 라이브러리들을 프로젝트에 추가하면 iOS, Android 버전 모두에서 사용됩니다.
 
@@ -87,7 +111,7 @@ Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/proje
 
 <br>
 
-## 5. Firebase 콘솔에서 Apple 로그인 사용 설정하기
+## 6. Firebase 콘솔에서 Apple 로그인 사용 설정하기
 
 다시 Firebase 콘솔의 프로젝트 관리 페이지로 돌아옵니다. 왼쪽 메뉴바에서 `Authentication` 메뉴를 클릭하여 이동한 후 `시작하기` 버튼을 클릭합니다.
 
@@ -142,7 +166,7 @@ Android 앱에서도 Apple 로그인을 사용하려면 아래 항목들을 작�
 
 <br>
 
-## 6. Apple Developer에서 서비스 ID 생성하기
+## 7. Apple Developer에서 서비스 ID 생성하기
 
 이제 Apple의 Sign in with Apple 서비스를 사용하기 위해 서비스 ID를 만들어야합니다. [Apple Developer](https://developer.apple.com) 사이트에서 [Account > Certificates, IDs & Profiles > Identifiers](https://developer.apple.com/account/resources/identifiers/list)로 이동한 후, `+` 버튼을 클릭하여 서비스 ID 생성을 시작합니다.
 
