@@ -76,11 +76,11 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 ## 3. Firebase에 iOS 앱 등록하기
 
-이제 위에서 생성한 Firebase 프로젝트에 Apple 로그인을 적용할 iOS 앱을 등록해야 합니다. 프로젝트 메인보드 페이지에서 `iOS` 아이콘을 클릭합니다.
+> 이 단계부터 자세한 내용은 [Flutter 앱에 Firebase 추가](https://firebase.google.com/docs/flutter/setup?hl=ko) 문서를 참고하세요.
 
 <br>
 
-> 이 단계부터 자세한 내용은 [Flutter 앱에 Firebase 추가](https://firebase.google.com/docs/flutter/setup?hl=ko) 문서를 참고하세요.
+이제 위에서 생성한 Firebase 프로젝트에 Apple 로그인을 적용할 iOS 앱을 등록해야 합니다. 프로젝트 메인페이지에서 `iOS` 아이콘을 클릭합니다.
 
 <br>
 
@@ -91,11 +91,12 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 `iOS` 아이콘을 클릭하여 앱 등록을 시작하면 아래 스크린샷과 같이 폼 양식이 나타납니다. 각 항목에 입력해야할 내용은 다음과 같습니다.
 
-- iOS 번들 ID : [Apple Developer](https://developer.apple.com/account/resources/identifiers/list/bundleId)에서 생성한 앱의 고유 번들 ID를 입력합니다.
+- iOS 번들 ID : [Apple Developer](https://developer.apple.com/account/resources/identifiers/list/bundleId)에서 생성한 앱의 고유 번들 ID를 입력합니다. 아직 앱 ID가 없다면 [1. 선행 작업하기](#user-content-2-고유-앱-번들-id-등록)로 돌아가서 앱 ID를 생성해주세요.
 
-- 앱 닉네임 : Firebase Console에서 본인만 볼 수 있는 편의용 닉네임입니다.
+- 앱 닉네임 : Firebase 콘솔에서 관리자만 볼 수 있는 편의용 이름입니다.
 
-- App Store ID : 앱에 아직 App Store ID가 없으면 나중에 프로젝트 설정에서 ID를 추가할 수 있습니다.
+- App Store ID : 아직 App Store ID가 없다면 추후에 프로젝트 설정에서 추가할 수 있습니다.
+  > 여기에서는 건너뛰겠습니다.
 
 <br>
 
@@ -104,11 +105,11 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 <br>
 <br>
 
-`앱 등록` 버튼이 활성화되면 클릭하여 앱 등록을 완료하시고요, 다음 단계들은 추후 편집이 가능하므로 건너뛰고 프로젝트 메인보드 페이지로 이동합니다. 아래 스크린샷과 같이 방금 등록한 앱을 확인할 수 있습니다. 이제 등록한 앱 이름을 클릭한 후 톱니바퀴 아이콘을 클릭하여 건너뛰었던 내용들을 편집해봅시다.
+`앱 등록` 버튼이 활성화되면 클릭하여 앱 등록을 완료하시고요, 다음 단계들은 추후 입력이 가능하므로 건너뛰고 프로젝트 메인페이지로 돌아갑니다. 아래 스크린샷과 같이 방금 등록한 iOS 앱을 확인할 수 있습니다. 이제 등록한 앱 이름을 클릭한 후 톱니바퀴 아이콘을 클릭하여 건너뛰었던 내용들을 편집해봅시다.
 
 <br>
 
-<img src="./../img/firebase11.png" alt="firebase" />
+<img src="./../img/firebase21.png" alt="firebase" />
 
 <br>
 
