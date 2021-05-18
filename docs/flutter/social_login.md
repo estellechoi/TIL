@@ -177,9 +177,9 @@ Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/proje
 
 Android 앱에서도 Apple 로그인을 사용하려면 아래 항목들을 작성합니다.
 
-- `서비스 ID` : Android 앱에서 Apple 로그인을 사용할 때 필요한 ID 입니다. [Apple Store Connect](https://appstoreconnect.apple.com/)에서 생성한 앱 ID를 입력하면 됩니다.
+- `서비스 ID` : Android 앱에서 Apple 로그인을 사용할 때 필요한 ID 입니다. [Apple Developer](https://developer.apple.com/account/resources/identifiers/list)에서 생성한 앱 ID를 입력하면 됩니다.
 
-  > 아직 앱 ID가 없다면, [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서를 참고하여 앱 ID를 먼저 생성해주세요.
+  > 아직 앱 ID가 없다면 앱 ID를 먼저 생성해주세요.
 
 <br>
 
@@ -193,7 +193,7 @@ Android 앱에서도 Apple 로그인을 사용하려면 아래 항목들을 작�
 
 <br>
 
-폼 양식의 하단에 있는 승인 콜백 URL은 [Apple Developer](https://developer.apple.com)에서 서비스 ID 등록시 필요합니다.
+폼 양식의 하단에 있는 승인 콜백 URL은 [Apple Developer](https://developer.apple.com)에서 서비스 ID 생성시 필요합니다.
 
 <br>
 
@@ -242,7 +242,7 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 <br>
 
-`Sign in with Apple`에 체크합니다.
+서비스 ID의 상세정보 페이지로 이동하면 `Sign in with Apple` 항목이 있습니다. `ENABLED`에 체크합니다.
 
 <br>
 
