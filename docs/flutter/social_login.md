@@ -136,7 +136,7 @@ Flutter 프로젝트의 루트 경로를 기준으로 `ios/Runner.xcworkspace` �
 
 <br>
 
-## 5. FlutterFire 라이브러리 추가하기
+## 5. FlutterFire(라이브러리) 추가하기
 
 Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/projects/firebaseextended/flutterfire/)를 사용하여 Firebase API 등 다양한 플랫폼별 서비스에 접근할 수 있습니다. 각 Firebase 서비스에 필요한 라이브러리를 추가하는 방식인데, 이러한 라이브러리들을 총칭하여 FlutterFire라고 부릅니다. Flutter 프로젝트의 경우 FlutterFire 라이브러리들을 프로젝트에 추가하면 iOS, Android 버전 모두에서 사용됩니다.
 
