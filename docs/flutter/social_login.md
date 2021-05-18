@@ -132,7 +132,7 @@ Flutter 프로젝트의 루트 경로를 기준으로 `ios/Runner.xcworkspace` �
 
 <br>
 
-<img src="./../img/firebase13.png" alt="firebase" />
+<img src="./../img/firebase22.png" alt="firebase" />
 
 <br>
 
