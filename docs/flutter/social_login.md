@@ -1,4 +1,4 @@
-# Flutter 앱에서 Apple 로그인 구현하기
+# Flutter 앱에서 Firebase를 사용하여 Apple 로그인 구현하기
 
 <br>
 
@@ -18,16 +18,50 @@
 
 ## 1. 선행 작업하기
 
-Flutter 앱에서 Apple 로그인을 구현하려면 Firebase 프로젝트와 앱을 연결하고 Apple Developer에서 생성하는 서비스 ID가 필요합니다. 또 이 작업을 위해서는 몇 가지 선행 작업이 완료되어야합니다. 이 문서는 이러한 선행작업을 포함하는 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하고 아래 단계들을 따라가는 것이 좋습니다. 선행 작업들을 목록화하면 다음과 같습니다.
+> Apple 로그인은 iOS 13 이상에서만 사용 가능합니다.
 
-- [Apple Developer Program 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-apple-developer-program-등록하기)
+<br>
 
-- [Apple Developer에서 고유 앱 번들 ID 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-고유-번들-id-등록)
+Flutter 앱에서 Apple 로그인을 구현하려면 Firebase 프로젝트와 앱을 연결하고 Apple Developer에서 생성하는 서비스 ID가 필요합니다. 또 이 작업을 위해서는 몇 가지 선행 작업이 필요합니다. 이 문서는 이러한 선행작업을 포함하는 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하고 아래 단계들을 따라가는 것이 좋습니다.
 
-- [Apple Developer > Identifiers](https://developer.apple.com/account/resources/identifiers/list)에서 앱 ID Capabilities 섹션에서 Sign in with Apple 항목 체크
+<br>
 
-- [Xcode 프로젝트 Signing & Capabilities](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-2-signing--capabilities)에 Sign in with Apple 추가
+### 1) Apple Developer Program 등록
 
+Sign in with Apple을 포함한 Apple 서비스를 개발중인 앱에서 이용하려면 고유한 앱 번들 ID가 필요합니다. 이를 위해 개발자(팀)의 Apple 계정을 개발자 계정으로 전환해야합니다. [Apple Developer Program 등록하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-apple-developer-program-등록하기)를 참고하여 개발자 계정으로 등록하세요. 이 단계에서 비용이 발생하고, 승인까지 시간이 소요될 수 있습니다.
+
+<br>
+
+### 2) 고유 앱 번들 ID 등록
+
+개발자 계정으로 전환이 완료되면 Apple에서 앱을 식별할 수 있는 고유한 앱 ID를 생성해야합니다. [Apple Developer에서 고유 앱 번들 ID 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-고유-번들-id-등록)을 참고하여 앱 ID를 등록하세요.
+
+<br>
+
+> 아직 앱 ID가 없어 새로 ID를 생성하는 경우라면, 이 단계에서 Capabilites 섹션에서 Sign in with Apple 항목을 `ENABLED`로 체크하고 다음 단계는 건너뜁니다. 이미 앱 ID가 있다면, 이 단계는 건너뛰고 다음 단계에 따라 Capabilites 섹션을 수정합니다.
+
+<br>
+
+### 3) 앱 ID 정보의 Capabilites에 Sign in with Apple 항목 추가
+
+[Apple Developer > Identifiers](https://developer.apple.com/account/resources/identifiers/list) 페이지에서 수정할 앱 ID를 클릭하여 편집 페이지로 이동하세요. Capabilities 섹션에서 Sign in with Apple 항목을 `ENABLED`로 체크하고 `Save` 버튼을 클릭하여 수정합니다.
+
+<br>
+
+<img src="./../img/firebase20.png" alt="firebase" />
+
+<br>
+<br>
+
+### 4) Xcode 프로젝트 설정에 Sign in with Apple 추가
+
+[Signing & Capabilities](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-2-signing--capabilities)를 참고하여 Xcode를 열고 Sign in with Apple 서비스를 Capability로 추가합니다. 아래 스크린샷과 같이 Xcode에서 프로젝트의 `Runner/Runner` 경로를 열고, `Signing & Capabilities` 탭으로 이동한 후 `+ Capability` 버튼을 클릭하여 추가하면 됩니다.
+
+<br>
+
+<img src="./../img/firebase16.png" alt="firebase" />
+
+<br>
 <br>
 
 ## 2. Firebase 프로젝트 생성하기
