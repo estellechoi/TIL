@@ -42,7 +42,7 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 <br>
 
-### 3) 앱 ID 정보의 Capabilites에 Sign in with Apple 항목 추가
+### 3) 앱 ID Capabilites에 Sign in with Apple 항목 추가
 
 [Apple Developer > Identifiers](https://developer.apple.com/account/resources/identifiers/list) 페이지에서 수정할 앱 ID를 클릭하여 편집 페이지로 이동하세요. Capabilities 섹션에서 Sign in with Apple 항목을 `ENABLED`로 체크하고 `Save` 버튼을 클릭하여 수정합니다.
 
