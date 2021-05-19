@@ -270,7 +270,7 @@ firebase deploy
 
 <br>
 
-<img src="./../img/firebase28.png" alt="firebase" />
+<img src="./../img/firebase29.png" alt="firebase" />
 
 <br>
 <br>
@@ -358,16 +358,15 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 <br>
 <br>
 
-완료하면 아래와 같이 도메인과 이메일 주소가 등록된 것을 확인할 수 있습니다. 이전에는 도메인 검증을 위해 `Download` 버튼을 사용해 `apple-developer-domain-association.txt` 파일을 가져오고 Flutter 프로젝트에 포함시킨 후 Firebase 앱을 배포하는 과정이 있었지만, 현재는 이 과정이 생략되었으므로 여기에서 마무리하면 됩니다. 등록한 도메인이 `TLS 1.2` 이상을 지원하는 것으로 자동 검증이 됩니다. StackOverflow의 [Sign in with Apple: Not able to download apple-developer-domain-association.txt](https://stackoverflow.com/questions/61523793/sign-in-with-apple-not-able-to-download-apple-developer-domain-association-txt) 페이지가 도움이 되었습니다.
+완료하면 아래와 같이 도메인과 이메일 주소가 등록된 것을 확인할 수 있습니다. 참고로 도메인 주소 위에 커서를 올리면 `Reverify SPF` 버튼이 나타납니다. 이전에는 도메인 검증을 위해 `Download` 버튼을 사용해 `apple-developer-domain-association.txt` 파일을 가져오고 Flutter 프로젝트에 포함시킨 후 Firebase 앱을 배포하는 과정이 있었지만, 현재는 이 과정이 생략되었으므로 여기에서 마무리하면 됩니다. 등록한 도메인이 `TLS 1.2` 이상을 지원하는 것으로 자동 검증이 됩니다.
+
+<br>
+
+> StackOverflow의 [Sign in with Apple: Not able to download apple-developer-domain-association.txt](https://stackoverflow.com/questions/61523793/sign-in-with-apple-not-able-to-download-apple-developer-domain-association-txt) 페이지가 도움이 되었습니다.
 
 <br>
 
 <img src="./../img/firebase32.png" alt="firebase" />
-
-<br>
-<br>
-
-> 도메인 주소 위에 커서를 올리면 `Reverify SPF` 버튼이 나타납니다.
 
 <br>
 
@@ -392,17 +391,13 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 ## 10. `sign_in_with_apple` 라이브러리 추가하기
 
-Flutter 프로젝트 코드에서 Apple 로그인 구현은 [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple) 라이브러리를 사용합니다. `pubspec.yaml` 파일에 라이브러리를 추가하여 설치해주세요.
+Flutter 프로젝트 코드에서 Apple 로그인 구현은 [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple) 라이브러리를 사용하는 것을 추천합니다. `pubspec.yaml` 파일에 라이브러리를 추가하여 설치해주세요.
 
 <br>
 
 ## 11. Apple 로그인 구현하기
 
-이제 필요한 곳에서 라이브러리를 사용하여 구현하면 됩니다. 아래는 [Flutter Firebase Authentication: Apple Sign In](https://dev.to/offlineprogrammer/flutter-firebase-authentication-apple-sign-in-1m64#app-implementation) 문서의 App Implementation 섹션을 참고하여 작성한 예제 코드입니다.
-
-<br>
-
-아래의 예제 코드는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다.
+이제 필요한 곳에서 라이브러리를 사용하여 구현하면 됩니다. 아래는 [Flutter Firebase Authentication: Apple Sign In](https://dev.to/offlineprogrammer/flutter-firebase-authentication-apple-sign-in-1m64#app-implementation) 문서의 App Implementation 섹션을 참고하여 작성한 예제 코드입니다. 이 예제 코드는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다.
 
 <br>
 
@@ -460,7 +455,6 @@ class AuthProvider with ChangeNotifier {
       final OAuthCredential oauthCredential =
           OAuthProvider('apple.com').credential(
         idToken: credential.identityToken,
-        // rawNonce: rawNonce,
       );
 
       // `oauthCredential` 객체를 사용하여 Firebase에 로그인 시키고
@@ -531,9 +525,13 @@ class _SignInWithAppleButtonState extends State<SignInWithAppleButton> {
 
 <br>
 
+이제 이 버튼 위젯을 사용하면 끝입니다.
+
+<br>
+
 ### 4) `main.dart`에서 `AuthProvider` 클래스의 변화 감지하기
 
-> 이 단계는 건너뛰어도 됩니다.
+> 이 단계는 필요한 경우에만 해당합니다.
 
 <br>
 
@@ -606,6 +604,18 @@ providers: [
           context.read<AuthProvider>().authStateChanges,
       initialData: null)
 ]
+```
+
+<br>
+
+## 12. Podfile 설정하기
+
+위 단계까지 마무리하고 Flutter 앱을 실행시키면 아래와 같은 오류가 나타날 수 있습니다.
+
+```
+[!] Automatically assigning platform `iOS` with version `9.0` on target `Runner`
+because no platform was specified. Please specify a platform for this target in
+your Podfile. See `https://guides.cocoapods.org/syntax/podfile.html#platform`.
 ```
 
 <br>
