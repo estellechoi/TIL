@@ -422,28 +422,43 @@ Future<void> main() async {
 
 ### 2) `AuthProvider` 만들기
 
-이제 Firebase 인증 메소드를 모아둘 `AuthProvider` 클래스를 만듭니다. `auth_provider.dart` 파일을 생성하고, 아래 코드를 참고하여 작성해주세요. 저는 `signinWithApple()` 메소드와 `signout()` 메소드를 만들었습니다. `main.dart`에서 `AuthProvider` 클래스의 변화를 감지할 수 있도록 `ChangeNotifier`를 [`mixins`](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins)로 추가합니다.
+이제 Firebase 인증 메소드를 모아둘 `AuthProvider` 클래스를 만듭니다. `auth_provider.dart` 파일을 생성하시고요, [FlutterFire 공식문서](https://firebase.flutter.dev/docs/auth/social#apple)에서 제공하는 예제 코드를 참고하여 작성합니다. 저는 `signinWithApple()` 메소드와 `signout()` 메소드를 만들었습니다. `main.dart`에서 `AuthProvider` 클래스의 변화를 감지할 수 있도록 `ChangeNotifier`를 [`mixins`](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins)로 추가합니다.
 
 ```dart
+import 'dart:math';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthProvider with ChangeNotifier {
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth firebaseAuth;
 
-  AuthProvider(this._firebaseAuth);
+  AuthProvider(this.firebaseAuth);
 
-  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  Stream<User?> get authStateChanges => firebaseAuth.authStateChanges();
 
-  // Signout
-  Future signout() async {
-    await _firebaseAuth.signOut();
+  String generateNonce([int length = 32]) {
+    final String charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final Random random = Random.secure();
+    return List.generate(
+        length, (index) => charset[random.nextInt(charset.length)]).join();
+  }
+
+  String sha256ofString(String input) {
+    final List<int> bytes = utf8.encode(input);
+    final Digest digest = sha256.convert(bytes);
+    return digest.toString();
   }
 
   // Signin
   Future<User?> signinWithApple() async {
     try {
+      final String rawNonce = generateNonce();
+      final String nonce = sha256ofString(rawNonce);
+
       // Sign in with Apple 후 반환된 `credential` 객체를 가져옵니다
       final AuthorizationCredentialAppleID credential =
           await SignInWithApple.getAppleIDCredential(
@@ -451,18 +466,20 @@ class AuthProvider with ChangeNotifier {
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
+        nonce: nonce
       );
 
       // 위에서 가져온 `credential` 객체를 사용하여 `oauthCredential` 객체를 생성합니다.
       final OAuthCredential oauthCredential =
           OAuthProvider('apple.com').credential(
         idToken: credential.identityToken,
+        rawNonce: rawNonce
       );
 
       // `oauthCredential` 객체를 사용하여 Firebase에 로그인 시키고
       // 결과 정보를 담은 `authResult` 객체를 가져옵니다.
       final UserCredential authResult =
-          await _firebaseAuth.signInWithCredential(oauthCredential);
+          await firebaseAuth.signInWithCredential(oauthCredential);
 
       final String displayName =
           '${credential.givenName} ${credential.familyName}';
@@ -478,6 +495,11 @@ class AuthProvider with ChangeNotifier {
     } catch (e) {
       print(e);
     }
+  }
+
+  // Signout
+  Future signout() async {
+    await firebaseAuth.signOut();
   }
 }
 ```
