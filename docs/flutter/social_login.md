@@ -689,6 +689,10 @@ platform :ios, '10.0'
 <br>
 <br>
 
+> 현재 기준 iOS 14.0 이상 Emulator에서 Sign in with Apple이 작동하지 않는 이슈가 있습니다. Apple Developer Forums의 [Sign In With Apple not working with Xcode 12 beta on simulator ?](https://developer.apple.com/forums/thread/651533) 페이지에 이 이슈에 대한 질문이 올라왔고, 아직까지 Apple에서 대응중인 것으로 추측됩니다. 실제 디바이스에서는 정상 작동합니다.
+
+<br>
+
 회원가입/로그인 테스트를 완료했으면 [Firebase 콘솔](https://console.firebase.google.com/u/0/)의 `Authentication` 메뉴에서 테스트한 사용자 정보를 조회할 수 있습니다.
 
 <br>
