@@ -17,6 +17,7 @@
 9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
 10. `sign_in_with_apple` 라이브러리 추가하기
 11. Apple 로그인 구현하기
+12. `Podfile` 설정하기
 
 <br>
 
@@ -608,15 +609,71 @@ providers: [
 
 <br>
 
-## 12. Podfile 설정하기
+## 12. `Podfile` 설정하기
 
-위 단계까지 마무리하고 Flutter 앱을 실행시키면 아래와 같은 오류가 나타날 수 있습니다.
+[CocoaPods](https://cocoapods.org/)는 Xcode 프로젝트를 위한 의존성 매니저이고요, CocoaPods의 `Podfile`은 Xcode 프로젝트의 의존성을 명세하는 파일입니다.
+
+<br>
+
+> CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects. It has over 83 thousand libraries and is used in over 3 million apps. - [CocoaPods 공식문서](https://cocoapods.org/)
+
+<br>
+
+위 단계까지 마무리하고 Flutter 앱을 실행시키면 아래와 같은 CocoaPods 오류들이 나타날 수 있습니다.
+
+- [`Podfile`](https://guides.cocoapods.org/using/the-podfile.html)에 이 프로젝트 타겟을 위한 플랫폼을 명시하라는 내용입니다.
 
 ```
 [!] Automatically assigning platform `iOS` with version `9.0` on target `Runner`
 because no platform was specified. Please specify a platform for this target in
 your Podfile. See `https://guides.cocoapods.org/syntax/podfile.html#platform`.
 ```
+
+<br>
+
+- 다음은 `firebase_auth` 의존성을 사용하기 위해 최소 호환 버전을 충족하라는 내용입니다.
+
+```
+[!] CocoaPods could not find compatible versions for pod "firebase_auth":
+      In Podfile:
+        firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
+    Specs satisfying the `firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)` dependency were found, but they required a higher minimum deployment target.
+```
+
+<br>
+
+### 플랫폼 명시하기
+
+`Podfile`을 열어 플랫폼부터 명시해봅시다. 플러터 프로젝트의 `Podfile`은 `ios/` 경로에 있습니다. 파일의 최상단에는 아래와 같이 두 줄의 주석이 있고요.
+
+```Podfile
+# Uncomment this line to define a global platform for your project
+# platform :ios, '9.0'
+```
+
+<br>
+
+주석의 내용대로 이 프로젝트의 플랫폼을 정의하기 위해 아랫줄의 주석을 해제하면 끝입니다.
+
+```Podfile
+# Uncomment this line to define a global platform for your project
+platform :ios, '9.0'
+```
+
+<br>
+
+### FlutterFire 요구 버전 맞추기
+
+현재 기준으로 `firebase_auth`를 포함한 FlutterFire는 iOS 10 이상을 지원하기 때문에 플랫폼 버전을 `10`으로 수정합니다.
+
+```Podfile
+# Uncomment this line to define a global platform for your project
+platform :ios, '10.0'
+```
+
+<br>
+
+`Podfile` 설정을 완료하고 다시 Flutter 앱을 실행시키면 자동으로 `pod install` 명령어가 실행되고 앱이 실행됩니다.
 
 <br>
 
