@@ -660,7 +660,7 @@ platform :ios, '9.0'
 
 ### FlutterFire 요구 버전 맞추기
 
-현재 기준으로 `firebase_auth`를 포함한 FlutterFire는 iOS 10 이상을 지원하기 때문에 플랫폼 버전을 `10`으로 수정합니다.
+현재 기준으로 `firebase_auth`를 포함한 FlutterFire는 iOS 10 이상을 지원하기 때문에 플랫폼 버전을 `10.0`으로 수정합니다.
 
 ```Podfile
 # Uncomment this line to define a global platform for your project
