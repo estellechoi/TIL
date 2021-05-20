@@ -424,6 +424,8 @@ Future<void> main() async {
 
 이제 Firebase 인증 메소드를 모아둘 `AuthProvider` 클래스를 만듭니다. `auth_provider.dart` 파일을 생성하시고요, [FlutterFire 공식문서](https://firebase.flutter.dev/docs/auth/social#apple)에서 제공하는 예제 코드를 참고하여 작성합니다. 저는 `signinWithApple()` 메소드와 `signout()` 메소드를 만들었습니다. `main.dart`에서 `AuthProvider` 클래스의 변화를 감지할 수 있도록 `ChangeNotifier`를 [`mixins`](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins)로 추가합니다.
 
+<br>
+
 ```dart
 import 'dart:math';
 import 'dart:convert';
@@ -502,6 +504,37 @@ class AuthProvider with ChangeNotifier {
     await firebaseAuth.signOut();
   }
 }
+```
+
+<br>
+
+Flutter 2.0을 사용하신다면 이전 버전의 `crypto` 라이브러리가 `null-safety`를 지원하지 않는 이슈가 있을겁니다. 현재 기준으로 가장 최근 버전인 [`crypto 3.0.1`](https://pub.dev/packages/crypto/install)이 `null-safety`를 지원하므로 해당 버전을 사용해야합니다.
+
+<br>
+
+하지만 `pubspec.yaml` 파일을 아래와 같이 수정하지 마세요.
+
+```yaml
+dependencies:
+  crypto: ^3.0.1
+```
+
+<br>
+
+위와 같이 버전을 지정하고 라이브러리 설치를 진행하면 아래와 같은 오류가 나타납니다. 프로젝트에서 `crypto ^3.0.1`을 사용하겠다고 명시했으나, `integration_test`가 `crypto 2.1.5` 버전에 의존하고 있어 버전 충돌 문제가 있다는 내용입니다.
+
+```
+Because every version of integration_test from sdk depends on crypto 2.1.5 and flutter_app depends on crypto ^3.0.1, integration_test from sdk is forbidden.
+So, because flutter_app depends on integration_test any from sdk, version solving failed.
+```
+
+<br>
+
+위의 이슈는 `dependency_overrides`를 명시하여 임시로 해결이 가능합니다. `pubspec.yaml` 파일에 아래 내용을 추가하세요.
+
+```
+dependency_overrides:
+  crypto: ^3.0.1
 ```
 
 <br>
