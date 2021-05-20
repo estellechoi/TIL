@@ -18,6 +18,7 @@
 10. `sign_in_with_apple` 라이브러리 추가하기
 11. Sign in with Apple 구현하기
 12. `Podfile` 설정하기
+13. Firebase 콘솔에서 사용자 조회하기
 
 <br>
 
@@ -674,6 +675,25 @@ platform :ios, '10.0'
 <br>
 
 <img src="./../img/firebase33.png" alt="firebase" />
+
+<br>
+
+## 13. Firebase 콘솔에서 사용자 조회하기
+
+이제 iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요. Settings에서 Apple 계정 로그인을 먼저 진행해야 Sign in with Apple 테스트가 가능합니다. 또는 TestFlight에 앱을 출시하고 실제 iOS 디바이스에서 테스트할 수 있습니다. 첫 테스트시에는 회원가입이 진행되고, 그 다음부터는 로그인이 진행됩니다.
+
+<br>
+
+<!-- <img src="./../img/firebase35.png" alt="firebase" /> -->
+
+<br>
+<br>
+
+회원가입/로그인 테스트를 완료했으면 [Firebase 콘솔](https://console.firebase.google.com/u/0/)의 `Authentication` 메뉴에서 테스트한 사용자 정보를 조회할 수 있습니다.
+
+<br>
+
+<img src="./../img/firebase34.png" alt="firebase" />
 
 <br>
 
