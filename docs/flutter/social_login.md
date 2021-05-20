@@ -485,7 +485,7 @@ class AuthProvider with ChangeNotifier {
 
 ### 3) Apple 로그인 버튼 위젯 구현하기
 
-버튼을 클릭하면 `AuthProvider`의 `signinWithApple()` 메소드가 호출되도록 구현합니다. `provider` 라이브러리를 임포트하여 사용합니다. `HinokiButton`은 별도로 만들어둔 버튼 위젯입니다.
+버튼을 클릭하면 `AuthProvider`의 `signinWithApple()` 메소드가 호출되도록 위젯을 구현합니다. `provider` 라이브러리를 사용할건데요, `Provider`는 스코프(Scope) 기반으로 작동하기 때문에 특정 라우트가 아닌 `main.dart`의 최상위 위젯에 추가해야합니다. 그리고 필요한 경우에 `BuildContext`에서 가져와 사용하는 방식이죠. `main.dart` 파일 작업은 뒤에서 하도록 하고, 이 단계에서는 `AuthProvider` 인스턴스를 직접 만들어 사용하지 않고 `BuildContext`에서 이미 존재하는 인스턴스를 가져와 사용하도록 작성하면 됩니다.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -526,7 +526,7 @@ class _SignInWithAppleButtonState extends State<SignInWithAppleButton> {
 
 <br>
 
-이제 이 버튼 위젯을 사용하면 끝입니다.
+`HinokiButton`은 별도로 만들어둔 버튼 위젯입니다. 이제 이 버튼 위젯을 사용하면 끝입니다.
 
 <br>
 
