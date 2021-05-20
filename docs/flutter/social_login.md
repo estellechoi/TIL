@@ -526,7 +526,7 @@ class _SignInWithAppleButtonState extends State<SignInWithAppleButton> {
 
 <br>
 
-`HinokiButton`은 별도로 만들어둔 버튼 위젯입니다. 이제 이 버튼 위젯을 사용하면 끝입니다.
+`HinokiButton`은 별도로 만들어둔 버튼 위젯입니다. 이제 `SignInWithAppleButton` 버튼 위젯을 사용하면 됩니다. 플랫폼이 iOS일 때만 사용하기위해서는 Flutter에서 제공하는 `bool` 타입의 `Platform.isIOS` 값을 사용할 수 있습니다.
 
 <br>
 
