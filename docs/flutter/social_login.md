@@ -1,4 +1,4 @@
-# Flutter 앱에서 Firebase를 사용하여 Apple 로그인 구현하기
+# Flutter 앱에서 Firebase를 사용하여 Sign in with Apple 구현하기
 
 <br>
 
@@ -16,14 +16,14 @@
 8. Sign in with Apple 서비스 설정하기
 9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
 10. `sign_in_with_apple` 라이브러리 추가하기
-11. Apple 로그인 구현하기
+11. Sign in with Apple 구현하기
 12. `Podfile` 설정하기
 
 <br>
 
 ## 1. 선행 작업하기
 
-> Apple 로그인은 iOS 13 이상에서만 사용 가능합니다.
+> Sign in with Apple은 iOS 13 이상에서만 사용 가능합니다.
 
 <br>
 
@@ -392,11 +392,11 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 ## 10. `sign_in_with_apple` 라이브러리 추가하기
 
-Flutter 프로젝트 코드에서 Apple 로그인 구현은 [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple) 라이브러리를 사용하는 것을 추천합니다. `pubspec.yaml` 파일에 라이브러리를 추가하여 설치해주세요.
+Flutter 프로젝트 코드에서 Sign in with Apple 구현은 [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple) 라이브러리를 사용하는 것을 추천합니다. `pubspec.yaml` 파일에 라이브러리를 추가하여 설치해주세요.
 
 <br>
 
-## 11. Apple 로그인 구현하기
+## 11. Sign in with Apple 구현하기
 
 이제 필요한 곳에서 라이브러리를 사용하여 구현하면 됩니다. 아래는 [Flutter Firebase Authentication: Apple Sign In](https://dev.to/offlineprogrammer/flutter-firebase-authentication-apple-sign-in-1m64#app-implementation) 문서의 App Implementation 섹션을 참고하여 작성한 예제 코드입니다. 이 예제 코드는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다.
 
@@ -440,10 +440,10 @@ class AuthProvider with ChangeNotifier {
     await _firebaseAuth.signOut();
   }
 
-  // Signin with Apple
+  // Signin
   Future<User?> signinWithApple() async {
     try {
-      // Apple 로그인 후 반환된 `credential` 객체를 가져옵니다
+      // Sign in with Apple 후 반환된 `credential` 객체를 가져옵니다
       final AuthorizationCredentialAppleID credential =
           await SignInWithApple.getAppleIDCredential(
         scopes: [
@@ -483,7 +483,7 @@ class AuthProvider with ChangeNotifier {
 
 <br>
 
-### 3) Apple 로그인 버튼 위젯 구현하기
+### 3) Sign in with Apple 버튼 위젯 구현하기
 
 버튼을 클릭하면 `AuthProvider`의 `signinWithApple()` 메소드가 호출되도록 위젯을 구현합니다. `provider` 라이브러리를 사용할건데요, `Provider`는 스코프(Scope) 기반으로 작동하기 때문에 특정 라우트가 아닌 `main.dart`의 최상위 위젯에 추가해야합니다. 그리고 필요한 경우에 `BuildContext`에서 가져와 사용하는 방식이죠. `main.dart` 파일 작업은 뒤에서 하도록 하고, 이 단계에서는 `AuthProvider` 인스턴스를 직접 만들어 사용하지 않고 `BuildContext`에서 이미 존재하는 인스턴스를 가져와 사용하도록 작성하면 됩니다.
 
@@ -538,7 +538,7 @@ class _SignInWithAppleButtonState extends State<SignInWithAppleButton> {
 @override
 void initState() {
   super.initState();
-  // 이 부분은 Router를 설정합니다. 이 문서는 Apple 로그인 구현을 다루기 때문에 설명하지 않습니다.
+  // 이 부분은 Router를 설정합니다. 이 문서는 Sign in with Apple 구현을 다루기 때문에 설명하지 않습니다.
   _routerDelegate = AppRouterDelegate(appState);
   _routerDelegate.setNewRoutePath(homePageConfig);
   _backButtonDispatcher = AppBackButtonDispatcher(_routerDelegate);
