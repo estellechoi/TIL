@@ -680,7 +680,7 @@ platform :ios, '10.0'
 
 ## 13. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
-이제 iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요. Settings에서 Apple 계정 로그인을 먼저 진행해야 Sign in with Apple 테스트가 가능합니다. 또는 TestFlight에 앱을 출시하고 실제 iOS 디바이스에서 테스트할 수 있습니다. 첫 테스트시에는 회원가입이 진행되고, 그 다음부터는 로그인이 진행됩니다.
+이제 iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요. Settings에서 Apple 계정 로그인을 먼저 진행해야 Sign in with Apple 테스트가 가능합니다. 또는 [TestFlight에 앱을 출시](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md)하고 실제 iOS 디바이스에서 테스트할 수 있습니다. 첫 테스트시에는 회원가입이 진행되고, 그 다음부터는 로그인이 진행됩니다.
 
 <br>
 
@@ -707,3 +707,6 @@ platform :ios, '10.0'
 
 - [Flutter 앱에 Firebase 추가](https://firebase.google.com/docs/flutter/setup?hl=ko)
 - [iOS에서 Apple을 통해 인증](https://firebase.google.com/docs/auth/ios/apple?authuser=0)
+- [로그인을 손쉽게](https://developer.apple.com/kr/sign-in-with-apple/get-started/)
+- [Flutter 앱에 Firebase 추가](https://firebase.google.com/docs/flutter/setup?hl=ko)
+- [Flutter Firebase Authentication: Apple Sign In](https://dev.to/offlineprogrammer/flutter-firebase-authentication-apple-sign-in-1m64#app-implementation)
