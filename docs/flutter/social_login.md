@@ -669,7 +669,7 @@ platform :ios, '10.0'
 
 <br>
 
-`Podfile` 설정을 완료하고 다시 Flutter 앱을 실행시키면 자동으로 `pod install` 명령어가 실행되고 앱이 실행됩니다. iOS 앱을 빌드할 때는 Xcode를 열고 Deployment Info 섹션에 최소 버전 정보를 `iOS 10.0`으로 변경해주세요.
+`Podfile` 설정을 완료하고 다시 Flutter 앱을 실행시키면 자동으로 `pod install` 명령어가 실행되고 앱이 실행됩니다. iOS 앱을 빌드할 때 Xcode를 열고 Deployment Info 섹션에 최소 버전 정보를 `iOS 10.0`으로 변경해주세요.
 
 <br>
 
