@@ -530,13 +530,9 @@ class _SignInWithAppleButtonState extends State<SignInWithAppleButton> {
 
 <br>
 
-### 4) `main.dart`에서 `AuthProvider` 클래스의 변화 감지하기
+### 4) 최상위 위젯에 `AuthProvider` 인스턴스 등록하기
 
-> 이 단계는 필요한 경우에만 해당합니다.
-
-<br>
-
-다시 `main.dart` 파일로 돌아와서 루트 클래스의 `build()` 메소드로 이동합니다. 여기에서 `AuthProvider` 인스턴스를 등록하고 변화를 감지하는 코드를 작성합니다.
+다시 `main.dart` 파일로 돌아와서 루트 클래스의 `build()` 메소드로 이동합니다. 여기에서 `AuthProvider` 인스턴스를 등록하고 변화를 감지하는 코드를 작성해봅시다.
 
 ```dart
 @override
@@ -589,9 +585,9 @@ Widget build(BuildContext context) {
 
 이제 `MultiProvider` 위젯의 `providers` 속성에 `ChangeNotifierProvider`와 `StreamProvider`를 추가합니다.
 
-- `ChangeNotifierProvider` : `FirebaseAuth.instance` 인스턴스를 사용하여 생성한 `AuthProvider` 인스턴스를 반환합니다.
+- `ChangeNotifierProvider` : `FirebaseAuth.instance` 인스턴스를 사용하여 생성한 `AuthProvider` 인스턴스를 생성하여 반환합니다.
 
-- `StreamProvider` : `AuthProvider` 인스턴스의 변경을 감지합니다.
+- `StreamProvider` : `BuildContext`에서 `AuthProvider` 인스턴스를 가져오고, `authStateChanges` 값을 반환합니다.
 
 <br>
 
