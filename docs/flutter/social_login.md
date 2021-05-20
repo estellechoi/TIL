@@ -18,7 +18,7 @@
 10. `sign_in_with_apple` 라이브러리 추가하기
 11. Sign in with Apple 구현하기
 12. `Podfile` 설정하기
-13. Firebase 콘솔에서 사용자 조회하기
+13. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 <br>
 
@@ -678,19 +678,19 @@ platform :ios, '10.0'
 
 <br>
 
-## 13. Firebase 콘솔에서 사용자 조회하기
+## 13. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 이제 iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요. Settings에서 Apple 계정 로그인을 먼저 진행해야 Sign in with Apple 테스트가 가능합니다. 또는 TestFlight에 앱을 출시하고 실제 iOS 디바이스에서 테스트할 수 있습니다. 첫 테스트시에는 회원가입이 진행되고, 그 다음부터는 로그인이 진행됩니다.
+
+<br>
+
+> 현재 기준 iOS 14.0 이상 Emulator에서 Sign in with Apple이 작동하지 않는 이슈가 있습니다. Apple Developer Forums의 [Sign In With Apple not working with Xcode 12 beta on simulator ?](https://developer.apple.com/forums/thread/651533) 페이지에 이 이슈에 대한 질문이 올라왔고, 아직까지 Apple에서 대응중인 것으로 추측됩니다. 실제 디바이스에서는 정상 작동합니다.
 
 <br>
 
 <img src="./../img/firebase37.png" alt="firebase" />
 
 <br>
-<br>
-
-> 현재 기준 iOS 14.0 이상 Emulator에서 Sign in with Apple이 작동하지 않는 이슈가 있습니다. Apple Developer Forums의 [Sign In With Apple not working with Xcode 12 beta on simulator ?](https://developer.apple.com/forums/thread/651533) 페이지에 이 이슈에 대한 질문이 올라왔고, 아직까지 Apple에서 대응중인 것으로 추측됩니다. 실제 디바이스에서는 정상 작동합니다.
-
 <br>
 
 회원가입/로그인 테스트를 완료했으면 [Firebase 콘솔](https://console.firebase.google.com/u/0/)의 `Authentication` 메뉴에서 테스트한 사용자 정보를 조회할 수 있습니다.
