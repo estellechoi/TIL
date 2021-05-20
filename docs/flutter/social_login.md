@@ -598,7 +598,7 @@ providers: [
   ),
   StreamProvider(
       create: (BuildContext ctx) =>
-          context.read<AuthProvider>().authStateChanges,
+          ctx.read<AuthProvider>().authStateChanges,
       initialData: null)
 ]
 ```
