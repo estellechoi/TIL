@@ -684,7 +684,7 @@ platform :ios, '10.0'
 
 <br>
 
-<!-- <img src="./../img/firebase35.png" alt="firebase" /> -->
+<img src="./../img/firebase35.png" alt="firebase" width="300" />
 
 <br>
 <br>
