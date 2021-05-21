@@ -10,7 +10,9 @@
 6. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
 7. `google_sign_in` 라이브러리 추가하기
 8. Sign in with Google 구현하기
-9. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+9. `Podfile` 설정하기 : 플랫폼 및 버전 설정, `GoogleSignIn` 종속성 추가
+10. Xcode에서 Google 로그인을 위한 URL 체계 추가하기
+11. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 <br>
 
@@ -346,7 +348,7 @@ pod 'GoogleSignIn'
 
 <br>
 
-## 11. Google 로그인을 위한 URL 체계 추가하기
+## 10. Xcode에서 Google 로그인을 위한 URL 체계 추가하기
 
 iOS 앱에서 Google 로그인을 사용하기 위한 설정이 하나 더 남았습니다. `ios/Runner.xcworkspace` 파일을 실행하여 Xcode를 열고 맞춤 URL 체계를 추가해야합니다. 이 단계를 건너뛰고 Google 로그인을 시도하면 아래와 같이 `PlatformException` 오류가 발생합니다. 표시된 내용대로 Flutter 프로젝트의 iOS 앱이 필요한 URL 체계를 지원하지 않아서 발생하는 오류입니다.
 
@@ -371,7 +373,7 @@ Xcode에서 왼쪽 상단의 `Runner`를 클릭하고, `Info` 탭으로 이동�
 
 <br>
 
-## 12. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+## 11. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 이제 Android/iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요.
 
