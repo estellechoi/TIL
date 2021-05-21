@@ -14,6 +14,23 @@ Flutter 앱에서 Google 로그인을 구현하기에 앞서 Firebase 프로젝�
 
 <br>
 
+`/android/app/build.gradle` 파일에서 `defaultConfig` 섹션의 `applicationId` 값이 Android 앱의 ID가 됩니다.
+
+```gradle
+android {
+
+    // ...
+
+    defaultConfig {
+        applicationId "com.hinoki.seoul"
+
+        // ...
+    }
+}
+```
+
+<br>
+
 ## 2. Firebase 프로젝트 생성하기
 
 Google [Firebase 콘솔](https://console.firebase.google.com/u/0/)에서 `프로젝트 만들기` 버튼을 클릭하여 프로젝트를 생성합니다. [Flutter 앱에서 Firebase를 사용하여 Sign in with Apple 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md) 문서의 [2. Firebase 프로젝트 생성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-2-firebase-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0) 섹션을 참고하여 동일하게 진행합니다.
