@@ -86,7 +86,7 @@ Sign in with Apple을 포함한 Apple 서비스를 이용하려면 개발자(팀
 
 <br>
 
-이제 위에서 생성한 Firebase 프로젝트에 Apple 로그인을 적용할 iOS 앱을 등록해야 합니다. 프로젝트 메인페이지에서 `iOS` 아이콘을 클릭합니다.
+이제 위에서 생성한 Firebase 프로젝트에 Apple 로그인을 적용할 iOS 앱을 등록해야 합니다. 일반적으로 Android 디바이스 사용자들은 Sign in with Apple 기능을 사용하지 않기 때문에 이 문서에서는 iOS 앱에서만 구현하는 것을 목표로 합니다. 프로젝트 메인페이지에서 `iOS` 아이콘을 클릭합니다.
 
 <br>
 
