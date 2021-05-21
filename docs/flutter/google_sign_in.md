@@ -334,7 +334,11 @@ class _SignInWithGoogleButtonState extends State<SignInWithGoogleButton> {
 
 ### 2) `GoogleSignIn` 종속성 추가하기
 
-[iOS 앱에 Google 로그인 통합 시작](https://developers.google.com/identity/sign-in/ios/start-integrating) 문서에 따르면, iOS 앱에서 Google 로그인을 사용하려면 `GoogleSignIn` 종속성이 요구됩니다. `Podfile` 파일을 열고 다음을 추가합니다. 이후 앱을 실행하면 `pod install` 명령어가 자동으로 실행되면서 수정한 내용이 반영됩니다.
+> 이 단계는 필요한 경우에만 진행합니다. 일반적으로 라이브러리를 통해 자동으로 진행되기 때문에 직접 추가하지 않아도 됩니다.
+
+<br>
+
+[iOS 앱에 Google 로그인 통합 시작](https://developers.google.com/identity/sign-in/ios/start-integrating) 문서에 따르면, `GoogleSignIn` 종속성이 요구됩니다. `Podfile` 파일을 열고 다음을 추가합니다. 이후 앱을 실행하면 `pod install` 명령어가 자동으로 실행되면서 수정한 내용이 반영됩니다.
 
 ```
 pod 'GoogleSignIn'
@@ -368,6 +372,10 @@ Xcode에서 왼쪽 상단의 `Runner`를 클릭하고, `Info` 탭으로 이동�
 <br>
 
 ## 12. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+
+이제 Android/iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요.
+
+> 이미지 추가하기 ..
 
 <br>
 <br>
