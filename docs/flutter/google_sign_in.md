@@ -67,11 +67,15 @@ Firebase 프로젝트 메인페이지에서 아래 스크린샷에 표시한 `�
 
 - `앱 닉네임` : Firebase 콘솔에서 사용하는 편의용 앱 이름입니다.
 
-- `디버그 서명 인증서 SHA-1` : Google 로그인을 구현하는데 필요합니다. Firebase OAuth2 클라이언트와 API 키를 생성하는데 앱 서명 인증서의 [SHA-1(Secure Hash Algorithm 1)](https://en.wikipedia.org/wiki/SHA-1) 지문값(Fingerprint)가 사용되기 때문입니다. 앱 서명 인증서는 [Flutter 프로젝트를 Android 앱으로 배포하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0) 문서의 앱 서명하기 섹션을 참고하여 생성해주세요. 바로 아래 섹션을 참고하거나, [Authenticating Your Client](https://developers.google.com/android/guides/client-auth) 문서를 참고하여 인증서의 SHA-1 지문값을 가져올 수 있습니다. Android 앱에서 Firebase 서비스를 사용하기 위해서는 디버그용/배포용 SHA-1 지문값이 모두 필요하고요, 그 중 디버그용 지문값을 이 항목에 입력하면 됩니다.
+- `디버그 서명 인증서 SHA-1` : Google 로그인을 구현하는데 필요합니다. Firebase OAuth2 클라이언트와 API 키를 생성하는데 앱 서명 인증서의 [SHA-1(Secure Hash Algorithm 1)](https://en.wikipedia.org/wiki/SHA-1) 지문값(Fingerprint)가 사용되기 때문입니다. Android 앱에서 Firebase 서비스를 사용하기 위해서는 디버그용/배포용 SHA-1 지문값이 모두 필요하고요, 그 중 디버그용 지문값을 이 항목에 입력하면 됩니다.
 
 <br>
 
-#### Keytool을 사용하여 서명 인증서의 SHA-1 지문값 가져오기
+앱 서명 인증서는 [Flutter 프로젝트를 Android 앱으로 배포하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0) 문서의 앱 서명하기 섹션을 참고하여 생성해주세요. 앱 서명 인증서가 준비되었다면 바로 아래의 두 섹션 중 하나를 참고하거나, [Authenticating Your Client](https://developers.google.com/android/guides/client-auth) 문서를 참고하여 인증서의 SHA-1 지문값을 가져옵니다.
+
+<br>
+
+#### 1) Keytool을 사용하여 서명 인증서의 SHA-1 지문값 가져오기
 
 Flutter 프로젝트의 루트 경로에서 아래의 `keytool` 명령어를 사용하여 보유한 인증서의 SHA-1 지문값을 가져올 수 있습니다. 디버그용/배포용 2개 지문값이 모두 필요합니다. [Authenticating Your Client](https://developers.google.com/android/guides/client-auth) 문서와 StackOverflow의 [Generate SHA-1 for Flutter/React-Native/Android-Native app](https://stackoverflow.com/questions/51845559/generate-sha-1-for-flutter-react-native-android-native-app) 페이지가 도움이 되었습니다.
 
@@ -93,7 +97,7 @@ keytool -list -v -alias <your-key-name> -keystore <path-to-production-keystore>
 
 <br>
 
-#### `signingReport`를 사용하여 서명 인증서의 SHA-1 지문값 가져오기
+#### 2) `signingReport`를 사용하여 서명 인증서의 SHA-1 지문값 가져오기
 
 또는 `/android/gradlew` 파일이 있는 경로로 이동한 후 `signingReport` 명령어를 사용하여 디버그용/배포용 SHA-1 지문값을 가져올 수도 있습니다.
 
