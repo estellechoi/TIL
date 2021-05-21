@@ -5,6 +5,7 @@
 1. 선행 작업하기 : Android/iOS 앱 ID 가져오기
 2. Firebase 프로젝트 생성하기
 3. Firebase에 Android/iOS 앱 등록하기
+4. Flutter 프로젝트에 Firebase 구성 파일 추가하기
 
 <br>
 
@@ -43,7 +44,7 @@ Google [Firebase 콘솔](https://console.firebase.google.com/u/0/)에서 `프로
 
 ## 3. Firebase에 Android/iOS 앱 등록하기
 
-### Android 앱 등록
+### 1) Android 앱 등록
 
 Firebase 프로젝트 메인페이지에서 아래 스크린샷에 표시한 `앱 추가` 버튼을 클릭해서 Android 앱 등록을 시작해주세요.
 
@@ -75,31 +76,9 @@ Firebase 프로젝트 메인페이지에서 아래 스크린샷에 표시한 `�
 
 <br>
 
-#### 1) Keytool을 사용하여 서명 인증서의 SHA-1 지문값 가져오기
+#### 1-1) `signingReport`를 사용하여 서명 인증서의 SHA-1 지문값 가져오기
 
-Flutter 프로젝트의 루트 경로에서 아래의 `keytool` 명령어를 사용하여 보유한 인증서의 SHA-1 지문값을 가져올 수 있습니다. 디버그용/배포용 2개 지문값이 모두 필요합니다. [Authenticating Your Client](https://developers.google.com/android/guides/client-auth) 문서와 StackOverflow의 [Generate SHA-1 for Flutter/React-Native/Android-Native app](https://stackoverflow.com/questions/51845559/generate-sha-1-for-flutter-react-native-android-native-app) 페이지가 도움이 되었습니다.
-
-<br>
-
-- 디버그용 인증서 지문값 가져오기
-
-```
-keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
-```
-
-<br>
-
-- 배포용 인증서 지문값 가져오기
-
-```
-keytool -list -v -alias <your-key-name> -keystore <path-to-production-keystore>
-```
-
-<br>
-
-#### 2) `signingReport`를 사용하여 서명 인증서의 SHA-1 지문값 가져오기
-
-또는 `/android/gradlew` 파일이 있는 경로로 이동한 후 `signingReport` 명령어를 사용하여 디버그용/배포용 SHA-1 지문값을 가져올 수도 있습니다.
+Flutter 프로젝트의 `/android/gradlew` 파일이 있는 경로로 이동한 후 `signingReport` 명령어를 사용하여 디버그용/배포용 SHA-1 지문값을 가져올 수도 있습니다.
 
 <br>
 
@@ -119,20 +98,53 @@ cd android
 
 <br>
 
-아래 스크린샷에 표시된 두 섹션의 `SHA1` 값이 우리가 필요한 값입니다.
+아래 스크린샷에 표시된 두 부분의 `SHA1` 값이 우리가 필요한 값입니다.
 
 <img src="./../img/firebase42.png" alt="firebase" />
 
 <br>
 <br>
 
-### iOS 앱 등록
+#### 1-2) Keytool을 사용하여 서명 인증서의 SHA-1 지문값 가져오기
 
-iOS 앱 등록은 [Firebase에 iOS 앱 등록하기](user-content-3-firebase에-ios-앱-등록하기)를 참고하여 진행해주세요.
+또는 Flutter 프로젝트의 루트 경로에서 아래의 `keytool` 명령어를 사용하여 보유한 인증서의 SHA-1 지문값을 가져올 수 있습니다. 디버그용/배포용 2개 지문값이 모두 필요합니다. [Authenticating Your Client](https://developers.google.com/android/guides/client-auth) 문서와 StackOverflow의 [Generate SHA-1 for Flutter/React-Native/Android-Native app](https://stackoverflow.com/questions/51845559/generate-sha-1-for-flutter-react-native-android-native-app) 페이지가 도움이 되었습니다.
 
 <br>
+
+- 디버그용 인증서 지문값 가져오기
+
+```
+keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+```
+
 <br>
+
+- 배포용 인증서 지문값 가져오기
+
+```
+keytool -list -v -alias <your-key-name> -keystore <path-to-production-keystore>
+```
+
 <br>
+
+### 2) iOS 앱 등록
+
+iOS 앱 등록은 [Firebase에 iOS 앱 등록하기](user-content-3-firebase에-ios-앱-등록하기)를 참고하여 진행해주세요. Firebase 프로젝트 메인페이지로 돌아가면 아래와 같이 앱이 등록된 것을 확인할 수 있습니다.
+
+<br>
+
+<img src="./../img/firebase44.png" alt="firebase" />
+
+<br>
+
+## 4. Flutter 프로젝트에 Firebase 구성 파일 추가하기
+
+이제 Firebase 프로젝트에 각각 등록한 Android/iOS 앱과 개발중인 Flutter 프로젝트를 연결하면 됩니다. 메인페이지에서 위에서 확인한 앱 아이콘을 클릭, 다시 톱니바퀴 아이콘을 클릭하여 프로젝트 설정 페이지로 이동합니다. 그 다음 아래 스크린샷을 참고하여 Android 앱용 구성 파일(`google-service.json`)과 iOS 앱용 구성 파일(`GoogleService-Info.plist`)을 각각 다운로드합니다.
+
+<br>
+
+<img src="./../img/firebase45.png" alt="firebase" />
+
 <br>
 <br>
 <br>
