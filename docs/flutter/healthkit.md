@@ -2,6 +2,11 @@
 
 <br>
 
+1. Apple HealthKit 셋업하고 데이터 가져오기
+2. Google Fitness 셋업하고 데이터 가져오기
+
+<br>
+
 ## 1. Apple HealthKit 셋업하고 데이터 가져오기
 
 Apple [HealthKit](https://developer.apple.com/documentation/healthkit)을 사용하여 사용자의 건강 데이터를 조회하고 추가할 수 있습니다. 이 문서를 참고하여 HealthKit 사용 설정을 완료한 후 [`health`](https://pub.dev/packages/health) 라이브러리를 사용하여 구현하면 됩니다.
@@ -198,7 +203,7 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 <br>
 <br>
 
-## 2. Google Fit 셋업하고 데이터 가져오기
+## 2. Google Fitness 셋업하고 데이터 가져오기
 
 이미 Google API를 위한 OAuth 2.0 클라이언트 ID가 있다면 `1)` ~ `3)` 단계는 건너뜁니다. Sign in with Google과 같은 API를 사용한 적이 있다면 이미 OAuth 2.0 클라이언트 ID가 있는 것입니다. 클라이언트 ID는 `YOUR_CLIENT_ID.apps.googleusercontent.com` 형태입니다. 기존에 생성한 클라이언트 ID는 [Google Cloud Platform]()에서 [API 및 서비스 > 사용자 인증 정보](https://console.cloud.google.com/apis/credentials) 메뉴로 이동하면 OAuth 2.0 클라이언트 ID 목록에서 확인할 수 있습니다.
 
@@ -206,7 +211,7 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 
 ### 1) 선행 작업하기: Android 앱 디지털 서명
 
-Google Fit 등의 Google 서비스를 사용하거나 Android 앱을 배포하기 위해서는 디지털 서명을 통해 개발자 인증을 완료해야합니다. 아직 앱 서명을 하지 않았다면 [앱 서명하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0)를 참고하여 앱에 디지털 서명을 완료한 후 진행해주세요. Android 앱의 디지털 서명은 `keytool`을 사용하고요, 앱 서명 정보가 담긴 Keystore를 생성한 후 앱에서 참조하는 방식입니다.
+Google Fitness 등의 Google 서비스를 사용하거나 Android 앱을 배포하기 위해서는 디지털 서명을 통해 개발자 인증을 완료해야합니다. 아직 앱 서명을 하지 않았다면 [앱 서명하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0)를 참고하여 앱에 디지털 서명을 완료한 후 진행해주세요. Android 앱의 디지털 서명은 `keytool`을 사용하고요, 앱 서명 정보가 담긴 Keystore를 생성한 후 앱에서 참조하는 방식입니다.
 
 <br>
 
@@ -324,3 +329,5 @@ android.useAndroidX=true
 - [Accessing Health Records | Apple Developer](https://developer.apple.com/documentation/healthkit/samples/accessing_health_records)
 - [Apple Health Records: Everything you need to know!](https://www.imore.com/health-records)
 - [Apple Health Records](https://blog.usejournal.com/apple-health-records-cbb98551bbb9)
+- [Get started on Android | Google Fit](https://developers.google.com/fit/android/get-started#create-configure-project)
+- [Get an OAuth 2.0 Client ID | Google Fit](https://developers.google.com/fit/android/get-api-key#find_your_apps_certificate_information)
