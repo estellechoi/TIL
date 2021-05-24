@@ -2,7 +2,7 @@
 
 <br>
 
-## 1. Apple HealthKit 셋업하기
+## 1. Apple HealthKit 셋업하고 데이터 가져오기
 
 Apple [HealthKit](https://developer.apple.com/documentation/healthkit)을 사용하여 사용자의 건강 데이터를 조회하고 추가할 수 있습니다. 이 문서를 참고하여 HealthKit 사용 설정을 완료한 후 [`health`](https://pub.dev/packages/health) 라이브러리를 사용하여 구현하면 됩니다.
 
@@ -195,6 +195,22 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 
 <img src="./../img/healthkit11.png" alt="healthkit" />
 
+<br>
+<br>
+
+## 2. Google Fit 셋업하고 데이터 가져오기
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 
