@@ -33,8 +33,8 @@
 - [Flutter 프로젝트를 Android 앱으로 배포하기](./docs/flutter/deploy_android.md)
 - [Flutter 앱에서 Firebase를 사용하여 Sign in with Apple 구현하기](./docs/flutter/social_login.md)
 - [Flutter 앱에서 Firebase를 사용하여 Sign in with Google 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md)
-
-<br>
+- [Flutter 앱에서 Apple HealthKit, Google Fit 데이터 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md)
+  <br>
 
 ### TypeScript
 
