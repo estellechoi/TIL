@@ -62,16 +62,9 @@ Xcode를 사용하여 Flutter 프로젝트에도 HealthKit 사용 설정을 해�
 <br>
 <br>
 
-### 4) Clinical Health Records 사용 설정
+### 4) `Clinical Health Records` 사용 설정
 
-> 사용자 임상 기록을 사용하지 않는다면 이 단계는 건너뜁니다. 이 단계를 진행한다면, [Accessing Health Records](https://developer.apple.com/documentation/healthkit/samples/accessing_health_records) 문서에서 자세한 내용을 확인하세요.
-
-<br>
-
-사용자 임상 기록은 민감한 데이터이기 때문에 추가적인 셋업 절차가 요구됩니다.
-
-- 2-1) Xcode에서 `Clinical Health Records` 항목에 체크
-- 2-2) `Health Records Usage` 문구 제공
+사용자 임상 기록은 민감한 데이터이기 때문에 추가적인 셋업 절차가 요구됩니다. 사용자 임상 기록을 사용하지 않는다면 이 단계는 건너뜁니다. 이 단계를 진행한다면, [Accessing Health Records](https://developer.apple.com/documentation/healthkit/samples/accessing_health_records) 문서에서 자세한 내용을 확인하세요.
 
 <br>
 
