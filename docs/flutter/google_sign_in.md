@@ -75,7 +75,7 @@ Firebase 프로젝트 메인페이지에서 아래 스크린샷에 표시한 `�
 
 - `앱 닉네임` : Firebase 콘솔에서 사용하는 편의용 앱 이름입니다.
 
-- `디버그 서명 인증서 SHA-1` : Google 로그인을 구현하는데 필요합니다. Firebase OAuth2 클라이언트와 API 키를 생성하는데 앱 서명 인증서의 [SHA-1(Secure Hash Algorithm 1)](https://en.wikipedia.org/wiki/SHA-1) 지문값(Fingerprint)가 사용되기 때문입니다. Android 앱에서 Firebase 서비스를 사용하기 위해서는 디버그용/배포용 SHA-1 지문값이 모두 필요하고요, 그 중 디버그용 지문값을 이 항목에 입력하면 됩니다.
+- `디버그 서명 인증서 SHA-1` : Google 로그인 등 Google 서비스를 사용하기위해 필요합니다. Firebase OAuth2 클라이언트와 API 키를 생성하는데 앱 서명 인증서의 [SHA-1(Secure Hash Algorithm 1)](https://en.wikipedia.org/wiki/SHA-1) 지문값(Fingerprint)가 사용되기 때문입니다. Android 앱에서 Firebase 서비스를 사용하기 위해서는 디버그용/배포용 SHA-1 지문값이 모두 필요하고요, 그 중 디버그용 지문값을 이 항목에 입력하면 됩니다.
 
 <br>
 
