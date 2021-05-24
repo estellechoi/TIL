@@ -85,7 +85,7 @@ Firebase 프로젝트 메인페이지에서 아래 스크린샷에 표시한 `�
 
 #### 1-1) `signingReport`를 사용하여 서명 인증서의 SHA-1 지문값 가져오기
 
-Flutter 프로젝트의 `/android/gradlew` 파일이 있는 경로로 이동한 후 `signingReport` 명령어를 사용하여 디버그용/배포용 SHA-1 지문값을 가져올 수도 있습니다.
+Flutter 프로젝트의 `/android/gradlew` 파일이 있는 경로로 이동한 후 `signingReport` 명령어를 사용하여 디버그용/배포용 SHA-1 지문값을 가져올 수 있습니다.
 
 <br>
 
