@@ -108,14 +108,14 @@ Xcode를 사용하여 Flutter 프로젝트에도 HealthKit 사용 설정을 해�
 
 ### 5) `info.plist` 파일에 사용자 데이터 사용에 대한 안내 문구 제공
 
-앱에서 사용자의 건강 데이터를 사용하려면 사용자로부터 동의를 받아야합니다. 이때 사용자에게 표시되는 안내 문구를 직접 제공합니다. 사용자의 건강 데이터를 어떤 목적으로 사용할 것인지 알리는 목적입니다. Clinical Health Records 사용 설정 단계를 진행했다면, 같은 방법으로 아래의 2개 항목을 추가합니다. 이 문구를 잘 작성하면 사용자가 앱을 통해 무엇을 얻을 수 있는지 알리고, 건강 데이터를 공유하도록 설득할 수 있습니다.
+앱에서 사용자의 건강 데이터를 사용하려면 사용자로부터 동의를 받아야합니다. 이때 사용자에게 표시되는 안내 문구를 직접 제공합니다. 사용자의 건강 데이터를 어떤 목적으로 사용할 것인지 알리는 목적입니다. `Clinical Health Records` 사용 설정 단계를 진행했다면, 같은 방법으로 아래의 2개 항목을 추가합니다. 이 문구를 잘 작성하면 사용자가 앱을 통해 무엇을 얻을 수 있는지 알리고, 건강 데이터를 공유하도록 설득할 수 있습니다.
 
 - `Privacy - Health Share Usage Description`
 - `Privacy - Health Update Usage Description`
 
 <br>
 
-Clinical Health Records 사용 설정 단계를 건너뛰었다면, Xcode 좌측 트리의 `info.plist` 파일을 선택하여 열고 문구를 추가합니다. `Information Property List` 항목 위에 커서를 두면 `+` 버튼이 나타나고요, 이 버튼을 클릭하여 해당하는 항목들을 추가한 후 각 항목에 대한 문구를 입력하면 됩니다.
+`Clinical Health Records` 사용 설정 단계를 건너뛰었다면, Xcode 좌측 트리의 `info.plist` 파일을 선택하여 열고 문구를 추가합니다. `Information Property List` 항목 위에 커서를 두면 `+` 버튼이 나타나고요, 이 버튼을 클릭하여 해당하는 항목들을 추가한 후 각 항목에 대한 문구를 입력하면 됩니다.
 
 <br>
 
@@ -135,11 +135,11 @@ Clinical Health Records 사용 설정 단계를 건너뛰었다면, Xcode 좌측
 
 <br>
 
-> HealthKit을 비롯하여 대부분의 Apple 서비스를 이용하려면 UI 요구사항을 충족해야합니다. `info.plist` 파일에 설정하는 값들이고요, [UIRequiredDeviceCapabilities](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/plist/info/UIRequiredDeviceCapabilities) 목록을 참고하여 필요한 UI 요구사항을 충족하는지 확인해야합니다.
+> HealthKit을 비롯하여 대부분의 Apple 서비스를 이용하려면 위와 같은 UI 요구사항을 충족해야합니다. `info.plist` 파일에 설정하는 값들이고요, [UIRequiredDeviceCapabilities](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/plist/info/UIRequiredDeviceCapabilities) 목록을 참고하여 필요한 UI 요구사항을 충족하는지 확인해야합니다.
 
 <br>
 
-### 6) `Health` 라이브러리를 사용하여 건강 데이터 가져오기
+### 6) `health` 라이브러리를 사용하여 건강 데이터 가져오기
 
 > Swift나 Objective-C를 이용하여 iOS 앱을 개발중이라면 HealthKit 프레임워크를 사용하여 필요한 기능을 구현하면 됩니다. 공식문서 [About the HealthKit Framework](https://developer.apple.com/documentation/healthkit/about_the_healthkit_framework)를 확인한 후 진행해주세요.
 
