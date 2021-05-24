@@ -1,4 +1,4 @@
-# Flutter 앱에서 Apple HealthKit, Google Fit 데이터 가져오기
+# Flutter 앱에서 Apple HealthKit, Google Fitness 데이터 가져오기
 
 <br>
 
