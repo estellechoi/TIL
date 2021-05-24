@@ -189,11 +189,11 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 
 <br>
 
-이제 앱을 다시 실행하고 `fetchAppleHealthKit()` 메소드를 실행하면 아래와 같이 사용자에게 공유할 데이터를 지정하도록 하는 OS UI가 나타납니다. 사용자가 공유할 데이터를 지정한 후 `Allow` 버튼을 클릭하면 데이터 가져오기가 완료됩니다.
+이제 앱을 다시 실행하고 `fetchAppleHealthKit()` 메소드를 실행하면 아래와 같이 사용자에게 공유할 데이터를 지정하도록 하는 OS UI가 나타나고요, 사용자가 공유할 데이터를 지정한 후 `Allow` 버튼을 클릭하면 데이터 가져오기가 완료됩니다. UI 하단 `App Explanation` 섹션에 `info.plist`에 지정했던 건강 데이터 사용에 대한 안내 문구가 표시됩니다.
 
 <br>
 
-<img src="./../img/healthkit10.png" alt="healthkit" />
+<img src="./../img/healthkit11.png" alt="healthkit" />
 
 <br>
 <br>
