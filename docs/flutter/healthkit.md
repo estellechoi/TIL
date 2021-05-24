@@ -4,7 +4,11 @@
 
 ## 1. Apple HealthKit 셋업하기
 
-Apple [HealthKit](https://developer.apple.com/documentation/healthkit)을 사용하여 사용자의 건강 데이터를 조회하고 추가할 수 있습니다. 이 문서를 참고하여 HealthKit 사용 설정을 완료한 후 [HealthKit 프레임워크](https://developer.apple.com/documentation/healthkit/about_the_healthkit_framework)를 사용하여 구현하면 됩니다.
+Apple [HealthKit](https://developer.apple.com/documentation/healthkit)을 사용하여 사용자의 건강 데이터를 조회하고 추가할 수 있습니다. 이 문서를 참고하여 HealthKit 사용 설정을 완료한 후 [`health`](https://pub.dev/packages/health) 라이브러리를 사용하여 구현하면 됩니다.
+
+<br>
+
+> iOS 네이티브 앱은 [HealthKit 프레임워크](https://developer.apple.com/documentation/healthkit/about_the_healthkit_framework)를 사용하여 구현합니다.
 
 <br>
 
@@ -148,7 +152,7 @@ Clinical Health Records 사용 설정 단계를 건너뛰었다면, Xcode 좌측
 
 <br>
 
-Flutter 프로젝트에서는 [`Health`](https://pub.dev/packages/health) 라이브러리를 사용합니다. 라이브러리에서 제공하는 [예제 코드](https://github.com/cph-cachet/flutter-plugins/blob/master/packages/health/example/lib/main.dart)를 참고하여 구현했습니다.
+Flutter 프로젝트에서는 [`health`](https://pub.dev/packages/health) 라이브러리를 사용합니다. 라이브러리에서 제공하는 [예제 코드](https://github.com/cph-cachet/flutter-plugins/blob/master/packages/health/example/lib/main.dart)를 참고하여 구현했습니다.
 
 ```dart
 import 'package:health/health.dart';
