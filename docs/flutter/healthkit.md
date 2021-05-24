@@ -200,17 +200,119 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 
 ## 2. Google Fit 셋업하고 데이터 가져오기
 
+이미 Google API를 위한 OAuth 2.0 클라이언트 ID가 있다면 `1)` ~ `3)` 단계는 건너뜁니다. Sign in with Google과 같은 API를 사용한 적이 있다면 이미 OAuth 2.0 클라이언트 ID가 있는 것입니다. 클라이언트 ID는 `YOUR_CLIENT_ID.apps.googleusercontent.com` 형태입니다. 기존에 생성한 클라이언트 ID는 [Google Cloud Platform]()에서 [API 및 서비스 > 사용자 인증 정보](https://console.cloud.google.com/apis/credentials) 메뉴로 이동하면 OAuth 2.0 클라이언트 ID 목록에서 확인할 수 있습니다.
+
+<br>
+
+### 1) 선행 작업하기: Android 앱 디지털 서명
+
+Google Fit 등의 Google 서비스를 사용하거나 Android 앱을 배포하기 위해서는 디지털 서명을 통해 개발자 인증을 완료해야합니다. 아직 앱 서명을 하지 않았다면 [앱 서명하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0)를 참고하여 앱에 디지털 서명을 완료한 후 진행해주세요. Android 앱의 디지털 서명은 `keytool`을 사용하고요, 앱 서명 정보가 담긴 Keystore를 생성한 후 앱에서 참조하는 방식입니다.
+
+<br>
+
+### 2) 서명 인증서의 디버그용 SHA-1 지문값 확인
+
+앱 서명이 완료되었다면 서명 인증서의 SHA-1 지문값이 필요합니다. OAuth 2.0 클라이언트 ID와 API 키를 생성하는데 사용됩니다. 공식문서의 [Find your app's certificate information](https://developers.google.com/fit/android/get-api-key#find_your_apps_certificate_information)을 참고하거나 [`signingReport`를 사용하여 서명 인증서의 SHA-1 지문값 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md#user-content-1-1-signingreport%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%84%9C%EB%AA%85-%EC%9D%B8%EC%A6%9D%EC%84%9C%EC%9D%98-sha-1-%EC%A7%80%EB%AC%B8%EA%B0%92-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)를 참고하여 SHA-1 지문값을 가져오면 됩니다.
+
+<br>
+
+공식문서에 따르면, Keystore가 위치한 경로에서 아래 명령어를 사용하여 디버그용 인증서 정보를 가져올 수 있습니다. 저의 경우 `android/keystore` 경로에 `key.jks` 파일을 두었기 때문에 아래와 같이 이동한 후 인증서 정보를 조회했습니다.
+
+```
+cd android/keystore
+```
+
+```
+keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+```
+
+<br>
+
+<img src="./../img/googlefit1.png" alt="fit" />
+
 <br>
 <br>
+
+### 3) OAuth 2.0 클라이언트 ID 셋업
+
+Google Cloud Platform에서 [Google Cloud Platform에 Fitness API용으로 애플리케이션 등록](https://console.cloud.google.com/flows/enableapi?apiid=fitness) 페이지로 이동하여 앱을 등록하고 위에서 가져온 인증서의 SHA-1 지문값을 사용하여 OAuth 2.0 클라이언트 ID를 생성합니다.
+
+<br>
+
+<img src="./../img/googlefit2.png" alt="fit" />
+
 <br>
 <br>
+
+아래 스크린샷과 같이 API를 사용할 프로젝트를 선택한 후 `동의 및 계속하기` 버튼을 클릭하세요. Google Cloud Platform에 프로젝트를 생성한 적이 없다면 새로운 프로젝트를 생성한 후 진행해주세요.
+
+<br>
+
+<img src="./../img/googlefit3.png" alt="fit" />
+
 <br>
 <br>
+
+그 다음 나타나는 화면에서 `사용자 인증 정보로 이동` 버튼을 클릭하여 이동합니다.
+
+<br>
+
+<img src="./../img/googlefit4.png" alt="fit" />
+
 <br>
 <br>
+
+`Fitness API`를 선택하고, `사용자 데이터`를 선택한 후 `다음` 버튼을 클릭하여 계속합니다.
+
+<br>
+
+<img src="./../img/googlefit5.png" alt="fit" />
+
 <br>
 <br>
+
+다음 나타난 각 항목에는 다음을 입력하면 됩니다.
+
+- `애플리케이션 유형` : Android 앱에서 사용할 것이므로 `Android`를 선택합니다.
+
+- `이름` : 안내 문구대로 Google 콘솔에서 OAuth 클라이언트를 식별하는 용도로 개발자만 보는 이름입니다.
+
+- `패키지 이름` : Flutter 프로젝트의 `build.gradle` 파일에 지정한 Android 앱의 ID입니다.
+
+- `SHA-1 인증서 디지털 지문` : 위 단계에서 확인한 앱 서명 인증서의 SHA-1 지문값입니다.
+
 <br>
+
+<img src="./../img/googlefit7.png" alt="fit" />
+
+<br>
+<br>
+
+이미 다른 Google API를 사용하면서 OAuth 클라이언트 ID를 생성한 적이 있다면 아래와 같은 안내창이 나타납니다. 이 경우 현재 단계를 중단하고 기존에 생성한 OAuth 클라이언트 ID를 사용하면 됩니다.
+
+<br>
+
+<img src="./../img/googlefit6.png" alt="fit" />
+
+<br>
+<br>
+
+### 4) `gradle.properties` 파일 설정
+
+Flutter 프로젝트의 `android/gradle.properties` 파일을 열고 각 항목의 값이 아래와 같도록 수정합니다.
+
+```
+org.gradle.jvmargs=-Xmx1536M
+android.enableJetifier=true
+android.useAndroidX=true
+```
+
+<br>
+
+### 5) `health` 라이브러리를 사용하여 건강 데이터 가져오기
+
+`health` 라이브러리는 Apple HealthKit와 Google Fitness 동시 사용을 지원합니다. [위 섹션](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md#user-content-6-health-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B1%B4%EA%B0%95-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)을 참고하여 동일하게 진행하면 됩니다.
+
 <br>
 <br>
 
