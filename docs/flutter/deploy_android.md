@@ -385,7 +385,7 @@ NDK는 Android 스튜디오에서 설치할 수 있고요, [NDK 및 CMake 설치
 
 <br>
 
-<img src="./../img/android-deploy11.png" />
+<img src="./../img/android-deploy11.png" width="800" />
 
 <br>
 <br>
@@ -394,7 +394,7 @@ NDK는 Android 스튜디오에서 설치할 수 있고요, [NDK 및 CMake 설치
 
 <br>
 
-<img src="./../img/android-deploy12.png" />
+<img src="./../img/android-deploy12.png" width="800" />
 
 <br>
 <br>
@@ -403,7 +403,7 @@ NDK는 Android 스튜디오에서 설치할 수 있고요, [NDK 및 CMake 설치
 
 <br>
 
-<img src="./../img/android-deploy13.png" />
+<img src="./../img/android-deploy13.png" width="800" />
 
 <br>
 <br>
