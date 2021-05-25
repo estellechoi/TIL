@@ -18,7 +18,8 @@
 10. `sign_in_with_apple` 라이브러리 추가하기
 11. Sign in with Apple 구현하기
 12. `Podfile` 설정하기
-13. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+13. Android 빌드 파일에 플러그인 추가하기
+14. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 <br>
 
@@ -733,7 +734,13 @@ platform :ios, '10.0'
 
 <br>
 
-## 13. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+## 13. Android 빌드 파일에 플러그인 추가하기
+
+[Android 빌드 파일에 플러그인 추가하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md#user-content-11-android-%EB%B9%8C%EB%93%9C-%ED%8C%8C%EC%9D%BC%EC%97%90-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)를 참고하여 동일하게 진행합니다. Android 앱에서 플러그인을 통해 Firebase 설정 파일을 설치하지 않으면 앱이 실행되지 않습니다.
+
+<br>
+
+## 14. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 이제 iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요. Settings에서 Apple 계정 로그인을 먼저 진행해야 Sign in with Apple 테스트가 가능합니다. 또는 [TestFlight에 앱을 출시](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md)하고 실제 iOS 디바이스에서 테스트할 수 있습니다. 첫 테스트시에는 회원가입이 진행되고, 그 다음부터는 로그인이 진행됩니다.
 
