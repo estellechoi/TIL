@@ -379,7 +379,7 @@ Xcode에서 왼쪽 상단의 `Runner`를 클릭하고, `Info` 탭으로 이동�
 
 <br>
 
-<img src="./../img/google_signin0.png" alt="firebase" />
+<img src="./../img/firebase50.png" alt="firebase" />
 
 <br>
 <br>
