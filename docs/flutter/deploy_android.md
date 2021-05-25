@@ -312,7 +312,7 @@ Google Play는 150MB 이하의 압축된 앱 다운로드만 지원합니다. �
 
 <br>
 
-<img src="./../img/android-deploy2.png" />
+<img src="./../img/android-deploy3.png" />
 
 <br>
 <br>
@@ -321,7 +321,7 @@ Google Play는 150MB 이하의 압축된 앱 다운로드만 지원합니다. �
 
 <br>
 
-<img src="./../img/android-deploy2.png" />
+<img src="./../img/android-deploy4.png" />
 
 <br>
 <br>
