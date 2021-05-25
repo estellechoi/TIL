@@ -379,6 +379,10 @@ android {
 
 <br>
 
+StackOverflow의 [How to add debug symbols to build.gradle](https://stackoverflow.com/questions/63373245/how-to-add-debug-symbols-to-build-gradle#answer-63436935) 답변이 도움이 되었습니다.
+
+<br>
+
 #### \* NDK 설치
 
 NDK는 Android 스튜디오에서 설치할 수 있고요, [NDK 및 CMake 설치 및 구성](https://developer.android.com/studio/projects/install-ndk) 문서를 참고하여 설치합니다. Android Studio에서 프로젝트를 열고 상단 툴바에서 `Tools > SDK Manager`를 클릭하여 Android SDK 설정창을 엽니다.
@@ -418,10 +422,6 @@ android {
     ndkVersion '23.0.7344513'
 }
 ```
-
-<br>
-
-StackOverflow의 [How to add debug symbols to build.gradle](https://stackoverflow.com/questions/63373245/how-to-add-debug-symbols-to-build-gradle#answer-63436935) 답변이 도움이 되었습니다.
 
 <br>
 
