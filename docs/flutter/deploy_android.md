@@ -252,10 +252,14 @@ Gradle 빌드 파일인 `/android/app/build.gradle` 파일을 검토합니다. �
 
 ## 6. 앱 번들 빌드하기
 
-Google Play 스토어에 앱을 배포하는 방법은 두 가지입니다. Google Play 스토어는 앱 번들 방식을 권합니다.
+Google Play 스토어에 앱을 배포하는 방법은 두 가지입니다.
 
 - 앱 번들 (추천)
 - APK
+
+<br>
+
+하지만 2021년 8월부터 신규 앱은 Google Play에서 Android 앱 번들 형태로 게시해야 합니다. 자세한 내용은 공식 블로그의 [New Android App Bundle and target API level requirements in 2021](https://android-developers.googleblog.com/2020/11/new-android-app-bundle-and-target-api.html) 문서에서 확인할 수 있습니다.
 
 <br>
 
@@ -269,7 +273,62 @@ flutter build appbundle
 
 ## 7. 앱 번들 테스트/출시하기
 
-앱 번들 빌드가 완료되면 [앱을 Play Console에 업로드](https://developer.android.com/studio/publish/upload-bundle) 문서를 참고하여 구글 플레이에 앱을 업로드합니다. 앱 번들을 출시하기 위해서는 먼저 Google Play Console에서 비용을 지불하고 개발자 등록을 완료해야합니다. 2021년 4월 기준 $25가 청구됩니다. 이후 공개/비공개/내부 테스트 트랙을 사용하여 앱의 베타버전을 출시하거나 지정된 테스터들을 대상으로 앱을 테스트할 수 있습니다. 혹은 바로 프로덕션 앱으로 출시할 수 있습니다. 자세한 내용은 [버전 준비 및 출시](https://support.google.com/googleplay/android-developer/answer/9859348?visit_id=637550273103240982-1310059594&rd=1) 문서를 참고하세요.
+앱 번들을 출시하기 위해서는 먼저 Google Play 콘솔에서 비용을 지불하고 개발자 등록을 완료해야하고요, 2021년 4월 기준 $25가 청구됩니다. 앱 번들 빌드가 완료되면 [앱을 Play Console에 업로드](https://developer.android.com/studio/publish/upload-bundle) 문서를 참고하여 Google Play 콘솔에 앱을 업로드합니다. 보통 앱을 업로드하기 전에 다음의 2가지 요구사항을 충족했는지 체크합니다.
+
+- [앱 서명 등록](https://developer.android.com/studio/publish/app-signing#enroll) 완료
+
+- 150MB 이하의 압축된 앱
+
+<br>
+
+#### \* 앱 압축 다운로드 크기 제한 확인
+
+Google Play는 150MB 이하의 압축된 앱 다운로드만 지원합니다. 사용자가 앱을 다운로드할 때 앱을 설치하는 데 필요한 압축 APK의 총 크기(기본 APK + 구성 APK)는 150MB 이하여야 합니다. 자세한 내용은 [압축 다운로드 크기 제한](https://developer.android.com/guide/app-bundle#size_restrictions) 문서를 참고하세요.
+
+<br>
+
+### 1) 버전 만들기
+
+다음 3가지 테스트 트랙 중에서 출시할 버전을 만듭니다. 테스트 트랙을 통해 앱의 베타버전을 출시하거나 지정된 테스터들을 대상으로 앱을 테스트할 수 있습니다. 혹은 바로 프로덕션 앱으로 출시할 수도 있습니다. 자세한 내용은 [버전 준비 및 출시](https://support.google.com/googleplay/android-developer/answer/9859348?visit_id=637550273103240982-1310059594&rd=1) 문서를 참고하세요.
+
+- 공개 테스트 : Google Play에서 테스터에게 공개됩니다.
+
+- 비공개 테스트 : 개발자가 선택한 소수의 테스터에게 제공됩니다. 버전 테스트와 의견 제출이 가능합니다.
+
+- 내부 테스트 : 개발자가 선택하는 최대 100명의 테스터에게 제공됩니다.
+
+<br>
+
+이 문서에서는 내부 테스트를 진행하겠습니다. [내부 테스트 시작](https://play.google.com/console/u/0/developers/app/tracks/internal-testing) 페이지에서 앱을 출시할 개발자 계정을 선택하고 진행합니다. 그럼 Google Play 콘솔의 출시 > 테스트 > 내부 테스트 메뉴로 자동 이동되고요, 우측 상단의 `새 버전 만들기` 버튼을 클릭하여 버전 만들기를 시작합니다.
+
+<br>
+
+<img src="./../img/android-deploy2.png" width="300" />
+
+<br>
+<br>
+
+그 다음, App Bundle 및 APK 섹션에 `aab` 포맷의 앱 번들 파일을 업로드하면 됩니다. 위 단계에서 생성한 앱 번들 파일은 Flutter 프로젝트의 `build/app/outputs/bundle/release/app.aab` 경로에 있습니다.
+
+<br>
+
+<img src="./../img/android-deploy2.png" width="300" />
+
+<br>
+<br>
+
+이미 앱 번들을 업로드한 적이 있는 경우, 앱 빌드 구성에서 버전코드가 이전 번들과 동일하면 아래와 같은 오류가 발생합니다. [빌드 구성 검토하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-5-%EB%B9%8C%EB%93%9C-%EA%B5%AC%EC%84%B1-%EA%B2%80%ED%86%A0%ED%95%98%EA%B8%B0)를 참고하여 `android/app/build.gradle` 파일에서 `versionCode` 항목에 새로운 버전을 명시한 후 다시 앱 번들을 생성하세요. `flutterVersionCode.toInteger()`라고 명시되어있다면, `pubspec.yaml` 파일에서 `version` 항목을 수정합니다.
+
+<br>
+
+<img src="./../img/android-deploy2.png" width="300" />
+
+<br>
+<br>
+
+### 2) 버전 검토 및 출시
+
+앱 번들 업로드가 완료되면 같은 페이지에서 아래로 스크롤하여 `출시명`과 `출시노트`를 입력한 후 `저장` 버튼을 클릭하여 버전 정보를 저장합니다. 그 다음 `버전 검토` 버튼을 클릭합니다. 검토가 완료되면 `내부 테스트 트랙으로 출시 시작` 버튼을 클릭하여 앱을 출시합니다.
 
 <br>
 
