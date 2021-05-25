@@ -8,7 +8,7 @@
 4. 앱 메니페스트 검토하기
 5. 빌드 구성 검토하기
 6. 앱 번들 빌드하기
-7. 앱 번들 테스트하기
+7. 앱 번들 테스트/출시하기
 
 <br>
 
@@ -326,9 +326,108 @@ Google Play는 150MB 이하의 압축된 앱 다운로드만 지원합니다. �
 <br>
 <br>
 
-### 2) 버전 검토 및 출시
+### 2) 버전 검토
 
-앱 번들 업로드가 완료되면 같은 페이지에서 아래로 스크롤하여 `출시명`과 `출시노트`를 입력한 후 `저장` 버튼을 클릭하여 버전 정보를 저장합니다. 그 다음 `버전 검토` 버튼을 클릭합니다. 검토가 완료되면 `내부 테스트 트랙으로 출시 시작` 버튼을 클릭하여 앱을 출시합니다.
+앱 번들 업로드가 완료되면 같은 페이지에서 아래로 스크롤하여 `출시명`과 `출시노트`를 입력한 후 `저장` 버튼을 클릭하여 버전 정보를 저장합니다. 그 다음 `버전 검토` 버튼을 클릭합니다.
+
+<br>
+
+### 3) 디버그 기호 파일 추가 및 출시
+
+검토 결과에 아래와 같은 경고가 있을 수 있습니다. 예외 처리가 되지 않는 등의 이유로 앱이 [비정상 종료](https://developer.android.com/topic/performance/vitals/crash#diagnose-crashes)되는 경우, 이를 분석하고 디버그할 수 있도록 앱의 네이티브 기호 파일을 업로드하라는 내용입니다. 이 기호 파일을 사용하면 기호화된 네이티브 비정상 종료 스택 트레이스(클래스 및 함수 이름 포함)를 사용 설정하여 프로덕션에서 앱을 디버그할 수 있습니다. 공식문서의 [네이티브 충돌 지원](https://developer.android.com/studio/build/shrink-code#native-crash-support)을 참고하여 해결합니다.
+
+<br>
+
+<img src="./../img/android-deploy10.png" />
+
+<br>
+<br>
+
+Android 앱 번들을 빌드하는 경우 앱의 `android/app/build.gradle` 파일 설정을 통해 기호 파일을 자동으로 추가할 수 있습니다. 이 단계를 진행하려면 먼저 아래 조건이 충족되어야합니다.
+
+- Gradle 플러그인 버전 4.1 이상 : Gradle 플러그인 버전은 `android/build.gradle` 파일에서 확인할 수 있습니다.
+- NDK(Native Development Kit) 설치 : NDK는 Android에서 C 및 C++ 코드를 사용할 수 있도록 해주는 도구 모음입니다.
+
+<br>
+
+조건이 충족되었으면 `android/app/build.gradle` 파일에 아래 내용을 추가하세요.
+
+```
+android {
+
+    // ...
+
+    buildTypes {
+        release {
+
+            // ...
+
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE'
+            }
+        }
+    }
+}
+```
+
+<br>
+
+`SYMBOL_TABLE`/`FULL` 중 기호 수준을 선택하여 입력합니다. 네이티브 디버그 기호 파일은 300MB로 제한됩니다. 디버그 기호 공간이 너무 크면 `FULL` 대신 `SYMBOL_TABLE`을 사용합니다.
+
+- `SYMBOL_TABLE` : Google Play 콘솔의 기호화된 스택 트레이스에서 함수 이름을 가져옵니다.
+- `FULL` : Google Play 콘솔의 기호화된 스택 트레이스에서 함수 이름, 파일, 행 번호를 가져옵니다.
+
+<br>
+
+#### \* NDK 설치
+
+NDK는 Android 스튜디오에서 설치할 수 있고요, [NDK 및 CMake 설치 및 구성](https://developer.android.com/studio/projects/install-ndk) 문서를 참고하여 설치합니다. Android Studio에서 프로젝트를 열고 상단 툴바에서 `Tools > SDK Manager`를 클릭하여 Android SDK 설정창을 엽니다.
+
+<br>
+
+<img src="./../img/android-deploy11.png" />
+
+<br>
+<br>
+
+그 다음 `SDK Tools` 탭으로 이동한 후 `NDK (Side by side)`와 `CMAKE` 항목에 체크하고 `OK` 버튼을 클릭하여 설치를 시작합니다. 설치가 완료되면 `Finish` 버튼을 클릭하여 완료합니다.
+
+<br>
+
+<img src="./../img/android-deploy12.png" />
+
+<br>
+<br>
+
+그 다음 다시 창을 열고 `Show Package Details` 항목에 체크하면, 설치된 NDK 버전을 확인할 수 있습니다.
+
+<br>
+
+<img src="./../img/android-deploy13.png" />
+
+<br>
+<br>
+
+이 버전을 `android/app/build.gradle` 파일에 명시합니다. 설치된 NDK 버전을 명시하지 않으면 `NDK is not installed` 오류가 발생할 수 있습니다. StackOverflow의 [Gradle sync failed, NDK not configured, download it with SDK manager](https://stackoverflow.com/questions/40943764/gradle-sync-failed-ndk-not-configured-download-it-with-sdk-manager/59275504#59275504) 페이지가 도움이 되었습니다.
+
+```
+android {
+
+    // ...
+
+    ndkVersion '23.0.7344513'
+}
+```
+
+<br>
+
+StackOverflow의 [How to add debug symbols to build.gradle](https://stackoverflow.com/questions/63373245/how-to-add-debug-symbols-to-build-gradle#answer-63436935) 답변이 도움이 되었습니다.
+
+<br>
+
+### 4) 출시
+
+`내부 테스트 트랙으로 출시 시작` 버튼을 클릭하여 앱을 출시합니다.
 
 <br>
 
