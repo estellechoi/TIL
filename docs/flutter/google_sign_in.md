@@ -377,9 +377,19 @@ Xcode에서 왼쪽 상단의 `Runner`를 클릭하고, `Info` 탭으로 이동�
 
 이제 Android/iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요.
 
-> 이미지 추가하기 ..
+<br>
+
+<img src="./../img/google_signin0.png" alt="firebase" />
 
 <br>
+<br>
+
+회원가입/로그인 테스트를 완료했으면 [Firebase 콘솔](https://console.firebase.google.com/u/0/)의 Authentication 메뉴에서 테스트한 사용자 정보를 조회할 수 있습니다.
+
+<br>
+
+<img src="./../img/firebase49.png" alt="firebase" />
+
 <br>
 <br>
 
