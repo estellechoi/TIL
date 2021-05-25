@@ -12,7 +12,8 @@
 8. Sign in with Google 구현하기
 9. `Podfile` 설정하기 : 플랫폼 및 버전 설정, `GoogleSignIn` 종속성 추가
 10. Xcode에서 Google 로그인을 위한 URL 체계 추가하기
-11. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+11. Android 빌드 파일에 플러그인 추가하기
+12. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 <br>
 
@@ -373,7 +374,77 @@ Xcode에서 왼쪽 상단의 `Runner`를 클릭하고, `Info` 탭으로 이동�
 
 <br>
 
-## 11. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+## 11. Android 빌드 파일에 플러그인 추가하기
+
+마지막으로 Android 빌드 설정 파일을 구성해야합니다. 그렇지 않으면 아래와 같이 Firebase 오류가 발생합니다.
+
+```
+[ERROR:flutter/lib/ui/ui_dart_state.cc(186)] Unhandled Exception: [core/not-initialized] Firebase has not been correctly initialized. Have you added the "google-services.json" file to the project?
+```
+
+<br>
+
+이 단계는 FlutterFire 공식문서의 [Android Installation](https://firebase.flutter.dev/docs/installation/android/)에서 확인할 수 있습니다. StackOverflow의 [Flutter Firebase and Android issue - unable to initialise. Cannot find google-services.json with latest (sept 2020) migration instructions executed](https://stackoverflow.com/questions/63804012/flutter-firebase-and-android-issue-unable-to-initialise-cannot-find-google-se) 페이지가 도움이 되었습니다.
+
+<br>
+
+### 1) `google-services` 플러그인 추가
+
+먼저 `google-services` 플러그인을 추가합니다. `android/build.gradle` 파일을 열고 아래와 같이 플러그인을 추가하세요.
+
+```
+buildscript {
+
+    // ...
+
+    dependencies {
+
+        // ...
+
+        classpath 'com.google.gms:google-services:4.3.3'
+    }
+}
+```
+
+<br>
+
+그 다음 `android/app/build.gradle` 파일을 열고 아래와 같이 입력하여 플러그인이 실행되도록 합니다.
+
+```
+apply plugin: 'com.google.gms.google-services'
+```
+
+<br>
+
+### 2) `multidex` 모듈 추가
+
+그 다음 같은 파일의 `dependencies` 항목에 `multidex` 모듈을 추가합니다.
+
+```
+implementation 'com.android.support:multidex:1.0.3'
+```
+
+<br>
+
+그 다음 `defaultConfig` 항목에 아래와 같이 모듈을 활성화 설정해주세요.
+
+```
+android {
+
+    // ...
+
+    defaultConfig {
+
+        // ...
+
+        multiDexEnabled true
+    }
+}
+```
+
+<br>
+
+## 12. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 이제 Android/iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요.
 
