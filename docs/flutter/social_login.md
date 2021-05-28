@@ -373,6 +373,48 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 <br>
 
+## 9. Apple 서버에 접근하기 위한 키 생성하기
+
+이제 Apple Developer에서 Apple 서버에 접근하기 위한 키를 생성합니다. 이 키는 앱과 Apple의 서비스 서버를 연결하는 역할을 하는데, Sign in with Apple 기능이 작동한 후에 반환되는 인증 정보를 얻기 위해 반드시 필요합니다.
+
+<br>
+
+<img src="./../img/firebase54.png" alt="firebase" />
+
+<br>
+<br>
+
+`Key Name`을 입력하고요, `Sign in with Apple` 항목을 `ENABLED`로 체크합니다. 이 단계에서 생성하는 키는 단 한 번만 다운로드할 수 있기 때문에 추후에 사용할 다른 서비스를 함께 체크하여 키를 생성하는 것을 추천합니다. 저의 경우 `Apple Push Notifications service (APNs)` 항목을 함께 체크했습니다.
+
+<br>
+
+<img src="./../img/firebase57.png" alt="firebase" />
+
+<br>
+<br>
+
+`Sign in with Apple` 항목은 추가 설정이 필수이기 때문에 `Configure` 버튼을 클릭합니다. 이동한 페이지에서 `Primary App ID`로 Apple 로그인을 구현할 앱 ID를 선택한 후 `Save` 버튼을 클릭하여 설정을 완료합니다.
+
+<br>
+
+<img src="./../img/firebase58.png" alt="firebase" />
+
+<br>
+<br>
+
+그 다음 돌아온 페이지에서 `Continue`, `Register` 버튼을 차례로 클릭하여 키 생성을 완료합니다. 마지막으로 생성된 키 정보가 나타나는데요, `Key ID` 항목에 표시된 키 ID는 추후 서버 설정시 사용됩니다. 사용할 서비스가 모두 선택되었는지 확인한 후 `Download` 버튼을 클릭하여 `p8` 포맷의 키 파일을 다운로드합니다.
+
+<br>
+
+<img src="./../img/firebase59.png" alt="firebase" />
+
+<br>
+<br>
+
+> [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple#create-a-service-id) 라이브러리 문서가 도움이 되었습니다.
+
+<br>
+
 ## 9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
 
 이제 Flutter 프로젝트에 필요한 라이브러리들을 설치하고 라이브러리를 사용하여 Apple 로그인을 구현하면 됩니다. Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/projects/firebaseextended/flutterfire/)를 사용하여 Firebase API 등 다양한 플랫폼별 서비스에 접근할 수 있습니다. 각 Firebase 서비스에 필요한 라이브러리를 추가하는 방식인데, 이러한 라이브러리들을 총칭하여 FlutterFire라고 부릅니다. Flutter 프로젝트의 경우 FlutterFire 라이브러리들을 프로젝트에 추가하면 iOS, Android 버전 모두에서 사용됩니다.
