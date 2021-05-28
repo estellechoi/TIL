@@ -170,7 +170,7 @@ class PushNotificationManager {
 
 ### 2) 사용자 허용 요청하기
 
-사용자의 디바이스에 푸시 알림을 보내기 위해서는 사용자가 이를 허용해야합니다. 사용자가 거절한 이후에는 허용 요청을 다시 보내도 작동하지 않습니다. 허용 요청을 보내기 전 사용자가 푸시 알림 허용 요청을 받은 적이 있는지 확인하기 위해 아래와 같이 사용자의 설정값을 가져옵니다. 사용자가 푸시 알림을 허용할지 결정한 적이 없는 경우 `authorizationStatus` 값은 `AuthorizationStatus.notDetermined`입니다.
+사용자의 디바이스에 푸시 알림을 보내기 위해서는 사용자에게 허용 요청을 해야합니다. 사용자가 거절한 이후에는 허용 요청을 다시 보내도 작동하지 않습니다. 허용 요청을 보내기 전 사용자가 푸시 알림 허용 요청을 받은 적이 있는지 확인하기 위해 아래와 같이 사용자의 설정값을 가져옵니다. 사용자가 푸시 알림을 허용할지 결정한 적이 없는 경우 `NotificationSettings.authorizationStatus` 값은 `AuthorizationStatus.notDetermined`입니다.
 
 ```dart
 import 'package:firebase_messaging/firebase_messaging.dart';
