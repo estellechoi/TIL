@@ -246,7 +246,7 @@ class PushNotificationManager {
 
 ### 3) 푸시 알림 보내기
 
-기본적으로 푸시 알림은 앱이 백그라운드에 있거나 종료 상태일 때 작동합니다. 이 설정을 변경하려면 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 iOS/Android 각각 진행해야합니다. 참고로 FCM을 사용하면 스타일링, Foreground Notifications 등의 고급 기능은 지원하지 않습니다.
+기본적으로 푸시 알림은 앱이 백그라운드에 있거나 종료 상태일 때 작동합니다. 이 설정을 변경하려면 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 iOS/Android 각각 진행해야합니다. 참고로 FCM을 사용하면 Foreground Notifications을 비롯하여 스타일링 등의 고급 기능은 지원하지 않습니다.
 
 <br>
 
@@ -259,6 +259,9 @@ class PushNotificationManager {
 - `onMessageOpenedApp.listen()` : 백그라운드에 있던 앱이 열리는 경우 콜백을 사용하여 핸들링합니다.
 
 <br>
+
+...
+
 <br>
 <br>
 <br>
