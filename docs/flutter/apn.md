@@ -105,9 +105,9 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-## 4. APN 인증서를 생성 및 프로비저닝 프로파일(Provisioining profile) 구성하기
+## 4. APN 인증서 생성 및 프로비저닝 프로파일(Provisioining profile) 구성하기
 
-APN 서비스를 사용하는 경우 Xcode에서 프로비저닝 프로파일을 자동으로 생성할 수 없기 때문에, 개발자 인증 정보가 포함된 APN 서비스 인증서를 발급한 후 이를 포함한 프로비저닝 프로파일을 수동으로 가져와야 합니다. [APNs 인증서를 생성 및 프로비저닝 프로파일 구성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-automatically-manage-signing)를 참고하여 Xcode에서 프로비저닝 프로파일을 서명에 포함하는 것까지 진행합니다. 또는 FlutterFire 공식문서의 [Generating a provisioning profile](https://firebase.flutter.dev/docs/messaging/apple-integration#3-generating-a-provisioning-profile)를 참고하여 진행합니다.
+APN 서비스를 사용하는 경우 Xcode에서 프로비저닝 프로파일을 자동으로 생성할 수 없기 때문에, 개발자 인증 정보가 포함된 APN 서비스 인증서를 발급한 후 이를 포함한 프로비저닝 프로파일을 수동으로 가져와야 합니다. [APNs 인증서 생성 및 프로비저닝 프로파일 구성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-automatically-manage-signing)를 참고하여 Xcode에서 프로비저닝 프로파일을 서명에 포함하는 것까지 진행합니다. 또는 FlutterFire 공식문서의 [Generating a provisioning profile](https://firebase.flutter.dev/docs/messaging/apple-integration#3-generating-a-provisioning-profile)를 참고하여 진행합니다.
 
 <br>
 
@@ -133,7 +133,7 @@ FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니
 
 Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/project/_/settings/cloudmessaging) 페이지에서 `클라우드 메시징` 탭으로 이동합니다. `iOS 앱 구성` 섹션에서 위에서 등록한 iOS 앱을 선택한 후, `APN 인증 키` 섹션의 `업로드` 버튼을 클릭하면 아래와 같이 `APN 인증 키 업로드` 창이 나타납니다.
 
-- `APN 인증 키` : [Apple 서버에 접근하기 위한 키 등록하기]()에서 다운로드했던 키 파일을 업로드합니다.
+- `APN 인증 키` : [Apple 서버에 접근하기 위한 키 등록하기](#user-content-3-apple-서버에-접근하기-위한-키-등록하기)에서 다운로드했던 키 파일을 업로드합니다.
 
 - `키 ID` : Apple Developer [Certificates, Identifiers & Profiles > Keys](https://developer.apple.com/account/resources/authkeys/list) 페이지에서 해당하는 키 항목을 클릭하여 확인할 수 있습니다.
 
