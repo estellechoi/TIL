@@ -149,7 +149,9 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 사용자들의 디바이스에 설치된 앱은 다음 3가지 중 하나의 상태를 갖게 되고요, 앱이 어떤 상태에 있는지에 따라 푸시 알림도 다르게 핸들링됩니다. 기본적으로 대부분 플랫폼에서 푸시 알림은 앱이 `background`나 `terminated` 상태일 때만 작동합니다. 필요한 경우 공식 문서의 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 `foreground` 상태에서 푸시 알림이 어떻게 동작할지 컨트롤할 수 있습니다.
 
 - `foreground` : 앱이 켜져있고 사용중인 상태
+
 - `background` : 앱이 켜져있지만, 사용중이지 않고 백그라운드에 있는 상태
+
 - `terminated` : 앱이 켜져있지 않거나 디바이스가 잠겨있는 상태
 
 <br>
