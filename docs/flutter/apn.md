@@ -255,7 +255,7 @@ class FCMController {
 
 <br>
 
-이제 `requestPermission()` 메소드를 호출하여 사용자에게 허용 요청을 보냅니다. `requestPermission()` 메소드의 인자에는 사용자가 푸시 알림을 허용할 경우 기본 설정값으로 지정될 값들을 넘깁니다. 각 인자에 대한 설명은 FlutterFire 공식문서의 [Permission settings](https://firebase.flutter.dev/docs/messaging/permissions#permission-settings)를 참고합니다. 참고로 [`provisional`](https://firebase.flutter.dev/docs/messaging/permissions#provisional-authorization)은 iOS 12 이상에서 지원하는 설정값입니다.
+이제 `requestPermission()` 메소드를 호출하여 사용자에게 허용 요청을 보냅니다. 메소드의 인자에는 사용자가 푸시 알림을 허용할 경우 기본 설정값으로 지정될 값들을 넘깁니다. 각 인자에 대한 설명은 FlutterFire 공식문서의 [Permission settings](https://firebase.flutter.dev/docs/messaging/permissions#permission-settings)를 참고합니다. 참고로 [`provisional`](https://firebase.flutter.dev/docs/messaging/permissions#provisional-authorization)은 iOS 12 이상에서 지원하는 설정값입니다.
 
 ```dart
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -324,7 +324,7 @@ class _MyAppState extends State<MyApp> {
 
 ### 4) 사용자 동작 핸들링하기
 
-푸시 알림 전송 후 사용자의 행동에 따라 취해야할 앱의 동작을 핸들링할 수 있습니다. 아래의 2가지 메소드를 사용할 수 있고요, 공식 문서에서는 2개 메소드를 모두 구현하여 스무스한 UX를 제공하는 것을 권유합니다. 자세한 내용은 공식문서의 [Handling Interaction](https://firebase.flutter.dev/docs/messaging/notifications#handling-interaction)를 참고합니다.
+푸시 알림을 전송하는 역할은 서버에서 하는데요, 이 내용은 뒤에서 다루겠습니다. 푸시 알림이 전송되었을 때 사용자의 행동에 따라 진행되어야 할 앱의 동작을 핸들링해봅시다. 아래의 2가지 메소드를 사용할 수 있고요, 공식 문서에서는 2개 메소드를 모두 구현하여 스무스한 UX를 제공하는 것을 권유합니다. 자세한 내용은 공식문서의 [Handling Interaction](https://firebase.flutter.dev/docs/messaging/notifications#handling-interaction)를 참고합니다.
 
 <br>
 
