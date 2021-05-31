@@ -1,14 +1,12 @@
 # Flutter 앱에서 APN(Apple Push Notification) 사용하기 (FCM(Firebase Cloud Messaging) 사용)
 
-<br>
-
-[FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 사용자의 디바이스에 설치된 앱에서 사용자에게 푸시 알림을 보낼 수 있는 Firebase의 서비스입니다.
+> [FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 사용자의 디바이스에 설치된 앱에서 사용자에게 푸시 알림을 보낼 수 있는 Firebase의 서비스입니다.
 
 <br>
 
 ## 1. 선행 작업하기
 
-iOS 앱의 경우 APN(Apple Push Notification) 서비스와 연동하여 구현합니다. APN 사용을 위해서는 몇 가지 선행 작업이 필요합니다. 이 문서는 이러한 선행작업을 포함하는 테스트 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하거나, 아래 단계들을 따라가며 최소한의 선행 작업을 진행하세요.
+iOS 앱에서 사용자에게 푸시 알림을 보내기 위해서는 APN(Apple Push Notification) 서비스를 사용합니다. APN 사용을 위해서는 몇 가지 선행 작업이 필요하고요, 이 문서는 이러한 선행 작업을 포함하는 테스트 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하거나, 아래 단계들을 따라가며 최소한의 선행 작업을 진행하세요.
 
 <br>
 
@@ -20,7 +18,7 @@ APN을 포함한 Apple 서비스를 이용하려면 개발자(팀)의 Apple 계�
 
 ### 2) 고유 앱 번들 ID 등록
 
-개발자 계정으로 전환이 완료되면 Apple에서 앱을 식별할 수 있는 고유한 앱 ID를 생성해야합니다. 이 단계에서 생성하는 앱 ID가 뒤에 나오는 Firebase 콘솔에서의 앱 등록과 서비스 ID 생성에 사용됩니다. [Apple Developer에서 고유 앱 번들 ID 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-%EA%B3%A0%EC%9C%A0-%EB%B2%88%EB%93%A4-id-%EB%93%B1%EB%A1%9D)을 참고하여 앱 ID를 등록하세요.
+개발자 계정으로 전환이 완료되면 Apple에서 앱을 식별할 수 있는 고유한 앱 ID를 생성해야합니다. 이 단계에서 생성하는 앱 ID는 Firebase 콘솔에서 프로젝트에 앱을 등록할 때 사용됩니다. [Apple Developer에서 고유 앱 번들 ID 등록](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-1-%EA%B3%A0%EC%9C%A0-%EB%B2%88%EB%93%A4-id-%EB%93%B1%EB%A1%9D)을 참고하여 앱 ID를 등록하세요.
 
 <br>
 
@@ -34,13 +32,11 @@ APN을 포함한 Apple 서비스를 이용하려면 개발자(팀)의 Apple 계�
 
 <br>
 
-## 2. Xcode 프로젝트 설정에 `Push Notifications`/`Background Modes` 추가
+## 2. Xcode에서 `Push Notifications`/`Background Modes` 추가
 
 ### 1) `Push Notifications`
 
-[Signing & Capabilities](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-2-signing--capabilities)를 참고하여 Xcode에서 프로젝트 설정을 열고 `Push Notifications` 서비스를 Capability로 추가합니다.
-
-Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다. 그 다음, 아래 스크린샷과 같이 Xcode에서 프로젝트의 `Runner` 경로를 열고 `Signing & Capabilities` 탭으로 이동한 후 `+ Capability` 버튼을 클릭하여 추가하면 됩니다.
+Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다. 그 다음, 아래 스크린샷과 같이 Xcode에서 프로젝트의 `Runner` 경로를 열고 `Signing & Capabilities` 탭으로 이동한 후 `+ Capability` 버튼을 클릭하여 추가하면 됩니다. 이 탭에 대한 추가 설명은 [Signing & Capabilities](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-2-signing--capabilities)를 참고하세요.
 
 <br>
 
@@ -51,7 +47,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 
 ### 2) `Background Modes` 추가
 
-같은 탭에서 다시 `+ Capability` 버튼을 클릭하여 `Background Modes`를 추가합니다.
+같은 탭에서 다시 `+ Capability` 버튼을 클릭하여 `Background Modes`를 찾아 추가합니다.
 
 <br>
 
@@ -60,7 +56,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-추가된 `Background Modes` 항목 내에서 아래와 같이 2개의 세부 항목에 체크합니다.
+추가된 `Background Modes` 항목 내에 여러 개의 세부 항목이 보일겁니다. 아래와 같이 2개 항목에 체크합니다.
 
 - `Background fetch`
 - `Remote Notifications`
@@ -74,7 +70,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 
 ## 3. Apple 서버에 접근하기 위한 키 등록하기
 
-이제 외부에서 Apple의 서버에 접근할 수 있도록 키를 등록해야합니다. 이 문서에서는 자체 서버를 구축하지 않고 FCM을 사용하므로, 여기에서 생성하는 키 파일은 Firebase 콘솔에서 프로젝트 셋업시 사용됩니다. Apple Developer [Certificates, Identifiers & Profiles > Keys](https://developer.apple.com/account/resources/authkeys/list) 페이지에서 `Create a key` 또는 `+` 버튼을 클릭하여 시작합니다.
+이제 외부에서 Apple의 APN 서버에 접근할 수 있도록 인증 키를 등록해야합니다. 이 문서에서는 자체 서버를 구축하지 않고 FCM을 사용하므로, 여기에서 생성하는 키 파일은 Firebase 콘솔에서 프로젝트 셋업시 사용됩니다. Apple Developer 웹사이트에서 [Certificates, Identifiers & Profiles > Keys](https://developer.apple.com/account/resources/authkeys/list) 메뉴로 이동, `Create a key` 또는 `+` 버튼을 클릭하여 시작합니다.
 
 <br>
 
@@ -83,7 +79,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-`Key Name`을 입력하고요, `Apple Push Notifications service (APNs)` 항목을 `ENABLED`로 체크한 다음 `Continue`, `Register` 버튼을 차례로 클릭합니다. 화면에 표시된 안내문구대로, 이 단계에서 생성하는 키는 개발팀의 푸시 알림 서버와 Apple의 APNs를 연결하는 역할을 합니다.
+`Key Name`을 입력하고요, `Apple Push Notifications service (APNs)` 항목을 `ENABLED`로 체크합니다. 화면에 표시된 안내문구대로, 이 단계에서 생성하는 키는 개발팀의 푸시 알림 서버와 Apple의 APNs를 연결하는 역할을 합니다. `Continue`, `Register` 버튼을 차례로 클릭합니다.
 
 <br>
 
@@ -92,11 +88,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-키 등록이 완료되면 아래와 같이 키 정보와 경고문구가 나타납니다. 키는 단 한 번만 다운로드 가능하다는 내용입니다. 다른 Apple 서비스를 함께 사용한다면 해당 서비스들을 포함하도록 키를 편집한 후 다운로드하는 것이 좋습니다.
-
-<br>
-
-`Key ID` 항목에 표시된 키 ID는 추후 서버 설정시 사용됩니다. 사용할 서비스가 모두 선택되었는지 확인한 후 `Download` 버튼을 클릭하여 `p8` 포맷의 키 파일을 다운로드하고 보관합니다.
+키 등록이 완료되면 아래와 같이 키 이름, 키 ID, 접근할 서비스 정보가 표시됩니다. `Key ID` 항목에 표시된 키 ID는 개발팀의 푸시 알림 서버에서 APN 서버에 접근할 때 사용하게 됩니다. 한편 아래에 표시된 것과 같이 경고 문구가 보일겁니다. 키는 단 한 번만 다운로드 가능하다는 내용입니다. APN 외에 다른 Apple 서비스를 함께 사용한다면 해당 서비스들을 포함하도록 키를 편집한 후 계속 진행합니다. 사용할 서비스가 모두 선택되었는지 확인한 후 `Download` 버튼을 클릭하여 `p8` 포맷의 키 파일을 다운로드하고 보관합니다.
 
 <br>
 
@@ -105,15 +97,15 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-## 4. APN 인증서 생성 및 프로비저닝 프로파일(Provisioining profile) 구성하기
+## 4. APN 서비스 인증서 발급받기
 
-APN 서비스를 사용하는 경우 Xcode에서 프로비저닝 프로파일을 자동으로 생성할 수 없기 때문에, 개발자 인증 정보가 포함된 APN 서비스 인증서를 발급한 후 이를 포함한 프로비저닝 프로파일을 수동으로 가져와야 합니다. [APNs 인증서 생성 및 프로비저닝 프로파일 구성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-automatically-manage-signing)를 참고하여 Xcode에서 프로비저닝 프로파일을 서명에 포함하는 것까지 진행합니다. 또는 FlutterFire 공식문서의 [Generating a provisioning profile](https://firebase.flutter.dev/docs/messaging/apple-integration#3-generating-a-provisioning-profile)를 참고하여 진행합니다.
+APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서를 발급받아야합니다. 개발자 인증 정보가 담긴 APN 서비스 인증서를 발급받고, 이 인증서 정보가 포함된 프로비저닝 프로파일(Provisioining Profile)을 생성한 후 프로젝트에 추가해야하죠. [APNs 인증서 생성 및 프로비저닝 프로파일 구성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-automatically-manage-signing)를 참고하여 다음 단계까지 진행합니다. 이 레퍼런스 문서는 Xcode에서 프로비저닝 프로파일을 앱 서명에 포함하는 것까지 진행합니다.
 
 <br>
 
-## 5. `ImageNotification` 추가하기
+## 5. 프로비저닝 프로파일(Provisioining Profile) 구성하기
 
-FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니다. iOS 앱에서는 `ImageNotification` 라이브러리를 사용해야합니다. FlutterFire 공식문서의 [(Advanced, Optional) Allowing Notification Images](https://firebase.flutter.dev/docs/messaging/apple-integration#advanced-optional-allowing-notification-images)를 참고하여 진행합니다. 이 단계는 선택입니다.
+이제 위 단계에서 생성한 서비스 인증서가 앱 ID 정보에 자동으로 추가되었기 때문에, 프로비저닝 프로파일을 생성하면 됩니다. 이러한 추가적인 인증 정보를 담은 프로비저닝 프로파일은 Xcode를 사용하여 자동으로 생성할 수 없기 때문에 Apple Developer에서 진행합니다. 위 단계에서 언급한 동일한 문서를 참고하거나, FlutterFire 공식 문서의 [Generating a provisioning profile](https://firebase.flutter.dev/docs/messaging/apple-integration#3-generating-a-provisioning-profile)를 참고하여 진행합니다.
 
 <br>
 
@@ -260,7 +252,11 @@ class PushNotificationManager {
 
 <br>
 
-...
+### 5) `ImageNotification` 추가하기
+
+FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니다. iOS 앱에서는 `ImageNotification` 라이브러리를 사용해야합니다. FlutterFire 공식문서의 [(Advanced, Optional) Allowing Notification Images](https://firebase.flutter.dev/docs/messaging/apple-integration#advanced-optional-allowing-notification-images)를 참고하여 진행합니다. 이 단계는 선택입니다.
+
+<br>
 
 <br>
 <br>
