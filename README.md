@@ -34,7 +34,7 @@
 - [Flutter 앱에서 Firebase를 사용하여 Sign in with Apple 구현하기](./docs/flutter/social_login.md)
 - [Flutter 앱에서 Firebase를 사용하여 Sign in with Google 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md)
 - [Flutter 앱에서 Apple HealthKit, Google Fitness 데이터 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md)
-- [Flutter 앱에서 FCM(Firebase Cloud Messaging)을 사용하여 APN(Apple Push Notification) 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
+- [Flutter 앱에서 APN(Apple Push Notification) 사용하기 (FCM(Firebase Cloud Messaging) 사용)](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
 
 <br>
 

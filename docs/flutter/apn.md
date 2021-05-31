@@ -1,8 +1,8 @@
-# Flutter 앱에서 FCM(Firebase Cloud Messaging)을 사용하여 APN(Apple Push Notification) 구현하기
+# Flutter 앱에서 APN(Apple Push Notification) 사용하기 (FCM(Firebase Cloud Messaging) 사용)
 
 <br>
 
-[FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 사용자의 디바이스에 설치된 앱에서 사용자에게 푸시 알림을 보낼 수 있는 Firebase의 서비스입니다. 별도로 푸시 알림 서버를 구축해서 사용할 수도 있지만, FCM을 사용하면 iOS와 Android 앱에 동시 사용이 가능합니다.
+[FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 사용자의 디바이스에 설치된 앱에서 사용자에게 푸시 알림을 보낼 수 있는 Firebase의 서비스입니다.
 
 <br>
 
