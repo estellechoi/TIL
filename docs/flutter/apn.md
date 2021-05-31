@@ -324,7 +324,11 @@ class _MyAppState extends State<MyApp> {
 
 ### 4) 사용자 동작 핸들링하기
 
-푸시 알림을 전송하는 역할은 서버에서 하는데요, 이 내용은 뒤에서 다루겠습니다. 푸시 알림이 전송되었을 때 사용자의 행동에 따라 진행되어야 할 앱의 동작을 핸들링해봅시다. 아래의 2가지 메소드를 사용할 수 있고요, 공식 문서에서는 2개 메소드를 모두 구현하여 스무스한 UX를 제공하는 것을 권유합니다. 자세한 내용은 공식문서의 [Handling Interaction](https://firebase.flutter.dev/docs/messaging/notifications#handling-interaction)를 참고합니다.
+> 푸시 알림을 전송하는 역할은 서버에서 하는데요, 이 내용은 뒤에서 다루겠습니다.
+
+<br>
+
+푸시 알림이 전송되었을 때 사용자의 행동에 따라 진행되어야 할 앱의 동작을 핸들링해봅시다. 아래의 2가지 메소드를 사용할 수 있고요, 공식 문서에서는 2개 메소드를 모두 구현하여 스무스한 UX를 제공하는 것을 권유합니다. 자세한 내용은 공식문서의 [Handling Interaction](https://firebase.flutter.dev/docs/messaging/notifications#handling-interaction)를 참고합니다.
 
 <br>
 
