@@ -1,4 +1,4 @@
-# Flutter 앱에서 FCM(Firebase Cloud Messaging)을 사용하여 푸시 알림 구현하기 : APN(Apple Push Notification) / Android
+# Flutter 앱에서 푸시 알림 구현하기 : FCM(Firebase Cloud Messaging) + APN(Apple Push Notification) / Android
 
 <br>
 
