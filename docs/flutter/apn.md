@@ -470,19 +470,34 @@ class _MyAppState extends State<MyApp> {
 
 ### 1) Firebase 콘솔에서 보내기
 
-당장 디바이스로 메시지를 전송하고 테스트해볼 수 있는 가장 빠른 방법은 Firebase 콘솔의 [Cloud Messaging](https://console.firebase.google.com/project/_/notification) 메뉴 알림 작성기를 사용하는 것입니다. `Send your first message` 버튼을 클릭하여 알림 작성기를 시작합니다.
+당장 디바이스로 메시지를 전송하고 테스트해볼 수 있는 가장 빠른 방법은 Firebase 콘솔의 [Cloud Messaging](https://console.firebase.google.com/project/_/notification) 메뉴에서 알림 작성기를 사용하는 것입니다. `Send your first message` 버튼을 클릭하여 알림 작성기를 시작합니다.
 
 <br>
 
 <img src="./../img/firebase61.png" alt="firebase" />
 
 <br>
+<br>
+
+아래와 같이 알림 작성 페이지로 이동했다면, `알림 제목`, `알림 텍스트` 항목을 입력하고 우측의 `테스트 메시지 전송` 버튼을 클릭하여 테스트 메시지를 전송해봅니다.
+
+<br>
 
 <img src="./../img/firebase62.png" alt="firebase" />
 
 <br>
+<br>
+
+`다음` 버튼을 클릭하여 타겟 조건을 설정해보세요.
+
+<br>
 
 <img src="./../img/firebase63.png" alt="firebase" />
+
+<br>
+<br>
+
+메시지를 전송할 시간을 예약할 수 있습니다.
 
 <br>
 
