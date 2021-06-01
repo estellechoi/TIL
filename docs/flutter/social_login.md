@@ -14,12 +14,13 @@
 6. Firebase 프로젝트 호스팅하기
 7. Apple Developer에서 서비스 ID 생성하기
 8. Sign in with Apple 서비스 설정하기
-9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
-10. `sign_in_with_apple` 라이브러리 추가하기
-11. Sign in with Apple 구현하기
-12. `Podfile` 설정하기
-13. Android 빌드 파일에 플러그인 추가하기
-14. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+9. Apple 서버에 접근하기 위한 키 생성하기
+10. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
+11. `sign_in_with_apple` 라이브러리 추가하기
+12. Sign in with Apple 구현하기
+13. `Podfile` 설정하기
+14. Android 빌드 파일에 플러그인 추가하기
+15. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 <br>
 
@@ -163,21 +164,17 @@ Flutter 프로젝트의 루트 경로를 기준으로 `ios/Runner.xcworkspace` �
 <br>
 <br>
 
-Android 앱에서도 Apple 로그인을 사용하려면 아래 항목들을 작성합니다.
+Android 앱에서도 Apple 로그인을 사용하려면 아래 항목들을 작성합니다. `OAuth 코드 흐름 구성(선택사항)` 하위 항목들 역시 웹과 Android 앱의 경우 설정하는 것을 추천하고 있지만, Flutter로 iOS 앱을 개발하는 경우 Apple의 네이티브 iOS SDK나 JS 라이브러리를 사용하지 않기 때문에 입력합니다.
 
-- `서비스 ID` : Android 앱에서 Apple 로그인을 사용할 때 필요한 ID 입니다. [Apple Developer](https://developer.apple.com/account/resources/identifiers/list)에서 생성한 앱 ID를 입력하면 됩니다.
+- `서비스 ID` : Android 앱에서 Apple 로그인을 사용할 때 필요한 ID 입니다. [Apple Developer > Identifiers](https://developer.apple.com/account/resources/identifiers/list)에서 생성한 서비스 ID를 입력하면 됩니다.
 
   > 아직 앱 ID가 없다면 앱 ID를 먼저 생성해주세요.
 
-<br>
+- `Apple 팀 ID` : 앱을 소유한 Apple 개발자 계정의 팀 ID를 입력합니다. [Apple Developer > Membership](https://developer.apple.com/account/#/membership/) 페이지에서 확인할 수 있습니다.
 
-`OAuth 코드 흐름 구성(선택사항)` 항목을 펼치면 아래와 같은 양식이 추가로 나타납니다.
+- `키 ID` : [Apple Developer > Keys](https://developer.apple.com/account/resources/authkeys/list)에서 생성한 키 ID를 입력합니다.
 
-- `Apple 팀 ID` : 앱을 소유한 Apple 개발자 계정의 팀 ID를 입력합니다. 영대문자와 숫자로 이루어져있습니다.
-
-- `키 ID` : ...
-
-- `비공개 키` : ...
+- `비공개 키` : 위에서 입력한 키를 생성하고 다운로드 받은 `p8` 포맷의 키 파일을 열어서 확인할 수 있습니다.
 
 <br>
 
@@ -352,7 +349,7 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 <br>
 <br>
 
-`+` 버튼을 클릭하면 아래와 같은 창이 나타납니다. `Domains and Subdomains`에는 위에서 호스팅한 Firebase 앱 도메인 주소를 작성하고요, `Email Address` 항목에는 사용자를 대상으로 이메일 커뮤니케이션을 진행할 이메일 주소를 입력합니다.
+`+` 버튼을 클릭하면 아래와 같은 창이 나타납니다. `Domains and Subdomains`에는 위에서 호스팅한 Firebase 앱 도메인 주소를 작성하고요, `Email Address` 항목에는 사용자를 대상으로 이메일 커뮤니케이션을 진행할 이메일 주소를 입력합니다. 이메일 링크 로그인, 이메일 주소 인증, 계정 변경 취소 등 사용자에게 이메일을 보내는 Firebase 인증 기능 중 하나라도 사용한다면 Firebase에서 전송된 이메일을 익명처리된 Apple 이메일 주소로 전달할 수 있도록 [Apple 비공개 이메일 릴레이 서비스](https://help.apple.com/developer-account/#/devf822fb8fc)를 구성하고, `noreply@*YOUR_FIREBASE_PROJECT_ID*.firebaseapp.com` 형태의 이메일 주소를 입력해야합니다. Firebase 공식문서의 [Apple로 로그인 구성](https://firebase.google.com/docs/auth/ios/apple#configure_sign_in_with_apple)이 도움이 되었습니다.
 
 <br>
 
@@ -375,7 +372,7 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 ## 9. Apple 서버에 접근하기 위한 키 생성하기
 
-이제 Apple Developer에서 Apple 서버에 접근하기 위한 키를 생성합니다. 이 키는 앱과 Apple의 서비스 서버를 연결하는 역할을 하는데, Sign in with Apple 기능이 작동한 후에 반환되는 인증 정보를 얻기 위해 반드시 필요합니다.
+이제 Apple Developer의 [Certificates, Identifiers & Profiles > Keys](https://developer.apple.com/account/resources/authkeys/list) 메뉴에서 Apple의 서비스 서버에 접근하기 위한 키를 생성합니다. Sign in with Apple 기능이 작동한 후 반환되는 인증 정보는 검증 과정을 거쳐야하는데요, 이 검증 과정을 위해 Apple의 서비스 서버와 통신하게 되고요, 이때 Apple 서버에 접근하기 위한 키가 필요합니다.
 
 <br>
 
@@ -415,7 +412,7 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 <br>
 
-## 9. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
+## 10. Flutter 프로젝트에 FlutterFire(라이브러리) 추가하기
 
 이제 Flutter 프로젝트에 필요한 라이브러리들을 설치하고 라이브러리를 사용하여 Apple 로그인을 구현하면 됩니다. Flutter 프로젝트에서는 [FlutterFire](https://firebaseopensource.com/projects/firebaseextended/flutterfire/)를 사용하여 Firebase API 등 다양한 플랫폼별 서비스에 접근할 수 있습니다. 각 Firebase 서비스에 필요한 라이브러리를 추가하는 방식인데, 이러한 라이브러리들을 총칭하여 FlutterFire라고 부릅니다. Flutter 프로젝트의 경우 FlutterFire 라이브러리들을 프로젝트에 추가하면 iOS, Android 버전 모두에서 사용됩니다.
 
@@ -434,13 +431,13 @@ Sign in with Apple 서비스를 위한 ID를 생성할 것이므로 `Service IDs
 
 <br>
 
-## 10. `sign_in_with_apple` 라이브러리 추가하기
+## 11. `sign_in_with_apple` 라이브러리 추가하기
 
 Flutter 프로젝트 코드에서 Sign in with Apple 구현은 [`sign_in_with_apple`](https://pub.dev/packages/sign_in_with_apple) 라이브러리를 사용하는 것을 추천합니다. `pubspec.yaml` 파일에 라이브러리를 추가하여 설치해주세요.
 
 <br>
 
-## 11. Sign in with Apple 구현하기
+## 12. Sign in with Apple 구현하기
 
 이제 필요한 곳에서 라이브러리를 사용하여 구현하면 됩니다. 아래는 [Flutter Firebase Authentication: Apple Sign In](https://dev.to/offlineprogrammer/flutter-firebase-authentication-apple-sign-in-1m64#app-implementation) 문서의 App Implementation 섹션을 참고하여 작성한 예제 코드입니다. 이 예제 코드는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다.
 
@@ -704,7 +701,7 @@ providers: [
 
 <br>
 
-## 12. `Podfile` 설정하기
+## 13. `Podfile` 설정하기
 
 [CocoaPods](https://cocoapods.org/)는 Xcode 프로젝트를 위한 의존성 매니저이고요, CocoaPods의 `Podfile`은 Xcode 프로젝트의 의존성을 명세하는 파일입니다.
 
@@ -776,13 +773,13 @@ platform :ios, '10.0'
 
 <br>
 
-## 13. Android 빌드 파일에 플러그인 추가하기
+## 14. Android 빌드 파일에 플러그인 추가하기
 
 [Android 빌드 파일에 플러그인 추가하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md#user-content-11-android-%EB%B9%8C%EB%93%9C-%ED%8C%8C%EC%9D%BC%EC%97%90-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)를 참고하여 동일하게 진행합니다. Android 앱에서 플러그인을 통해 Firebase 설정 파일을 설치하지 않으면 앱이 실행되지 않습니다.
 
 <br>
 
-## 14. 테스트 및 Firebase 콘솔에서 사용자 조회하기
+## 15. 테스트 및 Firebase 콘솔에서 사용자 조회하기
 
 이제 iOS Emulator를 사용하여 앱을 실행하고 테스트해보세요. Settings에서 Apple 계정 로그인을 먼저 진행해야 Sign in with Apple 테스트가 가능합니다. 또는 [TestFlight에 앱을 출시](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md)하고 실제 iOS 디바이스에서 테스트할 수 있습니다. 첫 테스트시에는 회원가입이 진행되고, 그 다음부터는 로그인이 진행됩니다.
 
