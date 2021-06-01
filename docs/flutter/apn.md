@@ -1,6 +1,4 @@
-# Flutter 앱에서 APN(Apple Push Notification) 사용하기 (FCM(Firebase Cloud Messaging) 사용)
-
-> [FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 사용자의 디바이스에 설치된 앱에서 사용자에게 푸시 알림을 보낼 수 있는 Firebase의 서비스입니다.
+# Flutter 앱에서 APN(Apple Push Notification) 사용하기 + FCM(Firebase Cloud Messaging)
 
 <br>
 
@@ -109,19 +107,43 @@ APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서�
 
 <br>
 
-## 6. Firebase 프로젝트 생성하기
+여기까지 진행하시면 APN 사용을 위한 셋업은 끝입니다.
+
+<br>
+
+## 6. FCM(Firebase Cloud Messaging)
+
+[FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 앱을 통해 사용자의 디바이스로 메시지를 보낼 수 있는 Firebase의 메시징 솔루션입니다. 푸시 알림 메시지, 데이터 메시지, 채팅 등의 메세지 전송을 지원하고요, 최대 4KB 크기의 페이로드 형태로 메시지를 전송할 수 있습니다. 자세한 설명은 [Firebase 클라우드 메시징](https://firebase.google.com/docs/cloud-messaging/?authuser=0#implementation_paths) 문서를 참고하세요.
+
+<br>
+
+FCM을 사용하여 보낼 수 있는 [메시지 타입](https://firebase.flutter.dev/docs/messaging/usage/#message-types)은 다음 3가지로 나눠볼 수 있습니다.
+
+- 알림 메시지(`Notification only`) : 사용자에게 푸시 알림을 통해 메시지를 표시합니다. FCM이 앱을 대신하여 사용자의 디바이스에 자동으로 메시지를 표시합니다.
+
+- 데이터 메시지(`Data only`) : '조용한 메시지'로 불립니다. FCM이 아닌 앱이 메시지 처리를 담당합니다. 디바이스에서 이 타입의 메시지는 우선순위가 낮다고 판단하기 때문에 무시될 수 있습니다.
+
+- 알림 & 데이터 메시지(`Notification & Data`) : 푸시 알림과 데이터 메시지를 함께 보냅니다.
+
+<br>
+
+각 타입의 메시지를 전송하는 자세한 방법은 공식 문서의 [메시지 유형](https://firebase.google.com/docs/cloud-messaging/concept-options?authuser=0#notifications_and_data_messages)을 참고하세요. 다음 단계에서는 바로 메시지 전송을 다루지 않고, FCM 사용을 위한 Firebase 프로젝트 셋업을 다룹니다.
+
+<br>
+
+## 7. Firebase 프로젝트 생성하기
 
 이제 FCM 사용을 위해 [Firebase 프로젝트 생성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-2-firebase-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)를 참고하여 Google Firbase 콘솔에서 프로젝트를 생성합니다.
 
 <br>
 
-## 7. Firebase에 iOS 앱 등록하기
+## 8. Firebase에 iOS 앱 등록하기
 
 [Firebase에 iOS 앱 등록하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-3-firebase%EC%97%90-ios-%EC%95%B1-%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0), [Flutter 프로젝트에 Firebase 구성 파일 추가하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-4-flutter-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-firebase-%EA%B5%AC%EC%84%B1-%ED%8C%8C%EC%9D%BC-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)를 참고하여 위 단계에서 생성한 Firebase 프로젝트에 앱을 연결해주세요.
 
 <br>
 
-## 8. Firebase 프로젝트에 APN 인증 키 등록하기
+## 9. Firebase 프로젝트에 APN 인증 키 등록하기
 
 Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/project/_/settings/cloudmessaging) 페이지에서 `클라우드 메시징` 탭으로 이동합니다. `iOS 앱 구성` 섹션에서 위에서 등록한 iOS 앱을 선택한 후, `APN 인증 키` 섹션의 `업로드` 버튼을 클릭하면 아래와 같이 `APN 인증 키 업로드` 창이 나타납니다.
 
@@ -138,15 +160,15 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 <br>
 <br>
 
-## 9. 푸시 알림 핸들링하기
+## 10. 푸시 알림 핸들링하기
 
-모든 셋업이 완료되었습니다. 이제 FlutterFire 중 [`firebase_messaging`](https://pub.dev/packages/firebase_messaging) 라이브러리를 사용하여 푸시 알림을 구현하면 됩니다. 앱을 FCM 서비스에 연결하고, 파라미터를 통해 메시지를 보내는 방식입니다. 라이브러리를 설치하고 [FlutterFire 초기화](https://firebase.flutter.dev/docs/overview/#initializing-flutterfire)를 완료한 후 진행해주세요.
+이제 푸시 알림 전송시 앱의 동작을 핸들링하고, 사용자에게 알림 허용을 묻는 등의 사전 작업을 해야합니다. 이 작업들은 공식 문서에 따라 FlutterFire 중 [`firebase_messaging`](https://pub.dev/packages/firebase_messaging) 라이브러리를 사용합니다. 라이브러리를 설치하시고요, FlutterFire 라이브러리를 사용하므로 [FlutterFire 초기화](https://firebase.flutter.dev/docs/overview/#initializing-flutterfire)를 완료한 후 다음 단계를 진행해주세요.
 
 <br>
 
 ### 1) 앱의 3가지 상태 : `foreground`/`background`/`terminated`
 
-사용자들의 디바이스에 설치된 앱은 다음 3가지 중 하나의 상태를 갖게 되고요, 앱이 어떤 상태에 있는지에 따라 푸시 알림도 다르게 핸들링됩니다. 기본적으로 대부분 플랫폼에서 푸시 알림은 앱이 `background`나 `terminated` 상태일 때만 작동합니다. 필요한 경우 공식 문서의 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 `foreground` 상태에서 푸시 알림이 어떻게 동작할지 컨트롤할 수 있습니다.
+사용자의 디바이스에 설치된 앱은 다음 3가지 중 하나의 상태를 갖게 됩니다. 앱이 어떤 상태에 있는지에 따라 푸시 알림도 다르게 핸들링되고요. 기본적으로 대부분 플랫폼에서 푸시 알림은 앱이 `background`나 `terminated` 상태일 때만 작동합니다. 필요한 경우 공식 문서의 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 `foreground` 상태에서 푸시 알림이 어떻게 동작할지 컨트롤할 수 있습니다.
 
 - `foreground` : 앱이 켜져있고 사용중인 상태
 
@@ -190,7 +212,7 @@ Future<void> main() async {
 
 <br>
 
-### 2) 클래스 만들기
+### 2) FCM 핸들링을 위한 클래스 만들기
 
 이제 본격적으로 구현해보겠습니다. 저는 `fcm_controller.dart` 파일을 생성한 후 라이브러리를 임포트하고 아래와 같이 클래스를 생성했습니다. `FirebaseMessaging` 인스턴스는 인자로 받기로하고요.
 
@@ -210,7 +232,7 @@ class FCMController {
 
 ### 3) iOS 사용자에게 허용 요청하기
 
-> Android 앱에서는 이 단계는 생략합니다.
+> Android 앱은 이 단계를 생략합니다.
 
 <br>
 
@@ -322,7 +344,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-### 4) 사용자 동작 핸들링하기
+### 4) 알림 전송 후 사용자 동작 핸들링하기
 
 > 푸시 알림을 전송하는 역할은 서버에서 하는데요, 이 내용은 뒤에서 다루겠습니다.
 
@@ -424,22 +446,29 @@ FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니
 
 <br>
 
-## 10. 푸시 알림 보내기
-
-푸시 알림 전송시 보낼 수 있는 메시지 타입에는 다음 3가지가 있습니다. 자세한 내용은 공식문서의 [Message types](https://firebase.flutter.dev/docs/messaging/usage/#message-types)를 참고하세요.
-
-- 알림 메시지(`Notification only`) : 사용자에게 푸시 알림을 통해 메시지를 표시합니다. FCM이 앱을 대신하여 사용자의 디바이스에 자동으로 메시지를 표시합니다.
-
-- 데이터 메시지(`Data only`) : '조용한 메시지'로 불립니다. FCM이 아닌 앱이 메시지 처리를 담당합니다. 디바이스에서 이 타입의 메시지는 우선순위가 낮다고 판단하기 때문에 무시될 수 있습니다.
-
-- 알림 & 데이터 메시지(`Notification & Data`) : 푸시 알림과 조용한 메시지를 함께 보냅니다. `notification`, `data` 속성을 함께 사용합니다.
-
-<br>
+## 11. 메시지 전송하기
 
 ### 1) Firebase 콘솔에서 보내기
 
-Firebase 콘솔의 [Cloud Messaging](https://console.firebase.google.com/project/_/notification) 메뉴에서 사용자에게 보낼 알림 메시지를 지정합니다.
+당장 디바이스로 메시지를 전송하고 테스트해볼 수 있는 가장 빠른 방법은 Firebase 콘솔의 [Cloud Messaging](https://console.firebase.google.com/project/_/notification) 메뉴 알림 작성기를 사용하는 것입니다. `Send your first message` 버튼을 클릭하여 알림 작성기를 시작합니다.
 
+<br>
+
+<img src="./../img/firebase61.png" alt="firebase" />
+
+<br>
+
+<img src="./../img/firebase62.png" alt="firebase" />
+
+<br>
+
+<img src="./../img/firebase63.png" alt="firebase" />
+
+<br>
+
+<img src="./../img/firebase64.png" alt="firebase" />
+
+<br>
 <br>
 
 ### 2) Admin SDK 사용하여 보내기
@@ -480,3 +509,4 @@ Authorization: Bearer ya29.ElqKBGN2Ri_Uz...HnS_uNreA
 - [Flutter push notifications with Firebase Cloud Messaging](https://blog.logrocket.com/flutter-push-notifications-with-firebase-cloud-messaging/#addingfunctionality)
 - [iOS 앱에서 메시지 수신 | Firebase](https://firebase.google.com/docs/cloud-messaging/ios/receive?hl=ko)
 - [FCM 메시지 정보 | Firebase](https://firebase.google.com/docs/cloud-messaging/concept-options)
+- [Firebase 클라우드 메시징 | Firebase](https://firebase.google.com/docs/cloud-messaging/?authuser=0#implementation_paths)
