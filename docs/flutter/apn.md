@@ -1,8 +1,8 @@
-# Flutter 앱에서 APN(Apple Push Notification) 사용하기 + FCM(Firebase Cloud Messaging)
+# Flutter 앱에서 FCM(Firebase Cloud Messaging)을 사용하여 푸시 알림 구현하기 : APN(Apple Push Notification) / Android
 
 <br>
 
-## 1. 선행 작업하기
+## 1. iOS 셋업하기, APN(Apple Push Notification)
 
 iOS 앱에서 사용자에게 푸시 알림을 보내기 위해서는 APN(Apple Push Notification) 서비스를 사용합니다. APN 사용을 위해서는 몇 가지 선행 작업이 필요하고요, 이 문서는 이러한 선행 작업을 포함하는 테스트 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하거나, 아래 단계들을 따라가며 최소한의 선행 작업을 진행하세요.
 
@@ -30,9 +30,9 @@ APN을 포함한 Apple 서비스를 이용하려면 개발자(팀)의 Apple 계�
 
 <br>
 
-## 2. Xcode에서 `Push Notifications`/`background Modes` 추가
+### 4) Xcode에서 `Push Notifications`/`background Modes` 추가
 
-### 1) `Push Notifications`
+#### 4-1) `Push Notifications`
 
 Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜서 Xcode를 엽니다. 그 다음, 아래 스크린샷과 같이 Xcode에서 프로젝트의 `Runner` 경로를 열고 `Signing & Capabilities` 탭으로 이동한 후 `+ Capability` 버튼을 클릭, `Push Notifications`를 추가합니다. 이 탭에 대한 추가 설명은 [Signing & Capabilities](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-2-signing--capabilities)를 참고하세요.
 
@@ -43,7 +43,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-### 2) `background Modes` 추가
+#### 4-2) `background Modes` 추가
 
 같은 탭에서 다시 `+ Capability` 버튼을 클릭하여 `background Modes`를 찾아 추가합니다.
 
@@ -66,7 +66,7 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-## 3. Apple 서버에 접근하기 위한 키 등록하기
+### 5) Apple 서버에 접근하기 위한 키 등록하기
 
 이제 외부에서 Apple의 APN 서버에 접근할 수 있도록 인증 키를 등록해야합니다. 이 문서에서는 자체 서버를 구축하지 않고 FCM을 사용하므로, 여기에서 생성하는 키 파일은 Firebase 콘솔에서 프로젝트 셋업시 사용됩니다. Apple Developer 웹사이트에서 [Certificates, Identifiers & Profiles > Keys](https://developer.apple.com/account/resources/authkeys/list) 메뉴로 이동, `Create a key` 또는 `+` 버튼을 클릭하여 시작합니다.
 
@@ -95,23 +95,91 @@ Flutter 프로젝트의 `ios/` 경로에서 `Runner.xcworkspace`를 실행시켜
 <br>
 <br>
 
-## 4. APN 서비스 인증서 발급받기
+### 6) APN 서비스 인증서 발급받기
 
 APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서를 발급받아야합니다. 개발자 인증 정보가 담긴 APN 서비스 인증서를 발급받고, 이 인증서 정보가 포함된 프로비저닝 프로파일(Provisioining Profile)을 생성한 후 프로젝트에 추가해야하죠. [APNs 인증서 생성 및 프로비저닝 프로파일 구성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md#user-content-automatically-manage-signing)를 참고하여 다음 단계까지 진행합니다. 이 레퍼런스 문서는 Xcode에서 프로비저닝 프로파일을 앱 서명에 포함하는 것까지 진행합니다.
 
 <br>
 
-## 5. 프로비저닝 프로파일(Provisioining Profile) 구성하기
+### 7) 프로비저닝 프로파일(Provisioining Profile) 구성하기
 
-이제 위 단계에서 생성한 서비스 인증서가 앱 ID 정보에 자동으로 추가되었기 때문에, 프로비저닝 프로파일을 생성하면 됩니다. 이러한 추가적인 인증 정보를 담은 프로비저닝 프로파일은 Xcode를 사용하여 자동으로 생성할 수 없기 때문에 Apple Developer에서 진행합니다. 위 단계에서 언급한 동일한 문서를 참고하거나, FlutterFire 공식 문서의 [Generating a provisioning profile](https://firebase.flutter.dev/docs/messaging/apple-integration#3-generating-a-provisioning-profile)를 참고하여 진행합니다.
-
-<br>
-
-여기까지 진행하시면 APN 사용을 위한 셋업은 끝입니다.
+이제 위 단계에서 생성한 서비스 인증서가 앱 ID 정보에 자동으로 추가되었기 때문에, 프로비저닝 프로파일을 생성하면 됩니다. 이러한 추가적인 인증 정보를 담은 프로비저닝 프로파일은 Xcode를 사용하여 자동으로 생성할 수 없기 때문에 Apple Developer에서 진행합니다. 위 단계에서 언급한 동일한 문서를 참고하거나, FlutterFire 공식 문서의 [Generating a provisioning profile](https://firebase.flutter.dev/docs/messaging/apple-integration#3-generating-a-provisioning-profile)를 참고하여 진행합니다. 여기까지 진행하시면 APN 사용을 위한 셋업은 끝입니다.
 
 <br>
 
-## 6. FCM(Firebase Cloud Messaging)
+## 2. Android 셋업하기
+
+### 1) `FLUTTER_NOTIFICATION_CLICK` 필터 추가하기
+
+`android/app/src/main/AndroidManifest.xml` 파일에 아래와 같이 `<intent-filter>`를 추가합니다. 그렇지 않으면 사용자가 푸시 알림을 탭하여 앱을 실행했을 때 앱에서 데이터를 수신하지 못하는 이슈가 있습니다.
+
+```xml
+<!-- .. -->
+
+<activity android:name=".MainActivity">
+
+  <!-- .. -->
+
+  <intent-filter>
+    <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+    <category android:name="android.intent.category.DEFAULT" />
+  </intent-filter>
+
+  <!-- .. -->
+
+</activity>
+```
+
+<br>
+
+### 2) 확장 서비스 추가하기
+
+`foreground` 상태인 앱의 알림 수신, 데이터 페이로드 수신, 업스트림 메시지 전송 등을 수행하려면 아래와 같이 `AndroidManifest.xml` 파일에 확장 서비스를 추가합니다.
+
+```xml
+<service
+    android:name=".java.MyFirebaseMessagingService"
+    android:exported="false">
+    <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+</service>
+```
+
+<br>
+
+### 3) 알림 아이콘 및 색상 설정하기
+
+`android/app/src/main/AndroidManifest.xml` 파일에 `<meta-data>` 태그를 사용하여 기본 알림 아이콘과 색상을 설정할 수 있습니다.
+
+```xml
+<!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+<meta-data
+    android:name="com.google.firebase.messaging.default_notification_icon"
+    android:resource="@drawable/ic_stat_ic_notification" />
+<!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+     notification message. See README(https://goo.gl/6BKBk7) for more. -->
+<meta-data
+    android:name="com.google.firebase.messaging.default_notification_color"
+    android:resource="@color/colorAccent" />
+```
+
+<br>
+
+### 4) 알림 채널 설정하기
+
+Android 8.0(API 수준 26) 이상부터는 모든 알림을 [알림 채널](https://developer.android.com/guide/topics/ui/notifiers/notifications.html?authuser=0#ManageChannels)에 할당해야합니다. FCM은 기본적인 설정으로 기본 알림 채널을 제공합니다. 기본 채널을 직접 만들어 사용하려면 아래 예시와 같이 지정하시고요, 자세한 설명은 공식 문서의 [앱 매니페스트 수정](https://firebase.google.com/docs/cloud-messaging/android/client?authuser=0#manifest)을 참고합니다.
+
+```xml
+<meta-data
+    android:name="com.google.firebase.messaging.default_notification_channel_id"
+    android:value="@string/default_notification_channel_id" />
+```
+
+<br>
+
+## 3. FCM(Firebase Cloud Messaging)
 
 [FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 앱을 통해 사용자의 디바이스로 메시지를 보낼 수 있는 Firebase의 메시징 솔루션입니다. 푸시 알림 메시지, 데이터 메시지, 채팅 등의 메시지 전송을 지원하고요, 최대 4KB 크기의 페이로드 형태로 메시지를 전송할 수 있습니다. 자세한 설명은 [Firebase 클라우드 메시징](https://firebase.google.com/docs/cloud-messaging/?authuser=0#implementation_paths) 문서를 참고하세요.
 
@@ -131,19 +199,19 @@ FCM을 사용하여 보낼 수 있는 [메시지 타입](https://firebase.flutte
 
 <br>
 
-## 7. Firebase 프로젝트 생성하기
+## 4. Firebase 프로젝트 생성하기
 
 이제 FCM 사용을 위해 [Firebase 프로젝트 생성하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-2-firebase-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)를 참고하여 Google Firbase 콘솔에서 프로젝트를 생성합니다.
 
 <br>
 
-## 8. Firebase에 iOS 앱 등록하기
+## 5. Firebase에 iOS/Android 앱 등록하기
 
-[Firebase에 iOS 앱 등록하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-3-firebase%EC%97%90-ios-%EC%95%B1-%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0), [Flutter 프로젝트에 Firebase 구성 파일 추가하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-4-flutter-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-firebase-%EA%B5%AC%EC%84%B1-%ED%8C%8C%EC%9D%BC-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)를 참고하여 위 단계에서 생성한 Firebase 프로젝트에 앱을 연결해주세요.
+[Firebase에 Android/iOS 앱 등록하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md#user-content-3-firebase%EC%97%90-androidios-%EC%95%B1-%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0)를 참고하여 Firebase 프로젝트에 Android, iOS 앱을 각각 등록합니다. FCM만 사용하는 경우 Android 앱 등록시 `디버그 서명 인증서 SHA-1` 항목은 생략해도 됩니다. 그 다음 [Flutter 프로젝트에 Android/iOS용 Firebase 구성 파일 추가하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md#user-content-4-flutter-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-androidios%EC%9A%A9-firebase-%EA%B5%AC%EC%84%B1-%ED%8C%8C%EC%9D%BC-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)를 참고하여 Flutter 프로젝트의 지정된 경로에 Android, iOS용 Firebase 구성 파일을 각각 추가합니다.
 
 <br>
 
-## 9. Firebase 프로젝트에 APN 인증 키 등록하기
+## 6. Firebase 프로젝트에 APN 인증 키 등록하기
 
 Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/project/_/settings/cloudmessaging) 페이지에서 `클라우드 메시징` 탭으로 이동합니다. `iOS 앱 구성` 섹션에서 위에서 등록한 iOS 앱을 선택한 후, `APN 인증 키` 섹션의 `업로드` 버튼을 클릭하면 아래와 같이 `APN 인증 키 업로드` 창이 나타납니다.
 
@@ -160,7 +228,27 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 <br>
 <br>
 
-## 10. 푸시 알림 핸들링하기
+## 7. `firebase_messaging` 라이브러리 설치 및 FlutterFire 셋업하기
+
+### 1) `firebase_messaging` 라이브러리 설치, FlutterFire 초기화하기
+
+푸시 알림 전송시 앱이 수행할 일을 정의하고, 사용자에게 알림 허용을 묻는 등의 작업들 공식 문서에 따라 FlutterFire 중 [`firebase_messaging`](https://pub.dev/packages/firebase_messaging) 라이브러리를 사용합니다. 라이브러리를 설치하시고요, FlutterFire 라이브러리를 사용하므로 [FlutterFire 초기화](https://firebase.flutter.dev/docs/overview/#initializing-flutterfire)를 완료한 후 다음 단계를 진행해주세요.
+
+<br>
+
+### 2) FlutterFire iOS 요구 버전 맞추기
+
+FlutterFire 라이브러리를 사용하려면 Xcode 프로젝트에서 iOS 10.0 이상을 타겟팅하고, `Podfile`에도 플랫폼과 버전을 `10.0`으로 명시해야합니다. [FlutterFire 요구 버전 맞추기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-flutterfire-%EC%9A%94%EA%B5%AC-%EB%B2%84%EC%A0%84-%EB%A7%9E%EC%B6%94%EA%B8%B0)를 참고하여 진행합니다.
+
+<br>
+
+### 3) Android 빌드 파일에 플러그인 추가하기
+
+[Android 빌드 파일에 플러그인 추가하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md#user-content-11-android-%EB%B9%8C%EB%93%9C-%ED%8C%8C%EC%9D%BC%EC%97%90-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)를 참고하여 동일하게 진행합니다.
+
+<br>
+
+## 8. 푸시 알림 핸들링하기
 
 ### 1) 앱의 3가지 상태 : `foreground`/`background`/`terminated`
 
@@ -182,19 +270,7 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 
 <br>
 
-### 2) `firebase_messaging` 라이브러리 설치, FlutterFire 초기화하기
-
-푸시 알림 전송시 앱이 수행할 일을 정의하고, 사용자에게 알림 허용을 묻는 등의 작업들 공식 문서에 따라 FlutterFire 중 [`firebase_messaging`](https://pub.dev/packages/firebase_messaging) 라이브러리를 사용합니다. 라이브러리를 설치하시고요, FlutterFire 라이브러리를 사용하므로 [FlutterFire 초기화](https://firebase.flutter.dev/docs/overview/#initializing-flutterfire)를 완료한 후 다음 단계를 진행해주세요.
-
-<br>
-
-#### \* FlutterFire 요구 버전 맞추기
-
-FlutterFire 라이브러리를 사용하려면 Xcode 프로젝트에서 iOS 10.0 이상을 타겟팅하고, `Podfile`에도 플새폼 버전을 `10.0`으로 명시해야합니다. [FlutterFire 요구 버전 맞추기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-flutterfire-%EC%9A%94%EA%B5%AC-%EB%B2%84%EC%A0%84-%EB%A7%9E%EC%B6%94%EA%B8%B0)를 참고하여 진행합니다.
-
-<br>
-
-### 3) `onBackgroundMessage()`
+### 2) `onBackgroundMessage()`
 
 `FirebaseMessaging.onBackgroundMessage()`를 사용하여 앱이 `background` 상태일 때 메시지를 수신하는 경우를 핸들링할 수 있습니다. 사용자가 푸시 알림을 클릭하거나 스와이프하여 무시하는 등 어떤 행동을 하더라도 상관없습니다. 메시지가 수신되기만 하면 `onBackgroundMessage()`의 콜백 함수가 실행되기 때문입니다. 이때 실행되는 콜백 핸들링 함수는 앱의 실행 Context에서 떨어져 완전히 독립적으로 실행되기 때문에 앱의 `state` 값이나 UI 업데이트와 같은 작업은 수행할 수 없습니다. HTTP 요청이나, 로컬 스토리지 업데이트와 같은 단순 로직 수행만이 가능하죠.
 
@@ -231,7 +307,7 @@ Future<void> main() async {
 
 <br>
 
-### 4) FCM 핸들링을 위한 클래스 만들기
+### 3) FCM 핸들링을 위한 클래스 만들기
 
 이제 FCM과 관련된 나머지 기능들을 모아둘 `fcm_controller.dart` 파일을 생성한 후, 라이브러리를 임포트하고 아래와 같이 클래스를 만듭니다. `FirebaseMessaging` 인스턴스는 인자로 받기로하고요.
 
@@ -249,7 +325,7 @@ class FCMController {
 
 <br>
 
-### 5) iOS 사용자에게 허용 요청하기
+### 4) iOS 사용자에게 허용 요청하기
 
 > Flutter 앱을 웹으로 배포하는 경우에도 이 단계를 진행해야합니다. Android 앱은 이 단계를 생략합니다.
 
@@ -259,7 +335,7 @@ class FCMController {
 
 <br>
 
-#### 5-1) `getNotificationSettings()`
+#### 4-1) `getNotificationSettings()`
 
 푸시 알림 허용 요청을 보내기 전에 사용자가 이미 요청을 받은 적이 있는지 확인하기 위해서는 아래와 같이 `getNotificationSettings()` 메소드를 호출하여 사용자의 푸시 알림 설정값을 가져옵니다.
 
@@ -303,7 +379,7 @@ class FCMController {
 
 <br>
 
-#### 5-2) `requestPermission()`
+#### 4-2) `requestPermission()`
 
 이제 `requestPermission()` 메소드를 호출하여 사용자에게 허용 요청을 보냅니다. 메소드의 인자에는 사용자가 푸시 알림을 허용할 경우 기본 설정값으로 지정될 값들을 넘깁니다. 각 인자에 대한 설명은 FlutterFire 공식문서의 [Permission settings](https://firebase.flutter.dev/docs/messaging/permissions#permission-settings)를 참고합니다. 참고로 [`provisional`](https://firebase.flutter.dev/docs/messaging/permissions#provisional-authorization)은 iOS 12 이상에서 지원하는 설정값입니다.
 
@@ -372,7 +448,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-### 6) 알림 전송 후 사용자 동작 핸들링하기
+### 5) 알림 전송 후 사용자 동작 핸들링하기
 
 > 푸시 알림을 전송하는 역할은 서버에서 하는데요, 이 내용은 뒤에서 다루겠습니다.
 
@@ -386,7 +462,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-#### 6-1) `getInitialMessage()`
+#### 5-1) `getInitialMessage()`
 
 `terminated` 상태인 앱이 열렸을 때 메시지 정보가 담긴 `RemoteMessage`를 반환합니다. 아래는 예제 코드이고요, `getInitialMessage()` 메소드를 호출하고 다음 동작을 정의하는 메소드를 `FCMController` 클래스에 추가합니다.
 
@@ -438,7 +514,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-#### 6-2) `onMessageOpenedApp.listen()`
+#### 5-2) `onMessageOpenedApp.listen()`
 
 `background` 상태인 앱이 사용자 동작에 의해 `foreground` 상태로 바뀌는 경우, 콜백을 사용하여 핸들링합니다. 콜백의 인자로부터 `RemoteMessage`를 가져올 수 있습니다.
 
@@ -472,7 +548,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-## 11. 메시지 전송하기
+## 9. 메시지 전송하기
 
 ### 1) Firebase 콘솔에서 보내기
 
@@ -581,7 +657,7 @@ Authorization: Bearer ya29.ElqKBGN2Ri_Uz...HnS_uNreA
 
 <br>
 
-## 12. `ImageNotification` 추가하기
+## 10. `ImageNotification` 추가하기
 
 FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니다. iOS 앱에서는 `ImageNotification` 라이브러리를 사용해야합니다. FlutterFire 공식문서의 [(Advanced, Optional) Allowing Notification Images](https://firebase.flutter.dev/docs/messaging/apple-integration#advanced-optional-allowing-notification-images)를 참고하여 진행합니다. 이 단계는 선택입니다.
 
