@@ -253,7 +253,7 @@ class FCMController {
 
 <br>
 
-#### \* `getNotificationSettings()`
+#### 5-1) `getNotificationSettings()`
 
 푸시 알림 허용 요청을 보내기 전에 사용자가 이미 요청을 받은 적이 있는지 확인하기 위해서는 아래와 같이 `getNotificationSettings()` 메소드를 호출하여 사용자의 푸시 알림 설정값을 가져옵니다.
 
@@ -297,7 +297,7 @@ class FCMController {
 
 <br>
 
-#### \* `requestPermission()`
+#### 5-2) `requestPermission()`
 
 이제 `requestPermission()` 메소드를 호출하여 사용자에게 허용 요청을 보냅니다. 메소드의 인자에는 사용자가 푸시 알림을 허용할 경우 기본 설정값으로 지정될 값들을 넘깁니다. 각 인자에 대한 설명은 FlutterFire 공식문서의 [Permission settings](https://firebase.flutter.dev/docs/messaging/permissions#permission-settings)를 참고합니다. 참고로 [`provisional`](https://firebase.flutter.dev/docs/messaging/permissions#provisional-authorization)은 iOS 12 이상에서 지원하는 설정값입니다.
 
@@ -373,6 +373,10 @@ class _MyAppState extends State<MyApp> {
 <br>
 
 푸시 알림이 전송되었을 때 사용자의 행동에 따라 진행되어야 할 앱의 동작을 핸들링해봅시다. 아래의 2가지 메소드를 사용할 수 있고요, 공식 문서에서는 2개 메소드를 모두 구현하여 스무스한 UX를 제공하는 것을 권유합니다. 자세한 내용은 공식문서의 [Handling Interaction](https://firebase.flutter.dev/docs/messaging/notifications#handling-interaction)를 참고합니다.
+
+- `getInitialMessage()`
+
+- `onMessageOpenedApp.listen()`
 
 <br>
 
