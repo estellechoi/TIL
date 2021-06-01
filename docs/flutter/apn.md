@@ -166,8 +166,6 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 
 앱이 어떤 상태에 있는지에 따라 푸시 알림 핸들링도 달라지기 때문에 먼저 앱의 상태에 대해 알아야합니다. 사용자의 디바이스에 설치된 앱은 다음 3가지 중 하나의 상태를 갖게 된다는 것을 알아두세요.
 
-<br>
-
 - `foreground` : 앱이 켜져있고 사용중인 상태
 
 - `background` : 앱이 켜져있지만, 사용중이지 않고 백그라운드에 있는 상태
@@ -247,7 +245,7 @@ class FCMController {
 
 ### 5) iOS 사용자에게 허용 요청하기
 
-> Flutter 앱을 웹으로도 배포하는 경우에도 이 단계를 진행해야합니다. Android 앱은 이 단계를 생략합니다.
+> Flutter 앱을 웹으로 배포하는 경우에도 이 단계를 진행해야합니다. Android 앱은 이 단계를 생략합니다.
 
 <br>
 
@@ -255,9 +253,39 @@ class FCMController {
 
 <br>
 
-푸시 알림 허용 요청을 보내기 전에 사용자가 이미 요청을 받은 적이 있는지 확인하기 위해서는 아래와 같이 `getNotificationSettings()` 메소드를 호출하여 사용자의 푸시 알림 설정값을 가져옵니다. `NotificationSettings`가 반환되고요, `authorizationStatus` 속성을 통해 사용자의 설정값을 확인할 수 있습니다. 다음 4가지 값 중 하나입니다.
+#### \* `getNotificationSettings()`
+
+푸시 알림 허용 요청을 보내기 전에 사용자가 이미 요청을 받은 적이 있는지 확인하기 위해서는 아래와 같이 `getNotificationSettings()` 메소드를 호출하여 사용자의 푸시 알림 설정값을 가져옵니다.
+
+```dart
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+class FCMController {
+  final FirebaseMessaging fcm;
+
+  FCMController(this.fcm);
+
+  Future<void> requestPermission() async {
+
+    // 사용자가 이전에 설정한 알림 허용 상태를 가져옵니다.
+    NotificationSettings previousSettings =
+        await fcm.getNotificationSettings();
+
+    // 사용자가 결정하지 않은 경우, 혀용 요청을 보냅니다.
+    if (previousSettings.authorizationStatus ==
+        AuthorizationStatus.notDetermined) {
+
+        // ..
+    }
+
+  }
+}
+
+```
 
 <br>
+
+`NotificationSettings`가 반환되고요, `authorizationStatus` 속성을 통해 사용자의 설정값을 확인할 수 있습니다. 다음 4가지 값 중 하나입니다.
 
 - `authorized` : 사용자가 허용했음
 
@@ -269,33 +297,7 @@ class FCMController {
 
 <br>
 
-아래는 예제 코드입니다. 전 단계에서 만들었던 `FCMController` 클래스 내에 `requestPermission()` 메소드를 만들었습니다.
-
-```dart
-import 'package:firebase_messaging/firebase_messaging.dart';
-
-class FCMController {
-  final FirebaseMessaging fcm;
-
-  FCMController(this.fcm);
-
-  Future<void> requestPermission() async {
-    NotificationSettings previousSettings =
-        await fcm.getNotificationSettings();
-
-    if (previousSettings.authorizationStatus ==
-        AuthorizationStatus.notDetermined) {
-
-        // 사용자가 결정하지 않은 경우, 혀용 요청을 보냅니다.
-        // ..
-    }
-
-  }
-}
-
-```
-
-<br>
+#### \* `requestPermission()`
 
 이제 `requestPermission()` 메소드를 호출하여 사용자에게 허용 요청을 보냅니다. 메소드의 인자에는 사용자가 푸시 알림을 허용할 경우 기본 설정값으로 지정될 값들을 넘깁니다. 각 인자에 대한 설명은 FlutterFire 공식문서의 [Permission settings](https://firebase.flutter.dev/docs/messaging/permissions#permission-settings)를 참고합니다. 참고로 [`provisional`](https://firebase.flutter.dev/docs/messaging/permissions#provisional-authorization)은 iOS 12 이상에서 지원하는 설정값입니다.
 
