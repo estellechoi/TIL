@@ -2,6 +2,19 @@
 
 <br>
 
+1. iOS 셋업하기, APN(Apple Push Notification)
+2. Android 셋업하기
+3. FCM(Firebase Cloud Messaging)
+4. Firebase 프로젝트 생성하기
+5. Firebase에 iOS/Android 앱 등록하기
+6. Firebase 프로젝트에 APN 인증 키 등록하기
+7. `firebase_messaging` 라이브러리 설치 및 FlutterFire 셋업하기
+8. 푸시 알림 핸들링하기
+9. 메시지 전송하기
+10. `ImageNotification` 추가하기
+
+<br>
+
 ## 1. iOS 셋업하기, APN(Apple Push Notification)
 
 iOS 앱에서 사용자에게 푸시 알림을 보내기 위해서는 APN(Apple Push Notification) 서비스를 사용합니다. APN 사용을 위해서는 몇 가지 선행 작업이 필요하고요, 이 문서는 이러한 선행 작업을 포함하는 테스트 배포 작업을 완료했다고 가정하기 때문에 [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy.md) 문서에서 필요한 내용을 참고하여 선행 작업을 진행하거나, 아래 단계들을 따라가며 최소한의 선행 작업을 진행하세요.
@@ -601,18 +614,6 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-- 주의사항
-
-```
-Flutter로 개발한 Android 앱에 메시지를 보내는 경우 아래의 키-쌍 데이터를 반드시 추가해야 합니다.
-그렇지 않으면 사용자가 푸시 알림을 탭해도 작동하지 않는 이슈가 있기 때문입니다.
-
-- 키 : click_action
-- 값 : FLUTTER_NOTIFICATION_CLICK
-```
-
-<br>
-
 <img src="./../img/firebase67.png" alt="firebase" />
 
 <br>
@@ -675,3 +676,4 @@ FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니
 - [iOS에서 Firebase 클라우드 메시징 클라이언트 앱 설정 | Firebase](https://firebase.google.com/docs/cloud-messaging/ios/client?authuser=0#analytics-enabled)
 - [FCM에서 APN 구성](https://firebase.google.com/docs/cloud-messaging/ios/certs?authuser=0)
 - [백그라운드 iOS 앱에 테스트 메시지 보내기](https://firebase.google.com/docs/cloud-messaging/ios/first-message?authuser=0)
+- [Android에서 Firebase 클라우드 메시징 클라이언트 앱 설정](https://firebase.google.com/docs/cloud-messaging/android/client?authuser=0#manifest)
