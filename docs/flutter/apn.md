@@ -188,6 +188,12 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 
 <br>
 
+#### \* FlutterFire 요구 버전 맞추기
+
+FlutterFire 라이브러리를 사용하려면 Xcode 프로젝트에서 iOS 10.0 이상을 타겟팅하고, `Podfile`에도 플새폼 버전을 10.0으로 명시해야합니다. [FlutterFire 요구 버전 맞추기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-flutterfire-%EC%9A%94%EA%B5%AC-%EB%B2%84%EC%A0%84-%EB%A7%9E%EC%B6%94%EA%B8%B0)를 참고하여 진행합니다.
+
+<br>
+
 ### 3) `onBackgroundMessage()`
 
 `FirebaseMessaging.onBackgroundMessage()`를 사용하여 앱이 `background` 상태일 때 메시지를 수신하는 경우를 핸들링할 수 있습니다. 사용자가 푸시 알림을 클릭하거나 스와이프하여 무시하는 등 어떤 행동을 하더라도 상관없습니다. 메시지가 수신되기만 하면 `onBackgroundMessage()`의 콜백 함수가 실행되기 때문입니다. 이때 실행되는 콜백 핸들링 함수는 앱의 실행 Context에서 떨어져 완전히 독립적으로 실행되기 때문에 앱의 `state` 값이나 UI 업데이트와 같은 작업은 수행할 수 없습니다. HTTP 요청이나, 로컬 스토리지 업데이트와 같은 단순 로직 수행만이 가능하죠.
@@ -479,11 +485,20 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-아래와 같이 알림 작성 페이지로 이동했다면, `알림 제목`, `알림 텍스트` 항목을 입력하고 우측의 `테스트 메시지 전송` 버튼을 클릭하여 테스트 메시지를 전송해봅니다.
+아래와 같이 알림 작성 페이지로 이동했다면, `알림 제목`, `알림 텍스트` 항목을 각각 입력합니다. 우측의 `테스트 메시지 전송` 버튼을 클릭하면 지정된 개발용 디바이스로 테스트 메시지를 전송할 수 있습니다.
 
 <br>
 
-<img src="./../img/firebase62.png" alt="firebase" />
+<img src="./../img/firebase65.png" alt="firebase" />
+
+<br>
+<br>
+
+`테스트 메시지 전송` 버튼을 클릭하시고요, 아래와 같이 창이 나타나면 `FCM 등록 토큰 추가` 입력란에 개발용 디바이스의 토큰값을 입력하여 추가한 후 테스트해볼 수 있습니다.
+
+<br>
+
+<img src="./../img/firebase66.png" alt="firebase" />
 
 <br>
 <br>
