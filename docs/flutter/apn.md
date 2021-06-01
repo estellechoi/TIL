@@ -113,7 +113,7 @@ APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서�
 
 ## 6. FCM(Firebase Cloud Messaging)
 
-[FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 앱을 통해 사용자의 디바이스로 메시지를 보낼 수 있는 Firebase의 메시징 솔루션입니다. 푸시 알림 메시지, 데이터 메시지, 채팅 등의 메세지 전송을 지원하고요, 최대 4KB 크기의 페이로드 형태로 메시지를 전송할 수 있습니다. 자세한 설명은 [Firebase 클라우드 메시징](https://firebase.google.com/docs/cloud-messaging/?authuser=0#implementation_paths) 문서를 참고하세요.
+[FCM(Firebase Cloud Messaging)](https://firebase.flutter.dev/docs/messaging/overview)은 앱을 통해 사용자의 디바이스로 메시지를 보낼 수 있는 Firebase의 메시징 솔루션입니다. 푸시 알림 메시지, 데이터 메시지, 채팅 등의 메시지 전송을 지원하고요, 최대 4KB 크기의 페이로드 형태로 메시지를 전송할 수 있습니다. 자세한 설명은 [Firebase 클라우드 메시징](https://firebase.google.com/docs/cloud-messaging/?authuser=0#implementation_paths) 문서를 참고하세요.
 
 <br>
 
@@ -162,13 +162,11 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 
 ## 10. 푸시 알림 핸들링하기
 
-이제 푸시 알림 전송시 앱의 동작을 핸들링하고, 사용자에게 알림 허용을 묻는 등의 사전 작업을 해야합니다. 이 작업들은 공식 문서에 따라 FlutterFire 중 [`firebase_messaging`](https://pub.dev/packages/firebase_messaging) 라이브러리를 사용합니다. 라이브러리를 설치하시고요, FlutterFire 라이브러리를 사용하므로 [FlutterFire 초기화](https://firebase.flutter.dev/docs/overview/#initializing-flutterfire)를 완료한 후 다음 단계를 진행해주세요.
-
-<br>
-
 ### 1) 앱의 3가지 상태 : `foreground`/`background`/`terminated`
 
-사용자의 디바이스에 설치된 앱은 다음 3가지 중 하나의 상태를 갖게 됩니다. 앱이 어떤 상태에 있는지에 따라 푸시 알림도 다르게 핸들링되고요. 기본적으로 대부분 플랫폼에서 푸시 알림은 앱이 `background`나 `terminated` 상태일 때만 작동합니다. 필요한 경우 공식 문서의 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 `foreground` 상태에서 푸시 알림이 어떻게 동작할지 컨트롤할 수 있습니다.
+앱이 어떤 상태에 있는지에 따라 푸시 알림 핸들링도 달라지기 때문에 먼저 앱의 상태에 대해 알아야합니다. 사용자의 디바이스에 설치된 앱은 다음 3가지 중 하나의 상태를 갖게 된다는 것을 알아두세요.
+
+<br>
 
 - `foreground` : 앱이 켜져있고 사용중인 상태
 
@@ -178,29 +176,46 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 
 <br>
 
+기본적으로 대부분 플랫폼에서 푸시 알림은 앱이 `background`나 `terminated` 상태일 때만 작동합니다. 필요한 경우 공식 문서의 [Foreground Notifications](https://firebase.flutter.dev/docs/messaging/notifications/#foreground-notifications)를 참고하여 `foreground` 상태에서 푸시 알림이 어떻게 동작할지 컨트롤할 수 있습니다.
+
+<br>
+
 > FCM은 Foreground Notifications, 스타일링 등의 고급 기능은 지원하지 않습니다.
 
 <br>
 
-#### \* `onBackgroundMessage()`
+### 2) `firebase_messaging` 라이브러리 설치, FlutterFire 초기화하기
 
-앱이 `background` 상태일 때 메시지를 수신하는 경우, `FirebaseMessaging.onBackgroundMessage()` 메소드를 호출하고요, 메소드의 인자로 핸들링 함수를 넘깁니다. 이때 핸들링 함수는 앱의 실행 Context에서 떨어져 완전히 독립적으로 실행되기 때문에 앱의 `state` 값이나 UI 업데이트와 같은 작업은 수행할 수 없습니다. HTTP 요청이나, 로컬 스토리지 업데이트와 같은 단순 로직 수행만이 가능하죠.
+푸시 알림 전송시 앱이 수행할 일을 정의하고, 사용자에게 알림 허용을 묻는 등의 작업들 공식 문서에 따라 FlutterFire 중 [`firebase_messaging`](https://pub.dev/packages/firebase_messaging) 라이브러리를 사용합니다. 라이브러리를 설치하시고요, FlutterFire 라이브러리를 사용하므로 [FlutterFire 초기화](https://firebase.flutter.dev/docs/overview/#initializing-flutterfire)를 완료한 후 다음 단계를 진행해주세요.
 
-- 핸들링 함수는 익명 함수를 사용하지 않습니다.
+<br>
+
+### 3) `onBackgroundMessage()`
+
+`FirebaseMessaging.onBackgroundMessage()`를 사용하여 앱이 `background` 상태일 때 메시지를 수신하는 경우를 핸들링할 수 있습니다. 사용자가 푸시 알림을 클릭하거나 스와이프하여 무시하는 등 어떤 행동을 하더라도 상관없습니다. 메시지가 수신되기만 하면 `onBackgroundMessage()`의 콜백 함수가 실행되기 때문입니다. 이때 실행되는 콜백 핸들링 함수는 앱의 실행 Context에서 떨어져 완전히 독립적으로 실행되기 때문에 앱의 `state` 값이나 UI 업데이트와 같은 작업은 수행할 수 없습니다. HTTP 요청이나, 로컬 스토리지 업데이트와 같은 단순 로직 수행만이 가능하죠.
+
+<br>
+
+다음은 핸들링 함수가 지켜야할 조건입니다.
+
+- 익명 함수를 사용하지 않습니다.
 - 별도의 `class`로 묶지 않고, `main()` 메소드 내에 바로 구현합니다.
 
 <br>
 
-아래는 예제 코드입니다. `main.dart` 파일을 열고요, `FirebaseMessaging.onBackgroundMessage()` 메소드의 인자에 핸들링 함수를 넘깁니다.
+아래는 예제 코드입니다. `main()` 메소드 내에서 사용해야하므로 `main.dart` 파일을 열고요, 라이브러리를 임포트합니다. 그 다음 `runApp()`을 실행하기 전에 `FirebaseMessaging.onBackgroundMessage()`를 호출하여 `Future<void>` 타입의 핸들링 함수를 등록합니다.
 
 ```dart
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+// 익명함수를 사용할 수 없기 때문에 아래와 같이 선언 후에 참조합니다.
 Future<void> _handleFirebaseMessage(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("A background message: ${message.messageId}");
 }
 
 Future<void> main() async {
-  // main 메소드에서 서버나 SharedPreferences 등 비동기로 데이터를 다룬 다음 runApp을 실행해야하는 경우
+  // main 메소드에서 비동기로 데이터를 다룬 다음 runApp을 실행해야하는 경우 필요한 메소드입니다.
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
@@ -212,9 +227,9 @@ Future<void> main() async {
 
 <br>
 
-### 2) FCM 핸들링을 위한 클래스 만들기
+### 4) FCM 핸들링을 위한 클래스 만들기
 
-이제 본격적으로 구현해보겠습니다. 저는 `fcm_controller.dart` 파일을 생성한 후 라이브러리를 임포트하고 아래와 같이 클래스를 생성했습니다. `FirebaseMessaging` 인스턴스는 인자로 받기로하고요.
+이제 FCM과 관련된 나머지 기능들을 모아둘 `fcm_controller.dart` 파일을 생성한 후, 라이브러리를 임포트하고 아래와 같이 클래스를 만듭니다. `FirebaseMessaging` 인스턴스는 인자로 받기로하고요.
 
 ```dart
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -230,9 +245,9 @@ class FCMController {
 
 <br>
 
-### 3) iOS 사용자에게 허용 요청하기
+### 5) iOS 사용자에게 허용 요청하기
 
-> Android 앱은 이 단계를 생략합니다.
+> Flutter 앱을 웹으로도 배포하는 경우에도 이 단계를 진행해야합니다. Android 앱은 이 단계를 생략합니다.
 
 <br>
 
@@ -242,9 +257,14 @@ class FCMController {
 
 푸시 알림 허용 요청을 보내기 전에 사용자가 이미 요청을 받은 적이 있는지 확인하기 위해서는 아래와 같이 `getNotificationSettings()` 메소드를 호출하여 사용자의 푸시 알림 설정값을 가져옵니다. `NotificationSettings`가 반환되고요, `authorizationStatus` 속성을 통해 사용자의 설정값을 확인할 수 있습니다. 다음 4가지 값 중 하나입니다.
 
+<br>
+
 - `authorized` : 사용자가 허용했음
+
 - `denied` : 사용자가 거절했음
+
 - `noDetermined` : 사용자가 허용여부를 결정하지 않았음
+
 - `provisional` : 사용자가 허용했으나, Provisional 허용임
 
 <br>
@@ -344,7 +364,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-### 4) 알림 전송 후 사용자 동작 핸들링하기
+### 6) 알림 전송 후 사용자 동작 핸들링하기
 
 > 푸시 알림을 전송하는 역할은 서버에서 하는데요, 이 내용은 뒤에서 다루겠습니다.
 
@@ -354,7 +374,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-#### 4-1) `getInitialMessage()`
+#### 6-1) `getInitialMessage()`
 
 `terminated` 상태인 앱이 열렸을 때 메시지 정보가 담긴 `RemoteMessage`를 반환합니다. 아래는 예제 코드이고요, `getInitialMessage()` 메소드를 호출하고 다음 동작을 정의하는 메소드를 `FCMController` 클래스에 추가합니다.
 
@@ -406,7 +426,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-#### 4-2) `onMessageOpenedApp.listen()`
+#### 6-2) `onMessageOpenedApp.listen()`
 
 `background` 상태인 앱이 사용자 동작에 의해 `foreground` 상태로 바뀌는 경우, 콜백을 사용하여 핸들링합니다. 콜백의 인자로부터 `RemoteMessage`를 가져올 수 있습니다.
 
@@ -437,12 +457,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
-
-<br>
-
-### 5) `ImageNotification` 추가하기
-
-FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니다. iOS 앱에서는 `ImageNotification` 라이브러리를 사용해야합니다. FlutterFire 공식문서의 [(Advanced, Optional) Allowing Notification Images](https://firebase.flutter.dev/docs/messaging/apple-integration#advanced-optional-allowing-notification-images)를 참고하여 진행합니다. 이 단계는 선택입니다.
 
 <br>
 
@@ -498,6 +512,12 @@ Authorization: Bearer ya29.ElqKBGN2Ri_Uz...HnS_uNreA
    }
 }
 ```
+
+<br>
+
+## 12. `ImageNotification` 추가하기
+
+FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니다. iOS 앱에서는 `ImageNotification` 라이브러리를 사용해야합니다. FlutterFire 공식문서의 [(Advanced, Optional) Allowing Notification Images](https://firebase.flutter.dev/docs/messaging/apple-integration#advanced-optional-allowing-notification-images)를 참고하여 진행합니다. 이 단계는 선택입니다.
 
 <br>
 
