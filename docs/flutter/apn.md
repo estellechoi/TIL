@@ -190,7 +190,7 @@ Firebase 콘솔의 [프로젝트 설정](https://console.firebase.google.com/pro
 
 #### \* FlutterFire 요구 버전 맞추기
 
-FlutterFire 라이브러리를 사용하려면 Xcode 프로젝트에서 iOS 10.0 이상을 타겟팅하고, `Podfile`에도 플새폼 버전을 10.0으로 명시해야합니다. [FlutterFire 요구 버전 맞추기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-flutterfire-%EC%9A%94%EA%B5%AC-%EB%B2%84%EC%A0%84-%EB%A7%9E%EC%B6%94%EA%B8%B0)를 참고하여 진행합니다.
+FlutterFire 라이브러리를 사용하려면 Xcode 프로젝트에서 iOS 10.0 이상을 타겟팅하고, `Podfile`에도 플새폼 버전을 `10.0`으로 명시해야합니다. [FlutterFire 요구 버전 맞추기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/social_login.md#user-content-flutterfire-%EC%9A%94%EA%B5%AC-%EB%B2%84%EC%A0%84-%EB%A7%9E%EC%B6%94%EA%B8%B0)를 참고하여 진행합니다.
 
 <br>
 
@@ -494,7 +494,7 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-`테스트 메시지 전송` 버튼을 클릭하시고요, 아래와 같이 창이 나타나면 `FCM 등록 토큰 추가` 입력란에 개발용 디바이스의 토큰값을 입력하여 추가한 후 테스트해볼 수 있습니다.
+버튼을 클릭하시고요, 아래와 같이 창이 나타나면 `FCM 등록 토큰 추가` 입력란에 개발용 디바이스의 토큰값을 입력하여 추가한 후 테스트해볼 수 있습니다.
 
 <br>
 
@@ -503,7 +503,7 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-`다음` 버튼을 클릭하여 타겟 조건을 설정해보세요.
+`다음` 버튼을 클릭하여 타겟 조건을 설정해보세요. 앱 버전, 언어, 국가/지역 등 여러 조건을 추가하여 특정 사용자들에게만 메시지가 전송되도록 타겟팅할 수 있습니다. 사용자를 한 명씩 지목해서 전송할 수도 있는데요, 이 기능은 Firebase 콘솔에서는 불가능하고 Admin SDK를 통해서만 가능합니다.
 
 <br>
 
@@ -512,11 +512,45 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-메시지를 전송할 시간을 예약할 수 있습니다.
+메시지를 전송할 날짜와 시간, 반복 발송여부를 지정할 수 있습니다.
 
 <br>
 
 <img src="./../img/firebase64.png" alt="firebase" />
+
+<br>
+<br>
+
+`추가 옵션(선택사항)` 섹션에서는 키-값 쌍으로 이루어진 맞춤 데이터를 추가할 수 있습니다. 이 데이터는 사용자에게는 보이지 않고요, 프로젝트 코드에서 `firebase_messaging` 라이브러리를 사용하여 가져온 후 값에 따라 다른 동작을 수행하도록 코딩할 수 있습니다.
+
+<br>
+
+```
+* 주의사항
+
+Flutter로 개발한 Android 앱에 메시지를 보내는 경우 아래의 키-쌍 데이터를 반드시 추가해야 합니다.
+그렇지 않으면 사용자가 푸시 알림을 탭해도 작동하지 않는 이슈가 있기 때문입니다.
+
+- 키 : click_action
+- 값 : FLUTTER_NOTIFICATION_CLICK
+```
+
+<br>
+
+<img src="./../img/firebase67.png" alt="firebase" />
+
+<br>
+<br>
+
+알림 설정이 완료되면 `검토` 버튼을 클릭하고, 나타나는 메시지 검토 창의 내용을 확인한 후 `게시` 버튼을 클릭합니다.
+
+<br>
+
+기다리면 아래와 같이 푸시 알림을 받을 수 있습니다!
+
+<br>
+
+<img src="./../img/push_notification_success.png" alt="firebase" width="400" />
 
 <br>
 <br>
@@ -566,3 +600,6 @@ FCM을 통해 원하는 이미지를 푸시 알림에 노출시킬 수 있습니
 - [iOS 앱에서 메시지 수신 | Firebase](https://firebase.google.com/docs/cloud-messaging/ios/receive?hl=ko)
 - [FCM 메시지 정보 | Firebase](https://firebase.google.com/docs/cloud-messaging/concept-options)
 - [Firebase 클라우드 메시징 | Firebase](https://firebase.google.com/docs/cloud-messaging/?authuser=0#implementation_paths)
+- [iOS에서 Firebase 클라우드 메시징 클라이언트 앱 설정 | Firebase](https://firebase.google.com/docs/cloud-messaging/ios/client?authuser=0#analytics-enabled)
+- [FCM에서 APN 구성](https://firebase.google.com/docs/cloud-messaging/ios/certs?authuser=0)
+- [백그라운드 iOS 앱에 테스트 메시지 보내기](https://firebase.google.com/docs/cloud-messaging/ios/first-message?authuser=0)
