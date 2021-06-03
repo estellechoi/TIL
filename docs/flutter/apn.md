@@ -596,7 +596,7 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-아래와 같이 알림 작성 페이지로 이동했다면, `알림 제목`, `알림 텍스트` 항목을 각각 입력합니다. 우측의 `테스트 메시지 전송` 버튼을 클릭하면 지정된 개발용 디바이스로 테스트 메시지를 전송할 수 있습니다.
+아래와 같이 알림 작성 페이지로 이동했다면, `알림 제목`, `알림 텍스트` 항목을 각각 입력합니다.
 
 <br>
 
@@ -605,7 +605,9 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-버튼을 클릭하시고요, 아래와 같이 창이 나타나면 `FCM 등록 토큰 추가` 입력란에 개발용 디바이스의 토큰값을 입력하여 추가한 후 테스트해볼 수 있습니다.
+> 테스트 메시지 전송 버튼을 사용하는 방법은 건너뛰어도 됩니다.
+
+우측의 `테스트 메시지 전송` 버튼을 클릭하면 지정된 개발용 디바이스로 테스트 메시지를 전송할 수 있습니다. 버튼을 클릭하시고요, 아래와 같이 창이 나타나면 `FCM 등록 토큰 추가` 입력란에 개발용 디바이스의 토큰값을 입력하여 추가한 후 테스트해볼 수 있습니다.
 
 <br>
 
@@ -614,7 +616,7 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-`다음` 버튼을 클릭하여 타겟 조건을 설정해보세요. 앱 버전, 언어, 국가/지역 등 여러 조건을 추가하여 특정 사용자들에게만 메시지가 전송되도록 타겟팅할 수 있습니다. 사용자를 한 명씩 지목해서 전송할 수도 있는데요, 이 기능은 Firebase 콘솔에서는 불가능하고 Admin SDK를 통해서만 가능합니다.
+`알림 제목`, `알림 텍스트` 항목을 모두 입력했다면 `다음` 버튼을 클릭하여 타겟 조건을 설정해보세요. 앱 버전, 언어, 국가/지역 등 여러 조건을 추가하여 특정 사용자들에게만 메시지가 전송되도록 타겟팅할 수 있습니다. 사용자를 한 명씩 지목해서 전송할 수도 있는데요, 이 기능은 Firebase 콘솔에서는 불가능하고 Admin SDK를 통해서만 가능합니다.
 
 <br>
 
@@ -650,25 +652,78 @@ class _MyAppState extends State<MyApp> {
 <br>
 <br>
 
-### 2) Admin SDK 사용하여 보내기
+### 2) Firebase Admin SDK 사용하여 서버에서 직접 보내기
 
-푸시 알림 서버를 직접 구축하고 [Admin SDK](https://firebase.google.com/docs/reference/admin)를 사용하면 메시지 데이터를 커스텀하여 전송할 수 있습니다. Admin SDK는 인증된 외부 환경에서 Firebase와 상호 작용할 수있는 서버 라이브러리 모음입니다. Node.js, Java, Python, Go 및 C # (. NET)을 지원합니다. 자세한 내용은 [서버에 Firebase Admin SDK 추가](https://firebase.google.com/docs/admin/setup) 문서를 참고합니다.
+[Admin SDK](https://firebase.google.com/docs/reference/admin)를 사용하여 푸시 알림 서버를 직접 구축한 후 메시지를 커스텀하여 전송할 수 있습니다. Admin SDK는 인증된 외부 환경에서 Firebase와 상호 작용할 수있는 서버 라이브러리 모음입니다. Node.js, Java, Python, Go 및 C # (. NET)을 지원하고요, 전체 관리자 권한으로 실시간으로 Firebase DB의 데이터를 읽고 쓸 수 있습니다.
 
 <br>
 
-### 3) REST API 사용하여 보내기
+자세한 내용은 [FCM용 Firebase Admin SDK](https://firebase.google.com/docs/cloud-messaging/server#firebase-admin-sdk-for-fcm) 문서를 참고합니다. [서버에 Firebase Admin SDK를 추가](https://firebase.google.com/docs/admin/setup) 문서를 참고하여 서버와 Firebase Admin SDK를 연동하세요. 위 단계에서 Firebase 프로젝트 생성을 완료했기 때문에 [SDK 추가](https://firebase.google.com/docs/admin/setup#add-sdk)부터 진행하면 됩니다. Firebase Admin SDK를 사용하여 메시지를 보내는 경우 라이브러리에서 토큰이 자동으로 처리됩니다.
 
-Admin SDK를 사용할 수 없는 상황이라면, Firebase에서 제공하는 REST API를 사용할 수 있습니다.
+<br>
+
+### 3) FCM HTTP v1 API 사용하여 보내기
+
+Firebase Admin SDK를 사용할 수 없거나 불필요하다면, [FCM HTTP v1 API](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=ko)를 사용할 수 있습니다. FCM HTTP v1 API는 수명이 짧은 OAuth 2.0 액세스 토큰을 사용하여 요청을 승인합니다.
+
+<br>
+
+#### 3-1) 토큰 발급
+
+> 자세한 내용은 Firebase [보내기 요청 승인](https://firebase.google.com/docs/cloud-messaging/auth-server?hl=ko) 문서를 참고하세요.
+
+<br>
+
+FCM API용 토큰을 발급하려면 다음 방법 중 하나를 선택하세요.
+
+- Google 애플리케이션 기본 사용자 인증 정보(ADC) : 애플리케이션이 Compute Engine, Google Kubernetes Engine, App Engine 또는 Cloud Functions(Firebase용 Cloud Functions 포함)에서 실행되는 경우 사용합니다.
+
+- 서비스 계정 JSON 비공개 키 파일 : 애플리케이션이 Google 이외의 서버 환경에서 실행되는 경우 Firebase 프로젝트에서 서비스 계정 JSON 파일을 다운로드합니다.
+
+- 서비스 계정에서 생성된 수명이 짧은 OAuth 2.0 액세스 토큰
+
+<br>
+
+#### \* 서비스 계정 JSON 비공개 키 파일
+
+저는 서비스 계정 JSON 비공개 키 파일을 사용합니다. [Firebase 콘솔 > 프로젝트 설정](https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk?hl=ko) 페이지에서 `서비스 계정` 탭을 엽니다. `새 비공개 키 생성`, `키 생성` 버튼을 차례로 클릭하여 `json` 포맷의 키 파일을 생성 및 다운로드합니다.
+
+<br>
+
+<img src="./../img/fcm1.png" alt="fcm" />
+
+<br>
+<br>
+
+이제 아래와 같이 `GOOGLE_APPLICATION_CREDENTIALS` 환경변수를 설정하고요, [사용자 인증 정보를 사용하여 액세스 토큰 발급](https://firebase.google.com/docs/cloud-messaging/auth-server?hl=ko#use-credentials-to-mint-access-tokens)을 참고하여 엑세스 토큰을 발급받습니다.
+
+<br>
+
+<br>
 
 ```
-POST https://fcm.googleapis.com/v1/projects/myproject-b5ae1/messages:send HTTP/1.1
+export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json"
+```
+
+<br>
+
+> API에 요청을 보낼 프로젝트에서 키 파일의 경로를 명시적으로 지정하여 사용할 수도 있지만, 보안을 위해 환경변수를 사용하는 것을 권장합니다.
+
+<br>
+
+#### 3-2) API 요청
+
+아래는 API 요청시 필요한 값과 Request Body 포맷입니다. `<Project Id>` 부분에 입력할 프로젝트 ID는 [Firebase 콘솔](https://console.firebase.google.com/) 프로젝트 설정 페이지에서 확인할 수 있습니다.
+
+```
+POST https://fcm.googleapis.com/v1/projects/<Project Id>/messages:send
 
 Content-Type: application/json
 Authorization: Bearer ya29.ElqKBGN2Ri_Uz...HnS_uNreA
 
 {
    "message":{
-      "token":"token_1",
+      "token":"FCM_TOKEN",
       "data":{},
       "notification":{
         "title":"FCM Message"
@@ -677,6 +732,10 @@ Authorization: Bearer ya29.ElqKBGN2Ri_Uz...HnS_uNreA
    }
 }
 ```
+
+<br>
+
+> [Testing FCM Push Notification (HTTP v1) through OAuth 2.0 Playground/Postman/Terminal — Part 2](https://apoorv487.medium.com/testing-fcm-push-notification-http-v1-through-oauth-2-0-playground-postman-terminal-part-2-7d7a6a0e2fa0) 블로그가 도움이 되었습니다.
 
 <br>
 
