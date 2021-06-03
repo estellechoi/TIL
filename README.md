@@ -35,6 +35,7 @@
 - [Flutter 앱에서 Firebase를 사용하여 Sign in with Google 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md)
 - [Flutter 앱에서 Apple HealthKit, Google Fit, Samsung Health 데이터 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md)
 - [Flutter 앱에서 푸시 알림 구현하기 : FCM(Firebase Cloud Messaging) + APN(Apple Push Notification) / Android](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
+- [Flutter에서 Redux로 State 관리하기]()
 
 <br>
 
