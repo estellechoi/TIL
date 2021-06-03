@@ -329,7 +329,7 @@ android.useAndroidX=true
 
 ### 1) 버전 확인하기
 
-[Samsung Health](https://developer.samsung.com/health) 데이터는 Android 8.0 이상에서만 접근할 수 있습니다. Flutter 프로젝트에서는 Android 앱 빌드 구성 파일인 `android/app/build.gradle`에서 타겟 버전을 확인할 수 있습니다. `targetSdkVersion` 값이 `26`이면 Android 8.0에 해당합니다.
+[Samsung Health](https://developer.samsung.com/health) 데이터는 Android 8.0 이상을 타겟팅해야 접근할 수 있습니다. Flutter 프로젝트에서는 Android 앱 빌드 구성 파일인 `android/app/build.gradle`에서 타겟 버전을 확인할 수 있고요, `targetSdkVersion` 값이 `26`이면 Android 8.0에 해당합니다.
 
 ```gradle
 android {
@@ -349,23 +349,19 @@ android {
 
 ### 2) Samsung Health 파트너 앱으로 등록하기
 
-Samsung Health 데이터는 Apple HealthKit, Google Fit과는 달리 Partner App Program에 등록한 후 파트너 앱으로 승인받아야만 사용할 수 있습니다. 여기부터는 Samsung Health 공식 문서의 [개발 가이드](https://developer.samsung.com/health/android/data/guide/process.html)에 따라 진행하면 됩니다.
+Samsung Health 데이터는 Apple HealthKit, Google Fit과는 달리 Partner App Program에 등록한 후 파트너 앱으로 승인받아야만 사용할 수 있습니다. 그 다음, Samsung Health 공식 문서의 [개발 가이드](https://developer.samsung.com/health/android/data/guide/process.html)에 따라 진행하면 됩니다.
 
 <br>
 
 ### 3) Samsung Health Android SDK 다운로드, 라이브러리 추가하기
 
-파트너 앱으로 승인되었다면, [Samsung Health SDK for Android](https://developer.samsung.com/health/android/overview.html)를 사용하여 앱에 기록된 사용자 데이터에 접근할 수 있습니다. 단순 테스트를 위해서는 Samsung Health 앱을 [Developer Mode](https://developer.samsung.com/health/android/data/guide/dev-mode.html)로 전환하여 테스트해볼 수 있습니다.
-
-<br>
-
-이 단계부터는 Samsung Health 공식 개발 가이드의 [Hello Health Data](https://developer.samsung.com/health/android/data/guide/hello-health-data.html) 예제 문서를 참고하여 진행했습니다.
+파트너 앱으로 승인되었다면, [Samsung Health SDK for Android](https://developer.samsung.com/health/android/overview.html)를 사용하여 앱에 기록된 사용자 데이터에 접근할 수 있습니다. 단순 테스트를 위해서는 Samsung Health 앱을 [Developer Mode](https://developer.samsung.com/health/android/data/guide/dev-mode.html)로 전환하여 테스트해볼 수 있습니다. 이 단계부터는 Samsung Health 공식 개발 가이드의 [Hello Health Data](https://developer.samsung.com/health/android/data/guide/hello-health-data.html) 예제 문서를 참고하여 진행했습니다.
 
 <br>
 
 #### 3-1) Samsung Health SDK 다운로드
 
-Samsung Developers > [Samsung Health SDK for Android](https://developer.samsung.com/health/android/overview.html?download=/shealth/file/1869fee0-3d6b-424e-9bd7-f65f592cffb2#SDK-Download)에서 Samsung Health SDK를 다운로드합니다. 그 다음 다운로드한 `zip` 파일의 압축을 해제하고요, 해당 폴더 내의 `data-v1.5.0/libs/` 경로에서 `samsung-health-data-1.5.0.aar` 파일을 찾습니다. 디렉토리명, 파일명은 다운로드한 버전에 따라 달라질 수 있습니다.
+Samsung Developers > [Samsung Health SDK for Android](https://developer.samsung.com/health/android/overview.html?download=/shealth/file/1869fee0-3d6b-424e-9bd7-f65f592cffb2#SDK-Download)에서 Samsung Health SDK `zip` 압축 파일을 다운로드합니다. 압축을 해제하고요, 해당 폴더 내의 `data-v1.5.0/libs/` 경로에서 `samsung-health-data-1.5.0.aar` 파일을 찾습니다. 디렉토리명, 파일명은 다운로드한 버전에 따라 달라질 수 있습니다.
 
 <br>
 
@@ -383,6 +379,9 @@ Samsung Developers > [Samsung Health SDK for Android](https://developer.samsung.
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:multidex:1.0.3'
+
+    // ..
+
     implementation files('libs/samsung-health-data-1.5.0.aar') // SDK 파일 참조!
 }
 ```
