@@ -9,3 +9,5 @@
 ---
 
 ### References
+
+- [List of state management approaches](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options)
