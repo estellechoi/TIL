@@ -142,7 +142,7 @@ android {
 
 <br>
 
-> 만약 `targetSdkVersion` 값이 `25` 이하로 설정되면 앱이 Android 8.0 이상인 환경에서 실행되더라도 API 25 수준에 해당하는 Android 7.1 이하 디바이스에서와 동일하게 작동합니다.
+> 만약 `targetSdkVersion` 값이 `25` 이하로 설정되면 앱이 Android 8.0 이상인 환경에서 실행되더라도, 25 수준을 타겟팅하고 있으므로 Android 7.1 이하 디바이스에서와 동일하게 작동합니다.
 
 <br>
 
