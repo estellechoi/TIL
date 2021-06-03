@@ -122,7 +122,41 @@ APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서�
 
 ## 2. Android 셋업하기
 
-### 1) `FLUTTER_NOTIFICATION_CLICK` 필터 추가하기
+### 1) 알림 채널 지정하기
+
+앱이 Android 8.0 이상을 타겟팅하는 경우, [알림 채널](https://developer.android.com/training/notify-user/channels)을 지정하지 않고 알림을 전송하면 알림이 표시되지 않고 시스템에서 오류를 기록합니다. Flutter 프로젝트에서는 Android 앱 빌드 구성 파일인 `android/app/build.gradle`에서 확인할 수 있습니다. `targetSdkVersion` 값이 `26`이면 Android 8.0에 해당합니다.
+
+```
+android {
+    // ..
+
+    defaultConfig {
+        // ..
+
+        targetSdkVersion 30
+
+        // ..
+    }
+}
+```
+
+<br>
+
+> 만약 `targetSdkVersion` 값이 `25` 이하로 설정되면 앱이 Android 8.0 이상인 환경에서 실행되더라도 API 25 수준에 해당하는 Android 7.1 이하 디바이스에서와 동일하게 작동합니다.
+
+<br>
+
+FCM은 기본 설정으로 기본적인 알림 채널을 제공합니다. 알림 채널을 직접 만들어 사용하려면 아래 예시와 같이 지정하시고요, 자세한 설명은 공식 문서의 [앱 매니페스트 수정](https://firebase.google.com/docs/cloud-messaging/android/client?authuser=0#manifest)을 참고합니다.
+
+```xml
+<meta-data
+    android:name="com.google.firebase.messaging.default_notification_channel_id"
+    android:value="@string/default_notification_channel_id" />
+```
+
+<br>
+
+### 2) `FLUTTER_NOTIFICATION_CLICK` 필터 추가하기
 
 `android/app/src/main/AndroidManifest.xml` 파일에 아래와 같이 `<intent-filter>`를 추가합니다. 그렇지 않으면 사용자가 푸시 알림을 탭하여 앱을 실행했을 때 앱에서 데이터를 수신하지 못하는 이슈가 있습니다.
 
@@ -145,7 +179,7 @@ APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서�
 
 <br>
 
-### 2) 확장 서비스 추가하기
+### 3) 확장 서비스 추가하기
 
 `foreground` 상태인 앱의 알림 수신, 데이터 페이로드 수신, 업스트림 메시지 전송 등을 수행하려면 아래와 같이 `AndroidManifest.xml` 파일에 확장 서비스를 추가합니다.
 
@@ -176,18 +210,6 @@ APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서�
 <meta-data
     android:name="com.google.firebase.messaging.default_notification_color"
     android:resource="@color/colorAccent" />
-```
-
-<br>
-
-### 4) 알림 채널 설정하기
-
-Android 8.0(API 수준 26) 이상부터는 모든 알림을 [알림 채널](https://developer.android.com/guide/topics/ui/notifiers/notifications.html?authuser=0#ManageChannels)에 할당해야합니다. FCM은 기본적인 설정으로 기본 알림 채널을 제공합니다. 기본 채널을 직접 만들어 사용하려면 아래 예시와 같이 지정하시고요, 자세한 설명은 공식 문서의 [앱 매니페스트 수정](https://firebase.google.com/docs/cloud-messaging/android/client?authuser=0#manifest)을 참고합니다.
-
-```xml
-<meta-data
-    android:name="com.google.firebase.messaging.default_notification_channel_id"
-    android:value="@string/default_notification_channel_id" />
 ```
 
 <br>
