@@ -1,9 +1,10 @@
-# Flutter 앱에서 Apple HealthKit, Google Fitness 데이터 가져오기
+# Flutter 앱에서 Apple HealthKit, Google Fit, Samsung Health 데이터 가져오기
 
 <br>
 
 1. Apple HealthKit 셋업하고 데이터 가져오기
-2. Google Fitness 셋업하고 데이터 가져오기
+2. Google Fit 셋업하고 데이터 가져오기
+3. Samsung Health 셋업하고 데이터 가져오기
 
 <br>
 
@@ -203,7 +204,11 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 <br>
 <br>
 
-## 2. Google Fitness 셋업하고 데이터 가져오기
+## 2. Google Fit 셋업하고 데이터 가져오기
+
+> Google Fit 앱이 설치된 경우에만 사용 가능합니다.
+
+<br>
 
 이미 Google API를 위한 OAuth 2.0 클라이언트 ID가 있다면 `1)` ~ `3)` 단계는 건너뜁니다. Sign in with Google과 같은 API를 사용한 적이 있다면 이미 OAuth 2.0 클라이언트 ID가 있는 것입니다. 클라이언트 ID는 `YOUR_CLIENT_ID.apps.googleusercontent.com` 형태입니다. 기존에 생성한 클라이언트 ID는 [Google Cloud Platform]()에서 [API 및 서비스 > 사용자 인증 정보](https://console.cloud.google.com/apis/credentials) 메뉴로 이동하면 OAuth 2.0 클라이언트 ID 목록에서 확인할 수 있습니다.
 
@@ -211,7 +216,7 @@ Future<List<HealthDataPoint>?> fetchAppleHealthKit() async {
 
 ### 1) 선행 작업하기: Android 앱 디지털 서명
 
-Google Fitness 등의 Google 서비스를 사용하거나 Android 앱을 배포하기 위해서는 디지털 서명을 통해 개발자 인증을 완료해야합니다. 아직 앱 서명을 하지 않았다면 [앱 서명하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0)를 참고하여 앱에 디지털 서명을 완료한 후 진행해주세요. Android 앱의 디지털 서명은 `keytool`을 사용하고요, 앱 서명 정보가 담긴 Keystore를 생성한 후 앱에서 참조하는 방식입니다.
+Google Fit 등의 Google 서비스를 사용하거나 Android 앱을 배포하기 위해서는 디지털 서명을 통해 개발자 인증을 완료해야합니다. 아직 앱 서명을 하지 않았다면 [앱 서명하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/deploy_android.md#user-content-2-%EC%95%B1-%EC%84%9C%EB%AA%85%ED%95%98%EA%B8%B0)를 참고하여 앱에 디지털 서명을 완료한 후 진행해주세요. Android 앱의 디지털 서명은 `keytool`을 사용하고요, 앱 서명 정보가 담긴 Keystore를 생성한 후 앱에서 참조하는 방식입니다.
 
 <br>
 
@@ -316,8 +321,98 @@ android.useAndroidX=true
 
 ### 5) `health` 라이브러리를 사용하여 건강 데이터 가져오기
 
-`health` 라이브러리는 Apple HealthKit와 Google Fitness 동시 사용을 지원합니다. [위 섹션](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md#user-content-6-health-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B1%B4%EA%B0%95-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)을 참고하여 동일하게 진행하면 됩니다.
+`health` 라이브러리는 Apple HealthKit와 Google Fit 동시 사용을 지원합니다. [위 섹션](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md#user-content-6-health-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B1%B4%EA%B0%95-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)을 참고하여 동일하게 진행하면 됩니다.
 
+<br>
+
+## 3. Samsung Health 셋업하고 데이터 가져오기
+
+### 1) 버전 확인하기
+
+[Samsung Health](https://developer.samsung.com/health) 데이터는 Android 8.0 이상에서만 접근할 수 있습니다. Flutter 프로젝트에서는 Android 앱 빌드 구성 파일인 `android/app/build.gradle`에서 타겟 버전을 확인할 수 있습니다. `targetSdkVersion` 값이 `26`이면 Android 8.0에 해당합니다.
+
+```gradle
+android {
+    // ..
+
+    defaultConfig {
+        // ..
+
+        targetSdkVersion 30
+
+        // ..
+    }
+}
+```
+
+<br>
+
+### 2) Samsung Health 파트너 앱으로 등록하기
+
+Samsung Health 데이터는 Apple HealthKit, Google Fit과는 달리 Partner App Program에 등록한 후 파트너 앱으로 승인받아야만 사용할 수 있습니다. 여기부터는 Samsung Health 공식 문서의 [개발 가이드](https://developer.samsung.com/health/android/data/guide/process.html)에 따라 진행하면 됩니다.
+
+<br>
+
+### 3) Samsung Health Android SDK 다운로드, 라이브러리 추가하기
+
+파트너 앱으로 승인되었다면, [Samsung Health SDK for Android](https://developer.samsung.com/health/android/overview.html)를 사용하여 앱에 기록된 사용자 데이터에 접근할 수 있습니다. 단순 테스트를 위해서는 Samsung Health 앱을 [Developer Mode](https://developer.samsung.com/health/android/data/guide/dev-mode.html)로 전환하여 테스트해볼 수 있습니다.
+
+<br>
+
+이 단계부터는 Samsung Health 공식 개발 가이드의 [Hello Health Data](https://developer.samsung.com/health/android/data/guide/hello-health-data.html) 예제 문서를 참고하여 진행했습니다.
+
+<br>
+
+#### 3-1) Samsung Health SDK 다운로드
+
+Samsung Developers > [Samsung Health SDK for Android](https://developer.samsung.com/health/android/overview.html?download=/shealth/file/1869fee0-3d6b-424e-9bd7-f65f592cffb2#SDK-Download)에서 Samsung Health SDK를 다운로드합니다. 그 다음 다운로드한 `zip` 파일의 압축을 해제하고요, 해당 폴더 내의 `data-v1.5.0/libs/` 경로에서 `samsung-health-data-1.5.0.aar` 파일을 찾습니다. 디렉토리명, 파일명은 다운로드한 버전에 따라 달라질 수 있습니다.
+
+<br>
+
+> `aar` 포맷은 Android Archive의 줄임말로, Android 라이브러리 프로젝트의 바이너리 배포 파일입니다. Java 클래스 파일과 리소스 파일들을 포함하고 있습니다.
+
+<br>
+
+#### 3-2) Flutter 프로젝트에서 Samsung Health SDK 임포트
+
+이제 `samsung-health-data-1.5.0.aar` 파일을 Flutter 프로젝트에 추가합니다. Flutter 프로젝트의 `android/app/` 경로에 `libs`라는 이름으로 디렉토리를 생성하고 파일을 넣어주면 됩니다. 그 다음 `android/app/build.gradle` 파일을 열고 `dependencies`에 아래와 같이 추가한 파일을 참조하도록 추가합니다.
+
+```gradle
+// ..
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation files('libs/samsung-health-data-1.5.0.aar') // SDK 파일 참조!
+}
+```
+
+<br>
+
+그 다음 `android/app/src/main/AndroidManifest.xml` 파일을 열고 아래와 같이 `<queries>` 태그를 사용하여 추가합니다.
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.flutter_app">
+   <uses-permission android:name="android.permission.INTERNET" />
+   <!-- 여기 -->
+   <queries>
+      <package android:name="com.sec.android.app.shealth" />
+   </queries>
+   <application
+        android:label="Hinoki"
+        android:icon="@mipmap/test_launcher">
+
+        <!-- .. -->
+
+   </application>
+```
+
+<br>
+
+..
+
+<br>
 <br>
 <br>
 
@@ -331,3 +426,4 @@ android.useAndroidX=true
 - [Apple Health Records](https://blog.usejournal.com/apple-health-records-cbb98551bbb9)
 - [Get started on Android | Google Fit](https://developers.google.com/fit/android/get-started#create-configure-project)
 - [Get an OAuth 2.0 Client ID | Google Fit](https://developers.google.com/fit/android/get-api-key#find_your_apps_certificate_information)
+- [Samsung Health Android SDK - Data API Reference 1.5.0](https://img-developer.samsung.com/onlinedocs/health/android/data/index.html)
