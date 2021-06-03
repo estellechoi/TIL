@@ -126,7 +126,7 @@ APN 서비스를 사용하는 경우 Apple Developer에서 서비스 인증서�
 
 앱이 Android 8.0 이상을 타겟팅하는 경우, [알림 채널](https://developer.android.com/training/notify-user/channels)을 지정하지 않고 알림을 전송하면 알림이 표시되지 않고 시스템에서 오류를 기록합니다. Flutter 프로젝트에서는 Android 앱 빌드 구성 파일인 `android/app/build.gradle`에서 확인할 수 있습니다. `targetSdkVersion` 값이 `26`이면 Android 8.0에 해당합니다.
 
-```
+```gradle
 android {
     // ..
 
