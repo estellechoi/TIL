@@ -4,7 +4,7 @@
 
 1. Flutter의 선언형(Declarative) UI
 2. Ephemeral State
-3. App state
+3. App State
 4. `provider`
 
 <br>
@@ -51,7 +51,7 @@ setState(() {
 
 <br>
 
-## 3. App state
+## 3. App State
 
 특정 위젯에 얽매이지 않고 앱의 모든 곳에서 사용되는 `state`는 App State라고 합니다. 보통 로그인 정보, 쇼핑몰 장바구니 정보 등 여러 위젯에서 공유해야하는 값들을 App State로 지정하고 관리합니다.
 
