@@ -46,7 +46,7 @@ setState(() {
 
 ## 3. App state
 
-특정 위젯에 얽매이지 않고 앱의 모든 곳에서 사용되는 `state`는 App State라고 합니다. 보통 로그인 정보, 쇼핑몰 장바구니 정보 등의 여러 위젯에서 공유해야하는 값들을 App State로 지정하고 관리합니다.
+특정 위젯에 얽매이지 않고 앱의 모든 곳에서 사용되는 `state`는 App State라고 합니다. 보통 로그인 정보, 쇼핑몰 장바구니 정보 등 여러 위젯에서 공유해야하는 값들을 App State로 지정하고 관리합니다.
 
 <br>
 
@@ -64,7 +64,7 @@ import 'package:provider/provider.dart';
 
 <br>
 
-`provider`를 사용하려면 다음 3가지 개념을 알아야합니다.
+`provider`로 App State를 관리하는 일에는 다음 3가지 개념이 사용됩니다.
 
 - `ChangeNotifier`
 
