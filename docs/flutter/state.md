@@ -2,7 +2,14 @@
 
 <br>
 
-## Flutter의 선언형(Declarative) UI
+1. Flutter의 선언형(Declarative) UI
+2. Ephemeral State
+3. App state
+4. `provider`
+
+<br>
+
+## 1. Flutter의 선언형(Declarative) UI
 
 Flutter는 `state` 값이 변할 때마다 `state`의 현재 값을 반영하여 UI를 다시 빌드합니다. 이때 뷰(View) 전체를 다시 구성하지 않고요, 위젯 트리 내에서 변경된 `state` 값이 관여하는 특정 부분만 재구성하여 다시 렌더링하는 방식입니다. 이러한 UI 빌드 방식을 선언형(Declarative) UI 프로그래밍이라고 말합니다. `StatefulWidget` 내에서 `setState()`를 호출하여 `state` 값을 변경하고 위젯의 일부를 업데이트합니다. 이때 해당 위젯 인스턴스가 처음 생성될 때 지정한 인자 값들은 변하지 않고, 오직 `state` 값만이 변경되면서 위젯을 재구성합니다.
 
@@ -54,7 +61,7 @@ setState(() {
 
 <br>
 
-## 4. `provider` 기본 셋업
+## 4. `provider`
 
 라이브러리를 `pubspec.yaml` 파일에 추가하여 설치하고 임포트합니다.
 
@@ -184,7 +191,7 @@ class _MyAppState extends State<MyApp> {
 
 <br>
 
-## 5. `Provider.of`
+### 4-4) `Provider.of`
 
 인스턴스의 값은 필요하지 않고 단순히 메소드만 호출할 때는 `Provider.of`를 사용하고요, `listen` 값을 `false`로 지정하여 인스턴스를 참조합니다.
 
