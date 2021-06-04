@@ -54,7 +54,7 @@ setState(() {
 
 <br>
 
-## 4. `provider`
+## 4. `provider` 기본 셋업
 
 라이브러리를 `pubspec.yaml` 파일에 추가하여 설치하고 임포트합니다.
 
@@ -76,9 +76,122 @@ import 'package:provider/provider.dart';
 
 ### 4-1) `ChangeNotifier`
 
-`ChangeNotifier`는 Flutter에서 기본으로 제공하는 클래스이고요, `ChangeNotifier`를 구독하는 곳에 변경을 알리는 단순한 역할을 합니다.
+`ChangeNotifier`는 Flutter에서 기본으로 제공하는 클래스이고요, 이름 그대로 다른 곳에 변경을 알리는 단순한 역할을 합니다. `package:flutter/foundation.dart`를 임포트 한 후 `state` 변경이 일어나는 (가령 `AppState`) 클래스에서 `ChangeNotifier`를 상속하고요, 변경이 일어날 때마다 `notifyListeners()` 메소드를 호출하여 변경 알림을 보내면 됩니다.
+
+```dart
+import 'package:flutter/foundation.dart';
+
+class AppState extends ChangeNotifier {
+    final List<String> _strings = [];
+
+    // ..
+
+    void addItem(String string) {
+        _strings.add(string);
+        notifyListeners();
+    }
+}
+```
 
 <br>
+
+그 다음, 해당 클래스의 인스턴스를 사용하는 곳에서 변경 알림을 받을 수 있도록 `addListener()`를 사용하여 리스너를 등록합니다.
+
+```dart
+final AppState appState = AppState();
+appState.addListener(() {
+    print('App state changed !');
+});
+```
+
+<br>
+
+### 4-2) `ChangeNotifierProvider`
+
+`ChangeNotifierProvider`는 `provider` 라이브러리를 설치해야 사용할 수 있고요, 자손 위젯들이 동일한 `ChangeNotifier`를 공유할 수 있도록 `ChangeNotifier`를 사용하는 위젯의 인스턴스를 생성하여 제공하는 위젯입니다. 앱의 모든 위젯에서 `ChangeNotifier` 인스턴스에 접근할 수 있도록 하려면 `ChangeNotifierProvider`는 앱의 루트 위젯에 등록해야합니다. 그리고 `create` 속성에 하위 위젯들이 공유할 `AppState` 인스턴스를 반환하는 함수를 지정합니다. `AppState` 인스턴스가 더이상 필요하지 않게되면 `ChangeNotifierProvider`는 자동으로 `dispose()` 메소드를 호출하여 인스턴스를 제거합니다.
+
+```dart
+Future<void> main() async {
+  // main 메소드에서 비동기로 데이터를 다룬 다음 runApp을 실행해야하는 경우
+  WidgetsFlutterBinding.ensureInitialized();
+  await DotEnv.load(fileName: '.env');
+
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+      return ChangeNotifierProvider(
+          create: (BuildContext ctx) => AppState()
+          child: MaterialApp(
+              // ..
+          )
+      );
+  }
+}
+```
+
+<br>
+
+### 4-3) `Consumer`
+
+이제 앱의 모든 위젯에서 `AppState` 인스턴스에 접근할 수 있게 되었습니다. 실제로 이 인스턴스에 접근하려면 UI 업데이트가 필요한 곳에서 `Consumer` 위젯을 사용하면 되고요, `Consumer<AppState>`와 같이 접근하고자 하는 인스턴스의 타입을 반드시 명시해야 합니다. 이제 `AppState`에서 변경이 발생할 때마다 `Consumer` 위젯의 `builder` 함수가 호출되고요, `builder` 함수의 두 번째 인자를 통해 `AppState` 인스턴스에 접근하여 변경된 값을 사용할 수 있습니다.
+
+```dart
+ @override
+  Widget build(BuildContext context) {
+      return Consumer<AppState>(
+          builder: (context, appState, child) {
+              return
+              Column(
+                  children: <Widget>[
+                      Text(appState.loggedIn ? 'Sign out' : 'Sign in')
+                  ]
+              );
+          }
+      );
+  }
+```
+
+<br>
+
+`builder` 함수의 세 번째 인자(`child`)는 `AppState` 값이 변하더라도 UI 업데이트가 필요없는 부분입니다. `Consumer` 위젯의 `child` 인자로 고정된 UI를 지정해놓으면 `builder` 함수가 실행될 때 받아올 수 있습니다. `Consumer` 위젯의 `child` 인자를 따로 지정하지 않으면 이 값은 `null`입니다.
+
+```dart
+ @override
+  Widget build(BuildContext context) {
+      return Consumer<AppState>(
+          builder: (context, appState, child) {
+              return
+              Column(
+                  children: <Widget>[
+                      if (child != null) child, // FixedWidget()
+                      Text(appState.loggedIn ? 'Sign out' : 'Sign in')
+                  ]
+              );
+          },
+          // UI 업데이트가 필요없는 부분을 지정
+          child: FixedWidget()
+      );
+  }
+```
+
+<br>
+
+## 5. `Provider.of`
+
+인스턴스의 값은 필요하지 않고 단순히 메소드만 호출할 때는 `Provider.of`를 사용하고요, `listen` 값을 `false`로 지정하여 인스턴스를 참조합니다.
+
+```dart
+Provider.of<AppState>(context, listen: false).clearAll();
+```
+
 <br>
 
 ---
