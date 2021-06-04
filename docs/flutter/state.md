@@ -1,4 +1,4 @@
-# Flutter에서 App State 관리하기
+# Flutter에서 `provider`로 App State 관리하기
 
 <br>
 
