@@ -57,7 +57,7 @@ setState(() {
 
 <br>
 
-중요한 것은 App State는 앱의 모든 위젯들보다 상위에 존재해야한다는 것입니다. App State가 변경될 때마다 이 값을 사용하는 모든 위젯들이 다시 UI를 빌드하는 방식이기 때문이죠. 만약 위젯 트리가 매우 복잡해서 10 개의 위젯이 겹쳐있고, 가장 하위 위젯에서 사용자가 버튼을 클릭했을 때 가장 상위 위젯에 있는 App State가 변경되어야 한다고 가정해봅시다. 하위 위젯에서 상위 위젯으로 콜백을 사용하여 변경할 값을 전달할 수는 있지만, 이 과정이 10번 반복됩니다. 그리고 중간에 위젯이 추가된다면 해당 콜백을 전달하는 인자를 매번 추가해줘야 하고요. 그래서 이런 문제를 간단하게 해주는 라이브러리를 사용하는 것이 권장되고요, 공식 문서 예제에서는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다. 이 외에도 [다양한 방법](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options)으로 App State를 관리할 수 있습니다. 공식 문서에서 소개한 [You Might Not Need Redux: The Flutter Edition](https://proandroiddev.com/you-might-not-need-redux-the-flutter-edition-9c11eba006d7) 문서가 도움이 됩니다.
+중요한 것은 App State는 앱의 모든 위젯들보다 상위에 존재해야한다는 것입니다. App State가 변경될 때마다 이 값을 사용하는 모든 위젯들이 다시 UI를 빌드하는 방식이기 때문이죠. 만약 위젯 트리가 매우 복잡해서 10 개의 위젯이 겹쳐있고, 가장 하위 위젯에서 사용자가 버튼을 클릭했을 때 가장 상위 위젯에 있는 App State가 변경되어야 한다고 가정해봅시다. 하위 위젯에서 상위 위젯으로 콜백을 사용하여 변경할 값을 전달할 수는 있지만, 이 과정이 10번 반복됩니다. 그리고 중간에 위젯이 추가된다면 해당 콜백을 전달하는 인자를 매번 추가해줘야 하고요. 그래서 이런 문제를 간단하게 해주는 라이브러리를 사용하는 것이 권장되고요, 공식 문서 예제에서는 [`provider`](https://pub.dev/packages/provider) 라이브러리를 사용합니다. 이 외에도 [다양한 방법](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options)으로 App State를 관리할 수 있습니다. [`redux`](https://pub.dev/packages/redux)를 사용하는 것이 적합한지 고민중이라면, 공식 문서에서 소개한 [You Might Not Need Redux: The Flutter Edition](https://proandroiddev.com/you-might-not-need-redux-the-flutter-edition-9c11eba006d7) 문서가 도움이 됩니다.
 
 <br>
 
