@@ -1,4 +1,4 @@
-# Fastlane을 사용하여 Flutter iOS 앱 배포 자동화하기
+# Fastlane을 사용하여 Flutter iOS/Android 앱 배포 자동화하기
 
 <br>
 
@@ -14,7 +14,7 @@ xcode-select --install
 
 <br>
 
-### 2) Homebrew를 사용하여 Fastlane 설치하기
+### 2) Homebrew를 사용하여 `fastlane` 설치하기
 
 아래와 같이 `brew` 명령어를 사용하여 `fastlane`을 설치합니다. 자세한 내용은 [Homebrew Formulae](https://formulae.brew.sh/formula/fastlane)를 참고하세요.
 
@@ -24,9 +24,9 @@ brew install fastlane
 
 <br>
 
-## 2. Fastlane 셋업
+## 2. iOS를 위한 `fastlane` 셋업
 
-이제 프로젝트의 루트 경로에서 다음 명령어를 사용하여 Fastlane 셋업을 진행합니다. Flutter 프로젝트는 `ios/` 경로에서 실행합니다.
+이제 프로젝트의 루트 경로에서 다음 명령어를 사용하여 `fastlane` 셋업을 진행합니다. Flutter 프로젝트는 `ios/` 경로에서 실행합니다.
 
 ```
 fastlane init
@@ -58,8 +58,6 @@ fastlane init
 - `Gemfile.lock`
 
 <br>
-
-## 3. Fastlane 설정하기
 
 ### 1) `Appfile`
 
@@ -185,7 +183,7 @@ Slack으로 메시지를 보내는 메소드 설정을 커스텀하려면 `fastl
 
 <br>
 
-## 4. `.gitignore` 세팅하기
+### 3) `.gitignore` 세팅하기
 
 `fastlane beta` 혹은 `fastlane release`를 실행하고나면 `ios/` 경로에 여러 파일들이 자동으로 생성되는데요, 원격 레파지토리에 올리지 않을 파일들은 `.gitignore` 파일에 추가하는 것을 잊지마세요. 저는 아래 항목들을 추가했습니다.
 
@@ -197,6 +195,174 @@ Runner.app.*.zip
 Runner.ipa
 ```
 
+<br>
+
+## 3. Android를 위한 `fastlane` 셋업
+
+Flutter 프로젝트의 `android/` 경로로 이동한 후 `fastlane` 초기화 명령어를 실행합니다.
+
+```
+fastlane init
+```
+
+<br>
+
+그럼 아래와 같이 `Package Name` 입력이 요구되고요, `app/build.gradle` 파일의 `applicationId` 항목의 값을 입력하면 됩니다.
+
+<br>
+
+<img src="./../img/fastlane3.png" alt="fastlane" width="600" />
+
+<br>
+<br>
+
+다음으로는 `Path to the json secret file` 입력이 요구됩니다.
+
+<br>
+
+<img src="./../img/fastlane4.png" alt="fastlane" width="600" />
+
+<br>
+<br>
+
+`fastlane` 공식문서의 [Setting up supply](https://docs.fastlane.tools/getting-started/android/setup/#setting-up-supply) 섹션을 참고하여 `json secret file`을 생성한 후 진행해야합니다. 문서의 설명에 따라 [Google Play 콘솔](https://play.google.com/apps/publish/)에서 설정 > API 엑세스 메뉴로 이동한 후 새 프로젝트를 생성합니다.
+
+<br>
+
+<img src="./../img/fastlane5.png" alt="fastlane" />
+
+<br>
+<br>
+
+그 다음 `새 서비스 계정 만들기` 버튼을 클릭하고, 나타난 안내창의 설명에 따라 서비스 계정 만들기를 진행합니다.
+
+<br>
+
+<img src="./../img/fastlane6.png" alt="fastlane" />
+
+<br>
+<br>
+
+참고로 아래 단계에서 역할은 `서비스 계정 사용자`를 선택하고 계정 생성을 완료합니다.
+
+<br>
+
+<img src="./../img/fastlane7.png" alt="fastlane" />
+
+<br>
+<br>
+
+서비스 계정이 생성되면 아래와 같이 `키 관리` 메뉴로 이동합니다.
+
+<br>
+
+<img src="./../img/fastlane8.png" alt="fastlane" />
+
+<br>
+<br>
+
+`키 추가` 버튼을 클릭하여 키 생성을 시작하시고요, `키 유형`은 `JSON`을 선택한 후 `만들기` 버튼을 클릭하여 완료합니다. `json` 포맷의 키 파일이 다운로드되는데요, 이 파일은 앱에서 Google API에 접근할 때 사용되므로 반드시 안전한 곳에 보관해야합니다. 저는 파일명을 `google_key.json`으로 바꾸고 프로젝트의 `android/` 경로로 파일을 옮긴 다음 `.gitignore` 항목에 추가했습니다.
+
+<br>
+
+<img src="./../img/fastlane9.png" alt="fastlane" />
+
+<br>
+<br>
+
+다시 Google Play 콘솔로 돌아가서 안내창의 `완료` 버튼을 클릭합니다. 서비스 계정이 추가된 것을 확인할 수 있고요, `액세스 권한 부여` 클릭, `사용차 초대`를 클릭하여 마무리합니다.
+
+<br>
+
+이제 아래 명령어를 사용하여 다운로드한 `json` 파일이 Google Play Store와 연결되었는지 검증합니다. 명령어의 `google_key.json` 부분에는 `android/` 경로를 기준으로 파일이 위치한 경로와 파일명을 입력합니다.
+
+```
+fastlane run validate_play_store_json_key json_key:google_key.json
+```
+
+<br>
+
+`Download existing metadata and setup metadata management?` 질문에는 `y`라고 답변합니다.
+
+<br>
+
+<img src="./../img/fastlane10.png" alt="fastlane" width="600" />
+
+<br>
+<br>
+
+`fastlane` 초기화가 완료되면 위에서 진행했던 iOS 셋업때와 마찬가지로 다음 파일들이 생성되고요, 위에서 메타데이터를 가져오겠다고 답변했으므로 `fastlane/metadata` 디렉토리가 함께 생성됩니다.
+
+- `fastlane/Appfile`
+- `fastlane/Fastfile`
+- `Gemfile`
+- `Gemfile.lock`
+
+<br>
+
+### 1) `Appfile`
+
+Android의 경우 `Appfile` 파일은 다음 2개의 메소드로 구성되어 있습니다.
+
+```ruby
+json_key_file("json-key-file.json") # Path to the json secret file ..
+package_name("package-name") # e.g. com.krausefx.app
+```
+
+<br>
+
+역시 `.env` 파일을 생성하여 환경변수를 지정한 후 아래와 같이 파일을 수정할 수 있습니다.
+
+```ruby
+json_key_file(ENV['JSON_KEY_FILE']) # Path to the json secret file ..
+package_name(ENV['PACKAGE_NAME']) # e.g. com.krausefx.app
+```
+
+<br>
+
+### 2) `Fastfile`
+
+```ruby
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+    version = get_version_number
+    send_slack({ "version": version })
+  end
+
+  lane :send_slack do |options|
+    slack(
+      message: "Android 앱이 Google Play에 성공적으로 업로드 되었습니다.",
+      channel: "#deploy",
+      slack_url: ENV["SLACK_WEBHOOK_URL"],
+      payload: {
+        "Version": options[:version],
+        "Build Date" => Time.new.to_s
+      }
+    )
+  end
+end
+```
+
+<br>
 <br>
 
 ---
