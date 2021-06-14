@@ -101,7 +101,7 @@ team_id(ENV['TEAM_ID']) # Developer Portal Team ID
 
 ### 2) `Fastfile`
 
-`Fastfile`은 실제 배포를 진행하기 위해 커맨드 명령들을 설정하는 파일입니다. 파일의 기본 내용에 필요한 내용을 추가합니다.
+`Fastfile`은 실제 배포를 진행하기 위해 커맨드 명령들을 설정하는 파일입니다. 아래는 예시입니다.
 
 ```ruby
 default_platform(:ios)
@@ -134,7 +134,7 @@ end
 
 <br>
 
-아래와 같이 `beta` 명령어를 실행하면,
+위의 예시 파일 내용은 이렇습니다. `beta` 명령어를 실행하면,
 
 ```t
 fastlane beta
@@ -142,7 +142,7 @@ fastlane beta
 
 <br>
 
-아래의 명령어들이 실행되면서 TestFlight 배포가 진행되고, Slack에 메시지를 전송하도록 설정되어 있습니다. 진행 과정에서 앱 암호(`app-specific password`) 입력이 필요합니다. 앱 암호는 Apple 계정 암호와는 다른 것이고요, 앱 암호가 없다면 [Apple 계정관리](https://appleid.apple.com/account/manage)에서 생성 후 계속 진행합니다.
+다음 명령어들이 실행되면서 TestFlight 배포가 진행되고, Slack에 메시지를 전송하도록 설정되어 있습니다. 진행 과정에서 앱 암호(`app-specific password`) 입력이 필요합니다. 앱 암호는 Apple 계정 암호와는 다른 것이고요, 앱 암호가 없다면 [Apple 계정관리](https://appleid.apple.com/account/manage)에서 생성 후 계속 진행합니다.
 
 ```ruby
 # 인증서, 프로비저닝 프로파일을 가져오기
