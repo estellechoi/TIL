@@ -36,7 +36,7 @@
 - [Flutter 앱에서 Apple HealthKit, Google Fit, Samsung Health 데이터 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md)
 - [Flutter 앱에서 푸시 알림 구현하기 : FCM(Firebase Cloud Messaging) + APN(Apple Push Notification) / Android](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
 - [Flutter에서 `provider`로 App State 관리하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/state.md)
-- [Fastlane을 사용하여 iOS 앱 배포 자동화하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/cd.md)
+- [Fastlane을 사용하여 Flutter iOS/Android 앱 배포 자동화하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/cd.md)
 
 <br>
 
