@@ -373,3 +373,5 @@ end
 - [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks)
 - [Using app-specific passwords | Apple](https://support.apple.com/en-gb/HT204397)
 - [Fastlane으로 iOS앱 배포과정을 자동화 해보았다](https://velog.io/@hyob/Fastlane%EC%9C%BC%EB%A1%9C-iOS%EC%95%B1-%EB%B0%B0%ED%8F%AC%EA%B3%BC%EC%A0%95%EC%9D%84-%EC%9E%90%EB%8F%99%ED%99%94-%ED%95%B4%EB%B3%B4%EC%95%98%EB%8B%A4)
+- [Getting started with fastlane for Android](https://docs.fastlane.tools/getting-started/android/setup/)
+- [\[Fastlane\] Flutter 앱 자동배포 구축 - 안드로이드 편](https://eunjin3786.tistory.com/224)
