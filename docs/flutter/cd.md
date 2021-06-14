@@ -161,7 +161,7 @@ build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 # TestFlight에 업로드
 upload_to_testflight
 
-# 현재 버전을 info.plist에서 읽어오고, Slack에 메시지 전송
+# 현재 버전을 Info.plist에서 읽어오고, Slack에 메시지 전송
 version = get_version_number
 send_slack({"version": version })
 
