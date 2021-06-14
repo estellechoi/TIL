@@ -33,7 +33,18 @@ fastlane init
 ```
 
 <br>
+
+<img src="./../img/fastlane.png" alt="fastlane" width="600" />
+
 <br>
+<br>
+
+그 다음, [App Store Connect](https://appstoreconnect.apple.com/) 로그인시 사용하는 Apple 계정 이메일과 비밀번호를 입력하고 계속합니다.
+
+<br>
+
+<img src="./../img/fastlane.png" alt="fastlane" width="600" />
+
 <br>
 
 ---
