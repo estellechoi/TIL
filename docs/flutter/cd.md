@@ -65,7 +65,7 @@ fastlane init
 
 `Appfile` 파일은 앱 배포시 App Store Connect에 자동으로 접속하여 배포를 진행하기 위한 Apple 계정 정보와 앱 ID를 포함해야합니다. 파일 내용은 아래와 같이 구성되어 있고요, 각 메소드의 인자 값이 자동으로 세팅되어있습니다.
 
-```
+```ruby
 app_identifier("your.app.identifier") # The bundle identifier of your app
 apple_id("apple-id") # Your Apple email address
 
@@ -77,7 +77,7 @@ team_id("portal-team-id") # Developer Portal Team ID
 
 위의 인자 값들은 환경변수를 사용하여 관리할 수 있고요, `fastlane`에는 `.env` 파일을 통해 환경변수를 사용할 수 있도록 `dotenv` 라이브러리가 기본으로 포함되어 있습니다. (`Gemfile.lock` 파일에서 확인할 수 있습니다) `fastlane/` 경로에 `.env` 파일을 생성하고 아래와 같이 환경변수를 세팅합니다.
 
-```
+```t
 APP_IDENTIFIER=your.app.identifier
 APPLE_ID=apple-id
 ITC_TEAM_ID=team-id
@@ -88,7 +88,7 @@ TEAM_ID=portal-team-id
 
 그 다음 `Appfile`을 아래와 같이 수정하면 끝입니다.
 
-```
+```t
 app_identifier(ENV['APP_IDENTIFIER']) # The bundle identifier of your app
 apple_id(ENV['APPLE_ID']) # Your Apple email address
 
@@ -103,7 +103,7 @@ team_id(ENV['TEAM_ID']) # Developer Portal Team ID
 
 `Fastfile`은 실제 배포를 진행하기 위해 커맨드 명령들을 설정하는 파일입니다. 파일의 기본 내용에 필요한 내용을 추가합니다.
 
-```
+```ruby
 default_platform(:ios)
 
 platform :ios do
@@ -136,7 +136,7 @@ end
 
 아래와 같이 `beta` 명령어를 실행하면,
 
-```
+```t
 fastlane beta
 ```
 
@@ -144,7 +144,7 @@ fastlane beta
 
 아래의 명령어들이 실행되면서 TestFlight 배포가 진행되고, Slack에 메시지를 전송하도록 설정되어 있습니다. 진행 과정에서 앱 암호(`app-specific password`) 입력이 필요합니다. 앱 암호는 Apple 계정 암호와는 다른 것이고요, 앱 암호가 없다면 [Apple 계정관리](https://appleid.apple.com/account/manage)에서 생성 후 계속 진행합니다.
 
-```
+```ruby
 # 인증서, 프로비저닝 프로파일을 가져오기
 get_certificates
 get_provisioning_profile
@@ -189,7 +189,7 @@ Slack으로 메시지를 보내는 메소드 설정을 커스텀하려면 `fastl
 
 `fastlane beta` 혹은 `fastlane release`를 실행하고나면 `ios/` 경로에 여러 파일들이 자동으로 생성되는데요, 원격 레파지토리에 올리지 않을 파일들은 `.gitignore` 파일에 추가하는 것을 잊지마세요. 저는 아래 항목들을 추가했습니다.
 
-```
+```t
 # fastlane outputs
 AppStore_com.*
 *.cer
