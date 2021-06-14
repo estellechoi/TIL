@@ -50,7 +50,7 @@ fastlane init
 <br>
 <br>
 
-셋업이 완료되면 `ios/` 경로에 다음 4개 파일이 생성되고요, 4개 파일은 `.gitignore`에 추가하지 않고 원격 디렉토리를 통해 공유될 수 있도록 합니다.
+셋업이 완료되면 `ios/` 경로에 다음 4개 파일이 생성되고요, 4개 파일은 `.gitignore`에 추가하지 않고 원격 레파지토리를 통해 공유될 수 있도록 합니다.
 
 - `fastlane/Appfile`
 - `fastlane/Fastfile`
