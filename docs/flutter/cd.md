@@ -111,7 +111,7 @@ team_id(ENV['TEAM_ID']) # Developer Portal Team ID
 
 ### 3) `Fastfile` 작성하기
 
-`Fastfile`은 실제 배포를 실행하는 커맨드들을 설정하는 파일입니다. 아래는 TestFlight에 베타 버전을 출시하는 예시입니다.
+`Fastfile`은 실제 배포를 실행하는 커맨드들을 설정하는 파일입니다. 아래는 TestFlight에 베타 버전을 출시하는 예시입니다. 진행 과정에서 Apple 계정의 앱 암호(`app-specific password`) 입력이 요구됩니다. 앱 암호는 Apple 계정 암호가 아닙니다. 앱 암호가 없다면 [Apple 계정관리](https://appleid.apple.com/account/manage)에서 생성한 후 진행하세요.
 
 ```ruby
 default_platform(:ios)
@@ -144,11 +144,7 @@ end
 
 <br>
 
-진행 과정에서 Apple 계정의 앱 암호(`app-specific password`) 입력이 요구됩니다. 앱 암호는 Apple 계정 암호가 아닙니다. 앱 암호가 없다면 [Apple 계정관리](https://appleid.apple.com/account/manage)에서 생성한 후 진행하세요.
-
-<br>
-
-위의 예시 파일 내용은 이렇습니다. `beta` 명령어를 실행하면,
+이제 Flutter 프로젝트의 `ios/` 경로에서 `beta` 명령어를 실행하면,
 
 ```t
 fastlane beta
@@ -156,7 +152,7 @@ fastlane beta
 
 <br>
 
-다음 명령어들이 실행되면서 TestFlight 출시가 진행되고, Slack에 출시 완료 메시지를 전송하도록 설정되어 있습니다. `send_slack` 외에는 모두 `fastlane`에서 제공하는 메소드입니다.
+다음 명령어들이 실행되면서 TestFlight 출시가 진행되고, Slack에 출시 완료 메시지가 전송됩니다. `send_slack` 외에는 모두 `fastlane`에서 제공하는 메소드입니다.
 
 ```ruby
 # 인증서, 프로비저닝 프로파일을 가져오기
@@ -410,7 +406,7 @@ end
 
 <br>
 
-`deploy` 명령어를 실행하면,
+이제 Flutter 프로젝트의 `android/` 경로에서 `deploy` 명령어를 실행하면,
 
 ```
 fastlane deploy
@@ -444,7 +440,7 @@ send_slack({ "version": new_version_code })
 
 <br>
 
-#### `increment_version_code`
+#### 버전 변경 `increment_version_code`
 
 `pubspec.yaml` 파일의 `version` 항목을 변경하는 `increment_version_code` 함수를 만들었고요, 앱 번들을 빌드하기 전에 실행합니다.
 
@@ -500,9 +496,9 @@ if (flutterVersionName == null) {
 
 <br>
 
-#### `sh "flutter build appbundle"`
+#### 앱 번들 빌드 `sh "flutter build appbundle"`
 
-Android 앱 빌드를 할 때는 `gradle()` 메소드를 사용하지만, `sh`를 사용하여 `flutter` 커맨드를 실행하도록 할 수 있습니다.
+Android 앱 빌드를 할 때는 `gradle()` 메소드를 사용하지만, `sh`를 사용하여 `flutter` 커맨드를 실행하도록 할 수 있습니다. 아래의 `flutter` 커맨드를 사용하면 Flutter 2.0의 Null Sound 체크와 `flutter pub get` 실행이 완료된 후 Gradle 빌드가 진행됩니다.
 
 ```ruby
 sh "flutter build appbundle"
@@ -518,7 +514,7 @@ gradle(task: "bundleRelease")
 
 <br>
 
-참고로 아래 명령어를 실행하여 `gradle()` 메소드의 사용 가능한 파라미터 목록을 확인할 수 있습니다.
+참고로 아래 명령어를 실행하여 `gradle()` 메소드의 사용 가능한 파라미터 목록을 확인할 수 있습니다. 출력된 내용 중 `gradle Options` 테이블을 참고하여 빌드 타입 등의 설정 값들을 넘겨줍니다. 참고로 2021년 8월부터 신규 앱은 Google Play에서 Android 앱 번들 형태로 게시해야 하고요, APK가 아닌 앱 번들 배포를 권유하고 있습니다. 앱 번들 빌드를 위해서는 `task` 파라미터의 값을 `assemble`이 아닌 `bundle`로 지정해야합니다.
 
 ```
 fastlane action gradle
@@ -526,13 +522,9 @@ fastlane action gradle
 
 <br>
 
-출력된 내용 중 `gradle Options` 테이블을 참고하여 빌드 타입 등의 설정 값들을 넘겨줍니다. 참고로 2021년 8월부터 신규 앱은 Google Play에서 Android 앱 번들 형태로 게시해야 하고요, APK가 아닌 앱 번들 배포를 권유하고 있습니다. 앱 번들 빌드를 위해서는 `task` 파라미터의 값을 `assemble`이 아닌 `bundle`로 지정해야합니다.
+#### Play Store 업로드 `upload`
 
-<br>
-
-#### `upload`
-
-`upload`는 `upload_to_play_store()` 메소드를 실행하는 함수입니다. `track` 파라미터의 값이 `internal`이면, `release_status` 파라미터의 값은 `draft`로 지정해야 업로드가 진행됩니다.
+`upload`는 `upload_to_play_store()` 메소드를 실행하는 함수입니다. `track` 파라미터의 값이 `internal`이면, `release_status` 파라미터의 값은 `draft`로 지정해야 업로드가 진행됩니다. 자세한 내용은 `fastlane` 공식문서의 [`upload_to_play_store`](https://docs.fastlane.tools/actions/upload_to_play_store/) 섹션을 참고하세요.
 
 ```ruby
 desc "Upload app bundle to the Google Play"
@@ -547,10 +539,6 @@ lane :upload do |options|
   )
 end
 ```
-
-<br>
-
-자세한 내용은 `fastlane` 공식문서의 [`upload_to_play_store`](https://docs.fastlane.tools/actions/upload_to_play_store/) 섹션을 참고하세요.
 
 <br>
 
