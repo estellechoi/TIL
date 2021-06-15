@@ -3,6 +3,8 @@
 <br>
 
 1. `fastlane` 셋업: Xcode CLT/`fastlane` 설치하기
+2. iOS 셋업하기
+3. Android 셋업하기
 
 <br>
 
@@ -199,7 +201,7 @@ Slack으로 메시지를 보내는 메소드 설정을 커스텀하려면 `fastl
 
 <br>
 
-### 3) `.gitignore` 세팅하기
+### 4) `.gitignore` 관리하기
 
 `fastlane beta` 혹은 `fastlane release`를 실행하고나면 `ios/` 경로에 여러 파일들이 자동으로 생성되는데요, 원격 레파지토리에 올리지 않을 파일들은 `.gitignore` 파일에 추가하는 것을 잊지마세요. 저는 아래 항목들을 추가했습니다.
 
