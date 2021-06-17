@@ -418,7 +418,7 @@ fastlane deploy
 
 <br>
 
-다음 명령어들이 차례로 실행되면서 Google Play Store의 내부 테스트 트랙으로 출시됩니다. `increment_version_code`, `upload`, `send_slack`은 직접 정의한 함수입니다.
+다음 명령어들이 차례로 실행되면서 Google Play Store의 내부 테스트 트랙으로 출시됩니다. [`increment_version_code`](#user-content-3-1-버전-변경-increment_version_code), [`upload`](#user-content-3-3-play-store-업로드-upload), `send_slack`은 직접 정의한 함수입니다.
 
 ```ruby
 # 내부 테스트 트랙
@@ -543,6 +543,12 @@ lane :upload do |options|
   )
 end
 ```
+
+<br>
+
+#### 3-4) Slack에 배포 완료 메시지 전송: `send_slack`
+
+iOS와 동일합니다. [`slack()` 메소드](#user-content--slack-메소드) 섹션을 참고하세요.
 
 <br>
 
