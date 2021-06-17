@@ -129,6 +129,7 @@ platform :ios do
     send_slack({ "version": version })
   end
 
+  desc "Send deploy notification to Slack"
   lane :send_slack do |options|
     slack(
       message: "iOS 앱이 TestFlight에 성공적으로 업로드 되었습니다.",
@@ -176,7 +177,16 @@ version = get_version_number
 
 # Slack에 배포 완료 메시지 전송
 send_slack({"version": version })
+```
 
+<br>
+
+#### \* `slack()` 메소드
+
+Slack으로 메시지를 보내는 메소드 설정을 커스텀하려면 `fastlane` 공식문서의 [slack](https://docs.fastlane.tools/actions/slack/) 섹션을 참고하시고요, `slack_url` 값은 [Slack Incoming Webhooks](https://api.slack.com/messaging/webhooks) URL을 생성한 후 지정합니다.
+
+```ruby
+desc "Send deploy notification to Slack"
 lane :send_slack do |options|
 slack(
     message: "iOS 앱이 TestFlight에 성공적으로 업로드 되었습니다.",
@@ -188,12 +198,6 @@ slack(
 )
 end
 ```
-
-<br>
-
-#### \* `slack()` 메소드
-
-Slack으로 메시지를 보내는 메소드 설정을 커스텀하려면 `fastlane` 공식문서의 [slack](https://docs.fastlane.tools/actions/slack/) 섹션을 참고하시고요, `slack_url` 값은 [Slack Incoming Webhooks](https://api.slack.com/messaging/webhooks) URL을 생성한 후 지정합니다.
 
 <br>
 
