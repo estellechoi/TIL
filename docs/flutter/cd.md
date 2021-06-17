@@ -311,7 +311,7 @@ fastlane run validate_play_store_json_key json_key:google_key.json
 <br>
 <br>
 
-`fastlane` 초기화가 완료되면 다음 파일들이 생성되고.
+`fastlane` 초기화가 완료되면 다음 파일들이 생성되고요,
 
 - `fastlane/Appfile`
 - `fastlane/Fastfile`
@@ -444,7 +444,7 @@ send_slack({ "version": new_version_code })
 
 <br>
 
-#### 버전 변경 `increment_version_code`
+#### 3-1) 버전 변경: `increment_version_code`
 
 `pubspec.yaml` 파일의 `version` 항목을 변경하는 `increment_version_code` 함수를 만들었고요, 앱 번들을 빌드하기 전에 실행합니다.
 
@@ -500,7 +500,7 @@ if (flutterVersionName == null) {
 
 <br>
 
-#### 앱 번들 빌드 `sh "flutter build appbundle"`
+#### 3-2) 앱 번들 빌드: `sh "flutter build appbundle"`
 
 Android 앱 빌드를 할 때는 `gradle()` 메소드를 사용하지만, `sh`를 사용하여 `flutter` 커맨드를 실행하도록 할 수 있습니다. 아래의 `flutter` 커맨드를 사용하면 Flutter 2.0의 Null Sound 체크와 `flutter pub get` 실행이 완료된 후 Gradle 빌드가 진행됩니다.
 
@@ -526,7 +526,7 @@ fastlane action gradle
 
 <br>
 
-#### Play Store 업로드 `upload`
+#### 3-3) Play Store 업로드: `upload`
 
 `upload`는 `upload_to_play_store()` 메소드를 실행하는 함수입니다. `track` 파라미터의 값이 `internal`이면, `release_status` 파라미터의 값은 `draft`로 지정해야 업로드가 진행됩니다. 자세한 내용은 `fastlane` 공식문서의 [`upload_to_play_store`](https://docs.fastlane.tools/actions/upload_to_play_store/) 섹션을 참고하세요.
 
