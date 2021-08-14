@@ -2,87 +2,43 @@
 
 <br>
 
-## Types
+## 1. Types
 
-### String
+### 1-1. Basics
 
 ```typescript
+// String
 const str: string = "hello world.";
-```
 
-<br />
-
-### Number
-
-```typescript
+// Number
 const num: number = 1;
-```
 
-<br />
-
-### Array
-
-```typescript
+// Array
 const nums: Array<number> = [1, 2, 3];
-```
-
-<br />
-
-```typescript
 const strs: Array<string> = ["1", "2", "3"];
-```
-
-<br />
-
-```typescript
 const secNums: number[] = [1, 2, 3];
-```
-
-<br />
-
-```typescript
 const tupl: [string, number] = ["1", 2];
-```
 
-<br />
-
-### Object
-
-```typescript
+// Object
 const obj: object = {};
-```
-
-<br />
-
-```typescript
 const person: object = {
 	name: "Yujin",
 	age: 29,
 };
-```
-
-<br />
-
-```typescript
 const person: { name: string; age: number } = {
 	name: "Yujin",
 	age: 29,
 };
-```
 
-<br />
-
-### Boolean
-
-```typescript
+// Boolean
 const show: boolean = true;
 ```
 
 <br />
 
-### Parameters and Return
+### 1-2. Parameters and Return Type
 
-#### Basic
+#### Typed Parameters
 
 - Not only type but the number of parameters is limited automatically.
 
@@ -134,7 +90,7 @@ function print(): string {
 
 <br />
 
-### Any
+### 1-3. Any
 
 - Type is decided on runtime with `any` type given. If the value for `noImplicitAny` property in `tsconfig.json` file, `any` type is not available unless specified explicitly.
 
@@ -148,13 +104,28 @@ val = [1, 2];
 
 <br />
 
-### Void
+### 1-4. Void
 
 - `void` means the function returns nothing.
 
 ```typescript
 function logSomething(str: string): void {
 	console.log(str);
+}
+```
+
+<br />
+
+## 2.`tsconfig.json`
+
+```tsconfig.json
+{
+	"compilerOptions": {
+		"allowJS": false,
+		"checkJS": true,
+		"noImplicitAny": true
+	},
+	"include": ["./src/**/*.ts"]
 }
 ```
 
