@@ -629,7 +629,7 @@ printUser("createdAt"); // Error !
 
 <br />
 
-### 10-2. For Vue3 Projects
+### 10-2. Vue3 Projects' `tsconfig` Example
 
 ```json
 {
