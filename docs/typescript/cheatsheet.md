@@ -873,9 +873,34 @@ stringTest = numberTest; // Error !
 
 <br />
 
-## 14.`tsconfig.json`
+## 14. Interface as a Module - Import & Export in TypeScript
 
-### 14-1. Basics
+Interface can be exported and imported like a variable of function.
+
+```typescript
+// user.ts
+export interface User {
+	id: string;
+	name: string;
+}
+```
+
+<br />
+
+```typescript
+// index.ts
+import { User } from "./user.ts";
+
+class Test extends User {
+	// ..
+}
+```
+
+<br />
+
+## 15.`tsconfig.json`
+
+### 15-1. Basics
 
 - `noImplicitAny` : All types must be always specified, even `any`.
 
@@ -902,7 +927,7 @@ stringTest = numberTest; // Error !
 
 <br />
 
-### 14-2. Vue3 Projects' `tsconfig` Example
+### 15-2. Vue3 Projects' `tsconfig` Example
 
 ```json
 {
