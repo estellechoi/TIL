@@ -600,6 +600,20 @@ printUser("createdAt"); // Error !
 
 <br />
 
+### 9-7. Generics for Functions Returning `Promise`
+
+This is how to type the functions calling API like [Axios](https://axios-http.com/docs/intro) methods.
+
+```typescript
+function fetchNames(): Promise<string[]> {
+	return new Promise((resolve) => resolve(["Estelle", "Hailey"]));
+}
+
+fetchNames();
+```
+
+<br />
+
 ## 10.`tsconfig.json`
 
 ### 10-1. Basics
