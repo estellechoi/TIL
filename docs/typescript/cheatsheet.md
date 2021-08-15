@@ -510,7 +510,7 @@ const reversedValue: string = reverseString(value);
 
 <br />
 
-### 9-2. Union Type
+### 9-2. Generics vs. Union Type
 
 What if we don't have generics syntax and just use union type to allow more than one type?
 
@@ -530,6 +530,72 @@ const value: string | number = printValue("Hello World.");
 
 // Type check is needed
 if (typeof value === "string") reversedValue = reverseString(value);
+if (typeof value === "number") reversedValue = reverseString(value + "");
+```
+
+<br />
+
+### 9-3. Generics in Interface
+
+```typescript
+interface DropdownItem<T> {
+	value: T;
+	selected: boolean;
+}
+
+const item: DropdownItem<string> = { value: "Estelle", selected: false };
+```
+
+<br />
+
+### 9-4. Generics for Array
+
+```typescript
+function printTextLength<T>(arr: <T>[]): <T>[] {
+	console.log(arr.length); // `length` is allowed as arr is an array type param.
+	arr.forEach(item => console.log(item));
+	return arr;
+}
+
+printTextLength<string>(["Estelle", "Hailey"]); // 2
+```
+
+<br />
+
+### 9-5. Generics Extending Interface with Typed Properties
+
+```typescript
+interface Length {
+	length: number;
+}
+
+function printTextLength<T extends Length>(text: T): T {
+	console.log(text.length);
+	return text;
+}
+
+printTextLength<string>("Estelle"); // 7
+printTextLength<number>(123); // Error ! Number type has no `length` prop.
+```
+
+<br />
+
+### 9-6. Generics Limited to Keys of Interface with `keyof` word
+
+```typescript
+interface User {
+	name: string;
+	age: number;
+	isVip: boolean;
+}
+
+function printUserOption<T extends keyof User>(key: T): T {
+	console.log(key);
+	return key;
+}
+
+printUser("name");
+printUser("createdAt"); // Error !
 ```
 
 <br />
