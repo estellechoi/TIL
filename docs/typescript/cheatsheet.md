@@ -875,7 +875,7 @@ stringTest = numberTest; // Error !
 
 ## 14. Interface as a Module - Import & Export in TypeScript
 
-Interface can be exported and imported like a variable of function.
+Interface can be exported and imported like a variable or function in JavaScript.
 
 ```typescript
 // user.ts
