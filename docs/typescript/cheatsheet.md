@@ -38,9 +38,9 @@ const show: boolean = true;
 
 ### 1-2. Parameters and Return Type
 
-#### Typed Parameters
+#### 1) Typed Parameters
 
-- Not only type but the number of parameters is limited automatically.
+- Not only type but the number of parameters is also limited.
 
 ```typescript
 function sum(a: number, b: number): number {
@@ -50,9 +50,7 @@ function sum(a: number, b: number): number {
 
 <br />
 
-#### Type Inference
-
-- Type inferenced with typed parameters
+Returning type is inferenced from typed parameters, if not specified.
 
 ```typescript
 function sum(a: number, b: number) {
@@ -62,9 +60,9 @@ function sum(a: number, b: number) {
 
 <br />
 
-#### Optional Parameters
+#### 2) Optional Parameters
 
-- Parameters optional
+Parameters can be optional.
 
 ```typescript
 function log(a: string, b?: string, c?: string) {
@@ -72,18 +70,16 @@ function log(a: string, b?: string, c?: string) {
 }
 
 log("hello");
-
 log("hello", "world");
-
 log("hello", "world", "!");
 ```
 
 <br />
 
-#### Typed Return
+#### 3) Return Type
 
 ```typescript
-function print(): string {
+function getString(): string {
 	return "hello world.";
 }
 ```
@@ -614,9 +610,269 @@ fetchNames();
 
 <br />
 
-## 10.`tsconfig.json`
+## 10. Type Inference
 
 ### 10-1. Basics
+
+Type is inferenced when a variable is declared or initialized.
+
+```typescript
+let value = 7; // value: number
+
+// getValue(value :?number): number
+function getValue(value = 10) {
+	return value;
+}
+```
+
+<br />
+
+### 10-2. Type Inference in Interface with Generics
+
+The type of interface properties typed with `T`(Generics) is inferenced.
+
+```typescript
+interface DropdownItem<T> {
+	value: T;
+	label: string;
+	selected: boolean;
+}
+
+const item: DropdownItem<string> = {
+	value: "Estelle", // value: string - type inference
+	label: "Estelle",
+	selected: false,
+};
+```
+
+<br />
+
+A more complicated example is following.
+
+```typescript
+interface DropdownItem<T> {
+	id: string;
+	label: string;
+	value: T;
+}
+
+interface DropdownItemStatus<K> extends DropdownItem<K> {
+	selected: boolean;
+	tag: K;
+}
+
+const dropdownItem: DropdownItemStatus<string> = {
+	id: "dfjdikfalkdflskdjfk",
+	label: "Sunday",
+	value: "SUN", // type inference
+	selected: false,
+	tag: "SUN", // type inference
+};
+```
+
+<br />
+
+### 10-3. Best Common Type
+
+For type mixed arrays, union type is used.
+
+```typescript
+const arr = [0, 1, 2]; // arr: number[]
+const arr = [0, 1, "2"]; // arr: (number | string)[]
+```
+
+<br />
+
+## 11. Type Assertion
+
+Developers can assert the type of a variable since they are actuall coders and designers, which means they sometimes know more than TypeScript does.
+
+```typescript
+let a;
+a = "Hello World";
+a = 10;
+const b = a as number;
+```
+
+<br />
+
+This is useful mostly when developers use DOM APIs. For example like below, the `itemNode` could be `HTMLDivElement` as type-inferenced, but also could be `null` if the DOM node does not exist. So the finally inferenced type is `HTMLDivElement | null`, a union type. Accordingly, `if` check is needed.
+
+```typescript
+const itemNode = document.querySelector("div"); // HTMLDivElement | null
+if (itemNode) itemNode.innerText = "Item";
+```
+
+<br />
+
+However, if developers are certain that a node EXIST, they would assert the type like below, with `as HTMLDivElement`. Then, `if` check is no more needed.
+
+```typescript
+const itemNode = document.querySelector("div") as HTMLDivElement;
+itemNode.innerText = "Item";
+```
+
+<br />
+
+## 12. Type Guard Function
+
+Type Guard function is a function returning `boolean` type value to tell if the type of a parameter is something or not. An example is following.
+
+```typescript
+enum City {
+	Seoul = "Seoul",
+	Tokyo = "Tokyo",
+}
+
+interface User {
+	id: string;
+	name: string;
+}
+
+interface Admin extends User {
+	office: City;
+}
+```
+
+<br />
+
+Type Guard function is mostly named with `is` prefix.
+
+```typescript
+// Type Guard Function
+function isAdminUser(target: User | Admin): target is Admin {
+	return (target as Admin).office !== undefined; // true or false
+}
+
+const user = { id: "sjdikflskd", name: "Estelle", office: "Seoul" };
+if (isAdminUser(user)) {
+	console.log("Office : ", user.office);
+}
+```
+
+<br />
+
+## 13. Type Compatibility
+
+### 13-1. Basics
+
+Type compatibility is based on structural typing. For type compatibility, the type of a value that you try to assign must be inclusive of all the properties of the interfaced type of the variable which will be assigned with the value.
+
+<br />
+
+```typescript
+class User {
+	id: string;
+	name: string;
+}
+
+interface Admin {
+	id: string;
+	name: string;
+}
+
+let admin: Admin;
+admin = new User(); // structural typing
+```
+
+<br />
+
+If not inclusive of all, an error will be thrown.
+
+```typescript
+interface User {
+	id: string;
+	name: string;
+}
+
+interface Admin {
+	name: string;
+}
+
+let user: User;
+let admin: Admin;
+user = admin; // Error ! `admin` doesn't include `id` property.
+```
+
+<br />
+
+### 13-2. Functions' Type Compatibility
+
+`sum2` function is inclusive of `sum2` function.
+
+```typescript
+const sum1 = function (a: number) {
+	// ..
+};
+
+const sum2 = function (a: number, b: number) {
+	// ..
+};
+```
+
+<br />
+
+```typescript
+sum1 = sum2; // Error !
+```
+
+<br />
+
+```typescript
+sum2 = sum1; // Compatible
+```
+
+<br />
+
+### 13-3. Generics' Type Compatibility
+
+Differently typed generics are type-compatible if they are empty, since the type for `T` is decided on runtime.
+
+```typescript
+interface Test<T> {
+	// ..
+}
+
+const stringTest: Test<string>;
+const numberTest: Test<number>;
+```
+
+<br />
+
+```typescript
+stringTest = numberTest; // stringTest: Test<number>
+```
+
+<br />
+
+```typescript
+numberTest = stringTest; // numberTest: Test<string>
+```
+
+<br />
+
+However, if the interfaced type has any property typed with generics, it will not be type-compatible. Because the type of the property is decided when developers assign a type for the generics.
+
+```typescript
+interface Test<T> {
+	value: T;
+}
+
+const stringTest: Test<string>;
+const numberTest: Test<number>;
+```
+
+<br />
+
+```typescript
+stringTest = numberTest; // Error !
+```
+
+<br />
+
+## 14.`tsconfig.json`
+
+### 14-1. Basics
 
 - `noImplicitAny` : All types must be always specified, even `any`.
 
@@ -643,7 +899,7 @@ fetchNames();
 
 <br />
 
-### 10-2. Vue3 Projects' `tsconfig` Example
+### 14-2. Vue3 Projects' `tsconfig` Example
 
 ```json
 {
