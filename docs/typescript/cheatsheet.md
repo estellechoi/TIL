@@ -590,22 +590,24 @@ function printUserOption<T extends keyof User>(key: T): T {
 	return key;
 }
 
-printUser("name");
-printUser("createdAt"); // Error !
+printUserOption("name");
+printUserOption("createdAt"); // Error !
 ```
 
 <br />
 
 ### 9-7. Generics for Functions Returning `Promise`
 
-This is how to type the functions calling API like [Axios](https://axios-http.com/docs/intro) methods.
+Generics is used for the functions returning `Promise`, which are mostly the functions calling API like [Axios](https://axios-http.com/docs/intro) methods.
 
 ```typescript
 function fetchNames(): Promise<string[]> {
 	return new Promise((resolve) => resolve(["Estelle", "Hailey"]));
 }
 
-fetchNames();
+fetchNames().then((res) => {
+	// ..
+});
 ```
 
 <br />
@@ -674,7 +676,7 @@ const dropdownItem: DropdownItemStatus<string> = {
 
 ### 10-3. Best Common Type
 
-For type mixed arrays, union type is used.
+For type mixed arrays, union typing is used.
 
 ```typescript
 const arr = [0, 1, 2]; // arr: number[]
@@ -685,7 +687,7 @@ const arr = [0, 1, "2"]; // arr: (number | string)[]
 
 ## 11. Type Assertion
 
-Developers can assert the type of a variable since they are actuall coders and designers, which means they sometimes know more than TypeScript does.
+Developers can assert the type of a variable since they are actual coders and designers, which means they sometimes know more than TypeScript does.
 
 ```typescript
 let a;
@@ -696,7 +698,7 @@ const b = a as number;
 
 <br />
 
-This is useful mostly when developers use DOM APIs. For example like below, the `itemNode` could be `HTMLDivElement` as type-inferenced, but also could be `null` if the DOM node does not exist. So the finally inferenced type is `HTMLDivElement | null`, a union type. Accordingly, `if` check is needed.
+This would be useful mostly when developers use DOM APIs. For example like below, the `itemNode` could be `HTMLDivElement` as type-inferenced, but also could be `null` if the DOM node does not exist. So the final inferenced type is `HTMLDivElement | null`, a union type. So accordingly, `if` check is needed for type filtering.
 
 ```typescript
 const itemNode = document.querySelector("div"); // HTMLDivElement | null
@@ -705,7 +707,7 @@ if (itemNode) itemNode.innerText = "Item";
 
 <br />
 
-However, if developers are certain that a node EXIST, they would assert the type like below, with `as HTMLDivElement`. Then, `if` check is no more needed.
+However, if developers are certain that a node EXIST, they can assert the type with `as HTMLDivElement` word, like below. In this case, `if` check is no more needed since the type of `itemNode` has been asserted to be `HTMLDivElement`.
 
 ```typescript
 const itemNode = document.querySelector("div") as HTMLDivElement;
@@ -716,7 +718,7 @@ itemNode.innerText = "Item";
 
 ## 12. Type Guard Function
 
-Type Guard function is a function returning `boolean` type value to tell if the type of a parameter is something or not. An example is following.
+Type Guard function is a function returning `boolean` value to tell if the type of a parameter is the one you want or not. An example is following.
 
 ```typescript
 enum City {
@@ -736,7 +738,7 @@ interface Admin extends User {
 
 <br />
 
-Type Guard function is mostly named with `is` prefix.
+Type Guard functions are mostly named with `is-` prefix to implicit it will return a `boolean` type value.
 
 ```typescript
 // Type Guard Function
@@ -745,8 +747,9 @@ function isAdminUser(target: User | Admin): target is Admin {
 }
 
 const user = { id: "sjdikflskd", name: "Estelle", office: "Seoul" };
+
 if (isAdminUser(user)) {
-	console.log("Office : ", user.office);
+	// ..
 }
 ```
 
@@ -798,7 +801,7 @@ user = admin; // Error ! `admin` doesn't include `id` property.
 
 ### 13-2. Functions' Type Compatibility
 
-`sum2` function is inclusive of `sum2` function.
+`sum2` function is inclusive of `sum1` function.
 
 ```typescript
 const sum1 = function (a: number) {
@@ -826,7 +829,7 @@ sum2 = sum1; // Compatible
 
 ### 13-3. Generics' Type Compatibility
 
-Differently typed generics are type-compatible if they are empty, since the type for `T` is decided on runtime.
+Two variables with differently typed generics are type-compatible, if the interface they share is empty, since the type for `T` will be decided on runtime.
 
 ```typescript
 interface Test<T> {
@@ -851,7 +854,7 @@ numberTest = stringTest; // numberTest: Test<string>
 
 <br />
 
-However, if the interfaced type has any property typed with generics, it will not be type-compatible. Because the type of the property is decided when developers assign a type for the generics.
+However, if the interface type has any property typed with generics, the two variales will not be type-compatible. Because, the type of the property is decided when developers assign a type for the generics before runtime.
 
 ```typescript
 interface Test<T> {
