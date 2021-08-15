@@ -132,7 +132,7 @@ function postUser(user: User) {
 	// ..
 }
 
-const user: User = fetchUser(id);
+postUser({ name: "Estelle", age: 27 });
 ```
 
 <br />
@@ -251,10 +251,10 @@ const user: Person = {
 
 <br />
 
-Type Alias is literally just naming types, not creating types and not extendable with `extends` word unlike interface.
+Type Alias is literally just naming types, not an interface, which means it is not extendable with `extends` word.
 
 ```typescript
-// User is extendable as it is an interface, a customized type
+// User is extendable since it is an interface
 interface VipUser extends User {
 	agreeMarketing: boolean;
 }
@@ -275,19 +275,19 @@ const vipUser: VipUser = {
 Union type allows more than one type.
 
 ```typescript
-function updateValue(value: string | number) {
+function printInformation(value: string | number) {
 	// Type Filtering
-	if (typeof value === "string") console.log("name updated : ", value);
-	if (typeof value === "number") console.log("age updated : ", value);
+	if (typeof value === "string") console.log("Name : ", value);
+	if (typeof value === "number") console.log("Age : ", value);
 }
 
-updateValue("Estelle");
-updateValue(27);
+printInformation("Estelle");
+printInformation(27);
 ```
 
 <br />
 
-### 5-2. Interface
+### 5-2. Interface Union Type
 
 ```typescript
 interface User {
@@ -303,9 +303,11 @@ interface VipUser extends User {
 
 <br />
 
+`VipUser` interface has `name` and `age` properties implicitly since it extends `User`.
+
 ```typescript
-function updateUser(user: User | VipUser) {
-	// Common properties can get a value without filtering type.
+function printUser(user: User | VipUser) {
+	// Can access common properties without filtering type.
 	console.log("Name : ", user.name);
 	console.log("Age : ", user.age);
 
@@ -316,8 +318,8 @@ function updateUser(user: User | VipUser) {
 	}
 }
 
-updateUser({ name: "Estelle", age: 27 });
-updateUser({
+printUser({ name: "Estelle", age: 27 });
+printUser({
 	name: "Estelle",
 	age: 27,
 	agreeMarketing: true,
@@ -344,12 +346,14 @@ interface Admin {
 
 <br />
 
+In this case, `name`, `age` and `office` properties are required.
+
 ```typescript
-function updateUser(user: User & Admin) {
-	// Common properties can get a value without filtering type.
+function printAdminUser(user: User & Admin) {
+	// ..
 }
 
-updateUser({
+printAdminUser({
 	name: "Estelle",
 	age: 27,
 	office: "Barcelona",
@@ -362,7 +366,7 @@ updateUser({
 
 ### 7-1. Basics
 
-Enum is a group of pre-defined values.
+Enum is a group of pre-defined values. The default value of an enum member is `0`, and it is `number` typed.
 
 ```typescript
 enum City {
@@ -376,7 +380,7 @@ console.log(office); // 0
 
 <br />
 
-Enum members get number type `0` value if not initialized with specific value.
+Initialize members if needed like below.
 
 ```typescript
 enum City {
@@ -398,15 +402,16 @@ enum City {
 	Tokyo = "Tokyo",
 }
 
-function fetchFlightByCity(city: City {
+// The values defined in City enum are the only ones allowed as a parameter.
+function printDepartureByCity(city: City {
 	switch (city) {
 		case City.Seoul: console.log("Depart at 10:00"); break;
 		case City.Tokyo: console.log("Depart at 21:00"); break;
 	}
 })
 
-fetchFlightByCity(City.Seoul); // "Depart at 10:00"
-fetchFlightByCity("Barcelona"); // Error !
+printDepartureByCity(City.Seoul); // "Depart at 10:00"
+printDepartureByCity("Barcelona"); // Error !
 ```
 
 <br />
@@ -415,7 +420,7 @@ fetchFlightByCity("Barcelona"); // Error !
 
 ### 8-1. JavaScript `class` Basics
 
-Constructor functions are replacable with `class` syntax.
+Constructor functions are replacable with `class` syntax since ES6.
 
 ```javascript
 class User {
@@ -431,7 +436,7 @@ const user = new User("Estelle", 27); // "User instance created"
 
 <br />
 
-Nothing different fundamentally. Just syntax.
+Nothing different fundamentally. Just syntax diff.
 
 ```javascript
 function User(name, age) {
@@ -463,8 +468,8 @@ console.log(admin.age); // 27
 
 ### 8-3. `class` with TypeScript
 
-- Properties must be typed before constructor.
-- Properties have different accessabilities.
+- Properties must be typed and declared before constructor works.
+- Properties have different accessabilities(`readonly`/`private`/`public`).
 
 ```typescript
 class User {
@@ -483,16 +488,48 @@ class User {
 
 ## 9. Generics
 
+### 9-1. Basics
+
 Any type is acceptable and the late-given type will work for any `T` position.
 
 ```typescript
-function printUser<T>(user: T): T {
-	console.log(user);
-	return user;
+function printValue<T>(value: T): T {
+	console.log(value);
+	return value;
 }
 
-printUser<User>(user);
-printUser<Admin>(admin);
+function reverseString(value: string) {
+	return value.split("").reverse().join("");
+}
+
+// Returning type is fixed when calling the function.
+const value: string = printValue<string>("Hello World.");
+
+const reversedValue: string = reverseString(value);
+```
+
+<br />
+
+### 9-2. Union Type
+
+What if we don't have generics syntax and just use union type to allow more than one type?
+
+```typescript
+let reversedValue: string = "";
+
+function printValue(value: string | number) {
+	console.log(value);
+	return value;
+}
+
+function reverseString(value: string) {
+	return value.split("").reverse().join("");
+}
+
+const value: string | number = printValue("Hello World.");
+
+// Type check is needed
+if (typeof value === "string") reversedValue = reverseString(value);
 ```
 
 <br />
