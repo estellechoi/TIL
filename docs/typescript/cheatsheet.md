@@ -604,12 +604,24 @@ printUser("createdAt"); // Error !
 
 ### 10-1. Basics
 
+- `noImplicitAny` : All types must be always specified, even `any`.
+
+- `strict`: Strict type check gets on.
+
+- `strictFunctionTypes` : Strict type check for functions gets on, included in `strict` option if it gets `true`.
+
+<br />
+
 ```json
 {
 	"compilerOptions": {
 		"allowJS": false,
 		"checkJS": true,
-		"noImplicitAny": true // any 타입이라도 명시
+		"target": "es5",
+		"lib": ["es2015", "dom", "dom.iterable"],
+		"noImplicitAny": true,
+		"strict": true,
+		"strictFunctionTypes": true
 	},
 	"include": ["./src/**/*.ts"]
 }
@@ -617,7 +629,7 @@ printUser("createdAt"); // Error !
 
 <br />
 
-### 10-2. For Vue3
+### 10-2. For Vue3 Projects
 
 ```json
 {
@@ -651,6 +663,8 @@ printUser("createdAt"); // Error !
 	"exclude": ["node_modules"]
 }
 ```
+
+<br />
 
 <br />
 
