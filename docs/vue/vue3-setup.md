@@ -78,8 +78,15 @@ vue create project-name
 
 <br>
 
+그리고 프로젝트 셋업 시작. 아래는 제가 셋업하면서 선택한 옵션들입니다.
+
 <img src="./../img/vue3-setup-1.png"  />
 <img src="./../img/vue3-setup-2.png"  />
+
+<br>
+
+아래 질문에 `3.x`를 선택하여 Vue3 프로젝트를 생성해주세요.
+
 <img src="./../img/vue3-setup-3.png"  />
 <img src="./../img/vue3-setup-4.png"  />
 <img src="./../img/vue3-setup-5.png"  />
