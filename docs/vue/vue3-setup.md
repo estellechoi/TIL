@@ -163,8 +163,24 @@ cd project-name
 
 <br>
 
+## 4. `shims-vue.d.ts`
+
+`src/shims-vue.d.ts` 파일은 TypeScript가 Vue 문법을 어떻게 해석해야하는지 명시하는 파일입니다. 예를 들어, `.ts` 파일 내에서 `.vue` 포맷의 파일을 임포트하려는 경우, 이 파일의 타입을 어떻게 해석해야하는지 정의합니다.
+
+```typescript
+/* eslint-disable */
+declare module "*.vue" {
+	import type { DefineComponent } from "vue";
+	const component: DefineComponent<{}, {}, any>;
+	export default component;
+}
+```
+
+<br>
+
 ---
 
 ### References
 
 - [Installation | Vue.js](https://v3.vuejs.org/guide/installation.html#release-notes)
+- [Intro to the TSConfig Reference | TypeScript](https://www.typescriptlang.org/tsconfig)
