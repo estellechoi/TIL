@@ -183,4 +183,5 @@ declare module "*.vue" {
 ### References
 
 - [Installation | Vue.js](https://v3.vuejs.org/guide/installation.html#release-notes)
+- [Vue3 Migration Guide | Vue.js](https://v3.vuejs.org/guide/migration/introduction.html)
 - [Intro to the TSConfig Reference | TypeScript](https://www.typescriptlang.org/tsconfig)
