@@ -2,55 +2,11 @@
 
 🌎 Today I learned
 
-> `*`-marked item is under revision.
+> `*`-marked item is under research or revision, so it would be fine NOT TO READ it.
 
 <br>
 
-### Articles
-
-- [All You Need To Know About CSS-in-JS](https://medium.com/better-programming/all-you-need-to-know-about-css-in-js-984a72d48ebc)
-- [ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?](https://gomugom.github.io/is-class-only-a-syntactic-sugar/)
-- [자바스크립트의 메모리관리 | MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
-- [How JavaScript works: memory management + how to handle 4 common memory leaks](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
-
-<br>
-
-### Flutter
-
-- [Flutter setup for Mac OS](./docs/flutter/setup.md)
-- [Flutter 튜토리얼 1 : Stateful/Stateless 위젯, 무한 스크롤, 콜백](./docs/flutter/basics1.md)
-- [Flutter 튜토리얼 2 : 아이콘, `Navigator` 라우팅, `ThemeData` 위젯으로 테마 설정](./docs/flutter/basics2.md)
-- [Stateful/Stateless 위젯](./docs/flutter/stful.md)
-- [Flutter 위젯(Widget)](./docs/flutter/widgets.md)
-- [Flutter 라우팅(Routing)](./docs/flutter/route.md)
-- [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](./docs/flutter/deploy.md)
-- [Flutter 프로젝트를 Android 앱으로 배포하기](./docs/flutter/deploy_android.md)
-- [Flutter 앱에서 Firebase를 사용하여 Sign in with Apple 구현하기](./docs/flutter/social_login.md)
-- [Flutter 앱에서 Firebase를 사용하여 Sign in with Google 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md)
-- [Flutter 앱에서 Apple HealthKit, Google Fit, Samsung Health 데이터 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md)
-- [Flutter 앱에서 푸시 알림 구현하기 : FCM(Firebase Cloud Messaging) + APN(Apple Push Notification) / Android](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
-- [Flutter에서 `provider`로 App State 관리하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/state.md)
-- [Fastlane을 사용하여 Flutter iOS/Android 앱 배포 자동화하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/cd.md)
-
-<br>
-
-### Vue
-
-- [Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
-
-<br>
-
-### TypeScript
-
-- [TypeScript Cheat Sheet](./docs/typescript/cheatsheet.md)
-
-<br>
-
-### WebGL
-
-- [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
-
-<br>
+## Web Front-end
 
 ### HTML
 
@@ -100,16 +56,11 @@
 
 <br>
 
-### Web API
+### DOM & Web API
 
 - [Intersection Observer API](https://github.com/estellechoi/TIL/blob/master/docs/web-api/IntersectionObserver.md)
 - [File API - 웹에서 파일 다루기](https://github.com/estellechoi/TIL/blob/master/docs/web-api/howToUsefiles.md)
 - [이벤트 전파와 이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/docs/web-api/event.md)
-
-<br>
-
-### DOM
-
 - [To read about DOM](https://github.com/estellechoi/TIL/blob/master/docs/Dom/toRead.md)
 - [DOM (Document Object Model)](https://github.com/estellechoi/TIL/blob/master/docs/Dom/dom.md)
 - [Events and the DOM](https://github.com/estellechoi/TIL/blob/master/docs/Dom/domEvent.md)
@@ -118,11 +69,52 @@
 
 <br>
 
+### TypeScript
+
+- [TypeScript Cheat Sheet](./docs/typescript/cheatsheet.md)
+
+<br>
+
+### Vue
+
+- [Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
+
+<br>
+
+### WebGL
+
+- [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
+
+<br>
+
 ### Image
 
 - [웹을 위한 이미지(Image)](https://github.com/estellechoi/TIL/blob/master/docs/image/types.md)
 
 <br>
+
+## Mobile App Front-end
+
+### Flutter
+
+- [Flutter setup for Mac OS](./docs/flutter/setup.md)
+- [Flutter 튜토리얼 1 : Stateful/Stateless 위젯, 무한 스크롤, 콜백](./docs/flutter/basics1.md)
+- [Flutter 튜토리얼 2 : 아이콘, `Navigator` 라우팅, `ThemeData` 위젯으로 테마 설정](./docs/flutter/basics2.md)
+- [Stateful/Stateless 위젯](./docs/flutter/stful.md)
+- [Flutter 위젯(Widget)](./docs/flutter/widgets.md)
+- [Flutter 라우팅(Routing)](./docs/flutter/route.md)
+- [Flutter 프로젝트를 iOS 앱으로 배포하기 : 앱 ID, 프로비저닝 프로파일, APNs, 미국 수출 규정](./docs/flutter/deploy.md)
+- [Flutter 프로젝트를 Android 앱으로 배포하기](./docs/flutter/deploy_android.md)
+- [Flutter 앱에서 Firebase를 사용하여 Sign in with Apple 구현하기](./docs/flutter/social_login.md)
+- [Flutter 앱에서 Firebase를 사용하여 Sign in with Google 구현하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/google_sign_in.md)
+- [Flutter 앱에서 Apple HealthKit, Google Fit, Samsung Health 데이터 가져오기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/healthkit.md)
+- [Flutter 앱에서 푸시 알림 구현하기 : FCM(Firebase Cloud Messaging) + APN(Apple Push Notification) / Android](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
+- [Flutter에서 `provider`로 App State 관리하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/state.md)
+- [Fastlane을 사용하여 Flutter iOS/Android 앱 배포 자동화하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/cd.md)
+
+<br>
+
+## Etc
 
 ### HTTP
 
@@ -168,3 +160,14 @@
 ### Markdown
 
 - [마크다운(Markdown) 파일 작성법](https://github.com/estellechoi/TIL/blob/master/docs/markdown/grammar.md)
+
+<br>
+
+## Reference
+
+### Articles Referenced
+
+- [All You Need To Know About CSS-in-JS](https://medium.com/better-programming/all-you-need-to-know-about-css-in-js-984a72d48ebc)
+- [ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?](https://gomugom.github.io/is-class-only-a-syntactic-sugar/)
+- [자바스크립트의 메모리관리 | MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
+- [How JavaScript works: memory management + how to handle 4 common memory leaks](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
