@@ -78,7 +78,7 @@ vue create project-name
 
 <br>
 
-프로젝트 셋업 시작. 아래는 제가 셋업하면서 선택한 옵션들입니다.
+프로젝트 생성 시작. 아래는 제가 `@vue/cli`의 `create` 프로세스를 따르면서 선택한 옵션들입니다.
 
 <img src="./../img/vue3-setup-1.png"  />
 
