@@ -15,12 +15,6 @@
 
 <br>
 
-### Algorithm
-
-- [시간복잡도(Time Complexity)](./docs/algorithm/time-complexity.md)
-
-<br>
-
 ### Flutter
 
 - [Flutter setup for Mac OS](./docs/flutter/setup.md)
@@ -37,6 +31,12 @@
 - [Flutter 앱에서 푸시 알림 구현하기 : FCM(Firebase Cloud Messaging) + APN(Apple Push Notification) / Android](https://github.com/estellechoi/TIL/blob/master/docs/flutter/apn.md)
 - [Flutter에서 `provider`로 App State 관리하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/state.md)
 - [Fastlane을 사용하여 Flutter iOS/Android 앱 배포 자동화하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/cd.md)
+
+<br>
+
+### Vue
+
+- [Vue3 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
 
 <br>
 
@@ -146,6 +146,12 @@
 ### Security
 
 - Cross site scripting (XSS) \*
+
+<br>
+
+### Algorithm
+
+- [시간복잡도(Time Complexity)](./docs/algorithm/time-complexity.md)
 
 <br>
 
