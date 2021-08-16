@@ -78,16 +78,16 @@ vue create project-name
 
 <br>
 
-<img src="./../img/vue3-setup-1.png" width="400" />
-<img src="./../img/vue3-setup-2.png" width="400" />
-<img src="./../img/vue3-setup-3.png" width="400" />
-<img src="./../img/vue3-setup-4.png" width="400" />
-<img src="./../img/vue3-setup-5.png" width="400" />
-<img src="./../img/vue3-setup-6.png" width="400" />
-<img src="./../img/vue3-setup-7.png" width="400" />
-<img src="./../img/vue3-setup-8.png" width="400" />
-<img src="./../img/vue3-setup-9.png" width="400" />
-<img src="./../img/vue3-setup-10.png" width="400" />
+<img src="./../img/vue3-setup-1.png"  />
+<img src="./../img/vue3-setup-2.png"  />
+<img src="./../img/vue3-setup-3.png"  />
+<img src="./../img/vue3-setup-4.png"  />
+<img src="./../img/vue3-setup-5.png"  />
+<img src="./../img/vue3-setup-6.png"  />
+<img src="./../img/vue3-setup-7.png"  />
+<img src="./../img/vue3-setup-8.png"  />
+<img src="./../img/vue3-setup-9.png"  />
+<img src="./../img/vue3-setup-10.png"  />
 
 <br>
 
