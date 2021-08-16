@@ -108,6 +108,61 @@ vue create project-name
 
 <br>
 
+## 3. `package.json`
+
+프로젝트 생성이 완료되면 다음 명령어를 사용하여 프로젝트 루트 경로로 이동합니다.
+
+```
+cd project-name
+```
+
+<br>
+
+`package.json` 파일을 확인해보면, `@vue/cli`를 사용하여 프로젝트 생성시 선택했던 옵션에 따라 기본 셋업이 되어있습니다.
+
+```json
+{
+	"name": "project-name",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"core-js": "^3.6.5",
+		"register-service-worker": "^1.7.1",
+		"vue": "^3.0.0",
+		"vue-router": "^4.0.0-0",
+		"vuex": "^4.0.0-0"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.18.0",
+		"@typescript-eslint/parser": "^4.18.0",
+		"@vue/cli-plugin-babel": "~4.5.0",
+		"@vue/cli-plugin-eslint": "~4.5.0",
+		"@vue/cli-plugin-pwa": "~4.5.0",
+		"@vue/cli-plugin-router": "~4.5.0",
+		"@vue/cli-plugin-typescript": "~4.5.0",
+		"@vue/cli-plugin-vuex": "~4.5.0",
+		"@vue/cli-service": "~4.5.0",
+		"@vue/compiler-sfc": "^3.0.0",
+		"@vue/eslint-config-prettier": "^6.0.0",
+		"@vue/eslint-config-typescript": "^7.0.0",
+		"eslint": "^6.7.2",
+		"eslint-plugin-prettier": "^3.3.1",
+		"eslint-plugin-vue": "^7.0.0",
+		"node-sass": "^4.12.0",
+		"prettier": "^2.2.1",
+		"sass-loader": "^8.0.2",
+		"typescript": "~4.1.5"
+	}
+}
+```
+
+<br>
+
 ---
 
 ### References
