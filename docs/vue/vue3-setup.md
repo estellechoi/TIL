@@ -111,3 +111,5 @@ vue create project-name
 ---
 
 ### References
+
+- [Installation | Vue.js](https://v3.vuejs.org/guide/installation.html#release-notes)
