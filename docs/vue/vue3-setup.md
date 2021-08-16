@@ -1,4 +1,4 @@
-# Vue3 프로젝트 셋업하기
+# Vue3 + TypeScript 프로젝트 셋업하기
 
 <br>
 
@@ -78,9 +78,14 @@ vue create project-name
 
 <br>
 
-그리고 프로젝트 셋업 시작. 아래는 제가 셋업하면서 선택한 옵션들입니다.
+프로젝트 셋업 시작. 아래는 제가 셋업하면서 선택한 옵션들입니다.
 
 <img src="./../img/vue3-setup-1.png"  />
+
+<br>
+
+아래 단계에서 `TypeScript`를 포함하고요,
+
 <img src="./../img/vue3-setup-2.png"  />
 
 <br>
@@ -92,6 +97,11 @@ vue create project-name
 <img src="./../img/vue3-setup-5.png"  />
 <img src="./../img/vue3-setup-6.png"  />
 <img src="./../img/vue3-setup-7.png"  />
+
+<br>
+
+다음 단계에서 [`ESLint`](https://eslint.org/)를 선택합니다. [`TSLint`](https://www.npmjs.com/package/tslint)는 Deprecation을 공식 선언했습니다.
+
 <img src="./../img/vue3-setup-8.png"  />
 <img src="./../img/vue3-setup-9.png"  />
 <img src="./../img/vue3-setup-10.png"  />

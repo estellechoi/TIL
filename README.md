@@ -36,7 +36,7 @@
 
 ### Vue
 
-- [Vue3 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
+- [Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
 
 <br>
 
