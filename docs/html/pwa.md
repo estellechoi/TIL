@@ -80,12 +80,13 @@ PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/do
 
 <br>
 
-## 3. 최소 조건
+## 3. 설치 가능하게 하기
 
 PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다. PWA로 식별되기 위한 최소 조건은 다음과 같습니다.
 
-- HTTPS 통신
-- [`manifest.webmanifest`](https://web.dev/add-manifest/)(`manifest.json`)파일을 포함하고, 이 파일은 최소 아래의 항목들을 포함
+- HTTPS
+- [Service Worker](/#5-service-worker) 등록 완료 (Android용 Chrome에서 필수)
+- [`manifest.webmanifest`](https://web.dev/add-manifest/)(`manifest.json`)파일을 포함하고, 이 파일은 [최소 아래의 항목들을 포함](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#manifest)
 
 ```json
 {
@@ -319,9 +320,9 @@ window.addEventListener("load", () => {
 
 <br>
 
-## 6. Service Worker 사용하여 오프라인 Fallback 페이지 커스텀하기
+## 6. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
 
-Service Worker를 사용하면 오프라인 Fallback 페이지를 커스텀할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 설계된 UX를 제공할 수 있죠. Service Worker를 이용하여 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 미리 캐싱하는 아이디어입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드입니다.
+Service Worker와 [`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하면 오프라인 Fallback 페이지를 제공할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 설계된 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 미리 캐싱하는 아이디어입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
 
 ```javascript
 /*
@@ -461,12 +462,6 @@ self.addEventListener("fetch", (event) => {
 	</body>
 </html>
 ```
-
-<br>
-
-### \* `CacheStorage` API
-
-[CacheStorage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하면 브라우저 캐싱을 JavaScript 코드로 컨트롤할 수 있습니다. 자세한 내용은 [The Cache Storage API](https://web.dev/service-workers-cache-storage/#the-cache-storage-api)를 참고하세요.
 
 <br>
 
