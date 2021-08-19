@@ -36,7 +36,7 @@ PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡
 
 ### 1-2. 브라우저 호환성
 
-PWA는 여러 API를 사용하지만, 그 중 핵심 기술은 [Service Worker API](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)입니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements)/[Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready)/[Opera](https://dev.opera.com/articles/installable-web-apps/)/[Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/)/[UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA 지원범위를 할 수 있습니다.
+PWA는 여러 API를 사용하지만, 그 중 핵심 기술은 [Service Worker API](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)입니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements)/[Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready)/[Opera](https://dev.opera.com/articles/installable-web-apps/)/[Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/)/[UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA 지원범위를 확인할 수 있습니다.
 
 - Safari 11.1부터 대부분 기능 지원 (푸시알림 불가)
 - Chrome 40부터 대부분 기능 지원 (iOS용 제외)
