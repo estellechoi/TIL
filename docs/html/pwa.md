@@ -3,6 +3,16 @@
 <br>
 
 1. PWA(Progressive Web App)
+2. 설치 가능하게 하기
+3. `webmanifest` 파일을 사용하여 Manifest 구성하기
+4. Service Worker
+5. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
+6. 알림 전송
+7. 설치하기
+8. 설치 유도하기 (Safari 미지원)
+9. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
+10. PWA와 네이티브 앱
+11. iOS에서의 PWA
 
 <br>
 
@@ -579,7 +589,7 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 <br>
 
-## 7. 웹 앱을 OS에 설치하기
+## 7. 설치하기
 
 웹 앱을 디바이스 홈화면에 설치하는 방법은 간단합니다. 보통 브라우저의 `공유하기` 버튼을 클릭하여 설치할 수 있습니다.
 
@@ -668,7 +678,7 @@ window.addEventListener("appinstalled", (evt) => {
 
 <br>
 
-## 9. 웹사이트 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
+## 9. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
 
 아래와 같이 CSS 미디어쿼리를 이용하여 웹사이트의 접속모드에 따라 다르게 스타일링할 수 있습니다. (브라우저를 통해 접속했는지, PWA를 통해 접속했는지에 따라서 말이죠) `display-mode` 값에 따라 아래와 같이 CSS를 작성하는거죠.
 
@@ -819,10 +829,6 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 
 <br>
 
-## 12. 선택사항
-
-- [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API)
-
 <br>
 
 ---
@@ -846,3 +852,4 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 - [Configuring Web Applications | Safari HTML Reference](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html)
 - [6 Tips to make your iOS PWA feel like a native app](https://www.netguru.com/codestories/pwa-ios)
 - [Encouraging iOS users to install your Progressive Web Apps in Ember](https://dockyard.com/blog/2017/09/27/encouraging-pwa-installation-on-ios)
+- [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API)
