@@ -26,11 +26,15 @@ PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사�
 
 - 반응형 : 모든 디바이스, 모든 브라우저에서 호환됨
 
-- 안전 : 사용자의 민감한 데이터에 접근하려는 시도로 부터 안전함
+- 안전 : 사용자의 민감한 데이터에 접근하려는 시도로부터 안전함
 
 <br>
 
-PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요 없이 자주 사용하는 웹사이트를 디바이스의 홈화면에 앱처럼 추가하여 사용할 수 있죠. FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다. PWA 적용사례는 [PWA Stats](https://www.pwastats.com/)에서 확인할 수 있습니다.
+PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요 없이 자주 사용하는 웹사이트를 디바이스의 홈화면에 앱처럼 추가하여 사용할 수 있죠.
+
+<br>
+
+FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다. PWA 적용사례는 [PWA Stats](https://www.pwastats.com/)에서 확인할 수 있습니다.
 
 <br>
 
@@ -54,9 +58,25 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 <br>
 
-### 1-4. PWA 완성도 측정하기, PWA를 네이티브 앱으로 포장하기
+### 1-4. PWA 완성도 측정하기
 
-웹 앱의 완성도를 측정하는 [Lighthouse](https://developers.google.com/web/tools/lighthouse/)와 같은 도구들을 사용하여 앱이 얼마나 PWA에 부합하는지 체크할 수 있고요, [PWABuilder](https://www.pwabuilder.com/)를 사용하여 PWA를 네이티브 앱으로 포장하여 앱스토어에 등록할 수도 있습니다.
+아래의 툴, 체크리스트를 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹사이트에 접속하는지 검사할 수 있습니다.
+
+- Chrome 개발자도구의 Application 탭에서 Manifest 메뉴
+
+- [Chrome Flags](chrome://flags/) "Bypass user engagement checks"
+
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
+
+- [Measuring Impact](https://pwa-book.awwwards.com/chapter-8)
+
+- [What makes a good Progressive Web App?](https://web.dev/pwa-checklist/)
+
+<br>
+
+### 1-5. PWA를 네이티브 앱으로 포장하기
+
+[PWABuilder](https://www.pwabuilder.com/)를 사용하여 PWA를 네이티브 앱으로 포장하여 앱스토어에 등록할 수도 있습니다.
 
 <br>
 
@@ -821,23 +841,7 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 
 <br>
 
-## 13. PWA 검사하기
-
-아래의 툴/체크리스트를 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹사이트에 접속하는지 검사할 수 있습니다.
-
-- Chrome 개발자도구의 Application 탭에서 Manifest 메뉴
-
-- [Chrome Flags](chrome://flags/) "Bypass user engagement checks"
-
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
-
-- [Measuring Impact](https://pwa-book.awwwards.com/chapter-8)
-
-- [What makes a good Progressive Web App?](https://web.dev/pwa-checklist/)
-
-<br>
-
-## 14. 선택사항
+## 13. 선택사항
 
 - [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API)
 
