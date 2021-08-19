@@ -189,11 +189,11 @@ PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이
 
 <br>
 
-<br>
-
 Android Chrome에서 디바이스 크기에 따라 아이콘 사이즈를 자동으로 핏되게 하려면 `192 * 192 px` / `512 * 512 px` 사이즈의 이미지를 반드시 지정해야합니다. 만약 Android에서 디바이스 크기에 따라 최적화된 픽셀(`px`) 경험을 제공하려면 아이콘 이미지의 사이즈를 `48dp`로 지정하세요. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px`, .. 등으로 변환되죠.
 
-##### Android Maskable Icons
+<br>
+
+#### \* Android Maskable Icons
 
 Android에서 [maskable icons](https://web.dev/maskable-icon/)를 사용하려면 해당 아이콘 정보에 `purpose` 속성을 추가하고, 값은 `any maskable`로 지정하세요.
 
