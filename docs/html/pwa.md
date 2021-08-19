@@ -2,37 +2,53 @@
 
 <br>
 
-## PWA(Progressive Web App)
+## 1. PWA(Progressive Web App)
 
-PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 더 직접적으로는, 웹 애플리케이션을 네이티브 앱처럼 PC/모바일의 홈화면에 추가해놓고, 아이콘을 눌러 쉽게 재방문할 수 있는 애플리케이션을 말합니다. 전통적인 방법대로 브라우저를 통해 접속할 수도 있고, 네이티브 앱처럼 디바이스의 홈 화면에서 아이콘을 눌러 접속할 수도 있죠.
-
-<br>
-
-PWA의 장점은 편리함과 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리한 UX를 제공하면서, 웹의 검색엔진을 통해 쉽게 접근할 수 있죠. iOS의 앱스토어나 Android 플레이스토어로 이동하여 앱을 검색하고 다운로드할 필요 없이 사용하던 웹사이트를 바로 앱처럼 디바이스에 추가하여 사용할 수 있죠.
+PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사이트와 네이티브 앱의 장점을 모두 갖도록 개발된 웹의 확장판 정도로 이해해볼 수 있는데요, 오프라인에서 동작, 설치 가능, 쉬운 동기화, 푸시 알림 등 네이티브 앱에서만 가능하던 특정 기능들을 포함한 웹 앱을 PWA라고 합니다.
 
 <br>
 
-> FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
+다음은 어떤 웹 앱을 PWA로 식별하기 위한 몇 가지 핵심 원칙입니다.
+
+- 발견 가능 : 브라우저의 검색엔진을 통해 찾을 수 있음
+
+- 설치 가능 : 디바이스의 홈 화면에 추가하여 사용할 수 있음
+
+- 연결 가능 : URL을 공유할 수 있음
+
+- 네트워크 독립적 : 오프라인이나 불안정한 네트워크 환경에서 동작함
+
+- 점진적 : 이전 브라우저의 기본 기능을 여전히 사용할 수 있어야함
+
+- 재참여 (Re-engageable) : 새로운 컨텐츠가 사용 가능할 때마다 알림 전송이 가능함
+
+- 반응형 : 모든 디바이스, 모든 브라우저에서 호환됨
+
+- 안전 : 사용자의 민감한 데이터에 접근하려는 시도로 부터 안전함
+
+<br>
+
+PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요 없이 자주 사용하는 웹사이트를 디바이스의 홈화면에 앱처럼 추가하여 사용할 수 있죠. FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
 
 <br>
 
 ### PWA 지원현황
 
+PWA를 제공하기 위해 요구되는 핵심 기술은 [Service Worker API](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)입니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다.
+
 - iOS 11.3부터 지원
-
 - Chrome 45부터 지원 (iOS용 제외)
-
 - MS Edge
-
-<br>
-
-> [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)에서 Android와 iOS에서의 PWA 지원 현황을 비교해보세요.
 
 <br>
 
 ## PWA 제공하기
 
 > Android Chrome 기준으로 정리했습니다. iOS용 Chrome에서는 PWA가 지원되지 않습니다. iOS에서 PWA를 지원하려면 <a href="#ios에서의-pwa">여기</a>를, 다른 브라우저에서 PWA를 지원하려면 각 회사의 가이드를 참고하세요.
+
+<br>
+
+웹 앱의 완성도를 측정하는 [Lighthouse](https://developers.google.com/web/tools/lighthouse/)와 같은 도구들을 사용하여 앱이 얼마나 PWA에 부합하는지 체크할 수 있습니다.
 
 <br>
 
@@ -688,6 +704,7 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 
 ### References
 
+- [Introduction to progressive web apps | MDN](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Introduction)
 - [Progressive Web Apps](https://web.dev/progressive-web-apps/)
 - [What does it take to be installable?](https://web.dev/install-criteria/)
 - [How to provide your own in-app install experience](https://web.dev/customize-install/)
