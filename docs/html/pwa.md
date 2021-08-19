@@ -2,6 +2,10 @@
 
 <br>
 
+1. PWA(Progressive Web App)
+
+<br>
+
 ## 1. PWA(Progressive Web App)
 
 ### 1-1. PWA란?
@@ -74,13 +78,7 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 <br>
 
-## 2. App Shell
-
-PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없이도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있습니다. 무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다.
-
-<br>
-
-## 3. 설치 가능하게 하기
+## 2. 설치 가능하게 하기
 
 PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다. PWA로 식별되기 위한 최소 조건은 다음과 같습니다.
 
@@ -107,9 +105,9 @@ PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이
 
 <br>
 
-## 4. `webmanifest` 파일을 사용하여 Manifest 구성하기
+## 3. `webmanifest` 파일을 사용하여 Manifest 구성하기
 
-### 4-1. `webmanifest` 파일
+### 3-1. `webmanifest` 파일
 
 `webmanifest` 포맷의 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. `credentials`가 필요하다면 아래 태그에 `crossorigin="use-credentials"` 속성을 추가하세요.
 
@@ -169,7 +167,7 @@ PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이
 
 <br>
 
-### 4-2. `webmanifest` 항목
+### 3-2. `webmanifest` 항목
 
 #### `name` / `short_name`
 
@@ -298,15 +296,15 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
-## 5. Service Worker
+## 4. Service Worker
 
-### 5-1. Service Worker란?
+### 4-1. Service Worker란?
 
 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)의 역할 중 하나는 웹 앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있습니다. Service Worker API는 대부분의 브라우저에 내장되어 있고요, 개발자는 약간의 JavaScript 코드를 추가하여 Service Worker가 무슨 일을 할지 지정할 수 있습니다. 이 Service Worker를 사용하여 PWA 기능들을 구현할 수 있습니다.
 
 <br>
 
-### 5-2. Service Worker 등록하기
+### 4-2. Service Worker 등록하기
 
 Service Worker API는 `window.navigator` 객체 내의 `serviceWorker`라는 이름의 객체로 제공됩니다. Service Worker API를 제공하는 브라우저라면, 처음 앱이 로드될 때 아래와 같이 `service-worker.js` 파일을 앱의 Service Worker로 등록시킵니다. 이제 `service-worker.js` 파일에 작성된 로직이 앱의 인터셉터로서 작동하게 됩니다.
 
@@ -320,9 +318,13 @@ window.addEventListener("load", () => {
 
 <br>
 
-## 6. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
+## 5. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
 
-Service Worker와 [`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하면 오프라인 Fallback 페이지를 제공할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 설계된 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 미리 캐싱하는 아이디어입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
+PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없이도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있습니다. 무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다.
+
+<br>
+
+[`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하면 오프라인 Fallback 페이지를 제공할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 설계된 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 미리 캐싱하는 아이디어입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
 
 ```javascript
 /*
@@ -465,9 +467,9 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-## 7. 알림 전송
+## 6. 알림 전송
 
-### 7-1. Notification API
+### 6-1. Notification API
 
 [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 알림을 전송할 수 있습니다. 사용자의 인터렉션에 대한 응답으로만 알림을 발생시키는 것이 권장되며, 실제로 Firefox와 Safari는 이렇게 하고 있습니다.
 
@@ -477,7 +479,7 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-### 7-2. 권한 확인
+### 6-2. 권한 확인
 
 먼저 읽기 전용 속성인 `Notification.permission`을 사용하여 현재 권한 상태를 확인합니다.
 
@@ -497,7 +499,7 @@ console.log(Notification.permission); // 'granted'
 
 <br>
 
-### 7-3. 권한 요청
+### 6-3. 권한 요청
 
 앱이 알림을 보내려면 사용자가 앱에 해당 권한을 허용해줘야 합니다. `Notification.requestPermission()` 메소드를 사용하여 앱에서 알림을 전송할 수 있도록 권한을 요청합니다.
 
@@ -536,7 +538,7 @@ if (!supportNotificationPromise) {
 
 <br>
 
-### 7-4. 알림 전송
+### 6-4. 알림 전송
 
 알림 전송은 `Notification` 생성자를 사용하여 만듭니다.
 
@@ -549,7 +551,7 @@ const notification = new Notification("제목", {
 
 <br>
 
-### 7-5. 알림 닫기
+### 6-5. 알림 닫기
 
 Firefox와 Safari는 알림을 약 4초 후에 자동으로 닫습니다. 이 외 브라우저에서는 `setTimeout`과 `Notification.close` 메소드를 사용하여 코드를 통해 닫아야합니다. 이때 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 알림 객체를 연동시켜야합니다.
 
@@ -559,7 +561,7 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 <br>
 
-### 7-6. 이벤트 핸들링
+### 6-6. 이벤트 핸들링
 
 `Notification` 인스턴스에는 다음 네 가지 이벤트가 발생할 수 있습니다.
 
@@ -570,14 +572,14 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 <br>
 
-### 7-7. 참고자료
+### 6-7. 참고자료
 
 - [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/codelabs/push-notifications/)
 - [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)
 
 <br>
 
-## 8. 웹 앱을 OS에 설치하기
+## 7. 웹 앱을 OS에 설치하기
 
 웹 앱을 디바이스 홈화면에 설치하는 방법은 간단합니다. 보통 브라우저의 `공유하기` 버튼을 클릭하여 설치할 수 있습니다.
 
@@ -589,9 +591,9 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 <br>
 
-## 9. 설치 유도하기 (Safari 미지원)
+## 8. 설치 유도하기 (Safari 미지원)
 
-### 9-1. 커스텀 Prompt로 앱 설치 유도하기
+### 8-1. 커스텀 Prompt로 앱 설치 유도하기
 
 대부분의 브라우저는 웹사이트가 PWA로 식별되는 경우 앱 설치를 유도하는 알림을 자동으로 띄워줍니다. 앱 설치를 유도하는 UI를 커스텀하고 싶다면 `beforeinstallprompt` 이벤트가 발생했을 때 `preventDefault()` 메소드를 호출하여 브라우저가 자체적으로 띄우는 알림을 중단시킵니다.
 
@@ -613,7 +615,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
 <br>
 
-### 9-2. 특정 UI를 클릭했을 때 앱 설치 Prompt 띄우기
+### 8-2. 특정 UI를 클릭했을 때 앱 설치 Prompt 띄우기
 
 `appinstalled` 이벤트를 사용하여 앱이 설치되면 해당 UI를 숨기세요.
 
@@ -640,7 +642,7 @@ installBtn.addEventListener("click", (e) => {
 
 <br>
 
-### 9-3. 앱 설치여부를 감지하기
+### 8-3. 앱 설치여부를 감지하기
 
 `beforeinstallprompt` 이벤트 객체의 `userChoice` 속성을 사용하여 사용자가 Prompt 모달에서 "설치하기"를 선택했는지 감지할 수 있지만, 완벽하지는 않습니다. 가령, 주소창과 같은 브라우저 내장 알림을 통해 PWA를 설치한다면 `userChoice` 속성을 사용할 수 없죠. 앱이 설치되었는지를 완벽하게 판단하려면 `appinstalled` 이벤트를 사용하세요.
 
@@ -656,7 +658,7 @@ window.addEventListener("appinstalled", (evt) => {
 
 <br>
 
-### 9-4. Prompt 가이드라인
+### 8-4. Prompt 가이드라인
 
 - 웹사이트의 UX 흐름에 방해가 돼서는 안됩니다. 가령, 로그인 페이지라면 PWA 설치를 유도하는 UI는 반드시 아이디/비밀번호 입력 필드와 제출 버튼 아래에 위치해야합니다.
 
@@ -666,7 +668,7 @@ window.addEventListener("appinstalled", (evt) => {
 
 <br>
 
-## 10. 웹사이트 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
+## 9. 웹사이트 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
 
 아래와 같이 CSS 미디어쿼리를 이용하여 웹사이트의 접속모드에 따라 다르게 스타일링할 수 있습니다. (브라우저를 통해 접속했는지, PWA를 통해 접속했는지에 따라서 말이죠) `display-mode` 값에 따라 아래와 같이 CSS를 작성하는거죠.
 
@@ -712,7 +714,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 <br>
 
-## 11. PWA와 네이티브 앱
+## 10. PWA와 네이티브 앱
 
 만약 별도로 네이티브 앱을 제공한다면, 네이티브 앱이 사용자의 디바이스에 설치되었는지 확인할 수 있습니다. 네이티브 앱 설치여부에 따라 PWA 설치를 유도하거나, 유도하지 않을 수 있죠. 아래 문서를 참고하세요.
 
@@ -734,9 +736,9 @@ PWA를 실행시키는 Android 앱을 빠르게 빌딩하고 싶다면 [Trusted 
 
 <br>
 
-## 12. iOS에서의 PWA
+## 11. iOS에서의 PWA
 
-### 12-1. `link`/`meta` 태그 사용
+### 11-1. `link`/`meta` 태그 사용
 
 iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추가함으로써 PWA를 적용할 수 있습니다.
 
@@ -748,7 +750,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 <br>
 
-### 12-2. 아이콘
+### 11-2. 아이콘
 
 ```html
 <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
@@ -769,7 +771,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 <br>
 
-### 12-3. 앱 스플래시 화면(Launch Screen)
+### 11-3. 앱 스플래시 화면(Launch Screen)
 
 ```html
 <link rel="apple-touch-startup-image" href="/launch.png" />
@@ -777,7 +779,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 <br>
 
-### 12-4. 앱 이름
+### 11-4. 앱 이름
 
 별도로 지정하지 않으면 `<title>` 태그에 지정한 이름을 사용합니다.
 
@@ -787,7 +789,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 <br>
 
-### 12-5. `standalone` 모드 (브라우저 UI 제거하기)
+### 11-5. `standalone` 모드 (브라우저 UI 제거하기)
 
 아래와 같이 `<meta>` 태그를 지정하면 PWA가 `standalone` 모드로 전환되고요, 주소창, 하단 컨트롤러 등의 모든 브라우저 UI를 제거합니다.
 
@@ -797,7 +799,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 <br>
 
-### 12-6. 상태바 스타일링
+### 11-6. 상태바 스타일링
 
 PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있습니다. 가령, 아래와 같이 값을 `black`으로 지정하면 상태바가 검정색으로 스타일링됩니다.
 
@@ -817,7 +819,7 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 
 <br>
 
-## 13. 선택사항
+## 12. 선택사항
 
 - [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API)
 
