@@ -50,7 +50,7 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 ### 1-3. 예제 사이트
 
-- [Hacker News readers as Progressive Wep Apps](https://hnpwa.com/) : React, Vue 등 프론트엔드 프레임워크에서 PWA를 구현 예제
+- [Hacker News readers as Progressive Wep Apps](https://hnpwa.com/) : React, Vue 등 프론트엔드 프레임워크를 사용하여 개발한 PWA 예제
 - [Service Worker Cookbook](https://serviceworke.rs/) : Service Worker 사용 예제와 푸시 알림 예제
 - [PWA Stats](https://www.pwastats.com/) : PWA 적용사례
 
@@ -60,14 +60,10 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 아래의 툴, 체크리스트를 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹사이트에 접속하는지 검사할 수 있습니다.
 
-- Chrome 개발자도구의 Application 탭에서 Manifest 메뉴
-
+- Chrome 개발자도구 Application > Manifest
 - [Chrome Flags](chrome://flags/) "Bypass user engagement checks"
-
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
-
 - [Measuring Impact](https://pwa-book.awwwards.com/chapter-8)
-
 - [What makes a good Progressive Web App?](https://web.dev/pwa-checklist/)
 
 <br>
@@ -80,24 +76,21 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 ## 2. App Shell
 
-PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없어도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있습니다. 무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다.
+PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없이도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있습니다. 무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다.
 
 <br>
 
 ## 3. 최소 조건
 
-PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 유도합니다. PWA로서 식별되기 위한 최소 조건은 다음과 같습니다.
+PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다. PWA로 식별되기 위한 최소 조건은 다음과 같습니다.
 
 - HTTPS 통신
-
 - [`manifest.webmanifest`](https://web.dev/add-manifest/)(`manifest.json`)파일을 포함하고, 이 파일은 최소 아래의 항목들을 포함
 
 ```json
 {
 	"name": "name",
-	"icons": [
-		// ..
-	],
+	"icons": [],
 	"start_url": "/",
 	"display": "fullscreen",
 	"prefer_related_applications": false
@@ -117,7 +110,7 @@ PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이
 
 ### 4-1. `webmanifest` 파일
 
-`webmanifest` 포맷의 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다.
+`webmanifest` 포맷의 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. `credentials`가 필요하다면 아래 태그에 `crossorigin="use-credentials"` 속성을 추가하세요.
 
 <br>
 
@@ -130,11 +123,7 @@ PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이
 
 <br>
 
-`credentials`가 필요하다면 위 태그에 `crossorigin="use-credentials"` 속성을 추가하세요.
-
-<br>
-
-`webmanifest` 파일은 Chrome/Edge/Firefox/UC Browser/Opera/Samsung 브라우저에서 지원하고, Safari에서는 부분 지원합니다. 다음은 `webmanifest` 파일 구성 예시입니다.
+`webmanifest` 파일은 Chrome, Edge, Firefox, UC Browser, Opera, Samsung 브라우저에서 지원하고, Safari에서는 부분 지원합니다. 다음은 `webmanifest` 파일 구성 예시입니다.
 
 ```json
 {
