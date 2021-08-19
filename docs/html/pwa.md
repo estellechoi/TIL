@@ -588,14 +588,7 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 <br>
 
-#### MacOS용 Chrome
-
-<img src="./../img/pwa-notification.png" width="400" />
-<img src="./../img/pwa-notification2.png" width="400" />
-
-<br>
-
-#### iOS용 Safari
+#### 예시 : iOS용 Safari
 
 <img src="./../img/how-to-install-pwa.png" width="375" />
 
