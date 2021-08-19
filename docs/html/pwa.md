@@ -50,7 +50,9 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 ### 1-3. 예제 사이트
 
-[Hacker News readers as Progressive Wep Apps](https://hnpwa.com/)에서 React, Vue 등 프론트엔드 프레임워크에서 PWA를 구현하는 예제를 확인할 수 있고요, Service Worker 사용 예제와 푸시 알림 예제는 [Service Worker Cookbook](https://serviceworke.rs/)에서 확인할 수 있습니다. PWA 적용사례는 [PWA Stats](https://www.pwastats.com/)에서 확인할 수 있습니다.
+- [Hacker News readers as Progressive Wep Apps](https://hnpwa.com/) : React, Vue 등 프론트엔드 프레임워크에서 PWA를 구현 예제
+- [Service Worker Cookbook](https://serviceworke.rs/) : Service Worker 사용 예제와 푸시 알림 예제
+- [PWA Stats](https://www.pwastats.com/) : PWA 적용사례
 
 <br>
 
