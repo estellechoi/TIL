@@ -478,7 +478,7 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-`Notification` API는 아직 브라우저 호환 범위가 넓지 않습니다. 대표적으로 Android Webview와 iOS용 Safari에서는 전혀 지원하지 않습니다.
+★ 주의 : `Notification` API는 아직 브라우저 호환 범위가 넓지 않습니다. 대표적으로 Android Webview와 iOS용 Safari에서는 전혀 지원하지 않습니다.
 
 <br>
 
