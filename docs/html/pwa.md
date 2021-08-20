@@ -225,7 +225,7 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 #### \* Android Maskable Icons
 
-Android에서 [Maskable Icon](https://web.dev/maskable-icon/)을 사용하려면 해당 아이콘 정보에 `purpose` 속성을 추가하고, 값은 `any maskable`로 지정하세요.
+Android에서 [Maskable Icon](https://web.dev/maskable-icon/)을 사용하려면 해당 아이콘 정보에 `purpose` 속성을 추가하고, 값은 `maskable` 또는 `any maskable`로 지정하세요.
 
 ```json
 {
@@ -239,6 +239,12 @@ Android에서 [Maskable Icon](https://web.dev/maskable-icon/)을 사용하려면
 	]
 }
 ```
+
+<br>
+
+다음은 [Adaptive icon support in PWAs with maskable icons | web.dev](https://web.dev/maskable-icon/)에서 `any maskable` 대신 `maskable` 지정을 권고하는 내용을 발췌한 부분입니다. 참고해보면 좋을 것 같습니다.
+
+> While you can specify multiple space-separated purposes like `any maskable`, in practice you shouldn't. Using `maskable` icons as `any` icons is suboptimal as the icon is going to be used as-is, resulting in excess padding and making the core icon content smaller. Ideally, icons for the `any` purpose should have transparent regions and no extra padding, like your site's favicons, since the browser isn't going to add that for them.
 
 <br>
 
@@ -352,10 +358,6 @@ PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS
 
 <br>
 
-Spotlight, Settings, Notification용 아이콘 사이즈 규격 등 자세한 사항은 [iOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes)를 참고하세요.
-
-<br>
-
 ### 4-2. MacOS
 
 현시점 기준 MacOS의 Finder, Dock, Launchpad 등에서 사용되는 아이콘 사이즈 규격입니다.
@@ -385,7 +387,11 @@ Spotlight, Settings, Notification용 아이콘 사이즈 규격 등 자세한 �
 
 #### ★ Android Maskable Icon
 
-Maskable 아이콘은 Android용 앱 아이콘 포맷입니다. 자세한 내용은 [Maskable Icon](https://web.dev/maskable-icon/)과 [Maskable Icons: Android Adaptive Icons for Your PWA](https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/)를 참고하세요.
+Maskable 아이콘은 Android 앱 규격에 딱 맞추어 둥근 형태로 잘린 아이콘을 말합니다. Maskable 아이콘을 제공하면 Android 앱에 기본으로 적용되는 흰 색 배경 대신 아이콘 영역을 원하는 이미지로 모두 채울 수 있습니다. [Maskable.app Editor](https://maskable.app/editor)를 사용하여 간편하게 Maskable 아이콘 이미지를 생성할 수 있습니다.
+
+<br>
+
+Chrome 개발자도구의 Application > Manifest 탭에서 아이콘이 어떻게 보이는지 미리 확인할 수 있고요, [Maskable.app](https://maskable.app/)을 사용해서 검사해볼 수도 있습니다. 자세한 내용은 [Maskable Icon](https://web.dev/maskable-icon/)과 [Maskable Icons: Android Adaptive Icons for Your PWA](https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/)를 참고하세요.
 
 <br>
 
