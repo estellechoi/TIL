@@ -75,7 +75,7 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 아래의 툴, 체크리스트를 사용하여 웹 앱이 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹 앱에 접속하는지 검사할 수 있습니다. PWA 완성도를 정량적으로 측정할 수 있는 [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)가 유명합니다.
 
-- Chrome 개발자도구 > Application > Manifest
+- [Tools for PWA Developers | Google Developers](https://developers.google.com/web/ilt/pwa/tools-for-pwa-developers)
 - [Chrome Flags](chrome://flags/) > Bypass user engagement checks
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
 - [Measuring Impact](https://pwa-book.awwwards.com/chapter-8)
@@ -215,7 +215,7 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 #### `icons`
 
-아이콘 정보를 담는 배열입니다. 아래와 같은 하위 속성들을 갖고요, `src`, `sizes`, `type` 속성은 반드시 포함해야 합니다. OS별 아이콘 사이즈 규격은 []() 섹션을 확인하세요.
+아이콘 정보를 담는 배열입니다. 아래와 같은 하위 속성들을 갖고요, `src`, `sizes`, `type` 속성은 반드시 포함해야 합니다. OS별 아이콘 사이즈 규격은 [아이콘 규격](./#user-content-4-아이콘-규격) 섹션을 확인하세요.
 
 - `src` : 이미지 경로
 - `sizes` : 이미지가 적용될 디바이스 사이즈 (`px`)
@@ -337,7 +337,7 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 ### 4-1. OS별 아이콘 가이드
 
-PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS마다 다르기 때문에 각 OS의 앱 아이콘 가이드 문서를 확인해야합니다.
+PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS마다 다르기 때문에 각 OS의 앱 아이콘 가이드 문서를 확인해야합니다. 또한, 대부분 OS에서 아이콘은 테두리가 둥글게 잘리기 때문에 잘려질 부분과 여백을 고려하여 아이콘을 제작해야합니다.
 
 - iOS : [iOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes)
 - MacOS : [MacOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/app-icon/#app-icon-sizes)
@@ -387,7 +387,7 @@ PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS
 
 #### ★ Android Maskable Icon
 
-Maskable 아이콘은 Android 앱 규격에 딱 맞추어 둥근 형태로 잘린 아이콘을 말합니다. Maskable 아이콘을 제공하면 Android 앱에 기본으로 적용되는 흰 색 배경 대신 아이콘 영역을 원하는 이미지로 모두 채울 수 있습니다. [Maskable.app Editor](https://maskable.app/editor)를 사용하여 간편하게 Maskable 아이콘 이미지를 생성할 수 있습니다.
+Maskable 아이콘은 Android 앱 규격에 딱 맞추어 둥근 형태로 잘린 아이콘을 말합니다. Maskable 아이콘을 제공하면 Android 앱에 기본으로 적용되는 흰 색 배경 대신 아이콘 영역을 원하는 이미지로 모두 채울 수 있습니다. [Maskable.app Editor](https://maskable.app/editor)를 사용하여 간편하게 Maskable 아이콘 이미지를 생성할 수 있고요, `webmanifest`에서 Maskable 아이콘의 경우 `"purpose": "maskable"` 항목을 명시합니다.
 
 <br>
 
