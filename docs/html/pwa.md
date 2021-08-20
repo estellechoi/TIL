@@ -20,7 +20,7 @@
 
 ### 1-1. PWA란?
 
-PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사이트와 네이티브 앱의 장점을 모두 갖도록 개발된 웹의 확장판 정도로 이해해볼 수 있는데요, 오프라인에서 동작, 설치 가능, 쉬운 동기화, 푸시 알림 등 네이티브 앱에서만 가능하던 특정 기능들을 포함한 웹 앱을 PWA라고 합니다. 중요한 것은 PWA로 식별되는 기능들을 오래된 브라우저가 지원하지 않더라도 사용자들이 앱을 이용할 수 있도록 "점진적으로" 적용하는 것입니다. 모든 사용자가 앱을 사용할 수 있지만, 최신 브라우저 사용자는 PWA 기능으로부터 더 많은 이점을 얻을 수 있도록 합니다.
+PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사이트와 네이티브 앱의 장점을 모두 갖도록 개발된 웹의 확장판 정도로 이해해볼 수 있는데요, 오프라인에서 동작, 설치 가능, 쉬운 동기화, 푸시 알림 등 네이티브 앱에서만 가능하던 기능들을 포함한 웹 앱을 말합니다. 중요한 것은 PWA로 식별되는 기능들을 오래된 브라우저가 지원하지 않더라도 사용자들이 웹을 이용할 수 있도록 "점진적으로" 적용하는 것입니다. 모든 사용자가 앱을 사용할 수 있지만, 최신 브라우저 사용자는 PWA 기능으로부터 더 많은 이점을 얻을 수 있도록 한다는 개념입니다.
 
 <br>
 
@@ -30,7 +30,7 @@ PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사�
 
 - 설치 가능 : 디바이스의 홈 화면에 추가하여 사용할 수 있음
 
-- 연결 가능 : URL을 공유할 수 있음
+- 연결 가능 : URL을 공유하여 접근할 수 있음
 
 - 네트워크 독립적 : 오프라인이나 불안정한 네트워크 환경에서 동작함
 
@@ -44,38 +44,38 @@ PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사�
 
 <br>
 
-PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요 없이 자주 사용하는 웹사이트를 디바이스의 홈화면에 앱처럼 추가하여 사용할 수 있죠. FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
+PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요가 없고요, 자주 사용하는 웹사이트를 디바이스의 홈화면에 앱처럼 추가하여 사용하는 방식입니다. FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
 
 <br>
 
 ### 1-2. 브라우저 호환성
 
-PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기술은 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API) API입니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements)/[Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready)/[Opera](https://dev.opera.com/articles/installable-web-apps/)/[Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/)/[UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA 지원범위를 확인할 수 있습니다.
+PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기술은 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API) API입니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements), [Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready), [Opera](https://dev.opera.com/articles/installable-web-apps/), [Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/), [UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA 지원 범위를 확인할 수 있습니다. 현시점 기준으로 지원 현황을 요약해보면 아래와 같습니다.
 
-- Safari 11.1부터 대부분 기능 지원 (푸시알림 불가)
-- Chrome 40부터 대부분 기능 지원 (iOS용 제외)
-- MS Edge 17부터 대부분 기능 지원
+- Safari 11.1부터 대부분 지원 (iOS용 Safari 알림 불가)
+- Chrome 40부터 대부분 지원 (iOS용 Chrome 미지원)
+- MS Edge 17부터 대부분 지원
 
 <br>
 
-iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 섹션을 참고하세요.
+현시점 기준 PWA 지원 범위가 가장 좁은 브라우저는 iOS용 Safari인 것 같습니다. iOS용 Safari에서 PWA를 구현하려면 별도의 섹션으로 분리한 [iOS에서의 PWA](./#ios에서의-pwa)를 참고하세요.
 
 <br>
 
 ### 1-3. 예제 사이트
 
-- [Hacker News readers as Progressive Wep Apps](https://hnpwa.com/) : React, Vue 등 프론트엔드 프레임워크를 사용하여 개발한 PWA 예제
-- [Service Worker Cookbook](https://serviceworke.rs/) : Service Worker 사용 예제와 푸시 알림 예제
+- [Hacker News readers as Progressive Wep Apps](https://hnpwa.com/) : React, Vue 등 프론트엔드 툴을 사용하여 개발한 PWA 예제
+- [Service Worker Cookbook](https://serviceworke.rs/) : Service Worker 사용 및 푸시 알림 예제
 - [PWA Stats](https://www.pwastats.com/) : PWA 적용사례
 
 <br>
 
 ### 1-4. PWA 완성도 측정하기
 
-아래의 툴, 체크리스트를 사용하여 웹사이트가 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹사이트에 접속하는지 검사할 수 있습니다.
+아래의 툴, 체크리스트를 사용하여 웹 앱이 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹 앱에 접속하는지 검사할 수 있습니다. PWA 완성도를 정량적으로 측정할 수 있는 [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)가 유명합니다.
 
-- Chrome 개발자도구 Application > Manifest
-- [Chrome Flags](chrome://flags/) "Bypass user engagement checks"
+- Chrome 개발자도구 > Application > Manifest
+- [Chrome Flags](chrome://flags/) > Bypass user engagement checks
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)
 - [Measuring Impact](https://pwa-book.awwwards.com/chapter-8)
 - [What makes a good Progressive Web App?](https://web.dev/pwa-checklist/)
@@ -84,17 +84,28 @@ iOS Safari에서 PWA를 지원하려면 [iOS에서의 PWA](./#ios에서의-pwa) 
 
 ### 1-5. PWA를 네이티브 앱으로 포장하기
 
-[PWABuilder](https://www.pwabuilder.com/)를 사용하여 PWA를 네이티브 앱으로 포장하여 앱스토어에 등록할 수도 있습니다.
+[PWABuilder](https://www.pwabuilder.com/), [Trusted Web Activity](https://developers.google.com/web/android/trusted-web-activity) 등의 툴을 사용하여 PWA를 네이티브 앱으로 포장하여 Google Playstore에 등록할 수도 있습니다. 자세한 내용은 아래 문서를 참고하세요.
+
+- [Using a PWA in your Android app](https://web.dev/using-a-pwa-in-your-android-app/)
+- [Trusted Web Activities Quick Start Guide](https://developers.google.com/web/android/trusted-web-activity/quick-start)
 
 <br>
 
 ## 2. 설치 가능하게 하기
 
-PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다. PWA로 식별되기 위한 최소 조건은 다음과 같습니다.
+위에서 소개한 PWA로 식별되기 위한 핵심원칙들을 모두 충족해야하는 것은 아닙니다. 브라우저마다 지원 범위 차이도 있고요. 가능한 기능들부터 점진적으로 제공해나가면 된다고 봅니다. 기존 웹사이트에 없던 PWA 기능들을 뽑아보면 아래와 같고요, 이번 섹션에서는 "설치 가능"에 대해 설명합니다.
 
-- HTTPS
+- 설치 가능
+- 네트워크 독립적
+- 재참여
+
+<br>
+
+(역시나 브라우저마다 약간의 차이가 있기는 하지만) 아래의 최소 조건을 충족하면 "설치 가능한" 웹 앱이 됩니다.
+
+- HTTPS를 통해 제공
 - [Service Worker](./#5-service-worker) 등록 완료 (Android용 Chrome에서 필수)
-- [`manifest.webmanifest`](https://web.dev/add-manifest/)(`manifest.json`)파일을 포함하고, 이 파일은 [최소 아래의 항목들을 포함](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#manifest)
+- [`webmanifest`](https://web.dev/add-manifest/)파일을 포함하고, 이 파일은 [최소 아래의 항목들을 포함](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#manifest)
 
 ```json
 {
@@ -111,7 +122,12 @@ PWA로서 식별되기 위한 최소 조건을 충족하면서, 동시에 앱이
 참고로,
 
 - `name` 대신 `short_name`만 포함해도 됩니다.
-- `prefer_related_applications`의 기본값은 `false`이므로 명시하지 않아도 됩니다. `related_applications` 항목에 관련된 네이티브 앱을 지정하고, `prefer_related_applications` 값을 `true`로 지정하면, Android에서는 앱 설치를 유도하기 위해 사용자를 자동으로 Google Playstore로 이동시킵니다.
+- `prefer_related_applications`의 기본값은 `false`이므로 명시하지 않아도 됩니다.
+- `related_applications` 항목에 관련된 네이티브 앱을 지정하고, `prefer_related_applications` 값을 `true`로 지정하면, Android에서 앱 설치를 유도하기 위해 사용자를 자동으로 Google Playstore로 이동시킵니다.
+
+<br>
+
+위의 최소 조건을 만족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다.
 
 <br>
 
@@ -735,14 +751,6 @@ window.addEventListener("DOMContentLoaded", () => {
 PWA와 네이티브 앱을 적절하게 블렌딩 하여 사용자들에게 심리스한 경험을 제공할 수 있습니다. 아래 영상을 보세요.
 
 - [Blending PWA into native environments (Chrome Dev Summit 2019)](https://www.youtube.com/watch?v=V7YX4cZ_Cto&feature=youtu.be)
-
-<br>
-
-PWA를 실행시키는 Android 앱을 빠르게 빌딩하고 싶다면 [Trusted Web Activity](https://developers.google.com/web/android/trusted-web-activity)를 사용하세요. 구글플레이스토어에 PWA를 노출시킬 수 있죠. 아래 글과 가이드를 참고하세요.
-
-- [Using a PWA in your Android app](https://web.dev/using-a-pwa-in-your-android-app/)
-
-- [Trusted Web Activities Quick Start Guide](https://developers.google.com/web/android/trusted-web-activity/quick-start)
 
 <br>
 
