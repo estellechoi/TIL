@@ -134,7 +134,17 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 ## 3. `webmanifest` 파일을 사용하여 Manifest 구성하기
 
-### 3-1. `webmanifest` 파일
+### 3-1. Manifest 생성 툴
+
+Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참고하여 Manifest를 구성하면 편리합니다.
+
+- [Firebase Web App Manifest Generator](https://app-manifest.firebaseapp.com/)
+- [Awesome Meta Tags & Manifest Properties](https://github.com/gokulkrishh/awesome-meta-and-manifest)
+- [pwacompat](https://github.com/GoogleChromeLabs/pwacompat)
+
+<br>
+
+### 3-2. `webmanifest` 파일
 
 `webmanifest` 포맷의 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. `credentials`가 필요하다면 아래 태그에 `crossorigin="use-credentials"` 속성을 추가하세요.
 
@@ -194,7 +204,7 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 <br>
 
-### 3-2. `webmanifest` 항목
+### 3-3. `webmanifest` 항목
 
 #### `name` / `short_name`
 
@@ -205,23 +215,17 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 #### `icons`
 
-아이콘 정보를 담는 배열입니다. 아래와 같은 하위 속성들을 갖고요, `src`, `sizes`, `type` 속성은 반드시 포함해야 합니다.
+아이콘 정보를 담는 배열입니다. 아래와 같은 하위 속성들을 갖고요, `src`, `sizes`, `type` 속성은 반드시 포함해야 합니다. OS별 아이콘 사이즈 규격은 []() 섹션을 확인하세요.
 
 - `src` : 이미지 경로
-
 - `sizes` : 이미지가 적용될 디바이스 사이즈 (`px`)
-
 - `type` : 이미지 타입
-
-<br>
-
-Android Chrome에서 디바이스 크기에 따라 아이콘 사이즈를 자동으로 핏되게 하려면 `192 * 192 px` / `512 * 512 px` 사이즈의 이미지를 반드시 지정해야합니다. 만약 Android에서 디바이스 크기에 따라 최적화된 픽셀(`px`) 경험을 제공하려면 아이콘 이미지의 사이즈를 `48dp`로 지정하세요. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px`, .. 등으로 변환되죠.
 
 <br>
 
 #### \* Android Maskable Icons
 
-Android에서 [maskable icons](https://web.dev/maskable-icon/)를 사용하려면 해당 아이콘 정보에 `purpose` 속성을 추가하고, 값은 `any maskable`로 지정하세요.
+Android에서 [Maskable Icon](https://web.dev/maskable-icon/)을 사용하려면 해당 아이콘 정보에 `purpose` 속성을 추가하고, 값은 `any maskable`로 지정하세요.
 
 ```json
 {
@@ -325,11 +329,63 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 ## 4. 아이콘 규격
 
-PWA는 기본적으로 세 가지 아이콘이 필요합니다.
+### 4-1. OS별 아이콘 가이드
 
-- Favicon
-- 설치된 앱 아이콘
-- 스플래시 화면 아이콘
+PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS마다 다르기 때문에 각 OS의 앱 아이콘 가이드 문서를 확인해야합니다.
+
+- iOS : [iOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes)
+- MacOS : [MacOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/app-icon/#app-icon-sizes)
+- Android : [Google Play icon design specifications](https://developer.android.com/google-play/resources/icon-design-specifications)
+- Windows : [App icons and logos | Windows Developer](https://docs.microsoft.com/en-us/windows/apps/design/style/app-icons-and-logos)
+
+<br>
+
+### 4-1. iOS 앱 아이콘
+
+현시점 기준 iOS 홈화면 앱 아이콘 사이즈 규격입니다.
+
+- `120*120 px @2x` : iPhone
+- `152*152 px @2x` : iPad, iPad Mini
+- `167*167 px @2x` : iPad Pro
+- `180*180 px @3x` : iPhone
+- `1024*1024 px @1x` : App Store
+
+<br>
+
+Spotlight, Settings, Notification용 아이콘 사이즈 규격 등 자세한 사항은 [iOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes)를 참고하세요.
+
+<br>
+
+### 4-2. MacOS
+
+현시점 기준 MacOS의 Finder, Dock, Launchpad 등에서 사용되는 아이콘 사이즈 규격입니다.
+
+- `16*16 px @1x`
+- `32*32 px @1x @2x`
+- `64*64 px @2x`
+- `128*128 px @1x`
+- `256*256 px @1x @2x`
+- `512*512 px @1x @2x`
+- `1024*1024 px @2x`
+
+<br>
+
+### 4-3. Android
+
+[Google Play icon design specifications](https://developer.android.com/google-play/resources/icon-design-specifications)에 따르면, `512*512 px` 사이즈의 아이콘을 제공하면 되지만, Android용 Chrome에서 모든 디바이스 뷰포트에 아이콘을 자동으로 핏되게 하려면 다음 2개 사이즈를 반드시 제공해야합니다.
+
+- `192*192 px`
+- `512*512 px`
+
+<br>
+
+만약 Android에서 최적화된 픽셀(`px`) 경험을 제공하려면 `webmanifest` 파일에서 아이콘 사이즈를 `48dp` 단위로 지정하세요. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px` 등으로 변환됩니다.
+
+<br>
+
+#### ★ Android Maskable Icon
+
+Maskable 아이콘은 Android용 앱 아이콘 포맷입니다. 자세한 내용은 [Maskable Icon](https://web.dev/maskable-icon/)과 [Maskable Icons: Android Adaptive Icons for Your PWA](https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/)를 참고하세요.
 
 <br>
 
