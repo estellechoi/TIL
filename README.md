@@ -114,7 +114,14 @@
 
 <br>
 
-## 3. Etc
+## 3. Design
+
+- [디자인시스템 가이드](./docs/design/design-system.md)
+
+<br>
+
+
+## 4. Etc
 
 ### HTTP
 
