@@ -6,6 +6,12 @@
 
 <br>
 
+## 0. Design System
+
+- [개발자를 위한 디자인 시스템 Foundation 1 - 컬러](./docs/design-system/color-system.md)
+
+<br>
+
 ## 1. Web Front-end
 
 ### HTML
@@ -114,13 +120,7 @@
 
 <br>
 
-## 3. Design System
-
-- [개발자를 위한 디자인 시스템 Foundation 1 - 컬러](./docs/design-system/color-system.md)
-
-<br>
-
-## 4. Etc
+## 3. Etc
 
 ### HTTP
 
