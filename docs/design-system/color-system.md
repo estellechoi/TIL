@@ -1,4 +1,15 @@
-# 개발자를 위한 디자인 시스템 1: 컬러 팔레트
+# 개발자를 위한 디자인 시스템 Foundation 1 - 컬러
+
+<br>
+
+1. 개발자를 위한 디자인 시스템
+2. 컬러 팔레트(Color Palette)
+3. Primary 팔레트
+4. Secondary 팔레트
+5. 피드백 팔레트
+6. 확장 팔레트
+7. 다크모드를 위한 팔레트
+8. 데이터 시각화를 위한 컬러
 
 <br>
 
@@ -16,7 +27,7 @@
 
 <br>
 
-## 2. 컬러 팔레트(Color Palettes)
+## 2. 컬러 팔레트(Color Palette)
 
 디자인 시스템 파운데이션 중 가장 기본이 되는 컬러 시스템은 팔레트 형태로 몇 가지 색들을 세팅하여 구축합니다. 아래 사진은 저의 포트폴리오 웹사이트를 리뉴얼 기획하면서 작업하고 있는 컬러 팔레트입니다. Figma 커뮤니티에서 [Create a Design System](https://www.figma.com/community/file/943130265019106988) 프로젝트를 템플릿으로 사용했습니다.
 
@@ -51,9 +62,9 @@
 
 <br>
 
-## 4. Secondary 컬러
+## 4. Secondary 팔레트
 
-Secondary 컬러는 Primary 색과 보완 관계에 있는 색으로 정합니다. [Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation)에 따르면 다음의 경우에 사용하면 가장 좋습니다.
+Secondary 팔레트는 Primary 색과 보완 관계에 있는 색들로 구성합니다. [Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation)에 따르면 다음의 경우에 사용하면 가장 좋습니다.
 
 - Floating action buttons
 - Selection controls, like sliders and switches
@@ -109,6 +120,29 @@ Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 �
 
 <br>
 
+## 7. 다크모드를 위한 팔레트
+
+사용자가 서비스를 다크모드로 사용할 때를 대비하여 위에서 구성한 팔레트 색들이 명시성(Visibility)과 가독성(Legibility)을 유지하는지 검사해봐야합니다. 기본적으로 다크모드는 배경색으로 아래의 색들이 권장되거나 사용되고 있습니다.
+
+- Material Design `#121212`
+- iOS `#000`, `#161618`, `#212124`
+
+<br>
+
+다크모드 디자인에 대한 자세한 가이드는 [Material Design Dark theme](https://material.io/design/color/dark-theme.html), [Human Interface Guidelines Dark Mode](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) 등을 참고하세요.
+
+<br>
+
+<img src="./../img/palette8.png" />
+
+<br>
+
+## 8. 데이터 시각화를 위한 컬러
+
+차트 UI와 같은 데이터 시각화 목적의 컴포넌트를 디자인할 때 서로 다른 카테고리의 데이터임을 명확히 하기 위해 서로 다른 색조의 팔레트를 사용할 수 있습니다. 이 때 사용할 컬러들은 Secondary 팔레트에 추가하여 사용하면 좋을 것 같다는 생각입니다. [Material Design](https://material.io/design/color/the-color-system.html) Additional colors for data visualization 섹션을 읽어보면 좋습니다.
+
+<br>
+
 ---
 
 ### References
@@ -116,4 +150,5 @@ Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 �
 - [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG/)
 - [The color system | Material Design](https://material.io/design/color/the-color-system.html#color-usage-and-palettes)
 - [Color | Atlassian Design System](https://atlassian.design/foundations/color/)
+- [Color | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
 - [The Ultimate Guide to Creating a Design System — Part One, Colors](https://blog.prototypr.io/the-ultimate-guide-to-creating-a-design-system-part-one-colors-20b1d3f15ee6)
