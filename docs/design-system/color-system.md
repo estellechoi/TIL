@@ -22,7 +22,7 @@
 
 <br>
 
-<img src="./../img/color-palettes1.png" />
+<img src="./../img/color-palettes-1.png" />
 
 <br>
 
