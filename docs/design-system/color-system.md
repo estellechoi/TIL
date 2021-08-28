@@ -53,7 +53,13 @@
 
 ## 4. Secondary 컬러
 
-Secondary 색은 Primary 색과 보완되거나 대조되는 색으로 지정합니다. 사용자들이 주로 하게 될 행동에서 벗어난 Secondary 액션을 나타내는 색으로 사용합니다.
+Secondary 컬러는 Primary 색과 보완 관계에 있는 색으로 정합니다. [Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation)에 따르면 다음의 경우에 사용하면 가장 좋습니다.
+
+- Floating action buttons
+- Selection controls, like sliders and switches
+- Highlighting selected text
+- Progress bars
+- Links and headlines
 
 <br>
 
@@ -71,7 +77,35 @@ Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 �
 
 <br>
 
-## 4. Primary & Secondary Colors
+저는 [Material palette generator](https://material.io/design/color/the-color-system.html#tools-for-picking-colors)를 사용하여 아래와 같이 정했습니다.
+
+<br>
+
+<img src="./../img/palettes4.png" />
+
+<br>
+
+## 5. 피드백 팔레트
+
+피드백(Feedback) 팔레트는 사용자의 행동에 대한 "의미있는 응답"을 줄 때 사용할 색들로 구성합니다. 예를 들어, 사용자가 회원가입 버튼을 클릭했을 때 성공했는지, 오류가 발생했는지 등의 결과를 알려줄 때 사용합니다. 피드백 목적의 색이기 때문에 브랜드 컬러를 사용하지 않고, 의미를 담고 있는 시멘틱 컬러(Semantic color)를 사용하여 사용자가 의미를 쉽게 인지하도록 해야겠죠. 참고로 피드백 팔레트는 제가 임의로 만든 말이고요, [Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation)에서는 Surface, background, and error colors 섹션에서 설명하고 있고, [Atlassian Design System](https://atlassian.design/foundations/color/)에서는 Secondary Palette 섹션에서 설명하고 있습니다.
+
+<br>
+
+<img src="./../img/palettes6.png" />
+
+<br>
+
+## 6. 확장 팔레트
+
+확장 팔레트는 위에서 정한 Primary, Secondary 팔레트의 색들을 확장한 팔레트입니다. 보통 밝기, 색조가 다른 색들로 구성하고요, 한 컴포넌트 내에서 요소간 경계를 나타내거나 사용자가 인터렉션(Interaction)할 수 있음을 나타내기 위해 사용합니다. 저는 햇빛의 비침을 꼭 나타내고 싶어서 투명도를 달리한 팔레트를 추가로 만들었습니다.
+
+<br>
+
+<img src="./../img/palette2.png" />
+
+<br>
+
+<img src="./../img/palette7.png" />
 
 <br>
 
