@@ -22,7 +22,7 @@
 
 <br>
 
-<img src="./../img/color-palettes-1.png" />
+<img src="./../img/palettes2.png" />
 
 <br>
 
@@ -34,9 +34,19 @@
 
 <br>
 
-## 3. Primary, Secondary 컬러
+## 3. Primary 팔레트
 
-컬러 팔레트 구성의 첫걸음은 Primary 색과 Secondary 색을 정하는 것입니다. Primary 색은 서비스 전반에서 주로 사용될 브랜드 컬러이고요, Secondary 색은 Primary 색과 보완되거나 대조되는 색으로 지정합니다. 사용자들이 주로 하게 될 행동에서 벗어난 Secondary 액션을 나타내는 색으로 사용합니다.
+컬러 팔레트 구성의 첫걸음은 Primary 색들을 정하는 것입니다. Primary 색은 서비스 전반에서 주로 사용될 브랜드 컬러입니다.
+
+<br>
+
+<img src="./../img/palettes1.png" />
+
+<br>
+
+## 4. Secondary 컬러
+
+Secondary 색은 Primary 색과 보완되거나 대조되는 색으로 지정합니다. 사용자들이 주로 하게 될 행동에서 벗어난 Secondary 액션을 나타내는 색으로 사용합니다.
 
 <br>
 
