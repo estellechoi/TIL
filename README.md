@@ -114,12 +114,11 @@
 
 <br>
 
-## 3. Design
+## 3. Design System
 
-- [디자인시스템 가이드](./docs/design/design-system.md)
+- [컬러 시스템](./docs/design-system/color-system.md)
 
 <br>
-
 
 ## 4. Etc
 
