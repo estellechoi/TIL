@@ -22,7 +22,7 @@
 
 <br>
 
-<img src="./../img/palettes2.png" />
+<img src="./../img/palette2.png" />
 
 <br>
 
@@ -47,7 +47,7 @@
 
 <br>
 
-<img src="./../img/palettes3.png" />
+<img src="./../img/palette3.png" />
 
 <br>
 
@@ -81,7 +81,7 @@ Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 �
 
 <br>
 
-<img src="./../img/palettes4.png" />
+<img src="./../img/palette4.png" />
 
 <br>
 
@@ -91,7 +91,7 @@ Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 �
 
 <br>
 
-<img src="./../img/palettes6.png" />
+<img src="./../img/palette6.png" />
 
 <br>
 
