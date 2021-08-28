@@ -168,3 +168,4 @@ Primary, Secondary 팔레트의 색들이 다크모드에서도 명시성(Visibi
 - [Color | Atlassian Design System](https://atlassian.design/foundations/color/)
 - [Color | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
 - [The Ultimate Guide to Creating a Design System — Part One, Colors](https://blog.prototypr.io/the-ultimate-guide-to-creating-a-design-system-part-one-colors-20b1d3f15ee6)
+- [Applying color to UI | Material Design](https://material.io/design/color/applying-color-to-ui.html#usage)
