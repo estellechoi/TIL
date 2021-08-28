@@ -18,7 +18,7 @@
 
 ## 2. 컬러 팔레트(Color Palettes)
 
-디자인 시스템 파운데이션 중 가장 기본 기본이 되는 컬러 시스템은 팔레트 형태로 몇 가지 색들을 세팅합니다.
+디자인 시스템 파운데이션 중 가장 기본이 되는 컬러 시스템은 팔레트 형태로 몇 가지 색들을 세팅하여 구축합니다. 아래 사진은 저의 포트폴리오 웹사이트를 리뉴얼 기획하면서 작업하고 있는 컬러 팔레트입니다. Figma 커뮤니티에서 [Create a Design System](https://www.figma.com/community/file/943130265019106988) 프로젝트를 템플릿으로 사용했습니다.
 
 <br>
 
@@ -26,7 +26,38 @@
 
 <br>
 
-## 2. Primary & Secondary Colors
+다음은 컬러 팔레트를 빠르게 구성할 수 있게 도와주는 도구들입니다.
+
+- [Material palette generator](https://material.io/design/color/the-color-system.html#tools-for-picking-colors)
+- [Coolors.co](https://coolors.co/)
+- [Colorhunt](https://colorhunt.co/)
+
+<br>
+
+## 3. Primary, Secondary 컬러
+
+컬러 팔레트 구성의 첫걸음은 Primary 색과 Secondary 색을 정하는 것입니다. Primary 색은 서비스 전반에서 주로 사용될 브랜드 컬러이고요, Secondary 색은 Primary 색과 보완되거나 대조되는 색으로 지정합니다. 사용자들이 주로 하게 될 행동에서 벗어난 Secondary 액션을 나타내는 색으로 사용합니다.
+
+<br>
+
+Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 수 있도록 웹접근성을 보장하는 것이 중요합니다. [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/TR/WCAG/#contrast-minimum)를 참고하면 좋습니다. 최소 `4.5 : 1`의 충분한 대비 비율을 확보해야 한다는 것이 주 내용입니다.
+
+<br>
+
+    > The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following:
+
+    Large Text
+    Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;
+
+    Incidental
+    Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.
+
+    Logotypes
+    Text that is part of a logo or brand name has no contrast requirement.
+
+<br>
+
+## 4. Primary & Secondary Colors
 
 <br>
 
