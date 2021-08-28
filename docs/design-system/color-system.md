@@ -122,18 +122,32 @@ Secondary 색은 시각적 어려움이 있는 사람들도 색 구분을 할 �
 
 ## 7. 다크모드를 위한 팔레트
 
-사용자가 서비스를 다크모드로 사용할 때를 대비하여 위에서 구성한 팔레트 색들이 명시성(Visibility)과 가독성(Legibility)을 유지하는지 검사해봐야합니다. 기본적으로 다크모드는 배경색으로 아래의 색들이 권장되거나 사용되고 있습니다.
+사용자가 서비스를 다크모드로 사용할 때를 대비하여 위에서 구성한 Primary, Secondary 팔레트의 색들이 명시성(Visibility)과 가독성(Legibility)을 유지하는지 검사해봐야합니다. 가령, 저의 팔레트 색들을 그대로 사용하면 다크모드에서는 아래와 같이 텍스트 가독성이 떨어지겠죠.
+
+<br>
+
+<img src="./../img/palette9.png" />
+
+<br>
+
+저의 경우 Primary, Secondary 팔레트의 색들은 확장 팔레트에서 밝은 컬러로 대체하고, 피드백 팔레트의 색들은 밝은 색을 사용하여 아래와 같이 다크모드용 팔레트를 구성했습니다.
+
+<img src="./../img/palette10.png" />
+
+<br>
+
+그리고 텍스트에 적용시켜서 가독성이 개선되었는지 검사했습니다.
+
+<br>
+
+<img src="./../img/palette11.png" />
+
+<br>
+
+다크모드 디자인에 대한 자세한 가이드는 [Material Design Dark theme](https://material.io/design/color/dark-theme.html), [Human Interface Guidelines Dark Mode](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) 등을 참고하세요. 기본적으로 다크모드는 배경색으로 아래의 색들이 권장되거나 사용되고 있습니다.
 
 - Material Design `#121212`
 - iOS `#000`, `#161618`, `#212124`
-
-<br>
-
-다크모드 디자인에 대한 자세한 가이드는 [Material Design Dark theme](https://material.io/design/color/dark-theme.html), [Human Interface Guidelines Dark Mode](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) 등을 참고하세요.
-
-<br>
-
-<img src="./../img/palette8.png" />
 
 <br>
 
