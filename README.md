@@ -9,6 +9,7 @@
 ## 0. Design System
 
 - [개발자를 위한 디자인 시스템 Foundation 1 - 컬러](./docs/design-system/color-system.md)
+- [개발자를 위한 디자인 시스템 Foundation 2 - 타이포그래피](./docs/design-system/typography.md)
 
 <br>
 
