@@ -4,7 +4,7 @@
 
 ## 1. 타입페이스(Typeface) 선정: Serif vs Sans Serif
 
-타이포그래피(Typography) 시스템의 기본은 타입페이스(Typeface)를 선정하는 것입니다. 보통 1 ~ 2 개의 타입페이스를 크기, 굵기 등으로 확장하여 타이포그래피 시스템을 구축하고요, 당연히 브랜드의 톤앤매너와 가독성을 고려하여 타입페이스를 선정해야합니다. 참고로 [List of typefaces | Wikipedia](https://en.wikipedia.org/wiki/List_of_typefaces)에서 모든 타입페이스를 살펴볼 수 있습니다.
+타이포그래피(Typography) 시스템의 기본은 타입페이스(Typeface)를 선정하는 것입니다. 보통 1 ~ 2 개의 타입페이스를 크기, 굵기 등으로 확장하여 타이포그래피 시스템을 구축하고요, 당연히 브랜드의 톤앤매너와 가독성을 고려하여 타입페이스를 선정해야합니다. 참고로 [Wikipedia List of typefaces](https://en.wikipedia.org/wiki/List_of_typefaces)에서 모든 타입페이스를 살펴볼 수 있습니다.
 
 <br>
 
