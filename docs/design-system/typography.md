@@ -44,7 +44,7 @@
 
 - Arial
 - Tahoma
-- Verdana
+- <span style="font-family: Verdana">Verdana</span>
 
 <br>
 
