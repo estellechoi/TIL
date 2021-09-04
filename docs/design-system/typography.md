@@ -8,11 +8,22 @@
 
 <br>
 
+다음은 타이포그래피 시스템 구축을 빠르게 해주는 도구들입니다.
+
+- [FontBase](https://fontba.se/)
+- [Font Playground](https://play.typedetail.com/)
+- [Pair & Compare](https://www.pairandcompare.net/)
+- [FontPair](https://www.fontpair.co/)
+- [FontSpark](https://fontspark.app/)
+- [Better Font Finder](https://jmattthew.github.io/better-font-finder/better-font-finder.html)
+
+<br>
+
 ## 2. 타입페이스(Typeface) 정하기
 
 ### 2-1. `Serif` vs `Sans Serif`
 
-많고 많은 타입페이스 중 어떤 것을 선택해야할까요? 보통 `Serif`와 `Sans Serif` 중에서 사용할 폰트 계열을 정하는 것으로 시작합니다. `Serif`(세리프)는 인쇄된 H나 I 같은 활자에서 아래·위에 가로로 나 있는 가는 선을 의미하고요, 따라서 `Serif` 계열 폰트의 특징은 활자 끝에서 확장된 선이 있다는 것입니다. `Sans Serif`는 반대로 활자 끝이 깔끔하게 떨어지는 폰트 계열입니다. 한글에서 `Serif`는 명조체, `Sans Serif`는 고딕체로 부릅니다.
+많고 많은 타입페이스 중 어떤 것을 선택해야할까요? 보통 `Serif`와 `Sans Serif` 중에서 사용할 Primary 폰트 계열을 정하는 것으로 시작합니다. `Serif`(세리프)는 인쇄된 H나 I 같은 활자에서 아래·위에 가로로 나 있는 가는 선을 의미하고요, 따라서 `Serif` 계열 폰트의 특징은 활자 끝에서 확장된 선이 있다는 것입니다. `Sans Serif`는 반대로 활자 끝이 깔끔하게 떨어지는 폰트 계열입니다. 한글에서 `Serif`는 명조체, `Sans Serif`는 고딕체로 부릅니다.
 
 <br>
 
@@ -61,16 +72,25 @@
 
 <br>
 
-### 2-4. 타입페이스 도구
+### 2-4. 폰트 패밀리(Font Family)
 
-다음은 타입페이스 서칭과 선택을 도와주는 도구들입니다.
+사실 타입페이스를 선택한다는 것은 "단 하나의 고정된 폰트"가 아닌 "폰트 패밀리(Font Family)"를 선택하는 것입니다. 아래 사진처럼 하나의 폰트는 `100` ~ `900` 사이의 다양한 굵기 구성을 가지고요, `italic`체를 지원하기도 합니다. 쓰임에 맞게 얅거나 굵은 버전을 사용하고, `italic`체를 사용하기도 하죠. CSS에서 타입페이스를 지정하는 속성의 이름이 `font-family`인 이유이기도 합니다. 폰트 패밀리마다 굵기의 종류와 `italic`체 지원 여부가 다르기 때문에 프로젝트의 성격과 규모를 구현하는데 충분한 패밀리 구성을 갖추었는지 고려하여 타입페이스를 정해야합니다.
 
-- [FontBase](https://fontba.se/)
-- [Font Playground](https://play.typedetail.com/)
-- [Pair & Compare](https://www.pairandcompare.net/)
-- [FontPair](https://www.fontpair.co/)
-- [FontSpark](https://fontspark.app/)
-- [Better Font Finder](https://jmattthew.github.io/better-font-finder/better-font-finder.html)
+<br>
+
+<img src="./../img/font-family.png" />
+
+<br>
+
+### 2-5. 2 개 이상의 타입페이스 사용하기
+
+다음은 2 개 이상의 타입페이스를 사용할 때 참고할만한 사항들입니다.
+
+- 2 ~ 3 개 이상의 타입페이스를 사용하지 않습니다. 주의력을 분산시키기 때문입니다. 폰트의 사이즈와 굵기를 다르게 하는 것으로 충분합니다.
+
+- 서로 명확히 대조되는 타입페이스를 사용합니다. 보통 `Serif` 계열 1 가지와 `Sans Serif` 계열 1 가지를 사용합니다.
+
+- 타입페이스간 위계를 명확히 합니다. Primary 타입페이스와 Secondary 타입페이스로 나누어 사용합니다.
 
 <br>
 
@@ -78,7 +98,7 @@
 
 ### References
 
-- [옥스퍼드 영한사전](https://www.oxfordlearnersdictionaries.com/)
+- [Serif | Oxford Learner's Dictionaries](https://www.oxfordlearnersdictionaries.com/definition/english/serif?q=serif)
 - [Typography | Design Systems](https://www.designsystems.com/typography-guides/)
 - [A framework to create an accessible & harmonious typography system for faster design-dev handoff](https://blog.prototypr.io/10-practical-steps-to-create-a-predictable-accessible-and-harmonious-typography-system-a-case-6c85d901bedd)
 - [Typography | Shopify Design System](https://polaris.shopify.com/design/typography#navigation)
