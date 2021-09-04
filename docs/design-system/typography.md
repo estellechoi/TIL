@@ -16,7 +16,7 @@
 
 <br>
 
-<img src="./../img/serif-vs-sans-serif.png" />
+<img src="./../img/serif-vs-sans-serif.webp" />
 
 <br>
 
