@@ -349,19 +349,40 @@ $line-height-xs: math.floor(
 
 <br>
 
-## 8. 줄 길이(Paragraph Width)
+## 8. 줄 길이(Line length)
 
-줄 길이는 텍스트 박스의 왼쪽과 오른쪽 사이의 간격입니다. 줄 길이를 고려해야하는 이유는 줄 길이가 너무 길면 컨텐츠가 리듬을 잃고, 줄 길이가 너무 짧으면 텍스트가 분리되기 때문입니다.
+줄 길이는 텍스트 박스의 왼쪽과 오른쪽 사이의 간격입니다.
+권장되는 줄의 길이는 레퍼런스마다 조금씩 다르지만 데스크탑의 경우 한 줄에 50 ~ 75자, 모바일은 35 ~ 40자 사이가 일반적입니다. [Atlassian Design System](https://atlassian.design/foundations/typography#line-length)은 여백 포함 60 ~ 100자 사이를 이상적인 줄 길이로 제안합니다.
 
 <br>
 
-디지털 텍스트에 권장되는 줄의 길이는 데스크탑의 경우 한 줄에 50 ~ 75자, 모바일은 35 ~ 40자 사이입니다.
+<img src="./../img/line-length.png" />
+
+사진 출처 : [Atlassian Design System](https://atlassian.design/foundations/typography#line-length)
+
+<br>
+
+어찌됐든 정확한 줄 길이를 측정하기란 불가능하고, 디바이스마다 뷰포트의 너비 또한 다르기 때문에 폰트 크기와 자간, 디바이스들의 뷰포트 크기를 종합적으로 고려하여 결정하면 되겠습니다. 가장 간단한 방법 중 하나는 가장 보편적일 수 있는 값을 정한 다음 `max-width`로 지정하는 것입니다.
+
+<br>
+
+줄 길이를 고려해야하는 이유는 줄 길이가 너무 길거나 짧으면 읽는 속도와 이해도가 떨어지기 때문입니다. 다음은 [Wikipedia](https://en.wikipedia.org/wiki/Line_length#Electronic_text)에서 발췌한 가독성 연구 결과에 대한 설명입니다.
+
+<br>
+
+> Legibility research specific to digital text has shown that, like with printed text, line length can affect reading speed. If lines are too long it is difficult for the reader to quickly return to the start of the next line (saccade), whereas if lines are too short more scrolling or paging will be required.
+
+> In order for on-screen text to have both the best speed and comprehension possible about 55 cpl should be used.
+
+<br>
+
+[StackExchange - What is the best number of paragraph width for readability?](https://ux.stackexchange.com/questions/108801/what-is-the-best-number-of-paragraph-width-for-readability) 페이지가 도움이 되었습니다.
 
 <br>
 
 ## 9. 폰트 스타일(Font Style)
 
-폰트 스타일에는 `italic`, `bold`, `underline` 등이 있습니다. HTML에서 `<strong>`, `<em>` 등의 태그에 기반하는 스타일들입니다. 다음은 몇가지 참고할 만한 규칙들입니다.
+폰트 스타일에는 `italic`, `bold`, `underline` 등이 있습니다. HTML에서 `<strong>`, `<em>` 등의 태그에 기반하는 스타일들입니다. 다음은 [Building a design system — where to start?](https://uxdesign.cc/building-a-design-system-where-to-start-part-4-typography-5065b8d360c)에서 가져온 몇가지 참고할 만한 규칙들입니다.
 
 <br>
 
