@@ -205,9 +205,7 @@
 
 ## 5. 폰트 사이즈와 줄높이를 그리드에 맞추기
 
-4pt Baseline Grid 레이아웃을 사용한다면 `x` 배씩 증감하는 사이즈 팔레트의 값들을 인위적으로 조정하여 4의 배수 위주로 구성할 수도 있습니다.
-
-<br>
+4pt Baseline Grid 레이아웃을 사용한다면 `x` 배씩 증감하는 사이즈 팔레트의 값들을 인위적으로 조정하여 `4`의 배수 위주로 구성할 수도 있습니다.
 
 ```css
 :root {
@@ -230,7 +228,7 @@
 
 <br>
 
-[CSS 전처리기](https://developer.mozilla.org/ko/docs/Glossary/CSS_preprocessor) 중 하나인 [SCSS](https://sass-lang.com/)의 `math.floor` 함수를 사용하면, 아래와 같이 Modular Scale을 구축할 수 있습니다.
+[CSS 전처리기](https://developer.mozilla.org/ko/docs/Glossary/CSS_preprocessor) 중 하나인 [SCSS](https://sass-lang.com/)의 `math.floor` 함수를 사용하면, 아래와 같이 `4`의 배수로 구성된 Modular Scale을 구축할 수 있습니다.
 
 ```scss
 @use "sass:list";
