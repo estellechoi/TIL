@@ -4,7 +4,7 @@
 
 1. 타입페이스(Typeface) 정하기
 2. 여러 개의 타입페이스를 함께 사용하기
-3. 줄높이(Line Height): 웹접근성, 4pt Baseline Grid
+3. 줄높이(Line Height): 정의, 웹접근성, 4pt Baseline Grid
 4. 폰트 사이즈(Font Size): 웹접근성, `rem`
 5. Type Scales
 6. 폰트 사이즈와 줄높이를 그리드 시스템에 맞추기
@@ -104,9 +104,9 @@
 
 <br>
 
-## 3. 줄높이(Line Height): 줄높이란, 웹접근성, 4pt Baseline Grid
+## 3. 줄높이(Line Height): 정의, 웹접근성, 4pt Baseline Grid
 
-### 3-1. 줄높이란
+### 3-1. 정의
 
 텍스트의 위아래 행간(Leading)을 포함한 높이를 줄높이(Line Height)라고 합니다. 줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다.
 
@@ -116,7 +116,7 @@
 
 <br>
 
-### 3-1. 웹접근성
+### 3-2. 웹접근성
 
 [WCAG Success Criterion 1.4.8](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html)에 명시된 가이드에 따르면, 폰트 크기의 최소 `1.5` 배를 텍스트의 줄높이 공간으로 사용하는 것이 좋습니다. 만약 본문 텍스트의 폰트 사이즈가 `16px`이라면, 줄높이는 최소 `24px`이어야 웹접근성이 좋다고 보는 것입니다.
 
@@ -126,7 +126,7 @@
 
 <br>
 
-### 3-2. 4pt Baseline Grid
+### 3-3. 4pt Baseline Grid
 
 그리드 시스템에서 모든 Vertical 여백값은 텍스트의 줄높이와 정비례 관계에서 있어야 조화롭다고 보기 때문입니다. 따라서 가장 많이 사용되는 [4pt Baseline Grid]() 레이아웃에서 텍스트의 줄높이는 `4`의 배수를 사용합니다. 예를 들어 폰트 사이즈가 `16px`이라면 줄높이는 `24px`로 정하는 것이 좋습니다. 폰트 사이즈의 `1.5` 배 이상이면서 `4`의 배수이기 때문입니다.
 
