@@ -104,11 +104,21 @@
 
 <br>
 
-## 3. 줄높이(Line Height): 웹접근성, 4pt Baseline Grid
+## 3. 줄높이(Line Height): 줄높이(Line Height)란, 웹접근성, 4pt Baseline Grid
+
+### 3-1. 줄높이(Line Height)란
+
+텍스트의 위아래 여백(Space)을 포함한 높이를 줄높이(Line Height)라고 합니다. 줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다.
+
+<img src="./../img/line-height.png" />
+
+사진 출처 : [sirong.tistory.com](https://sirong.tistory.com/64)
+
+<br>
 
 ### 3-1. 웹접근성
 
-줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다. [WCAG Success Criterion 1.4.8](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html)에 명시된 가이드에 따르면, 폰트 크기의 최소 `1.5` 배를 텍스트의 줄높이 공간으로 사용하는 것이 좋습니다. 만약 본문 텍스트의 폰트 사이즈가 `16px`이라면, 줄높이는 최소 `24px`이어야 웹접근성이 좋다고 보는 것입니다.
+[WCAG Success Criterion 1.4.8](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html)에 명시된 가이드에 따르면, 폰트 크기의 최소 `1.5` 배를 텍스트의 줄높이 공간으로 사용하는 것이 좋습니다. 만약 본문 텍스트의 폰트 사이즈가 `16px`이라면, 줄높이는 최소 `24px`이어야 웹접근성이 좋다고 보는 것입니다.
 
 <br>
 
