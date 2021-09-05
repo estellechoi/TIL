@@ -145,17 +145,7 @@
 
 ### 4-2. Type Scales
 
-이제 기본 사이즈를 중심으로 특정 배수 `x`씩 증감하는 사이즈 팔레트를 구축합니다. 특정 배수 `x`의 값은 정하기 나름이지만, [Type Scale](https://type-scale.com/)은 아래와 같이 가이드를 제공합니다. 일반적으로 `1.15` ~ `1.333` 배수를 사용하면 충분하고요, 모바일 버전은 `1.2`보다 작은 배수를 사용하는 것이 좋겠네요.
-
-<br>
-
-> Small scales (less than 1.2) are subtle and good for both mobile and desktop apps, or the mobile version of a responsive site. <br/>
-> Medium scales (1.15–1.333) have a clear hierarchy, and help to organize sections with subheadings. A medium scale is versatile and works well for a wide variety of desktop sites, including blogs and marketing sites.<br/>
-> Large scales (1.333 or greater) may be challenging to implement effectively, but could work well for portfolios, agencies, some marketing sites, or avant-garde works.
-
-<br>
-
-만약 [Major Second Ratio](https://en.wikipedia.org/wiki/Major_second#Epogdoon)에 기반한 디자인을 구축한다면, 아래와 같이 `1rem`을 기점으로 `1.125` 배씩 스케일링하는 사이즈 팔레트를 구성할 수 있겠습니다. `1rem`은 `<html>` 태그의 폰트 사이즈이고요, `<html>` 태그의 폰트 사이즈를 `px` 단위로 고정시킨 후 다른 모든 폰트 사이즈는 `rem` 단위를 사용합니다. 확장성과 웹접근성 때문입니다.
+이제 기본 사이즈를 중심으로 특정 배수 `x`씩 증감하는 사이즈 팔레트를 구축합니다. 만약 [Major Second Ratio](https://en.wikipedia.org/wiki/Major_second#Epogdoon)에 기반한 디자인을 구축한다면, 아래와 같이 `1rem`을 기점으로 `1.125` 배씩 스케일링하는 사이즈 팔레트를 구성할 수 있겠습니다. `1rem`은 `<html>` 태그의 폰트 사이즈이고요, `<html>` 태그의 폰트 사이즈를 `px` 단위로 고정시킨 후 다른 모든 폰트 사이즈는 `rem` 단위를 사용합니다. 확장성과 웹접근성 때문입니다.
 
 <br>
 
@@ -192,6 +182,16 @@
 	);
 }
 ```
+
+<br>
+
+배수 `x`의 값은 정하기 나름이지만, [Type Scale](https://type-scale.com/)은 아래와 같이 가이드를 제공합니다. 일반적으로 `1.15` ~ `1.333` 배수를 사용하면 충분하고요, 모바일 버전은 `1.2`보다 작은 배수를 사용하는 것이 좋겠네요.
+
+<br>
+
+> Small scales (less than 1.2) are subtle and good for both mobile and desktop apps, or the mobile version of a responsive site. <br/>
+> Medium scales (1.15–1.333) have a clear hierarchy, and help to organize sections with subheadings. A medium scale is versatile and works well for a wide variety of desktop sites, including blogs and marketing sites.<br/>
+> Large scales (1.333 or greater) may be challenging to implement effectively, but could work well for portfolios, agencies, some marketing sites, or avant-garde works.
 
 <br>
 
