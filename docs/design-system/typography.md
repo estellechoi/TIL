@@ -107,7 +107,7 @@
 
 ### 3-1. 웹접근성
 
-줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다. [WCAG Success Criterion 1.4.8](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html)에 명시된 가이드에 따르면, 폰트 크기의 최소 1.5 배를 텍스트의 줄높이 공간으로 사용하는 것이 좋습니다. 만약 본문 텍스트의 폰트 사이즈가 `16px`이라면, 줄높이는 최소 `24px`이어야 웹접근성이 좋다고 보는 것입니다.
+줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다. [WCAG Success Criterion 1.4.8](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html)에 명시된 가이드에 따르면, 폰트 크기의 최소 `1.5` 배를 텍스트의 줄높이 공간으로 사용하는 것이 좋습니다. 만약 본문 텍스트의 폰트 사이즈가 `16px`이라면, 줄높이는 최소 `24px`이어야 웹접근성이 좋다고 보는 것입니다.
 
 <br>
 
@@ -117,7 +117,7 @@
 
 ### 3-2. 4pt Baseline Grid
 
-이제 고려해야할 것은 [그리드(Grid)](https://developer.mozilla.org/ko/docs/Learn/CSS/CSS_layout/Grids)와의 조화입니다. 그리드 시스템에서 모든 Vertical 여백값은 텍스트의 줄높이와 비례 관계에서 있어야 조화롭다고 보기 때문입니다. 따라서 텍스트의 줄높이 값은 홀수보다는, 잘 나누어 떨어지는 짝수를 사용하는 것이 용이합니다. 예를 들어 폰트 사이즈가 `16px`이라면 줄높이는 `24px`로 정하는 것이 좋습니다. 폰트 사이즈의 `1.5` 배 이상이면서 `4`의 배수이므로 [4pt Baseline Grid]() 레이아웃에 어울리기 때문입니다.
+그리드 시스템에서 모든 Vertical 여백값은 텍스트의 줄높이와 정비례 관계에서 있어야 조화롭다고 보기 때문입니다. 따라서 가장 많이 사용되는 [4pt Baseline Grid]() 레이아웃에서 텍스트의 줄높이는 `4`의 배수를 사용합니다. 예를 들어 폰트 사이즈가 `16px`이라면 줄높이는 `24px`로 정하는 것이 좋습니다. 폰트 사이즈의 `1.5` 배 이상이면서 `4`의 배수이기 때문입니다.
 
 <br>
 
@@ -125,7 +125,7 @@
 
 ### 4-1. 웹접근성
 
-가장 먼저 기본 사이즈를 정합니다. 웹에서 폰트의 기본 사이즈는 일반적으로 `16px`입니다. 보통 텍스트가 다량 사용되는 본문 영역에 기본 사이즈를 사용합니다. `16px` 보다 작은 크기를 사용하더라도 웹접근성을 고려하여 너무 작은 크기의 텍스트는 사용하지 말아야하고요, 일반적으로 `10pt`(`13px`)을 최소 크기로 보고 있습니다. 텍스트 웹접근성에 대한 다양한 자료는 [WebAIM](https://webaim.org/resources/designers/#text)에서 확인할 수 있습니다.
+가장 먼저 기본 사이즈를 정합니다. 보통 텍스트가 다량 사용되는 본문 영역에 기본 사이즈를 사용하게 됩니다. 웹에서 폰트의 기본 사이즈는 일반적으로 `16px`을 사용합니다. `16px` 보다 작은 크기를 사용하더라도 웹접근성을 고려하여 너무 작은 크기의 텍스트는 사용하지 말아야하고요, 일반적으로 `10pt`(대략 `13px`)을 최소 크기로 보고 있습니다. 텍스트 웹접근성에 대한 다양한 자료는 [WebAIM](https://webaim.org/resources/designers/#text)에서 확인할 수 있습니다.
 
 <br>
 
@@ -149,15 +149,7 @@
 
 <br>
 
-다음은 사이즈 팔레트 구축을 빠르게 도와주는 도구들입니다.
-
-- [Modular Scale](https://www.modularscale.com/) : 자동으로 Modular Scale 팔레트를 구성해주는 사이트
-- [Type Scale](https://type-scale.com/) : 사용할 디자인 레이아웃 방법론을 선택하면 자동으로 사이즈 팔레트를 구성해주는 사이트
-- [archetype](https://archetypeapp.com/#) : 2 개 이상의 타입페이스를 사용한다면 유용한 사이트
-
-<br>
-
-만약 [Major Second Ratio](https://en.wikipedia.org/wiki/Major_second#Epogdoon)에 기반한 디자인을 구축한다면, 아래와 같이 `1rem`을 기점으로 `1.125` 배씩 스케일링하는 사이즈 팔레트를 구성할 수 있겠습니다.
+만약 [Major Second Ratio](https://en.wikipedia.org/wiki/Major_second#Epogdoon)에 기반한 디자인을 구축한다면, 아래와 같이 `1rem`을 기점으로 `1.125` 배씩 스케일링하는 사이즈 팔레트를 구성할 수 있겠습니다. [Type Scale](https://type-scale.com/)을 사용했습니다.
 
 <br>
 
@@ -169,26 +161,35 @@
 
 ```css
 :root {
+	/* base modules */
 	--font-size-base: 16px; /* fallback for old browsers */
 	--font-size-base: 1rem;
 	--type-scale-ratio: 1.125;
 
 	/* type scales */
-	--font-size-xs: calc(
-		var(--font-size-base) / (var(--type-scale-ratio) * var(--type-scale-ratio))
-	);
-	--font-size-s: calc(var(--font-size-base) / var(--type-scale-ratio));
-	--font-size-m: var(--font-size-base);
-	--font-size-l: calc(var(--font-size-base) * var(--type-scale-ratio));
-	--font-size-xl: calc(
-		var(--font-size-base) * var(--type-scale-ratio) * var(--type-scale-ratio)
-	);
 	--font-size-2xl: calc(
 		var(--font-size-base) * var(--type-scale-ratio) * var(--type-scale-ratio) *
 			var(--type-scale-ratio)
 	);
+	--font-size-xl: calc(
+		var(--font-size-base) * var(--type-scale-ratio) * var(--type-scale-ratio)
+	);
+	--font-size-l: calc(var(--font-size-base) * var(--type-scale-ratio));
+	--font-size-m: var(--font-size-base);
+	--font-size-s: calc(var(--font-size-base) / var(--type-scale-ratio));
+	--font-size-xs: calc(
+		var(--font-size-base) / (var(--type-scale-ratio) * var(--type-scale-ratio))
+	);
 }
 ```
+
+<br>
+
+다음은 사이즈 팔레트 구축을 빠르게 도와주는 도구들입니다.
+
+- [Modular Scale](https://www.modularscale.com/) : 자동으로 Modular Scale 팔레트를 구성해주는 사이트
+- [Type Scale](https://type-scale.com/) : 사용할 디자인 레이아웃 방법론을 선택하면 자동으로 사이즈 팔레트를 구성해주는 사이트
+- [archetype](https://archetypeapp.com/#) : 2 개 이상의 타입페이스를 사용한다면 유용한 사이트
 
 <br>
 
@@ -201,20 +202,47 @@
 ```css
 :root {
 	/* fallback for old browsers */
-	--font-size-xs: 12px;
-	--font-size-s: 14px;
-	--font-size-m: 16px;
-	--font-size-l: 18px;
-	--font-size-xl: 20px;
 	--font-size-2xl: 24px;
+	--font-size-xl: 20px;
+	--font-size-l: 18px;
+	--font-size-m: 16px;
+	--font-size-s: 14px;
+	--font-size-xs: 12px;
 	/* rem */
-	--font-size-xs: 0.75rem;
-	--font-size-s: 0.875rem;
-	--font-size-m: 1rem;
-	--font-size-l: 1.125rem;
-	--font-size-xl: 1.25rem;
 	--font-size-2xl: 1.5rem;
+	--font-size-xl: 1.25rem;
+	--font-size-l: 1.125rem;
+	--font-size-m: 1rem;
+	--font-size-s: 0.875rem;
+	--font-size-xs: 0.75rem;
 }
+```
+
+<br>
+
+[CSS 전처리기](https://developer.mozilla.org/ko/docs/Glossary/CSS_preprocessor) 중 하나인 [SCSS](https://sass-lang.com/)의 `math.floor` 함수를 사용하면, 아래와 같이 Modular Scale을 구축할 수 있습니다.
+
+```scss
+@use "sass:list";
+
+/* base modules */
+$font-size-base: 16px;
+$type-scale-ratio: 1.125;
+
+/* type scales */
+$font-size-2xl: math.floor(
+		$font-size-base * $type-scale-ratio * $type-scale-ratio *
+			$type-scale-ratio / 4
+	) * 4;
+$font-size-xl: math.floor(
+		$font-size-base * $type-scale-ratio * $type-scale-ratio / 4
+	) * 4;
+$font-size-l: math.floor($font-size-base * $type-scale-ratio / 4) * 4;
+$font-size-m: $font-size-base;
+$font-size-s: math.floor(($font-size-base / $type-scale-ratio) / 4) * 4;
+$font-size-xs: math.floor(
+		($font-size-base / ($type-scale-ratio * $type-scale-ratio)) / 4
+	) * 4;
 ```
 
 <br>
@@ -224,20 +252,35 @@
 ```css
 :root {
 	/* fallback for old browsers */
-	--line-height-xs: 16px;
-	--line-height-s: 20px;
-	--line-height-m: 24px;
-	--line-height-l: 28px;
-	--line-height-xl: 32px;
 	--line-height-2xl: 36px;
+	--line-height-xl: 32px;
+	--line-height-l: 28px;
+	--line-height-m: 24px;
+	--line-height-s: 20px;
+	--line-height-xs: 16px;
 	/* rem */
-	--line-height-xs: 1rem;
-	--line-height-s: 1.25rem;
-	--line-height-m: 1.5rem;
-	--line-height-l: 1.75rem;
-	--line-height-xl: 2rem;
 	--line-height-2xl: 2.25rem;
+	--line-height-xl: 2rem;
+	--line-height-l: 1.75rem;
+	--line-height-m: 1.5rem;
+	--line-height-s: 1.25rem;
+	--line-height-xs: 1rem;
 }
+```
+
+<br>
+
+Modular Scale을 구축한다면 SCSS와 같은 CSS 전처리기를 사용하여 아래와 같이 작성하고요.
+
+```scss
+@use "sass:list";
+
+$line-height-2xl: math.floor($font-size-2xl * 1.5 / 4) * 4;
+$line-height-xl: math.floor($font-size-xl * 1.5 / 4) * 4;
+$line-height-l: math.floor($font-size-l * 1.5 / 4) * 4;
+$line-height-m: math.floor($font-size-m * 1.5 / 4) * 4;
+$line-height-s: math.floor($font-size-s * 1.5 / 4) * 4;
+$line-height-xs: math.floor($font-size-xs * 1.5 / 4) * 4;
 ```
 
 <br>
