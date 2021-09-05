@@ -352,17 +352,13 @@ $line-height-xs: math.floor(
 ## 8. 줄 길이(Line length)
 
 줄 길이는 텍스트 박스의 왼쪽과 오른쪽 사이의 간격입니다.
-권장되는 줄의 길이는 레퍼런스마다 조금씩 다르지만 데스크탑의 경우 한 줄에 50 ~ 75자, 모바일은 35 ~ 40자 사이가 일반적입니다. [Atlassian Design System](https://atlassian.design/foundations/typography#line-length)은 여백 포함 60 ~ 100자 사이를 이상적인 줄 길이로 제안합니다.
+권장되는 줄의 길이는 레퍼런스마다 조금씩 다르지만 데스크탑의 경우 한 줄에 50 ~ 75자, 모바일은 35 ~ 40자 사이가 일반적입니다. [Atlassian Design System](https://atlassian.design/foundations/typography#line-length)은 여백 포함 60 ~ 100자 사이를 이상적인 줄 길이로 제안합니다. 어찌됐든 정확한 줄 길이를 측정하기란 불가능하고, 디바이스마다 뷰포트의 너비 또한 다르기 때문에 폰트 크기와 자간, 디바이스들의 뷰포트 크기를 종합적으로 고려하여 결정하면 되겠습니다. 가장 간단한 방법 중 하나는 가장 보편적일 수 있는 값을 정한 다음 `max-width`로 지정하는 것입니다.
 
 <br>
 
 <img src="./../img/line-length.png" />
 
 사진 출처 : [Atlassian Design System](https://atlassian.design/foundations/typography#line-length)
-
-<br>
-
-어찌됐든 정확한 줄 길이를 측정하기란 불가능하고, 디바이스마다 뷰포트의 너비 또한 다르기 때문에 폰트 크기와 자간, 디바이스들의 뷰포트 크기를 종합적으로 고려하여 결정하면 되겠습니다. 가장 간단한 방법 중 하나는 가장 보편적일 수 있는 값을 정한 다음 `max-width`로 지정하는 것입니다.
 
 <br>
 
