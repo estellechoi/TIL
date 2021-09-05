@@ -1,4 +1,4 @@
-# 개발자를 위한 디자인 시스템 Foundation 2 - 타이포그래피
+# 개발자를 위한 디자인 시스템 Foundation 2 - 타이포그래피(Typography)
 
 <br>
 
