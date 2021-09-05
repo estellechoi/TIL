@@ -8,6 +8,9 @@
 4. 폰트 사이즈(Font Size): 웹접근성, Type Scales
 5. 폰트 사이즈와 줄높이를 그리드 시스템에 맞추기
 6. 폰트 굵기(Font Weight)
+7. 자간(Letter Spacing)
+8. 줄 길이(Paragraph Width)
+9. 폰트 스타일(Font Style)
 
 <br>
 
@@ -83,7 +86,7 @@
 
 ### 1-5. 폰트 패밀리(Font Family)
 
-사실 타입페이스를 선택한다는 것은 "단 하나의 고정된 폰트"가 아닌 "폰트 패밀리(Font Family)"를 선택하는 것입니다. 아래 사진처럼 하나의 폰트는 `100` ~ `900` 사이의 다양한 굵기 구성을 가지고요, `italic`체를 지원하기도 합니다. CSS에서 타입페이스를 지정하는 속성의 이름이 `font-family`인 이유이기도 합니다. 폰트 패밀리마다 굵기의 종류와 `italic`체 지원 여부가 다르기 때문에 프로젝트의 성격과 규모를 구현하는데 충분한 패밀리 구성을 갖추었는지 고려하여 타입페이스를 정해야합니다.
+사실 타입페이스를 선택한다는 것은 "단 하나의 고정된 폰트"가 아닌 "폰트 패밀리(Font Family)"를 선택하는 것입니다. 아래 사진처럼 하나의 폰트는 [`100` ~ `900` 사이의 굵기](https://helpx.adobe.com/fonts/using/css-selectors.html#Usingmultipleweightsandstyles) 구성을 가지고요, `italic`체를 지원하기도 합니다. CSS에서 타입페이스를 지정하는 속성의 이름이 `font-family`인 이유이기도 합니다. 폰트 패밀리마다 굵기의 종류와 `italic`체 지원 여부가 다르기 때문에 프로젝트의 성격과 규모를 구현하는데 충분한 패밀리 구성을 갖추었는지 고려하여 타입페이스를 정해야합니다.
 
 <br>
 
@@ -103,7 +106,7 @@
 
 <br>
 
-## 3. 줄높이(Line Height): 정의, 웹접근성, 4pt Baseline Grid
+## 3. 줄높이(Line Height): 정의, 웹접근성과 가독성, 4포인트 그리드 시스템
 
 ### 3-1. 정의
 
@@ -115,7 +118,7 @@
 
 <br>
 
-### 3-2. 웹접근성
+### 3-2. 웹접근성과 가독성
 
 [WCAG Success Criterion 1.4.8](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html)에 명시된 가이드에 따르면, 폰트 크기의 최소 `1.5` 배를 텍스트의 줄높이 공간으로 사용하는 것이 좋습니다. 만약 본문 텍스트의 폰트 사이즈가 `16px`이라면, 줄높이는 최소 `24px`이어야 웹접근성이 좋다고 보는 것입니다.
 
@@ -125,9 +128,21 @@
 
 <br>
 
-### 3-3. 4pt Baseline Grid
+하지만 일반적으로는, 폰트 사이즈의 `1.3` ~ `1.5` 배의 줄높이가 가독성에 최적이고, `2` 배까지도 허용된다는 것이 중론입니다. 주의할 점은 폰트마다 최적의 줄높이가 다르다는 것입니다. [Golden Ratio Typography Calculator](https://grtcalculator.com/)는 폰트별로 최적의 줄높이를 계산해줍니다.
 
-그리드 시스템에서 모든 Vertical 여백값은 텍스트의 줄높이와 정비례 관계에서 있어야 조화롭다고 보기 때문입니다. 따라서 가장 많이 사용되는 [4pt Baseline Grid]() 레이아웃에서 텍스트의 줄높이는 `4`의 배수를 사용합니다. 예를 들어 폰트 사이즈가 `16px`이라면 줄높이는 `24px`로 정하는 것이 좋습니다. 폰트 사이즈의 `1.5` 배 이상이면서 `4`의 배수이기 때문입니다.
+<br>
+
+폰트 사이즈가 작을 수록 줄높이 배수는 커져야합니다. [Best UX practices for line spacing](https://www.justinmind.com/blog/best-ux-practices-for-line-spacing/)에 따르면, 작은 글씨는 이미 읽기 어려우며, 눈이 쉽게 따라갈 수 있도록 더 많은 공간이 필요하기 때문입니다.
+
+<br>
+
+> Small fonts need more spacing. Line spacing as a % should actually increase with smaller font sizes. This is because smaller fonts are already more difficult to read, and need more space around them for the eye to easily follow.
+
+<br>
+
+### 3-3. 4포인트 그리드 시스템(4pt Baseline Grid)
+
+그리드 시스템에서 모든 Vertical 여백값은 텍스트의 줄높이와 정비례 관계에서 있어야 조화롭다고 봅니다. 따라서 흔히 사용하는 [4포인트 그리드 시스템(4pt Baseline Grid)]()을 채택한다면, 텍스트의 줄높이는 `4`의 배수를 사용해야합니다. 예를 들어 폰트 사이즈가 `16px`이라면 줄높이는 `24px`로 정하는 것이 좋습니다. 폰트 사이즈의 `1.5` 배이면서 `4`의 배수이기 때문입니다.
 
 <br>
 
@@ -311,7 +326,49 @@ $line-height-xs: math.floor(
 
 ## 6. 폰트 굵기(Font Weight)
 
-폰트 굵기(Font Weight)는 텍스트간 위계를 정확하게 전달하는 용도로 사용합니다. 간단한 서비스라면 보통 굵은 폰트, 중간 폰트, 얅은 폰트 3 가지로 충분합니다. 텍스트간 위계를 부여할 때 굵기 대신 폰트 사이즈를 사용할 수도 있으므로 어떤 것이 효과적일지 고려해봐야합니다.
+웹에서 폰트의 굵기는 [`100` ~ `900` 사이의 9 가지 값](https://helpx.adobe.com/fonts/using/css-selectors.html#Usingmultipleweightsandstyles)을 사용합니다. 폰트에 따라 모든 굵기를 지원하거나 일부 굵기만 지원하기도 합니다. 같은 굵기 값이라도 폰트에 따라 실제 굵기는 다르고요.
+
+<br>
+
+폰트 굵기(Font Weight)는 텍스트간 위계를 나타내는 용도로 사용합니다. 텍스트간 위계를 부여할 때 굵기 대신 폰트 사이즈를 사용할 수도 있으므로 어떤 것이 효과적일지 비교하여 결정해야합니다. 폰트 사이즈가 작은 텍스트에는 얇은 굵기를 적용하는 것을 지양해야합니다. 접근성 문제가 있기 때문입니다.
+
+<br>
+
+## 7. 자간(Letter Spacing)
+
+폰트의 크기가 커지면 자간을 적게 사용하고, 폰트의 크기가 작아지면 자간을 늘려 사용하는 것이 좋습니다. [Guidelines for Letterspacing Type](https://johndjameson.com/blog/guidelines-for-letterspacing-type/)에서 참고할 만한 사항들을 정리해보면 다음과 같습니다.
+
+<br>
+
+- 대문자 : 대문자의 자간은 늘리는 것이 좋음
+- 큰 텍스트는 자간을 줄이는 것이 좋습니다. (타이틀 등)
+- 본문 텍스트는 기본 자간을 사용하거나 기본 자간과 매우 비슷해야 합니다.
+- 작은 텍스트는 자간을 늘려 사용합니다.
+- 어두운 배경의 밝은 색 텍스트는 자간을 약간 늘리는 것이 좋습니다.
+- 폰트 굵기와 자간은 반비례 관계입니다. 폰트가 굵을 수록 자간은 좁아지고, 폰트 굵기가 얇을 수록 자간은 늘어납니다.
+
+<br>
+
+## 8. 줄 길이(Paragraph Width)
+
+줄 길이는 텍스트 박스의 왼쪽과 오른쪽 사이의 간격입니다. 줄 길이를 고려해야하는 이유는 줄 길이가 너무 길면 컨텐츠가 리듬을 잃고, 줄 길이가 너무 짧으면 텍스트가 분리되기 때문입니다.
+
+<br>
+
+디지털 텍스트에 권장되는 줄의 길이는 데스크탑의 경우 한 줄에 50 ~ 75자, 모바일은 35 ~ 40자 사이입니다.
+
+<br>
+
+## 9. 폰트 스타일(Font Style)
+
+폰트 스타일에는 `italic`, `bold`, `underline` 등이 있습니다. HTML에서 `<strong>`, `<em>` 등의 태그에 기반하는 스타일들입니다. 다음은 몇가지 참고할 만한 규칙들입니다.
+
+<br>
+
+- `italic`과 `bold`는 상호배타적이므로 함께 사용하지 않습니다.
+- 폰트 스타일은 최대한 적게 사용합니다.
+- `Serif` 계열 폰트에서 부드러운 강조는 `italic`, 강한 강조는 `bold`를 사용합니다.
+- `Sans Serif` 계열 폰트에서는 강조시 `italic` 스타일을 사용하지 않습니다. 눈에 띄지 않기 때문입니다.
 
 <br>
 
@@ -319,6 +376,7 @@ $line-height-xs: math.floor(
 
 ### References
 
+- [Building a design system — where to start?](https://uxdesign.cc/building-a-design-system-where-to-start-part-4-typography-5065b8d360c)
 - [Serif | Oxford Learner's Dictionaries](https://www.oxfordlearnersdictionaries.com/definition/english/serif?q=serif)
 - [Typography | Design Systems](https://www.designsystems.com/typography-guides/)
 - [A framework to create an accessible & harmonious typography system for faster design-dev handoff](https://blog.prototypr.io/10-practical-steps-to-create-a-predictable-accessible-and-harmonious-typography-system-a-case-6c85d901bedd)
@@ -332,5 +390,7 @@ $line-height-xs: math.floor(
 - [Mathematical Web Typography](https://jxnblk.com/blog/mathematical-web-typography/)
 - [More Meaningful Typography](https://alistapart.com/article/more-meaningful-typography/)
 - [Defining a Modular Type Scale for Web UI](https://blog.prototypr.io/defining-a-modular-type-scale-for-web-ui-51acd5df31aa)
+- [Guidelines for Letterspacing Type](https://johndjameson.com/blog/guidelines-for-letterspacing-type/)
+- [디자인 시스템 구축하기 4부 : 타이포그래피](https://brunch.co.kr/@thinkaboutlove/291)
 - [Goodbye 8-point grid, hello 4-point grid?](https://uxdesign.cc/goodbye-8-point-grid-hello-4-point-grid-1aa7f2159051)
 - [Why we’re using a 4-point grid in Webflow](https://webflow.com/blog/why-were-using-a-4-point-grid-in-webflow)
