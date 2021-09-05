@@ -104,11 +104,11 @@
 
 <br>
 
-## 3. 줄높이(Line Height): 줄높이(Line Height)란, 웹접근성, 4pt Baseline Grid
+## 3. 줄높이(Line Height): 줄높이란, 웹접근성, 4pt Baseline Grid
 
-### 3-1. 줄높이(Line Height)란
+### 3-1. 줄높이란
 
-텍스트의 위아래 여백(Space)을 포함한 높이를 줄높이(Line Height)라고 합니다. 줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다.
+텍스트의 위아래 행간(Leading)을 포함한 높이를 줄높이(Line Height)라고 합니다. 줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다.
 
 <img src="./../img/line-height.png" />
 
