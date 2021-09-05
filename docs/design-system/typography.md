@@ -236,21 +236,25 @@
 /* base modules */
 $font-size-base: 1rem;
 $type-scale-ratio: 1.125;
+$grid-base-pt: 4;
 
 /* type scales */
 $font-size-2xl: math.floor(
 		$font-size-base * $type-scale-ratio * $type-scale-ratio *
-			$type-scale-ratio / 4
-	) * 4;
+			$type-scale-ratio / $grid-base-pt
+	) * $grid-base-pt;
 $font-size-xl: math.floor(
-		$font-size-base * $type-scale-ratio * $type-scale-ratio / 4
-	) * 4;
-$font-size-l: math.floor($font-size-base * $type-scale-ratio / 4) * 4;
+		$font-size-base * $type-scale-ratio * $type-scale-ratio / $grid-base-pt
+	) * $grid-base-pt;
+$font-size-l: math.floor($font-size-base * $type-scale-ratio / $grid-base-pt) *
+	$grid-base-pt;
 $font-size-m: $font-size-base;
-$font-size-s: math.floor(($font-size-base / $type-scale-ratio) / 4) * 4;
+$font-size-s: math.floor(
+		($font-size-base / $type-scale-ratio) / $grid-base-pt
+	) * $grid-base-pt;
 $font-size-xs: math.floor(
-		($font-size-base / ($type-scale-ratio * $type-scale-ratio)) / 4
-	) * 4;
+		($font-size-base / ($type-scale-ratio * $type-scale-ratio)) / $grid-base-pt
+	) * $grid-base-pt;
 ```
 
 <br>
@@ -282,13 +286,25 @@ Modular Scale을 구축하기 위해 CSS 전처리기를 사용합니다. 저는
 
 ```scss
 @use "sass:list";
+/* modules */
+$line-height-ratio: 1.5;
 
-$line-height-2xl: math.floor($font-size-2xl * 1.5 / 4) * 4;
-$line-height-xl: math.floor($font-size-xl * 1.5 / 4) * 4;
-$line-height-l: math.floor($font-size-l * 1.5 / 4) * 4;
-$line-height-m: math.floor($font-size-m * 1.5 / 4) * 4;
-$line-height-s: math.floor($font-size-s * 1.5 / 4) * 4;
-$line-height-xs: math.floor($font-size-xs * 1.5 / 4) * 4;
+/* line heights */
+$line-height-2xl: math.floor(
+		$font-size-2xl * $line-height-ratio / $grid-base-pt
+	) * $grid-base-pt;
+$line-height-xl: math.floor(
+		$font-size-xl * $line-height-ratio / $grid-base-pt
+	) * $grid-base-pt;
+$line-height-l: math.floor($font-size-l * $line-height-ratio / $grid-base-pt) *
+	$grid-base-pt;
+$line-height-m: math.floor($font-size-m * $line-height-ratio / $grid-base-pt) *
+	$grid-base-pt;
+$line-height-s: math.floor($font-size-s * $line-height-ratio / $grid-base-pt) *
+	$grid-base-pt;
+$line-height-xs: math.floor(
+		$font-size-xs * $line-height-ratio / $grid-base-pt
+	) * $grid-base-pt;
 ```
 
 <br>
