@@ -4,7 +4,7 @@
 
 1. 타입페이스(Typeface) 정하기
 2. 여러 개의 타입페이스를 함께 사용하기
-3. 줄높이(Line Height): 정의, 웹접근성, 4pt Baseline Grid
+3. 줄높이(Line Height): 정의, 웹접근성, 4포인트 그리드 시스템
 4. 폰트 사이즈(Font Size): 웹접근성, Type Scales
 5. 폰트 사이즈와 줄높이를 그리드 시스템에 맞추기
 6. 폰트 굵기(Font Weight)
