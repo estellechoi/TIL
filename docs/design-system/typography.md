@@ -110,7 +110,7 @@
 
 ### 3-1. 정의
 
-텍스트의 위아래 행간(Leading)을 포함한 높이를 줄높이(Line Height)라고 합니다. 줄높이(Line Height)는 웹접근성과 그리드 시스템을 고려하여 정합니다.
+텍스트의 위아래 행간(Leading)을 포함한 높이를 줄높이(Line Height)라고 합니다. 줄높이(Line Height)는 [웹접근성](https://en.m.wikipedia.org/wiki/Web_accessibility)과 [그리드 시스템](https://material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins)을 고려하여 정합니다.
 
 <img src="./../img/line-height.png" />
 
@@ -220,7 +220,7 @@
 
 ## 5. 폰트 사이즈와 줄높이를 그리드에 맞추기
 
-4pt Baseline Grid 레이아웃을 사용한다면 `x` 배씩 증감하는 사이즈 팔레트의 값들을 인위적으로 조정하여 `4`의 배수 위주로 구성할 수도 있습니다.
+4포인트 그리드 시스템을 사용한다면 `x` 배씩 증감하는 사이즈 팔레트의 값들을 인위적으로 조정하여 `4`의 배수 위주로 구성할 수도 있습니다.
 
 ```css
 :root {
@@ -274,7 +274,7 @@ $font-size-xs: math.floor(
 
 <br>
 
-줄높이 역시 `line-height: 1.5`와 같이 일괄로 적용하지 않고, Type Scales에 따라 폰트 사이즈별로 다른 줄높이 값을 지정하는 것이 좋습니다. 4pt Baseline Grid 레이아웃을 사용한다면 줄높이가 `4`의 배수여야 안정감을 주기 때문입니다.
+줄높이 역시 `line-height: 1.5`와 같이 일괄로 적용하지 않고, Type Scales에 따라 폰트 사이즈별로 다른 줄높이 값을 지정하는 것이 좋습니다. 4포인트 그리드 시스템을 사용한다면 줄높이가 `4`의 배수여야 안정감을 주기 때문입니다.
 
 ```css
 :root {
