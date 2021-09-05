@@ -5,10 +5,9 @@
 1. 타입페이스(Typeface) 정하기
 2. 여러 개의 타입페이스를 함께 사용하기
 3. 줄높이(Line Height): 정의, 웹접근성, 4pt Baseline Grid
-4. 폰트 사이즈(Font Size): 웹접근성, `rem`
-5. Type Scales
-6. 폰트 사이즈와 줄높이를 그리드 시스템에 맞추기
-7. 폰트 굵기(Font Weight)
+4. 폰트 사이즈(Font Size): 웹접근성, Type Scales
+5. 폰트 사이즈와 줄높이를 그리드 시스템에 맞추기
+6. 폰트 굵기(Font Weight)
 
 <br>
 
@@ -132,7 +131,7 @@
 
 <br>
 
-## 4. 폰트 사이즈(Font Size): 웹접근성, `rem`
+## 4. 폰트 사이즈(Font Size): 웹접근성, Type Scales
 
 ### 4-1. 웹접근성
 
@@ -144,13 +143,7 @@
 
 <br>
 
-### 4-2. `rem`
-
-`px`이 아닌 `rem` 단위를 사용합니다. `1rem`은 `<html>` 태그의 폰트 사이즈입니다. `<html>` 태그의 폰트 사이즈를 `px` 단위로 고정시킨 후, 다른 모든 폰트 사이즈는 `rem` 단위를 사용하여 지정합니다.
-
-<br>
-
-## 5. Type Scales
+### 4-2. Type Scales
 
 이제 기본 사이즈를 중심으로 특정 배수 `x`씩 증감하는 사이즈 팔레트를 구축합니다. 특정 배수 `x`의 값은 정하기 나름이지만, [Type Scale](https://type-scale.com/)은 아래와 같이 가이드를 제공합니다.
 
@@ -160,7 +153,11 @@
 
 <br>
 
-만약 [Major Second Ratio](https://en.wikipedia.org/wiki/Major_second#Epogdoon)에 기반한 디자인을 구축한다면, 아래와 같이 `1rem`을 기점으로 `1.125` 배씩 스케일링하는 사이즈 팔레트를 구성할 수 있겠습니다. [Type Scale](https://type-scale.com/)을 사용했습니다.
+만약 [Major Second Ratio](https://en.wikipedia.org/wiki/Major_second#Epogdoon)에 기반한 디자인을 구축한다면, 아래와 같이 `1rem`을 기점으로 `1.125` 배씩 스케일링하는 사이즈 팔레트를 구성할 수 있겠습니다. `1rem`은 `<html>` 태그의 폰트 사이즈이고요, `<html>` 태그의 폰트 사이즈를 `px` 단위로 고정시킨 후 다른 모든 폰트 사이즈는 `rem` 단위를 사용합니다.
+
+<br>
+
+[Type Scale](https://type-scale.com/)을 사용했습니다.
 
 <br>
 
@@ -204,7 +201,7 @@
 
 <br>
 
-## 6. 폰트 사이즈와 줄높이를 그리드에 맞추기
+## 5. 폰트 사이즈와 줄높이를 그리드에 맞추기
 
 4pt Baseline Grid 레이아웃을 사용한다면 `x` 배씩 증감하는 사이즈 팔레트의 값들을 인위적으로 조정하여 4의 배수 위주로 구성할 수도 있습니다.
 
@@ -237,7 +234,7 @@
 @use "sass:list";
 
 /* base modules */
-$font-size-base: 16px;
+$font-size-base: 1rem;
 $type-scale-ratio: 1.125;
 
 /* type scales */
@@ -281,7 +278,7 @@ $font-size-xs: math.floor(
 
 <br>
 
-Modular Scale을 구축한다면 SCSS와 같은 CSS 전처리기를 사용하여 아래와 같이 작성하고요.
+Modular Scale을 구축하기 위해 CSS 전처리기를 사용합니다. 저는 SCSS를 사용했습니다.
 
 ```scss
 @use "sass:list";
@@ -296,7 +293,7 @@ $line-height-xs: math.floor($font-size-xs * 1.5 / 4) * 4;
 
 <br>
 
-## 7. 폰트 굵기(Font Weight)
+## 6. 폰트 굵기(Font Weight)
 
 폰트 굵기(Font Weight)는 텍스트간 위계를 정확하게 전달하는 용도로 사용합니다. 간단한 서비스라면 보통 굵은 폰트, 중간 폰트, 얅은 폰트 3 가지로 충분합니다. 텍스트간 위계를 부여할 때 굵기 대신 폰트 사이즈를 사용할 수도 있으므로 어떤 것이 효과적일지 고려해봐야합니다.
 
