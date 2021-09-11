@@ -103,8 +103,6 @@ console.log(window.devicePixelRatio); // 2
 
 <img src="./../img/box-model.png" />
 
-<br>
-
 사진출처 : [W3S 박스모델(Box Model)](https://www.w3schools.com/css/css_boxmodel.asp)
 
 <br>
