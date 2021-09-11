@@ -158,7 +158,7 @@ console.log(window.devicePixelRatio); // 2
 
 <br>
 
-[Create your design system, part 1: Typography](https://medium.com/codyhouse/create-your-design-system-part-1-typography-7c630d9092bd)에서 케이스 스터디를 해볼 수 있습니다.
+[Create your design system, part 1: Typography](https://medium.com/codyhouse/create-your-design-system-part-1-typography-7c630d9092bd)에서 케이스 스터디를 해볼 수 있습니다. [Comprehensive Guide: When to Use Em vs. Rem](https://webdesign.tutsplus.com/tutorials/comprehensive-guide-when-to-use-em-vs-rem--cms-23984)도 도움이 됩니다.
 
 <br>
 
@@ -167,11 +167,20 @@ console.log(window.devicePixelRatio); // 2
 ### References
 
 - [Understanding layout | Material Design](https://material.io/design/layout/understanding-layout.html#principles)
+- [Pixel | Wikipedia](https://en.wikipedia.org/wiki/Pixel)
+- [CSS pixel | MDN](https://developer.mozilla.org/en-US/docs/Glossary/CSS_pixel)
+- [Absolute Lengths: the cm, mm, Q, in, pt, pc, px units | W3C Editor's Draft](https://drafts.csswg.org/css-values/#absolute-lengths)
+- [CSS Length Explained](https://hacks.mozilla.org/2013/09/css-length-explained/)
 - [픽셀과 포인트 | Spoqa 기술블로그](https://spoqa.github.io/2012/07/06/pixel-and-point.html)
+- [Point vs Pixel: What is the difference? | StackExchange](https://graphicdesign.stackexchange.com/questions/199/point-vs-pixel-what-is-the-difference)
+- [CSS Box Model | W3C Schools](https://www.w3schools.com/css/css_boxmodel.asp)
 - [Window.devicePixelRatio | MDN](https://developer.mozilla.org/ko/docs/Web/API/Window/devicePixelRatio)
-- [Baseline grids](https://www.figma.com/best-practices/everything-you-need-to-know-about-layout-grids/baseline-grids/)
+- [Baseline grids | Figma](https://www.figma.com/best-practices/everything-you-need-to-know-about-layout-grids/baseline-grids/)
+- [Baseline grids & design systems](https://uxdesign.cc/baseline-grids-design-systems-ae23b5af8cec)
 - [Goodbye 8-point grid, hello 4-point grid?](https://uxdesign.cc/goodbye-8-point-grid-hello-4-point-grid-1aa7f2159051)
 - [Why we’re using a 4-point grid in Webflow](https://webflow.com/blog/why-were-using-a-4-point-grid-in-webflow)
 - [The 8-Point Grid | Spec.fm](https://spec.fm/specifics/8-pt-grid)
 - [A framework for creating a predictable & harmonious spacing system for faster design-dev handoff](https://blog.prototypr.io/a-framework-for-creating-a-predictable-and-harmonious-spacing-system-8eee8aaf773c)
+- [Comprehensive Guide: When to Use Em vs. Rem](https://webdesign.tutsplus.com/tutorials/comprehensive-guide-when-to-use-em-vs-rem--cms-23984)
 - [디자인 시스템 구축하기 3부 : 크기와 간격](https://brunch.co.kr/@thinkaboutlove/290)
+- [1px 보다 얇은 디자인 — 라인 편](https://brunch.co.kr/@euid/6)
