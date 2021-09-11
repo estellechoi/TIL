@@ -105,6 +105,10 @@ console.log(window.devicePixelRatio); // 2
 
 <br>
 
+사진출처 : [W3S 박스모델(Box Model)](https://www.w3schools.com/css/css_boxmodel.asp)
+
+<br>
+
 4픽셀 그리드 레이아웃을 사용한다면, 하나의 박스를 구성하는 4가지 구성요소의 크기를 `4`의 배수로 지정합니다.
 
 - 컨텐츠(Content) : 박스의 컨텐츠 영역
