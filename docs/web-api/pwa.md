@@ -212,7 +212,7 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 #### `icons`
 
-아이콘 정보를 담는 배열입니다. 아래와 같은 하위 속성들을 갖고요, `src`, `sizes`, `type` 속성은 반드시 포함해야 합니다. OS별 아이콘 사이즈 규격은 [아이콘 규격](./#user-content-4-아이콘-규격) 섹션을 확인하세요.
+아이콘 정보를 담는 배열입니다. 아래와 같은 하위 속성들을 갖고요, `src`, `sizes`, `type` 속성은 반드시 포함해야 합니다. OS별 아이콘 사이즈 규격은 [아이콘 규격](./#user-content-4-아이콘-규격) 섹션을 확인하시고요, iOS용 Safari에서 지원하지 않습니다.
 
 - `src` : 이미지 경로
 - `sizes` : 이미지가 적용될 디바이스 사이즈 (`px`)
@@ -272,13 +272,13 @@ PWA를 벗어나서 외부 사이트로 이동하도록 하려면 `<a>` 태그�
 
 #### `background_color`
 
-모바일에서 처음 앱을 실행시켰을 때 보여줄 스플래시 화면(Splash screen)의 배경색을 지정합니다.
+모바일에서 처음 앱을 실행시켰을 때 보여줄 스플래시 화면(Splash screen)의 배경색을 지정합니다. iOS용 Safari에서 지원하지 않습니다.
 
 <br>
 
 #### `display`
 
-앱이 실행되었을 때 보여질 브라우저의 UI 형태를 지정합니다. 아래의 값 중에서 지정할 수 있고요, 이 속성에 지정하는 값들은 브라우저마다 크게 다를 수 있으므로 별도로 확인하는 것이 좋습니다.
+앱이 실행되었을 때 보여질 브라우저의 UI 형태를 지정합니다. 아래의 값 중에서 지정할 수 있고요, 지정된 값을 지원하지 않는 디바이스에서는 한 단계씩 Fallback 합니다. 여기서 지정된 값은 CSS에서 [`@media (display-mode: fullscreen)`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/display-mode) [Media Feature](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries#media_features)를 사용하여 감지할 수 있습니다. 디스플레이 모드에 따라 스타일링을 다르게 할 수 있습니다.
 
 - `fullscreen` : 브라우저의 주소창을 포함한 모든 UI를 완전히 제거하고 디바이스의 뷰포트(Viewport) 전체를 사용
 - `standalone` : 브라우저의 주소창을 제거하여 독립적인 앱처럼 보이도록 함, 데스크탑과 노트북에서는 앱이 실행되는 독립된 OS 창을 사용
@@ -287,15 +287,22 @@ PWA를 벗어나서 외부 사이트로 이동하도록 하려면 `<a>` 태그�
 
 <br>
 
+iOS용 Safari에서는 다음 2 개의 옵션만 지원합니다.
+
+- `standalone`
+- `browser`
+
+<br>
+
 #### `theme_color`
 
-디바이스에 설치된 앱의 툴바(상태바) 색을 지정합니다. `<head>`의 `<meta>` 태그로 지정한 색과 일치해야 합니다.
+디바이스에 설치된 앱의 툴바(상태바) 색을 지정합니다. `<head>`의 `<meta>` 태그로 지정한 색과 일치해야 하고요, iOS용 Safari에서 지원하지 않습니다.
 
 <br>
 
 #### `shortcuts`
 
-PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지정합니다. Android에서는 앱 아이콘을 길게 눌러서 아래와 같이 특정 페이지들에 빠르고 편하게 접근할 수 있습니다.
+PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지정합니다. Android에서는 앱 아이콘을 길게 눌러서 아래와 같이 특정 페이지들에 빠르고 편하게 접근할 수 있습니다. iOS용 Safari에서 지원하지 않습니다.
 
 ![App Shortcut](./../img/app-shortcut.png)
 
