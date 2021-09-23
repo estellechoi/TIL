@@ -55,15 +55,15 @@ PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡
 
 ### 1-2. 브라우저 호환성
 
-PWA는 하나의 독립된 기술을 명명하는 말이 아닙니다. 위에 나열된 기능들을 다수 갖추고 있는 웹앱을 PWA, 점진적인 웹앱이라고 부를 뿐입니다. PWA로 식별될 수 있는 기능들은 각각 해당하는 웹기술을 사용하여 구현하면 되고요, 그 중 핵심적인 기술이 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)라는 웹 API이기 때문에, 보통 Service Worker API 사용이 가능한 브라우저라면 PWA를 지원한다고 말합니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements), [Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready), [Opera](https://dev.opera.com/articles/installable-web-apps/), [Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/), [UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA를 구성하는 기술별로 브라우저 지원 범위를 확인할 수 있습니다. 현시점 기준으로 지원 현황을 아주 대략적으로 요약해보면 아래와 같습니다.
+PWA는 하나의 독립된 기술을 명명하는 말이 아닙니다. 위에 나열된 기능들을 다수 갖추고 있는 웹앱을 PWA, 점진적인 웹앱이라고 부를 뿐입니다. PWA로 식별될 수 있는 기능들은 각각 해당하는 웹기술을 사용하여 구현하면 되고요, 그 중 핵심적인 기술이 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)라는 웹 API이기 때문에, 보통 Service Worker API 사용이 가능한 브라우저라면 PWA를 지원한다고 말합니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements), [Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready), [Opera](https://dev.opera.com/articles/installable-web-apps/), [Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/), [UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA를 구성하는 기술별로 브라우저 지원 범위를 확인할 수 있습니다. 지원 현황을 아주 대략적으로 요약해보면 아래와 같습니다.
 
-- Safari 11.1부터 대부분 지원 (iOS용 Safari 알림 불가)
+- Safari 11.1부터 대부분 지원 (iOS용 Safari 푸시알림 불가)
 - Chrome 40부터 대부분 지원 (iOS용 Chrome 미지원)
 - MS Edge 17부터 대부분 지원
 
 <br>
 
-현시점 기준 PWA 지원 범위가 가장 좁은 브라우저는 iOS용 Safari인 것 같습니다. iOS용 Safari에서 PWA를 구현하려면 별도의 섹션으로 분리한 [iOS에서의 PWA](./#ios에서의-pwa)를 참고하세요.
+현시점 기준 PWA 지원 범위가 가장 좁은 브라우저는 iOS용 Safari입니다. iOS 상에서는 다른 브라우저들도 몇가지 기능이 제한되는데요, iOS에서는 결국 Safari가 웹페이지의 최종적인 해석과 렌더링을 담당하기 때문입니다. 대표적으로 iOS에서는 어떤 브라우저에서도 푸시알림을 보낼 수가 없습니다. iOS용 Safari에서 PWA를 구현하려면 별도의 섹션으로 분리한 [iOS에서의 PWA](./#ios에서의-pwa)를 참고하세요.
 
 <br>
 
