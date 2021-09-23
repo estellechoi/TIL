@@ -294,6 +294,16 @@ iOS용 Safari에서는 다음 2 개의 옵션만 지원합니다.
 
 <br>
 
+#### `orientation`
+
+앱의 가로세로 모드의 디폴트 상태를 지정합니다. 자세한 내용은 [MDN `orientation`](https://developer.mozilla.org/en-US/docs/Web/Manifest/orientation) 문서를 참고하시고요, 이 속성으로 지정하는 디폴트 값은 말그대로 디폴트 값이기 때문에 [Screen Orientation API](https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientation)에 의해 조작될 수 있습니다. 
+
+<br>
+
+iOS용 Safari에서 지원하지 않습니다. 따라서 앱의 런치 화면 이미지는 사이즈당 가로, 세로 두 가지 모드를 모두 제공해야합니다. iOS용 Safari 런치 화면 관련 내용은 이 문서의 [앱 런치 화면(Launch Screen)](./user-content-12-3-앱-런치-화면launch-screen) 섹션을 참고하세요.
+
+<br>
+
 #### `theme_color`
 
 디바이스에 설치된 앱의 툴바(상태바) 색을 지정합니다. `<head>`의 `<meta>` 태그로 지정한 색과 일치해야 하고요, iOS용 Safari에서 지원하지 않습니다.
