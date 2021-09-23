@@ -306,7 +306,7 @@ iOS용 Safari에서 지원하지 않습니다. 따라서 앱의 런치 화면 �
 
 #### `theme_color`
 
-디바이스에 설치된 앱의 툴바(상태바) 색을 지정합니다. `<head>`의 `<meta>` 태그로 지정한 색과 일치해야 하고요, iOS용 Safari에서 지원하지 않습니다.
+앱의 테마 색을 지정합니다. [`<head>`의 `<meta>` 태그로 지정한 색](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color)과 일치해야 하고요, iOS용 Safari에서 지원하지 않습니다.
 
 <br>
 
