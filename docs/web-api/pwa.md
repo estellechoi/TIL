@@ -21,23 +21,27 @@
 
 ### 1-1. PWA란?
 
-PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사이트와 네이티브 앱의 장점을 모두 갖도록 개발된 웹의 확장판 정도로 이해해볼 수 있는데요, 오프라인에서 동작, 설치 가능, 쉬운 동기화, 푸시 알림 등 네이티브 앱에서만 가능하던 기능들을 포함한 웹 앱을 말합니다. 중요한 것은 PWA로 식별되는 기능들을 오래된 브라우저가 지원하지 않더라도 사용자들이 웹을 이용할 수 있도록 "점진적으로" 적용하는 것입니다. 모든 사용자가 웹을 사용할 수 있지만, 최신 브라우저 사용자는 PWA 기능으로부터 더 많은 이점을 얻을 수 있도록 한다는 개념입니다.
+PWA(Progressive Web App)란 말그대로 점진적인 웹앱(Web app)입니다. 웹사이트와 네이티브 앱의 장점을 모두 갖도록 개발된 웹의 확장판 정도로 이해해볼 수 있는데요, 설치 가능, 쉬운 동기화, 푸시 알림, 오프라인에서 동작 등 네이티브 앱에서만 가능하던 기능들을 갖춘 웹앱을 말합니다. 중요한 것은 PWA로 식별되는 기능들을 오래된 브라우저가 지원하지 않더라도 사용자들이 웹을 이용할 수 있도록 "점진적으로" 적용하는 것입니다. 모든 사용자가 웹앱을 정상적으로 사용할 수 있어야하며, 최신 브라우저 사용자는 PWA 기능으로부터 더 많은 이점을 얻을 수 있도록 한다는 개념입니다.
 
 <br>
 
-다음은 웹 앱을 PWA로 식별하기 위한 몇 가지 핵심 원칙입니다.
-
-- 발견 가능 : 브라우저의 검색엔진을 통해 찾을 수 있음
+다음은 웹앱을 기존의 일반적인 웹사이트와 달리 PWA로 식별하기 위한 몇 가지 핵심 원칙입니다.
 
 - 설치 가능 : 디바이스의 홈 화면에 추가하여 사용할 수 있음
 
-- 연결 가능 : URL을 공유하여 접근할 수 있음
-
 - 네트워크 독립적 : 오프라인이나 불안정한 네트워크 환경에서 동작함
 
-- 점진적 : 이전 브라우저의 기본 기능을 여전히 사용할 수 있어야함
-
 - 재참여 (Re-engageable) : 새로운 컨텐츠가 사용 가능할 때마다 알림 전송이 가능함
+
+<br>
+
+다음 나열된 특징들 역시 PWA의 원칙들이지만, 전통적인 웹사이트의 특징이면서 지향점이기도 하죠. 
+
+- 발견 가능 : 브라우저의 검색엔진을 통해 찾을 수 있음
+
+- 연결 가능 : URL을 공유하여 접근할 수 있음
+
+- 점진적 : 이전 브라우저의 기본 기능을 여전히 사용할 수 있어야함
 
 - 반응형 : 모든 디바이스, 모든 브라우저에서 호환됨
 
@@ -45,13 +49,13 @@ PWA(Progressive Web App)란 말그대로 점진적인 웹 앱입니다. 웹사�
 
 <br>
 
-PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요가 없고요, 자주 사용하는 웹사이트를 디바이스의 홈화면에 앱처럼 추가하여 사용하는 방식입니다. FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
+PWA의 장점은 네이티브 앱의 편리함과 웹의 접근성을 모두 잡을 수 있다는 것입니다. 네이티브 앱의 편리하고 부드러운 UX를 제공하면서, 웹의 검색엔진을 통하거나 링크를 공유하여 서비스에 바로 접근할 수 있도록 합니다. 앱스토어에서 앱을 검색하고 다운로드할 필요가 없고요, 자주 사용하는 웹사이트를 스마트폰이나 노트북의 홈화면에 앱처럼 추가하여 사용하는 방식입니다. FIRE(Fast, Integrated, Reliable, Engaging)는 PWA 전략을 나타내는 키워드들입니다.
 
 <br>
 
 ### 1-2. 브라우저 호환성
 
-PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기술은 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API) API입니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements), [Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready), [Opera](https://dev.opera.com/articles/installable-web-apps/), [Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/), [UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA 지원 범위를 확인할 수 있습니다. 현시점 기준으로 지원 현황을 요약해보면 아래와 같습니다.
+PWA는 하나의 독립된 기술을 명명하는 말이 아닙니다. 위에 나열된 기능들을 다수 갖추고 있는 웹앱을 PWA, 점진적인 웹앱이라고 부를 뿐입니다. PWA로 식별될 수 있는 기능들은 각각 해당하는 웹기술을 사용하여 구현하면 되고요, 그 중 핵심적인 기술이 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)라는 웹 API이기 때문에, 보통 Service Worker API 사용이 가능한 브라우저라면 PWA를 지원한다고 말합니다. [Is Service Worker Ready?](https://jakearchibald.github.io/isserviceworkerready/#moar)에서 Service Worker API의 브라우저 지원 현황을 확인할 수 있습니다. 또한 [Edge](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/#requirements), [Firefox](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#How_do_you_make_an_app_A2HS-ready), [Opera](https://dev.opera.com/articles/installable-web-apps/), [Samsung Internet](https://hub.samsunginter.net/docs/ambient-badging/), [UC Browser](https://plus.ucweb.com/docs/pwa/docs-en/zvrh56) 각 브라우저의 공식사이트에서 PWA를 구성하는 기술별로 브라우저 지원 범위를 확인할 수 있습니다. 현시점 기준으로 지원 현황을 아주 대략적으로 요약해보면 아래와 같습니다.
 
 - Safari 11.1부터 대부분 지원 (iOS용 Safari 알림 불가)
 - Chrome 40부터 대부분 지원 (iOS용 Chrome 미지원)
@@ -73,7 +77,7 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 ### 1-4. PWA 완성도 측정하기
 
-아래의 툴, 체크리스트를 사용하여 웹 앱이 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹 앱에 접속하는지 검사할 수 있습니다. PWA 완성도를 정량적으로 측정할 수 있는 [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)가 유명합니다.
+아래의 툴, 체크리스트를 사용하여 웹앱이 PWA로서 얼마나 "잘" 작동하고 있는지, 얼마나 많은 사용자들이 PWA를 통해 웹앱에 접속하는지 검사할 수 있습니다. PWA 완성도를 정량적으로 측정할 수 있는 [Lighthouse](https://developers.google.com/web/tools/lighthouse#cli)가 유명합니다.
 
 - [Tools for PWA Developers | Google Developers](https://developers.google.com/web/ilt/pwa/tools-for-pwa-developers)
 - [Chrome Flags](chrome://flags/) > Bypass user engagement checks
@@ -102,7 +106,7 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 <br>
 
-(역시나 브라우저마다 약간의 차이가 있기는 하지만) 아래의 최소 조건을 충족하면 "설치 가능한" 웹 앱이 됩니다.
+(역시나 브라우저마다 약간의 차이가 있기는 하지만) 아래의 최소 조건을 충족하면 "설치 가능한" 웹앱이 됩니다.
 
 - HTTPS를 통해 제공
 - [Service Worker](./#5-service-worker) 등록 완료 (Android용 Chrome에서 필수)
@@ -128,7 +132,7 @@ PWA는 여러 기술을 사용하여 구현할 수 있지만, 그 중 핵심 기
 
 <br>
 
-위의 최소 조건을 만족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹 앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다.
+위의 최소 조건을 만족하면서, 동시에 앱이 사용자의 OS에 설치되어있지 않다면 브라우저는 사용자가 웹앱을 디바이스에 설치하도록 자동으로 Prompt를 띄워 유도합니다.
 
 <br>
 
@@ -399,7 +403,7 @@ Chrome 개발자도구의 Application > Manifest 탭에서 아이콘이 어떻�
 
 ### 5-1. Service Worker란?
 
-[Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)의 역할 중 하나는 웹 앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있습니다. Service Worker API는 대부분의 브라우저에 내장되어 있고요, 개발자는 약간의 JavaScript 코드를 추가하여 Service Worker가 무슨 일을 할지 지정할 수 있습니다. 이 Service Worker를 사용하여 PWA 기능들을 구현할 수 있습니다.
+[Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)의 역할 중 하나는 웹앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있습니다. Service Worker API는 대부분의 브라우저에 내장되어 있고요, 개발자는 약간의 JavaScript 코드를 추가하여 Service Worker가 무슨 일을 할지 지정할 수 있습니다. 이 Service Worker를 사용하여 PWA 기능들을 구현할 수 있습니다.
 
 <br>
 
@@ -680,7 +684,7 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 ## 8. 설치하기
 
-웹 앱을 디바이스 홈화면에 설치하는 방법은 간단합니다. 보통 브라우저의 `공유하기` 버튼을 클릭하여 설치할 수 있습니다.
+웹앱을 디바이스 홈화면에 설치하는 방법은 간단합니다. 보통 브라우저의 `공유하기` 버튼을 클릭하여 설치할 수 있습니다.
 
 <br>
 
