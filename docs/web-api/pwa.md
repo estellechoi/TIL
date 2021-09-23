@@ -143,7 +143,7 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 ### 3-2. `webmanifest` 파일
 
-`webmanifest` 포맷의 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. [`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
+`webmanifest` 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. [`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
 
 <br>
 
