@@ -402,7 +402,13 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
-만약 Android에서 최적화된 픽셀(`px`) 경험을 제공하려면 `webmanifest` 파일에서 아이콘 사이즈를 `48dp`로 지정하세요. Android는 표준 해상도로 `96ppi`를 채택하고있기 때문이죠. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px` 등으로 자동으로 변환됩니다.
+만약 Android에서 최적화된 픽셀 경험을 제공하려면 Android에서 사용할 가능성이 있는 모든 크기의 아이콘 파일을 제공하면 됩니다. Android는 표준해상도에서 앱 아이콘의 크기를 `48px`로 봅니다. 따라서 `@1.5x`, `@2x`, `@3x`, `@4x` 해상도에서 필요한 각 사이즈의 아이콘 파일을 제공합니다. 이는 Android가 앱 아이콘의 사이즈로 `48dp`를 사용하기 때문입니다. 자세한 내용은 [다양한 픽셀 밀도 지원](https://developer.android.com/training/multiscreen/screendensities) 문서를 확인하세요.
+
+- `48px`
+- `72px`
+- `96px`
+- `144px`
+- `192px`
 
 <br>
 
