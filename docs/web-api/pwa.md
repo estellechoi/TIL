@@ -312,7 +312,7 @@ iOS용 Safari에서 지원하지 않습니다. 따라서 앱의 런치 화면 �
 
 #### `shortcuts`
 
-PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지정합니다. Android에서는 앱 아이콘을 길게 눌러서 아래와 같이 특정 페이지들에 빠르고 편하게 접근할 수 있습니다. 대표적으로 Android용 Samsung Internet에서 지원합니다. Chrome은 Windows용에서만 지원하며, Safari에서는 지원하지 않습니다.
+PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지정합니다. Android에서는 앱 아이콘을 길게 눌러서 아래와 같이 특정 페이지들에 빠르고 편하게 접근할 수 있습니다. 대표적으로 Android용 Chrome과 Samsung Internet에서 지원하고요, Safari에서는 지원하지 않습니다.
 
 ![App Shortcut](./../img/app-shortcut.png)
 
