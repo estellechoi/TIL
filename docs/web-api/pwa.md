@@ -143,12 +143,7 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 ### 3-2. `webmanifest` 파일
 
-`webmanifest` 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. 
-
-<br>
-
-
-[`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
+`webmanifest` 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. [`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
 
 <br>
 
@@ -161,7 +156,7 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 <br>
 
-`webmanifest` 파일은 Chrome, Edge, Firefox, UC Browser, Opera, Samsung 브라우저에서 지원하고, Safari에서는 부분 지원합니다. 다음은 `webmanifest` 파일 구성 예시입니다.
+`webmanifest` 파일은 Chrome, Edge, Firefox, UC Browser, Opera, Samsung Internet 등의 브라우저에서 지원하고, iOS용 Safari에서는 상당부분 제한됩니다. 자세한 호환범위는 [Web app manifests - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/Manifest#browser_compatibility)에서 확인하시고요, iOS용 Safari의 경우 제한된 부분 중 일부는 Apple만의 방식으로 별도로 지원하기 때문에 [iOS에서의 PWA](./#user-content-12-ios에서의-pwa) 섹션을 확인하세요. 다음은 `webmanifest` 파일 구성 예시입니다.
 
 ```json
 {
@@ -348,7 +343,7 @@ PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS
 
 <br>
 
-### 4-1. iOS 앱 아이콘
+### 4-2. iOS
 
 현시점 기준 iOS 홈화면 앱 아이콘 사이즈 규격입니다.
 
@@ -360,9 +355,9 @@ PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS
 
 <br>
 
-### 4-2. MacOS
+### 4-3. MacOS
 
-현시점 기준 MacOS의 Finder, Dock, Launchpad 등에서 사용되는 아이콘 사이즈 규격입니다.
+현시점 기준 MacOS의 Finder, Dock, Launchpad 등에서 사용되는 앱 아이콘의 사이즈 규격입니다.
 
 - `16*16 px @1x`
 - `32*32 px @1x @2x`
@@ -374,16 +369,16 @@ PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS
 
 <br>
 
-### 4-3. Android
+### 4-4. Android
 
-[Google Play icon design specifications](https://developer.android.com/google-play/resources/icon-design-specifications)에 따르면, `512*512 px` 사이즈의 아이콘을 제공하면 되지만, Android용 Chrome에서 모든 디바이스 뷰포트에 아이콘을 자동으로 핏되게 하려면 다음 2개 사이즈를 반드시 제공해야합니다.
+[Google Play icon design specifications](https://developer.android.com/google-play/resources/icon-design-specifications)에 따르면 `512*512 px` 사이즈의 아이콘만 제공하면 되지만, Android용 Chrome에서 모든 디바이스 뷰포트에 아이콘을 자동으로 핏되게 하려면 다음 2개 사이즈를 반드시 제공해야합니다.
 
 - `192*192 px`
 - `512*512 px`
 
 <br>
 
-만약 Android에서 최적화된 픽셀(`px`) 경험을 제공하려면 `webmanifest` 파일에서 아이콘 사이즈를 `48dp` 단위로 지정하세요. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px` 등으로 변환됩니다.
+만약 Android에서 최적화된 픽셀(`px`) 경험을 제공하려면 `webmanifest` 파일에서 아이콘 사이즈를 `48dp`로 지정하세요. Android는 표준 해상도로 `96ppi`를 채택하고있기 때문이죠. `48dp`는 디바이스의 해상도에 따라 `48px`, `72px`, `96px` 등으로 자동으로 변환됩니다.
 
 <br>
 
@@ -397,11 +392,11 @@ Chrome 개발자도구의 Application > Manifest 탭에서 아이콘이 어떻�
 
 <br>
 
-## 5. Service Worker
+## 5. Service Worker API
 
 ### 5-1. Service Worker란?
 
-[Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)의 역할 중 하나는 웹앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있습니다. Service Worker API는 대부분의 브라우저에 내장되어 있고요, 개발자는 약간의 JavaScript 코드를 추가하여 Service Worker가 무슨 일을 할지 지정할 수 있습니다. 이 Service Worker를 사용하여 PWA 기능들을 구현할 수 있습니다.
+[Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)의 역할 중 하나는 웹앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있습니다. Service Worker API는 대부분의 브라우저에 내장되어 있고요, 이 Service Worker를 사용하여 PWA 기능들을 구현할 수 있습니다.
 
 <br>
 
@@ -421,11 +416,11 @@ window.addEventListener("load", () => {
 
 ## 6. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
 
-PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없이도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있습니다. 무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다.
+PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없이도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있는 것은 덤이고요.
 
 <br>
 
-[`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하면 오프라인 Fallback 페이지를 제공할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 설계된 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 미리 캐싱하는 아이디어입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
+무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 사용자가 어떻게 대처하면 될지 안내문구가 포함된 페이지를 보여주는 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 [`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하여 미리 캐싱해놓고, 필요할 때 보여주는 방식입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
 
 ```javascript
 /*
@@ -518,7 +513,7 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-오프라인 페이지 `offline.html`이 제대로 작동하려면 필요한 모든 리소스들도 미리 캐싱되어야 합니다. 가장 간단한 방법은 오프라인 페이지에 필요한 CSS와 JavaScript를 메인 페이지에 직접 포함시키는 것입니다. 따로 불러올 필요가 없도록 말이죠.
+오프라인 페이지 `offline.html`이 제대로 작동하려면 필요한 모든 리소스들도 미리 캐싱되어야 합니다. 가장 간단한 방법은 오프라인 페이지에 필요한 CSS와 JavaScript 코드를 `offline.html` 파일에 직접 포함시키는 것입니다. 따로 불러올 필요가 없도록 말이죠.
 
 ```html
 <!DOCTYPE html>
@@ -771,7 +766,7 @@ window.addEventListener("appinstalled", (evt) => {
 
 ## 10. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
 
-아래와 같이 CSS 미디어쿼리를 이용하여 웹사이트의 접속모드에 따라 다르게 스타일링할 수 있습니다. (브라우저를 통해 접속했는지, PWA를 통해 접속했는지에 따라서 말이죠) `display-mode` 값에 따라 아래와 같이 CSS를 작성하는거죠.
+아래와 같이 CSS 미디어쿼리를 이용하여 웹사이트의 접속모드에 따라 다르게 스타일링할 수 있습니다. (브라우저를 통해 접속했는지, 홈화면을 통해 접속했는지에 따라서 말이죠) `display-mode` 값에 따라 아래와 같이 CSS를 작성하는거죠.
 
 ```css
 @media all and (display-mode: standalone) {
@@ -783,7 +778,7 @@ window.addEventListener("appinstalled", (evt) => {
 
 <br>
 
-JavaSCript 코드에서도 웹사이트의 접속모드를 검사할 수 있습니다.
+JavaScript 코드에서도 웹사이트의 접속모드를 검사할 수 있습니다.
 
 ```javascript
 window.addEventListener("DOMContentLoaded", () => {
@@ -823,7 +818,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 <br>
 
-PWA와 네이티브 앱을 적절하게 블렌딩 하여 사용자들에게 심리스한 경험을 제공할 수 있습니다. 아래 영상을 보세요.
+PWA와 네이티브 앱을 적절하게 블렌딩 하여 사용자들에게 심리스한 경험을 제공할 수 있습니다. 아래 영상에 설명이 있습니다.
 
 - [Blending PWA into native environments (Chrome Dev Summit 2019)](https://www.youtube.com/watch?v=V7YX4cZ_Cto&feature=youtu.be)
 
@@ -831,9 +826,9 @@ PWA와 네이티브 앱을 적절하게 블렌딩 하여 사용자들에게 심�
 
 ## 12. iOS에서의 PWA
 
-### 12-1. `link`/`meta` 태그 사용
+### 12-1. `webmanifest` 제한 - `link`, `meta` 태그로 대체
 
-iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추가함으로써 PWA를 적용할 수 있습니다.
+iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되어있습니다. [Web app manifests - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/Manifest#browser_compatibility)에서 어떤 속성들이 제한되었는지 확인할 수 있고요, 다만 제한된 속성 중 일부는 아래의 태그들을 `html` 파일의 `<head>` 태그 내에 추가함으로써 PWA를 적용할 수 있습니다. 아래에서 하나씩 설명합니다.
 
 - `<link rel="apple-touch-icon" href="touch-icon-iphone.png" />`
 - `<link rel="apple-touch-startup-image" href="/launch.png" />`
@@ -844,6 +839,8 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 <br>
 
 ### 12-2. 아이콘
+
+아이콘은 `<link>` 태그를 사용하여 지정합니다. 모든 디바이스를 지원하려면 필요한 규격을 확인하여 모두 제공하면 됩니다. 만약 `<link>` 태그를 사용하여 아이콘을 지정하지 않으면, 웹사이트의 루트 경로에서 파일명에 `apple-touch-icon` Prefix가 포함된 이미지 파일을 찾아서 아이콘으로 사용합니다. 만약 `50 * 50 px` 사이즈의 디바이스라면 다음의 우선순위대로 파일명과 포맷을 탐색하여 아이콘으로 사용합니다. 1) `apple-touch-icon-80x80.png` 2) `apple-touch-icon.png`.
 
 ```html
 <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
@@ -860,7 +857,6 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 />
 ```
 
-> `<link>` 태그를 사용하여 아이콘을 지정하지 않으면, 웹사이트의 루트 디렉토리에서 `apple-touch-icon` Prefix를 포함한 파일을 찾아서 아이콘으로 사용합니다. 만약 `50 * 50 px` 사이즈의 디바이스라면 다음의 우선순위대로 파일을 탐색하여 아이콘으로 사용합니다. 1) `apple-touch-icon-80x80.png` 2) `apple-touch-icon.png`.
 
 <br>
 
@@ -874,7 +870,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 ### 12-4. 앱 이름
 
-별도로 지정하지 않으면 `<title>` 태그에 지정한 이름을 사용합니다.
+별도로 지정하지 않으면 `<title>` 태그에 지정한 이름을 그대로 사용합니다.
 
 ```html
 <meta name="apple-mobile-web-app-title" content="AppTitle" />
@@ -884,7 +880,7 @@ iOS에서는 `manifest` 파일대신 아래의 태그들을 `<head>` 내에 추�
 
 ### 12-5. `standalone` 모드 (브라우저 UI 제거하기)
 
-아래와 같이 `<meta>` 태그를 지정하면 PWA가 `standalone` 모드로 전환되고요, 주소창, 하단 컨트롤러 등의 모든 브라우저 UI를 제거합니다.
+아래와 같이 `<meta>` 태그를 지정하면 PWA가 `standalone` 모드로 전환되고요, 주소창과 하단 컨트롤러 등 모든 브라우저 UI를 제거합니다.
 
 ```html
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -908,7 +904,7 @@ PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있�
 
 - `black` : 검정
 
-- `black-translucent` : 상태바의 색이 없어지고(투명), 앱 콘텐츠 위로 올라감
+- `black-translucent` : 상태바의 색이 없어지고(투명), 앱 콘텐츠 위로 쌓임
 
 <br>
 
