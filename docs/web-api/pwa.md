@@ -392,6 +392,13 @@ Chrome 개발자도구의 Application > Manifest 탭에서 아이콘이 어떻�
 
 <br>
 
+### 4-5. Windows
+
+가짓수가 많아 생략합니다. 공식문서의 [Target-size app icon assets](https://docs.microsoft.com/en-us/windows/apps/design/style/app-icons-and-logos#target-size-app-icon-assets) 섹션을 참고하세요.
+
+<br>
+
+
 ## 5. Service Worker API
 
 ### 5-1. Service Worker란?
