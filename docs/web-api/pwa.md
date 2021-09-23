@@ -143,7 +143,12 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 ### 3-2. `webmanifest` 파일
 
-`webmanifest` 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. [`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
+`webmanifest` 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. 
+
+<br>
+
+
+[`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
 
 <br>
 
@@ -266,7 +271,7 @@ PWA에 속하는 페이지들의 URL 범위를 지정합니다. 지장한 URL �
 ★ 주의 : PWA에서 `<a>` 태그를 사용하면 무조건 PWA 내에서 이동하고 실행됩니다.
 이동하는 URL이 `scope`에서 지정한 범위를 벗어나도 말이죠.
 PWA를 벗어나서 외부 사이트로 이동하도록 하려면 `<a>` 태그에 `target="_blank"` 속성값을 지정해야합니다.
-Android Chrome에서는 브라우저의 새 탭이 열리고 해당 URL로 이동하게 됩니다.
+브라우저의 새 탭을 열어 해당 URL로 이동시킬 때 주로 사용하는 속성이죠.
 
 <br>
 
@@ -278,10 +283,10 @@ Android Chrome에서는 브라우저의 새 탭이 열리고 해당 URL로 이�
 
 #### `display`
 
-앱이 실행되었을 때 보여질 브라우저 UI 형태를 지정합니다. 아래의 값 중에서 지정할 수 있습니다.
+앱이 실행되었을 때 보여질 브라우저의 UI 형태를 지정합니다. 아래의 값 중에서 지정할 수 있고요, 이 속성에 지정하는 값들은 브라우저마다 크게 다를 수 있으므로 별도로 확인하는 것이 좋습니다.
 
-- `fullscreen` : 브라우저 UI를 완전히 제거하고 디바이스의 뷰포트(Viewport) 전체를 사용
-- `standalone` : 브라우저의 주소창을 제거하여 독립적인 앱처럼 보이도록 함, PC에서는 앱이 실행되는 독립된 창을 사용
+- `fullscreen` : 브라우저의 주소창을 포함한 모든 UI를 완전히 제거하고 디바이스의 뷰포트(Viewport) 전체를 사용
+- `standalone` : 브라우저의 주소창을 제거하여 독립적인 앱처럼 보이도록 함, 데스크탑과 노트북에서는 앱이 실행되는 독립된 OS 창을 사용
 - `minimal-ui` : `standalone` 디스플레이와 비슷하지만, 브라우저의 뒤로가기/새로고침 등 일부 UI를 제공
 - `browser` : 일반적인 브라우저 UI를 모두 사용
 
