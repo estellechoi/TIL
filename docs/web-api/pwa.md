@@ -899,7 +899,7 @@ iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되
 
 ### 12-3. 앱 런치 화면(Launch Screen)
 
-앱아이콘과 마찬가지로 디바이스별 런치 화면 사이즈를 확인한 후 규격에 맞는 파일을 모두 제공하면 됩니다. 참고로 iOS 14 이후로 런치 화면 이미지 파일 용량을 `25MB`로 제한합니다. 다음은 StackOverflow [iOS PWA splash screen?](https://stackoverflow.com/questions/55840186/ios-pwa-splash-screen)에서 가져온 구성 예시입니다.
+앱아이콘과 마찬가지로 디바이스별 런치 화면 사이즈를 확인한 후 규격에 맞는 파일을 모두 제공하면 됩니다. 런치 화면용 이미지 파일은 [About splash-screens](https://appsco.pe/developer/splash-screens)와 같은 툴을 사용하여 빠르게 생성할 수 있습니다. 참고로 iOS 14 이후로 런치 화면 이미지 파일 용량을 `25MB`로 제한합니다. 다음은 StackOverflow [iOS PWA splash screen?](https://stackoverflow.com/questions/55840186/ios-pwa-splash-screen)에서 가져온 구성 예시입니다.
 
 ```html
 <!-- Fallbacks for old devices -->
