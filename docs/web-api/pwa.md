@@ -332,9 +332,9 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 ## 4. 아이콘 규격
 
-### 4-1. OS별 아이콘 가이드
+### 4-1. `png` 포맷, OS별 사이즈 규격
 
-PWA의 앱스토어 및 홈화면, 스플래시 화면용 아이콘 규격은 OS마다 다르기 때문에 각 OS의 앱 아이콘 가이드 문서를 확인해야합니다. 또한, 대부분 OS에서 아이콘은 테두리가 둥글게 잘리기 때문에 잘려질 부분과 여백을 고려하여 아이콘을 제작해야합니다.
+현시점에서 PWA의 앱 아이콘은 모두 `png` 포맷으로 제공하면 됩니다. 홈화면, 스플래시 화면 등에서 보여질 아이콘의 사이즈 규격은 OS마다 다르기 때문에 각 OS의 앱 아이콘 가이드 문서를 확인해야합니다. 또한, 대부분 OS에서 아이콘은 테두리가 둥글게 잘리기 때문에 잘려질 부분과 여백을 고려하여 아이콘을 제작해야합니다.
 
 - iOS : [iOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes)
 - MacOS : [MacOS App Icon | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/app-icon/#app-icon-sizes)
