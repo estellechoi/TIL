@@ -893,21 +893,21 @@ async function register() {
 getPushSubscription();
 
 async function getPushSubscription() {
-  try {
-	if (swRegistration === null) {
-		throw new "Service Worker is not registered";
-	}
+	try {
+		if (swRegistration === null) {
+			throw new "Service Worker is not registered";
+		}
 
-    if ("PushManager" in window)  {
-		const subscription = await swRegistration.pushManager.getSubscription()
-		const isSubscribed = !(subscription === null)
+		if ("PushManager" in window)  {
+			const subscription = await swRegistration.pushManager.getSubscription()
+			const isSubscribed = !(subscription === null)
+			// ..
+		} else {
+			throw new "PushManager is not supported";
+		}
+	} catch(e) {
 		// ..
-	} else {
-		throw new "PushManager is not supported";
 	}
-  } catch(e) {
-    // ..
- }
 }
 ```
 
@@ -925,6 +925,8 @@ async function getPushSubscription() {
 `subscribe()` 메소드를 호출할 때 구독할 웹서버의 [애플리케이션 서버 키](https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol)를 제공해야하는데, 이 키는 [`UInt8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) 타입으로 변환하여 제공합니다. `userVisibleOnly` 속성의 값은 `true`로 지정해야 알림이 표시됩니다.
 
 ```javascript
+// register-service-worker.js
+
 subscribePush();
 
 async function subscribePush(appServerPublicKey) {
