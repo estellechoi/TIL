@@ -4,12 +4,12 @@
 
 1. PWA: PWA란, 브라우저 호환성, 예제 사이트, 완성도 측정하기, PWA를 네이티브 앱으로 포장하기
 2. 설치 가능하게 하기: 최소조건, 설치하기
-3. `webmanifest` 파일을 사용하여 Manifest 구성하기
-4. 아이콘 규격
-5. Service Worker
-6. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
-7. 알림 전송
-8. 설치 유도하기 (Safari 미지원)
+3. 설치 유도하기: `beforeinstallprompt` 이벤트, `prompt()` 메소드로 설치 Prompt 띄우기, 설치여부 감지, UX 가이드라인
+4. Manifest: 자동생성 툴, Manifest 파일, Manifest 항목
+5. 아이콘 규격: `png` 포맷, OS별 사이즈
+6. Service Worker API: Service Worker란, Service Worker 등록하기
+7. 오프라인 Fallback 페이지 제공하기: Service Worker, Cache Storage
+8. 알림 전송: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
 9. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
 10. PWA와 네이티브 앱
 11. iOS에서의 PWA
@@ -107,7 +107,7 @@ PWA는 하나의 독립된 기술을 명명하는 말이 아닙니다. 위에 �
 
 - HTTPS를 통해 제공
 - [Service Worker](./#5-service-worker) 등록 완료 (Android용 Chrome에서 필수)
-- [`webmanifest`](https://web.dev/add-manifest/)파일을 포함하고, 이 파일은 [최소 아래의 항목들을 포함](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#manifest)
+- [Manifest](https://web.dev/add-manifest/)파일을 포함하고, 이 `json` 포맷의 파일은 [최소 아래의 항목들을 포함](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#manifest)
 
 ```json
 {
@@ -121,7 +121,7 @@ PWA는 하나의 독립된 기술을 명명하는 말이 아닙니다. 위에 �
 
 <br>
 
-참고로 `webmanifest` 파일을 작성할 때,
+참고로 Manifest 파일을 작성할 때,
 
 - `name` 대신 `short_name`만 포함해도 됩니다.
 - `prefer_related_applications`의 기본값은 `false`이므로 명시하지 않아도 됩니다.
@@ -129,7 +129,7 @@ PWA는 하나의 독립된 기술을 명명하는 말이 아닙니다. 위에 �
 
 <br>
 
-Service Worker, `webmanifest`에 대한 자세한 내용은 다음 섹션들에서 하나씩 설명합니다.
+Service Worker, Manifest 파일에 대한 자세한 내용은 섹션 `4` ~ `7`에서 다룹니다.
 
 <br>
 
@@ -149,9 +149,84 @@ iOS용 Safari에서는 브라우저의 `공유하기` > `홈 화면에 추가` �
 
 <br>
 
-## 3. `webmanifest` 파일을 사용하여 Manifest 구성하기
+## 3. 설치 유도하기: `beforeinstallprompt` 이벤트, `prompt()` 메소드로 설치 Prompt 띄우기, 설치여부 감지, UX 가이드라인
 
-### 3-1. Manifest 생성 툴
+Safari에서 지원하지 않습니다.
+
+<br>
+
+### 3-1. `beforeinstallprompt` 이벤트
+
+대부분의 브라우저는 웹사이트가 PWA로 식별되는 경우 앱 설치를 유도하는 알림을 자동으로 띄워줍니다. 앱 설치를 유도하는 Prompt UI를 커스텀하고 싶다면 `beforeinstallprompt` 이벤트가 발생했을 때 `preventDefault()` 메소드를 호출하여 브라우저가 자체적으로 띄우는 알림을 중단시킵니다.
+
+<br>
+
+```javascript
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+	e.preventDefault();
+
+	// 이벤트를 나중에 핸들링하기 위해 저장
+	deferredPrompt = e;
+
+	// 커스텀 Prompt 제공
+	showInstallPromotion();
+});
+```
+
+<br>
+
+### 3-2. `prompt()` 메소드로 설치 Prompt 띄우기
+
+`prompt()` 메소드를 호출하면 사용쟈에게 PWA 앱을 설치할지 물어보는 브라우저의 Prompt 모달이 나타납니다. `prompt()` 메소드는 한 번만 호출할 수 있기 때문에, 사용자가 앱 설치를 거부한다면 다시 Prompt 모달을 띄울 수 없습니다. `prompt()` 메소드를 다시 호출하려면 `beforeinstallprompt` 이벤트가 다시 발생하기까지 기다려야합니다. 보통 그 시점은 `userChoice` 속성이 사용자의 응답을 `resolve`하는 `Promise` 객체를 반환할 때이죠.
+
+```javascript
+installBtn.addEventListener("click", (e) => {
+	// 커스텀 Prompt 숨기기
+	hideMyInstallPromotion();
+
+	// 브라우저의 설치 Prompt 보여주기 (위에서 저장해두었던 beforeinstallprompt 이벤트 객체를 사용)
+	deferredPrompt.prompt();
+
+	// 설치 Prompt에 대한 사용자 응답에 따라 다음 작업을 수행
+	deferredPrompt.userChoice.then((result) => {
+		if (result.outcome === "accepted") {
+			// 설치
+		} else {
+			// 미설치
+		}
+	});
+});
+```
+
+<br>
+
+### 3-3. 설치여부 감지
+
+`beforeinstallprompt` 이벤트 객체의 `userChoice` 속성을 사용하여 사용자가 Prompt 모달에서 "설치하기"를 선택했는지 감지할 수 있지만, 완벽하지 않을 수 있습니다. 주소창과 같은 브라우저 내장 알림을 통해 PWA를 설치한다면 `userChoice` 속성을 사용할 수 없을 수 있기 떄문입니다. 
+
+<br>
+
+참고로 앱이 설치되었는지를 완벽하게 판단하려면 `appinstalled` 이벤트를 사용하면 되었지만, 이 이벤트는 현재 Deprecated 상태이므로 브라우저들의 동향을 살펴봐야 합니다.
+
+<br>
+
+### 3-4. UX 가이드라인
+
+[Patterns for promoting PWA installation](https://web.dev/promote-install/)을 참고하는 것도 좋습니다.
+
+- 웹사이트의 UX 흐름에 방해가 돼서는 안됩니다. 가령, 로그인 페이지라면 PWA 설치를 유도하는 UI는 반드시 아이디/비밀번호 입력 필드와 제출 버튼 아래에 위치해야합니다.
+
+- PWA 설치를 유도하는 UI는 사용자가 원할 때 제거할 수 있어야합니다.
+
+- PWA 설치를 유도하는 UI는 `beforeinstallprompt` 이벤트가 발생한 후에 보여주세요.
+
+<br>
+
+## 4. Manifest: 자동생성 툴, Manifest 파일, Manifest 항목
+
+### 4-1. 자동생성 툴
 
 Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참고하여 Manifest를 구성하면 편리합니다.
 
@@ -161,9 +236,9 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 <br>
 
-### 3-2. `webmanifest` 파일
+### 4-2. Manifest 파일
 
-`webmanifest` 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. [`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
+Manifest 파일은 사용자의 브라우저에 PWA에 대한 정보를 알려주는 역할을 합니다. PWA 설정 파일이라고 보면 됩니다. 예를 들어, 아래와 같이 `<head>` 태그 내에 `manifest.webmanifest` 파일을 포함시키면 브라우저는 `manifest.webmanifest` 파일을 PWA 설정 파일로 인식하고 정보를 전달받습니다. 파일명은 `filename.webmanifest` 포맷으로 자유롭게 정하거나, `manifest.json`로 정합니다. [`credentials`](https://developer.mozilla.org/ko/docs/Web/API/Request/credentials)가 필요하다면 아래 태그에 [`crossorigin="use-credentials"` 속성을 추가](https://developer.mozilla.org/ko/docs/Web/HTML/Attributes/crossorigin)하세요.
 
 <br>
 
@@ -176,52 +251,79 @@ Manifest Generator를 사용하거나, Manifest 레퍼런스 프로젝트를 참
 
 <br>
 
-`webmanifest` 파일은 Chrome, Edge, Firefox, UC Browser, Opera, Samsung Internet 등의 브라우저에서 지원하고, iOS용 Safari에서는 상당부분 제한됩니다. 자세한 호환범위는 [Web app manifests - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/Manifest#browser_compatibility)에서 확인하시고요, iOS용 Safari의 경우 제한된 부분 중 일부는 Apple만의 방식으로 별도로 지원하기 때문에 [iOS에서의 PWA](./#user-content-12-ios에서의-pwa) 섹션을 확인하세요. 다음은 `webmanifest` 파일 구성 예시입니다.
+Manifest 파일은 Chrome, Edge, Firefox, UC Browser, Opera, Samsung Internet 등의 브라우저에서 지원하고, iOS용 Safari에서는 상당부분 제한됩니다. 자세한 호환범위는 [Web app manifests - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/Manifest#browser_compatibility)에서 확인하시고요, iOS용 Safari의 경우 제한된 부분 중 일부는 Apple만의 방식으로 별도로 지원하기 때문에 [iOS에서의 PWA](./#user-content-12-ios에서의-pwa) 섹션을 확인하세요.
+
+<br>
+
+다음은 제가 구성하여 사용했던 Manifest 파일입니다. 예시로 봐주세요.
 
 ```json
 {
-	"short_name": "Weather",
-	"name": "Weather: Do I need an umbrella?",
-	"description": "Weather forecast information",
-	"icons": [
-		{
-			"src": "/images/icons-192.png",
-			"type": "image/png",
-			"sizes": "192x192"
-		},
-		{
-			"src": "/images/icons-512.png",
-			"type": "image/png",
-			"sizes": "512x512"
-		}
-	],
-	"start_url": "/?source=pwa",
-	"scope": "/",
-	"display": "standalone",
-	"background_color": "#3367D6",
-	"theme_color": "#3367D6",
-	"shortcuts": [
-		{
-			"name": "How's weather today?",
-			"short_name": "Today",
-			"description": "View weather information for today",
-			"url": "/today?source=pwa",
-			"icons": [{ "src": "/images/today.png", "sizes": "192x192" }]
-		},
-		{
-			"name": "How's weather tomorrow?",
-			"short_name": "Tomorrow",
-			"description": "View weather information for tomorrow",
-			"url": "/tomorrow?source=pwa",
-			"icons": [{ "src": "/images/tomorrow.png", "sizes": "192x192" }]
-		}
-	]
+  "lang": "ko",
+  "name": "Estelle's",
+  "short_name": "Estelle's",
+  "description": "Estelle's",
+  "icons": [
+    {
+      "src": "img/android/mipmap-mdpi/app-icon.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "img/android/mipmap-hdpi/app-icon.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "density": 1.5
+    },
+    {
+      "src": "img/android/mipmap-xhdpi/app-icon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "density": 2
+    },
+    {
+      "src": "img/android/mipmap-xxhdpi/app-icon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": 3
+    },
+    {
+      "src": "img/android/mipmap-xxxhdpi/app-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": 4
+    },
+    {
+      "src": "img/android/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "shortcuts": [
+    {
+      "name": "Works",
+      "url": "/projects",
+      "description": "Estelle이 수행한 모든 프로젝트를 한 곳에서 둘러보세요"
+    },
+    {
+      "name": "About",
+      "url": "/about",
+      "description": "Estelle에 대해 알아보세요."
+    }
+  ]
 }
 ```
 
 <br>
 
-### 3-3. `webmanifest` 항목
+### 4-3. Manifest 항목
 
 #### `name` / `short_name`
 
@@ -367,9 +469,9 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
-## 4. 아이콘 규격
+## 5. 아이콘 규격: `png` 포맷, OS별 사이즈
 
-### 4-1. `png` 포맷, OS별 사이즈 규격
+### 5-1. `png` 포맷, OS별 사이즈
 
 현시점에서 PWA의 앱 아이콘은 모두 `png` 포맷으로 제공하면 됩니다. 홈화면, 스플래시 화면 등에서 보여질 아이콘의 사이즈 규격은 OS마다 다르기 때문에 각 OS의 앱 아이콘 가이드 문서를 확인해야합니다. 또한, 대부분 OS에서 아이콘은 테두리가 둥글게 잘리기 때문에 잘려질 부분과 여백을 고려하여 아이콘을 제작해야합니다. [App Icon Generator](https://appicon.co/)와 같은 아이콘 생성 툴을 사용하면 편리합니다.
 
@@ -397,7 +499,7 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
-### 4-2. iOS
+### 5-2. iOS
 
 현시점 기준 iOS 앱 아이콘의 사이즈 규격입니다. `@2x`는 표준해상도 대비 해상도가 2 배인 디바이스라는 의미입니다. 가령, iPhone의 경우 물리적으로는 `60*60 pt` 크기의 아이콘을 제공하면 되는데요, iOS의 표준해상도에서 `1pt = 1px` 이므로 `60*60 px` 크기의 아이콘을 제공하면 됩니다. `@2x` 디바이스에서는 가로, 세로 각각 픽셀 밀도가 2 배씩 높기 때문에 `120*120 px` 크기의 이미지 파일을 제공하면 되고요.
 
@@ -409,7 +511,7 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
-### 4-3. MacOS
+### 5-3. MacOS
 
 현시점 기준 MacOS의 Finder, Dock, Launchpad 등에서 사용되는 앱 아이콘의 사이즈 규격입니다.
 
@@ -423,7 +525,7 @@ PWA의 [쇼트컷(Shortcut)](https://web.dev/app-shortcuts/) 페이지들을 지
 
 <br>
 
-### 4-4. Android
+### 5-4. Android
 
 [Google Play icon design specifications](https://developer.android.com/google-play/resources/icon-design-specifications)에 따르면 `512*512 px` 사이즈의 아이콘만 제공하면 되지만, Android용 Chrome에서 모든 디바이스 뷰포트에 아이콘을 자동으로 핏되게 하려면 다음 2개 사이즈를 반드시 제공해야합니다.
 
@@ -452,22 +554,21 @@ Chrome 개발자도구의 Application > Manifest 탭에서 아이콘이 어떻�
 
 <br>
 
-### 4-5. Windows
+### 5-5. Windows
 
 가짓수가 많아 생략합니다. 공식문서의 [Target-size app icon assets](https://docs.microsoft.com/en-us/windows/apps/design/style/app-icons-and-logos#target-size-app-icon-assets) 섹션을 참고하세요.
 
 <br>
 
+## 6. Service Worker API: Service Worker란, Service Worker 등록하기
 
-## 5. Service Worker API
-
-### 5-1. Service Worker란?
+### 6-1. Service Worker란
 
 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)의 역할 중 하나는 웹앱에서 외부로 요청(Request)을 보낼 때 인터셉터(Interceptor)로서 작동하는 것입니다. 요청이 보내지는 시점에 끼어들어 특정한 일을 처리할 수 있습니다. Service Worker API는 대부분의 브라우저에 내장되어 있고요, 이 Service Worker를 사용하여 PWA 기능들을 구현할 수 있습니다.
 
 <br>
 
-### 5-2. Service Worker 등록하기
+### 6-2. Service Worker 등록하기
 
 Service Worker API는 `window.navigator` 객체 내의 `serviceWorker`라는 이름의 객체로 제공됩니다. Service Worker API를 제공하는 브라우저라면, 처음 앱이 로드될 때 아래와 같이 `service-worker.js` 파일을 앱의 Service Worker로 등록시킵니다. 이제 `service-worker.js` 파일에 작성된 로직이 앱의 인터셉터로서 작동하게 됩니다.
 
@@ -481,13 +582,17 @@ window.addEventListener("load", () => {
 
 <br>
 
-## 6. Service Worker 사용하여 오프라인 Fallback 페이지 제공하기
+## 7. 오프라인 Fallback 페이지 제공하기: Service Worker, Cache Storage
 
-PWA를 제공하는 방법중 [App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에서 UI를 즉시 로드하여 보여주기 때문에 인터넷이 없이도 앱을 사용할 수 있습니다. 새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있는 것은 덤이고요.
+[App Shell](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell)이라는 개념이 있습니다. SSR(Server-side rendering)과 CSR(Client-side rendering)을 믹스한 개념으로, 사용자가 앱에 재방문했을 때 캐시에 미리 저장해놓은 페이지를 즉시 로드하여 보여주기 때문에 인터넷이 없는 환경에서도 앱을 사용할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 사용자가 어떻게 대처하면 될지 안내문구가 포함된 페이지를 보여주는 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 [`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하여 미리 캐싱해놓고, 필요할 때 보여주는 방식입니다.
 
 <br>
 
-무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다. 사용자의 네트워크 환경이 불안정할 때, 아무것도 보여주지 않는 대신 사용자가 어떻게 대처하면 될지 안내문구가 포함된 페이지를 보여주는 UX를 제공할 수 있죠. 네트워크 연결이 없을 때 보여줄 `offline.html` 파일을 [`CacheStorage`](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 사용하여 미리 캐싱해놓고, 필요할 때 보여주는 방식입니다. 아래는 구글에서 제공하는 `service-worker.js`의 예시 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
+새로 업데이트된 부분만 서버에 요청하여 받아오기 때문에 전체 페이지를 로딩하는 것보다 빠르고 부드러운 UX를 제공할 수 있는 것은 덤입니다. 무엇을 캐시에서 받아오고, 무엇을 서버에 새로 요청할지는 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)를 사용하여 설정할 수 있습니다. 
+
+<br>
+
+아래는 구글에서 제공하는 `service-worker.js`의 예시 코드입니다. 오프라인 Fallback 페이지를 제공하는 코드이고요, 자세한 설명은 [Making PWAs work offline with Service workers](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers) 문서를 참고하세요.
 
 ```javascript
 /*
@@ -580,7 +685,7 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-오프라인 페이지 `offline.html`이 제대로 작동하려면 필요한 모든 리소스들도 미리 캐싱되어야 합니다. 가장 간단한 방법은 오프라인 페이지에 필요한 CSS와 JavaScript 코드를 `offline.html` 파일에 직접 포함시키는 것입니다. 따로 불러올 필요가 없도록 말이죠.
+오프라인 환경에서 `offline.html`이 제대로 작동하려면 필요한 모든 리소스들도 미리 캐싱되어야 합니다. 가장 간단한 방법은 오프라인 페이지에 필요한 CSS와 JavaScript 코드를 `offline.html` 파일에 직접 포함시키는 것입니다. 따로 불러올 필요가 없도록 말이죠.
 
 ```html
 <!DOCTYPE html>
@@ -630,21 +735,28 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-## 7. 알림 전송
+## 8. 알림 전송: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
 
-### 7-1. Notification API
+다음 문서에서 예제를 확인할 수 있습니다.
+
+- [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/codelabs/push-notifications/)
+- [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)
+
+<br>
+
+### 8-1. Notification API
 
 [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 알림을 전송할 수 있습니다. 사용자의 인터렉션에 대한 응답으로만 알림을 발생시키는 것이 권장되며, 실제로 Firefox와 Safari는 이렇게 하고 있습니다.
 
 <br>
 
-★ 주의 : `Notification` API는 아직 브라우저 호환 범위가 넓지 않습니다. 대표적으로 Android Webview와 iOS용 Safari에서는 전혀 지원하지 않습니다.
+★ 주의 : `Notification` API는 아직 브라우저 호환 범위가 넓지 않습니다. 대표적으로 iOS에서는 전혀 지원하지 않습니다.
 
 <br>
 
-### 7-2. 권한 확인
+### 8-2. 권한 핸들링
 
-먼저 읽기 전용 속성인 `Notification.permission`을 사용하여 현재 권한 상태를 확인합니다.
+먼저 읽기전용 속성인 `Notification.permission`을 사용하여 현재 권한 상태를 확인합니다.
 
 ```javascript
 if (!("Notification" in window)) return;
@@ -662,9 +774,7 @@ console.log(Notification.permission); // 'granted'
 
 <br>
 
-### 7-3. 권한 요청
-
-앱이 알림을 보내려면 사용자가 앱에 해당 권한을 허용해줘야 합니다. `Notification.requestPermission()` 메소드를 사용하여 앱에서 알림을 전송할 수 있도록 권한을 요청합니다.
+만약 권한 상태가 `granted`가 아니라면, 앱이 알림을 보내기 위해 사용자가 앱에 해당 권한을 허용해줘야 합니다. `Notification.requestPermission()` 메소드를 사용하여 앱에서 알림을 전송할 수 있도록 사용자에게 권한 허용을 요청합니다.
 
 <br>
 
@@ -701,7 +811,7 @@ if (!supportNotificationPromise) {
 
 <br>
 
-### 7-4. 알림 전송
+### 8-3. 알림 전송
 
 알림 전송은 `Notification` 생성자를 사용하여 만듭니다.
 
@@ -714,9 +824,9 @@ const notification = new Notification("제목", {
 
 <br>
 
-### 7-5. 알림 닫기
+### 8-4. 알림 닫기
 
-Firefox와 Safari는 알림을 약 4초 후에 자동으로 닫습니다. 이 외 브라우저에서는 `setTimeout`과 `Notification.close` 메소드를 사용하여 코드를 통해 닫아야합니다. 이때 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 알림 객체를 연동시켜야합니다.
+Firefox와 MacOS용 Safari는 알림을 약 4초 후에 자동으로 닫습니다. 이 외 브라우저에서는 `setTimeout`과 `Notification.close` 메소드를 사용하여 코드를 통해 닫아야합니다. 이때 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 알림 객체를 연동시켜야합니다.
 
 ```javascript
 window.setTimeout(notification.close.bind(notification), 4000);
@@ -724,7 +834,7 @@ window.setTimeout(notification.close.bind(notification), 4000);
 
 <br>
 
-### 7-6. 이벤트 핸들링
+### 8-5. 이벤트 핸들링
 
 `Notification` 인스턴스에는 다음 네 가지 이벤트가 발생할 수 있습니다.
 
@@ -732,90 +842,6 @@ window.setTimeout(notification.close.bind(notification), 4000);
 - `close` : 알림이 닫힘
 - `error` : 알림에 오류 발생
 - `show` : 알림이 사용자에게 표출됨
-
-<br>
-
-### 7-7. 참고자료
-
-- [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/codelabs/push-notifications/)
-- [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)
-
-<br>
-
-## 8. 설치 유도하기 (Safari 미지원)
-
-### 8-1. 커스텀 Prompt로 앱 설치 유도하기
-
-대부분의 브라우저는 웹사이트가 PWA로 식별되는 경우 앱 설치를 유도하는 알림을 자동으로 띄워줍니다. 앱 설치를 유도하는 UI를 커스텀하고 싶다면 `beforeinstallprompt` 이벤트가 발생했을 때 `preventDefault()` 메소드를 호출하여 브라우저가 자체적으로 띄우는 알림을 중단시킵니다.
-
-<br>
-
-```javascript
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (e) => {
-	e.preventDefault();
-
-	// 이벤트를 후에 컨트롤하기 위해 저장해두세요.
-	deferredPrompt = e;
-
-	// 앱 설치를 유도하는 커스텀 UI를 제공하세요.
-	showInstallPromotion();
-});
-```
-
-<br>
-
-### 8-2. 특정 UI를 클릭했을 때 앱 설치 Prompt 띄우기
-
-`appinstalled` 이벤트를 사용하여 앱이 설치되면 해당 UI를 숨기세요.
-
-```javascript
-installBtn.addEventListener("click", (e) => {
-	// PWA 설치를 유도하는 UI를 숨기세요.
-	hideMyInstallPromotion();
-
-	// 설치 Prompt를 보여주세요. (위에서 저장해두었던 beforeinstallprompt 이벤트 객체를 사용)
-	deferredPrompt.prompt();
-
-	// 설치 Prompt에 대한 사용자 응답에 따라 다음 작업을 수행하세요.
-	deferredPrompt.userChoice.then((result) => {
-		if (result.outcome === "accepted") {
-			// 설치
-		} else {
-			// 미설치
-		}
-	});
-});
-```
-
-`prompt()` 메소드를 호출하면 사용쟈에게 PWA 앱을 설치할지 물어보는 Prompt 모달이 나타납니다. `prompt()` 메소드는 한 번만 호출할 수 있기 때문에, 사용자가 앱 설치를 하지 않는다면 다시 Prompt 모달을 띄울 수 없습니다. `prompt()` 메소드를 다시 호출하려면 `beforeinstallprompt` 이벤트가 다시 발생하기까지 기다려야합니다. 보통 그 시점은 `userChoice` 속성이 사용자의 응답을 `resolve()`하는 `Promise` 객체를 반환할 때이죠.
-
-<br>
-
-### 8-3. 앱 설치여부를 감지하기
-
-`beforeinstallprompt` 이벤트 객체의 `userChoice` 속성을 사용하여 사용자가 Prompt 모달에서 "설치하기"를 선택했는지 감지할 수 있지만, 완벽하지는 않습니다. 가령, 주소창과 같은 브라우저 내장 알림을 통해 PWA를 설치한다면 `userChoice` 속성을 사용할 수 없죠. 앱이 설치되었는지를 완벽하게 판단하려면 `appinstalled` 이벤트를 사용하세요.
-
-```javascript
-window.addEventListener("appinstalled", (evt) => {
-	console.log("설치 성공");
-});
-```
-
-<br>
-
-[Patterns for promoting PWA installation](https://web.dev/promote-install/)을 참고하는 것도 좋습니다.
-
-<br>
-
-### 8-4. Prompt 가이드라인
-
-- 웹사이트의 UX 흐름에 방해가 돼서는 안됩니다. 가령, 로그인 페이지라면 PWA 설치를 유도하는 UI는 반드시 아이디/비밀번호 입력 필드와 제출 버튼 아래에 위치해야합니다.
-
-- PWA 설치를 유도하는 UI는 사용자가 원할 때 제거할 수 있어야합니다.
-
-- PWA 설치를 유도하는 UI는 `beforeinstallprompt` 이벤트가 발생한 후에 보여주세요.
 
 <br>
 
