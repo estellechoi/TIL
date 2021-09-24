@@ -746,17 +746,17 @@ self.addEventListener("fetch", (event) => {
 
 ### 8-1. Notification API
 
-[Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 알림을 전송할 수 있습니다. 사용자의 인터렉션에 대한 응답으로만 알림을 발생시키는 것이 권장되며, 실제로 Firefox와 Safari는 이렇게 하고 있습니다.
+[Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 푸시알림을 전송할 수 있습니다. HTTPS에서만 사용 가능합니다.
 
 <br>
 
-★ 주의 : `Notification` API는 아직 브라우저 호환 범위가 넓지 않습니다. 대표적으로 iOS에서는 전혀 지원하지 않습니다.
+★ 주의 : `Notification` API는 브라우저 호환성이 떨어집니다. 대표적으로 iOS에서는 모든 브라우저에서 지원하지 않습니다.
 
 <br>
 
 ### 8-2. 권한 핸들링
 
-먼저 읽기전용 속성인 `Notification.permission`을 사용하여 현재 권한 상태를 확인합니다.
+읽기전용 속성인 `Notification.permission`을 사용하여 현재 권한 상태를 확인합니다.
 
 ```javascript
 if (!("Notification" in window)) return;
@@ -774,12 +774,11 @@ console.log(Notification.permission); // 'granted'
 
 <br>
 
-만약 권한 상태가 `granted`가 아니라면, 앱이 알림을 보내기 위해 사용자가 앱에 해당 권한을 허용해줘야 합니다. `Notification.requestPermission()` 메소드를 사용하여 앱에서 알림을 전송할 수 있도록 사용자에게 권한 허용을 요청합니다.
+만약 권한 상태가 `granted`가 아니라면, 사용자가 권한을 직접 허용해줘야 합니다. `Notification.requestPermission()` 메소드를 사용하여 사용자에게 권한 허용을 요청합니다.
 
 <br>
 
 ```javascript
-// ES6+
 if (Notification.permission === "default") {
 	Notification.requestPermission().then((result) => {
 		if (result === "granted") {
@@ -813,7 +812,7 @@ if (!supportNotificationPromise) {
 
 ### 8-3. 알림 전송
 
-알림 전송은 `Notification` 생성자를 사용하여 만듭니다.
+알림은 `Notification` 생성자를 호출할 때 전송됩니다. 생성자를 호출할 때 인자를 사용하여 알림 내용을 구성할 수 있고요.
 
 ```javascript
 const notification = new Notification("제목", {
