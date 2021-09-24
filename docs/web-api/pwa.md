@@ -812,12 +812,14 @@ if (!supportNotificationPromise) {
 
 ### 8-3. 알림 전송
 
-알림은 `Notification` 생성자를 호출할 때 전송됩니다. 생성자를 호출할 때 인자를 사용하여 알림 내용을 구성할 수 있고요.
+알림은 `Notification` 생성자를 호출할 때 전송됩니다. 생성자를 호출할 때 인자를 통해 옵션을 지정할 수 있습니다. [MDN `Notification()`](https://developer.mozilla.org/en-US/docs/Web/API/Notification/Notification) 문서에서 모든 가능한 옵션을 확인하세요.
 
 ```javascript
 const notification = new Notification("제목", {
+	lang: "ko",
 	body: "내용",
 	icon: "/icon.png",
+	vibrate: 200
 });
 ```
 
