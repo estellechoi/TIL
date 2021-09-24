@@ -9,10 +9,11 @@
 5. 아이콘 규격: `png` 포맷, OS별 사이즈
 6. Service Worker API: Service Worker란, Service Worker 등록하기
 7. 오프라인 Fallback 페이지 제공하기: Service Worker, Cache Storage
-8. 알림 전송: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
-9. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
-10. PWA와 네이티브 앱
-11. iOS에서의 PWA
+8. 브라우저에서 알림 전송하기: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
+9. 서버에서 알림 전송하기: Push API
+10. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
+11. PWA와 네이티브 앱
+12. iOS에서의 PWA
 
 <br>
 
@@ -735,22 +736,19 @@ self.addEventListener("fetch", (event) => {
 
 <br>
 
-## 8. 알림 전송: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
+## 8. 브라우저에서 알림 전송하기: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
 
-다음 문서에서 예제를 확인할 수 있습니다.
+웹앱에서 알림을 전송하려면 [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API) 또는 [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)를 사용합니다. [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)에서 예제를 확인할 수 있고요, 두 API의 차이점이 헷갈린다면 StackOverflow [Difference between Notifications API and Push API from Web perspective](https://stackoverflow.com/questions/34844561/difference-between-notifications-api-and-push-api-from-web-perspective) 페이지를 확인해보세요. 이 섹션에서는 Notification API를 다룹니다.
 
-- [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/codelabs/push-notifications/)
-- [Codelab: Build a push notification client](https://web.dev/push-notifications-client-codelab/)
+<br>
+
+★ 주의 : 알림 관련 API들은 브라우저 호환성이 떨어집니다. 대표적으로 iOS에서는 모든 브라우저에서 지원하지 않습니다.
 
 <br>
 
 ### 8-1. Notification API
 
-[Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 푸시알림을 전송할 수 있습니다. HTTPS에서만 작동하고, Service Worker와 함께 사용할 수 있습니다.
-
-<br>
-
-★ 주의 : `Notification` API는 브라우저 호환성이 떨어집니다. 대표적으로 iOS에서는 모든 브라우저에서 지원하지 않습니다.
+[Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 알림을 전송할 수 있습니다. 브라우저에서 전송하는 알림이 OS의 시스템 알림 UI를 통해 표시됩니다. HTTPS에서만 작동하고, Service Worker를 통해 사용할 수 있습니다. 브라우저가 아닌 서버에서 전송하는 알림을 수신하게 하려면 Push API를 사용해야 합니다.
 
 <br>
 
@@ -854,7 +852,125 @@ document.addEventListener("visibilitychange", function() {
 
 <br>
 
-## 9. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
+## 9. 서버에서 알림 전송하기: Push API, 구독상태 확인, 애플리케이션 서버 키, `push` 이벤트
+
+### 9-1. Push API
+
+[Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)는 웹앱이 현재 로딩되어있지 않더라도 서버로부터 메시지를 받을 수 있도록 하는 API입니다. [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)가 등록되어야 사용할 수 있고요, [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/codelabs/push-notifications/) 문서에서 예제를 확인할 수 있습니다.
+
+<br>
+
+### 9-2. 구독상태 확인
+
+먼저 등록된 Service Worker 객체를 저장하시고요.
+
+```javascript
+const swRegistration = register()
+
+async function register() {
+	try {
+		if ("serviceWorker" in navigator) {
+			const sw = await navigator.serviceWorker.register("service-worker.js")
+			swRegistration = sw
+		} else {
+			throw new "Service Worker is not supported";
+		}
+	} catch(e) {
+		// ..
+		return null
+	}
+}
+```
+
+<br>
+
+`PushManager`를 지원하는 브라우저라면 등록된 Service Worker 객체 내의 `pushManager.getSubscription()` 메소드를 사용하여 사용자가 푸시알림을 구독중인지 확인할 수 있습니다. 
+
+```javascript
+getPushSubscription();
+
+async function getPushSubscription() {
+  try {
+	if (swRegistration === null) {
+		throw new "Service Worker is not registered";
+	}
+
+    if ("PushManager" in window)  {
+		const subscription = await swRegistration.pushManager.getSubscription()
+		const isSubscribed = !(subscription === null)
+		// ..
+	} else {
+		throw new "PushManager is not supported";
+	}
+  } catch(e) {
+    // ..
+ }
+}
+```
+
+<br>
+
+### 9-3. 애플리케이션 서버 키
+
+사용자가 현재 구독하지 않은 상태라면 `pushManager.subscribe()` 메소드를 호출하여 구독 프로세스를 시작합니다. 구독 프로세스라는 것은 다음 두 단계를 말합니다. 이 두 단계가 성공적으로 완료되면 `Promise`를 반환합니다.
+
+- 사용자에게 Notification 권한 허용 Prompt를 띄우고, 사용자가 허용함
+- 브라우저가 세부정보를 얻기 위해 푸시 알림을 보낼 서버로 네트워크 요청을 보냄
+
+<br>
+
+`subscribe()` 메소드를 호출할 때 구독할 웹서버의 [애플리케이션 서버 키](https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol)를 제공해야하는데, 이 키는 [`UInt8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) 타입으로 변환하여 제공합니다. `userVisibleOnly` 속성의 값은 `true`로 지정해야 알림이 표시됩니다.
+
+```javascript
+subscribePush();
+
+async function subscribePush(appServerPublicKey) {
+  try {
+	// ..
+
+    const applicationServerKey = Uint8Array.from(appServerPublicKey);
+
+    const subscription = await swRegistration.pushManager.subscribe({
+      userVisibleOnly: true, // 푸시가 전송될 때마다 알림을 표시하도록 허용
+      applicationServerKey
+    });
+	// ..
+  } catch(e) {
+    // ..
+  }
+}
+```
+
+<br>
+
+사용자가 권한을 거부하면 구독 프로세스는 실패하고, 알림을 전송할 수도 없습니다. 사용자의 권한 허용 상태는 `Notification.permisison` 값으로 알 수 있습니다. 값이 `denied`라면 사용자가 권한을 거부한 것이므로, 더이상 할 수 있는 것이 없습니다.
+
+```javascript
+if (Notification.permisison === 'denied') {
+	// ..
+}
+```
+
+<br>
+
+### 9-4. `push` 이벤트
+
+서버에서 푸시알림을 수신할 때 발생하는 `push` 이벤트를 사용하여 최종적으로 알림을 표시합니다. `push` 이벤트는 Service Worker 내에서 핸들링하면 되는데요, Service Worker 파일에서 `self`는 Service Worker 자체를 참조합니다.
+
+```javascript
+// service-worker.js
+
+self.addEventListener("push", function(evt) {
+	evt.waitUntil(self.registration.showNotification("제목", {
+		body: "내용",
+		icon: "img/icon.png",
+	}));
+})
+```
+
+<br>
+
+## 10. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
 
 아래와 같이 CSS 미디어쿼리를 이용하여 웹사이트의 접속모드에 따라 다르게 스타일링할 수 있습니다. (브라우저를 통해 접속했는지, 홈화면을 통해 접속했는지에 따라서 말이죠) `display-mode` 값에 따라 아래와 같이 CSS를 작성하는거죠.
 
@@ -900,7 +1016,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 <br>
 
-## 10. PWA와 네이티브 앱
+## 11. PWA와 네이티브 앱
 
 만약 별도로 네이티브 앱을 제공한다면, 네이티브 앱이 사용자의 디바이스에 설치되었는지 확인할 수 있습니다. 네이티브 앱 설치여부에 따라 PWA 설치를 유도하거나, 유도하지 않을 수 있죠. 아래 문서를 참고하세요.
 
@@ -914,9 +1030,9 @@ PWA와 네이티브 앱을 적절하게 블렌딩 하여 사용자들에게 심�
 
 <br>
 
-## 11. iOS에서의 PWA
+## 12. iOS에서의 PWA
 
-### 11-1. `webmanifest` 제한 - `link`, `meta` 태그로 대체
+### 12-1. `webmanifest` 제한 - `link`, `meta` 태그로 대체
 
 iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되어있습니다. [Web app manifests - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/Manifest#browser_compatibility)에서 어떤 속성들이 제한되었는지 확인할 수 있고요, 다만 제한된 속성 중 일부는 아래의 태그들을 `html` 파일의 `<head>` 태그 내에 추가함으로써 PWA를 적용할 수 있습니다. 아래에서 하나씩 설명합니다.
 
@@ -928,7 +1044,7 @@ iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되
 
 <br>
 
-### 11-2. 아이콘
+### 12-2. 아이콘
 
 아이콘은 `<link>` 태그를 사용하여 지정합니다. 모든 디바이스를 지원하려면 필요한 규격을 확인하여 모두 제공하면 됩니다. 만약 `<link>` 태그를 사용하여 아이콘을 지정하지 않으면, 웹사이트의 루트 경로에서 파일명에 `apple-touch-icon` Prefix가 포함된 이미지 파일을 찾아서 아이콘으로 사용합니다. 만약 `50 * 50 px` 사이즈의 디바이스라면 다음의 우선순위대로 파일명과 포맷을 탐색하여 아이콘으로 사용합니다. 1) `apple-touch-icon-80x80.png` 2) `apple-touch-icon.png`.
 
@@ -950,7 +1066,7 @@ iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되
 
 <br>
 
-### 11-3. 앱 런치 화면(Launch Screen)
+### 12-3. 앱 런치 화면(Launch Screen)
 
 앱아이콘과 마찬가지로 디바이스별 런치 화면 사이즈를 확인한 후 규격에 맞는 파일을 모두 제공하면 됩니다. 런치 화면용 이미지 파일은 [About splash-screens](https://appsco.pe/developer/splash-screens)와 같은 툴을 사용하여 빠르게 생성할 수 있습니다. 참고로 iOS 14 이후로 런치 화면 이미지 파일 용량을 `25MB`로 제한합니다. 다음은 StackOverflow [iOS PWA splash screen?](https://stackoverflow.com/questions/55840186/ios-pwa-splash-screen)에서 가져온 구성 예시입니다.
 
@@ -1002,7 +1118,7 @@ iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되
 
 <br>
 
-### 11-5. `standalone` 모드 (브라우저 UI 제거하기)
+### 12-5. `standalone` 모드 (브라우저 UI 제거하기)
 
 아래와 같이 `<meta>` 태그를 지정하면 PWA가 `standalone` 모드로 전환되고요, 주소창과 하단 컨트롤러 등 모든 브라우저 UI를 제거합니다.
 
@@ -1012,7 +1128,7 @@ iOS용 Safari에서는 `webmanifest` 파일의 속성 중 상당수가 제한되
 
 <br>
 
-### 11-6. 상태바 스타일링
+### 12-6. 상태바 스타일링
 
 PWA를 `standalone` 모드로 지정하면 상태바를 스타일링할 수 있습니다. 가령, 아래와 같이 값을 `black`으로 지정하면 상태바가 검정색으로 스타일링됩니다.
 
