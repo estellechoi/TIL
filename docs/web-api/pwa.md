@@ -812,7 +812,7 @@ if (!supportNotificationPromise) {
 
 ### 8-3. 알림 전송
 
-알림은 `Notification` 생성자를 호출할 때 전송됩니다. 생성자를 호출할 때 인자를 통해 옵션을 지정할 수 있습니다. [MDN `Notification()`](https://developer.mozilla.org/en-US/docs/Web/API/Notification/Notification) 문서에서 모든 가능한 옵션을 확인하세요.
+알림은 `Notification()` 생성자를 호출할 때 전송됩니다. 생성자를 호출할 때 인자를 통해 옵션을 지정할 수 있습니다. [MDN `Notification()`](https://developer.mozilla.org/en-US/docs/Web/API/Notification/Notification) 문서에서 모든 가능한 옵션을 확인하세요.
 
 ```javascript
 const notification = new Notification("제목", {
@@ -839,7 +839,7 @@ document.addEventListener("visibilitychange", function() {
 
 <br>
 
-참고로, 웹팩 사용이 불가능하다면 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 알림 객체를 연동시켜야합니다.
+참고로, 웹팩 사용이 불가능하다면 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 `Notificaiton` 객체를 연동시켜야합니다.
 
 <br>
 
