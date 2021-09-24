@@ -10,7 +10,7 @@
 6. Service Worker API: Service Worker란, Service Worker 등록하기
 7. 오프라인 Fallback 페이지 제공하기: Service Worker, Cache Storage
 8. 브라우저에서 알림 전송하기: Notification API, 권한 핸들링, 알림 전송, 알림 닫기, 이벤트 핸들링
-9. 서버에서 알림 전송하기: Push API
+9. 서버에서 알림 전송하기: Push API, 구독상태 확인, 애플리케이션 서버 키, `push` 이벤트
 10. 접속모드(브라우저/PWA)에 따라 다르게 스타일링하기
 11. PWA와 네이티브 앱
 12. iOS에서의 PWA
@@ -865,13 +865,14 @@ document.addEventListener("visibilitychange", function() {
 먼저 등록된 Service Worker 객체를 저장하시고요.
 
 ```javascript
+// register-service-worker.js
+
 const swRegistration = register()
 
 async function register() {
 	try {
 		if ("serviceWorker" in navigator) {
-			const sw = await navigator.serviceWorker.register("service-worker.js")
-			swRegistration = sw
+			return await navigator.serviceWorker.register("service-worker.js")
 		} else {
 			throw new "Service Worker is not supported";
 		}
@@ -887,6 +888,8 @@ async function register() {
 `PushManager`를 지원하는 브라우저라면 등록된 Service Worker 객체 내의 `pushManager.getSubscription()` 메소드를 사용하여 사용자가 푸시알림을 구독중인지 확인할 수 있습니다. 
 
 ```javascript
+// register-service-worker.js
+
 getPushSubscription();
 
 async function getPushSubscription() {
