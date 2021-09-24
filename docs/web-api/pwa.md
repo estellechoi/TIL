@@ -825,11 +825,19 @@ const notification = new Notification("제목", {
 
 ### 8-4. 알림 닫기
 
-Firefox와 MacOS용 Safari는 알림을 약 4초 후에 자동으로 닫습니다. 이 외 브라우저에서는 `setTimeout`과 `Notification.close` 메소드를 사용하여 코드를 통해 닫아야합니다. 이때 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 알림 객체를 연동시켜야합니다.
+대부분의 브라우저에서는 알림을 약 4초 후에 자동으로 닫습니다. 하지만 오래된 브라우저에서는 `Notification.close()` 메소드를 사용하여 코드를 통해 닫아야합니다. 여기서 주의할 점은 `close()` 메소드를 사용하면 알림 내역이 알림 트레이(Notification Tray)에서도 완전히 제거될 수 있다는 것입니다. 따라서 `setTimeout`을 사용하여 일괄적으로 제거하는 것은 적절하지 않습니다. 대신, 아래와 같이 [`document.visibilityState`](https://developer.mozilla.org/ko/docs/Web/API/Document/visibilityState) 값을 사용하여 사용자가 앱을 열었는지 판단하는 것이 좋습니다.
 
 ```javascript
-window.setTimeout(notification.close.bind(notification), 4000);
+document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "visible") {
+    notification.close();
+  }
+});
 ```
+
+<br>
+
+참고로, 웹팩 사용이 불가능하다면 [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)를 사용하여 열려있는 알림 객체를 연동시켜야합니다.
 
 <br>
 
