@@ -746,7 +746,7 @@ self.addEventListener("fetch", (event) => {
 
 ### 8-1. Notification API
 
-[Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 푸시알림을 전송할 수 있습니다. HTTPS에서만 사용 가능합니다.
+[Notification API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)를 사용하여 사용자에게 푸시알림을 전송할 수 있습니다. HTTPS에서만 작동하고, Service Worker와 함께 사용할 수 있습니다.
 
 <br>
 
