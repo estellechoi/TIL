@@ -6,9 +6,10 @@
 2. CSS 픽셀, DPPX(Device Pixel Ratio)
 3. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
 4. 8포인트 베이스라인 그리드(8pt Baseline Grid)
-5. 베이스라인 그리드 적용 범위: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인 그리드
-6. 모듈식 스케일(Modular Scales)
-7. 단위: `px`, `rem`, `em`
+5. 베이스라인 그리드와 컴포넌트: 박스모델(Box Model), Escape
+6. 단위: `px`, `rem`, `em`
+7. 컴포지션 그리드(Composition Grids)
+8. 모듈식 스케일(Modular Scales)
 
 <br>
 
@@ -180,7 +181,7 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-## 5. 베이스라인 그리드와 컴포넌트: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인
+## 5. 베이스라인 그리드와 컴포넌트: 박스모델(Box Model), Escape
 
 ### 5-1. 박스모델(Box Model)
 
@@ -203,7 +204,7 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-### 5-2. 타이포그래피 - Escape 베이스라인
+### 5-2. Escape
 
 레이아웃을 구성하다보면 아무리해도 `4`나 `8`로 나누어떨어지지 않는 경우가 있습니다. 베이스라인에 억지로 맞추다보면 버튼의 여백이 너무 넓거나 좁아지는 경우, 텍스트가 너무 크거나 작아지는 경우가 있죠. 이럴 때 다음 규칙을 고려해보세요.
 
@@ -230,29 +231,7 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-## 6. 모듈식 스케일(Modular Scales)
-
-일반적으로 그리드 시스템에서는 특정 비율로 증감하는 값들로 공간을 구성합니다. 그래야 사용자가 화면을 읽어내려갈 때 콘텐츠가 리듬을 갖는다고 보기 때문입니다. [Modular Scale](https://www.modularscale.com/?1&em&1.618) 등의 도구를 사용하면 증감 값들을 빠르게 추출할 수 있습니다. 증감 비율은 [피보나치 수열에 기반한 황금비율(1:1.618)](https://brunch.co.kr/@shaun/14)을 흔히 사용합니다. 또한 4픽셀 베이스라인 그리드 레이아웃을 채택하였으므로, 추출된 각 값들은 가장 가까운 `4`의 배수로 반올림하여 구성해볼 수 있겠습니다. 가령 `16px`을 기준으로 황금비로 증감하는 값들을 추출하면 `3.78`, `6.11`, `9.89`, `16`, `25.89`, `41.89`, `67.77`, `109.66`, `177.42`이고요, 이를 기반으로 4픽셀 베이스라인 그리드 모듈들을 구성하면 아래와 같이 할 수 있습니다.
-
-<br>
-
-```css
-:root {
-	--grid-1: 1px;
-	--grid-2: 4px;
-	--grid-3: 8px;
-	--grid-4: 16px;
-	--grid-5: 24px;
-	--grid-6: 40px;
-	--grid-7: 68px;
-	--grid-8: 108px;
-	--grid-9: 176px;
-}
-```
-
-<br>
-
-## 7. 단위: `px`, `rem`, `em`
+## 6. 단위: `px`, `rem`, `em`
 
 지금까지 픽셀을 가지고 얘기했지만, 사실 웹 개발에서는 공간과 타이포그래피에 `rem`을 흔히 사용합니다. `<html>` 태그의 폰트사이즈(기본적으로 `16px`)을 `1rem`으로 환산하는 상대적 단위이기 때문에, 단 하나의 픽셀 값을 조정함으로써 모든 폰트와 주변 여백 값이 자동으로 늘어나고 줄어든다는 사실 때문이죠. 이는 레이아웃의 유연성과 [접근성](https://www.w3.org/WAI/fundamentals/accessibility-intro/ko) 측면에서 장점으로 작용합니다. [Tailwind CSS](https://tailwindcss.com/)에서도 `padding`, `margin` 값으로 `rem`을 사용합니다.
 
@@ -266,13 +245,13 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-## 4. 컴포지션 그리드(Composition Grids)
+## 7. 컴포지션 그리드(Composition Grids)
 
-텍스트가 적고 추상적 이미지와 도형 위주의 화면은 일반적인 레이아웃 그리드보다는 컴포지션 그리드(Composition Grids)가 적합할 수 있습니다. 두 가지 컴포지션 그리드를 소개합니다.
+텍스트가 적고 추상적 이미지와 도형 위주의 화면은 베이스라인 그리드보다는 컴포지션 그리드(Composition Grids)가 적합할 수 있습니다. 혹은 섞어 사용할 수 있고요. 두 가지 컴포지션 그리드를 소개합니다.
 
 <br>
 
-### 4-1. Rule of Thirds
+### 7-1. Rule of Thirds
 
 [Rule of Thirds](https://en.wikipedia.org/wiki/Rule_of_thirds)는 화면을 똑같은 크기의 9개 조각으로 나눈 후, 이들을 나눈 선과 선들의 교차점을 기준 삼아 콘텐츠를 배치하는 방법입니다. 사용자의 시선이 Z자를 그리며 왼쪽 상단, 오른쪽 상단, 왼쪽 하단, 오른쪽 하단 순서로 흐른다고 가정합니다.
 
@@ -284,15 +263,74 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-### 4-2. 황금비(Golden Ratio)
+### 7-2. 황금비(Golden Ratio)
 
-황금비(Golden Ratio)는 자연에서 발견된 미의 비율에서 가져온 그리드 방법론입니다. [피보나치 수열](https://en.wikipedia.org/wiki/Fibonacci_number)에서 숫자가 증감하는 비율을 사용하여 그리드를 구성합니다.
+[황금비(Golden Ratio)](https://en.wikipedia.org/wiki/Golden_ratio)는 자연에서 발견된 미의 비율에서 가져온 그리드 방법론입니다. [피보나치 수열](https://en.wikipedia.org/wiki/Fibonacci_number)에서 숫자가 증감하는 비율을 사용하여 그리드를 구성합니다.
 
 <br>
 
 <img src="./../img/golden-ratio.png" alt="" />
 
 사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
+
+<br>
+
+## 8. 모듈식 스케일(Modular Scales)
+
+일반적으로 타이포그래피는 특정 비율로 증감하는 값들로 구성합니다. 그래야 사용자가 콘텐츠를 읽어내려갈 때 글이 리듬을 갖는다고 보기 때문입니다. 이러한 모듈식 스케일을 컴포넌트 디자인에도 적용할 수 있습니다. 특정 비율로 증감하는 값들로 컴포넌트의 사이즈를 구성해서 화면 전체의 리듬감에 기여할 수 있기 때문입니다. [Modular Scale](https://www.modularscale.com/?1&em&1.618) 등의 도구를 사용하면 증감 값들을 빠르게 추출할 수 있습니다.
+
+<br>
+
+증감 비율로는 위에서 소개한 황금비 `1.618`도 많이 사용됩니다. 만약 황금비로 증감하는 타이포그래피를 구성하면서 4픽셀 베이스라인 그리드에도 맞추고자한다면, 추출된 각 값들은 가장 가까운 `4`의 배수로 반올림하여 구성해볼 수 있겠습니다. 가령 `16px`을 기준으로 황금비로 증감하는 값들을 추출하면 `3.78`, `6.11`, `9.89`, `16`, `25.89`, `41.89`, `67.77`, `109.66`, `177.42`이고요, 이를 기반으로 4픽셀 베이스라인 그리드에서 사용할 모듈 값들을 구성하면 아래와 같이 할 수 있습니다.
+
+<br>
+
+```css
+:root {
+	--base-size: 4;
+}
+
+:root {
+	--modular-size-1: calc(var(--base-size) * 1); /* 4 */
+	--modular-size-2: calc(var(--base-size) * 2); /* 8 */
+	--modular-size-3: calc(var(--base-size) * 4); /* 16 */
+	--modular-size-4: calc(var(--base-size) * 6); /* 24 */
+	--modular-size-5: calc(var(--base-size) * 10); /* 40 */
+	--modular-size-6: calc(var(--base-size) * 17); /* 68 */
+	--modular-size-7: calc(var(--base-size) * 27); /* 108 */
+	--modular-size-8: calc(var(--base-size) * 44); /* 176 */
+}
+```
+
+<br>
+
+이후 필요에 맞게 단위를 환산해 사용합니다.
+
+```css
+:root {
+	--box-size-1: calc(var(--modular-size-1) * 1px); /* 4 */
+	--box-size-2: calc(var(--modular-size-2) * 1px); /* 8 */
+	--box-size-3: calc(var(--modular-size-3) * 1px); /* 16 */
+	--box-size-4: calc(var(--modular-size-4) * 1px); /* 24 */
+	--box-size-5: calc(var(--modular-size-5) * 1px); /* 40 */
+	--box-size-6: calc(var(--modular-size-6) * 1px); /* 68 */
+	--box-size-7: calc(var(--modular-size-7) * 1px); /* 108 */
+	--box-size-8: calc(var(--modular-size-8) * 1px); /* 176 */
+}
+```
+
+```css
+:root {
+	--margin-size-1: calc(var(--modular-size-1) / 16rem); /* 0.25rem */
+	--margin-size-2: calc(var(--modular-size-2) / 16rem); /* 0.5rem */
+	--margin-size-3: calc(var(--modular-size-3) / 16rem); /* 1rem */
+	--margin-size-4: calc(var(--modular-size-4) / 16rem); /* 1.5rem */
+	--margin-size-5: calc(var(--modular-size-5) / 16rem); /* 2.5rem */
+	--margin-size-6: calc(var(--modular-size-6) / 16rem); /* 4.25rem */
+	--margin-size-7: calc(var(--modular-size-7) / 16rem); /* 6.75rem */
+	--margin-size-8: calc(var(--modular-size-8) / 16rem); /* 11rem */
+}
+```
 
 <br>
 
