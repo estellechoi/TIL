@@ -26,7 +26,7 @@
 
 <br>
 
-그런데 이 포인트 단위를 픽셀 기반의 디지털 디바이스로 옮겨오는 과정에서 많은 사람들이 혼선을 겪게 되었고요, [Xerox PARC 연구소](<https://en.wikipedia.org/wiki/PARC_(company)>)는 이를 해소하기 위해 디지털 화면의 표준 해상도를 `72 ppi(pixels per inch)`로 채택합니다. 이로써 표준 해상도를 가진 디바이스에서 `1pt = 1px` 공식이 성립하게 되었습니다. 당시 `72 ppi`의 표준 해상도를 채택한 Apple PC의 성공으로 `72 ppi`가 보편화되어 현재까지 널리 쓰이고있습니다. 따라서 `72ppi` 규격을 따른 표준 해상도에서는 `1pt = 1px`로 계산할 수 있겠습니다. 해상도가 2 배가 되면 `1pt = 4px`이 됩니다. 가로, 세로 모두 인치당 픽셀 수가 2 배씩 커졌음을 의미하기 때문이죠.
+그런데 이 포인트 단위를 픽셀 기반의 디지털 디바이스로 옮겨오는 과정에서 많은 사람들이 혼선을 겪게 되었고요, [Xerox PARC 연구소](<https://en.wikipedia.org/wiki/PARC_(company)>)는 이를 해소하기 위해 디지털 화면의 표준 해상도를 `72 ppi(pixels per inch)`로 채택합니다. 이로써 표준 해상도를 가진 디바이스에서 `1pt = 1px`가 성립하게 되었습니다. 당시 `72 ppi` 표준 해상도를 채택한 Apple PC의 성공으로 `72 ppi`가 보편화되었고요, [Human Interface Guides](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes) 문서를 보면 현재까지도 Apple 디바이스에서 이 표준해상도를 사용하고있음을 알 수 있습니다. 가령 해상도가 2 배(`@x2`)라면 `1pt = 4px`이 됩니다. 가로, 세로 모두 인치당 픽셀 수가 2 배씩 커졌음을 의미하기 때문이죠.
 
 <br>
 
