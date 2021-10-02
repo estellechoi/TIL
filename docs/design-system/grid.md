@@ -440,7 +440,17 @@ Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생�
 
 그리드 생성이 완료되었으면, 아래와 같이 `Styles` 버튼을 클릭하여 모듈 영역을 열고, `+` 버튼을 클릭하여 새로운 모듈로 추가해줍니다.
 
+<br>
+
 <img src="./../img/figma-grid4.png" alt="" />
+
+<br>
+
+같은 방식으로 위에서 나눈 5개의 Breakpoint 시스템 그룹을 위한 그리드를 모두 만들면 아래와 같이 그리드 시스템이 완성됩니다.
+
+<br>
+
+<img src="./../img/figma-grid5.png" alt="" />
 
 <br>
 
