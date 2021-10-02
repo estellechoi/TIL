@@ -211,8 +211,8 @@ console.log(window.devicePixelRatio); // 4
 
 지켜야할 것
 
-- 박스의 크기 (너비, 높이)
-- 텍스트 줄높이
+- 박스의 너비, 높이
+- 텍스트 줄높이((Line Height))
 
 <br>
 
@@ -222,7 +222,7 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-박스의 크기와 줄높이(Line Height)는 최소 `4`의 배수를 유지하고 폰트 사이즈(Font Size)는 베이스라인에서 어느정도 벗어나도 괜찮다는 것이 [Material Design](https://material.io/design/layout/spacing-methods.html#baseline-grid)의 설명입니다. 다음은 발췌 내용입니다.
+박스의 크기와 텍스트 줄높이는 최소 `4`의 배수를 유지하고 폰트 사이즈(Font Size)는 베이스라인에서 어느정도 벗어나도 괜찮다는 것이 [Material Design](https://material.io/design/layout/spacing-methods.html#baseline-grid)의 설명입니다. 다음은 발췌 내용입니다.
 
 <br>
 
