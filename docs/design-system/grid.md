@@ -2,8 +2,8 @@
 
 <br>
 
-1. 픽셀, 포인트, Apple의 `72ppi`
-2. CSS 픽셀, DPPX(Device Pixel Ratio)
+1. 배경지식 1 - 픽셀, 포인트, Apple의 `72ppi`
+2. 배경지식 2 - CSS 픽셀, DPPX(Device Pixel Ratio)
 3. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
 4. 8포인트 베이스라인 그리드(8pt Baseline Grid)
 5. 베이스라인 그리드와 컴포넌트: 박스모델(Box Model), Escape
@@ -13,7 +13,7 @@
 
 <br>
 
-## 1. 픽셀, 포인트, Apple의 `72ppi`
+## 1. 배경지식 1 - 픽셀, 포인트, Apple의 `72ppi`
 
 ### 1-1. 픽셀(`px`)
 
@@ -39,7 +39,7 @@
 
 <br>
 
-## 2. CSS 픽셀, DPPX(Device Pixel Ratio)
+## 2. 배경지식 2 - CSS 픽셀, DPPX(Device Pixel Ratio)
 
 ### 2-1. CSS 픽셀
 
