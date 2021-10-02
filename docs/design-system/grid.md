@@ -336,11 +336,11 @@ console.log(window.devicePixelRatio); // 4
 
 ### 9-1. Breakpoint 시스템
 
-지금까지 픽셀 기준으로만 얘기했지만, 모든 디바이스에서 일관된 레이아웃을 제공하기 위해 반응형 그리드를 설계해야합니다. 반응형 그리드에서는 뷰포트(Viewport)의 너비(Width), 높이(Height)에 따라 컬럼, 거터, 마진 값이 가변할 수 있도록 구성합니다. 매년 새로운 크기의 뷰포트들이 등장하기 때문에 모든 뷰포트를 하나씩 다루지않고, 뷰포트의 너비를 특정 범위로 그루핑한 [Breakpoint 시스템](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에 따른 그리드를 구성하면 됩니다.
+지금까지 픽셀 기준으로만 얘기했지만, 모든 디바이스에서 일관된 레이아웃을 제공하기 위해 반응형 그리드를 설계해야합니다. 반응형 그리드에서는 뷰포트(Viewport)의 너비(Width), 높이(Height)에 따라 컬럼, 거터, 마진 값이 가변할 수 있도록 구성합니다. 매년 새로운 크기의 뷰포트들이 등장하기 때문에 모든 뷰포트를 하나씩 다루지않고, 뷰포트의 너비를 특정 범위로 그루핑한 [Breakpoint 시스템](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에 따른 그리드를 구성하면 됩니다. 참고로 Adobe의 [Spectrum](https://spectrum.adobe.com/page/responsive-grid/), Google의 [Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints), [Bootstrap](https://getbootstrap.com/docs/4.0/layout/grid/) 등 거의 모든 디자인 가이드에서 서로 다른 Breakpoint 시스템을 제안하고 있습니다.
 
 <br>
 
-다음은 [Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)의 Breakpoint 시스템입니다. 뷰포트 너비 기준입니다.
+다음은 Material Design의 Breakpoint 시스템이고요, 각 그룹마다 적절한 컬럼의 수와 마진 값에 대한 가이드를 얻을 수 있습니다.
 
 - 휴대폰 (`600dp` 미만) : 4 컬럼, `16dp` 마진
 
@@ -386,7 +386,15 @@ console.log(window.devicePixelRatio); // 4
 
 ### 9-2. 거터 값 정하기
 
-Material Design의 거터 예시를 참고하였고요, 컬럼과 거터의 너비가 4px 베이스라인에 맞아떨어지게 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
+거터의 값은 `16px`, `24px`와 같이 8px 베이스라인과 맞아 떨어지게 하는 것이 일반적이고요, 마진과 같거나 작은 값으로 지정합니다. 다음은 [Spectrum](https://spectrum.adobe.com/page/responsive-grid/)에서 발췌한 내용입니다.
+
+> Gutters are the gaps between the columns. Gutter widths are fixed values (16 px, 24 px, etc.) based on breakpoints.
+
+> Grid margins are the outer margins of the grid. They can be the same width as the gutters or greater.
+
+<br>
+
+거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
 
 - 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진, `16px` 거터
 
@@ -464,6 +472,7 @@ Figma에서 그리드 시스템을 추가하는 방법에 대한 자세한 내�
 
 - [Understanding layout | Material Design](https://material.io/design/layout/understanding-layout.html#principles)
 - [Adaptivity and Layout | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)
+- [Responsive grid | Spectrum](https://spectrum.adobe.com/page/responsive-grid/)
 - [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
 - [Pixel | Wikipedia](https://en.wikipedia.org/wiki/Pixel)
 - [CSS pixel | MDN](https://developer.mozilla.org/en-US/docs/Glossary/CSS_pixel)
