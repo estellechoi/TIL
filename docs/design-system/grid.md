@@ -2,7 +2,7 @@
 
 <br>
 
-1. 픽셀과 포인트
+1. 픽셀, 포인트, Apple의 `72ppi`
 2. 그리드의 종류
 3. 4포인트 베이스라인 그리드(4pt Baseline Grid)
 4. CSS 픽셀, DPPX(Device Pixel Ratio), 4픽셀 베이스라인 그리드(4px Baseline Grid)
@@ -12,7 +12,7 @@
 
 <br>
 
-## 1. 픽셀과 포인트
+## 1. 픽셀, 포인트, Apple의 `72ppi`
 
 ### 1-1. 픽셀(`px`)
 
