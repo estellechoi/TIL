@@ -336,11 +336,11 @@ console.log(window.devicePixelRatio); // 4
 
 ### 9-1. Breakpoint 시스템
 
-지금까지 픽셀 기준으로만 얘기했지만, 모든 디바이스에서 일관된 레이아웃을 제공하기 위해 반응형 그리드를 설계해야합니다. 반응형 그리드에서는 컬럼, 거터, 마진 값이 뷰포트(Viewport) 너비, 높이에 따라 가변할 수 있도록 설계합니다. 매년 새로운 크기의 뷰포트들이 등장하기 때문에 뷰포트의 크기를 특정 영역별로 그루핑한 [Breakpoint 시스템](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에 따른 그리드를 구성하면 됩니다.
+지금까지 픽셀 기준으로만 얘기했지만, 모든 디바이스에서 일관된 레이아웃을 제공하기 위해 반응형 그리드를 설계해야합니다. 반응형 그리드에서는 뷰포트(Viewport)의 너비(Width), 높이(Height)에 따라 컬럼, 거터, 마진 값이 가변할 수 있도록 구성합니다. 매년 새로운 크기의 뷰포트들이 등장하기 때문에 모든 뷰포트를 하나씩 다루지않고, 뷰포트의 너비를 특정 범위로 그루핑한 [Breakpoint 시스템](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에 따른 그리드를 구성하면 됩니다.
 
 <br>
 
-[Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에서는 뷰포트의 너비에 따라 아래와 같이 뷰포트 그룹을 마련했습니다.
+다음은 [Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)의 Breakpoint 시스템입니다. 뷰포트 너비 기준입니다.
 
 - 휴대폰 (`600dp` 미만) : 4 컬럼, `16dp` 마진
 
