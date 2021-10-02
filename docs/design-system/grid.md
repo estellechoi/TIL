@@ -358,7 +358,8 @@ console.log(window.devicePixelRatio); // 4
 
 ```css
 .wrapper {
-	width: 840px; /* 또는 1040px */
+	width: 100%;
+	max-width: 840px; /* 또는 1040px */
 	margin-left: auto;
 	margin-right: auto;
 }
