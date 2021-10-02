@@ -3,12 +3,13 @@
 <br>
 
 1. 픽셀, 포인트, Apple의 `72ppi`
-2. 그리드의 종류
-3. 4포인트 베이스라인 그리드(4pt Baseline Grid)
-4. CSS 픽셀, DPPX(Device Pixel Ratio), 4픽셀 베이스라인 그리드(4px Baseline Grid)
-5. 베이스라인 그리드 적용 범위: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인 그리드
-6. 모듈식 스케일(Modular Scales)
-7. 단위: `px`, `rem`, `em`
+2. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
+3. 그리드의 종류
+4. 4포인트 베이스라인 그리드(4pt Baseline Grid)
+5. CSS 픽셀, DPPX(Device Pixel Ratio), 4픽셀 베이스라인 그리드(4px Baseline Grid)
+6. 베이스라인 그리드 적용 범위: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인 그리드
+7. 모듈식 스케일(Modular Scales)
+8. 단위: `px`, `rem`, `em`
 
 <br>
 
@@ -26,7 +27,11 @@
 
 <br>
 
-그런데 이 포인트 단위를 픽셀 기반의 디지털 디바이스로 옮겨오는 과정에서 많은 사람들이 혼선을 겪게 되었고요, [Xerox PARC 연구소](<https://en.wikipedia.org/wiki/PARC_(company)>)는 이를 해소하기 위해 디지털 화면의 표준 해상도를 `72 ppi(pixels per inch)`로 채택합니다. 이로써 표준 해상도를 가진 디바이스에서 `1pt = 1px`가 성립하게 되었습니다. 당시 `72 ppi` 표준 해상도를 채택한 Apple PC의 성공으로 `72 ppi`가 보편화되었고요, [Human Interface Guides](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes) 문서를 보면 현재까지도 Apple 디바이스에서 이 표준해상도를 사용하고있음을 알 수 있습니다. 가령 해상도가 2 배(`@x2`)라면 `1pt = 4px`이 됩니다. 가로, 세로 모두 인치당 픽셀 수가 2 배씩 커졌음을 의미하기 때문이죠.
+그런데 이 포인트 단위를 픽셀 기반의 디지털 디바이스로 옮겨오는 과정에서 많은 사람들이 혼선을 겪게 되었고요, [Xerox PARC 연구소](<https://en.wikipedia.org/wiki/PARC_(company)>)는 이를 해소하기 위해 디지털 화면의 표준 해상도를 `72 ppi(pixels per inch)`로 채택합니다. 이로써 표준 해상도를 가진 디바이스에서 `1pt = 1px`가 성립하게 되었습니다. 당시 `72 ppi` 표준 해상도를 채택한 Apple PC의 성공으로 `72 ppi`가 보편화되었고요, [Human Interface Guides](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/#app-icon-sizes) 문서를 보면 현재까지도 Apple 디바이스에서 이 표준해상도를 사용하고있음을 알 수 있습니다.
+
+<br>
+
+만약 어떤 디바이스의 해상도가 `@x2`(2배)라면 물리적으로 `1*1 pt` 크기를 구현하는데 `2*2 px`, 총 4개의 픽셀이 사용됩니다. 가로, 세로 모두 인치당 픽셀 수가 2배씩 커졌음을 의미하기 때문이죠.
 
 <br>
 
@@ -62,7 +67,7 @@
 
 <br>
 
-<img src="./../img/grid-anatomy-modules.png" alt="" />
+<img src="./../img/grid-anatomy-modules.webp" alt="" />
 
 <br>
 
@@ -72,7 +77,7 @@
 
 <br>
 
-<img src="./../img/grid-anatomy-columns.png" alt="" />
+<img src="./../img/grid-anatomy-columns.webp" alt="" />
 
 <br>
 
@@ -82,7 +87,7 @@
 
 <br>
 
-<img src="./../img/grid-anatomy-rows.png" alt="" />
+<img src="./../img/grid-anatomy-rows.webp" alt="" />
 
 <br>
 
@@ -92,7 +97,7 @@
 
 <br>
 
-<img src="./../img/grid-anatomy-gutters.png" alt="" />
+<img src="./../img/grid-anatomy-gutters.webp" alt="" />
 
 사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
 
