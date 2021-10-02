@@ -386,17 +386,17 @@ console.log(window.devicePixelRatio); // 4
 
 ### 9-2. 거터 값 정하기
 
-Material Design의 거터 예시를 참고하였고요, 바디 너비가 고정되는 경우 컬럼의 너비와 거터 값이 4px 베이스라인에 딱 떨어지게 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
+Material Design의 거터 예시를 참고하였고요, 컬럼과 거터의 너비가 4px 베이스라인에 맞아떨어지게 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
 
 - 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진, `16px` 거터
 
-- 태블릿 (`600px` ~ `904px`) : 8 컬럼, `32px` 마진, `24px` 거터
+- 태블릿 (`600px` ~ `904px`) : 8 컬럼, `32px` 마진, `16px` 거터
 
-- 큰 태블릿 (`905px` ~ `1239px`) : 12 컬럼, `840px` 바디, `24px` 거터
+- 큰 태블릿 (`905px` ~ `1239px`) : 12 컬럼, 자동 마진, `840px` 바디, `16px` 거터, `44px` 패딩
 
 - 노트북 (`1240px` ~ `1440px`) : 12 컬럼, `200px` 마진, `24px` 거터
 
-- 데스크탑 (`1441px` 이상) : 12 컬럼, `1040px` 바디, `28px` 거터
+- 데스크탑 (`1441px` 이상) : 12 컬럼, 자동 마진, `1040px` 바디, `28px` 거터, `52px` 패딩
 
 <br>
 
@@ -450,7 +450,7 @@ Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생�
 
 <br>
 
-<img src="./../img/figma-grid5.png" alt="" />
+<img src="./../img/figma-grid6.png" alt="" />
 
 <br>
 
