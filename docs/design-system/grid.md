@@ -390,20 +390,6 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-참고로 Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)를 참고했습니다.
-
-- iPhone : `320x568 px` ~ `428x926 px`
-
-- iPad : `768x1024 px` ~ `834x1194 px`
-
-- 12.9" iPad : `1024x1366 px`
-
-- Mackbook : `1280x800 px` ~ `1440x900 px`
-
-- iMac : `1440 px` 초과
-
-<br>
-
 바디 너비가 고정되는 경우, 컬럼간 거터 값은 4px 베이스라인에 맞게 따로 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
 
 - 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진
@@ -415,6 +401,20 @@ console.log(window.devicePixelRatio); // 4
 - 노트북 (`1240px` ~ `1440px`) : 12 컬럼, `200px` 마진
 
 - 데스크탑 (`1441px` 이상) : 12 컬럼, `1040px` 바디, `16px`/`40px` 거터
+
+<br>
+
+참고로 Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)를 참고했습니다.
+
+- iPhone : `320x568 px` ~ `428x926 px`
+
+- iPad : `768x1024 px` ~ `834x1194 px`
+
+- 12.9" iPad : `1024x1366 px`
+
+- Mackbook : `1280x800 px` ~ `1440x900 px`
+
+- iMac : `1440 px` 초과
 
 <br>
 
