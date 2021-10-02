@@ -10,7 +10,7 @@
 6. 단위: `px`, `rem`, `em`
 7. 컴포지션 그리드(Composition Grids)
 8. 모듈식 스케일(Modular Scales)
-9. 반응형 그리드: Breakpoint 시스템, 가로 방향 그리드
+9. 반응형 그리드: Breakpoint 시스템, 거터 값 정하기, 가로 방향 그리드
 10. Figma에서 구축하기
 
 <br>
@@ -332,7 +332,7 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-## 9. 반응형 그리드: Breakpoint 시스템, 가로 방향 그리드
+## 9. 반응형 그리드: Breakpoint 시스템, 거터 값 정하기, 가로 방향 그리드
 
 ### 9-1. Breakpoint 시스템
 
@@ -366,41 +366,7 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-### 9-2. 가로 방향 그리드
-
-가로 방향의 그리드는 상단의 앱바(App Bar) 영역을 제외하고 구성합니다.
-
-<br>
-
-<img src="./../img/horizontal-grid.png" alt="" />
-
-사진출처 : [Material Design](https://material.io/design/layout/responsive-layout-grid.html)
-
-<br>
-
-## 10. Figma에서 구축하기
-
-제가 그리드 시스템을 구축한 과정을 소개합니다.
-
-<br>
-
-### 10-1. Breakpoint 시스템
-
 주요 디바이스들의 뷰포트 크기들이 [Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints) 가이드에서 거의 벗어나지 않았기 때문에 저는 Material Design의 시스템을 그대로 따르기로 했습니다. 다만, 노트북 기준에서 벗어나는 15" Macbook을 위해 데스크탑으로 식별되는 최소값을 `1440px`에서 `1441px`로 수정했습니다.
-
-<br>
-
-바디 너비가 고정되는 경우, 컬럼간 거터 값은 4px 베이스라인에 맞게 따로 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
-
-- 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진
-
-- 태블릿 (`600px` ~ `904px`) : 8 컬럼, `32px` 마진
-
-- 큰 태블릿 (`905px` ~ `1239px`) : 12 컬럼, `840px` 바디, `12px`/`24px` 거터
-
-- 노트북 (`1240px` ~ `1440px`) : 12 컬럼, `200px` 마진
-
-- 데스크탑 (`1441px` 이상) : 12 컬럼, `1040px` 바디, `16px`/`40px` 거터
 
 <br>
 
@@ -418,7 +384,35 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-### 10-2. Figma에 추가하기
+### 9-2. 거터 값 정하기
+
+바디 너비가 고정되는 경우, 컬럼간 거터 값은 4px 베이스라인에 맞게 따로 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
+
+- 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진
+
+- 태블릿 (`600px` ~ `904px`) : 8 컬럼, `32px` 마진
+
+- 큰 태블릿 (`905px` ~ `1239px`) : 12 컬럼, `840px` 바디, `12px`/`24px` 거터
+
+- 노트북 (`1240px` ~ `1440px`) : 12 컬럼, `200px` 마진
+
+- 데스크탑 (`1441px` 이상) : 12 컬럼, `1040px` 바디, `16px`/`40px` 거터
+
+<br>
+
+### 9-3. 가로 방향 그리드
+
+가로 방향의 그리드는 상단의 앱바(App Bar) 영역을 제외하고 구성합니다.
+
+<br>
+
+<img src="./../img/horizontal-grid.png" alt="" />
+
+사진출처 : [Material Design](https://material.io/design/layout/responsive-layout-grid.html)
+
+<br>
+
+## 10. Figma에서 구축하기
 
 Figma에서 그리드 시스템을 추가하는 방법에 대한 자세한 내용은 [Create layout grids with grids, columns, and rows](https://help.figma.com/hc/en-us/articles/360040450513-Create-layout-grids-with-grids-columns-and-rows#h_001df3c9-cf3c-473f-a4c5-278d9c212524) Figma 공식문서를 확인하세요.
 
