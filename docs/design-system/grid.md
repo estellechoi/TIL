@@ -380,17 +380,17 @@ console.log(window.devicePixelRatio); // 4
 
 ## 10. Figma에서 구축하기
 
-이제 뷰포트 Breakpoints를 마련하고, 각 뷰포트 그룹을 위한 그리드를 정하면 됩니다. 제가 그리드 시스템을 구축한 과정을 소개합니다.
+제가 그리드 시스템을 구축한 과정을 소개합니다.
 
 <br>
 
 ### 10-1. Breakpoint 시스템
 
-결과적으로 주요 디바이스들의 뷰포트 크기들이 [Material Design Breakpoints](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에서 15" Macbook을 제외하고는 벗어나지 않았기 때문에 저는 노트북과 랩탑의 Breakpoint만 `1440px`에서 `1441px`로 수정하여 사용하기로 했습니다.
+주요 디바이스들의 뷰포트 크기들이 [Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints) 가이드에서 거의 벗어나지 않았기 때문에 저는 Material Design의 시스템을 그대로 따르기로 했습니다. 다만, 노트북 기준에서 벗어나는 15" Macbook을 위해 데스크탑으로 식별되는 최소값을 `1440px`에서 `1441px`로 수정했습니다.
 
 <br>
 
-Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)를 참고했습니다.
+참고로 Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)를 참고했습니다.
 
 - iPhone : `320x568 px` ~ `428x926 px`
 
@@ -404,7 +404,7 @@ Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.a
 
 <br>
 
-바디 너비가 고정되는 경우, 컬럼간 거터 값은 따로 지정했습니다. 거터 값 계산을 위해 [Gird Calculator](http://gridcalculator.dk/)를 사용하였고, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
+바디 너비가 고정되는 경우, 컬럼간 거터 값은 4px 베이스라인에 맞게 따로 지정해주었습니다. 거터 값 계산을 위해 [Grid Calculator](http://gridcalculator.dk/)를 사용하였고요, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
 
 - 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진
 
