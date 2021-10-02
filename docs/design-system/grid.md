@@ -10,6 +10,8 @@
 6. 단위: `px`, `rem`, `em`
 7. 컴포지션 그리드(Composition Grids)
 8. 모듈식 스케일(Modular Scales)
+9. 반응형 그리드: Breakpoint 시스템, 가로 방향 그리드
+10. Figma에서 구축하기
 
 <br>
 
@@ -327,6 +329,94 @@ console.log(window.devicePixelRatio); // 4
 	--margin-size-8: calc(var(--modular-size-8) / 16rem); /* 11rem */
 }
 ```
+
+<br>
+
+## 9. 반응형 그리드: Breakpoint 시스템, 가로 방향 그리드
+
+### 9-1. Breakpoint 시스템
+
+지금까지 픽셀 기준으로만 얘기했지만, 모든 디바이스에서 일관된 레이아웃을 제공하기 위해 반응형 그리드를 설계해야합니다. 반응형 그리드에서는 컬럼, 거터, 마진 값이 뷰포트(Viewport) 너비, 높이에 따라 가변할 수 있도록 설계합니다. 매년 새로운 크기의 뷰포트들이 등장하기 때문에 뷰포트의 크기를 특정 영역별로 그루핑한 [Breakpoint 시스템](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에 따른 그리드를 구성하면 됩니다.
+
+<br>
+
+[Material Design](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에서는 뷰포트의 너비에 따라 아래와 같이 뷰포트 그룹을 마련했습니다.
+
+- 휴대폰 (`600dp` 미만) : 4 컬럼, `16dp` 마진
+
+- 태블릿 (`600dp` ~ `904dp`) : 8 컬럼, `32dp` 마진
+
+- 큰 태블릿 (`905dp` ~ `1239dp`) : 12 컬럼, `840dp` 바디, Scaling 마진
+
+- 노트북 (`1240dp` ~ `1439dp`) : 12 컬럼, `200dp` 마진
+
+- 데스크탑 (`1440dp` 이상) : 12 컬럼, `1040dp` 바디, Scaling 마진
+
+<br>
+
+큰 태블릿, 데스크탑의 경우, 콘텐츠가 담기는 바디(Body)의 크기를 `840dp`, `1040dp`로 고정시키고 마진 값은 남는 공간을 채우도록 하는 것에 주목해볼 수 있습니다. CSS에서는 아래와 같이 지정하게 되죠.
+
+```css
+.wrapper {
+	width: 840px; /* 또는 1040px */
+	margin-left: auto;
+	margin-right: auto;
+}
+```
+
+<br>
+
+### 9-2. 가로 방향 그리드
+
+가로 방향의 그리드는 상단의 앱바(App Bar) 영역을 제외하고 구성합니다.
+
+<br>
+
+<img src="./../img/horizontal-grid.png" alt="" />
+
+<br>
+
+## 10. Figma에서 구축하기
+
+이제 뷰포트 Breakpoints를 마련하고, 각 뷰포트 그룹을 위한 그리드를 정하면 됩니다. 제가 그리드 시스템을 구축한 과정을 소개합니다.
+
+<br>
+
+### 10-1. Breakpoint 시스템
+
+결과적으로 주요 디바이스들의 뷰포트 크기들이 [Material Design Breakpoints](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)에서 15" Macbook을 제외하고는 벗어나지 않았기 때문에 저는 노트북과 랩탑의 Breakpoint만 `1440px`에서 `1441px`로 수정하여 사용하기로 했습니다.
+
+<br>
+
+Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)를 참고했습니다.
+
+- iPhone : `320x568 px` ~ `428x926 px`
+
+- iPad : `768x1024 px` ~ `834x1194 px`
+
+- 12.9" iPad : `1024x1366 px`
+
+- Mackbook : `1280x800 px` ~ `1440x900 px`
+
+- iMac : `1440 px` 초과
+
+<br>
+
+바디 너비가 고정되는 경우, 컬럼간 거터 값은 따로 지정했습니다. 거터 값 계산을 위해 [Gird Calculator](http://gridcalculator.dk/)를 사용하였고, 결과적으로 저의 Breakpoint 시스템은 아래와 같이 정리되었습니다.
+
+- 휴대폰 (`600px` 미만) : 4 컬럼, `16px` 마진
+
+- 태블릿 (`600px` ~ `904px`) : 8 컬럼, `32px` 마진
+
+- 큰 태블릿 (`905px` ~ `1239px`) : 12 컬럼, `840px` 바디, `12px`/`24px` 거터
+
+- 노트북 (`1240px` ~ `1440px`) : 12 컬럼, `200px` 마진
+
+- 데스크탑 (`1441px` 이상) : 12 컬럼, `1040px` 바디, `16px`/`40px` 거터
+
+<br>
+
+### 10-2. Figma에 추가하기
 
 <br>
 
