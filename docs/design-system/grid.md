@@ -3,13 +3,12 @@
 <br>
 
 1. 픽셀, 포인트, Apple의 `72ppi`
-2. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
-3. 그리드의 종류
+2. CSS 픽셀, DPPX(Device Pixel Ratio)
+3. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
 4. 4포인트 베이스라인 그리드(4pt Baseline Grid)
-5. CSS 픽셀, DPPX(Device Pixel Ratio), 4픽셀 베이스라인 그리드(4px Baseline Grid)
-6. 베이스라인 그리드 적용 범위: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인 그리드
-7. 모듈식 스케일(Modular Scales)
-8. 단위: `px`, `rem`, `em`
+5. 베이스라인 그리드 적용 범위: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인 그리드
+6. 모듈식 스케일(Modular Scales)
+7. 단위: `px`, `rem`, `em`
 
 <br>
 
@@ -39,9 +38,45 @@
 
 <br>
 
-## 2. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
+## 2. CSS 픽셀, DPPX(Device Pixel Ratio)
 
-### 2-1. 마진(Margin)
+### 2-1. CSS 픽셀
+
+[CSS 픽셀](https://developer.mozilla.org/en-US/docs/Glossary/CSS_pixel)은 `72ppi`가 아닌 `96ppi` 해상도를 기준으로 합니다. 따라서 거의 모든 웹 브라우저도 `96ppi`를 표준해상도 규격으로 사용합니다. Apple의 Safari도 마찬가지죠. 따라서 CSS에서는 표준해상도라고해도 `1pt = 1px`이 성립되지 않습니다. CSS `1px`은 `1/96inch`입니다. 가령, CSS에서 `16px`로 지정하면 물리적 크기는 `16pt`가 아닌 `12pt`가 됩니다.
+
+```css
+div {
+	font-size: 16px; /* = 12pt */
+}
+```
+
+<br>
+
+참고로 `96ppi`는 Microsoft가 개발하고 채택했던 해상도 규격입니다.
+
+<br>
+
+### 2-2. DPPX(Device Pixel Ratio)
+
+디바이스 화면에 최종 렌더링될 때 중요한 것은 DPPX(Device Pixel Ratio)입니다. DPPX는 디바이스 픽셀과 CSS 픽셀간 비율입니다. 모든 디바이스는 CSS에서의 `1px`이 실제 화면에서 몇 픽셀을 차지하는지 정해진 비율을 갖습니다. 가령, 어떤 디바이스의 DPPX가 `2`라면 CSS `1*1 px`이 실제 화면에 렌더링될 때 `2*2 px`을 차지합니다. 다음은 [CSS Length Explained](https://hacks.mozilla.org/2013/09/css-length-explained/#dppx)에서 발췌한 설명입니다.
+
+<br>
+
+> In order to make sure that CSS pixels are sized consistently across every device that accesses the web (i.e. everything with a screen and network connection), device manufacturers had to map multiple device pixels to one CSS pixel to make up for it’s relative bigger physical size. The ratio of the dimension of CSS pixel relative to device pixels is the device pixel ratio (DPPX).
+
+<br>
+
+참고로 JavaScript에서는 `window.devicePixelRatio` 속성을 통해 DPPX 값을 얻을 수 있습니다. 만약 어떤 이미지의 크기를 CSS에서 `60*60 px`로 지정한다면 DPPX가 `4`인 디바이스에서 이 이미지는 실제로 `24*24 px`을 차지하게 됩니다. 따라서 웹개발자는 `24*24 px` 크기의 이미지 파일이 로딩되도록 해야겠죠.
+
+```javascript
+console.log(window.devicePixelRatio); // 4
+```
+
+<br>
+
+## 3. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
+
+### 3-1. 마진(Margin)
 
 마진(Margin)은 프레임의 가장자리 여백, 또는 콘텐츠와 콘텐츠 사이의 여백입니다.
 
@@ -51,7 +86,7 @@
 
 <br>
 
-### 2-2. 흐름선(Flowline)
+### 3-2. 흐름선(Flowline)
 
 흐름선(Flowline)은 프레임 전체에 평행하게 배치되는 가로선입니다. 이 흐름선들을 기반으로 프레임 내에서 큰 영역들을 나눌 수 있고, 콘텐츠가 시작하거나 끝나는 부분을 정하게 됩니다.
 
@@ -61,7 +96,7 @@
 
 <br>
 
-### 2-3. 모듈(Module)
+### 3-3. 모듈(Module)
 
 모듈(Module)은 그리드에서 세로선과 가로선(흐름선)이 교차하면서 만들어내는 블록들을 의미합니다.
 
@@ -71,7 +106,7 @@
 
 <br>
 
-### 2-4. 컬럼(Column)
+### 3-4. 컬럼(Column)
 
 컬럼(Column)은 프레임의 천장부터 바닥까지 세로 방향으로 인접한 모듈들의 그룹입니다.
 
@@ -81,7 +116,7 @@
 
 <br>
 
-### 2-5. 행(Row)
+### 3-5. 행(Row)
 
 행(Row)은 프레임의 왼쪽부터 오른쪽까지 가로 방향으로 인접한 모들의 그룹입니다.
 
@@ -91,7 +126,7 @@
 
 <br>
 
-### 2-6. 거터(Gutter)
+### 3-6. 거터(Gutter)
 
 거터(Gutter)는 컬럼과 컬럼 사이, 혹은 행과 행 사이의 빈 공간입니다. 모든 거터의 값은 동일해야합니다.
 
@@ -103,9 +138,9 @@
 
 <br>
 
-## 3. 8포인트 베이스라인 그리드(8pt Baseline Grid)
+## 4. 8포인트 베이스라인 그리드(8pt Baseline Grid)
 
-### 3-1. 베이스라인 그리드
+### 4-1. 베이스라인 그리드
 
 베이스라인 그리드는 위에서 살펴본 컬럼, 행, 거터, 모듈 등을 만들어내는 가로 세로 교차선들을 레이아웃의 기준선으로 적극 활용하는 방식입니다. 다량의 텍스트가 포함된 모든 디자인에 적합하고요, 콘텐츠의 리듬을 만들어주는 것이 특징입니다.
 
@@ -117,7 +152,7 @@
 
 <br>
 
-### 3-2. 8포인트 베이스라인 그리드
+### 4-2. 8포인트 베이스라인 그리드
 
 8포인트 베이스라인 그리드는 베이스라인 그리드를 구성할 때 `8pt`를 기준으로 증감하는 값들만을 사용하는 방식입니다. 모든 요소의 크기를 `8`의 배수로, 그러니까 `72ppi`의 표준 해상도를 가정하면 `8px`, `16px`과 같은 값들만 사용하겠다는 겁니다. [Material Design](https://material.io/design/layout/understanding-layout.html#material-measurements)에서도 8dp 베이스라인을 제안합니다. 다만, 아이콘, 타이포그래피와 같이 작은 사이즈가 필요한 경우에는 4dp 베이스라인을 허용합니다.
 
@@ -131,55 +166,13 @@
 
 <br>
 
-### 3-3. 왜 4, 8인가요?
+### 4-3. 왜 4, 8인가요?
 
 그런데 왜 `4`, `8`인가요? `2`와 `4`로만 나눌 수 있기 때문입니다. 표준해상도 이상의 디바이스에서 화면이 깨지는 계단 현상이나 흐릿해지는 현상을 방지할 수 있다는 의미입니다. 고해상도 디바이스는 일반적으로 표준해상도의 1.5배, 2배, 3배, 4배 해상도를 사용합니다. `@x1.5`, `@x2`, `@x3`, `@x4`로 표시합니다.
 
 <br>
 
 예를 들어, 표준해상도에서 `1pt = 1px`이고, `@x1.5` 해상도의 디바이스에서 물리적으로 `5*5 pt` 크기만한 아이콘을 구현한다고 가정해봅시다. 아이콘의 한 면의 픽셀 사이즈는 `7.5px`(`5 * 1.5`)이 되겠죠. 이를 픽셀절반 현상이라고 합니다. 애초에 픽셀은 화면을 구성하는 가장 작은 단위이기 때문에 정수(Integer) 값에서 벗어난 소주점 아래 값으로 인해 [계단 현상(Aliasing)](https://en.wikipedia.org/wiki/Aliasing)이 발생할 수 있습니다. 계단현상을 자동으로 부드럽게 처리하는 [Anti-aliasing](https://en.wikipedia.org/wiki/Anti-aliasing) 기능을 탑재한 디바이스에서는 가장자리가 흐릿해질 수 있고요. 또는 렌더링 엔진이 자동으로 픽셀 값을 반올림 처리하면서 디자인과 다르게 렌더링될 수 있는 문제가 있습니다. 4포인트, 8포인트 베이스라인 그리드에서는 픽셀절반 현상이 없습니다. 또한 `4`와 `8`은 웹 브라우저의 기본 폰트 크기인 `16px`과도 맞아떨어져서 밸런스 유지에도 도움이 되고요.
-
-<br>
-
-## 4. CSS 픽셀, DPPX(Device Pixel Ratio), 4픽셀 베이스라인 그리드(4px Baseline Grid)
-
-### 4-1. CSS 픽셀
-
-[CSS 픽셀](https://developer.mozilla.org/en-US/docs/Glossary/CSS_pixel)은 `72ppi`가 아닌 `96ppi` 해상도를 기준으로 합니다. 이에 따라 Apple의 Safari를 비롯한 대부분의 웹 브라우저도 `96ppi` 해상도를 기준으로 합니다. 따라서 CSS에서는 1 배의 표준 해상도라고해도 엄밀히 말해 `1pt = 1px`이 성립되지 않습니다. CSS `1px`은 `1/96inch`입니다. 가령, CSS에서 `16px`로 지정하면 물리적 크기는 `16pt`가 아닌 `12pt`가 됩니다.
-
-```css
-div {
-	font-size: 16px; /* = 12pt */
-}
-```
-
-<br>
-
-`96ppi`는 Microsoft가 개발하고 채택했던 해상도 규격입니다.
-
-<br>
-
-### 4-2. DPPX(Device Pixel Ratio)
-
-어쨋든 우리는 위의 사실을 참고만 하고 DPPX(Device Pixel Ratio)만 이해하면 됩니다. DPPX는 디바이스 픽셀과 CSS 픽셀간 비율입니다. 모든 디바이스는 CSS에서의 `1px`이 실제 화면에서 몇 픽셀을 차지하는지 정해진 비율을 갖습니다. 가령, DPPX가 2 배(`@ 2x`)라면 CSS `1px`이 실제 화면에 렌더링될 때 `2px`을 차지합니다. 덕분에 웹 프론트엔드 개발자는 디바이스별 해상도를 고려할 필요없이 동일한 `px` 값을 사용하여 개발할 수 있는거죠. 다음은 [CSS Length Explained](https://hacks.mozilla.org/2013/09/css-length-explained/#dppx)에서 발췌한 설명입니다.
-
-<br>
-
-> In order to make sure that CSS pixels are sized consistently across every device that accesses the web (i.e. everything with a screen and network connection), device manufacturers had to map multiple device pixels to one CSS pixel to make up for it’s relative bigger physical size. The ratio of the dimension of CSS pixel relative to device pixels is the device pixel ratio (DPPX).
-
-<br>
-
-참고로 JavaScript에서는 `window.devicePixelRatio` 속성을 통해 DPPX 값을 얻을 수 있습니다.
-
-```javascript
-console.log(window.devicePixelRatio); // 2
-```
-
-<br>
-
-### 4-3. 4픽셀 베이스라인 그리드(4px Baseline Grid)
-
-거의 모든 디바이스가 `@ 1x`, `@ 1.5x`, `@ 2x`, `@ 3x`의 DPPX를 채택하기 때문에 여전히 `4`의 배수 베이스라인 그리드가 유효합니다. 다만, CSS에서 `px`을 `pt`에 맞추기 어렵고, 디지털 매체가 보편화된 지금은 `pt` 보다 `px` 기반 커뮤니케이션이 익숙하기 때문에 4픽셀 베이스라인 그리드(4px Baseline Grid)를 사용하면 되겠습니다. 모든 것이 포인트 베이스라인 그리드와 동일하게 적용됩니다. 가령 `@ 1.5x`에서 `5px`을 사용하면 디바이스에서 인지하는 픽셀 값은 `7.5px`로 계단 현상이 발생할 수 있기 때문에, 4픽셀/8픽셀 베이스라인 그리드를 사용합니다.
 
 <br>
 
