@@ -5,7 +5,7 @@
 1. 픽셀, 포인트, Apple의 `72ppi`
 2. CSS 픽셀, DPPX(Device Pixel Ratio)
 3. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
-4. 4포인트 베이스라인 그리드(4pt Baseline Grid)
+4. 8포인트 베이스라인 그리드(8pt Baseline Grid)
 5. 베이스라인 그리드 적용 범위: 박스모델(Box Model), 타이포그래피 - Escape 베이스라인 그리드
 6. 모듈식 스케일(Modular Scales)
 7. 단위: `px`, `rem`, `em`
