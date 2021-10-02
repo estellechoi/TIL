@@ -420,6 +420,38 @@ console.log(window.devicePixelRatio); // 4
 
 ### 10-2. Figma에 추가하기
 
+Figma에서 그리드 시스템을 추가하는 방법에 대한 자세한 내용은 [Create layout grids with grids, columns, and rows](https://help.figma.com/hc/en-us/articles/360040450513-Create-layout-grids-with-grids-columns-and-rows#h_001df3c9-cf3c-473f-a4c5-278d9c212524) Figma 공식문서를 확인하세요.
+
+<br>
+
+Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생성할 수 있습니다. `+` 버튼을 눌러 기본 그리드를 추가한 후, 추가된 그리드의 왼쪽 아이콘을 클릭하면 그리드를 설정할 수 있는 영역이 생깁니다.
+
+<br>
+
+<img src="./../img/figma-grid1.png" alt="" />
+
+<br>
+
+그다음 가장 상단에서 그리드 종류를 `Columns`로 변경합니다.
+
+<br>
+
+<img src="./../img/figma-grid2.png" alt="" />
+
+<br>
+
+그다음 `Count`, `Margin`, `Gutter` 값을 지정해주면 됩니다.
+
+<br>
+
+<img src="./../img/figma-grid3.png" alt="" />
+
+<br>
+
+그리드 생성이 완료되었으면, 아래와 같이 `Styles` 버튼을 클릭하여 모듈 영역을 열고, `+` 버튼을 클릭하여 새로운 모듈로 추가해줍니다.
+
+<img src="./../img/figma-grid4.png" alt="" />
+
 <br>
 
 ---
