@@ -67,7 +67,7 @@ div {
 
 <br>
 
-참고로 JavaScript에서는 `window.devicePixelRatio` 속성을 통해 DPPX 값을 얻을 수 있습니다. 만약 어떤 이미지의 크기를 CSS에서 `60*60 px`로 지정한다면 DPPX가 `4`인 디바이스에서 이 이미지는 실제로 `24*24 px`을 차지하게 됩니다. 따라서 웹개발자는 `24*24 px` 크기의 이미지 파일을 준비하여 로딩되도록 해야겠죠. `window.devicePixelRatio` 속성을 이용하면 DPPX에 따라 동적으로 알맞은 크기의 이미지를 로딩할 수 있습니다.
+참고로 JavaScript에서는 [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) 속성을 통해 DPPX 값을 얻을 수 있습니다. 만약 어떤 이미지의 크기를 CSS에서 `60*60 px`로 지정한다면 DPPX가 `4`인 디바이스에서 이 이미지는 실제로 `24*24 px`을 차지하게 됩니다. 따라서 웹개발자는 `24*24 px` 크기의 이미지 파일을 준비하여 로딩되도록 해야겠죠. `window.devicePixelRatio` 속성을 이용하면 DPPX에 따라 동적으로 알맞은 크기의 이미지를 로딩할 수 있습니다.
 
 ```javascript
 console.log(window.devicePixelRatio); // 4
