@@ -30,7 +30,7 @@
 
 <br>
 
-위 내용을 이해하는데 [spoqa 기술블로그 픽셀과 포인트](https://spoqa.github.io/2012/07/06/pixel-and-point.html)가 도움이 되었습니다.
+[spoqa 기술블로그 픽셀과 포인트](https://spoqa.github.io/2012/07/06/pixel-and-point.html)가 도움이 되었습니다.
 
 <br>
 
