@@ -81,7 +81,7 @@ console.log(window.devicePixelRatio); // 4
 
 ### 3-1. 마진(Margin)
 
-마진(Margin)은 프레임의 가장자리 여백, 또는 콘텐츠와 콘텐츠 사이의 여백입니다.
+마진(Margin)은 프레임의 가장자리 여백입니다.
 
 <br>
 
