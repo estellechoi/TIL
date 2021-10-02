@@ -211,7 +211,7 @@ console.log(window.devicePixelRatio); // 4
 지켜야할 것
 
 - 박스의 너비, 높이
-- 텍스트 줄높이((Line Height))
+- 텍스트 줄높이(Line Height)
 
 <br>
 
