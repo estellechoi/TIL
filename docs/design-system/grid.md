@@ -374,6 +374,8 @@ console.log(window.devicePixelRatio); // 4
 
 <img src="./../img/horizontal-grid.png" alt="" />
 
+사진출처 : [Material Design](https://material.io/design/layout/responsive-layout-grid.html)
+
 <br>
 
 ## 10. Figma에서 구축하기
