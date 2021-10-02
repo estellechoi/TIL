@@ -34,31 +34,105 @@
 
 <br>
 
-## 2. 그리드의 종류
+## 2. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
 
-그리드 레이아웃에는 여러 방법론이 있지만, 일반적인 웹/앱 서비스에 적용할만한 그리드에는 다음의 두 가지가 있을 것 같습니다.
+### 2-1. 마진(Margin)
 
-- 컬럼 그리드(Column Grid) : 가독성을 위해 컨텐츠를 컬럼별로 나열하는 그리드, 최초에 잡지에서 사용되었음
-
-- 베이스라인 그리드(Baseline Grid) : 타이포그래피 등에 주로 사용하는 기술적 그리드 방식, 다량의 텍스트가 포함된 모든 디자인에 적합하고, 컨텐츠를 읽을 때 리듬을 만들어줌
+마진(Margin)은 프레임의 가장자리 여백, 또는 콘텐츠와 콘텐츠 사이의 여백입니다.
 
 <br>
 
-## 3. 4포인트 베이스라인 그리드(4pt Baseline Grid)
-
-### 3-1. 개념
-
-4포인트 베이스라인 그리드(4pt Baseline Grid)는 `4pt`를 기준으로 증감하는 값들만을 사용하는 그리드 레이아웃 방식입니다. 레이아웃을 구성하는 모든 요소의 크기를 `4`의 배수로 하겠다는 개념입니다. `72ppi`의 표준 해상도를 가정하면, `4px`, `8px`, `12px`과 같은 값들만 사용하겠다는 겁니다. 흔히 `8`의 배수만 사용하는 8포인트 베이스라인 그리드가 많이 사용되지만, 최근에는 공간을 더 세밀하게 나눌 수 있는 4포인트 베이스라인 그리드가 인기를 얻고 있습니다. 저는 [Goodbye 8-point grid, hello 4-point grid?](https://uxdesign.cc/goodbye-8-point-grid-hello-4-point-grid-1aa7f2159051) 등의 아티클을 참고하여 포트폴리오 프로젝트를 위해 4포인트 그리드 레이아웃을 채택했습니다. 참고로 디지털 화면을 타겟으로 하는 UI 디자인에서는 4픽셀 베이스라인 그리드(4px Baseline Grid)를 사용하는 것이 적합하지만, 이는 뒤에 설명할 CSS 픽셀과 DPPX에 대한 이해가 필요하므로 일단 포인트 단위를 사용하여 설명합니다.
+<img src="./../img/grid-anatomy-margins.png" alt="" />
 
 <br>
 
-### 3-2. 왜 4, 8인가요?
+### 2-2. 흐름선(Flowline)
 
-그런데 왜 `4`, 또는 `8`인가요? `2`와 `4`로만 나눌 수 있기 때문에, 고해상도 디바이스에서 화면이 깨지는 계단 현상이나 흐릿해지는 현상을 방지할 수 있기 때문입니다. 예를 들어 1.5 배 해상도 디바이스에서 `5pt`를 사용하면 픽셀 값은 `11.25px`(`5 * 1.5 * 1.5`)이 되겠죠. 애초에 픽셀은 화면을 구성하는 가장 작은 단위이기 때문에 정수(Integer) 값보다 `0.25`만큼 초과된 값으로 인해 [계단 현상(Aliasing)](https://en.wikipedia.org/wiki/Aliasing)이 발생할 수 있고요, 디바이스에서 계단현상이 일어난 부분을 자동으로 부드럽게 처리하는 [Anti-aliasing](https://en.wikipedia.org/wiki/Anti-aliasing) 과정에서 화면이 흐릿해질 수도 있습니다. 또는 자동으로 픽셀 값을 반올림 처리하면서 디자인과 다르게 렌더링될 수 있는 문제가 있습니다. 4포인트, 8포인트 베이스라인 그리드에서는 이런 현상이 발생하지 않습니다.
+흐름선(Flowline)은 프레임 전체에 평행하게 배치되는 가로선입니다. 이 흐름선들을 기반으로 프레임 내에서 큰 영역들을 나눌 수 있고, 콘텐츠가 시작하거나 끝나는 부분을 정하게 됩니다.
 
 <br>
 
-또한 `4`와 `8`은 웹 브라우저의 기본 폰트 크기인 `16px`과도 맞아떨어집니다.
+<img src="./../img/grid-anatomy-flowlines.png" alt="" />
+
+<br>
+
+### 2-3. 모듈(Module)
+
+모듈(Module)은 그리드에서 세로선과 가로선(흐름선)으로 인해 생기는 블록들을 의미합니다.
+
+<br>
+
+<img src="./../img/grid-anatomy-modules.png" alt="" />
+
+<br>
+
+### 2-4. 컬럼(Column)
+
+컬럼(Column)은 프레임의 천장부터 바닥까지 세로 방향으로 인접한 모듈들의 그룹입니다.
+
+<br>
+
+<img src="./../img/grid-anatomy-columns.png" alt="" />
+
+<br>
+
+### 2-5. 행(Row)
+
+행(Row)은 프레임의 왼쪽부터 오른쪽까지 가로 방향으로 인접한 모들의 그룹입니다.
+
+<br>
+
+<img src="./../img/grid-anatomy-rows.png" alt="" />
+
+<br>
+
+### 2-6. 거터(Gutter)
+
+거터(Gutter)는 컬럼과 컬럼 사이, 혹은 행과 행 사이의 빈 공간입니다. 모든 거터의 값은 동일해야합니다.
+
+<br>
+
+<img src="./../img/grid-anatomy-gutters.png" alt="" />
+
+사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
+
+<br>
+
+## 3. 8포인트 베이스라인 그리드(8pt Baseline Grid)
+
+### 3-1. 베이스라인 그리드
+
+베이스라인 그리드는 다량의 텍스트가 포함된 모든 디자인에 적합하며 콘텐츠의 리듬을 만들어주는 것이 특징입니다.
+
+<br>
+
+<img src="./../img/baseline-grid.png" alt="" />
+
+사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
+
+<br>
+
+### 3-2. 8포인트 베이스라인 그리드
+
+8포인트 베이스라인 그리드는 베이스라인 그리드를 구성할 때 `8pt`를 기준으로 증감하는 값들만을 사용하는 방식입니다. 모든 요소의 크기를 `8`의 배수로, 그러니까 `72ppi`의 표준 해상도를 가정하면 `8px`, `16px`과 같은 값들만 사용하겠다는 겁니다. [Material Design](https://material.io/design/layout/understanding-layout.html#material-measurements)에서도 8dp 베이스라인을 제안합니다. 다만, 아이콘, 타이포그래피와 같이 작은 사이즈가 필요한 경우에는 4dp 베이스라인을 허용합니다.
+
+<br>
+
+최근에는 공간을 더 세밀하게 나눌 수 있는 4포인트 베이스라인 그리드가 인기를 얻고 있습니다. 저는 포트폴리오 프로젝트의 디자인시스템을 구축하면서 [Goodbye 8-point grid, hello 4-point grid?](https://uxdesign.cc/goodbye-8-point-grid-hello-4-point-grid-1aa7f2159051) 등의 아티클을 참고했는데요, 기본적으로 8포인트 베이스라인, 경우에 따라 4포인트 베이스라인을 사용하기로 했습니다.
+
+<br>
+
+참고로 디지털 화면을 위한 UI 디자인에서는 포인트가 아닌 픽셀 단위의 베이스라인 그리드를 사용하는 것이 적합합니다. Android 앱의 경우 Material Design 가이드에 따라 8dp 베이스라인을 사용하면 되고요.
+
+<br>
+
+### 3-3. 왜 4, 8인가요?
+
+그런데 왜 `4`, `8`인가요? `2`와 `4`로만 나눌 수 있기 때문입니다. 표준해상도 이상의 디바이스에서 화면이 깨지는 계단 현상이나 흐릿해지는 현상을 방지할 수 있다는 의미입니다. 고해상도 디바이스는 일반적으로 표준해상도의 1.5배, 2배, 3배, 4배 해상도를 사용합니다. `@x1.5`, `@x2`, `@x3`, `@x4`로 표시합니다.
+
+<br>
+
+예를 들어, 표준해상도에서 `1pt = 1px`이고, `@x1.5` 해상도의 디바이스에서 물리적으로 `5*5 pt` 크기만한 아이콘을 구현한다고 가정해봅시다. 아이콘의 한 면의 픽셀 사이즈는 `7.5px`(`5 * 1.5`)이 되겠죠. 이를 픽셀절반 현상이라고 합니다. 애초에 픽셀은 화면을 구성하는 가장 작은 단위이기 때문에 정수(Integer) 값에서 벗어난 소주점 아래 값으로 인해 [계단 현상(Aliasing)](https://en.wikipedia.org/wiki/Aliasing)이 발생할 수 있습니다. 계단현상을 자동으로 부드럽게 처리하는 [Anti-aliasing](https://en.wikipedia.org/wiki/Anti-aliasing) 기능을 탑재한 디바이스에서는 가장자리가 흐릿해질 수 있고요. 또는 렌더링 엔진이 자동으로 픽셀 값을 반올림 처리하면서 디자인과 다르게 렌더링될 수 있는 문제가 있습니다. 4포인트, 8포인트 베이스라인 그리드에서는 픽셀절반 현상이 없습니다. 그리고 `4`와 `8`은 웹 브라우저의 기본 폰트 크기인 `16px`과도 맞아떨어집니다.
 
 <br>
 
@@ -120,8 +194,8 @@ console.log(window.devicePixelRatio); // 2
 
 4픽셀 그리드 레이아웃을 사용한다면, 하나의 박스를 구성하는 4가지 구성요소의 크기를 `4`의 배수로 지정합니다.
 
-- 컨텐츠(Content) : 박스의 컨텐츠 영역
-- 패딩(Padding) : 박스의 컨텐츠를 둘러싼 여백
+- 콘텐츠(Content) : 박스의 콘텐츠 영역
+- 패딩(Padding) : 박스의 콘텐츠를 둘러싼 여백
 - 선(Border) : 박스의 선
 - 마진(Margin) : 박스 외부의 여백, 주변 요소와의 레이아웃에 사용
 
@@ -139,7 +213,7 @@ console.log(window.devicePixelRatio); // 2
 
 ## 6. 모듈식 스케일(Modular Scales)
 
-일반적으로 그리드 시스템에서는 특정 비율로 증감하는 값들로 공간을 구성합니다. 그래야 사용자가 화면을 읽어내려갈 때 컨텐츠가 리듬을 갖는다고 보기 때문입니다. [Modular Scale](https://www.modularscale.com/?1&em&1.618) 등의 도구를 사용하면 증감 값들을 빠르게 추출할 수 있습니다. 증감 비율은 [피보나치 수열에 기반한 황금비율(1:1.618)](https://brunch.co.kr/@shaun/14)을 흔히 사용합니다. 또한 4픽셀 베이스라인 그리드 레이아웃을 채택하였으므로, 추출된 각 값들은 가장 가까운 `4`의 배수로 반올림하여 구성해볼 수 있겠습니다. 가령 `16px`을 기준으로 황금비로 증감하는 값들을 추출하면 `3.78`, `6.11`, `9.89`, `16`, `25.89`, `41.89`, `67.77`, `109.66`, `177.42`이고요, 이를 기반으로 4픽셀 베이스라인 그리드 모듈들을 구성하면 아래와 같이 할 수 있습니다.
+일반적으로 그리드 시스템에서는 특정 비율로 증감하는 값들로 공간을 구성합니다. 그래야 사용자가 화면을 읽어내려갈 때 콘텐츠가 리듬을 갖는다고 보기 때문입니다. [Modular Scale](https://www.modularscale.com/?1&em&1.618) 등의 도구를 사용하면 증감 값들을 빠르게 추출할 수 있습니다. 증감 비율은 [피보나치 수열에 기반한 황금비율(1:1.618)](https://brunch.co.kr/@shaun/14)을 흔히 사용합니다. 또한 4픽셀 베이스라인 그리드 레이아웃을 채택하였으므로, 추출된 각 값들은 가장 가까운 `4`의 배수로 반올림하여 구성해볼 수 있겠습니다. 가령 `16px`을 기준으로 황금비로 증감하는 값들을 추출하면 `3.78`, `6.11`, `9.89`, `16`, `25.89`, `41.89`, `67.77`, `109.66`, `177.42`이고요, 이를 기반으로 4픽셀 베이스라인 그리드 모듈들을 구성하면 아래와 같이 할 수 있습니다.
 
 <br>
 
@@ -170,6 +244,36 @@ console.log(window.devicePixelRatio); // 2
 <br>
 
 [Create your design system, part 1: Typography](https://medium.com/codyhouse/create-your-design-system-part-1-typography-7c630d9092bd)에서 케이스 스터디를 해볼 수 있습니다. [Comprehensive Guide: When to Use Em vs. Rem](https://webdesign.tutsplus.com/tutorials/comprehensive-guide-when-to-use-em-vs-rem--cms-23984)도 도움이 됩니다.
+
+<br>
+
+## 4. 컴포지션 그리드(Composition Grids)
+
+텍스트가 적고 추상적 이미지와 도형 위주의 화면은 일반적인 레이아웃 그리드보다는 컴포지션 그리드(Composition Grids)가 적합할 수 있습니다. 두 가지 컴포지션 그리드를 소개합니다.
+
+<br>
+
+### 4-1. Rule of Thirds
+
+[Rule of Thirds](https://en.wikipedia.org/wiki/Rule_of_thirds)는 화면을 똑같은 크기의 9개 조각으로 나눈 후, 이들을 나눈 선과 선들의 교차점을 기준 삼아 콘텐츠를 배치하는 방법입니다. 사용자의 시선이 Z자를 그리며 왼쪽 상단, 오른쪽 상단, 왼쪽 하단, 오른쪽 하단 순서로 흐른다고 가정합니다.
+
+<br>
+
+<img src="./../img/rule-of-thirds.png" alt="" />
+
+사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
+
+<br>
+
+### 4-2. 황금비(Golden Ratio)
+
+황금비(Golden Ratio)는 자연에서 발견된 미의 비율에서 가져온 그리드 방법론입니다. [피보나치 수열](https://en.wikipedia.org/wiki/Fibonacci_number)에서 숫자가 증감하는 비율을 사용하여 그리드를 구성합니다.
+
+<br>
+
+<img src="./../img/golden-ratio.png" alt="" />
+
+사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
 
 <br>
 
