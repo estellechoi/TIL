@@ -28,7 +28,6 @@
 - [HTML tags - stay semantic](https://github.com/estellechoi/TIL/blob/master/docs/html/semantic.md)
 - [How to stay with web-accessiblity highly achieved](https://github.com/estellechoi/TIL/blob/master/docs/html/webaccess.md) \*
 - [[번역] 마이크로데이터(Microdata)와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/docs/html/microdata.md)
-- [PWA(Progressive Web App)](https://github.com/estellechoi/TIL/blob/master/docs/html/pwa.md)
 
 <br>
 
@@ -67,6 +66,7 @@
 
 ### DOM & Web API
 
+- [PWA(Progressive Web App)](https://github.com/estellechoi/TIL/blob/master/docs/web-api/pwa.md)
 - [Intersection Observer API](https://github.com/estellechoi/TIL/blob/master/docs/web-api/IntersectionObserver.md)
 - [File API - 웹에서 파일 다루기](https://github.com/estellechoi/TIL/blob/master/docs/web-api/howToUsefiles.md)
 - [이벤트 전파와 이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/docs/web-api/event.md)
