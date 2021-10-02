@@ -218,7 +218,7 @@ console.log(window.devicePixelRatio); // 4
 
 포기해도 될 것
 
-- 폰트 사이즈
+- 박스 내에 중앙정렬된 폰트의 사이즈
 
 <br>
 
