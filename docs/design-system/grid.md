@@ -370,23 +370,9 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-참고로 Apple 디바이스의 크기는 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)를 참고했습니다.
-
-- iPhone : `320x568 px` ~ `428x926 px`
-
-- iPad : `768x1024 px` ~ `834x1194 px`
-
-- 12.9" iPad : `1024x1366 px`
-
-- Mackbook : `1280x800 px` ~ `1440x900 px`
-
-- iMac : `1440 px` 초과
-
-<br>
-
 ### 9-2. 거터 값 정하기
 
-거터의 값은 `16px`, `24px`와 같이 8px 베이스라인과 맞아 떨어지게 하는 것이 일반적이고요, 마진과 같거나 작은 값으로 지정합니다. 다음은 [Spectrum](https://spectrum.adobe.com/page/responsive-grid/)에서 발췌한 내용입니다.
+거터의 값은 `16px`, `24px`과 같이 8px 베이스라인과 맞아 떨어지게 하는 것이 일반적이고요, 마진과 같거나 작은 값으로 지정합니다. 다음은 [Spectrum](https://spectrum.adobe.com/page/responsive-grid/)에서 발췌한 내용입니다.
 
 > Gutters are the gaps between the columns. Gutter widths are fixed values (16 px, 24 px, etc.) based on breakpoints.
 
@@ -404,7 +390,7 @@ console.log(window.devicePixelRatio); // 4
 
 - 노트북 (`1240px` ~ `1440px`) : 12 컬럼, `200px` 마진, `24px` 거터
 
-- 데스크탑 (`1441px` 이상) : 12 컬럼, 자동 마진, `1040px` 바디, `28px` 거터, `52px` 패딩
+- 데스크탑 (`1441px` 이상) : 12 컬럼, 자동 마진, `1040px` 바디, `24px` 거터, `52px` 패딩
 
 <br>
 
