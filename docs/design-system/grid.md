@@ -441,19 +441,37 @@ Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생�
 
 <br>
 
-같은 방식으로 5개의 Breakpoint 그룹을 위한 그리드를 추가합니다.
+바디 영역의 크기가 `840px`, `1040px`로 고정된 그룹의 경우, 2개의 컬럼 그리드를 함께 사용합니다. 바디 영역이 어떤 프레임에서든 중앙에 정렬되도록 2개의 그리드 모두 컬럼 타입을 `Center`로 선택하고 컬럼의 고정된 너비 값을 지정해줍니다.
 
 <br>
 
-<img src="./../img/figma-grid6.png" alt="" />
+<img src="./../img/figma-grid8.png" alt="" />
 
 <br>
 
-마지막으로, 아래와 같이 각 Breakpoint 그룹마다 사용할 확장된 그리드 모듈들을 추가할 수 있습니다. 컬럼의 수를 다르게 하여 디자인 작업을 할 때 빠르게 도움을 받을 수 있죠. 이때 기본 컬럼 그리드와 맞아 떨어지는 컬럼 수를 사용해야합니다. 예를 들어 8 컬럼 그리드를 사용하는 그룹에서는 2 컬럼, 4 컬럼 그리드를 함께 사용할 수 있지만, 3 또는 6 컬럼으로 나누었을 때는 기본이 되는 8 컬럼 그리드와 맞아떨어지지 않기 때문에 적합하지 않습니다.
+컬럼 그리드가 2개 필요한 이유는 고정된 바디 영역을 표시하기 위함입니다. 컬럼 수 `1`, 컬럼 타입 `Center`, 컬럼 너비 `840`/`1040`, 거터 `0`을 선택하여 1개의 컬럼 그리드를 추가로 사용하는거죠.
 
 <br>
 
-<img src="./../img/figma-grid7.png" alt="" />
+<img src="./../img/figma-grid9.png" alt="" />
+
+<br>
+
+그다음 이 2개의 컬럼 그리드를 묶어 1개의 그리드 모듈로 추가해줍니다.
+
+<br>
+
+<img src="./../img/figma-grid10.png" alt="" />
+
+<img src="./../img/figma-grid11.png" alt="" />
+
+<br>
+
+같은 방식으로 5개 그룹에 대한 기본 그리드 모듈을 각각 추가하시고요, 각 그룹의 기본 그리드에서 확장된 컬럼 그리드들을 추가할 수 있습니다. 컬럼의 수를 다르게 하여 디자인 작업을 할 때 빠르게 도움을 받을 수 있죠. 이때 기본 컬럼 그리드와 맞아 떨어지는 컬럼 수를 사용해야합니다. 예를 들어 8 컬럼 그리드를 사용하는 그룹에서는 2 컬럼, 4 컬럼 그리드를 함께 사용할 수 있지만, 3 또는 6 컬럼으로 나누었을 때는 기본이 되는 8 컬럼 그리드와 맞아떨어지지 않기 때문에 적합하지 않습니다.
+
+<br>
+
+<img src="./../img/figma-grid12.png" alt="" />
 
 <br>
 
@@ -468,6 +486,7 @@ Figma에서 그리드 시스템을 추가하는 방법에 대한 자세한 내�
 - [Understanding layout | Material Design](https://material.io/design/layout/understanding-layout.html#principles)
 - [Adaptivity and Layout | Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)
 - [Responsive grid | Spectrum](https://spectrum.adobe.com/page/responsive-grid/)
+- [Our grid pro quo: Everything you need to know about layout grids in Figma](https://www.figma.com/blog/everything-you-need-to-know-about-layout-grids-in-figma/)
 - [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
 - [Pixel | Wikipedia](https://en.wikipedia.org/wiki/Pixel)
 - [CSS pixel | MDN](https://developer.mozilla.org/en-US/docs/Glossary/CSS_pixel)
