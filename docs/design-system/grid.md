@@ -475,7 +475,7 @@ Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생�
 
 <br>
 
-Figma에서 그리드 시스템을 추가하는 방법에 대한 자세한 내용은 [Create layout grids with grids, columns, and rows](https://help.figma.com/hc/en-us/articles/360040450513-Create-layout-grids-with-grids-columns-and-rows#h_001df3c9-cf3c-473f-a4c5-278d9c212524) Figma 공식문서를 확인하세요.
+Figma에서 그리드 시스템을 추가하는 방법에 대한 자세한 내용은 Figma 공식 홈페이지에서 [Create layout grids with grids, columns, and rows](https://help.figma.com/hc/en-us/articles/360040450513-Create-layout-grids-with-grids-columns-and-rows#h_001df3c9-cf3c-473f-a4c5-278d9c212524), [Our grid pro quo: Everything you need to know about layout grids in Figma](https://www.figma.com/blog/everything-you-need-to-know-about-layout-grids-in-figma/) 아티클을 확인하세요.
 
 <br>
 
