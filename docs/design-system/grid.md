@@ -5,13 +5,13 @@
 1. 배경지식 1 - 픽셀, 포인트, Apple의 `72ppi`
 2. 배경지식 2 - CSS 픽셀, DPPX(Device Pixel Ratio)
 3. 그리드 구성요소: Margin, Flowline, Module, Column, Row, Gutter
-4. 8포인트 베이스라인 그리드(8pt Baseline Grid)
-5. 베이스라인 그리드와 컴포넌트: 박스모델(Box Model), Escape
+4. 8포인트 그리드 시스템(8pt Grid System)
+5. 베이스라인 그리드(Baseline Grid)
 6. 단위: `px`, `rem`, `em`
 7. 컴포지션 그리드(Composition Grids)
 8. 모듈식 스케일(Modular Scales)
 9. 반응형 그리드: Breakpoint 시스템, 거터 값 정하기, 가로 방향 그리드
-10. Figma에서 구축하기
+10. Figma에서 구축하기: 컬럼 그리드, 베이스라인 그리드
 
 <br>
 
@@ -141,31 +141,19 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-## 4. 8포인트 베이스라인 그리드
+## 4. 8포인트 그리드 시스템
 
-### 4-1. 베이스라인 그리드(Baseline Grid)
+### 4-1. 8포인트 그리드 시스템
 
-베이스라인 그리드는 위에서 살펴본 컬럼, 행, 거터, 모듈 등을 만들어내는 가로 세로 교차선들을 레이아웃의 기준선으로 적극 활용하는 방식입니다. 다량의 텍스트가 포함된 모든 디자인에 적합하고요, 콘텐츠의 리듬을 만들어주는 것이 특징입니다.
-
-<br>
-
-<img src="./../img/baseline-grid.png" alt="" />
-
-사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
+8포인트 그리드 시스템은 그리드를 구성할 때 `8`씩 증감하는 값들만을 사용하는 방식입니다. 그리드를 구성하는 거터, 마진의 값을 `8`의 배수로, 그러니까 가령 CSS에서는 `16px`, `24px`과 같은 값들만 사용하는 8px 그리드 시스템을 사용하면 됩니다. [Material Design](https://material.io/design/layout/understanding-layout.html#material-measurements)에서도 Android 앱을 위한 8dp 그리드 시스템을 제안합니다. 다만, 아이콘과 같이 작은 사이즈가 필요한 경우에는 4dp 그리드를 허용합니다.
 
 <br>
 
-### 4-2. 8포인트 베이스라인 그리드
-
-8포인트 베이스라인 그리드는 베이스라인 그리드를 구성할 때 `8`씩 증감하는 값들만을 사용하는 방식입니다. 모든 요소의 크기를 `8`의 배수로, 그러니까 웹디자인에는 `8px`, `16px`과 같은 값들만 사용하는 8px 베이스라인 그리드를 사용하면 됩니다. [Material Design](https://material.io/design/layout/understanding-layout.html#material-measurements)에서도 Android 앱을 위한 8dp 베이스라인을 제안합니다. 다만, 아이콘, 타이포그래피와 같이 작은 사이즈가 필요한 경우에는 4dp 베이스라인을 허용합니다.
+최근에는 공간을 더 세밀하게 나눌 수 있는 4포인트 그리드가 인기를 얻고 있습니다. 저는 포트폴리오 프로젝트의 디자인시스템을 구축하면서 [Goodbye 8-point grid, hello 4-point grid?](https://uxdesign.cc/goodbye-8-point-grid-hello-4-point-grid-1aa7f2159051) 등의 아티클을 참고했는데요, 기본적으로 8포인트, 경우에 따라 4포인트를 사용하기로 했습니다.
 
 <br>
 
-최근에는 공간을 더 세밀하게 나눌 수 있는 4포인트 베이스라인 그리드가 인기를 얻고 있습니다. 저는 포트폴리오 프로젝트의 디자인시스템을 구축하면서 [Goodbye 8-point grid, hello 4-point grid?](https://uxdesign.cc/goodbye-8-point-grid-hello-4-point-grid-1aa7f2159051) 등의 아티클을 참고했는데요, 기본적으로 8포인트 베이스라인, 경우에 따라 4포인트 베이스라인을 사용하기로 했습니다.
-
-<br>
-
-### 4-3. 왜 4, 8인가요?
+### 4-2. 왜 4, 8인가요?
 
 그런데 왜 `4`, `8`인가요? `2`와 `4`로만 나눌 수 있어 고해상도에서 픽셀절반 현상을 방지할 수 있기 때문입니다. 고해상도 디바이스는 일반적으로 표준해상도의 1.5배, 2배, 3배, 4배 해상도를 사용합니다. `@x1.5`, `@x2`, `@x3`, `@x4`로 표시하고요.
 
@@ -175,15 +163,13 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-4포인트, 8포인트 베이스라인 그리드에서는 픽셀절반 현상이 없습니다. 또한 `4`와 `8`은 웹 브라우저의 기본 폰트 크기인 `16px`과도 맞아떨어져서 밸런스 유지에도 도움이 되고요.
+4포인트, 8포인트 그리드에서는 픽셀절반 현상이 없습니다. 또한 `4`와 `8`은 웹 브라우저의 기본 폰트 크기인 `16px`과도 맞아떨어져서 밸런스 유지에도 도움이 되고요.
 
 <br>
 
-## 5. 베이스라인 그리드와 컴포넌트: 박스모델(Box Model), Escape
+### 4-3. 컴포넌트 박스모델(Box Model)에 그리드 적용하기
 
-### 5-1. 박스모델(Box Model)
-
-베이스라인 그리드를 전체 화면 레이아웃이 아닌 컴포넌트 디자인에 적용할 때 무엇을 고려해야할까요? 웹/앱에서 화면을 그릴 때 사용하는 [박스모델(Box Model)](https://www.w3schools.com/css/css_boxmodel.asp)을 하나의 화면으로 생각하고, 모든 구성요소와 타이포그래피에 베이스라인 그리드를 적용하면 됩니다. 그럼 컴포넌트들을 화면에 배치했을 때 전체 레이아웃의 베이스라인과도 맞아떨어집니다.
+8포인트 그리드 시스템을 전체 화면 레이아웃이 아닌 컴포넌트 디자인에 적용할 때 무엇을 고려해야할까요? 웹/앱에서 화면을 그릴 때 사용하는 [박스모델(Box Model)](https://www.w3schools.com/css/css_boxmodel.asp)을 하나의 화면으로 생각하고, 모든 구성요소와 텍스트에 8포인트 그리드를 적용하면 됩니다. 그럼 컴포넌트들을 화면에 배치했을 때 전체 레이아웃의 그리드와 맞아떨어집니다.
 
 <br>
 
@@ -202,9 +188,9 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-### 5-2. Escape
+### 4-4. Escape
 
-레이아웃을 구성하다보면 아무리해도 `4`나 `8`로 나누어떨어지지 않는 경우가 있습니다. 베이스라인에 억지로 맞추다보면 버튼의 여백이 너무 넓거나 좁아지는 경우, 텍스트가 너무 크거나 작아지는 경우가 있죠. 이럴 때 다음 규칙을 고려해보세요.
+컴포넌트를 디자인하다보면 아무리해도 `4`나 `8`로 나누어떨어지지 않는 경우가 있습니다. 8포인트에 억지로 맞추다보면 버튼의 여백이 너무 넓거나 좁아지는 경우, 텍스트가 너무 크거나 작아지는 경우가 있죠. 이럴 때 다음 규칙을 고려해보세요.
 
 <br>
 
@@ -221,11 +207,29 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-박스의 크기와 텍스트 줄높이는 최소 `4`의 배수를 유지하고 폰트 사이즈(Font Size)는 베이스라인에서 어느정도 벗어나도 괜찮다는 것이 [Material Design](https://material.io/design/layout/spacing-methods.html#baseline-grid)의 설명입니다. 다음은 발췌 내용입니다.
+박스의 크기와 텍스트 줄높이는 최소 `4`의 배수를 유지하고 폰트 사이즈(Font Size)는 그리드에서 어느정도 벗어나도 괜찮다는 것이 [Material Design](https://material.io/design/layout/spacing-methods.html#baseline-grid)의 설명입니다. 다음은 발췌 내용입니다.
 
 <br>
 
 > Type can be placed outside of the 4dp grid when it’s centered within a component, such as a button or list item. When placed outside of the grid but centered within a component, text can still appear vertically center-aligned.
+
+<br>
+
+## 5. 베이스라인 그리드(Baseline Grid)
+
+베이스라인 그리드(Baseline Grid)는 타이포그래피에서 텍스트의 기준선을 잡아주는 그리드 방식이고요, 콘텐츠의 리듬을 만들어주는 것이 특징입니다. 위에서 소개한 그리드 구성요소 중 흐름선(Flowline)에 해당합니다.
+
+<br>
+
+<img src="./../img/baseline-grid.png" alt="" />
+
+사진출처 : [A Quick Look at Types of Grids for Creating Professional Designs](https://visme.co/blog/layout-design/)
+
+<br>
+
+일반적으로 8포인트 그리드 시스템에서 4포인트 베이스라인을 사용합니다. 픽셀절반 현상을 방지하면서, 8포인트 베이스라인에 비해 폰트 사이즈와 줄높이에 다양성을 주기 용이하기 때문입니다. 다음은 Figma 공식 블로그의 [Our grid pro quo: Everything you need to know about layout grids in Figma](https://www.figma.com/blog/everything-you-need-to-know-about-layout-grids-in-figma/)에서 발췌한 내용입니다.
+
+> In many 8pt grid systems, a 4pt baseline is used. This basic unit makes the math easy and scalable as you start to setup different type sizes and line-height combinations.
 
 <br>
 
@@ -407,7 +411,9 @@ console.log(window.devicePixelRatio); // 4
 
 <br>
 
-## 10. Figma에서 구축하기
+## 10. Figma에서 구축하기: 컬럼 그리드, 베이스라인 그리드
+
+### 10-1. 컬럼 그리드
 
 Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생성할 수 있습니다. `+` 버튼을 눌러 기본 그리드를 추가한 후, 추가된 그리드의 왼쪽 아이콘을 클릭하면 그리드를 설정할 수 있는 영역이 생깁니다.
 
@@ -472,6 +478,12 @@ Figma에서 그리드는 우측 `Design` 탭의 `Layout Grid` 영역에서 생�
 <br>
 
 <img src="./../img/figma-grid12.png" alt="" />
+
+<br>
+
+### 10-2. 베이스라인 그리드
+
+...
 
 <br>
 
