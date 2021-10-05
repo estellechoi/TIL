@@ -15,7 +15,15 @@
 
 <br>
 
-## 1. Web Front-end
+## 1. Work Flow
+
+### GIT
+
+- [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
+
+<br>
+
+## 2. Web Front-end
 
 ### HTML
 
@@ -102,7 +110,7 @@
 
 <br>
 
-## 2. Mobile App Front-end
+## 3. Mobile App Front-end
 
 ### Flutter
 
@@ -123,13 +131,7 @@
 
 <br>
 
-## 3. Etc
-
-### GIT
-
-- [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
-
-<br>
+## 4. Etc
 
 ### HTTP
 
@@ -178,9 +180,7 @@
 
 <br>
 
-## 4. Reference
-
-### Articles by Various Authors
+## 4. Articles by Various Authors
 
 - [All You Need To Know About CSS-in-JS](https://medium.com/better-programming/all-you-need-to-know-about-css-in-js-984a72d48ebc)
 - [ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?](https://gomugom.github.io/is-class-only-a-syntactic-sugar/)
