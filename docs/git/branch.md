@@ -492,11 +492,7 @@ Bitbucket에서 PR을 머지하면, 기본으로 `--no-ff` 옵션이 적용됩�
 
 ## 10. 쉬운 롤백: `--squash`
 
-Github에서는 PR을 머지할 때 [`Squash and merge`](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits) 옵션을 제공합니다. 브랜치의 모든 커밋들을 `squash`해서 하나의 커밋으로 만든 후 머지하는 방식입니다. 이렇게 머지한 커밋은 추후 [`Revert Pull Request`](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/reverting-a-pull-request)을 사용해서 특정 기능들의 커밋들이 모인 곳으로 쉽게 롤백할 수 있습니다. 
-
-<br>
-
-다만 해당 기능들을 사용하려면 해당 레파지토리에서 사용 설정을 해줘야하고, 사용자에게 `write` 권한을 허용해야합니다. 이 과정의 자세한 내용은 [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)에서 확인할 수 있습니다.
+Github에서는 PR을 머지할 때 [`Squash and merge`](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits) 옵션을 제공합니다. 브랜치의 모든 커밋들을 `squash`해서 하나의 커밋으로 만든 후 머지하는 방식입니다. 이렇게 머지한 커밋은 추후 [`Revert Pull Request`](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/reverting-a-pull-request)을 사용해서 특정 기능들의 커밋들이 모인 곳으로 쉽게 롤백할 수 있습니다. 다만 해당 기능들을 사용하려면 해당 레파지토리에서 사용 설정을 해줘야하고, 사용자에게 `write` 권한을 허용해야합니다. 이 과정의 자세한 내용은 [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)에서 확인할 수 있습니다.
 
 <br>
 
