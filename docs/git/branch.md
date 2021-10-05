@@ -9,7 +9,7 @@
 5. `hotfix` 플로우
 6. 브랜치 네이밍 컨벤션
 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
-8. 이슈 생성하기: Github, Bitbucket, 브랜치 만들기
+8. 이슈 생성하기: Github, Bitbucket, 이슈 기반 브랜치 만들기
 
 <br>
 
@@ -380,7 +380,7 @@ Please include any relevant log snippets or files here.
 
 <br>
 
-## 8. 이슈 생성하기: Github, Bitbucket, 브랜치 만들기
+## 8. 이슈 생성하기: Github, Bitbucket, 이슈 기반 브랜치 만들기
 
 ### 8-1. Github
 
