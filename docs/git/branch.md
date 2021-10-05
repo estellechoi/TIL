@@ -8,11 +8,13 @@
 
 깃 플로우(Git Flow)는 여러명의 개발자들이 협업하는 환경에서 생겨나는 깃(Git)의 브랜치(Branch)들을 효율적으로 관리하고 통합하기 위한 전략 중 하나입니다. 2010년 Vincent Driessen이 블로그를 통해 공개한 [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/) 글에서 시작되었습니다.
 
+<br>
+
 <img src="./../img/gitflow.png" alt="" />
 
 <br>
 
-깃 플로우에서는 총 5개 브랜치를 사용하고요, 그 중 `master`, `develop` 브랜치는 정규 브랜치이므로 새로 생성하거나 없애지 않고 하나의 브랜치를 계속 사용합니다. `feature`, `release` 브랜치는 `develop` 브랜치에서 분기되는 임시 브랜치로 작업이 완료된 후 필요없어지면 삭제할 수 있는 브랜치입니다. `hotfix` 브랜치는 `master` 브랜치에서 직접 분기하는 임시 브랜치입니다. 이미 배포된 버전에서 발견된 버그를 빠르게 수정하기 위한 브랜치입니다.
+깃 플로우에서는 총 5개 브랜치를 사용하고요, 그 중 `master`, `develop` 브랜치는 정규 브랜치이므로 새로 생성하거나 없애지 않고 하나의 브랜치를 계속 사용합니다. `feature`, `release` 브랜치는 `develop` 브랜치에서 분기되는 임시 브랜치입니다. `hotfix` 브랜치는 `master` 브랜치에서 직접 분기하는 임시 브랜치로, 이미 배포된 버전의 버그를 빠르게 수정하기 위한 브랜치입니다. `feature`, `release`, `hotfix` 브랜치는 작업이 끝나고 머지가 완료되면 제거할 수 있습니다.
 
 <br>
 
@@ -20,6 +22,8 @@
 
 - `master`
 - `develop`
+
+<br>
 
 임시 브랜치
 
