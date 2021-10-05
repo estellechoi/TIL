@@ -1,4 +1,4 @@
-# 깃 플로우(Git Flow)와 브랜치(Branch) 네이밍 컨벤션
+# 깃 플로우(Git Flow)와 이슈 관리
 
 <br>
 
@@ -8,6 +8,7 @@
 4. 기본 사이클
 5. `hotfix` 플로우
 6. 브랜치 네이밍 컨벤션
+7. 이슈 기반으로 프로젝트 관리하기
 
 <br>
 
@@ -290,6 +291,110 @@ git checkout -b hotfix-1.0.1/yujin-1001-login-btn-typo
 ```
 
 <br>
+
+## 7. 이슈 기반으로 프로젝트 관리하기
+
+깃 플로우를 이슈 기반으로 관리하면 팀원들이 프로젝트의 진행상황을 모니터링하는데 도움이 됩니다. 여기서 이슈란, 단순 버그부터 새 출시 버전에 포함될 기능까지 프로젝트에 필요한 모든 것을 말합니다. 모든 이슈는 고유한 이슈번호를 부여받게 되고요, 각각의 이슈번호에 대응하는 브랜치를 만들어 작업하면 됩니다. Github `Issues` 또는 Bitbucket `Issue Tracker`에서 이슈 관리 기능을 제공하고요, 어떤 플랫폼을 사용하던 이슈 관리 플로우는 비슷합니다.
+
+- 이슈 템플릿 등록
+- 이슈 생성
+- 해당 이슈를 처리하는 브랜치 생성
+- 작업
+- 브랜치 풀 요청(`pull request`)
+- 머지(`merge`)
+
+<br>
+
+### 7-1. 이슈 템플릿 등록
+
+다른 팀원이 작업한 내용에 수정을 요청하기 위해 이슈를 생성할 수도 있지만, 모든 작업을 이슈로 생성하는 것이 좋다고 생각했습니다. 해당 프로젝트와 관련하여 진행되는 모든 일을 팀원들이 언제나 투명하게 확인할 수 있기 때문입니다. 또한 이슈 템플릿을 등록하여 팀원들이 가장 빠른 방법으로 필요한 내용을 모두 포함한 이슈를 등록하도록 시스템화할 수 있습니다. 
+
+<br>
+
+#### Github
+
+Github을 사용한다면 레파지토리 `Settings/Options` 탭의 `Features` 영역에서 이슈 템플릿을 등록할 수 있습니다.
+
+<br>
+
+<img src="./../img/github-issue.png" alt="" />
+
+<br>
+
+#### Bitbucket
+
+Bitbucket을 사용한다면 레파지토리 `Repository settings` 탭에서 `Features/Issue Tracker` 하위 탭으로 이동하여 이슈 템플릿을 등록할 수 있습니다.
+
+<br>
+
+<img src="./../img/bitbucket-issue.png" alt="" />
+
+<br>
+
+#### 템플릿 예시
+
+다음은 [A GitHub Issue Template for Your Projects](https://embeddedartistry.com/blog/2017/08/18/a-github-issue-template-for-your-projects/)에서 소개하는 이슈 템플릿 예시입니다.
+
+```
+# Prerequisites
+
+Please answer the following questions for yourself before submitting an issue. **YOU MAY DELETE THE PREREQUISITES SECTION.**
+
+- [ ] I am running the latest version
+- [ ] I checked the documentation and found no answer
+- [ ] I checked to make sure that this issue has not already been filed
+- [ ] I'm reporting the issue to the correct repository (for multi-repository projects)
+
+# Expected Behavior
+
+Please describe the behavior you are expecting
+
+# Current Behavior
+
+What is the current behavior?
+
+# Failure Information (for bugs)
+
+Please help provide information about the failure if this is a bug. If it is not a bug, please remove the rest of this template.
+
+## Steps to Reproduce
+
+Please provide detailed steps for reproducing the issue.
+
+1. step 1
+2. step 2
+3. you get it...
+
+## Context
+
+Please provide any relevant information about your setup. This is important in case the issue is not reproducible except for under certain conditions.
+
+* Firmware Version:
+* Operating System:
+* SDK version:
+* Toolchain version:
+
+## Failure Logs
+
+Please include any relevant log snippets or files here.
+```
+
+<br>
+
+### 7-2. 이슈 생성
+
+#### Bitbucket
+
+Bitbucket에서는 이슈 템플릿을 등록해야 비로소 레파지토리 메인에 `Issues` 탭이 생깁니다. 해당 탭으로 이동하여 `Create Issue` 버튼을 클릭하고 이슈 생성을 시작합니다. 등록해두었던 이슈 템플릿을 활용하여 내용을 작성한 후, `Assignee`, `Kind`, `Priority` 영역을 입력하고 이슈를 생성합니다.
+
+<br>
+
+
+
+<br>
+<br>
+<br>
+
 
 ---
 
