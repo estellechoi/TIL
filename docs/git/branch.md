@@ -56,7 +56,7 @@
 
 ## 4. 기본 사이클
 
-1. 원격저장소에서 `develop` 브랜치를 풀(`pull`) 합니다.
+1. 원격저장소에서 `develop` 브랜치의 최신상태를 풀(`pull`) 합니다.
 
 ```
 git pull origin develop
