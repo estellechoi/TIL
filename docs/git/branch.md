@@ -1,4 +1,4 @@
-# 깃 플로우(Git Flow)와 이슈 관리
+# 깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)
 
 <br>
 
@@ -10,6 +10,7 @@
 6. 브랜치 네이밍 컨벤션
 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
 8. 이슈 생성하기: Github, Bitbucket, 이슈 기반 브랜치 만들기
+9. 깃 플로우 모델에서 PR(Pull Request) 하기
 
 <br>
 
@@ -411,15 +412,52 @@ Bitbucket에서는 이슈 템플릿을 등록해야 비로소 레파지토리 �
 
 <br>
 
-### 8-3. 브랜치 만들기
+### 8-3. 이슈 기반 브랜치 만들기
 
-이제 부여받은 이슈번호를 브랜치 이름에 적용하면 됩니다. 예를 들어, 새로운 기능을 개발해야하는 이슈라면 `develop` 브랜치에서 분기하는 `feature` 브랜치를 생성하면 되겠죠. 이슈 번호가 `1`이라면 아래와 같이 브랜치를 네이밍할 수 있습니다.
+이제 부여받은 이슈 번호를 브랜치 이름에 적용하면 됩니다. 예를 들어, 새로운 기능 개발에 대한 이슈라면 `develop` 브랜치에서 분기하는 `feature` 브랜치를 생성하면 되겠죠. 이슈 번호가 `1`이라면 아래와 같이 브랜치를 네이밍할 수 있습니다.
 
 ```
 git checkout -b feature/1-app-tutorial-update develop
 ```
 
 <br>
+
+## 9. 깃 플로우 모델에서 PR(Pull Request) 하기
+
+### 9-1. PR(Pull Request) 만들기
+
+브랜치의 작업이 완료되면 작업 내용을 `commit`한 후, 원격 저장소로 `push` 합니다.
+
+```
+git push origin feature/1-app-tutorial-update
+```
+
+<br>
+
+다음은 [GitKraken Blog](https://www.gitkraken.com/blog/pull-requests-gitflow)에서 발췌한 내용이고요, `feature` 브랜치의 PR에 대한 가이드입니다.
+
+> develop branch: A pull request is created by developers from their respective feature branches to merge code to the develop branch. Usually, a pull request is created after features are completed. A pull request is merged to the develop branch by the reviewer. In most cases, a reviewer is a technical lead.
+
+<br>
+
+
+이제 원격 저장소에서 새로 푸시한 브랜치를 선택한 후, PR(Pull Request)를 생성합니다. PR 페이지의 우측에서는 이슈 페이지와 비슷한 항목들을 설정할 수 있습니다. 그 중 `Linked issues` 항목에 대응하는 이슈를 연결하는 것이 중요합니다. 이슈를 연결하면, 이 PR에 대한 리뷰가 끝나고 `merge`되는 순간 연결된 이슈도 함께 종료됩니다.
+
+<br>
+
+<img src="./../img/github-issue3.png" alt="" width="800" />
+
+<br>
+
+### 9-1. 브랜치 삭제하기
+
+이슈가 종료되면 원격 저장소에 푸시했던 브랜치를 삭제합니다.
+
+
+
+<br>
+
+
 
 ---
 
@@ -428,5 +466,7 @@ git checkout -b feature/1-app-tutorial-update develop
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 - [Git Branching Naming Convention: Best Practices](https://codingsight.com/git-branching-naming-convention-best-practices/)
 - [Linking a pull request to an issue | Github Docs](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+- [Git Feature Branch Workflow | Bitbucket](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
+- [Pull Requests and Gitflow | GitKraken Blog](https://www.gitkraken.com/blog/pull-requests-gitflow)
 - [GitFlow? 들어도 봤고, 쓰고도 있는데... | 강남언니 공식 블로그](https://blog.gangnamunni.com/post/understanding_git_flow/)
 - [하루에 1000번 배포하는 조직 되기 | 뱅크샐러드 블로그](https://blog.banksalad.com/tech/become-an-organization-that-deploys-1000-times-a-day/?gclid=CjwKCAjwzOqKBhAWEiwArQGwaLas_It3JTTOTPuC9pp3gVTZqV_efdm4a0QbeGYnVDhvphXXQCW0RBoC5BIQAvD_BwE)
