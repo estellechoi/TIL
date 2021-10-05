@@ -252,15 +252,15 @@ git push
 `master`, `develop`, `release-*`, `hotfix-*`는 사용할 수 없습니다. 팀과 함께 컨벤션을 만들어 사용하면 되고요, 아래의 추천 목록에서 선택하거나 변형해서 네이밍합니다.
 
 - `feature/{feature-description}`
-- `feature/{issue-number}-{feature-description}`
-- `feature/{author}{issue-number}-{feature-description}`
+- `feature/{#issue-number}-{feature-description}`
+- `feature/{author}{#issue-number}-{feature-description}`
 
 <br>
 
 예를 들어 아래와 같이 사용할 수 있겠습니다.
 
 ```
-git checkout -b feature/1001-app-tutorial-update
+git checkout -b feature/#1001-app-tutorial-update
 ```
 
 <br>
@@ -281,15 +281,15 @@ git checkout -b release-1.0
 
 - `hotfix-{next-version}`
 - `hotfix-{next-version}/{hotfix-description}`
-- `hotfix-{next-version}/{issue-number}-{hotfix-description}`
-- `hotfix-{next-version}/{author}-{issue-number}-{hotfix-description}`
+- `hotfix-{next-version}/{#issue-number}-{hotfix-description}`
+- `hotfix-{next-version}/{author}-{#issue-number}-{hotfix-description}`
 
 <br>
 
 예를 들어 아래와 같이 사용할 수 있겠습니다.
 
 ```
-git checkout -b hotfix-1.0.1/1001-login-btn-typo
+git checkout -b hotfix-1.0.1/#1001-login-btn-typo
 ```
 
 <br>
@@ -417,31 +417,43 @@ Bitbucket에서는 이슈 템플릿을 등록해야 비로소 레파지토리 �
 이제 부여받은 이슈 번호를 브랜치 이름에 적용하면 됩니다. 예를 들어, 새로운 기능 개발에 대한 이슈라면 `develop` 브랜치에서 분기하는 `feature` 브랜치를 생성하면 되겠죠. 이슈 번호가 `1`이라면 아래와 같이 브랜치를 네이밍할 수 있습니다.
 
 ```
-git checkout -b feature/1-app-tutorial-update develop
+git checkout -b feature/#1-app-tutorial-update develop
 ```
 
 <br>
 
 ## 9. 깃 플로우 모델에서 PR(Pull Request) 하기
 
-### 9-1. PR(Pull Request) 만들기
+### 9-1. 브랜치 푸시
 
 브랜치의 작업이 완료되면 작업 내용을 `commit`한 후, 원격 저장소로 `push` 합니다.
 
 ```
-git push origin feature/1-app-tutorial-update
+git push origin feature/#1-app-tutorial-update
 ```
 
 <br>
 
-다음은 [GitKraken Blog](https://www.gitkraken.com/blog/pull-requests-gitflow)에서 발췌한 내용이고요, `feature` 브랜치의 PR에 대한 가이드입니다.
+### 9-2. PR(Pull Request)
+
+이제 원격 저장소에서 책임자에게 `merge`를 요청하는 PR(Pull Request)를 생성합니다. `feature` 브랜치의 경우 `develop` 브랜치에 대해 PR을 등록해야합니다. 다음은 [GitKraken Blog](https://www.gitkraken.com/blog/pull-requests-gitflow)에서 발췌한 내용이고요, `feature` 브랜치의 PR에 대한 가이드입니다.
 
 > develop branch: A pull request is created by developers from their respective feature branches to merge code to the develop branch. Usually, a pull request is created after features are completed. A pull request is merged to the develop branch by the reviewer. In most cases, a reviewer is a technical lead.
 
 <br>
 
+#### Github
 
-이제 원격 저장소에서 새로 푸시한 브랜치를 선택한 후, PR(Pull Request)를 생성합니다. PR 페이지의 우측에서는 이슈 페이지와 비슷한 항목들을 설정할 수 있습니다. 그 중 `Linked issues` 항목에 대응하는 이슈를 연결하는 것이 중요합니다. 이슈를 연결하면, 이 PR에 대한 리뷰가 끝나고 `merge`되는 순간 연결된 이슈도 함께 종료됩니다.
+Github `Pull Requests` 탭으로 이동한 후 `New pull request` 버튼을 클릭합니다. 상단에서 `base` 브랜치를 `develop`, `compare` 브랜치를 `feature/#1-app-tutorial-update` 브랜치로 변경하고 `Create pull request` 버튼을 클릭하여 PR을 생성합니다.
+
+<br>
+
+<img src="./../img/github-issue4.png" alt="" />
+
+<br>
+
+
+PR 생성이 완료되면, 해당 PR 페이지의 우측에서는 이슈 페이지와 비슷한 항목들을 설정할 수 있습니다. 그 중 `Linked issues` 항목에 대응하는 이슈를 연결하는 것이 중요합니다. 이슈를 연결하면, 이 PR에 대한 리뷰가 끝나고 `merge`되는 순간 연결된 이슈도 함께 종료됩니다.
 
 <br>
 
@@ -451,7 +463,15 @@ git push origin feature/1-app-tutorial-update
 
 ### 9-1. 브랜치 삭제하기
 
-이슈가 종료되면 원격 저장소에 푸시했던 브랜치를 삭제합니다.
+이슈가 종료되면 원격 저장소에 푸시했던 브랜치를 삭제합니다. Github에서는 PR 페이지에서 버튼을 클릭하여 바로 제거할 수 있고요, 명령어로 삭제하려면 아래와 같이 합니다.
+
+```
+git push origin --delete feature/#1-app-tutorial-update
+```
+
+<br>
+
+로컬 브랜치를 모두 삭제합니다.
 
 
 
