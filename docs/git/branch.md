@@ -1,5 +1,7 @@
 # 깃 플로우(Git Flow)와 브랜치 네이밍 컨벤션 도입하기
 
+<br>
+
 1. 깃 플로우(Git Flow)
 2. 5개 브랜치: `master`, `develop`, `feature`, `release`, `hotfix`
 3. 브랜치 기록 남기기: `merge --no-ff`
