@@ -260,7 +260,7 @@ git push
 예를 들어 아래와 같이 사용할 수 있겠습니다.
 
 ```
-git checkout -b feature/yujin-1001-app-tutorial-update
+git checkout -b feature/1001-app-tutorial-update
 ```
 
 <br>
@@ -289,7 +289,7 @@ git checkout -b release-1.0
 예를 들어 아래와 같이 사용할 수 있겠습니다.
 
 ```
-git checkout -b hotfix-1.0.1/yujin-1001-login-btn-typo
+git checkout -b hotfix-1.0.1/1001-login-btn-typo
 ```
 
 <br>
