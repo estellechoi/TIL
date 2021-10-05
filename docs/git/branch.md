@@ -38,11 +38,12 @@
 깃 플로우의 사이클을 대략적으로 정리하면 다음과 같습니다.
 
 1. `develop` 브랜치에서 기능 개발을 위한 `feature` 브랜치를 생성하고 작업을 진행합니다.
-2. 작업이 완료되면 다시 `develop` 브랜치에 머지(`merge`)시킵니다.
+2. 작업이 완료되면 다시 `develop` 브랜치에 머지시킵니다.
 3. 기능 개발을 담당하는 `feature` 브랜치들이 모두 머지되었으면, 배포를 위한 `release` 브랜치를 생성합니다.
 4. `release` 브랜치에서 배포와 관련된 문서작업, 버그 수정 등을 진행합니다.
 5. `release` 브랜치 작업이 완료되면 `master`, `develop` 브랜치에 각각 머지합니다.
-6. `master` 브랜치에 마지막으로 머지된 커밋(`commit`)에 태그(`git tag`)를 생성하여 원격 저장소로 푸시(`push`)합니다.
+6. `master` 브랜치에 마지막으로 머지된 커밋(`commit`)에 태그(`git tag`)를 생성합니다. 태그명은 [Semantic Versioning](https://semver.org/)을 사용합니다.
+7. `master` 브랜치를 푸시(`push`)합니다.
 
 <br>
 
@@ -50,12 +51,9 @@
 
 > The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature.
 
-<img src="./../img/gitflow2.png" alt="" />
-
 <br>
 
-
-깃 태그 생성시에는 [Semantic Versioning](https://semver.org/)을 사용합니다.
+<img src="./../img/gitflow2.png" alt="" />
 
 <br>
 
@@ -67,3 +65,7 @@
 ---
 
 ### References
+
+- [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
+- [GitFlow? 들어도 봤고, 쓰고도 있는데... | 강남언니 공식 블로그](https://blog.gangnamunni.com/post/understanding_git_flow/)
+- [하루에 1000번 배포하는 조직 되기 | 뱅크샐러드 블로그](https://blog.banksalad.com/tech/become-an-organization-that-deploys-1000-times-a-day/?gclid=CjwKCAjwzOqKBhAWEiwArQGwaLas_It3JTTOTPuC9pp3gVTZqV_efdm4a0QbeGYnVDhvphXXQCW0RBoC5BIQAvD_BwE)
