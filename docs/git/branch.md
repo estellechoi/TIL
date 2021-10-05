@@ -9,7 +9,7 @@
 5. `hotfix` 플로우
 6. 브랜치 네이밍 컨벤션
 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
-8. 이슈 생성하기: Github, Bitbucket, 브랜치 만들기
+8. 이슈 생성하기: Github, Bitbucket, 이슈 기반 브랜치 만들기
 
 <br>
 
@@ -380,7 +380,7 @@ Please include any relevant log snippets or files here.
 
 <br>
 
-## 8. 이슈 생성하기: Github, Bitbucket, 브랜치 만들기
+## 8. 이슈 생성하기: Github, Bitbucket, 이슈 기반 브랜치 만들기
 
 ### 8-1. Github
 
@@ -427,5 +427,6 @@ git checkout -b feature/1-app-tutorial-update develop
 
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 - [Git Branching Naming Convention: Best Practices](https://codingsight.com/git-branching-naming-convention-best-practices/)
+- [Linking a pull request to an issue | Github Docs](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
 - [GitFlow? 들어도 봤고, 쓰고도 있는데... | 강남언니 공식 블로그](https://blog.gangnamunni.com/post/understanding_git_flow/)
 - [하루에 1000번 배포하는 조직 되기 | 뱅크샐러드 블로그](https://blog.banksalad.com/tech/become-an-organization-that-deploys-1000-times-a-day/?gclid=CjwKCAjwzOqKBhAWEiwArQGwaLas_It3JTTOTPuC9pp3gVTZqV_efdm4a0QbeGYnVDhvphXXQCW0RBoC5BIQAvD_BwE)
