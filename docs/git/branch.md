@@ -56,7 +56,15 @@
 
 ## 4. 기본 사이클
 
-1. `develop` 브랜치에서 기능 개발을 위한 `feature` 브랜치를 생성하고 작업을 진행합니다.
+1. 원격저장소에서 `develop` 브랜치를 풀(`pull`) 합니다.
+
+```
+git pull origin develop
+```
+
+<br>
+
+2. `develop` 브랜치에서 기능 개발을 위한 `feature` 브랜치를 생성하고 작업을 진행합니다.
 
 ```
 git checkout -b feature develop
@@ -64,7 +72,7 @@ git checkout -b feature develop
 
 <br>
 
-2. 작업이 완료되면 다시 `develop` 브랜치에 머지시키고, `feature` 브랜치는 제거합니다.
+3. 작업이 완료되면 다시 `develop` 브랜치에 머지시키고, `feature` 브랜치는 제거합니다.
 
 ```
 git checkout develop
@@ -74,7 +82,7 @@ git branch -d myfeature
 
 <br>
 
-3. 원격 저장소로 `develop` 브랜치를 푸시합니다.
+4. 원격 저장소로 `develop` 브랜치를 푸시합니다.
 
 ```
 git push origin develop
@@ -82,7 +90,7 @@ git push origin develop
 
 <br>
 
-4. 기능 개발과 각 브랜치 머지가 완료되었으면, 이제 배포를 위한 `release` 브랜치를 생성합니다.
+5. 기능 개발과 각 브랜치 머지가 완료되었으면, 이제 배포를 위한 `release` 브랜치를 생성합니다.
 
 ```
 git checkout -b release-1.0 develop
@@ -90,7 +98,7 @@ git checkout -b release-1.0 develop
 
 <br>
 
-5. 버전 번호를 일괄 업데이트하기 위한 `bump-version.sh` 파일이 있다면 해당 파일을 수정, 커밋합니다.
+6. 버전 번호를 일괄 업데이트하기 위한 `bump-version.sh` 파일이 있다면 해당 파일을 수정, 커밋합니다.
 
 ```
 ./bump-version.sh 1.0
@@ -100,11 +108,11 @@ git commit -a -m "Bumped version number to 1.0"
 <br>
 
 
-6. 배포와 관련된 문서작업, 버그 수정 등을 추가로 진행합니다.
+7. 배포와 관련된 문서작업, 버그 수정 등을 추가로 진행합니다.
 
 <br>
 
-7. `release` 브랜치 작업이 완료되면 `master`로 머지하고, 버전 태그(`git tag`)를 생성합니다. 태그명은 [Semantic Versioning](https://semver.org/)을 사용합니다.
+8. `release` 브랜치 작업이 완료되면 `master`로 머지하고, 버전 태그(`git tag`)를 생성합니다. 태그명은 [Semantic Versioning](https://semver.org/)을 사용합니다.
 
 ```
 git checkout master
@@ -114,7 +122,7 @@ git tag -a 1.0
 
 <br>
 
-8. `release` 브랜치를 `develop` 브랜치에 똑같이 머지합니다.
+9. `release` 브랜치를 `develop` 브랜치에 똑같이 머지합니다.
 
 ```
 git checkout develop
@@ -123,7 +131,7 @@ git merge --no-ff release-1.0
 
 <br>
 
-9. `release` 브랜치를 삭제합니다.
+10. `release` 브랜치를 삭제합니다.
 
 ```
 git branch -d release-1.0햣
@@ -131,7 +139,7 @@ git branch -d release-1.0햣
 
 <br>
 
-10. `develop` 브랜치와 `master` 브랜치를 푸시(`push`)합니다.
+11. `develop` 브랜치와 `master` 브랜치를 푸시(`push`)합니다.
 
 ```
 git push origin develop
