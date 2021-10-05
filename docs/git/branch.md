@@ -300,7 +300,7 @@ git checkout -b hotfix-1.0.1/#1001-login-btn-typo
 
 ## 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
 
-깃 플로우를 이슈 기반으로 관리하면 팀원들이 프로젝트의 진행상황을 모니터링하는데 도움이 됩니다. 여기서 이슈란, 단순 버그부터 새 출시 버전에 포함될 기능까지 프로젝트에 필요한 모든 것을 말합니다. 모든 이슈는 고유한 이슈 번호를 부여받게 되고요, 각각의 이슈 번호에 대응하는 브랜치를 만들어 작업하면 됩니다. Github `Issues`, Bitbucket `Issue Tracker` 등에서 이슈 관리 기능을 제공하고요, 어떤 플랫폼을 사용하던 이슈 관리 플로우는 비슷합니다.
+깃 플로우를 이슈 기반으로 관리하면 팀원들이 프로젝트의 진행상황을 모니터링하는데 도움이 됩니다. 여기서 이슈란, 단순 버그부터 새 출시 버전에 포함될 기능까지 프로젝트에 필요한 모든 것을 말합니다. 모든 이슈는 고유한 이슈 번호를 부여받게 되고요, 각각의 이슈 번호에 대응하는 브랜치를 만들어 작업하면 됩니다. [Github `Issues`](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues), [Bitbucket `Issue Tracker`](https://support.atlassian.com/bitbucket-cloud/docs/use-the-issue-tracker/) 등에서 이슈 관리 기능을 제공하고요, 어떤 플랫폼을 사용하던 이슈 관리 플로우는 비슷합니다.
 
 - 이슈 템플릿 등록
 - 이슈 생성
