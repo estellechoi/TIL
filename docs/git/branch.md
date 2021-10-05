@@ -8,7 +8,8 @@
 4. 기본 사이클
 5. `hotfix` 플로우
 6. 브랜치 네이밍 컨벤션
-7. 이슈 기반으로 프로젝트 관리하기
+7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
+8. 이슈 생성하기: Github, Bitbucket, 브랜치 만들기
 
 <br>
 
@@ -292,9 +293,9 @@ git checkout -b hotfix-1.0.1/yujin-1001-login-btn-typo
 
 <br>
 
-## 7. 이슈 기반으로 프로젝트 관리하기
+## 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
 
-깃 플로우를 이슈 기반으로 관리하면 팀원들이 프로젝트의 진행상황을 모니터링하는데 도움이 됩니다. 여기서 이슈란, 단순 버그부터 새 출시 버전에 포함될 기능까지 프로젝트에 필요한 모든 것을 말합니다. 모든 이슈는 고유한 이슈번호를 부여받게 되고요, 각각의 이슈번호에 대응하는 브랜치를 만들어 작업하면 됩니다. Github `Issues` 또는 Bitbucket `Issue Tracker`에서 이슈 관리 기능을 제공하고요, 어떤 플랫폼을 사용하던 이슈 관리 플로우는 비슷합니다.
+깃 플로우를 이슈 기반으로 관리하면 팀원들이 프로젝트의 진행상황을 모니터링하는데 도움이 됩니다. 여기서 이슈란, 단순 버그부터 새 출시 버전에 포함될 기능까지 프로젝트에 필요한 모든 것을 말합니다. 모든 이슈는 고유한 이슈 번호를 부여받게 되고요, 각각의 이슈번호에 대응하는 브랜치를 만들어 작업하면 됩니다. Github `Issues` 또는 Bitbucket `Issue Tracker`에서 이슈 관리 기능을 제공하고요, 어떤 플랫폼을 사용하던 이슈 관리 플로우는 비슷합니다.
 
 - 이슈 템플릿 등록
 - 이슈 생성
@@ -305,15 +306,13 @@ git checkout -b hotfix-1.0.1/yujin-1001-login-btn-typo
 
 <br>
 
-### 7-1. 이슈 템플릿 등록
-
-다른 팀원이 작업한 내용에 수정을 요청하기 위해 이슈를 생성할 수도 있지만, 모든 작업을 이슈로 생성하는 것이 좋다고 생각했습니다. 해당 프로젝트와 관련하여 진행되는 모든 일을 팀원들이 언제나 투명하게 확인할 수 있기 때문입니다. 또한 이슈 템플릿을 등록하여 팀원들이 가장 빠른 방법으로 필요한 내용을 모두 포함한 이슈를 등록하도록 시스템화할 수 있습니다. 
+다른 팀원이 작업한 내용에 수정을 요청하기 위해 이슈를 생성할 수도 있지만, 모든 작업을 이슈로 생성하는 것이 좋다고 생각했습니다. 해당 프로젝트와 관련하여 진행되는 모든 일을 팀원들이 언제나 투명하게 확인할 수 있기 때문입니다. 또한 이슈 템플릿을 등록하여 팀원들이 가장 빠른 방법으로 필요한 내용을 모두 포함한 이슈를 등록하도록 시스템화할 수 있습니다. 이번 섹션에서는 이슈 템플릿에 대해 다룹니다.  
 
 <br>
 
-#### Github
+### 7-1. Github
 
-Github을 사용한다면 레파지토리 `Settings/Options` 탭의 `Features` 영역에서 이슈 템플릿을 등록할 수 있습니다.
+Github을 사용한다면 레파지토리 `Settings/Options` 탭의 `Features` 영역에서 이슈 템플릿을 등록할 수 있습니다. 템플릿을 추가한 후 `Propose changes` 버튼을 클릭하고 템플릿 추가 내용을 `commit` 합니다. 프로젝트 루트 경로에 `.github/ISSUE_TEMPLATE` 파일이 생성되면 완료입니다.
 
 <br>
 
@@ -321,7 +320,7 @@ Github을 사용한다면 레파지토리 `Settings/Options` 탭의 `Features` �
 
 <br>
 
-#### Bitbucket
+### 7-2. Bitbucket
 
 Bitbucket을 사용한다면 레파지토리 `Repository settings` 탭에서 `Features/Issue Tracker` 하위 탭으로 이동하여 이슈 템플릿을 등록할 수 있습니다.
 
@@ -331,7 +330,7 @@ Bitbucket을 사용한다면 레파지토리 `Repository settings` 탭에서 `Fe
 
 <br>
 
-#### 템플릿 예시
+### 7-3. 템플릿 예시
 
 다음은 [A GitHub Issue Template for Your Projects](https://embeddedartistry.com/blog/2017/08/18/a-github-issue-template-for-your-projects/)에서 소개하는 이슈 템플릿 예시입니다.
 
@@ -381,20 +380,46 @@ Please include any relevant log snippets or files here.
 
 <br>
 
-### 7-2. 이슈 생성
+## 8. 이슈 생성하기: Github, Bitbucket, 브랜치 만들기
 
-#### Bitbucket
+### 8-1. Github
 
-Bitbucket에서는 이슈 템플릿을 등록해야 비로소 레파지토리 메인에 `Issues` 탭이 생깁니다. 해당 탭으로 이동하여 `Create Issue` 버튼을 클릭하고 이슈 생성을 시작합니다. 등록해두었던 이슈 템플릿을 활용하여 내용을 작성한 후, `Assignee`, `Kind`, `Priority` 영역을 입력하고 이슈를 생성합니다.
+`Issues` 탭에서 `Milestones`를 클릭, `New milestone` 버튼을 클릭하여 새로운 마일스톤을 추가합니다. 여기서 마일스톤이란, 일반적으로 프로젝트 버전을 의미합니다. 따라서 `Version 1.0.0`과 같은 버전명이 마일스톤 제목의 예시가 될 수 있겠습니다.
+
+<br>
+
+<img src="./../img/github-issue2.png" alt="" />
 
 <br>
 
+그다음 다시 `Issues` 탭의 메인으로 돌아와서 `New Issue` 버튼을 클릭하여 새로운 이슈를 추가합니다. 이슈 추가 페이지의 우측을 보면 다음 항목들을 입력할 수 있는데요, 각 항목은 다음을 의미합니다. 
 
+- `Assignee`: 담당자
+- `Labels`: 이슈의 종류
+- `Milestone`: 이슈가 속한 마일스톤(버전)
+- `Linked pull requests`: 연결된 `pull request`가 성공적으로 `merge`되면 해당 이슈도 완료 처리
 
 <br>
-<br>
+
+이제 이슈를 제출하면, 이슈 제목의 오른쪽 끝에 `#`으로 시작하는 번호를 확인할 수 있고요, 이 번호가 해당 이슈의 고유한 이슈 번호입니다.
+
 <br>
 
+### 8-2. Bitbucket
+
+Bitbucket에서는 이슈 템플릿을 등록해야 비로소 레파지토리 메인에 `Issues` 탭이 생깁니다. 해당 탭으로 이동하여 `Create Issue` 버튼을 클릭하고 이슈 생성을 시작합니다. 등록해놓은 이슈 템플릿을 활용하여 내용을 작성한 후, `Assignee`, `Kind`, `Priority` 영역을 입력하고 이슈를 생성합니다.
+
+<br>
+
+### 8-3. 브랜치 만들기
+
+이제 부여받은 이슈번호를 브랜치 이름에 적용하면 됩니다. 예를 들어, 새로운 기능을 개발해야하는 이슈라면 `develop` 브랜치에서 분기하는 `feature` 브랜치를 생성하면 되겠죠. 이슈 번호가 `1`이라면 아래와 같이 브랜치를 네이밍할 수 있습니다.
+
+```
+git checkout -b feature/1-app-tutorial-update develop
+```
+
+<br>
 
 ---
 
