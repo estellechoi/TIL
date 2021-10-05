@@ -125,6 +125,12 @@
 
 ## 3. Etc
 
+### GIT
+
+- [Git 브랜치](./docs/git/branch.md)
+
+<br>
+
 ### HTTP
 
 - [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/docs/Http/rest.md)
