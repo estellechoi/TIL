@@ -5,7 +5,7 @@
 1. 깃 플로우(Git Flow)
 2. 5개 브랜치: `master`, `develop`, `feature`, `release`, `hotfix`
 3. 브랜치 기록 남기기: `merge --no-ff`
-4. 기본 사이클
+4. 기본 사이클 (PR 없을 때)
 5. `hotfix` 플로우
 6. 브랜치 네이밍 컨벤션
 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
@@ -57,7 +57,11 @@
 
 <br>
 
-## 4. 기본 사이클
+## 4. 기본 사이클 (PR 없을 때)
+
+이 섹션에서는 PR(Pull Request) 과정을 제외하고 깃 플로우의 기본 사이클을 설명합니다.
+
+<br>
 
 1. 원격저장소에서 `develop` 브랜치의 최신상태를 풀(`pull`) 합니다.
 
