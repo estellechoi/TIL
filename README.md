@@ -127,7 +127,7 @@
 
 ### GIT
 
-- [깃 플로우(Git Flow)와 브랜치(Branch) 네이밍 컨벤션](./docs/git/branch.md)
+- [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
 
 <br>
 
