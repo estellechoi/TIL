@@ -11,6 +11,8 @@
 7. 이슈 템플릿 등록하기: Github, Bitbucket, 템플릿 예시
 8. 이슈 생성하기: Github, Bitbucket, 이슈 기반 브랜치 만들기
 9. 깃 플로우 모델에서 PR(Pull Request) 하기
+10. 쉬운 롤백: : `--squash`
+11. 이슈 종료, 브랜치 삭제하기
 
 <br>
 
@@ -54,6 +56,12 @@
 <br>
 
 <img src="./../img/gitflow2.png" alt="" width="840" />
+
+<br>
+
+참고로 Github에서 PR(Pull Request)을 통해 머지할 때 자동으로 이 옵션이 사용됩니다. 다음은 [GitHub Docs](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges)에서 발췌한 설명입니다.
+
+> When you click the default Merge pull request option on a pull request on GitHub, all commits from the feature branch are added to the base branch in a merge commit. The pull request is merged using the --no-ff option.
 
 <br>
 
@@ -456,8 +464,7 @@ Github `Pull Requests` 탭으로 이동한 후 `New pull request` 버튼을 클�
 
 <br>
 
-
-PR 생성이 완료되면, 해당 PR 페이지의 우측에서는 이슈 페이지와 비슷한 항목들을 설정할 수 있습니다. 그 중 `Linked issues` 항목에 대응하는 이슈를 연결하는 것이 중요합니다. 이슈를 연결하면, 이 PR에 대한 리뷰가 끝나고 `merge`되는 순간 연결된 이슈도 함께 종료됩니다.
+PR 생성이 완료되면, 해당 PR 페이지의 우측에서는 이슈 페이지와 비슷한 항목들을 설정할 수 있습니다. 그 중 `Linked issues` 항목에 대응하는 이슈를 연결하는 것이 중요합니다. 이슈를 연결하면, 이 PR에 대한 리뷰가 끝나고 머지되는 순간 연결된 이슈도 함께 종료됩니다. Github에서 PR을 머지하면 자동으로 `--no-ff` 옵션이 적용됩니다.
 
 <br>
 
@@ -465,9 +472,37 @@ PR 생성이 완료되면, 해당 PR 페이지의 우측에서는 이슈 페이�
 
 <br>
 
-### 9-3. 브랜치 삭제하기
+#### Bitbucket
 
-이슈가 종료되면 원격 저장소에 푸시했던 브랜치를 삭제합니다. Github에서는 PR 페이지에서 버튼을 클릭하여 바로 제거할 수 있고요, 명령어로 삭제하려면 아래와 같이 합니다.
+Bitbucket `Pull requests` 탭으로 이동, 우측 상단의 `Create pull request` 버튼을 클릭합니다. 상단에서 `feature/#1-app-tutorial-update`, `develop` 브랜치로 각각 변경합니다.
+
+<br>
+
+<img src="./../img/bitbucket-issue2.png" alt="" width="800" />
+
+<br>
+
+Bitbucket에서 PR을 머지하면, 기본으로 `--no-ff` 옵션이 적용됩니다. PR 페이지에서 `Merge` 버튼을 클릭하면 `Merge pull request` 창이 나타나는데요, 이 창의 `Merge Strategy` 항목에서 다음 중 1개를 선택할 수 있습니다.
+
+- `git merge --no-ff`
+- `git merge --squash`
+- `git merge --ff-only`
+
+<br>
+
+## 10. 쉬운 롤백: `--squash`
+
+Github에서는 PR을 머지할 때 [`Squash and merge`](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits) 옵션을 제공합니다. 브랜치의 모든 커밋들을 `squash`해서 하나의 커밋으로 만든 후 머지하는 방식입니다. 이렇게 머지한 커밋은 추후 [`Revert Pull Request`](https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/reverting-a-pull-request)을 사용해서 특정 기능들의 커밋들이 모인 곳으로 쉽게 롤백할 수 있습니다. 
+
+<br>
+
+다만 해당 기능들을 사용하려면 해당 레파지토리에서 사용 설정을 해줘야하고, 사용자에게 `write` 권한을 허용해야합니다. 이 과정의 자세한 내용은 [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)에서 확인할 수 있습니다.
+
+<br>
+
+## 11. 이슈 종료, 브랜치 삭제하기
+
+PR이 머지되고 이슈가 종료되면 해당 브랜치를 삭제합니다. Github에서는 PR 페이지에서 버튼을 클릭하여 바로 제거할 수 있고요, 명령어로 삭제하려면 아래와 같이 합니다.
 
 ```
 git push origin --delete feature/#1-app-tutorial-update
@@ -475,10 +510,18 @@ git push origin --delete feature/#1-app-tutorial-update
 
 <br>
 
-그다음 로컬에 있는 브랜치도 삭제합니다.
+이제 다음 명령어를 사용하여 원격 저장소와 로컬 저장소의 `develop` 브랜치를 일치시킵니다.
 
 ```
-git branch -d feature/#1-app-tutorial-update
+git pull origin develop
+```
+
+<br>
+
+이제 로컬의 해당 `feature` 브랜치를 삭제합니다. 이 브랜치는 직접적으로 머지된 적이 없기 때문에 `-D` 옵션을 사용합니다.
+
+```
+git branch -D feature/#1-app-tutorial-update
 ```
 
 <br>
