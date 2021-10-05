@@ -127,7 +127,7 @@
 
 ### GIT
 
-- [Git 브랜치](./docs/git/branch.md)
+- [깃 플로우(Git Flow)와 브랜치 네이밍 컨벤션](./docs/git/branch.md)
 
 <br>
 
