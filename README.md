@@ -6,7 +6,7 @@
 
 <br>
 
-## 0. Design System
+## 0. UI Design
 
 - [개발자를 위한 디자인 시스템](./docs/design-system/intro.md)
 - [개발자를 위한 디자인 시스템 Foundation 1 - 컬러(Color)](./docs/design-system/color-system.md)
