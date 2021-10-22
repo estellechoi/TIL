@@ -76,6 +76,7 @@
 
 ### DOM & Web API
 
+- [Barcode Detection API](./docs/web-api/barcode-detection.md)
 - [VR 서비스를 위한 웹 API](./docs/web-api/vr.md)
 - [PWA(Progressive Web App)](https://github.com/estellechoi/TIL/blob/master/docs/web-api/pwa.md)
 - [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
