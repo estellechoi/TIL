@@ -154,8 +154,8 @@
 
 ### Security
 
-- Cross site scripting (XSS) \*
-
+- [Cross site scripting (XSS)]()
+- [Cross-site request forgery (CSRF)](./docs/security/csrf.md)
 <br>
 
 ### Algorithm
