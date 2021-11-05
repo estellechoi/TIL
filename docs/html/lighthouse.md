@@ -20,13 +20,15 @@
 
 ## 2. 퍼포먼스
 
-Lighthouse의 퍼포먼스 보고서는 다음과 같습니다.
+Lighthouse의 퍼포먼스 보고서는 다음과 같습니다. 주로 로딩 속도에 관련된 지표로 구성됩니다. 사이트 퍼포먼스는 UX와 이에 따른 전환율에도 매우 중요하지만, 속도가 너무 느리면 Google 검색엔진에서 추천하지 않기 때문에 SEO에도 영향이 있습니다.
+
+<br>
 
 <img src="./../img/lighthouse1.png" aria-hidden="true" />
 
-<img src="./../img/lighthouse1.png" aria-hidden="true" />
+<img src="./../img/lighthouse2.png" aria-hidden="true" />
 
-<img src="./../img/lighthouse1.png" aria-hidden="true" />
+<img src="./../img/lighthouse3.png" aria-hidden="true" />
 
 <br>
 
