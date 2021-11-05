@@ -14,11 +14,13 @@
 
 <br>
 
+<img src="./../img/lighthouse4.png" aria-hidden="true" />
+
+<br>
+
 ## 2. 퍼포먼스
 
 Lighthouse의 퍼포먼스 보고서는 다음과 같습니다.
-
-<img src="./../img/lighthouse4.png" aria-hidden="true" />
 
 <img src="./../img/lighthouse1.png" aria-hidden="true" />
 
