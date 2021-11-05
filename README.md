@@ -30,6 +30,7 @@
 ### HTML
 
 - [검색엔진최적화(SEO)](./docs/html/seo.md)
+- [Lighthouse 퍼포먼스 점수 올리기](./docs/html/lighthouse.md)
 - [DOCTYPE, `<head>` 태그, 검색엔진 최적화(Search Engine Optimization)](https://github.com/estellechoi/TIL/blob/master/docs/html/doctype.md)
 - [블록(Block) / 인라인(Inline) 요소](https://github.com/estellechoi/TIL/blob/master/docs/html/blockInline.md)
 - [이미지와 멀티미디어 태그(Image and multimedia tags)](https://github.com/estellechoi/TIL/blob/master/docs/html/multimedia.md)
