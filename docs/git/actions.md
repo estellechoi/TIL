@@ -2,11 +2,9 @@
 
 <br>
 
-1. GitHub Actions
-2. Workflow 등록하기: `yml`
-3. Runner
-4. Workflow 구성요소: Events, Jobs, Steps, Actions
-5. Workflow 파일 작성하기
+1. GitHub Actions: Workflow 등록, Runner, Jobs, Steps, Actions, Workflow 파일 작성
+2. GitHub Actions 환경 캐싱하기
+3. 환경변수 세팅하기
 
 <br>
 
@@ -20,7 +18,7 @@ GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포�
 
 <br>
 
-## 2. Workflow 등록하기: `yml`
+### 1-1. Workflow 등록
 
 실행할 Workflow는 `yml`(Yaml) 포맷 파일로 작성하여 레포지토리의 `/.github/workflows/` 경로에 두면 됩니다. 이 파일 작성을 완료하고 GitHub 레포지토리에 `push`하면 완료입니다. 이후부터 파일에 설정한대로 Workflow가 작동합니다. 또는 GitHub 레포지토리의 ~~Actions~~ 탭으로 이동, Workflow 셋업 버튼을 클릭하여 해당 파일을 쉽게 생성할 수 있습니다. 다음은 Workflow 셋업 버튼을 클릭했을 때 제공되는 샘플 파일입니다.
 
@@ -65,7 +63,7 @@ jobs:
 
 <br>
 
-## 3. Runner
+### 1-2. Runner
 
 Runner는 [Job의 실행 환경](https://github.com/actions/runner)이 설치된 서버입니다. GitHub에서 호스팅하는 Runner를 사용할 수 있고요, 직접 Runner를 호스팅해도 됩니다. GitHub에서 호스팅하는 Runner는 가상머신의 형태로 제공하고요, Ubuntu Linux, Microsoft Windows, macOS 환경을 지원합니다. [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) 문서에서 더 자세한 설명과 OS별 하드웨어 사양, 각 환경을 사용하기 위한 `yml` 설정값 등을 확인할 수 있습니다. 예를 들어, macOS Big Sur 11 환경을 사용하려면 문서에 따라 `yml` 파일의 해당 항목에 `macos-11`이라고 지정하면 됩니다.
 
@@ -78,11 +76,11 @@ jobs:
 
 <br>
 
-## 4. Workflow 구성요소: Jobs, Steps, Actions
+### 1-3. Jobs, Steps, Actions
 
-### 4-1. Jobs
+#### 1-3-1. Jobs
 
-이벤트가 발생했을 때 여러 개의 Job들이 실행되도록 Workflow를 구성할 수 있습니다. 각 Job은 지정한 Runner 위에서 실행됩니다. 기본적으로 Job들은 순차가 아닌 동시에 실행됩니다. 하지만 특정 Job이 성공했을 때만 다른 Job이 실행되도록 순차 지정할 수도 있습니다.
+이벤트가 발생했을 때 여러 개의 Job들이 실행되도록 Workflow를 구성할 수 있습니다. 각 Job은 지정한 Runner 위에서 실행됩니다.
 
 <br>
 
@@ -90,25 +88,35 @@ jobs:
 
 <br>
 
+기본적으로 Job들은 순차가 아닌 병렬적으로 실행됩니다. 하지만 `needs` 항목을 사용해 특정 Job이 성공했을 때만 다른 Job이 실행되도록 순차 지정할 수도 있습니다.
+
+```yml
+jobs:
+  build:
+    needs: setup # setup이 끝나야 build가 실행됩니다
+```
+
+<br>
+
 [Reusing workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)에 따르면, Workflow에서 다른 Workflow를 참조하도록 해서 마치 [SPA](https://en.wikipedia.org/wiki/Single-page_application)의 컴포넌트처럼 Workflow를 재사용할 수 있습니다.
 
 <br>
 
-### 4-2. Steps
+#### 1-3-2. Steps
 
 Step은 Job 내에서 개별 업무들을 말합니다. Step이라는 이름처럼 지정한 순서대로 단계적으로 실행됩니다. Step은 하나의 [Action](./#actions)이 될 수도 있고, Shell 커맨드가 될 수도 있습니다.
 
 <br>
 
-### 4-3. Actions
+#### 1-3-3. Actions
 
 Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 직접 만들거나, [GitHub 커뮤니티에서 제공하는 Action](https://github.com/marketplace?type=actions)들을 사용할 수 있습니다.
 
 <br>
 
-## 5. Workflow 파일 작성하기
+### 1-4. Workflow 파일 작성
 
-### 5-1. 최상위 레벨 항목: `name`, `on`, `jobs`
+#### 1-4-1. 최상위 레벨 항목: `name`, `on`, `jobs`
 
 Workflow 파일의 가장 상위 레벨 항목들은 다음과 같습니다. 모든 항목과 하위 항목에 대한 파일 작성 문법은 [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) 문서에서 확인할 수 있습니다.
 
@@ -127,25 +135,36 @@ jobs:
 
 <br>
 
-### 5-2. Job 구성 항목: `runs-on`, `steps`
+#### 1-4-2. Job 구성 항목: `needs`, `runs-on`, `strategy: matrix`, `steps`
 
+- `needs`: 다른 Job이 성공해야만 실행되도록 의존성을 갖게 합니다.
 - `runs-on`: Job을 실행할 Runner를 지정합니다.
+- `strategy: matrix` : Job을 여러 환경에서 테스트하기 위해 Matrix를 지정합니다.
 - `steps`: Job 내에서 실행될 Step들을 순서대로 지정합니다.
 
 ```yml
 jobs:
   build: # job 이름
+    needs: setup # setup이 성공해야 이 job도 실행됩니다
     runs-on: macos-11 # runner
-    steps:
-      # step들을 여기에 작성합니다
+    strategy:
+      matrix:
+        node: [8, 10, 14] # node 8, 10, 14 환경에서 각각 job을 실행합니다
+    steps: # step들을 여기에 작성합니다
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }} # matrix의 항목 값이 사용됩니다
 ```
 
 <br>
 
-### 5-3. Step 구성 항목: `uses`, `run`
+#### 1-4-3. Step 구성 항목: `name`, `uses`, `run`
 
-- `- uses`: 사용할 Action을 지정합니다. 커뮤니티 Action들은 이름에 `actions/` Prefix를 사용합니다.
-- `- run`: Runner에서 실행할 커맨드를 지정합니다.
+각 스텝은 하이픈(`-`)을 사용하여 단계를 구분합니다. `step`을 구성하는 모든 문법은 [Workflow Syntax](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsrun) 문서에서 확인하세요.
+
+- `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다. Optional 값입니다.
+- `uses`: 사용할 Action을 지정합니다. 커뮤니티 Action들은 이름에 `actions/` Prefix를 사용합니다.
+- `run`: Runner에서 실행할 커맨드를 지정합니다.
 
 <br>
 
@@ -153,11 +172,14 @@ jobs:
 
 ```yml
 steps:
-  - uses: actions/checkout@v2 # step 1
-  - uses: actions/setup-node@v2 # step 2
+  - name: Checkout # step 1
+    uses: actions/checkout@v2 
+  - name: Setup Node.js # step 2
+    uses: actions/setup-node@v2
     with:
-      node-version: '14'
-  - run: npm install -g yarn # step 3
+      node-version: [ 14.x ]
+  - name: Install Dependencies # step 3
+    run: npm install -g yarn
 ```
 
 1. `actions/checkout@v2`를 사용해서 이 레파지토리에 체크아웃, Runner에 다운로드
@@ -165,6 +187,32 @@ steps:
 3. `node`와 함께 설치될 `npm` 커맨드를 실행한다는 뜻입니다.
 
 <br>
+
+## 2. GitHub Actions 환경 캐싱하기
+
+GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레파지토리의 모든 Workflow에서 사용할 수 있습니다. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 캐싱 Step을 만들 수 있고요, 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
+
+<br>
+
+```yml
+- name: Get yarn cache directory path
+  id: yarn-cache-dir-path
+  run: echo "::set-output name=dir::$(yarn cache dir)"
+
+- uses: actions/cache@v2
+  id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+  with:
+    path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+    key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+    restore-keys: |
+      ${{ runner.os }}-yarn-
+```
+
+<br>
+
+## 3. 환경변수 세팅하기
+
+자세한 내용은 [Environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables) 문서를 참고하세요.
 
 <br>
 
@@ -174,4 +222,6 @@ steps:
 
 - [Understanding GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
 - [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
+- [Essential features of GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions)
+- [Github Actions으로 배포 자동화하기 | NHN Cloud Meetup](https://meetup.toast.com/posts/286)
 - [[Github Action] Github Action 맛보고, AWS S3에 Vue 자동으로 배포하기 | 빈이의 개발 블로그](https://bin-e.tistory.com/44)
