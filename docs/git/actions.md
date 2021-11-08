@@ -22,7 +22,7 @@ GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포�
 
 ## 2. Workflow 등록하기: `yml`
 
-실행할 Workflow는 `yml`(Yaml) 포맷 파일로 작성하여 레포지토리의 `/.github/workflows/` 경로에 두면 됩니다. GitHub 레포지토리에서 Actions 탭으로 이동, Workflow 셋업 버튼을 클릭하여 해당 파일을 쉽게 생성할 수 있습니다. 다음은 Workflow 셋업 버튼을 클릭했을 때 제공되는 샘플 파일입니다. 이 파일 작성을 완료하고 GitHub 레포지토리에 `push`하면 완료입니다. 이제 파일에 설정한대로 Workflow가 작동합니다.
+실행할 Workflow는 `yml`(Yaml) 포맷 파일로 작성하여 레포지토리의 `/.github/workflows/` 경로에 두면 됩니다. 이 파일 작성을 완료하고 GitHub 레포지토리에 `push`하면 완료입니다. 이후부터 파일에 설정한대로 Workflow가 작동합니다. 또는 GitHub 레포지토리의 ~~Actions~~ 탭으로 이동, Workflow 셋업 버튼을 클릭하여 해당 파일을 쉽게 생성할 수 있습니다. 다음은 Workflow 셋업 버튼을 클릭했을 때 제공되는 샘플 파일입니다.
 
 ```yml
 # This is a basic workflow to help you get started with Actions
@@ -67,7 +67,7 @@ jobs:
 
 ## 3. Runner
 
-Runner는 [Job의 실행 환경](https://github.com/actions/runner)이 설치된 서버입니다. GitHub에서 호스팅하는 Runner를 사용할 수 있고요, 직접 Runner를 호스팅해도 됩니다. GitHub에서 호스팅하는 Runner는 가상머신의 형태로 제공하고요, Ubuntu Linux, Microsoft Windows, macOS 환경을 지원합니다. [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) 문서에서 더 자세한 설명과 OS별 하드웨어 사양, 각 환경을 사용 설정하기 위한 설정값 등을 확인할 수 있습니다. 예를 들어, macOS Big Sur 11 환경을 사용하려면 문서에 따라 `yml` 파일의 해당 항목에 `macos-11`이라고 지정하면 됩니다.
+Runner는 [Job의 실행 환경](https://github.com/actions/runner)이 설치된 서버입니다. GitHub에서 호스팅하는 Runner를 사용할 수 있고요, 직접 Runner를 호스팅해도 됩니다. GitHub에서 호스팅하는 Runner는 가상머신의 형태로 제공하고요, Ubuntu Linux, Microsoft Windows, macOS 환경을 지원합니다. [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) 문서에서 더 자세한 설명과 OS별 하드웨어 사양, 각 환경을 사용하기 위한 `yml` 설정값 등을 확인할 수 있습니다. 예를 들어, macOS Big Sur 11 환경을 사용하려면 문서에 따라 `yml` 파일의 해당 항목에 `macos-11`이라고 지정하면 됩니다.
 
 ```yml
 # main.yml
