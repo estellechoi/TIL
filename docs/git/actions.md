@@ -151,10 +151,6 @@ jobs:
 
 가령 아래와 같이 작성하면, 총 3 단계의 `steps`가 구성되는 겁니다.
 
-1. `actions/checkout@v2`를 사용해서 이 레파지토리에 체크아웃, Runner에 다운로드
-2. `actions/setup-node@v2`를 사용해서 Runner에 `14` 버전의 `node` 설치 
-3. `node`와 함께 설치될 `npm` 커맨드를 실행한다는 뜻입니다.
-
 ```yml
 steps:
   - uses: actions/checkout@v2 # step 1
@@ -163,6 +159,10 @@ steps:
       node-version: '14'
   - run: npm install -g yarn # step 3
 ```
+
+1. `actions/checkout@v2`를 사용해서 이 레파지토리에 체크아웃, Runner에 다운로드
+2. `actions/setup-node@v2`를 사용해서 Runner에 `14` 버전의 `node` 설치 
+3. `node`와 함께 설치될 `npm` 커맨드를 실행한다는 뜻입니다.
 
 <br>
 
