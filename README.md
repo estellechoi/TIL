@@ -22,7 +22,7 @@
 ### GIT
 
 - [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
-- [Github Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md)
+- [GitHub Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md)
 
 <br>
 

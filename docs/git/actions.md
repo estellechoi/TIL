@@ -1,4 +1,4 @@
-# Github Actions로 프론트엔드 CI/CD 구축하기
+# GitHub Actions로 프론트엔드 CI/CD 구축하기
 
 <br>
 
