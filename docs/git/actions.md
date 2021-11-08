@@ -102,7 +102,7 @@ Step은 Job 내에서 개별 업무들을 말합니다. Step이라는 이름처�
 
 ### 4-3. Actions
 
-Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 직접 만들거나, GitHub 커뮤니티에서 제공하는 Action을 사용할 수 있습니다. Action을 사용하려면 Step으로 추가하면 됩니다.
+Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 직접 만들거나, [GitHub 커뮤니티에서 제공하는 Action](https://github.com/marketplace?type=actions)들을 사용할 수 있습니다.
 
 <br>
 
@@ -144,7 +144,7 @@ jobs:
 
 ### 5-3. Step 구성 항목: `uses`, `run`
 
-- `- uses`: 사용할 Action을 지정합니다. 커뮤니티에서 가져와 사용할 수 있는 Action들은 앞에 `actions/` 라는 Prefix가 붙습니다.
+- `- uses`: 사용할 Action을 지정합니다. 커뮤니티 Action들은 이름에 `actions/` Prefix를 사용합니다.
 - `- run`: Runner에서 실행할 커맨드를 지정합니다.
 
 <br>
