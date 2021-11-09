@@ -543,8 +543,10 @@ on:
 
 ### References
 
-- [Understanding GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
-- [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
-- [Essential features of GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions)
+- [Understanding GitHub Actions | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
+- [About GitHub-hosted runners | GitHub Docs](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
+- [Essential features of GitHub Actions | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions)
+- [Reusing workflows | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)
+- [About webhooks | GitHub Docs](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks)
 - [Github Actions으로 배포 자동화하기 | NHN Cloud Meetup](https://meetup.toast.com/posts/286)
 - [[Github Action] Github Action 맛보고, AWS S3에 Vue 자동으로 배포하기 | 빈이의 개발 블로그](https://bin-e.tistory.com/44)
