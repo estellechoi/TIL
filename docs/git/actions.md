@@ -2,15 +2,15 @@
 
 <br>
 
-1. GitHub Actions란, Workflow 등록하기
-2. GitHub Actions 워킹 프로세스: Runner, Jobs, Steps, Actions
-3. Workflow 파일 작성하기
-4. 재사용하기: Reusable Workflow, Runner 환경 캐싱하기
-5. 환경변수 사용하기: 직접 세팅, GitHub 디폴트 환경변수
-6. 컨텍스트 변수 사용하기, 환경변수와의 차이점
-7. `secrets` 컨텍스트를 사용하여 환경변수 세팅하기
-8. CI: Webhook으로 코드 컨벤션 자동 체크, Actions로 테스트와 PR 자동화하기
-9. CD: Github Pages에 배포하기, AWS에 배포하기
+1. [GitHub Actions란, Workflow 등록하기](./#user-content-1-github-actions란-workflow-등록하기)
+2. [GitHub Actions 워킹 프로세스: Runner, Jobs, Steps, Actions](./#user-content-2-github-actions-워킹-프로세스-runner-jobs-steps-actions)
+3. [Workflow 파일 작성하기]()
+4. [재사용하기: Reusable Workflow, Runner 환경 캐싱하기]()
+5. [환경변수 사용하기: 직접 세팅, GitHub 디폴트 환경변수]()
+6. [컨텍스트 변수 사용하기, 환경변수와의 차이점]()
+7. [`secrets` 컨텍스트를 사용하여 환경변수 세팅하기]()
+8. [CI: Webhook으로 코드 컨벤션 자동 체크, Actions로 테스트와 PR 자동화하기]()
+9. [CD: Github Pages에 배포하기, AWS에 배포하기]()
 
 <br>
 
@@ -312,7 +312,7 @@ jobs:
 
 <br>
 
-<img src="./../img/github-secrets.png" aria-hidden="true" />
+<img src="./../img/github-secrets2.png" aria-hidden="true" />
 
 <br>
 
