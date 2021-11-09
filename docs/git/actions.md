@@ -407,22 +407,27 @@ jobs:
       - name: Install yarn # step 3
         run: npm install -g yarn
 
-      - name: Install all dependencies using yarn # step 4
+      - name: Set environment variables # step 4
+        env: 
+          VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
+
+      - name: Install all dependencies using yarn # step 5
         run: yarn install
 
-      - name: Do unit test # step 5
+      - name: Do unit test # step 6
         run: yarn test:unit
 
-      - name: Do build test # step 6
+      - name: Do build test # step 7
         run: yarn build
 ```
 
 1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
 2. `actions/setup-node@v2`를 사용해서 Runner에 `8`/`10`/`14` 버전의 `node` 설치
 3. `node`와 함께 설치될 `npm` 커맨드를 사용해서 `yarn`을 설치
-4. `yarn` 커맨드를 사용해서 의존하는 모든 패키지를 설치
-5. `test:unit` 스크립트를 실행해서 단위 테스트를 진행
-6. `build` 스크립트를 실행해서 빌드를 진행 (빌드 테스트를 위해)
+4. `secrets` 컨텍스트를 사용해서 환경변수 세팅
+5. `yarn` 커맨드를 사용해서 의존하는 모든 패키지를 설치
+6. `test:unit` 스크립트를 실행해서 단위 테스트를 진행
+7. `build` 스크립트를 실행해서 빌드를 진행 (빌드 테스트를 위해)
 
 <br>
 
