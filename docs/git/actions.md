@@ -2,14 +2,17 @@
 
 <br>
 
-1. GitHub Actions: Workflow 등록, Runner, Jobs, Steps, Actions, Workflow 파일 작성
-2. 환경 캐싱하기
-3. 환경변수 사용하기
-4. 컨텍스트 변수 사용하기
+1. GitHub Actions란, Workflow 등록하기
+2. GitHub Actions 워킹 프로세스: Runner, Jobs, Steps, Actions
+3. Workflow 파일 작성하기
+4. Runner 환경 캐싱하기
+5. 환경변수 사용하기: 직접 세팅, GitHub 디폴트 환경변수
+6. 컨텍스트 변수 사용하기, 환경변수와의 차이점
+7. `secrets` 컨텍스트를 사용하여 환경변수 세팅하기
 
 <br>
 
-## 1. GitHub Actions
+## 1. GitHub Actions란, Workflow 등록하기
 
 GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포뿐만 아니라 원하는 어떤 작업이던 Workflow에 포함시켜서 자동화할 수 있습니다. 한 번에 같이 실행시킬 일들을 모아 하나의 Job으로 구성해놓고요, `push`, `pull_request` 등 특정 [이벤트](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows)가 발생했을 때 Job을 실행합니다. 예를 들어, 누군가 특정 브랜치에 PR(Pull request)을 생성하는 이벤트가 발생하면, 테스트 스크립트가 자동으로 실행되게 할 수 있습니다.
 
@@ -18,8 +21,6 @@ GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포�
 <img src="./../img/actions.png" width="212" />
 
 <br>
-
-### 1-1. Workflow 등록
 
 실행할 Workflow는 `yml`(Yaml) 포맷 파일로 작성하여 프로그램의 `/.github/workflows/` 경로에 둡니다. 이 파일 작성을 완료하고 GitHub 레포지토리에 `push`하면 완료입니다. 이후부터 파일에 설정한대로 Workflow가 자동으로 작동합니다. 또는 GitHub 레포지토리의 *Actions* 탭으로 이동, Workflow 셋업 버튼을 클릭하여 GitHub에서 해당 파일을 직접 생성할 수 있습니다. 다음은 GitHub에서 제공하는 샘플 파일입니다.
 
@@ -64,7 +65,9 @@ jobs:
 
 <br>
 
-### 1-2. GitHub Actions는 어떻게 작동하는걸까: Runner
+## 2. GitHub Actions 워킹 프로세스: Runner, Jobs, Steps, Actions
+
+### 2-1. Runner
 
 Runner는 [Job의 실행 환경](https://github.com/actions/runner)이 설치된 서버를 말합니다. GitHub에서 호스팅하는 Runner를 사용할 수 있고요, 직접 Runner를 호스팅해도 됩니다. GitHub에서 호스팅하는 Runner는 가상머신의 형태로 제공되고요, Ubuntu Linux, Windows, macOS 환경을 지원합니다. [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) 문서에서 더 자세한 설명과 OS별 하드웨어 사양, 각 환경을 사용하기 위한 Workflow 파일 내 설정값 등을 확인할 수 있습니다. 사용할 Runner를 Workflow 파일에 명시하면 Workflow가 실행될 때 해당 Runner가 사용됩니다. 예를 들어, macOS Big Sur 11 환경을 사용하려면 `runs-on` 항목에 `macos-11`이라고 지정하면 됩니다.
 
@@ -77,9 +80,9 @@ jobs:
 
 <br>
 
-### 1-3. Jobs, Steps, Actions
+### 2-2. Jobs, Steps, Actions
 
-#### 1-3-1. Jobs
+#### 2-2-1. Jobs
 
 이벤트가 발생했을 때 여러 개의 Job들이 실행되도록 Workflow를 구성할 수 있습니다. 각 Job은 지정한 Runner 위에서 실행됩니다.
 
@@ -103,21 +106,21 @@ jobs:
 
 <br>
 
-#### 1-3-2. Steps
+#### 2-2-2. Steps
 
 Step은 Job 내에서 개별 업무들을 말합니다. Step이라는 이름처럼 지정한 순서대로 단계적으로 실행됩니다. Step은 하나의 [Action](./#actions)이 될 수도 있고, Shell 커맨드가 될 수도 있습니다.
 
 <br>
 
-#### 1-3-3. Actions
+#### 2-2-3. Actions
 
 Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 직접 만들거나, [GitHub 커뮤니티에서 제공하는 Action](https://github.com/marketplace?type=actions)들을 사용할 수 있습니다. 레포지토리 체크아웃, `node` 설치 등 기본적인 거의 모든 동작과 셋업 Action들이 커뮤니티에서 이미 제공되고 있습니다.
 
 <br>
 
-### 1-4. Workflow 파일 작성
+## 3. Workflow 파일 작성하기
 
-#### 1-4-1. 최상위 레벨 항목: `name`, `on`, `jobs`
+### 3-1. 최상위 레벨 항목: `name`, `on`, `jobs`
 
 Workflow 파일의 가장 상위 레벨 항목들은 다음과 같습니다. 모든 항목과 하위 항목에 대한 파일 작성 문법은 [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) 문서에서 확인할 수 있습니다.
 
@@ -136,7 +139,7 @@ jobs:
 
 <br>
 
-#### 1-4-2. Job 구성 항목: `needs`, `runs-on`, `strategy: matrix`, `steps`
+### 3-2. Job 구성 항목: `needs`, `runs-on`, `strategy: matrix`, `steps`
 
 - `needs`: 다른 Job이 성공해야만 실행되도록 의존성을 갖게 합니다.
 - `runs-on`: Job을 실행할 Runner를 지정합니다.
@@ -159,12 +162,12 @@ jobs:
 
 <br>
 
-#### 1-4-3. Step 구성 항목: `name`, `uses`, `run`
+### 3-3. Step 구성 항목: `name`, `uses`, `run`
 
 각 Step은 하이픈(`-`)을 사용하여 단계를 구분합니다. 더 자세한 문법은 [Workflow Syntax](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsrun) 문서에서 확인하세요.
 
 - `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다. Optional 값입니다.
-- `uses`: 사용할 Action을 지정합니다. 커뮤니티 Action들은 이름에 `actions/` Prefix를 사용합니다.
+- `uses`: 사용할 Action을 지정합니다.
 - `run`: Runner에서 실행할 Shell 커맨드를 지정합니다.
 
 <br>
@@ -189,7 +192,7 @@ steps:
 
 <br>
 
-## 2. 환경 캐싱하기
+## 4. Runner 환경 캐싱하기
 
 GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있고요. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 특정 경로와 파일을 캐싱하는 Step을 만들 수 있습니다. 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
 
@@ -211,11 +214,11 @@ GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 
 
 <br>
 
-## 3. 환경변수 사용하기
+## 5. 환경변수 사용하기: 직접 세팅, GitHub 디폴트 환경변수
 
-### 3-1. 환경변수 직접 세팅하기
+### 5-1. 직접 세팅
 
-Step, Job, 또는 Workflow 전체를 위한 환경변수를 범위에 맞게 만들어 사용할 수 있습니다. 원하는 범위에서 `env` 키워드를 사용하여 정의하면 되고요, 동명의 환경변수가 사용될 때는 Step > Job > Workflow 순으로 우선합니다. Workflow 레벨에서 정의한 환경변수와 같은 이름의 환경변수를 Step 레벨에서 정의할 경우, 해당 Step이 실행되는 동안 Step에서 정의한 환경변수 값이 Workflow 레벨에서 정의한 값을 덮어씁니다.
+Step, Job, 또는 Workflow 전체를 위한 환경변수를 범위에 맞게 만들어 사용할 수 있습니다. 원하는 범위에서 `env` 키워드를 사용하여 정의하면 되고요, 동명의 환경변수가 사용될 때는 Step > Job > Workflow 순으로 우선합니다. Workflow 레벨에서 정의한 환경변수와 동일한 이름의 환경변수를 Step 레벨에서 정의할 경우, 해당 Step이 실행되는 동안 Step에서 정의한 환경변수 값이 Workflow 레벨에서 정의한 값을 덮어씁니다.
 
 ```yml
 jobs:
@@ -227,25 +230,25 @@ jobs:
       - name: "Set environment variables to test Vue app"
         if: ${{ env.MODE == 'test' }} # env 컨텍스트에서 참조합니다
         env:
-          VUE_APP_API_URL: www.sample.com
-        run: echo "API Url is $VUE_APP_API_URL"
+          USER_NAME: Tester
+        run: echo "User name is $USER_NAME"
 ```
 
 <br>
 
-Workflow 파일 내에서 정의된 환경변수를 참조할 때는 `env` 컨텍스트 내에서 사용하면 됩니다. 예를 들어, `MODE` 환경변수를 사용한다고 가정했을 때 `env.MODE` 이런식으로요. `run` 키를 사용하여 Runner에서 직접 커맨드를 실행할 때는, 해당 Runner 내에서 정의한 환경변수를 `env` 컨텍스트 없이 바로 참조합니다. 자세한 내용은 [Environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables) 문서를 참고하세요.
+Workflow 파일 내에서 정의된 환경변수를 참조할 때는 `env` 컨텍스트 내에서 사용하면 됩니다. 예를 들어, `MODE` 환경변수를 사용한다고 가정했을 때 `env.MODE` 이런식으로요. `run` 키를 사용하여 Runner에서 직접 커맨드를 실행할 때는, 해당 Runner 내에서 정의한 환경변수를 `env` 컨텍스트 없이 `$NODE` 이렇게 참조합니다. 자세한 내용은 [Environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables) 문서를 참고하세요.
 
 > If you use the workflow file's run key to read environment variables from within the runner operating system (as shown in the example above), the variable is substituted in the runner operating system after the job is sent to the runner. For other parts of a workflow file, you must use the env context to read environment variables; this is because workflow keys (such as if) require the variable to be substituted during workflow processing before it is sent to the runner.
 
 <br>
 
-### 3-2. GitHub 디폴트 환경변수 사용하기
+### 5-2. GitHub 디폴트 환경변수
 
 기본적인 값들은 GitHub에서 디폴트 환경변수로 제공합니다. 공식문서의 [Default environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables) 섹션에서 모든 디폴트 환경변수 목록을 확인할 수 있습니다.
 
 <br>
 
-## 4. 컨텍스트 변수 사용하기
+## 6. 컨텍스트 변수 사용하기, 환경변수와의 차이점
 
 GitHub Actions는 [컨텍스트](https://docs.github.com/en/actions/learn-github-actions/contexts) 변수도 제공합니다. 예를 들어, 현재 Runner의 OS 정보를 참조하려면 `runner.os` 변수를 사용합니다. 이 컨텍스트 변수들은 [디폴트 환경변수](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables)들과 꽤 겹치는데요, 각각 다른 용도로 의도되었습니다.
 
@@ -269,7 +272,32 @@ jobs:
 
 <br>
 
-## 5.
+## 7. `secrets` 컨텍스트를 사용하여 환경변수 세팅하기
+
+프로그램에서 사용하는 민감한 정보를 관리하는 방법 중 GitHub의 [Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)가 있습니다. 가령, Vue 앱에서 사용할 API의 도메인(`VUE_APP_API_URL`)을 Secrets를 사용하여 안전하게 보관하고 공유할 수 있습니다. Secret을 추가할 레포지토리에서 *Settings* 탭으로 이동, *Secrets* 메뉴에서 *New repository secret* 버튼을 클릭하여 Secret을 추가합니다.
+
+<img src="./../img/github-secrets.png" aria-hidden="true" />
+
+<br>
+
+<img src="./../img/github-secrets.png" aria-hidden="true" />
+
+<br>
+
+Secret은 GitHub Actions의 Workflow를 구성할 때 `secrets` 컨텍스트를 사용해서 참조할 수 있습니다. 위 예시에서 Secret으로 추가한 `VUE_APP_API_URL` 값은 다음과 같이 불러올 수 있습니다.
+
+```yml
+steps:
+  - name: Set environment variables
+    env: 
+      VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
+```
+
+<br>
+
+## 6. 커뮤니티 Action을 사용해서 Vue 앱을 빠르게 빌드, 배포하기
+
+- GitHub Pages : [Vue to Github Pages](https://github.com/marketplace/actions/vue-to-github-pages)
 
 <br>
 
