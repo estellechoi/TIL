@@ -5,7 +5,7 @@
 1. GitHub Actions란, Workflow 등록하기
 2. GitHub Actions 워킹 프로세스: Runner, Jobs, Steps, Actions
 3. Workflow 파일 작성하기
-4. Runner 환경 캐싱하기
+4. 재사용하기: Reusable Workflow, Runner 환경 캐싱하기
 5. 환경변수 사용하기: 직접 세팅, GitHub 디폴트 환경변수
 6. 컨텍스트 변수 사용하기, 환경변수와의 차이점
 7. `secrets` 컨텍스트를 사용하여 환경변수 세팅하기
@@ -102,10 +102,6 @@ jobs:
 
 <br>
 
-[Reusing workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)에 따르면, Workflow에서 다른 Workflow를 참조하도록 해서 마치 [SPA](https://en.wikipedia.org/wiki/Single-page_application)의 컴포넌트처럼 Workflow를 재사용할 수 있습니다.
-
-<br>
-
 #### 2-2-2. Steps
 
 Step은 Job 내에서 개별 업무들을 말합니다. Step이라는 이름처럼 지정한 순서대로 단계적으로 실행됩니다. Step은 하나의 [Action](./#actions)이 될 수도 있고, Shell 커맨드가 될 수도 있습니다.
@@ -120,7 +116,7 @@ Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 �
 
 ## 3. Workflow 파일 작성하기
 
-이제 Workflow 파일 예제를 작성해보면서 파일을 구성하는 기본적인 문법들을 다룹니다. 파일명은 `main.yml`으로 하고, [Vue2](https://kr.vuejs.org/v2/guide/index.html)로 구현한 프론트엔드 CI를 구축한다고 가정합니다.
+이제 Workflow 파일 예제를 작성해보면서 파일을 구성하는 기본적인 문법들을 정리합니다. 특정 조건의 브랜치에 한해 `push` 이벤트가 발생했을 때, 자동으로 실행환경을 셋업하고 단위 테스트를 실행한 후, 성공하면 `develop`/`master` 브랜치로 PR을 생성하는 Workflow를 만들겁니다. 파일명은 `main.yml`으로 할거고요, [Vue2](https://kr.vuejs.org/v2/guide/index.html)로 구현한 프론트엔드 CI를 구축한다고 가정합니다.
 
 <br>
 
@@ -159,7 +155,7 @@ jobs:
 
 ```yml
 jobs:
-  setup-and-test: # job 이름
+  test-and-pr: # job 이름
     runs-on: macos-11 # runner
     strategy:
       matrix:
@@ -168,7 +164,7 @@ jobs:
       # ...
 
   build: # job 이름
-    needs: setup # setup-and-test가 성공해야 build도 실행됩니다
+    needs: setup # test-and-pr가 성공해야 build도 실행됩니다
     runs-on: macos-11 
     steps:
     # ...
@@ -180,17 +176,19 @@ jobs:
 
 각 Step은 하이픈(`-`)을 사용하여 단계를 구분합니다. 더 자세한 문법은 [Workflow Syntax](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsrun) 문서에서 확인하세요.
 
-- `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다. Optional 키.
+- `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다.
+- `id`: 다른 Step에서 특정 Step을 참조할 때 사용됩니다. `steps` 컨텍스트를 통해 접근합니다.
 - `uses`: 사용할 Action을 지정합니다.
+- `with`: Action를 사용할 때 필요한 키 값들을 지정할 때 사용합니다.
 - `run`: Runner에서 실행할 Shell 커맨드를 지정합니다.
 
 <br>
 
-가령 아래와 같이 작성하면, 총 5 단계의 Step으로 구성된 `setup-and-test` Job이 완성됩니다.
+만약 아래와 같이 작성하면, 총 7 단계의 Step으로 구성된 `test-and-pr` Job이 완성됩니다.
 
 ```yml
 jobs:
-  setup-and-test:
+  test-and-pr:
     runs-on: macos-11
     strategy:
       matrix:
@@ -207,7 +205,23 @@ jobs:
       - name: Install all dependencies using yarn # step 4
         run: yarn install
       - name: Do unit test # step 5
-        run: yarn test:unit # package.json에 test:unit script가 있다고 가정
+        run: yarn test:unit
+      - name: Render PR template # step 6
+        id: template
+        uses: chuhlomin/render-template@v1.2 # https://github.com/chuhlomin/render-template
+        with:
+          template: .github/PULL_REQUEST_TEMPLATE.md
+          var: |
+            works: ...
+            context: ...
+      - name: Create PR to develop # step 7
+        uses: peter-evans/create-pull-request@v3 # https://github.com/marketplace/actions/create-pull-request
+        with:
+          title: ${{ .. }}
+          body: ${{ steps.template.outputs.result }}
+          branch: develop
+          delete-branch: false
+          reviewers: estellechoi
 ```
 
 1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
@@ -215,10 +229,20 @@ jobs:
 3. `node`와 함께 설치될 `npm` 커맨드를 사용해서 `yarn`을 설치
 4. `yarn` 커맨드를 사용해서 의존하는 모든 패키지를 설치
 5. `test:unit` 스크립트를 실행해서 단위 테스트를 진행
+6. `chuhlomin/render-template@v1.2`를 사용해서 PR 템플릿을 사용하여 PR 메시지 완성
+7. `peter-evans/create-pull-request@v3`를 사용해서 코드리뷰를 위한 PR을 생성
 
 <br>
 
-## 4. Runner 환경 캐싱하기
+## 4. 재사용하기: Reusable Workflow, Runner 환경 캐싱하기
+
+### 4-1. Reusable Workflow
+
+여러 Workflow에서 동일한 작업이 사용되어 작업이 중복될 때 이를 피하기 위해 Workflow를 재사용할 수 있습니다. 아직 베타 단계이며 몇가지 제한이 있기 때문에 [Reusing workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows) 문서를 꼼꼼히 확인하세요. 제한사항 중 주목할만한 것은 `env` 컨텍스트를 공유할 수 없다는 것, 재사용 Workflow에서 다른 재사용 Workflow를 사용할 수 없다는 것입니다.
+
+<br>
+
+### 4-2. Runner 환경 캐싱하기
 
 GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있고요. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 특정 경로와 파일을 캐싱하는 Step을 만들 수 있습니다. 예로, 패키지들이 설치된 `node_modules` 경로와 `yarn`의 전역 설치 경로를 캐싱할 수 있겠죠. 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
 
