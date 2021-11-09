@@ -1,4 +1,4 @@
-# GitHub Actions로 프론트엔드 CI/CD 구축하기
+# GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기
 
 <br>
 
@@ -9,6 +9,8 @@
 5. 환경변수 사용하기: 직접 세팅, GitHub 디폴트 환경변수
 6. 컨텍스트 변수 사용하기, 환경변수와의 차이점
 7. `secrets` 컨텍스트를 사용하여 환경변수 세팅하기
+8. CI: Webhook으로 코드 컨벤션 자동 체크, Actions로 테스트와 PR 자동화하기
+9. CD: Github Pages에 배포하기, AWS에 배포하기
 
 <br>
 
@@ -69,10 +71,9 @@ jobs:
 
 ### 2-1. Runner
 
-Runner는 [Job의 실행 환경](https://github.com/actions/runner)이 설치된 서버를 말합니다. GitHub에서 호스팅하는 Runner를 사용할 수 있고요, 직접 Runner를 호스팅해도 됩니다. GitHub에서 호스팅하는 Runner는 가상머신의 형태로 제공되고요, Ubuntu Linux, Windows, macOS 환경을 지원합니다. [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) 문서에서 더 자세한 설명과 OS별 하드웨어 사양, 각 환경을 사용하기 위한 Workflow 파일 내 설정값 등을 확인할 수 있습니다. 사용할 Runner를 Workflow 파일에 명시하면 Workflow가 실행될 때 해당 Runner가 사용됩니다. 예를 들어, macOS Big Sur 11 환경을 사용하려면 `runs-on` 항목에 `macos-11`이라고 지정하면 됩니다.
+Runner는 [Job의 실행 환경](https://github.com/actions/runner)이 설치된 서버를 말합니다. GitHub에서 호스팅하는 Runner를 사용할 수 있고요, 직접 Runner를 호스팅해도 됩니다. GitHub에서 호스팅하는 Runner는 가상머신의 형태로 제공되고요, Ubuntu Linux, Windows, macOS 환경을 지원합니다. [About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) 문서에서 더 자세한 설명과 OS별 하드웨어 사양, 각 환경을 사용하기 위한 Workflow 파일 내 설정값 등을 확인할 수 있습니다. 사용할 Runner를 Workflow 파일(`yml`)에 명시하면 Workflow가 실행될 때 해당 Runner가 사용됩니다. 예를 들어, macOS Big Sur 11 환경을 사용하려면 `runs-on` 항목에 `macos-11`이라고 지정하면 됩니다.
 
 ```yml
-# main.yml
 jobs:
   build:
     runs-on: macos-11
@@ -116,7 +117,7 @@ Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 �
 
 ## 3. Workflow 파일 작성하기
 
-이제 Workflow 파일 예제를 작성해보면서 파일을 구성하는 기본적인 문법들을 정리합니다. 특정 조건의 브랜치에 한해 `push` 이벤트가 발생했을 때, 자동으로 실행환경을 셋업하고 단위 테스트를 실행한 후, 성공하면 `develop`/`master` 브랜치로 PR을 생성하는 Workflow를 만들겁니다. 파일명은 `main.yml`으로 할거고요, [Vue2](https://kr.vuejs.org/v2/guide/index.html)로 구현한 프론트엔드 CI를 구축한다고 가정합니다.
+이제 Workflow 파일 예제를 작성해보면서 파일을 구성하는 기본적인 문법들을 정리하려고 합니다.
 
 <br>
 
@@ -133,7 +134,7 @@ Workflow 파일의 가장 상위 레벨 키들은 다음과 같습니다. 모든
 다음과 같이 작성하면 조건에 해당하는 브랜치에 `push` 되었을 때 `CI` Workflow가 시작됩니다. 예를 들어, 로컬에서 `feature/#23/MEAL-14` 브랜치를 만들어서 작업한 후 레포지토리로 `push`하면 Workflow가 시작됩니다.
 
 ```yml
-# main.yml
+# test.yml
 name: CI
 on:
   push:
@@ -155,7 +156,7 @@ jobs:
 
 ```yml
 jobs:
-  test-and-pr: # job 이름
+  test: # job 이름
     runs-on: macos-11 # runner
     strategy:
       matrix:
@@ -164,7 +165,7 @@ jobs:
       # ...
 
   build: # job 이름
-    needs: setup # test-and-pr가 성공해야 build도 실행됩니다
+    needs: setup # test가 성공해야 build도 실행됩니다
     runs-on: macos-11 
     steps:
     # ...
@@ -184,11 +185,11 @@ jobs:
 
 <br>
 
-만약 아래와 같이 작성하면, 총 7 단계의 Step으로 구성된 `test-and-pr` Job이 완성됩니다.
+만약 아래와 같이 작성하면, 총 4 단계의 Step으로 구성된 `setup` Job이 완성됩니다.
 
 ```yml
 jobs:
-  test-and-pr:
+  setup:
     runs-on: macos-11
     strategy:
       matrix:
@@ -196,41 +197,18 @@ jobs:
     steps:
       - name: Checkout repo and download # step 1
         uses: actions/checkout@v2 
+
       - name: Install node # step 2
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install yarn # step 3
         run: npm install -g yarn
+
       - name: Install all dependencies using yarn # step 4
         run: yarn install
-      - name: Do unit test # step 5
-        run: yarn test:unit
-      - name: Render PR template # step 6
-        id: template
-        uses: chuhlomin/render-template@v1.2 # https://github.com/chuhlomin/render-template
-        with:
-          template: .github/PULL_REQUEST_TEMPLATE.md
-          var: |
-            works: ...
-            context: ...
-      - name: Create PR to develop # step 7
-        uses: peter-evans/create-pull-request@v3 # https://github.com/marketplace/actions/create-pull-request
-        with:
-          title: ${{ .. }}
-          body: ${{ steps.template.outputs.result }}
-          branch: develop
-          delete-branch: false
-          reviewers: estellechoi
 ```
-
-1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
-2. `actions/setup-node@v2`를 사용해서 Runner에 `8`/`10`/`14` 버전의 `node` 설치
-3. `node`와 함께 설치될 `npm` 커맨드를 사용해서 `yarn`을 설치
-4. `yarn` 커맨드를 사용해서 의존하는 모든 패키지를 설치
-5. `test:unit` 스크립트를 실행해서 단위 테스트를 진행
-6. `chuhlomin/render-template@v1.2`를 사용해서 PR 템플릿을 사용하여 PR 메시지 완성
-7. `peter-evans/create-pull-request@v3`를 사용해서 코드리뷰를 위한 PR을 생성
 
 <br>
 
@@ -261,6 +239,10 @@ GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 
     restore-keys: |
       ${{ runner.os }}-yarn-
 ```
+
+<br>
+
+Use Case로는 [Github Actions으로 배포 자동화하기 | NHN Cloud Meetup](https://meetup.toast.com/posts/286)가 도움이 되었습니다.
 
 <br>
 
@@ -345,9 +327,215 @@ steps:
 
 <br>
 
-## 6. 커뮤니티 Action을 사용해서 Vue 앱을 빠르게 빌드, 배포하기
+## 8. CI: Webhook으로 코드 컨벤션 자동 체크, Actions로 테스트와 PR 자동화하기
 
-- GitHub Pages : [Vue to Github Pages](https://github.com/marketplace/actions/vue-to-github-pages)
+우리팀은 [Vue2](https://kr.vuejs.org/v2/guide/index.html), [Yarn](https://yarnpkg.com/)을 사용하고, [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)를 변형한 브랜치 전략을 사용합니다.
+
+<br>
+
+### 8-1. Webhook으로 코드 컨벤션 자동 체크하기
+
+GitHub [Webhook](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks)을 사용해서 개발자가 코드를 커밋할 때 코드 컨벤션을 자동으로 체크한 후, 컨벤션을 통과해야만 커밋되도록 할 수 있습니다. 저는 Webhook 스크립트를 모아서 관리할 수 있게 해주는 [`yorkie`](https://github.com/yyx990803/yorkie)를 사용했고요, 코드 컨벤션 체크는 [`lint-staged`](https://www.npmjs.com/package/lint-staged)를 사용했습니다. `package.json`에 다음과 같이 항목을 추가하면, `git commit`을 시도할 때마다 `lint-staged`가 실행됩니다.
+
+```json
+"gitHooks": {
+  "pre-commit": "lint-staged"
+}
+```
+
+<br>
+
+다음은 `lint-staged` 설정파일인 `lint-staged.config.js` 예제입니다.
+
+```javascript
+module.exports = {
+  '*.js': ['yarn lint:eslint', 'yarn lint:prettier', 'yarn test:unit:file'],
+  '{!(package)*.json,*.code-snippets,.!(browserslist)*rc}': [
+    'yarn lint:prettier --parser json',
+  ],
+  'package.json': ['yarn lint:prettier'],
+  '*.vue': [
+    'yarn lint:eslint',
+    'yarn lint:stylelint',
+    'yarn lint:prettier',
+    'yarn test:unit:file',
+  ],
+  '*.scss': ['yarn lint:stylelint', 'yarn lint:prettier'],
+  '*.md': ['yarn lint:markdownlint', 'yarn lint:prettier'],
+  // '*.{png,jpeg,jpg,gif,svg}': ['imagemin-lint-staged'],
+}
+```
+
+<br>
+
+### 8-2. Actions로 테스트와 PR 자동화하기
+
+저는 다음의 3가지 Workflow 파일들을 만들어서 CI를 완성했고요, 다음 순서대로 하위 섹션에서 자세히 다룹니다.
+
+1. `reusable-test.yml`: 자동으로 실행환경을 셋업하고 단위 테스트를 실행
+2. `develop.yml`: `feature`/`hotfix` 브랜치에 한해 `push` 이벤트가 발생했을 때, `reusable-test.yml`을 호출해서 테스트한 후 `develop` 브랜치로 PR을 생성
+3. `master.yml`: `develop` 브랜치의 PR이 머지되어 종료되었을 때, `reusable-test.yml`을 호출해서 테스트한 후 `master` 브랜치로 PR을 생성
+
+<br>
+
+#### `reusable-test.yml`
+
+재사용 Workflow를 만듭니다. 자세한 문법은 [Reusing workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)를 참고합니다.
+
+```yml
+name: Reusable - setup and test
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: false
+jobs:
+  test:
+    runs-on: macos-11
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    steps:
+      - name: Checkout repo and download # step 1
+        uses: actions/checkout@v2 
+
+      - name: Install node # step 2
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install yarn # step 3
+        run: npm install -g yarn
+
+      - name: Install all dependencies using yarn # step 4
+        run: yarn install
+
+      - name: Do unit test # step 5
+        run: yarn test:unit
+
+      - name: Do build test # step 6
+        run: yarn build
+```
+
+1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
+2. `actions/setup-node@v2`를 사용해서 Runner에 `8`/`10`/`14` 버전의 `node` 설치
+3. `node`와 함께 설치될 `npm` 커맨드를 사용해서 `yarn`을 설치
+4. `yarn` 커맨드를 사용해서 의존하는 모든 패키지를 설치
+5. `test:unit` 스크립트를 실행해서 단위 테스트를 진행
+6. `build` 스크립트를 실행해서 빌드를 진행 (빌드 테스트를 위해)
+
+<br>
+
+#### `develop.yml`
+
+테스트를 위해 Reusable Workflow를 호출합니다. `uses` 키를 사용하고, `{owner}/{repo}/{path}/{filename}@{ref}` 문법으로 참조합니다. 그 다음, `pr` Job은 다음 3단계로 구성합니다.
+
+1. 레포지토리에 체크아웃 및 다운로드
+2. `chuhlomin/render-template@v1.2`를 사용해서 PR 템플릿을 사용하여 PR 메시지 완성
+3. `peter-evans/create-pull-request@v3`를 사용해서 코드리뷰를 위한 PR을 생성
+
+<br>
+
+```yml
+name: CI - feature & hotfix test
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'hotfix/**'
+jobs:
+  call-test:
+    uses: meallo/meallo_vip/.github/workflows/reusable-test.yml@v1
+  pr:
+    needs: call-test
+    runs-on: macos-11
+    steps:
+      - name: Checkout repo and download # step 1
+        uses: actions/checkout@v2 
+
+      - name: Render PR template # step 2
+        id: template
+        uses: chuhlomin/render-template@v1.2 # https://github.com/chuhlomin/render-template
+        with:
+          template: .github/PULL_REQUEST_TEMPLATE/develop.md
+          var: |
+            works: ...
+            context: ...
+
+      - name: Create PR to develop # step 3
+        uses: peter-evans/create-pull-request@v3 # https://github.com/marketplace/actions/create-pull-request
+        with:
+          title: ${{ .. }}
+          body: ${{ steps.template.outputs.result }}
+          branch: develop
+          delete-branch: false
+          reviewers: ${{ secrets.DEVELOP_REVIEWER }}
+```
+
+<br>
+
+#### `master.yml`
+
+`feature`, `develop`, `release` 브랜치들이 PR을 통과하여 `develop` 브랜치로 머지될 때마다 `reusable-test.yml` Workflow를 호출하여 마지막 테스트를 진행한 후, `master` 브랜치로 자동 PR을 생성하도록 합니다.
+
+```yml
+name: CI - test and pr to master
+on:
+  pull_request:
+    branches: [ develop ]
+    types: [ closed ]
+jobs:
+  call-test:
+    uses: meallo/meallo_vip/.github/workflows/reusable-test.yml@v1
+  master-pr:
+    needs: call-test
+    runs-on: macos-11
+    steps:
+      - name: Checkout repo and download # step 1
+        uses: actions/checkout@v2 
+
+    steps:
+      - name: Render PR template # step 2
+        id: template
+        uses: chuhlomin/render-template@v1.2
+        with:
+          template: .github/PULL_REQUEST_TEMPLATE/master.md
+          var: |
+            description: ..
+
+      - name: Create PR to master # step 3
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: PR to master
+          body: ${{ steps.template.outputs.result }}
+          branch: master
+          delete-branch: false
+          reviewers: ${{ secrets.MASTER_REVIEWER }}
+```
+
+<br>
+
+## 9. CD: Github Pages에 배포하기, AWS에 배포하기
+
+### 9-1. Github Pages에 배포하기
+
+커뮤니티 Action을 사용해서 쉽게 구축할 수 있습니다. [Vue to Github Pages](https://github.com/marketplace/actions/vue-to-github-pages)를 참고하세요.
+
+... Writing in progress
+
+<br>
+
+### 9-2. AWS에 배포하기
+
+... Research in progress
+
+```yml
+name: CD
+on:
+  pull_request:
+    branches: [ master ]
+    types: [ closed ]
+```
 
 <br>
 
