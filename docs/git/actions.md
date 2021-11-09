@@ -129,7 +129,7 @@ Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 �
 Workflow 파일의 가장 상위 레벨 키들은 다음과 같습니다. 모든 키와 하위 키에 대한 파일 작성 문법은 [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) 문서에서 확인할 수 있습니다.
 
 - `name`: GitHub Actions 탭에 표시되는 Workflow의 이름입니다. Optional 키.
-- `on`: Workflow를 트리거할 이벤트를 지정합니다. 이벤트 종류는 [Events that trigger workflows](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows)
+- `on`: Workflow를 트리거할 이벤트를 지정합니다. 이벤트 종류는 [Events that trigger workflows](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows), 브랜치 제한 문법은 [`on.<push|pull_request>.<branches|tags>`](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestbranchestags)을 확인하세요.
 - `jobs`: 이 Workflow에서 실행할 모든 Job들을 지정하면 됩니다.
 
 <br>
