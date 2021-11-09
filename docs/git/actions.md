@@ -110,7 +110,7 @@ Step은 Job 내에서 개별 업무들을 말합니다. Step이라는 이름처�
 
 #### 1-3-3. Actions
 
-Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 직접 만들거나, [GitHub 커뮤니티에서 제공하는 Action](https://github.com/marketplace?type=actions)들을 사용할 수 있습니다.
+Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 직접 만들거나, [GitHub 커뮤니티에서 제공하는 Action](https://github.com/marketplace?type=actions)들을 사용할 수 있습니다. 레포지토리 체크아웃, `node` 설치 등 기본적인 거의 모든 동작과 셋업 Action들이 커뮤니티에서 이미 제공되고 있습니다.
 
 <br>
 
@@ -182,7 +182,7 @@ steps:
     run: npm install -g yarn
 ```
 
-1. `actions/checkout@v2`를 사용해서 이 레파지토리에 체크아웃, Runner에 다운로드
+1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
 2. `actions/setup-node@v2`를 사용해서 Runner에 `14` 버전의 `node` 설치 
 3. `node`와 함께 설치될 `npm` 커맨드를 실행한다는 뜻입니다.
 
@@ -190,7 +190,7 @@ steps:
 
 ## 2. GitHub Actions 환경 캐싱하기
 
-GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레파지토리의 모든 Workflow에서 사용할 수 있습니다. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 캐싱 Step을 만들 수 있고요, 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
+GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있습니다. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 캐싱 Step을 만들 수 있고요, 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
 
 <br>
 
