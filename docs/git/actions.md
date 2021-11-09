@@ -10,7 +10,7 @@
 
 ## 1. GitHub Actions
 
-GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포뿐만 아니라 원하는 어떤 작업이던 Workflow에 포함시켜서 자동화할 수 있습니다. 한 번에 같이 실행시킬 일들을 모아 하나의 Job으로 구성해놓고요, `push`, `pull` 등 특정 이벤트가 발생했을 때 Job을 실행합니다. 예를 들어, 누군가 특정 브랜치에 PR(Pull request)을 생성하는 이벤트가 발생하면, 테스트 스크립트가 자동으로 실행되게 할 수 있습니다.
+GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포뿐만 아니라 원하는 어떤 작업이던 Workflow에 포함시켜서 자동화할 수 있습니다. 한 번에 같이 실행시킬 일들을 모아 하나의 Job으로 구성해놓고요, `push`, `pull_request` 등 특정 [이벤트](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows)가 발생했을 때 Job을 실행합니다. 예를 들어, 누군가 특정 브랜치에 PR(Pull request)을 생성하는 이벤트가 발생하면, 테스트 스크립트가 자동으로 실행되게 할 수 있습니다.
 
 <br>
 
@@ -20,7 +20,7 @@ GitHub Actions는 Workflow 자동화 도구입니다. 테스트, 빌드, 배포�
 
 ### 1-1. Workflow 등록
 
-실행할 Workflow는 `yml`(Yaml) 포맷 파일로 작성하여 레포지토리의 `/.github/workflows/` 경로에 두면 됩니다. 이 파일 작성을 완료하고 GitHub 레포지토리에 `push`하면 완료입니다. 이후부터 파일에 설정한대로 Workflow가 작동합니다. 또는 GitHub 레포지토리의 ~~Actions~~ 탭으로 이동, Workflow 셋업 버튼을 클릭하여 해당 파일을 쉽게 생성할 수 있습니다. 다음은 Workflow 셋업 버튼을 클릭했을 때 제공되는 샘플 파일입니다.
+실행할 Workflow는 `yml`(Yaml) 포맷 파일로 작성하여 프로그램의 `/.github/workflows/` 경로에 둡니다. 이 파일 작성을 완료하고 GitHub 레포지토리에 `push`하면 완료입니다. 이후부터 파일에 설정한대로 Workflow가 자동으로 작동합니다. 또는 GitHub 레포지토리의 *Actions* 탭으로 이동, Workflow 셋업 버튼을 클릭하여 GitHub에서 해당 파일을 직접 생성할 수 있습니다. 다음은 Workflow 셋업 버튼을 클릭했을 때 제공되는 샘플 파일입니다.
 
 ```yml
 # This is a basic workflow to help you get started with Actions
