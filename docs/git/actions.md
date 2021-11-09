@@ -120,81 +120,107 @@ Action은 Workflow를 이루는 가장 작은 Work 단위입니다. Action을 �
 
 ## 3. Workflow 파일 작성하기
 
-### 3-1. 최상위 레벨 항목: `name`, `on`, `jobs`
-
-Workflow 파일의 가장 상위 레벨 항목들은 다음과 같습니다. 모든 항목과 하위 항목에 대한 파일 작성 문법은 [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) 문서에서 확인할 수 있습니다.
-
-- `name`: GitHub Actions 탭에 표시되는 Workflow의 이름입니다. Optional 항목입니다.
-- `on`: Workflow를 자동으로 실행할 이벤트를 지정합니다. 이벤트 종류는 [Events that trigger workflows](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows)
-- `jobs`: 이 항목에 실행할 모든 Job들을 지정하면 됩니다.
+이제 Workflow 파일 예제를 작성해보면서 파일을 구성하는 기본적인 문법들을 다룹니다. 파일명은 `main.yml`으로 하고, [Vue2](https://kr.vuejs.org/v2/guide/index.html)로 구현한 프론트엔드 CI를 구축한다고 가정합니다.
 
 <br>
 
+### 3-1. 최상위 레벨: `name`, `on`, `jobs`
+
+Workflow 파일의 가장 상위 레벨 키들은 다음과 같습니다. 모든 키와 하위 키에 대한 파일 작성 문법은 [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths) 문서에서 확인할 수 있습니다.
+
+- `name`: GitHub Actions 탭에 표시되는 Workflow의 이름입니다. Optional 키.
+- `on`: Workflow를 트리거할 이벤트를 지정합니다. 이벤트 종류는 [Events that trigger workflows](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows)
+- `jobs`: 이 Workflow에서 실행할 모든 Job들을 지정하면 됩니다.
+
+<br>
+
+다음과 작성하면 조건에 해당하는 브랜치에 `push` 되었을 때 `CI` Workflow가 시작됩니다. 예를 들어, 로컬에서 `feature/#23/MEAL-14` 브랜치를 만들어서 작업한 후 레포지토리로 `push`하면 Workflow가 시작됩니다.
+
 ```yml
+# main.yml
 name: CI
-on: [push]
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'hotfix/**'
 jobs:
-  # job들을 여기에 작성합니다
+  # ...
 ```
 
 <br>
 
-### 3-2. Job 구성 항목: `needs`, `runs-on`, `strategy: matrix`, `steps`
+### 3-2. Job 구성: `needs`, `runs-on`, `strategy: matrix`, `steps`
 
 - `needs`: 다른 Job이 성공해야만 실행되도록 의존성을 갖게 합니다.
 - `runs-on`: Job을 실행할 Runner를 지정합니다.
-- `strategy: matrix` : Job을 여러 환경에서 테스트하기 위해 Matrix를 지정합니다.
+- `strategy: matrix` : Job을 여러 환경에서 테스트하기 위해 Matrix를 지정합니다. `matrix` 컨텍스트를 통해 여기서 지정한 값에 접근할 수 있습니다.
 - `steps`: Job 내에서 실행될 Step들을 순서대로 지정합니다.
 
 ```yml
 jobs:
-  build: # job 이름
-    needs: setup # setup이 성공해야 이 job도 실행됩니다
+  setup-and-test: # job 이름
     runs-on: macos-11 # runner
     strategy:
       matrix:
-        node: [8, 10, 14] # node 8, 10, 14 환경에서 각각 job을 실행합니다
-    steps: # step들을 여기에 작성합니다
-      - uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }} # matrix의 항목 값이 사용됩니다
+        node-version: [8, 10, 14] # node 8, 10, 14 환경에서 각각 job을 실행합니다
+    steps:
+      # ...
+
+  build: # job 이름
+    needs: setup # setup-and-test가 성공해야 build도 실행됩니다
+    runs-on: macos-11 
+    steps:
+    # ...
 ```
 
 <br>
 
-### 3-3. Step 구성 항목: `name`, `uses`, `run`
+### 3-3. Step 구성: `name`, `uses`, `run`
 
 각 Step은 하이픈(`-`)을 사용하여 단계를 구분합니다. 더 자세한 문법은 [Workflow Syntax](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsrun) 문서에서 확인하세요.
 
-- `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다. Optional 값입니다.
+- `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다. Optional 키.
 - `uses`: 사용할 Action을 지정합니다.
 - `run`: Runner에서 실행할 Shell 커맨드를 지정합니다.
 
 <br>
 
-가령 아래와 같이 작성하면, 총 3 단계의 `steps`가 구성되는 겁니다.
+가령 아래와 같이 작성하면, 총 5 단계의 Step으로 구성된 `setup-and-test` Job이 완성됩니다.
 
 ```yml
-steps:
-  - name: Checkout # step 1
-    uses: actions/checkout@v2 
-  - name: Setup Node.js # step 2
-    uses: actions/setup-node@v2
-    with:
-      node-version: [ 14.x ]
-  - name: Install Dependencies # step 3
-    run: npm install -g yarn
+jobs:
+  setup-and-test:
+    runs-on: macos-11
+    strategy:
+      matrix:
+        node-version: [8, 10, 14] # or [ 8.x, 10.x, 14.x ]
+    steps:
+      - name: Checkout repo and download # step 1
+        uses: actions/checkout@v2 
+      - name: Install node # step 2
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install yarn # step 3
+        run: npm install -g yarn
+      - name: Install all dependencies using yarn # step 4
+        run: yarn install
+      - name: Do unit test # step 5
+        run: yarn test:unit # package.json에 test:unit script가 있다고 가정
 ```
 
 1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
-2. `actions/setup-node@v2`를 사용해서 Runner에 `14` 버전의 `node` 설치
+2. `actions/setup-node@v2`를 사용해서 Runner에 `8`/`10`/`14` 버전의 `node` 설치
 3. `node`와 함께 설치될 `npm` 커맨드를 사용해서 `yarn`을 설치
+4. `yarn` 커맨드를 사용해서 의존하는 모든 패키지를 설치
+5. `test:unit` 스크립트를 실행해서 단위 테스트를 진행
 
 <br>
 
 ## 4. Runner 환경 캐싱하기
 
-GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있고요. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 특정 경로와 파일을 캐싱하는 Step을 만들 수 있습니다. 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
+GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있고요. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 특정 경로와 파일을 캐싱하는 Step을 만들 수 있습니다. 예로, 패키지들이 설치된 `node_modules` 경로와 `yarn`의 전역 설치 경로를 캐싱할 수 있겠죠. 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
 
 <br>
 
