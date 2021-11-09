@@ -3,8 +3,9 @@
 <br>
 
 1. GitHub Actions: Workflow 등록, Runner, Jobs, Steps, Actions, Workflow 파일 작성
-2. GitHub Actions 환경 캐싱하기
-3. 환경변수 세팅하기
+2. 환경 캐싱하기
+3. 환경변수 사용하기
+4. 컨텍스트 변수 사용하기
 
 <br>
 
@@ -160,11 +161,11 @@ jobs:
 
 #### 1-4-3. Step 구성 항목: `name`, `uses`, `run`
 
-각 스텝은 하이픈(`-`)을 사용하여 단계를 구분합니다. `step`을 구성하는 모든 문법은 [Workflow Syntax](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsrun) 문서에서 확인하세요.
+각 Step은 하이픈(`-`)을 사용하여 단계를 구분합니다. 더 자세한 문법은 [Workflow Syntax](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsrun) 문서에서 확인하세요.
 
 - `name`: GitHub Actions 탭에 표시되는 각 Step의 이름을 지정합니다. Optional 값입니다.
 - `uses`: 사용할 Action을 지정합니다. 커뮤니티 Action들은 이름에 `actions/` Prefix를 사용합니다.
-- `run`: Runner에서 실행할 커맨드를 지정합니다.
+- `run`: Runner에서 실행할 Shell 커맨드를 지정합니다.
 
 <br>
 
@@ -183,14 +184,14 @@ steps:
 ```
 
 1. `actions/checkout@v2`를 사용해서 이 레포지토리에 체크아웃, Runner에 다운로드
-2. `actions/setup-node@v2`를 사용해서 Runner에 `14` 버전의 `node` 설치 
-3. `node`와 함께 설치될 `npm` 커맨드를 실행한다는 뜻입니다.
+2. `actions/setup-node@v2`를 사용해서 Runner에 `14` 버전의 `node` 설치
+3. `node`와 함께 설치될 `npm` 커맨드를 사용해서 `yarn`을 설치
 
 <br>
 
-## 2. GitHub Actions 환경 캐싱하기
+## 2. 환경 캐싱하기
 
-GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있습니다. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 캐싱 Step을 만들 수 있고요, 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
+GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 실행하므로, 종속성 파일들을 캐싱하여 테스트와 빌드 속도를 높일 수 있습니다. 캐시를 생성하면 해당 레포지토리의 모든 Workflow에서 사용할 수 있고요. 커뮤니티의 [actions/cache@v2](https://github.com/actions/cache)를 사용해서 특정 경로와 파일을 캐싱하는 Step을 만들 수 있습니다. 아래는 [Node - Yarn 캐싱 예시](https://github.com/actions/cache/blob/main/examples.md#node---yarn)입니다.
 
 <br>
 
@@ -210,9 +211,65 @@ GitHub Actions는 Runner에 매번 새롭게 환경을 셋업하고 Workflow를 
 
 <br>
 
-## 3. 환경변수 세팅하기
+## 3. 환경변수 사용하기
 
-자세한 내용은 [Environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables) 문서를 참고하세요.
+### 3-1. 환경변수 직접 세팅하기
+
+Step, Job, 또는 Workflow 전체를 위한 환경변수를 범위에 맞게 만들어 사용할 수 있습니다. 원하는 범위에서 `env` 키워드를 사용하여 정의하면 되고요, 동명의 환경변수가 사용될 때는 Step > Job > Workflow 순으로 우선합니다. Workflow 레벨에서 정의한 환경변수와 같은 이름의 환경변수를 Step 레벨에서 정의할 경우, 해당 Step이 실행되는 동안 Step에서 정의한 환경변수 값이 Workflow 레벨에서 정의한 값을 덮어씁니다.
+
+```yml
+jobs:
+  test:
+    runs-on: macos-11
+    env:
+      MODE: test
+    steps:
+      - name: "Set environment variables to test Vue app"
+        if: ${{ env.MODE == 'test' }} # env 컨텍스트에서 참조합니다
+        env:
+          VUE_APP_API_URL: www.sample.com
+        run: echo "API Url is $VUE_APP_API_URL"
+```
+
+<br>
+
+Workflow 파일 내에서 정의된 환경변수를 참조할 때는 `env` 컨텍스트 내에서 사용하면 됩니다. 예를 들어, `MODE` 환경변수를 사용한다고 가정했을 때 `env.MODE` 이런식으로요. `run` 키를 사용하여 Runner에서 직접 커맨드를 실행할 때는, 해당 Runner 내에서 정의한 환경변수를 `env` 컨텍스트 없이 바로 참조합니다. 자세한 내용은 [Environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables) 문서를 참고하세요.
+
+> If you use the workflow file's run key to read environment variables from within the runner operating system (as shown in the example above), the variable is substituted in the runner operating system after the job is sent to the runner. For other parts of a workflow file, you must use the env context to read environment variables; this is because workflow keys (such as if) require the variable to be substituted during workflow processing before it is sent to the runner.
+
+<br>
+
+### 3-2. GitHub 디폴트 환경변수 사용하기
+
+기본적인 값들은 GitHub에서 디폴트 환경변수로 제공합니다. 공식문서의 [Default environment variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables) 섹션에서 모든 디폴트 환경변수 목록을 확인할 수 있습니다.
+
+<br>
+
+## 4. 컨텍스트 변수 사용하기
+
+GitHub Actions는 [컨텍스트](https://docs.github.com/en/actions/learn-github-actions/contexts) 변수도 제공합니다. 예를 들어, 현재 Runner의 OS 정보를 참조하려면 `runner.os` 변수를 사용합니다. 이 컨텍스트 변수들은 [디폴트 환경변수](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables)들과 꽤 겹치는데요, 각각 다른 용도로 의도되었습니다.
+
+- 디폴트 환경변수 : 현재 실행중인 Job의 Runner 내에서만 존재
+- 컨텍스트 변수 : Workflow의 어느 곳에서나 사용 가능
+
+<br>
+
+다음은 이 둘의 차이점을 나타내는 예시입니다. 디폴트 환경변수는 실행중인 현재 Job에 대한 정보만 제공하는 것이 포인트입니다.
+
+```yml
+name: CI
+on: push
+jobs:
+  prod-check:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
+```
+
+<br>
+
+## 5.
 
 <br>
 
