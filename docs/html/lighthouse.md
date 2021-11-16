@@ -4,6 +4,7 @@
 
 1. Lighthouse
 2. Brotli, Gzip으로 텍스트 압축하기
+3. 네트워크 페이로드 사이즈 줄이기
 
 <br>
 
@@ -43,9 +44,22 @@ Lighthouse의 퍼포먼스 보고서는 다음과 같습니다. 주로 로딩 �
 
 <br>
 
+## 3. 네트워크 페이로드 사이즈 줄이기
+
+웹페이지에서 요청하는 네트워크 전송 사이즈의 적정 수준은 `1,700` ~ `1,900` KiB 입니다. 통상적으로 `1,600` KiB를 넘지 않도록 하는 것이 좋습니다. 그래야 3G 네트워크 환경에서도 사용자가 10초 이내에 콘텐츠를 볼 수 있기 때문입니다. 네트워크 전송 사이즈를 줄이는 방법에는 다음과 같은 것들이 있습니다.
+
+- [PRPL 패턴](https://web.dev/apply-instant-loading-with-prpl/)
+- [Minification, 데이터 압축](https://web.dev/reduce-network-payloads-using-text-compression/)
+- [JPEG, PNG 대신 WebP 이미지 포맷 사용하기](https://web.dev/serve-images-webp/)
+- [JPEG 이미지 압축](https://web.dev/use-imagemin-to-compress-images/)
+- [캐싱](https://web.dev/reliable/)
+
+<br>
+
 ---
 
 ### References
 
 - [Lighthouse performance scoring](https://web.dev/performance-scoring/)
 - [Ensure text remains visible during webfont load](https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools)
+- [Avoid enormous network payloads](https://web.dev/total-byte-weight/?utm_source=lighthouse&utm_medium=devtools)
