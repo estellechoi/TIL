@@ -46,8 +46,7 @@
 
 ### CSS
 
-- [CSS 방법론: BEM(Block, Element, Modifier)](https://github.com/estellechoi/TIL/blob/master/docs/css/bem.md)
-- [Visual Formatting Model](https://github.com/estellechoi/TIL/blob/master/docs/css/vfm.md)
+- [VFM(Visual Formatting Model): Overflow, Over-constrained, 유효한 여백주기](https://github.com/estellechoi/TIL/blob/master/docs/css/vfm.md)
 - [박스 모델(Box Model)](https://github.com/estellechoi/TIL/blob/master/docs/css/box.md)
 - [포지셔닝 규칙(Positioning schemes)](https://github.com/estellechoi/TIL/blob/master/docs/css/positioning.md)
 - [블록 서식 컨텍스트(Block Formatting Context)](https://github.com/estellechoi/TIL/blob/master/docs/css/bfc.md)
@@ -59,8 +58,9 @@
 - [Background](https://github.com/estellechoi/TIL/blob/master/docs/css/background.md) \*
 - [애니메이션(Animation)](https://github.com/estellechoi/TIL/blob/master/docs/css/animation.md) \*
 - [`@` Rule과 미디어쿼리(Media Query)](https://github.com/estellechoi/TIL/blob/master/docs/css/at-rule.md) \*
-- [Image Sprites](https://github.com/estellechoi/TIL/blob/master/docs/css/sprites.md)
 - [Flex Box](https://github.com/estellechoi/TIL/blob/master/docs/css/flex.md) \*
+- [CSS 방법론: BEM(Block, Element, Modifier)](https://github.com/estellechoi/TIL/blob/master/docs/css/bem.md)
+- [Image Sprites](https://github.com/estellechoi/TIL/blob/master/docs/css/sprites.md)
 
 <br>
 
@@ -158,7 +158,7 @@
 
 - [Cross site scripting (XSS)]()
 - [Cross-site request forgery (CSRF)](./docs/security/csrf.md)
-<br>
+  <br>
 
 ### Algorithm
 
