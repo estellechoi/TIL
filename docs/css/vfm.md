@@ -1,4 +1,4 @@
-# VFM(Visual Formatting Model)
+# VFM(Visual Formatting Model): Overflow, Over-constrained, 유효한 여백주기
 
 <br>
 
