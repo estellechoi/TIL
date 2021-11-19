@@ -60,28 +60,32 @@ Lighthouse의 퍼포먼스 보고서는 다음과 같습니다. 주로 로딩 �
 
 PRPL 패턴은 Preload, Render, Pre-cache, Lazy load 4가지 전략을 묶어서 나타내는 말이고요, 각각은 다음을 의미합니다.
 
-- Preload : 가장 중요한 에셋들만 미리 로드
+- Preload : 가장 중요한 리소스들만 미리 로드
 - Render : 첫 번째 라우트 페이지를 가능한 빨리 렌더링
-- Pre-cahce : 남은 에셋들은 미리 캐싱
-- 나머지 라우트와 중요하지 않은 에셋들은 게으르게 로드
+- Pre-cahce : 남은 리소스들은 미리 캐싱
+- Lazy load : 나머지 라우트와 중요하지 않은 리소스들은 게으르게 로드
 
 <br>
 
 #### 3-1-1. Preload
 
-[Preload 전략](https://web.dev/preload-critical-assets/)은 말그대로 중요한 에셋들을 미리 로드시키는 방법입니다. 페이지가 로드되기 전에 CSS와 같은 중요한 에셋들을 먼저 로드시키고, 화면이 렌더링될 때 미리 준비된 에셋들을 바로 사용하겠다는 전략입니다.
-
-<br>
-
-아래와 같이 CSS 파일을 로드하는 `<link>` 태그에 `preload` 값을 지정하면 이 전략을 쉽게 구사할 수 있습니다.
+[Preload 전략](https://web.dev/preload-critical-assets/)은 말그대로 중요한 리소스들을 미리 로드시키는 방법입니다. 정말 단순하게, `<head>` 태그 내에서 리소스 파일을 로드하는 `<link>` 태그에 `preload` 값을 지정하면 쉽게 구사할 수 있습니다.
 
 ```html
-<link rel="preload" as="style" href="css/style.css" />
+<head>
+    <link rel="preload" as="style" href="css/style.css" />
+</head>
 ```
+
+<br />
+
+`rel="preload"` 속성은 브라우저에게 이 리소스가 미리 로드되어야한다고 알려줍니다. 이 속성을 통해 브라우저는 해당 리소스의 존재를 미리 인지하고, 다른 리소스들과 동시에 로드를 진행하는 등 가장 효율적인 타이밍에 이 파일을 요청할 수 있게 됩니다. 만약 이 속성을 지정하지 않으면, 브라우저는 HTML 페이지를 완전히 로드한 후에 뒤늦게 해당 리소스를 순차적으로 로드합니다. 따라서 전체 로딩시간이 길어지게 됩니다.
 
 <br>
 
-위와 같이 지정하여 CSS 파일이 먼저 로드되더라도 `window.onload` 이벤트의 발생 시점이 늦춰지지는 않습니다. `rel="preload"` 속성은 단순히 브라우저에게 이 에셋이 매우 중요하기 때문에 먼저 로드되어야한다고 알려주는 역할만 하기 때문입니다. 브라우저는 이 파일의 존재를 미리 인지하기 때문에 다른 파일과 동시에 로드를 진행하는 등 가장 효율적인 타이밍에 이 파일을 미리 로드할 수 있게 됩니다. 그렇지 않으면, 브라우저는 HTML 페이지를 먼저 완전히 로드하고, 이 파일의 존재를 뒤늦게 발견하기 때문에 순차적으로 로드하면서 전체 로딩시간이 길어지게 됩니다.
+다음은 [Preload key requests](https://web.dev/uses-rel-preload/) 문서에서 발췌한 설명입니다.
+
+> The potential savings are based on how much earlier the browser would be able to start the requests if you declared preload links. For example, if app.js takes 200ms to download, parse, and execute, the potential savings for each resource is 200ms since app.js is no longer a bottleneck for each of the requests.
 
 <br>
 
@@ -92,3 +96,4 @@ PRPL 패턴은 Preload, Render, Pre-cache, Lazy load 4가지 전략을 묶어서
 - [Lighthouse performance scoring](https://web.dev/performance-scoring/)
 - [Ensure text remains visible during webfont load](https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools)
 - [Avoid enormous network payloads](https://web.dev/total-byte-weight/?utm_source=lighthouse&utm_medium=devtools)
+- [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
