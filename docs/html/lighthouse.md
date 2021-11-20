@@ -105,4 +105,5 @@ Preload 전략을 구사할 때 주의할 점이 있습니다. 리소스 파일 
 - [Lighthouse performance scoring](https://web.dev/performance-scoring/)
 - [Ensure text remains visible during webfont load](https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools)
 - [Avoid enormous network payloads](https://web.dev/total-byte-weight/?utm_source=lighthouse&utm_medium=devtools)
+- [Preload critical assets to improve loading speed](https://web.dev/preload-critical-assets/)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
