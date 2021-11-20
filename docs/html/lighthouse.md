@@ -5,6 +5,7 @@
 1. Lighthouse
 2. Brotli, Gzip으로 텍스트 압축하기
 3. 네트워크 페이로드 사이즈 줄이기
+4. PRPL 패턴
 
 <br>
 
@@ -44,7 +45,7 @@ Lighthouse의 퍼포먼스 보고서는 다음과 같습니다. 주로 로딩 �
 
 <br>
 
-## 3. 네트워크 페이로드 사이즈 줄이기
+## 3. 네트워크 전송 사이즈 줄이기
 
 웹페이지에서 요청하는 네트워크 전송 사이즈의 적정 수준은 `1,700` ~ `1,900` KiB 입니다. 통상적으로 `1,600` KiB를 넘지 않도록 하는 것이 좋습니다. 그래야 3G 네트워크 환경에서도 사용자가 10초 이내에 콘텐츠를 볼 수 있기 때문입니다. 네트워크 전송 사이즈를 줄이는 방법에는 다음과 같은 것들이 있습니다.
 
@@ -56,7 +57,7 @@ Lighthouse의 퍼포먼스 보고서는 다음과 같습니다. 주로 로딩 �
 
 <br>
 
-### 3-1. PRPL 패턴
+## 4. PRPL 패턴
 
 PRPL 패턴은 Preload, Render, Pre-cache, Lazy load 4가지 전략을 묶어서 나타내는 말이고요, 각각은 다음을 의미합니다.
 
@@ -67,25 +68,33 @@ PRPL 패턴은 Preload, Render, Pre-cache, Lazy load 4가지 전략을 묶어서
 
 <br>
 
-#### 3-1-1. Preload
+### 4-1. Preload
 
-[Preload 전략](https://web.dev/preload-critical-assets/)은 말그대로 중요한 리소스들을 미리 로드시키는 방법입니다. 정말 단순하게, `<head>` 태그 내에서 리소스 파일을 로드하는 `<link>` 태그에 `preload` 값을 지정하면 쉽게 구사할 수 있습니다.
+[Preload 전략](https://web.dev/preload-critical-assets/)은 말그대로 중요한 리소스들을 미리 로드시키는 방법입니다. 정말 단순하게, `<head>` 태그 내에서 리소스 파일을 로드하는 `<link>` 태그에 `preload` 값을 지정하면 쉽게 구사할 수 있습니다. 이때 리소스의 종류에 따라 로딩 우선순위가 달라지기 때문에 `as` 속성을 사용하여 리소스 종류를 명시해줘야합니다. [earprintResource Fetch Prioritization and Scheduling in Chromium](https://docs.google.com/document/d/1bCDuq9H1ih9iNjgzyAL0gpwNFiEP4TZS-YLRp_RuMlc/edit) 문서에서는 Chrome 브라우저에서 다양한 리소스 타입들이 어떻게 분류되고, 어떤 종류의 리소스부터 로딩이 시작되는지에 대한 표를 제공합니다.
+
+<br>
 
 ```html
 <head>
-    <link rel="preload" as="style" href="css/style.css" />
+	<link rel="preload" as="style" href="css/style.css" />
 </head>
 ```
 
 <br />
 
-`rel="preload"` 속성은 브라우저에게 이 리소스가 미리 로드되어야한다고 알려줍니다. 이 속성을 통해 브라우저는 해당 리소스의 존재를 미리 인지하고, 다른 리소스들과 동시에 로드를 진행하는 등 가장 효율적인 타이밍에 이 파일을 요청할 수 있게 됩니다. 만약 이 속성을 지정하지 않으면, 브라우저는 HTML 페이지를 완전히 로드한 후에 뒤늦게 해당 리소스를 순차적으로 로드합니다. 따라서 전체 로딩시간이 길어지게 됩니다.
+`rel="preload"` 속성은 브라우저에게 이 리소스가 미리 로드되어야한다고 알려줍니다. 이 속성을 통해 브라우저는 해당 리소스의 존재를 미리 인지할 수 있기 때문에, HTML 파일이 완전히 로드될 때까지 기다리는 것이 아니라 필요한 리소스들을 동시에 로드할 수 있게 됩니다. 만약 이 속성을 지정하지 않으면, HTML 페이지 로드가 완료된 후에 뒤늦게 해당 리소스를 순차적으로 로드합니다. 이때 로드되는 리소스가 무겁다면 화면 렌더링이 지연되면서 사용자가 체감하는 로딩 시간이 길어지고요, 물론 실제 총 로딩시간 역시 길어지게 되죠. 따라서 웹앱에서 중요하게 사용되는 CSS, JavaScript, 폰트, 이미지 파일들은 대부분 Preload 하는 것이 좋습니다.
 
 <br>
 
 다음은 [Preload key requests](https://web.dev/uses-rel-preload/) 문서에서 발췌한 설명입니다.
 
 > The potential savings are based on how much earlier the browser would be able to start the requests if you declared preload links. For example, if app.js takes 200ms to download, parse, and execute, the potential savings for each resource is 200ms since app.js is no longer a bottleneck for each of the requests.
+
+<br>
+
+### Preload 주의사항
+
+Preload 전략을 구사할 때 주의할 점이 있습니다. 먼저 CSS 파일 내에서 사용되는 폰트나 배경 이미지 파일들은 해당 CSS 파일이 완전히 로드되고 파싱된 이후에나 브라우저에 의해 발견된다는 것입니다. CSS 파일이 파싱될 때까지 기다리지 않고 폰트와 이미지 파일을 Preload 시킨다면, CSS 파일이 해석된 이후 추가적인 리소스에 대한 로드시간이 없기 때문에 바로 화면 렌더링을 시작할 수 있겠죠.
 
 <br>
 
