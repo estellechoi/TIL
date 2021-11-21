@@ -92,9 +92,44 @@ PRPL 패턴은 Preload, Render, Pre-cache, Lazy load 4가지 전략을 묶어서
 
 <br>
 
-### Preload 주의사항
+### CSS, 폰트 Preload
 
-Preload 전략을 구사할 때 주의할 점이 있습니다. 리소스 파일 내에서 참조하는 다른 리소스 파일이 함께 Preload 되지 않는다는 사실입니다. 가령, CSS 파일 내에서 사용되는 폰트나 배경 이미지 파일들은 해당 CSS 파일이 완전히 로드되고 파싱된 이후에나 브라우저에 의해 발견됩니다. CSS 파일이 파싱될 때까지 기다리지 않고 폰트와 이미지 파일을 동시에 로드시키려면 따로 Preload 처리를 해줘야합니다. 그렇게하면 CSS 파일이 해석된 이후 추가적인 리소스에 대한 로드시간이 없기 때문에 바로 화면 렌더링을 시작할 수 있겠죠.
+#### 리소스 in 리소스
+
+Preload 전략을 구사할 때 주의할 점이 있습니다. 리소스 파일 내에서 참조하는 다른 리소스 파일이 함께 Preload 되지 않는다는 사실입니다. 가령, CSS 파일 내에서 사용되는 폰트나 배경 이미지 파일들은 해당 CSS 파일이 완전히 로드되고 파싱된 이후에나 브라우저에 의해 발견됩니다. CSS 파일이 파싱될 때까지 기다리지 않고 폰트와 이미지 파일을 동시에 로드시키려면 별도로 Preload 처리를 해줘야합니다. 그래야 CSS 파일이 해석된 이후 추가적인 리소스에 대한 로드시간이 없기 때문에 바로 화면 렌더링을 시작할 수 있겠죠.
+
+<br>
+
+예를 들어 폰트 파일은 CSS 파일 내에서 `@import` 룰을 사용하기보다, `<link>` 태그를 사용하여 직접 Preload 하는 것이 좋겠죠. [Preload web fonts to improve loading speed
+](https://web.dev/codelab-preload-web-fonts/) 문서가 도움이 되었습니다.
+
+#### 폰트를 위한 `crossorigin`
+
+폰트 파일의 경우 아래와 같이 `crossorigin` 속성을 지정합니다. `crossorigin` 속성을 지정하지 않으면 이 파일은 불필요하게 두 번 Fetch 되기 때문입니다. 자세한 내용은 W3C Recommendation 문서 [4.9. Font fetching requirements](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements) 섹션에서 확인할 수 있습니다.
+
+```html
+<link
+	rel="preload"
+	href="ComicSans.woff2"
+	as="font"
+	type="font/woff2"
+	crossorigin
+/>
+```
+
+<br>
+
+### Webpack을 사용하여 JavaScript 모듈 Preload 하기
+
+[Webpack](https://webpack.js.org/) 4.6.0 버전부터는 Preload를 지원합니다. `import()` 메소드 내에서 [마법 주석](https://webpack.js.org/api/module-methods/#magic-comments)으로 Preload를 선언하는 방식입니다.
+
+```javascript
+import(_/* webpackPreload: true */_ "CriticalChunk")
+```
+
+<br>
+
+이전 버전의 Webpack을 사용해야한다면 [preload-webpack-plugin](https://github.com/GoogleChromeLabs/preload-webpack-plugin) 플러그인을 사용할 수 있습니다.
 
 <br>
 
