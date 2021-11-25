@@ -4,7 +4,10 @@
 
 1. Lighthouse 퍼포먼스 리포트
 2. Preload: CSS, 폰트, 이미지, JavaScript 모듈, Vue에서 Preload 설정하기
-3. Brotli, Gzip으로 텍스트 압축하기
+3. FCP를 빠르게: JavaScript를 비동기 로드하기, 인라인 CSS와 `preload`, CSS Minify, Preconnect, SSR
+4. Pre-cache: Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
+5. Lazy load
+6. Brotli, Gzip으로 텍스트 압축하기
 
 <br>
 
@@ -50,7 +53,7 @@ Lighthouse의 퍼포먼스 리포트는 다음과 같습니다. 주로 로딩 �
 
 <br>
 
-## 2. Preload: CSS, 폰트, 이미지, JavaScript 모듈
+## 2. Preload: CSS, 폰트, 이미지, JavaScript 모듈, Vue에서 Preload 설정하기
 
 [Preload](https://web.dev/preload-critical-assets/)는 [PRPL 패턴](https://web.dev/apply-instant-loading-with-prpl/)에 포함된 퍼포먼스 전략 중 하나입니다. 말 그대로 곧 사용하게 될 리소스들을 미리 로드하는 개념인데요, HTML 페이지가 완전히 로드된 후에 필요한 CSS, JavaScipt 파일 등을 순차적으로 로드하는 것이 아니라, 페이지 렌더링이 시작되기 전, 그러니까 페이지가 로드되는 동안 필요한 리소스들도 동시에 미리 로드시킬 수 있습니다. 이렇게 하면 페이지 렌더링이 시작되었을 때 리소스들을 지체없이 바로 바로 사용할 수 있겠죠.
 
@@ -109,21 +112,6 @@ CSS 파일을 Preload 할 때 주의할 점이 있습니다. 리소스 파일 �
 	as="font"
 	type="font/woff2"
 	crossorigin
-/>
-```
-
-<br>
-
-만약 웹폰트를 사용한다면 아래와 같이 `preconnect` 속성을 사용하여 폰트 서버와의 연결을 미리 시도합니다.
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	rel="preload"
-	as="font"
-	crossorigin
-	href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
 />
 ```
 
@@ -188,7 +176,124 @@ module.exports = {
 
 <br>
 
-## 3. Brotli, Gzip으로 텍스트 압축하기
+## 3. FCP를 빠르게: JavaScript를 비동기 로드하기, 인라인 CSS와 `preload`, CSS Minify, Preconnect, SSR
+
+PRPL 패턴의 두 번째 전략인 [Render](https://web.dev/apply-instant-loading-with-prpl/#render-the-initial-route-as-soon-as-possible)는 `Render the initial route as soon as possible`을 의미합니다. 일반적으로 로딩 속도가 성능 자체에 집중하는 개념이라면 초기 렌더링 시점을 앞당기는 것은 사용자가 체감하는 앱 성능을 높이는데 중점을 둡니다. 이를 포함하여 사용자 관점에서 앱의 성능을 측정하는 [사용자 중심 성능 메트릭](https://web.dev/user-centric-performance-metrics/#first_paint_and_first_contentful_paint)이라는 개념이 있는데요, 여기에 포함되는 여러 성능 메트릭 중 [First Contentful Paint(FCP)](https://web.dev/fcp/)는 페이지가 로드되기 시작한 시점부터 페이지 콘텐츠의 일부가 화면에 렌더링될 때까지의 시간을 측정하는 지표입니다. FCP가 빠르면 사용자가 페이지에서 뭔가가 진행되고 있음을 인지해 안심하게 만들 수 있기 때문에 매우 중요한 지표이고요, FCP가 1.8초 이내면 좋다고 판단합니다.
+
+<br>
+
+<img src="fcp.png" />
+
+사진 출처: [First Contentful Paint(최초 콘텐츠풀 페인트, FCP)](https://web.dev/fcp/)
+
+<br>
+
+### 3-1. JavaScript를 비동기 로드하기
+
+FCP를 개선하는 방법은 다양한데요, 가장 기본적으로 인라인 스크립트를 제외한 나머지 JavaScript 파일 링크에 [`async`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async) 속성을 사용하여 JavaScript를 로드하되, HTML 문서 분석을 막지 않도록 합니다.
+
+```html
+<script
+	async
+	crossorigin="anonymous"
+	src="https://example.com/example-framework.js"
+></script>
+```
+
+<br>
+
+### 3-2. 인라인 CSS와 `preload`, CSS Minify
+
+페이지의 첫 번째 렌더링에 필요한 CSS만 `<head>` 태그 내에 인라인으로 작성하고, 나머지는 `preload` 속성을 사용하여 비동기 방식으로 로드합니다. [Defer non-critical CSS](https://web.dev/defer-non-critical-css/) 문서에서 자세한 내용을 설명합니다.
+
+```html
+<link rel="preload" href="/css/styles.css" as="style" />
+<noscript><link rel="stylesheet" href="styles.css" /></noscript>
+<style type="text/css">
+	* {
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+</style>
+```
+
+<br>
+
+그다음, CSS 파일 내에 불필요한 여백을 모두 제거하여 브라우저에 전송하는 CSS 파일 사이즈를 최소화합니다. [Webpack](https://webpack.js.org/)과 같은 번들러를 사용하여 간단하게 할 수 있습니다. 자세한 내용은 [Minify CSS](https://web.dev/minify-css/) 문서를 확인해보세요.
+
+<br>
+
+### 3-3. Preconnect
+
+써드파티 리소스를 사용한다면 `preconnect` 속성을 사용하여 브라우저가 써드파티 [오리진]()에 대한 정보를 미리 얻고, 가장 빠른 시점에 써드파티 서버에 연결을 시도하도록 할 수 있습니다. 만약 웹폰트를 사용한다면 아래와 같이 폰트 서버에 연결해야함을 브라우저에 미리 알려줍니다.
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
+	rel="stylesheet"
+/>
+```
+
+<br>
+
+`dns-prefetch` 속성은 DNS 검색까지만 진행하지만, 브라우저 호환 범위가 넓어 Fallback으로 사용합니다.
+
+```html
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+```
+
+<br>
+
+#### 주의할 점
+
+하지만 써드파티 서버에 연결 후 리소스를 10초 내에 사용하지 않는 경우라면, Preconnect를 사용하지 않는 것이 좋습니다. 페이지가 최초로 로드되고 렌더링 되는 중요한 시점에 CPU에 상당한 부담을 주는 작업이기 때문입니다. 일반적으로 `preload` 속성을 지정하는 것만으로 충분합니다.
+
+<br>
+
+### 3-4. SSR
+
+SSR, 서버 사이드 렌더링은 그 이름대로 서버에서 HTML 문서를 렌더링하여 클라이언트에 응답하는 방식입니다. SSR은 기본적으로 FCP를 빠르게 하는데요, 브라우저에 렌더링이 완료된 페이지를 응답하기 때문에 브라우저 입장에서는 사용하지도 않는 모든 CSS, JavaScript를 로드하고 탐색할 필요성이 완전히 제거되기 때문이죠.
+
+<br>
+
+[Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web) 문서에서 더 자세한 내용을 확인할 수 있고요, 다음은 일부 설명을 발췌한 것입니다.
+
+> Server rendering generally produces a fast First Paint (FP) and First Contentful Paint (FCP). Running page logic and rendering on the server makes it possible to avoid sending lots of JavaScript to the client, which helps achieve a fast Time to Interactive (TTI). This makes sense, since with server rendering you’re really just sending text and links to the user’s browser.
+
+<br>
+
+## 4. Pre-cache: Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
+
+### 4-1. Service Worker, Cache Storage API 사용하기
+
+Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리소스를 캐싱하여 불필요한 로딩을 줄이고 FCP를 개선할 수 있습니다. 프론트엔드에서 캐싱은 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage API](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)를 사용하여 구현할 수 있습니다. [Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/) 문서에서 자세한 내용을 확인할 수 있고요, [Workbox](https://web.dev/workbox/)와 같은 Service Worker 구성 자동화 도구를 사용할 수 있습니다.
+
+<br>
+
+### 4-2. `Cache-Control` 응답 헤더 설정
+
+HTTP 응답 헤더 중 [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)를 사용하여 브라우저가 리소스를 얼마나 오랫동안 [캐싱](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)해야하는지 명시할 수 있습니다.
+
+```
+Cache-Control: max-age=31536000
+```
+
+<br>
+
+Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control` 응답 헤더가 우선이라는 점에 유의해야 합니다. [Serve static assets with an efficient cache policy](https://web.dev/uses-long-cache-ttl/) 문서에 따르면, 서버에 리소스를 요청하는 메커니즘에서 캐시에서 해당 리소스를 보관중인지 먼저 체크하기 때문이죠.
+
+> When populating the Cache Storage API cache, the browser defaults to checking for existing entries in the HTTP cache, and uses those if found.
+
+<br>
+
+## 5. Lazy load
+
+<br>
+
+## 6. Brotli, Gzip으로 텍스트 압축하기
 
 - [Gzip 아시나요? 그러면 Brotli는요?](https://snyung.com/content/2021-02-11--Brotli) 블로그 글이 도움이 되었습니다.
 
@@ -205,3 +310,4 @@ module.exports = {
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
 - [Preloading modules](https://developers.google.com/web/updates/2017/12/modulepreload)
 - [Webpack and Dynamic Imports: Doing it Right](https://medium.com/front-end-weekly/webpack-and-dynamic-imports-doing-it-right-72549ff49234)
+- [Fast load times](https://web.dev/fast/#prioritize-resources)
