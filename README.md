@@ -92,7 +92,6 @@
 - [Barcode Detection API](./docs/web-api/barcode-detection.md)
 - [VR 서비스를 위한 웹 API](./docs/web-api/vr.md)
 - [PWA(Progressive Web App)](https://github.com/estellechoi/TIL/blob/master/docs/web-api/pwa.md)
-- [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
 - [Intersection Observer API](https://github.com/estellechoi/TIL/blob/master/docs/web-api/IntersectionObserver.md)
 - [File API - 웹에서 파일 다루기](https://github.com/estellechoi/TIL/blob/master/docs/web-api/howToUsefiles.md)
 - [이벤트 전파와 이벤트 핸들링](https://github.com/estellechoi/TIL/blob/master/docs/web-api/event.md)
@@ -113,6 +112,12 @@
 ### Vue
 
 - [Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
+
+<br>
+
+### 3D
+
+- [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
 
 <br>
 
