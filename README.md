@@ -10,10 +10,9 @@
 
 ### Design System
 
-- [개발자를 위한 디자인 시스템](./docs/design-system/intro.md) \*
-- [개발자를 위한 디자인 시스템 Foundation 1 - 컬러(Color)](./docs/design-system/color-system.md)
-- [개발자를 위한 디자인 시스템 Foundation 2 - 그리드(Grid)](./docs/design-system/grid.md)
-- [개발자를 위한 디자인 시스템 Foundation 3 - 타이포그래피(Typography)](./docs/design-system/typography.md)
+- [개발자를 위한 디자인 시스템 1: 파운데이션과 철학, 컬러](./docs/design-system/color-system.md)
+- [개발자를 위한 디자인 시스템 2: 그리드(Grid)](./docs/design-system/grid.md)
+- [개발자를 위한 디자인 시스템 3: 타이포그래피(Typography)](./docs/design-system/typography.md)
 
 <br>
 
