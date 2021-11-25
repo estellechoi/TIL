@@ -2,15 +2,15 @@
 
 🌎 Today I learned
 
-> `*`-marked item is under research or revision, so it would be fine NOT TO READ it.
+\*-marked item is a work in progress, so it would be good NOT TO READ it.
 
 <br>
 
-## 0. UI Design
+## 0. UX
 
 ### Design System
 
-- [개발자를 위한 디자인 시스템](./docs/design-system/intro.md)
+- [개발자를 위한 디자인 시스템](./docs/design-system/intro.md) \*
 - [개발자를 위한 디자인 시스템 Foundation 1 - 컬러(Color)](./docs/design-system/color-system.md)
 - [개발자를 위한 디자인 시스템 Foundation 2 - 그리드(Grid)](./docs/design-system/grid.md)
 - [개발자를 위한 디자인 시스템 Foundation 3 - 타이포그래피(Typography)](./docs/design-system/typography.md)
@@ -22,25 +22,35 @@
 ### GIT
 
 - [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
-- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md)
+- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
 
 <br>
 
 ## 2. Web Front-end
 
+### SEO & Performance
+
+- [Lighthouse 퍼포먼스 점수 올리기](./docs/html/lighthouse.md)
+- [검색엔진최적화(SEO): Meta, Sitemap, RSS](./docs/html/seo.md)
+- [[번역] 마이크로데이터(Microdata)와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/docs/html/microdata.md)
+
+<br>
+
+### Accessibility
+
+- [How to get web-accessibility highly achieved](https://github.com/estellechoi/TIL/blob/master/docs/html/webaccess.md) \*
+
+<br>
+
 ### HTML
 
-- [검색엔진최적화(SEO)](./docs/html/seo.md)
-- [Lighthouse 퍼포먼스 점수 올리기](./docs/html/lighthouse.md)
-- [DOCTYPE, `<head>` 태그, 검색엔진 최적화(Search Engine Optimization)](https://github.com/estellechoi/TIL/blob/master/docs/html/doctype.md)
+- [DOCTYPE, `<head>`, SEO](https://github.com/estellechoi/TIL/blob/master/docs/html/doctype.md)
+- [HTML 태그, 시멘틱 마크업](https://github.com/estellechoi/TIL/blob/master/docs/html/semantic.md)
 - [블록(Block) / 인라인(Inline) 요소](https://github.com/estellechoi/TIL/blob/master/docs/html/blockInline.md)
 - [이미지와 멀티미디어 태그(Image and multimedia tags)](https://github.com/estellechoi/TIL/blob/master/docs/html/multimedia.md)
 - [테이블 태그(Table content tags)](https://github.com/estellechoi/TIL/blob/master/docs/html/table.md)
 - [전역 속성(Global Attributes)](https://github.com/estellechoi/TIL/blob/master/docs/html/attribute-global.md)
 - [특수기호(Entities)](https://github.com/estellechoi/TIL/blob/master/docs/html/entity.md)
-- [HTML tags - stay semantic](https://github.com/estellechoi/TIL/blob/master/docs/html/semantic.md)
-- [How to stay with web-accessiblity highly achieved](https://github.com/estellechoi/TIL/blob/master/docs/html/webaccess.md) \*
-- [[번역] 마이크로데이터(Microdata)와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/docs/html/microdata.md)
 
 <br>
 
