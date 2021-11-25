@@ -182,7 +182,7 @@ PRPL 패턴의 두 번째 전략인 [Render](https://web.dev/apply-instant-loadi
 
 <br>
 
-<img src="./../img/fcp.png" />
+<img src="./../img/fcp.svg" />
 
 사진 출처: [First Contentful Paint(최초 콘텐츠풀 페인트, FCP)](https://web.dev/fcp/)
 
