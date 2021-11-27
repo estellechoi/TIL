@@ -288,7 +288,7 @@ async function registerServiceWorker() {
 			const reg = await navigator.serviceWorker.register(
 				"./service-worker.js",
 				{
-					scope: "./sw-test/",
+					scope: "./",
 				}
 			);
 
