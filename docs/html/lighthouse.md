@@ -267,15 +267,35 @@ SSR, 서버 사이드 렌더링은 그 이름대로 서버에서 HTML 문서를 
 
 ## 4. Pre-cache: Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
 
+Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리소스를 캐싱하고 재활용함으로써 불필요한 로딩을 줄이는 방식으로 FCP를 개선할 수 있습니다.
+
+<br>
+
 ### 4-1. Service Worker, Cache Storage API 사용하기
 
-Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리소스를 캐싱하여 불필요한 로딩을 줄이고 FCP를 개선할 수 있습니다. 프론트엔드에서 캐싱은 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage API](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)를 사용하여 구현할 수 있습니다. [Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/) 문서에서 자세한 내용을 확인할 수 있고요, [Workbox](https://web.dev/workbox/)와 같은 Service Worker 구성 자동화 도구를 사용할 수 있습니다.
+프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 맡은 임무들을 수행하는 일종의 인터셉터를 말합니다. 이 Service Worker가 수행할 일들은 `service-worker.js`와 같은 파일에 작성하게 되는데요, 여기에서 Cache Storage API를 사용하여 HTTP 요청과 응답 정보를 캐시에 저장하는 방식으로 구현합니다.
+
+```javascript
+// service-worker.js
+
+// ..
+
+// 캐시를 열고
+const cache = await caches.open("my-cache");
+
+// data.json 요청에 대한 응답 데이터를 받으면 캐시에 저장
+cache.add(new Request("/data.json"));
+```
+
+<br>
+
+[Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/) 문서에서 더 자세한 사용법을 확인할 수 있습니다. [Workbox](https://web.dev/workbox/)와 같은 도구를 사용하여 Service Worker를 자동으로 구성할 수도 있고요.
 
 <br>
 
 ### 4-2. `Cache-Control` 응답 헤더 설정
 
-HTTP 응답 헤더 중 [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)를 사용하여 브라우저가 리소스를 얼마나 오랫동안 [캐싱](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)해야하는지 명시할 수 있습니다.
+HTTP 응답 헤더 중 [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)를 사용하여 브라우저가 리소스를 얼마나 오랫동안 [캐싱](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)해야하는지 명시할 수 있습니다. 특히 버전이 있는 리소스를 관리하는 측면에서 유용한데요, 캐싱 유효기간이 남아있더라도 리소스 URL의 버전 정보가 바뀌면 새로운 리소스로 인지하여 업데이트된 리소스를 바로 가져오기 때문이죠.
 
 ```
 Cache-Control: max-age=31536000
