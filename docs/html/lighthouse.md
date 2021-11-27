@@ -273,7 +273,38 @@ Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리
 
 ### 4-1. Service Worker, Cache Storage API 사용하기
 
-프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 맡은 임무들을 수행하는 일종의 인터셉터를 말합니다. 이 Service Worker가 수행할 일들은 `service-worker.js`와 같은 파일에 작성하게 되는데요, 여기에서 Cache Storage API를 사용하여 HTTP 요청과 응답 정보를 캐시에 저장하는 방식으로 구현합니다.
+프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 맡은 임무들을 수행하는 일종의 인터셉터를 말합니다. 이 Service Worker가 수행할 일들은 `service-worker.js` 파일에 작성하게 되는데요 (파일 이름은 상관없으므로 무시하세요), 여기에서 Cache Storage API를 사용하여 HTTP 요청과 응답 정보를 캐시에 저장하는 방식입니다. 수행할 일들이 작성된 `service-worker.js` 파일은 `navigator.serviceWorker.register()` 메소드를 사용하여 앱의 Service Worker로 등록합니다.
+
+<br>
+
+#### Service Worker 등록
+
+```javascript
+// app.js
+
+async function registerServiceWorker() {
+	if ("serviceWorker" in navigator) {
+		try {
+			const reg = await navigator.serviceWorker.register(
+				"./service-worker.js",
+				{
+					scope: "./sw-test/",
+				}
+			);
+
+			// ..
+		} catch (e) {
+			// ..
+		}
+	}
+}
+
+registerServiceWorker();
+```
+
+<br>
+
+#### 캐시에 서버응답 저장
 
 ```javascript
 // service-worker.js
@@ -289,7 +320,28 @@ cache.add(new Request("/data.json"));
 
 <br>
 
-[Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/) 문서에서 더 자세한 사용법을 확인할 수 있습니다. [Workbox](https://web.dev/workbox/)와 같은 도구를 사용하여 Service Worker를 자동으로 구성할 수도 있고요.
+#### 캐시로부터 데이터 회수하기
+
+`Cache.match()` 메소드는 캐시에 저장되어있는 지난 HTTP 요청 정보 중 현재 요청과 일치하는 요청이 있는 지 검사하고, 있다면 해당 요청에 대한 응답 데이터를 반환합니다. 이때 요청 URL, [`Vary`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary) 요청 헤더, 메소드(`GET`, `POST` 등), 쿼리 스트링을 모두 검사합니다.
+
+```javascript
+// service-worker.js
+
+// ..
+
+const options = {
+	ignoreSearch: false,
+	ignoreMethod: false,
+	ignoreVary: true,
+};
+
+// 일치하는 요청에 대한 응답 데이터를 반환
+const response = await cache.match(request, options);
+```
+
+<br>
+
+[Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/), [Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) 문서에서 더 자세한 사용법을 확인할 수 있습니다. [Workbox](https://web.dev/workbox/)와 같은 도구를 사용하여 Service Worker를 자동으로 구성할 수도 있고요.
 
 <br>
 
