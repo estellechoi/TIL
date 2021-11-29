@@ -6,7 +6,7 @@
 2. Preload: CSS, 폰트, 이미지, JavaScript 모듈, Vue에서 Preload 설정하기
 3. FCP를 빠르게: JavaScript를 비동기 로드하기, 인라인 CSS와 `preload`, CSS Minify, Preconnect, SSR
 4. Pre-cache: Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
-5. Lazy load
+5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 (`lazysizes` 사용하기)
 6. Brotli, Gzip으로 텍스트 압축하기
 
 <br>
@@ -361,7 +361,44 @@ Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control
 
 <br>
 
-## 5. Lazy load
+## 5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 (`lazysizes` 사용하기)
+
+### 5-1. 동적 임포트로 JavaScript 번들 쪼개기
+
+[동적 임포트](https://v8.dev/features/dynamic-import)를 사용하여 초기 렌더링에 사용되지 않는 모듈들을 별도의 번들로 쪼갤 수 있습니다. 그리고 꼭 필요한 시점에 필요한 모듈만 "게으르게" 로드하는거죠. 아래와 같이 어떤 모듈을 [정적 임포트](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)하면, `app.js`가 로드되는 시점에 해당 모듈도 함께 로드됩니다. 모듈이 실제로 사용되던 사용되지 않던 말이죠.
+
+```javascript
+// app.js
+import moduleA from "a";
+```
+
+<br>
+
+하지만 아래와 같이 `import()` 동적 임포트 구문을 사용하면, `app.js`와 `moduleA`의 로딩을 독립적으로 관리할 수 있습니다. 다음과 같이 특정 조건 하에서만 모듈을 동적으로 로드할 수 있기 때문입니다.
+
+```javascript
+// app.js
+try {
+	if (isSubmitted) {
+		const moduleA = await import("a.moduleA");
+		const module = moduleA.default; // using the default export
+
+		// ..
+	}
+} catch (e) {
+	// ..
+}
+```
+
+<br>
+
+### 5-2. 게으른 이미지 (`lazysizes` 사용하기)
+
+[`lazysizes`](https://github.com/aFarkas/lazysizes)는 이미지의 Lazy load를 도와주는 라이브러리입니다. [Use lazysizes to lazy-load images](https://web.dev/use-lazysizes-to-lazyload-images/) 문서가 도움이 되었습니다.
+
+<br>
+
+Research in progress..
 
 <br>
 
