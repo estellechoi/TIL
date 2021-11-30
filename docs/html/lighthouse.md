@@ -6,7 +6,7 @@
 2. Preload: CSS, 폰트, 이미지, JavaScript 모듈, Vue에서 Preload 설정하기
 3. FCP를 빠르게: JavaScript를 비동기 로드하기, 인라인 CSS와 `preload`, CSS Minify, Preconnect, SSR
 4. Pre-cache: Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
-5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 (`lazysizes` 사용하기)
+5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 `loading=lazy`
 6. Brotli, Gzip으로 텍스트 압축하기
 
 <br>
@@ -361,7 +361,7 @@ Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control
 
 <br>
 
-## 5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 (`lazysizes` 사용하기)
+## 5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 `loading=lazy`
 
 ### 5-1. 동적 임포트로 JavaScript 번들 쪼개기
 
@@ -392,13 +392,35 @@ try {
 
 <br>
 
-### 5-2. 게으른 이미지 (`lazysizes` 사용하기)
+### 5-2. 게으른 이미지 `loading=lazy`
 
-[`lazysizes`](https://github.com/aFarkas/lazysizes)는 이미지의 Lazy load를 도와주는 라이브러리입니다. [Use lazysizes to lazy-load images](https://web.dev/use-lazysizes-to-lazyload-images/) 문서가 도움이 되었습니다.
+`<img>` 태그에 `loading=lazy` 속성값을 지정하여 이미지를 게으르게 로딩할 수 있습니다. 브라우저는 해당 이미지를 Fetch는 하되, 로딩은 하지 않습니다. 이후 해당 이미지가 뷰포트에 들어오기 직전, [계산된 영역](https://web.dev/browser-level-image-lazy-loading/#distance-from-viewport-thresholds) 내에 들어오면 자동으로 로딩을 시작합니다. `lazy` 대신 `eager` 값을 지정하면 반대로 동작합니다. 이미지의 위치를 고려하지 않고 즉시 로드하죠.
+
+```html
+<img
+	src="/img/sample.png"
+	alt="Sample image"
+	width="200"
+	height="200"
+	loading="lazy"
+/>
+```
 
 <br>
 
-Research in progress..
+"계산된 영역"은 이미지 타입, [Lite 모드](https://blog.chromium.org/2019/04/data-saver-is-now-lite-mode.html) 활성화 여부, [네트워크 연결 타입](https://googlechrome.github.io/samples/network-information/)와 같은 요인들에 의해 결정됩니다. 예를 들어 Chrome의 경우 4G 네트워크 환경 기준, 이미지가 뷰포트 하단으로부터 `1250px` 영역 내로 들어오면 로딩을 시작합니다. 이미지가 뷰포트에 들어오기 전에 미리 로딩하는 이유는 당연히 사용자 경험을 더 부드럽게 할 수 있기 때문이겠죠. 다음은 [Browser-level image lazy-loading for the web](https://web.dev/browser-level-image-lazy-loading/#distance-from-viewport-thresholds) 문서에서 발췌한 설명입니다.
+
+> Chromium's implementation of lazy-loading tries to ensure that offscreen images are loaded early enough so that they have finished loading once the user scrolls near to them. By fetching nearby images before they become visible in the viewport, we maximize the chance they are already loaded by the time they become visible.
+
+<br>
+
+게으른 로딩을 사용할 때는 `<img>` 태그에 `width`, `height` 속성값을 지정하거나, `style` 속성으로 인라인 스타일을 작성하는 것이 권장됩니다. 브라우저가 이미지 렌더링을 위해 확보해야 할 공간 사이즈에 대한 정보를 미리 제공하여 [레이아웃 이동](https://web.dev/cls/) 현상을 피할 수 있기 때문입니다. 사용자가 미세한 레이아웃 이동이라도 인지하게 되면 안좋은 사용자 경험이 되겠죠? [Do This to Improve Image Loading on Your Website](https://www.youtube.com/watch?v=4-d_SoCHeWE) 영상에서 자세한 설명을 시청할 수 있습니다.
+
+<br>
+
+#### Fallback
+
+예전에는 [Intersection Observer](https://developers.google.com/web/updates/2016/04/intersectionobserver)와 같은 웹API를 사용하여 JavaScript로 구현해야했지만, 이제 대부분의 브라우저에서 `loading` 속성을 지원합니다. 구버전 브라우저를 위해 Fallbak을 제공하려면 [`lazysizes`](https://github.com/aFarkas/lazysizes) 라이브러리를 사용해보세요. 이미지의 게으른 로딩을 도와주는 라이브러리이고요, [Use lazysizes to lazy-load images](https://web.dev/use-lazysizes-to-lazyload-images/) 문서가 도움이 되었습니다.
 
 <br>
 
