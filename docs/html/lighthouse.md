@@ -190,7 +190,7 @@ PRPL 패턴의 두 번째 전략인 [Render](https://web.dev/apply-instant-loadi
 
 ### 3-1. JavaScript를 비동기 로드하기
 
-FCP를 개선하는 방법은 다양한데요, 가장 기본적으로 인라인 스크립트를 제외한 나머지 JavaScript 파일 링크에 [`async`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async) 속성을 사용하여 JavaScript를 로드하되, HTML 문서 분석을 막지 않도록 합니다.
+FCP를 개선하는 방법은 다양한데요, 가장 기본적으로 JavaScript를 불러오는 `<script>` 태그에 [`async`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async) 속성을 사용하여 JavaScript를 비동기 로드합니다. `async` 속성을 지정하면, HTML 문서 분석을 멈추지 않고 JavaScript 로딩을 비동기로 동시에 진행합니다.
 
 ```html
 <script
