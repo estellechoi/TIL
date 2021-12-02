@@ -190,7 +190,7 @@ PRPL 패턴의 두 번째 전략인 [Render](https://web.dev/apply-instant-loadi
 
 ### 3-1. JavaScript를 비동기 로드하기
 
-FCP를 개선하는 방법은 다양한데요, 가장 기본적으로 JavaScript를 불러오는 `<script>` 태그에 [`async`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async) 속성을 사용하여 JavaScript를 비동기 로드합니다. `async` 속성을 지정하면, HTML 문서 분석을 멈추지 않고 JavaScript 로딩을 비동기로 동시에 진행합니다.
+FCP를 개선하는 방법은 다양한데요, 가장 기본적으로 JavaScript를 불러오는 `<script>` 태그에 [`async`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async) 속성을 지정하여 JavaScript를 비동기 로드하는 방법이 있습니다. `async` 속성을 지정하면, 해당 스크립트와 의존성을 모두 비동기 로드합니다. 이 속성의 핵심은 브라우저가 HTML 문서를 분석하는 중에 `<script>` 태그를 만나더라도, HTML 문서 분석을 멈추지 않고 계속 진행하면서 JavaScript를 동시에 Fetch 한다는 것입니다.
 
 ```html
 <script
@@ -199,6 +199,16 @@ FCP를 개선하는 방법은 다양한데요, 가장 기본적으로 JavaScript
 	src="https://example.com/example-framework.js"
 ></script>
 ```
+
+<br>
+
+#### `async` vs. `defer`
+
+[`defer`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-defer)와의 차이점은 이렇습니다. 자세한 내용은 [<script>: The Script element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async) 문서를 참고하세요.
+
+- `defer` 속성은 [`DOMContentLoaded`](https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event) 이벤트 발생을 막을 수 있습니다. `DOMContentLoaded` 이벤트가 발생하기 전에 로드한 JavaScript를 실행해야하기 때문입니다.
+
+- `defer` 속성은 JavaScript 모듈을 불러올 때 아무런 효과가 없습니다. JavaScript 모듈은 디폴트로 Defer 됩니다.
 
 <br>
 
