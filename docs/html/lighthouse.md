@@ -375,16 +375,7 @@ Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control
 
 ### 5-1. 동적 임포트로 JavaScript 번들 쪼개기
 
-[동적 임포트](https://v8.dev/features/dynamic-import)를 사용하여 초기 렌더링에 사용되지 않는 모듈들을 별도의 번들로 쪼갤 수 있습니다. 그리고 꼭 필요한 시점에 필요한 모듈만 "게으르게" 로드하는거죠. 아래와 같이 어떤 모듈을 [정적 임포트](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)하면, `app.js`가 로드되는 시점에 해당 모듈도 함께 로드됩니다. 모듈이 실제로 사용되던 사용되지 않던 말이죠.
-
-```javascript
-// app.js
-import moduleA from "a";
-```
-
-<br>
-
-하지만 아래와 같이 `import()` 동적 임포트 구문을 사용하면, `app.js`와 `moduleA`의 로딩을 독립적으로 관리할 수 있습니다. 다음과 같이 특정 조건 하에서만 모듈을 동적으로 로드할 수 있기 때문입니다.
+[SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA)를 빌드할 때, 초기 실행시 바로 로드할 모듈과 나중에 로드할 모듈을 나눌 수 있습니다. [Webpack](https://webpack.js.org/)의 [Code Splitting](https://webpack.js.org/guides/code-splitting/) 기능 중 하나인 [동적 임포트](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 문법을 사용하여 초기 렌더링에 사용되지 않는 모듈들을 별도의 번들로 쪼개고, 꼭 필요한 시점에 필요한 해당 번들을 "게으르게" 로드하는 방식이죠. 아래와 같이 동적 임포트 문법 `import()`를 사용하여 `app.js`와 `moduleA`을 서로 다른 번들에 포함시키고, 각 모듈을 독립적으로 로드할 수 있습니다. 특정 조건 하에서만 모듈을 동적으로 로드할 수 있죠.
 
 ```javascript
 // app.js
@@ -399,6 +390,23 @@ try {
 	// ..
 }
 ```
+
+<br>
+
+한편 JavaScript [정적 임포트](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 문법을 사용여 모듈을 임포트하면, 앱 초기 실행시 즉시 로드되는 메인 번들에 포함되기 때문에 `app.js`가 로드되는 시점에 해당 모듈도 함께 로드됩니다. 모듈이 실제로 사용되던 사용되지 않던 말이죠.
+
+```javascript
+// app.js
+import moduleA from "a";
+```
+
+<br>
+
+[Vue](https://vuejs.org/)를 사용한다면 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk) 문서를 참고하여, 라우트별 컴포넌트를 동적으로 로드할 수 있습니다.
+
+<br>
+
+참고로 [동적 임포트](https://v8.dev/features/dynamic-import)는 [ECMAScript 2020 명세에 포함](https://github.com/tc39/proposal-dynamic-import)되었습니다.
 
 <br>
 
