@@ -5,7 +5,7 @@
 1. Lighthouse 퍼포먼스 리포트
 2. Preload: CSS, 폰트, 이미지, JavaScript 모듈, Vue에서 Preload 설정하기
 3. FCP를 빠르게: JavaScript를 비동기 로드하기, 인라인 CSS와 `preload`, CSS Minify, Preconnect, SSR
-4. Pre-cache: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더 설정, Service Worker, Cache Storage API 사용하기
+4. Pre-cache: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더 설정, Service Worker, Cache Storage API 사용하기, Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
 5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 `loading=lazy`
 6. Brotli, Gzip으로 텍스트 압축하기
 
@@ -275,7 +275,7 @@ SSR, 서버 사이드 렌더링은 그 이름대로 서버에서 HTML 문서를 
 
 <br>
 
-## 4. Pre-cache: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더 설정, Service Worker, Cache Storage API 사용하기
+## 4. Pre-cache: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더 설정, Service Worker, Cache Storage API 사용하기, Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
 
 ### 4-1. HTTP 캐싱 메커니즘
 
@@ -362,15 +362,9 @@ Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control
 
 <br>
 
-#### 플러그인 사용하기
-
-보통 Service Worker를 자동으로 생성하고 등록해주는 [빌드 플러그인을 사용](https://web.dev/workbox/#how-should-you-use-workbox)합니다. 저처럼 Vue를 애용하신다면 [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-pwa/README.md) 플러그인을 사용할 수 있겠습니다. 이러한 플러그인의 역할 중 하나는 앱이 빌드될 때 Service Worker 파일을 자동으로 생성, 작성, 앱에 등록하는 것입니다. 플러그인에서 제공하는 옵션 설정을 통해 캐싱에 대한 로직을 관리하게 되고요. 이러한 플러그인의 원리는 내부적으로 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 사용하여 Service Worker를 만들어내고, 앱의 빌드 프로세스에 통합시키는 것입니다.
-
-<br>
-
 #### Service Worker 직접 등록하기
 
-플러그인을 사용할 수 없다면 직접 Service Worker 파일을 작성하고 등록할 수 있습니다. Service Worker 웹API를 직접 핸들링하면 되겠죠. 흔히 `service-worker.js`로 네이밍되는 파일을 만드시고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로서 작동하도록 등록하면 끝입니다.
+보통 앱의 빌드 시점에 Service Worker를 자동으로 생성하고 등록해주는 [플러그인을 사용](https://web.dev/workbox/#how-should-you-use-workbox)합니다. 플러그인을 사용할 수 없는 환경이라면 직접 Service Worker 파일을 작성하고 등록할 수 있습니다. Service Worker 웹API를 직접 핸들링하면 되겠죠. 흔히 `service-worker.js`로 네이밍되는 파일을 하나 만드시고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로서 등록하면 끝입니다.
 
 ```javascript
 // app.js
@@ -435,6 +429,70 @@ const response = await cache.match(request, options);
 <br>
 
 [Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/), [Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) 문서에서 더 자세한 사용법을 확인할 수 있습니다. [Workbox](https://web.dev/workbox/)와 같은 도구를 사용하여 Service Worker를 자동으로 구성할 수도 있고요.
+
+<br>
+
+### 4-4. Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
+
+Cache Storage API를 사용하는데는 그닥 유용하지 않지만, 만약 Vue([`@vue/cli`](https://cli.vuejs.org/)) 앱에서 Service Worker를 간단하게 관리하시려면 [`@vue/cli-plugin-pwa`](https://cli.vuejs.org/core-plugins/pwa.html#configuration) 플러그인을 사용할 수 있겠습니다. 이 플러그인의 역할 중 하나는 Service Worker 파일을 빌드 시점에 자동으로 생성하는 것입니다. 이 플러그인의 원리는 [Workbox](https://developers.google.com/web/tools/workbox) 기반으로 구성된 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 내부적으로 사용하여 Service Worker를 관리하고, Vue 앱의 빌드 프로세스에 통합시키는 것입니다. 하지만 Cache Storage, [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)와 같이 Service Worker의 기능들을 풍부하게 사용할 계획이라면, Workbox의 Service Worker 자동생성 기능을 사용하는데 한계가 있기 때문에 이 플러그인이 유용하지 않을 수 있습니다.
+
+<br>
+
+#### 설치하기
+
+이미 생성된 Vue 프로젝트가 있다면, 프로젝트 루트 경로에서 다음 명령어를 사용하여 `@vue/cli-plugin-pwa` 플러그인을 설치합니다.
+
+```
+vue add pwa
+```
+
+<br>
+
+이 플러그인을 설치해보니, 다음과 같은 변경들이 생겼습니다.
+
+- `package.json` 파일의 `devDependencies` 필드에 `@vue/cli-plugin-pwa` 플러그인이 추가됨
+- `src/` 경로에 `registerServiceWorker.js` 파일이 생성되고, 이 파일은 Service Worker 등록에 대한 로직을 담고 있음
+- `src/main.js` 파일에 `import './registerServiceWorker'` 라인이 추가됨
+- `public/` 경로에 `robots.txt` 파일이 생성됨 (**이미 이 파일이 있다면 덮으쓰므로 주의하세요**)
+- `public/img/icons` 경로에 PWA 구성에 요구되는 규격의 샘플 앱 아이콘 파일들이 생성됨
+
+<br>
+
+#### 설정하기
+
+이 플러그인은 크게 Service Worker에 대한 설정과, [Manifest](https://developer.mozilla.org/ko/docs/Web/Manifest)에 대한 설정을 지원합니다. 각 설정값들에 따라 Service Worker 파일과 Manifest 파일을 자동으로 생성해주고요. 설정은 다음의 두 가지 방법 중 하나를 택해서 진행하면 됩니다. 자세한 내용은 [공식문서](https://cli.vuejs.org/core-plugins/pwa.html#configuration)를 참고하세요.
+
+- `vue.config.js` 파일 내에서 `pwa` 속성에 접근
+- `package.json` 파일 `vue` 필드에서 `pwa` 속성에 접근
+
+<br>
+
+저는 `vue.config.js` 파일에서 설정을 관리했습니다. `workboxPluginMode` 속성 값으로 `GenerateSW`/`InjectManifest` 두 가지 모드를 지원하지만, [Push와 같은 Service Worker 기능들을 사용하려면 `InjectManifest` 모드를 사용해야합니다](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin). 참고로 `InjectManifest` 모드를 사용하면, 프로젝트에 존재하는 Service Worker 파일을 사용하므로 `workboxOptions.swSrc` 값을 필수적으로 지정해주어야합니다. 이때 플러그인 설치시 자동으로 생성된 `registerServiceWorker.js` 파일 내에서 Service Worker 등록에 사용되는 파일명과 일치해야하고요! 이 외 모든 `workboxOptions` 속성들은 [Workbox 공식문서](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest#InjectManifest)에서 확인할 수 있습니다.
+
+```javascript
+// vue.config.js
+
+module.exports = {
+  pwa: {
+    name: 'My App',
+    themeColor: '#4DBA87',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'default',
+	iconPaths: {
+		// ..
+	},
+	manifestOptions: {
+		// ..
+	},
+	workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'service-worker.js',
+    }
+	// ..
+  }
+}
+```
 
 <br>
 
