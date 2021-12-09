@@ -275,15 +275,29 @@ SSR, 서버 사이드 렌더링은 그 이름대로 서버에서 HTML 문서를 
 
 <br>
 
-## 4. Pre-cache: Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
+## 4. Pre-cache: HTTP 캐싱 메커니즘, Service Worker, Cache Storage API 사용하기, `Cache-Control` 응답 헤더 설정
 
-Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리소스를 캐싱하고 재활용함으로써 불필요한 로딩을 줄이는 방식으로 FCP를 개선할 수 있습니다.
+### 4-1. HTTP 캐싱 메커니즘
+
+Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리소스를 캐싱하고 재활용함으로써 불필요한 로딩을 줄이는 방식으로 FCP를 개선할 수 있습니다. [HTTP 캐싱](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)은 캐시(저장소)에 리소스의 복사본을 저장하고 있다가 요청 시에 서버로부터 리소스를 다시 다운로드하는 대신 해당 복사본을 반환하는 기술입니다. 다음 그림의 `Local (private) cache` 부분이 웹에서 가장 기본적으로 사용하게되는 사설 브라우저 캐시의 매커니즘입니다. 각 사용자의 최초 요청 시에는 서버까지 요청이 도달하여 리소스가 응답되지만, 이후 요청부터는 서버까지 요청이 전달되지 않고 브라우저 캐시에 저장되어있는 리소스의 복사본이 응답됩니다.
 
 <br>
 
-### 4-1. Service Worker, Cache Storage API 사용하기
+<img src="./../img/caching.png" />
 
-프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 다양한 일들을 수행하는 일종의 인터셉터입니다. 앱의 Service Worker로 등록된 파일에 Cache Storage API를 사용하여 캐싱을 매니징하는 코드를 작성하면 됩니다. Cache Storage API는 HTTP 요청과 응답 정보를 캐시에 저장하는 기능을 제공합니다. Service Worker 파일은 흔히 `service-worker.js`와 같이 네이밍되고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로 등록하게 됩니다.
+<br>
+
+캐시의 저장공간은 유한하기 때문에 모든 리소스를 영원히 누적하여 저장할 수는 없습니다. 때문에 캐시에 저장된 리소스들은 유효기간을 가집니다. 유효기간 만료 전에는 리소스가 유효(fresh)하고, 만료 후에는 실효(stale)하다고 말합니다. 실효된 리소스는 바로 축출되거나 무시되지 않습니다. 캐시가 실효된 리소스에 대한 요청을 받으면, 이 리소스가 아직 유효한지 확인하기 위해 서버에 요청을 보냅니다. 이때 [If-None-Match](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) 요청 헤더가 사용되고요, 아직 유효한 리소스라면 서버는 리소스를 응답하지 않고 [304 Not Modified](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/304) 헤더를 응답하여 트래픽을 절약합니다.
+
+<br>
+
+리소스의 유효기간은 응답 헤더에 따릅니다. `Cache-control: max-age=N` 헤더가 설정된 경우, 유효기간은 `N`과 동일합니다. 만약 이 헤더가 없다면, `Expires` 헤더가 있는지 없는지를 검사합니다. `Expires` 헤더가 존재한다면, 그것의 값에서 `Date` 헤더의 값을 뺀 결과가 유효기간이 됩니다.
+
+<br>
+
+### 4-2. Service Worker, Cache Storage API 사용하기
+
+프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 다양한 일들을 수행하는 일종의 인터셉터입니다. 앱의 Service Worker로 등록된 파일에 Cache Storage API를 사용하여 캐싱을 매니징하는 코드를 작성하면 됩니다. Cache Storage API는 HTTP 요청과 응답 정보를 캐시에 저장, 조회, 관리하는 기능을 제공합니다. Service Worker 파일은 흔히 `service-worker.js`와 같이 네이밍되고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로 등록하게 됩니다.
 
 <br>
 
@@ -355,7 +369,7 @@ const response = await cache.match(request, options);
 
 <br>
 
-### 4-2. `Cache-Control` 응답 헤더 설정
+### 4-3. `Cache-Control` 응답 헤더 설정
 
 HTTP 응답 헤더 중 [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)를 사용하여 브라우저가 리소스를 얼마나 오랫동안 [캐싱](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)해야하는지 명시할 수 있습니다. 특히 버전이 있는 리소스를 관리하는 측면에서 유용한데요, 캐싱 유효기간이 남아있더라도 리소스 URL의 버전 정보가 바뀌면 새로운 리소스로 인지하여 업데이트된 리소스를 바로 가져오기 때문이죠.
 
