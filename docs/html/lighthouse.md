@@ -364,7 +364,7 @@ Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control
 
 #### 플러그인 사용하기
 
-보통 Service Worker를 자동으로 생성하고 등록해주는 빌드 플러그인을 사용합니다. 저처럼 Vue를 애용하신다면 [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-pwa/README.md) 플러그인을 사용할 수 있겠습니다. 이러한 플러그인의 역할 중 하나는 앱이 빌드될 때 Service Worker 파일을 자동으로 생성, 작성, 앱에 등록하는 것입니다. 플러그인에서 제공하는 옵션 설정을 통해 캐싱에 대한 로직을 관리하게 되고요. 이러한 플러그인의 원리는 내부적으로 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 사용하여 Service Worker를 만들어내고, 앱의 빌드 프로세스에 통합시키는 것입니다.
+보통 Service Worker를 자동으로 생성하고 등록해주는 [빌드 플러그인을 사용](https://web.dev/workbox/#how-should-you-use-workbox)합니다. 저처럼 Vue를 애용하신다면 [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-pwa/README.md) 플러그인을 사용할 수 있겠습니다. 이러한 플러그인의 역할 중 하나는 앱이 빌드될 때 Service Worker 파일을 자동으로 생성, 작성, 앱에 등록하는 것입니다. 플러그인에서 제공하는 옵션 설정을 통해 캐싱에 대한 로직을 관리하게 되고요. 이러한 플러그인의 원리는 내부적으로 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 사용하여 Service Worker를 만들어내고, 앱의 빌드 프로세스에 통합시키는 것입니다.
 
 <br>
 
