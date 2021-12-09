@@ -289,7 +289,7 @@ Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리
 
 <br>
 
-캐시의 저장공간은 유한하기 때문에 모든 리소스를 영원히 누적하여 저장할 수는 없습니다. 때문에 캐시에 저장된 리소스들은 유효기간을 가집니다. 유효기간 만료 전에는 리소스가 유효(fresh)하고, 만료 후에는 실효(stale)하다고 말합니다. 실효된 리소스는 바로 축출되거나 무시되지 않습니다. 캐시가 실효된 리소스에 대한 요청을 받으면, 이 리소스가 아직 유효한지 확인하기 위해 서버에 요청을 보냅니다. 이때 [If-None-Match](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) 요청 헤더가 사용되고요, 아직 유효한 리소스라면 서버는 리소스를 응답하지 않고 [304 Not Modified](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/304) 헤더를 응답하여 트래픽을 절약합니다. 이 응답을 받으면 캐시는 리소스의 유효기간을 Refresh 합니다.
+캐시의 저장공간은 유한하기 때문에 모든 리소스를 영원히 누적하여 저장할 수는 없습니다. 때문에 캐시에 저장된 리소스들은 유효기간을 가집니다. 유효기간 만료 전에는 리소스가 유효(fresh)하고, 만료 후에는 실효(stale)하다고 말합니다. 실효된 리소스는 바로 축출되거나 무시되지 않습니다. 캐시가 실효된 리소스에 대한 요청을 받으면, 이 리소스가 아직 유효한지 확인하기 위해 서버에 요청을 보냅니다. 이때 [`If-None-Match`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) 요청 헤더가 사용되고요, 아직 유효한 리소스라면 서버는 리소스를 응답하지 않고 [`304 Not Modified`](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/304) 헤더를 응답하여 트래픽을 절약합니다. 이 응답을 받으면 캐시는 리소스의 유효기간을 Refresh 합니다.
 
 <br>
 
@@ -321,7 +321,7 @@ Cache-Control: no-cache
 
 #### 캐싱 유효기간 명시하기
 
-`Cache-Control: max-age=N` 헤더가 설정된 경우, 유효기간은 `N`과 동일합니다. 초단위(`s`)입니다. 만약 [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) 헤더가 있더라도, 이 설정값이 덮어씁니다. 이 설정값이 없다면, `Expires` 헤더가 있는지 없는지를 검사합니다. `Expires` 헤더가 존재한다면, 그것의 값에서 `Date` 헤더의 값을 뺀 결과가 유효기간이 됩니다.
+`Cache-Control: max-age=N` 헤더가 설정된 경우, 유효기간은 `N`과 동일합니다. 초단위(`s`)입니다. 만약 [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) 헤더가 있더라도, 이 설정값이 덮어씁니다. 이 설정값이 없다면, `Expires` 헤더가 있는지 없는지를 검사합니다. `Expires` 헤더가 존재한다면, 그것의 값에서 `Date` 헤더의 값을 뺀 결과가 유효기간이 됩니다. `Cache-Control: max-age=N`, `Expires` 헤더 모두 없다면 [Heuristic freshness checking](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#heuristic_freshness_checking)에 따라 유효기간이 계산됩니다.
 
 ```
 Cache-Control: max-age=31536000
@@ -329,13 +329,9 @@ Cache-Control: max-age=31536000
 
 <br>
 
-`Cache-Control: max-age=N`, `Expires` 헤더 모두 없다면 [Heuristic freshness checking](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#heuristic_freshness_checking)에 따라 유효기간이 계산됩니다.
-
-<br>
-
 #### 실효 리소스 검증하기
 
-실효된 리소스에 대한 요청을 받으면, 검증합니다.
+[실효된 리소스에 대한 요청](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#freshness)을 받으면, 검증합니다.
 
 ```
 Cache-Control: must-revalidate
@@ -360,15 +356,21 @@ Cache-Control: private
 
 <br>
 
-Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control` 응답 헤더가 우선이라는 점에 유의해야 합니다. [Serve static assets with an efficient cache policy](https://web.dev/uses-long-cache-ttl/) 문서에 따르면, 서버에 리소스를 요청하는 메커니즘에서 캐시에서 해당 리소스를 보관중인지 먼저 체크하기 때문이죠.
+Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control` 응답 헤더 설정을 무시할 수는 없습니다. [Serve static assets with an efficient cache policy](https://web.dev/uses-long-cache-ttl/) 문서에 따르면, 어떤 리소스에 대한 요청이 있을 때 브라우저는 무조건 브라우저 캐시에 해당 리소스의 복사본이 존재하는지 체크하기 때문이죠.
 
 > When populating the Cache Storage API cache, the browser defaults to checking for existing entries in the HTTP cache, and uses those if found.
 
 <br>
 
-#### Service Worker 등록
+#### 플러그인 사용하기
 
-Service Worker 파일은 흔히 `service-worker.js`와 같이 네이밍되고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로 등록하게 됩니다.
+보통 Service Worker를 자동으로 생성하고 등록해주는 빌드 플러그인을 사용합니다. 저처럼 Vue를 애용하신다면 [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-pwa/README.md) 플러그인을 사용할 수 있겠습니다. 이러한 플러그인의 역할 중 하나는 앱이 빌드될 때 Service Worker 파일을 자동으로 생성, 작성, 앱에 등록하는 것입니다. 플러그인에서 제공하는 옵션 설정을 통해 캐싱에 대한 로직을 관리하게 되고요. 이러한 플러그인의 원리는 내부적으로 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 사용하여 Service Worker를 만들어내고, 앱의 빌드 프로세스에 통합시키는 것입니다.
+
+<br>
+
+#### Service Worker 직접 등록하기
+
+플러그인을 사용할 수 없다면 직접 Service Worker 파일을 작성하고 등록할 수 있습니다. Service Worker 웹API를 직접 핸들링하면 되겠죠. 흔히 `service-worker.js`로 네이밍되는 파일을 만드시고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로서 작동하도록 등록하면 끝입니다.
 
 ```javascript
 // app.js
