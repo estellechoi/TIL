@@ -283,7 +283,7 @@ Pre-cache(미리 캐싱하기)는 PRPL 패턴의 세 번째 전략입니다. 리
 
 ### 4-1. Service Worker, Cache Storage API 사용하기
 
-프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 맡은 임무들을 수행하는 일종의 인터셉터를 말합니다. 이 Service Worker가 수행할 일들은 `service-worker.js` 파일에 작성하게 되는데요 (파일 이름은 상관없으므로 무시하세요), 여기에서 Cache Storage API를 사용하여 HTTP 요청과 응답 정보를 캐시에 저장하는 방식입니다. 수행할 일들이 작성된 `service-worker.js` 파일은 `navigator.serviceWorker.register()` 메소드를 사용하여 앱의 Service Worker로 등록합니다.
+프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 다양한 일들을 수행하는 일종의 인터셉터입니다. 앱의 Service Worker로 등록된 파일에 Cache Storage API를 사용하여 캐싱을 매니징하는 코드를 작성하면 됩니다. Cache Storage API는 HTTP 요청과 응답 정보를 캐시에 저장하는 기능을 제공합니다. Service Worker 파일은 흔히 `service-worker.js`와 같이 네이밍되고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로 등록하게 됩니다.
 
 <br>
 
