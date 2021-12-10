@@ -496,6 +496,40 @@ module.exports = {
 
 <br>
 
+#### 테스트
+
+이 플러그인에서 다루는 Service Worker 파일은 프로덕션 모드, 그러니까 `process.env.NODE_ENV === 'production'` 일 때만 작동하므로, 로컬에서 테스트하려면 앱을 프로덕션 빌드하고 [`serve`](https://yarnpkg.com/package/serve#readme)와 같은 HTTP 서버로 실행하여 테스트해볼 수 있겠습니다.
+
+
+```zsh
+# 저의 경우 다음 명령어가 실행됩니다 : cross-env NODE_ENV=production vue-cli-service build --modern
+yarn build
+```
+
+<br>
+
+저는 앞으로도 `serve`를 계속 사용해보기 위해 전역 설치했습니다.
+
+```zsh
+yarn global add serve
+```
+
+<br>
+
+빌드 결과물이 `dist` 경로에 있다고 가정하고, `serve`를 사용해서 실행합니다.
+
+```zsh
+# -s 플래그는 SPA 모드로 실행하라는 의미입니다
+serve -s dist
+```
+
+<br>
+
+그다음, Service Worker가 HTTPS에서만 작동하므로 [ngrok](https://ngrok.com/)을 사용해서 HTTPS 환경에서 테스트했습니다.
+
+<br>
+
+
 ## 5. Lazy load: 동적 임포트로 JavaScript 번들 쪼개기, 게으른 이미지 `loading=lazy`
 
 ### 5-1. 동적 임포트로 JavaScript 번들 쪼개기
