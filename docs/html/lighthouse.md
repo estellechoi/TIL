@@ -496,7 +496,7 @@ module.exports = {
 
 <br>
 
-#### 테스트
+#### 테스트하기
 
 이 플러그인에서 다루는 Service Worker 파일은 프로덕션 모드, 그러니까 `process.env.NODE_ENV === 'production'` 일 때만 작동하므로, 로컬에서 테스트하려면 앱을 프로덕션 빌드하고 [`serve`](https://yarnpkg.com/package/serve#readme)와 같은 HTTP 서버로 실행하여 테스트해볼 수 있겠습니다.
 
