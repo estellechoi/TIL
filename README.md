@@ -29,7 +29,10 @@
 
 ### SEO & Performance
 
-- [Lighthouse 퍼포먼스 점수 올리기](./docs/html/lighthouse.md)
+- [Lighthouse 퍼포먼스 점수 올리기 1: Lighthouse란, FCP를 빠르게, CSS, 폰트, 이미지, JavaScript 로드 최적화](./docs/html/lighthouse1-nobundler.md)
+- [Lighthouse 퍼포먼스 점수 올리기 2: Vue에서 Webpack 활용하기](./docs/html/lighthouse2-webpack.md)
+- [Lighthouse 퍼포먼스 점수 올리기 3: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더 설정, Service Worker, Cache Storage API 사용하기, Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`](./docs/html/lighthouse3-precache.md)
+- [Lighthouse 퍼포먼스 점수 올리기 4: 압축, SSR](./docs/html/lighthouse4-minify.md)
 - [검색엔진최적화(SEO): Meta, Sitemap, RSS](./docs/html/seo.md)
 - [[번역] 마이크로데이터(Microdata)와 함께 Schema.org 시작하기](https://github.com/estellechoi/TIL/blob/master/docs/html/microdata.md)
 
