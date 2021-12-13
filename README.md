@@ -8,6 +8,13 @@
 
 ## 0. UX
 
+### Graphic Inspiration
+
+- [It's Nice That](https://www.itsnicethat.com/)
+- [Are.na](https://www.are.na/)
+
+<br>
+
 ### Design System
 
 - [개발자를 위한 디자인 시스템 1: 파운데이션과 철학, 컬러](./docs/design-system/color-system.md)
