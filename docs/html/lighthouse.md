@@ -619,3 +619,5 @@ import moduleA from "a";
 - [Preloading modules](https://developers.google.com/web/updates/2017/12/modulepreload)
 - [Webpack and Dynamic Imports: Doing it Right](https://medium.com/front-end-weekly/webpack-and-dynamic-imports-doing-it-right-72549ff49234)
 - [Fast load times](https://web.dev/fast/#prioritize-resources)
+- [Vue.js Performance | Vue School](https://vueschool.io/articles/series/vue-js-performance/)
+- [Mastering Browser Cache | Vue School](https://vueschool.io/articles/vuejs-tutorials/vue-js-performance-mastering-cache/)
