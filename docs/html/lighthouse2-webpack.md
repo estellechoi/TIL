@@ -5,7 +5,8 @@
 1. Vue에서 Preload 설정하기
 2. SPA를 빠르게: Webpack의 번들링 원리, 코드 분할(Code Splitting)
 3. 동적 임포트: `import()`, 정적 임포트
-4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+4. Webpack `SplitChunksPlugin`을 사용하여 써드파티 모듈도 분할하기
+5. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
 
 <br>
 
@@ -122,9 +123,34 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 <br>
 
-## 4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+## 4. Webpack `SplitChunksPlugin`을 사용하여 써드파티 모듈도 분할하기
 
-### 4-1. Webpack 동적 임포트 활용
+앱을 빌드하면 메인 번들인 `app.[hash].js`와 별도로 `chunk-vendors.[hash].js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. Webpack의 코드 분할 효과를 극대화하려면 이 라이브러리들을 담고있는 번들도 분할해주어야합니다.
+
+<br>
+
+Webpack 설정을 통해 간단히 할 수 있습니다. [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/) 문서를 참고하여 분할 설정을 해주면 됩니다. Vue의 Webpack 설정 파일인 `vue.config.js` 파일을 사용한다면 아래와 같이 `configureWebpack` 필드에 작성하면 되겠죠. `chunks: 'all'`은 모든 번들에 대해 분할 기능을 적용하겠다는 의미입니다.
+
+```javascript
+// vue.config.js
+
+module.exports = {
+	// ..
+	configureWebpack: {
+		optimization: {
+			splitChunks: {
+				chunks: 'all'
+			}
+		}
+	}
+}
+```
+
+<br>
+
+## 5. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+
+### 5-1. Webpack 동적 임포트 활용
 
 이번에는 Vue 앱의 컴포넌트들을 라우트별로 동적 로드하는 방법을 소개합니다. 일명 라우트 기반 번들 쪼개기인데요, 사용자가 특정 URL에 대해 라우팅을 요청하면 해당 라우트에 필요한 컴포넌트만 로드할 수 있게 하는겁니다. 위에서 살펴본 Webpack의 동적 임포트를 활용해서요. 자세한 내용은 공식문서인 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)를 참고하세요.
 
@@ -162,7 +188,7 @@ const routes = [
 
 <br>
 
-### 4-2. 번들 네이밍과 그루핑
+### 5-2. 번들 네이밍과 그루핑
 
 만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 두 컴포넌트에 `home`이라고 지정하면, `Home`과 `About` 컴포넌트는 `home.[hash].js` 번들에 함께 포함됩니다.
 
@@ -183,3 +209,4 @@ const About = () => import(/* webpackChunkName: "home" */ './About.vue');
 - [Vue.js Router Performance](https://vueschool.io/articles/vuejs-tutorials/vue-js-router-performance/)
 - [Lazy Loading Routes | Vue Router](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
+- [웹팩5(Webpack) 설정하기 | zerocho.com](https://www.zerocho.com/category/Webpack/post/58aa916d745ca90018e5301d)
