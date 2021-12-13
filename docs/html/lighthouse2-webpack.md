@@ -123,7 +123,7 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 ### 3-3. Vue 라우트 컴포넌트를 동적으로 임포트하기
 
-[Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk) 문서를 참고하여, Vue 앱의 라우트별 컴포넌트를 동적으로 로드할 수 있습니다.
+이번에는 Vue 앱의 라우트별 컴포넌트를 동적으로 로드하는 방법을 소개합니다. 위에서 살펴본 Webpack의 동적 임포트를 활용합니다. 자세한 내용은 공식문서인 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)를 참고하세요.
 
 <br>
 
@@ -136,7 +136,7 @@ const Home = () => import('./Home.vue');
 <br>
 
 
-만약 아래와 같이 [`webpackChunkName`]() 주석을 사용하면, 해당 모듈이 포함된 번들의 이름을 관리할 수 있습니다.
+만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 `home`이라고 지정하면, 이 `Home` 컴포넌트가 포함된 번들의 이름은 `home.[hash].js`가 됩니다.
 
 ```javascript
 const Home = () => import(/* webpackChunkName: "home" */ './Home.vue');
@@ -150,13 +150,13 @@ const Home = () => import(/* webpackChunkName: "home" */ './Home.vue');
 // router/index.js
 
 const router = new VueRouter({
-  routes: [{ path: '/foo', component: Foo }]
+  routes: [{ path: '/', component: Home }]
 })
 ```
 
 <br>
 
-이제 `Home` 컴포넌트가 포함된 번들은 아래와 같이 `Home` 컴포넌트가 실제로 필요할 때만 로드됩니다.
+이제 `Home` 컴포넌트가 포함된 번들은 아래와 같이 `Home` 컴포넌트가 실제로 사용될 때만 로드됩니다.
 
 ```html
 <home />
