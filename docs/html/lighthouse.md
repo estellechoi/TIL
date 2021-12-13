@@ -352,7 +352,11 @@ Cache-Control: private
 
 ### 4-3. Service Worker, Cache Storage API 사용하기
 
-프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 다양한 일들을 수행하는 일종의 인터셉터입니다. 앱의 Service Worker로 등록된 파일에 Cache Storage API를 사용하여 캐싱을 매니징하는 코드를 작성하면 됩니다. Cache Storage API는 HTTP 요청과 응답 정보를 캐시에 저장, 조회, 관리하는 기능을 제공합니다.
+프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 다양한 일들을 수행하는 일종의 인터셉터입니다. 앱의 Service Worker로 등록된 JavaScript 파일에 Cache Storage API를 사용하여 캐싱을 매니징하는 코드를 작성하면 됩니다. Cache Storage API는 HTTP 요청과 응답 정보를 캐시에 저장, 조회, 관리하는 기능을 제공합니다.
+
+<br>
+
+<img src="./../img/service-worker.png" width="700" />
 
 <br>
 
@@ -621,3 +625,4 @@ import moduleA from "a";
 - [Fast load times](https://web.dev/fast/#prioritize-resources)
 - [Vue.js Performance | Vue School](https://vueschool.io/articles/series/vue-js-performance/)
 - [Mastering Browser Cache | Vue School](https://vueschool.io/articles/vuejs-tutorials/vue-js-performance-mastering-cache/)
+- [The 100% correct way to split your chunks with Webpack](https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758)
