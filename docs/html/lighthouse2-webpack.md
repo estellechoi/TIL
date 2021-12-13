@@ -4,7 +4,8 @@
 
 1. Vue에서 Preload 설정하기
 2. SPA를 빠르게: Webpack의 번들링 원리, 코드 분할(Code Splitting)
-3. 동적 임포트: `import()`, 정적 임포트, Vue 라우트 컴포넌트를 동적으로 임포트하기
+3. 동적 임포트: `import()`, 정적 임포트
+4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
 
 <br>
 
@@ -76,7 +77,7 @@ module.exports = {
 
 <br>
 
-## 3. 동적 임포트: `import()`, 정적 임포트, Vue 라우트 컴포넌트를 동적으로 임포트하기
+## 3. 동적 임포트: `import()`, 정적 임포트
 
 ### 3-1. `import()`
 
@@ -121,45 +122,54 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 <br>
 
-### 3-3. Vue 라우트 컴포넌트를 동적으로 임포트하기
+## 4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
 
-이번에는 Vue 앱의 라우트별 컴포넌트를 동적으로 로드하는 방법을 소개합니다. 위에서 살펴본 Webpack의 동적 임포트를 활용합니다. 자세한 내용은 공식문서인 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)를 참고하세요.
+### 4-1. Webpack 동적 임포트 활용
+
+이번에는 Vue 앱의 컴포넌트들을 라우트별로 동적 로드하는 방법을 소개합니다. 일명 라우트 기반 번들 쪼개기인데요, 사용자가 특정 URL에 대해 라우팅을 요청하면 해당 라우트에 필요한 컴포넌트만 로드할 수 있게 하는겁니다. 위에서 살펴본 Webpack의 동적 임포트를 활용해서요. 자세한 내용은 공식문서인 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)를 참고하세요.
 
 <br>
 
-아래와 같이 `import()` 문법을 사용하여 컴포넌트 함수를 선언합니다.
+만약 컴포넌트 임포트가 아래와 같이 작성되어있다면, 컴포넌트들을 정적으로 임포트하고 있는겁니다. 실제로 사용자가 `/about` 경로에 접근하지 않더라도, `About` 컴포넌트는 앱이 실행될 때 무조건 로드됩니다.
 
 ```javascript
-const Home = () => import('./Home.vue');
+// router.js
+
+import Home from './Home.vue'
+import About from './About.vue'
+
+const routes = [
+  { path: '/', component: Home }
+  { path: '/about', component: About }
+]
 ```
 
 <br>
 
+위 코드는 아래와 같이 Webpack의 `import()` 문법을 사용하여 바꿀 수 있습니다. 이제 사용자가 `/about` 경로에 접근했기 때문에 `About` 컴포넌트가 실제로 사용되어야 할 때만 `About` 컴포넌트가 포함된 번들이 로드됩니다.
 
-만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 `home`이라고 지정하면, 이 `Home` 컴포넌트가 포함된 번들의 이름은 `home.[hash].js`가 됩니다.
+```javascript
+// router.js
+
+const Home = () => import('./Home.vue')
+const About = () => import('./About.vue')
+
+const routes = [
+  { path: '/', component: Home }
+  { path: '/about', component: About }
+]
+```
+
+<br>
+
+### 4-2. 번들 네이밍과 그루핑
+
+만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 두 컴포넌트에 `home`이라고 지정하면, `Home`과 `About` 컴포넌트는 `home.[hash].js` 번들에 함께 포함됩니다.
 
 ```javascript
 const Home = () => import(/* webpackChunkName: "home" */ './Home.vue');
-```
+const About = () => import(/* webpackChunkName: "home" */ './About.vue');
 
-<br>
-
-이제 위에서 선언한 `Home` 컴포넌트를 아래와 같이 `VueRouter` 옵션 중 `component` 속성의 값으로 지정하면 됩니다.
-
-```javascript
-// router/index.js
-
-const router = new VueRouter({
-  routes: [{ path: '/', component: Home }]
-})
-```
-
-<br>
-
-이제 `Home` 컴포넌트가 포함된 번들은 아래와 같이 `Home` 컴포넌트가 실제로 사용될 때만 로드됩니다.
-
-```html
-<home />
 ```
 
 <br>
@@ -170,5 +180,6 @@ const router = new VueRouter({
 
 - [Webpack and Dynamic Imports: Doing it Right](https://medium.com/front-end-weekly/webpack-and-dynamic-imports-doing-it-right-72549ff49234)
 - [Lazy loading and code splitting in Vue.js](https://vueschool.io/articles/vuejs-tutorials/lazy-loading-and-code-splitting-in-vue-js/)
+- [Vue.js Router Performance](https://vueschool.io/articles/vuejs-tutorials/vue-js-router-performance/)
 - [Lazy Loading Routes | Vue Router](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
