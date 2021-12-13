@@ -80,20 +80,24 @@ module.exports = {
 
 ### 3-1. `import()`
 
-Webpack의 코드 분할 기능 중 하나인 [동적 임포트](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 문법을 사용하여 초기 렌더링에 사용되지 않는 JavaScript 모듈들을 별도의 번들로 분리하고, 꼭 필요한 시점에 필요한 해당 번들을 "게으르게" 로드하는 방식이죠. 아래와 같이 동적 임포트 문법 `import()`를 사용하여 `app.js`와 `moduleA`을 서로 다른 번들에 포함시키고, 각 모듈을 독립적으로 로드할 수 있습니다. 특정 조건 하에서만 모듈을 동적으로 로드할 수 있죠.
+아시다시피 JavaScript의 기본 임포트 문법은 아래와 같습니다. 이는 정적 임포트 방식입니다. `moduleA`은 Webpack의 의존성 그래프에서 `main.js`의 노드로 추가되고, 앱의 최종 JavaScript 번들인 `app.[hash].js`에 포함되므로 앱의 초기 실행 시 함께 로드됩니다.
 
 ```javascript
-// app.js
-try {
-	if (isSubmitted) {
-		const moduleA = await import("a.moduleA");
-		const module = moduleA.default; // using the default export
+// main.js
+import moduleA from "a";
+```
 
-		// ..
-	}
-} catch (e) {
+<br>
+
+Webpack의 코드 분할 기능 중 하나인 [동적 임포트](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 문법인 `import()`를 사용하면, 초기 렌더링에 사용되지 않는 JavaScript 모듈들을 별도의 번들로 분리할 수 있습니다. `import()` 메소드는 `Promise` 객체를 반환한다는 점에 유의하시고요. 동적으로 임포트되는 `moduleA`와 이 모듈 내에서 의존하는 또다른 모듈들은 앱 빌드시 `app.[hash].js` 번들에 포함되지 않고 별도의 번들로 분리됩니다. 이 별도로 분리된 번들은 앱 초기 실행시 로드되지 않고요, 해당 모듈이 필요해지면 그제서야 "게으르게" 로드됩니다.
+
+```javascript
+// main.js
+if (isSubmitted) {
+	const moduleA = await import("a.moduleA");
+	const module = moduleA.default; // using the default export
+
 	// ..
-}
 ```
 
 <br>
@@ -113,17 +117,6 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 <br>
 
-### 3-2. 정적 임포트
-
-한편 JavaScript [정적 임포트](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 문법을 사용여 모듈을 임포트하면, 앱 초기 실행시 즉시 로드되는 메인 번들에 포함되기 때문에 `app.js`가 로드되는 시점에 해당 모듈도 함께 로드됩니다. 모듈이 실제로 사용되던 사용되지 않던 말이죠.
-
-```javascript
-// app.js
-import moduleA from "a";
-```
-
-<br>
-
 참고로 [동적 임포트](https://v8.dev/features/dynamic-import) 구문이 [ECMAScript 2020 명세에 포함](https://github.com/tc39/proposal-dynamic-import)되었습니다.
 
 <br>
@@ -134,10 +127,48 @@ import moduleA from "a";
 
 <br>
 
+아래와 같이 `import()` 문법을 사용하여 컴포넌트 함수를 선언합니다.
+
+```javascript
+const Home = () => import('./Home.vue');
+```
+
+<br>
+
+
+만약 아래와 같이 [`webpackChunkName`]() 주석을 사용하면, 해당 모듈이 포함된 번들의 이름을 관리할 수 있습니다.
+
+```javascript
+const Home = () => import(/* webpackChunkName: "home" */ './Home.vue');
+```
+
+<br>
+
+이제 위에서 선언한 `Home` 컴포넌트를 아래와 같이 `VueRouter` 옵션 중 `component` 속성의 값으로 지정하면 됩니다.
+
+```javascript
+// router/index.js
+
+const router = new VueRouter({
+  routes: [{ path: '/foo', component: Foo }]
+})
+```
+
+<br>
+
+이제 `Home` 컴포넌트가 포함된 번들은 아래와 같이 `Home` 컴포넌트가 실제로 필요할 때만 로드됩니다.
+
+```html
+<home />
+```
+
+<br>
+
 ---
 
 ### References
 
 - [Webpack and Dynamic Imports: Doing it Right](https://medium.com/front-end-weekly/webpack-and-dynamic-imports-doing-it-right-72549ff49234)
 - [Lazy loading and code splitting in Vue.js](https://vueschool.io/articles/vuejs-tutorials/lazy-loading-and-code-splitting-in-vue-js/)
+- [Lazy Loading Routes | Vue Router](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
