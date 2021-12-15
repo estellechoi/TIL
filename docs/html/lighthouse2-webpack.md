@@ -140,11 +140,11 @@ module.exports = {
 	configureWebpack: {
 		optimization: {
 			splitChunks: {
-				chunks: 'all'
-			}
-		}
-	}
-}
+				chunks: "all",
+			},
+		},
+	},
+};
 ```
 
 <br>
@@ -194,9 +194,8 @@ const routes = [
 만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 두 컴포넌트에 `home`이라고 지정하면, `Home`과 `About` 컴포넌트는 `home.[hash].js` 번들에 함께 포함됩니다.
 
 ```javascript
-const Home = () => import(/* webpackChunkName: "home" */ './Home.vue');
-const About = () => import(/* webpackChunkName: "home" */ './About.vue');
-
+const Home = () => import(/* webpackChunkName: "home" */ "./Home.vue");
+const About = () => import(/* webpackChunkName: "home" */ "./About.vue");
 ```
 
 <br>
@@ -215,19 +214,20 @@ Vue의 Webpack 설정 파일인 `vue.config.js`에서 플러그인으로 추가�
 
 ```javascript
 // vue.config.js
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
 	// ..
-  plugins: [new BundleAnalyzerPlugin()]
-}
+	plugins: [new BundleAnalyzerPlugin()],
+};
 ```
 
 <br>
 
 이제 `vue-cli-service build`를 실행하면 다음과 같이 분석 결과를 확인할 수 있습니다.
 
-<img src="./../img/webpack-bundle-analyzer" />
+<img src="./../img/webpack-bundle-analyzer.png" />
 
 <br>
 
