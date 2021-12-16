@@ -240,5 +240,7 @@ module.exports = {
 - [Vue.js Router Performance](https://vueschool.io/articles/vuejs-tutorials/vue-js-router-performance/)
 - [Lazy Loading Routes | Vue Router](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)
 - [How to Reduce Your Vue.JS Bundle Size With Webpack - Jennifer Bland](https://medium.com/js-dojo/how-to-reduce-your-vue-js-bundle-size-with-webpack-3145bf5019b7)
+- [Code Splitting With Vue.js And Webpack - Anthony Gore](https://vuejsdevelopers.com/2017/07/03/vue-js-code-splitting-webpack/)
+- [3 Code Splitting Patterns For VueJS and Webpack - Anthony Gore](https://vuejsdevelopers.com/2017/07/08/vue-js-3-ways-code-splitting-webpack/)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
 - [웹팩5(Webpack) 설정하기 | zerocho.com](https://www.zerocho.com/category/Webpack/post/58aa916d745ca90018e5301d)
