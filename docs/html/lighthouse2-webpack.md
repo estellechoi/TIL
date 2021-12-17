@@ -130,7 +130,7 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 ## 4. Webpack `SplitChunksPlugin`을 사용하여 써드파티 모듈 분할하기
 
-앱을 빌드하면 메인 번들인 `app.[hash].js`와 별도로 `chunk-vendors.[hash].js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. 각 라이브러리 모듈 역시 사용처별로 나누어 서로 다른 번들로 구성한 후 실제로 사용될 때만 로드하는 것이 좋습니다. Webpack의 [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/)은 이러한 최적화를 자동으로 수행합니다.
+앱을 빌드하면 메인 번들인 `app.[hash].js`와 별도로 `chunk-vendors.[hash].js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. 예를 들어 [`moment`](https://momentjs.com/) 모듈을 2 개의 라우트에서 사용하고, 각 라우트별로 번들을 구성한다고 가정해보겠습니다. 이러한 경우 `moment` 모듈은 2 개의 번들에 중복 존재하게 됩니다! Webpack 4부터 지원하는 [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/)은 써드파티 모듈의 중복제거를 수행합니다.
 
 <br>
 
@@ -173,7 +173,7 @@ module.exports = {
 
 ### `splitChunks.chunks`
 
-보통은 `splitChunks.chunks` 속성을 건드리는 것으로 충분합니다. 설정값에 따라 각각 어떻게 번들링 최적화가 이루어지는지 설명하기 위해 간단한 예제를 가져왔습니다. 다음과 같이 `static-module`을 정적 임포트하고, `dynamic-module` 모듈을 동적으로 임포트하는 앱이 있다고 가정해보겠습니다.
+보통은 `splitChunks.chunks` 속성을 건드리는 것으로 충분합니다. 설정값에 따라 각각 어떻게 번들링 최적화(중복제거)가 이루어지는지 설명하기 위해 간단한 예제를 가져왔습니다. 다음과 같이 `static-module`을 정적 임포트하고, `dynamic-module` 모듈을 동적으로 임포트하는 앱이 있다고 가정해보겠습니다.
 
 ```javascript
 // app.js
@@ -188,7 +188,7 @@ getDynamicModule()
 
 <br>
 
-다음은 각 설정값에 따른 번들링 결과를 간단히 나타냈습니다.
+다음은 각 설정값에 따른 번들링 결과물을 간단히 나타냈습니다.
 
 `async` (디폴트)
 
@@ -208,7 +208,7 @@ getDynamicModule()
 
 <br>
 
-`all`은 정적 임포트를 했든, 동적 임포트를 했든 모든 모듈을 번들링 최적화 대상으로 하겠다는 의미입니다. [공식문서](https://webpack.js.org/plugins/split-chunks-plugin/#splitchunkschunks)에 따르면,
+`all`은 정적 임포트를 했든, 동적 임포트를 했든 모든 써드파티 모듈들을 모아서 공통 의존성이 있는 경우 중복을 제거하겠다는 의미입니다. 결과적으로 총 번들 사이즈를 가장 많이 줄일 수 있죠. 다음은 [공식문서](https://webpack.js.org/plugins/split-chunks-plugin/#splitchunkschunks)의 설명입니다.
 
 > Providing all can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
