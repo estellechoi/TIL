@@ -5,8 +5,8 @@
 1. Vue 앱 Preload 설정하기
 2. SPA를 빠르게: Webpack의 번들링 원리, 코드 쪼개기(Code Splitting)
 3. 동적 임포트: `import()`, 정적 임포트
-4. Webpack `SplitChunksPlugin`을 사용하여 써드파티 모듈 분할하기
-5. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+5. `SplitChunksPlugin`으로 써드파티 모듈이 번들링될 때 중복 제거하기
 6. `webpack-bundle-analyzer`를 사용하여 JavaScript 번들 분석하기
 
 <br>
@@ -16,11 +16,11 @@
 [Vue](https://vuejs.org/) 앱을 [`vue-cli-service build` 스크립트로 빌드](https://cli.vuejs.org/guide/build-targets.html#app)하면 `dist/` 경로 내에 아래와 같이 앱 번들이 구성됩니다.
 
 - `index.html`
-- `js/app.[hash].js`
-- `js/chunk-vendors.[hash].js`
-- `css/app.[hash].css`
-- `css/chunk-vendors.[hash].css`
-- `image-name.[hash].png`
+- `js/app.js`
+- `js/chunk-vendors.js`
+- `css/app.css`
+- `css/chunk-vendors.css`
+- `image-name.png`
 
 <br>
 
@@ -58,7 +58,7 @@ module.exports = {
 
 ### 2-1. Webpack의 JavaScript 번들링 원리
 
-[CSR(Client Side Rendering)](https://developers.google.com/web/updates/2019/02/rendering-on-the-web#csr)을 기반으로 하는 [SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA) 방식의 단점 중 하나는 초기 실행 속도가 느리다는 것이었습니다. 앱을 초기 실행하는 시점에 모든 JavaScript 코드가 포함된 거대한 번들(`app.[hash].js` 파일 등)을 로드해야하기 때문입니다. 이는 [Webpack](https://webpack.js.org/)과 같은 번들러가 SPA를 빌드하는 방식에 따른 결과입니다. Webpack은 JavaScript 번들을 구성할 때 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)를 기반으로 모든 [JavaScript 모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)들이 서로 연결되어 있는 의존성 그래프를 만들고요, 이 의존성 그래프에 기반하여 최종 번들에 각 모듈을 포함시킬지 제외할지 결정합니다.
+[CSR(Client Side Rendering)](https://developers.google.com/web/updates/2019/02/rendering-on-the-web#csr)을 기반으로 하는 [SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA) 방식의 단점 중 하나는 초기 실행 속도가 느리다는 것이었습니다. 앱을 초기 실행하는 시점에 모든 JavaScript 코드가 포함된 거대한 번들(`app.js` 파일 등)을 로드해야하기 때문입니다. 이는 [Webpack](https://webpack.js.org/)과 같은 번들러가 SPA를 빌드하는 방식에 따른 결과입니다. Webpack은 JavaScript 번들을 구성할 때 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)를 기반으로 모든 [JavaScript 모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)들이 서로 연결되어 있는 의존성 그래프를 만들고요, 이 의존성 그래프에 기반하여 최종 번들에 각 모듈을 포함시킬지 제외할지 결정합니다.
 
 <br>
 
@@ -86,7 +86,7 @@ module.exports = {
 
 ### 3-1. `import()`
 
-JavaScript 모듈의 기본 임포트 문법은 아래와 같습니다. 이는 정적 임포트 방식입니다. 아래와 같이 `moduleA`를 임포트하면 Webpack의 의존성 그래프에서 `main.js`의 노드 중 하나로 추가되고, 앱의 최종 JavaScript 번들인 `app.[hash].js`에 포함되므로 앱의 초기 실행 시 함께 로드됩니다. 만약 앱의 최초 렌더링에 이 모듈이 사용되지 않는다면, 이 모듈을 `app.[hash].js` 번들에서 제외시키고 별도의 번들로 묶는 것이 좋겠죠.
+JavaScript 모듈의 기본 임포트 문법은 아래와 같습니다. 이는 정적 임포트 방식입니다. 아래와 같이 `moduleA`를 임포트하면 Webpack의 의존성 그래프에서 `main.js`의 노드 중 하나로 추가되고, 앱의 최종 JavaScript 번들인 `app.js`에 포함되므로 앱의 초기 실행 시 함께 로드됩니다. 만약 앱의 최초 렌더링에 이 모듈이 사용되지 않는다면, 이 모듈을 `app.js` 번들에서 제외시키고 별도의 번들로 묶는 것이 좋겠죠.
 
 ```javascript
 // main.js
@@ -95,7 +95,7 @@ import moduleA from "a";
 
 <br>
 
-Webpack의 코드 쪼개기 기능 중 하나인 [동적 임포트](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 문법 `import()`를 사용하면, 초기 렌더링에 사용되지 않는 JavaScript 모듈들을 다른 번들로 분리할 수 있습니다. 아래와 같이 `moduleA`를 동적으로 임포트하면, 이 모듈과 이 모듈에서 의존하는 모듈들 모두 `app.[hash].js` 번들에 포함되지 않고 별도의 번들로 분리됩니다. 이 별도로 분리된 [Chunk]() 번들은 앱 초기 실행시 로드되지 않고요, 해당 모듈이 필요해지면 그제서야 "게으르게" 로드됩니다.
+Webpack의 코드 쪼개기 기능 중 하나인 [동적 임포트](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 문법 `import()`를 사용하면, 초기 렌더링에 사용되지 않는 JavaScript 모듈들을 다른 번들로 분리할 수 있습니다. 아래와 같이 `moduleA`를 동적으로 임포트하면, 이 모듈과 이 모듈에서 의존하는 모듈들 모두 `app.js` 번들에 포함되지 않고 별도의 번들로 분리됩니다. 이 별도로 분리된 [Chunk]() 번들은 앱 초기 실행시 로드되지 않고요, 해당 모듈이 필요해지면 그제서야 "게으르게" 로드됩니다.
 
 ```javascript
 // main.js
@@ -128,9 +128,63 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 <br>
 
-## 4. Webpack `SplitChunksPlugin`을 사용하여 써드파티 모듈 분할하기
 
-앱을 빌드하면 메인 번들인 `app.[hash].js`와 별도로 `chunk-vendors.[hash].js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. 예를 들어 [`moment`](https://momentjs.com/) 모듈을 2 개의 라우트에서 사용하고, 각 라우트별로 번들을 구성한다고 가정해보겠습니다. 이러한 경우 `moment` 모듈은 2 개의 번들에 중복 존재하게 됩니다! Webpack 4부터 지원하는 [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/)은 써드파티 모듈의 중복제거를 수행합니다.
+## 4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+
+### 4-1. Webpack 동적 임포트 활용
+
+이번에는 Vue 앱의 컴포넌트들을 라우트별로 동적 로드하는 방법을 소개합니다. 일명 라우트 기반 번들 쪼개기인데요, 사용자가 특정 URL에 대해 라우팅을 요청하면 해당 라우트에 필요한 컴포넌트만 로드할 수 있게 하는겁니다. 위에서 살펴본 Webpack의 동적 임포트를 활용해서요. 자세한 내용은 공식문서인 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)를 참고하세요.
+
+<br>
+
+만약 컴포넌트 임포트가 아래와 같이 작성되어있다면, 컴포넌트들을 정적으로 임포트하고 있는겁니다. 실제로 사용자가 `/about` 경로에 접근하지 않더라도, `About` 컴포넌트는 앱이 실행될 때 무조건 로드됩니다.
+
+```javascript
+// router.js
+
+import Home from './Home.vue'
+import About from './About.vue'
+
+const routes = [
+  { path: '/', component: Home }
+  { path: '/about', component: About }
+]
+```
+
+<br>
+
+위 코드는 아래와 같이 Webpack의 `import()` 문법을 사용하여 바꿀 수 있습니다. 이제 사용자가 `/about` 경로에 접근했기 때문에 `About` 컴포넌트가 실제로 사용되어야 할 때만 `About` 컴포넌트가 포함된 번들이 로드됩니다.
+
+```javascript
+// router.js
+
+const Home = () => import('./Home.vue')
+const About = () => import('./About.vue')
+
+const routes = [
+  { path: '/', component: Home }
+  { path: '/about', component: About }
+]
+```
+
+<br>
+
+### 4-2. 번들 네이밍과 그루핑
+
+만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 두 컴포넌트에 `home`이라고 지정하면, `Home`과 `About` 컴포넌트는 `home.js` 번들에 함께 포함됩니다.
+
+```javascript
+const Home = () => import(/* webpackChunkName: "home" */ "./Home.vue");
+const About = () => import(/* webpackChunkName: "home" */ "./About.vue");
+```
+
+<br>
+
+## 5. `SplitChunksPlugin`으로 써드파티 모듈이 번들링될 때 중복 제거하기
+
+### 5-1. `SplitChunksPlugin`
+
+앱을 빌드하면 메인 번들인 `app.js`와 별도로 `chunk-vendors.js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. 예를 들어 [`moment`](https://momentjs.com/) 모듈을 2 개의 라우트에서 사용하고, 각 라우트별로 번들을 구성한다고 가정해보겠습니다. 이러한 경우 `moment` 모듈은 2 개의 번들에 중복 존재하게 됩니다! Webpack 4부터 지원하는 [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/)은 써드파티 모듈의 중복제거를 자동으로 수행합니다.
 
 <br>
 
@@ -171,7 +225,7 @@ module.exports = {
 
 <br>
 
-### `splitChunks.chunks`
+### 5-2. `splitChunks.chunks`
 
 보통은 `splitChunks.chunks` 속성을 건드리는 것으로 충분합니다. 설정값에 따라 각각 어떻게 번들링 최적화(중복제거)가 이루어지는지 설명하기 위해 간단한 예제를 가져왔습니다. 다음과 같이 `static-module`을 정적 임포트하고, `dynamic-module` 모듈을 동적으로 임포트하는 앱이 있다고 가정해보겠습니다.
 
@@ -193,13 +247,13 @@ getDynamicModule()
 `async` (디폴트)
 
 - `bundle.js` (`app.js` + `static-module`)
-- `chunk-vendors.js` (`dynamic-module`)
+- `chunk.js` (`dynamic-module`)
 
 `initial`
 
 - `app.js`
 - `bundle.js` (`static-module`)
-- `chunk-vendors.js` (`dynamic-module`)
+- `chunk.js` (`dynamic-module`)
 
 `all`
 
@@ -231,54 +285,15 @@ module.exports = {
 
 <br>
 
-## 5. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
+### 5-3. `splitChunks.automaticNameDelimiter` (번들 네이밍)
 
-### 5-1. Webpack 동적 임포트 활용
+가령 `moment` 라이브러리 모듈을 `/home`, `/about` 2 개의 라우트에서 공통으로 사용한다고 해봅시다. 추가로, 각 라우트에 대한 뷰 컴포넌트는 동적으로 임포트되며 `webpackChunkName` 주석을 사용하여 번들명을 각각 `home`, `about`으로 설정한다고 가정하겠습니다. 이제 `moment` 모듈이 포함된 번들은 아래와 같이 자동으로 네이밍됩니다.
 
-이번에는 Vue 앱의 컴포넌트들을 라우트별로 동적 로드하는 방법을 소개합니다. 일명 라우트 기반 번들 쪼개기인데요, 사용자가 특정 URL에 대해 라우팅을 요청하면 해당 라우트에 필요한 컴포넌트만 로드할 수 있게 하는겁니다. 위에서 살펴본 Webpack의 동적 임포트를 활용해서요. 자세한 내용은 공식문서인 [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk)를 참고하세요.
-
-<br>
-
-만약 컴포넌트 임포트가 아래와 같이 작성되어있다면, 컴포넌트들을 정적으로 임포트하고 있는겁니다. 실제로 사용자가 `/about` 경로에 접근하지 않더라도, `About` 컴포넌트는 앱이 실행될 때 무조건 로드됩니다.
-
-```javascript
-// router.js
-
-import Home from './Home.vue'
-import About from './About.vue'
-
-const routes = [
-  { path: '/', component: Home }
-  { path: '/about', component: About }
-]
-```
+- `home~about.js`
 
 <br>
 
-위 코드는 아래와 같이 Webpack의 `import()` 문법을 사용하여 바꿀 수 있습니다. 이제 사용자가 `/about` 경로에 접근했기 때문에 `About` 컴포넌트가 실제로 사용되어야 할 때만 `About` 컴포넌트가 포함된 번들이 로드됩니다.
-
-```javascript
-// router.js
-
-const Home = () => import('./Home.vue')
-const About = () => import('./About.vue')
-
-const routes = [
-  { path: '/', component: Home }
-  { path: '/about', component: About }
-]
-```
-
-<br>
-
-### 5-2. 번들 네이밍과 그루핑
-
-만약 [`webpackChunkName`](https://webpack.js.org/api/module-methods/#magic-comments) 주석을 사용하면, 해당 모듈이 포함된 번들에 원하는 이름을 부여하고 다른 번들로부터 분리할 수 있습니다. 아래와 같이 두 컴포넌트에 `home`이라고 지정하면, `Home`과 `About` 컴포넌트는 `home.[hash].js` 번들에 함께 포함됩니다.
-
-```javascript
-const Home = () => import(/* webpackChunkName: "home" */ "./Home.vue");
-const About = () => import(/* webpackChunkName: "home" */ "./About.vue");
-```
+`splitChunks.automaticNameDelimiter` 속성은 위 번들명에서 `~`에 해당하는 부분에 관여합니다. 이 속성의 디폴트 값은 `~`입니다.
 
 <br>
 
