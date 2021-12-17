@@ -130,7 +130,89 @@ import(/* webpackPreload: true */ "CriticalComponent");
 
 ## 4. Webpack `SplitChunksPlugin`을 사용하여 써드파티 모듈 분할하기
 
-앱을 빌드하면 메인 번들인 `app.[hash].js`와 별도로 `chunk-vendors.[hash].js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. Webpack의 코드 쪼개기 효과를 극대화하려면 이 라이브러리들을 담고있는 번들도 분리해주어야하는데요, [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/)을 사용하여 분리 설정을 해주면 됩니다. Vue 앱의 Webpack 설정 파일인 `vue.config.js` 파일을 사용한다면 아래와 같이 `configureWebpack` 필드에 작성하면 되겠죠. `chunks: 'all'`이라고 지정하면, 모든 번들에 대해 Webpack이 자동으로 각 모듈이 사용되는 라우트를 분석하여 최적의 상태로 `chunk-vendors.[hash].js` 번들을 여러개로 분리하도록 허용하겠다는 의미입니다.
+앱을 빌드하면 메인 번들인 `app.[hash].js`와 별도로 `chunk-vendors.[hash].js` 번들이 생깁니다. 이 번들은 `node_modules`에 포함된 모든 써드파티 라이브러리 모듈들을 담고 있습니다. 각 라이브러리 모듈 역시 사용처별로 나누어 서로 다른 번들로 구성한 후 실제로 사용될 때만 로드하는 것이 좋습니다. Webpack의 [`SplitChunksPlugin`](https://webpack.js.org/plugins/split-chunks-plugin/)은 이러한 최적화를 자동으로 수행합니다.
+
+<br>
+
+Vue 앱의 Webpack 설정 파일인 `vue.config.js` 파일을 사용한다면 아래와 같이 `configureWebpack` 필드에서 설정해줄 수 있습니다. 설정하지 않더라도 아래와 같은 디폴트 설정값이 반영되므로 참고해주시고요, 변동사항이 있을 수 있으므로 [공식문서](https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks)를 확인해주세요.
+
+```javascript
+// vue.config.js
+
+module.exports = {
+	// ..
+	configureWebpack: {
+		optimization: {
+			splitChunks: {
+				chunks: 'async',
+				minSize: 20000,
+				minRemainingSize: 0,
+				minChunks: 1,
+				maxAsyncRequests: 30,
+				maxInitialRequests: 30,
+				enforceSizeThreshold: 50000,
+				cacheGroups: {
+					defaultVendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+					reuseExistingChunk: true,
+					},
+					default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+					},
+				},
+			},
+		},
+	},
+};
+```
+
+<br>
+
+### `splitChunks.chunks`
+
+보통은 `splitChunks.chunks` 속성을 건드리는 것으로 충분합니다. 설정값에 따라 각각 어떻게 번들링 최적화가 이루어지는지 설명하기 위해 간단한 예제를 가져왔습니다. 다음과 같이 `static-module`을 정적 임포트하고, `dynamic-module` 모듈을 동적으로 임포트하는 앱이 있다고 가정해보겠습니다.
+
+```javascript
+// app.js
+import staticModule from 'static-module';
+
+async function getDynamicModule() {
+	await import('dynamic-module')
+}
+
+getDynamicModule()
+```
+
+<br>
+
+다음은 각 설정값에 따른 번들링 결과를 간단히 나타냈습니다.
+
+`async` (디폴트)
+
+- `bundle.js` (`app.js` + `static-module`)
+- `chunk-vendors.js` (`dynamic-module`)
+
+`initial`
+
+- `app.js`
+- `bundle.js` (`static-module`)
+- `chunk-vendors.js` (`dynamic-module`)
+
+`all`
+
+- `app.js`
+- `bundle.js` (`static-module` + `dynamic-module`)
+
+<br>
+
+`all`은 정적 임포트를 했든, 동적 임포트를 했든 모든 모듈을 번들링 최적화 대상으로 하겠다는 의미입니다. [공식문서](https://webpack.js.org/plugins/split-chunks-plugin/#splitchunkschunks)에 따르면,
+
+> Providing all can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
+
+<br>
 
 ```javascript
 // vue.config.js
@@ -242,5 +324,6 @@ module.exports = {
 - [How to Reduce Your Vue.JS Bundle Size With Webpack - Jennifer Bland](https://medium.com/js-dojo/how-to-reduce-your-vue-js-bundle-size-with-webpack-3145bf5019b7)
 - [Code Splitting With Vue.js And Webpack - Anthony Gore](https://vuejsdevelopers.com/2017/07/03/vue-js-code-splitting-webpack/)
 - [3 Code Splitting Patterns For VueJS and Webpack - Anthony Gore](https://vuejsdevelopers.com/2017/07/08/vue-js-3-ways-code-splitting-webpack/)
+- [Webpack: What is the difference between "all" and "initial" options in optimization.splitChunks.chunks | Stack Overflow](https://stackoverflow.com/questions/50127185/webpack-what-is-the-difference-between-all-and-initial-options-in-optimizat)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
 - [웹팩5(Webpack) 설정하기 | zerocho.com](https://www.zerocho.com/category/Webpack/post/58aa916d745ca90018e5301d)
