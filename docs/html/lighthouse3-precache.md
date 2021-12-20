@@ -6,7 +6,7 @@
 2. `Cache-Control` 응답 헤더 설정
 3. Service Worker, Cache Storage API 사용하기
 4. `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기
-5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`, `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때는 `clientsClaim: true`
+5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`
 
 <br>
 
@@ -272,7 +272,7 @@ serve -s dist
 
 <br>
 
-## 5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`, `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때는 `clientsClaim: true`
+## 5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`
 
 ### 5-1. 라이프사이클 `install` ~ `activate`
 
@@ -310,7 +310,7 @@ self.addEventListener('install', evt => {
 
 ### 5-3. `clients.claim()`
 
-Service Worker 설치가 성공적으로 완료되면, Service Worker가 활성화되고 `activate` 이벤트가 발생합니다. 여기서 주의할 점은 Service Worker가 활성화되었다고해서 이전에 사용중이던 Service Worker를 즉시 대체하여 작동하지 않는다는 것입니다. 새로운 Service Worker가 등록되고 설치되는동안 브라우저는 미리 캐싱한 리소스들을 사용하여 어쨋든 사용자가 앱을 즉시 사용할 수 있도록 합니다. 때문에 앱을 처음 로드할 때는 이전에 캐싱된 Service Worker가 사용됩니다.
+Service Worker 설치가 성공적으로 완료되면, Service Worker가 활성화되고 `activate` 이벤트가 발생합니다. 여기서 주의할 점은 Service Worker가 활성화되었다고해서 이전에 사용중이던 Service Worker를 즉시 대체하여 작동하지 않는다는 것입니다. 앱이 처음 로드될 때는 이전에 캐싱된 Service Worker가 사용됩니다. 새로운 Service Worker가 등록되고 설치되는동안 브라우저는 미리 캐싱한 리소스들을 사용하여 사용자가 기다리지 않고 앱을 즉시 사용할 수 있게 해야하기 때문입니다.
 
 ```javascript
 // service-worker.js
@@ -326,7 +326,7 @@ self.addEventListener('activate', (event) => {
 
 <br>
 
-새로 설치된 Service Worker는 사용자가 앱을 새로고침하면 그제서야 작동합니다. 하지만 사용자들은 특별한 이유가 없는한 앱을 새로고침하지 않기 때문에 새로운 Service Worker가 작동하도록 강제하는 메소드가 제공되는데요, 바로 `clients.claim()` 입니다. 이 메소드는 `activate` 리스너의 콜백 안에서 호출합니다.
+활성화된 새로운 Service Worker는 사용자가 앱을 새로고침하면 그제서야 작동합니다. 하지만 사용자들은 특별한 이유가 없는 한 앱을 새로고침하지 않기 때문에 새롭게 활성화된 Service Worker가 작동하도록 강제하는 메소드가 제공되는데요, 바로 `clients.claim()` 입니다. 이 메소드는 `activate` 리스너의 콜백 안에서 호출합니다.
 
 ```javascript
 // service-worker.js
@@ -344,9 +344,9 @@ self.addEventListener('activate', (event) => {
 
 <br>
 
-### 5-4. `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때는 `clientsClaim: true`
+### 5-4. `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때: `clientsClaim: true`
 
-Workbox를 사용하여 Service Worker 파일을 자동 생성한다면 [`clientsClaim()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#clients_claim) 메소드를 사용합니다. `@vue/cli-plugin-pwa`를 사용한다면 `vue.config.js` 파일에서 아래와 같이 `clientsClaim: true`라고 지정해줍니다.
+Workbox를 사용하여 Service Worker 파일을 자동 생성한다면 [`skipWaiting()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#the_skipwaiting_wrapper_is_deprecated), [`clientsClaim()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#clients_claim) 메소드를 사용합니다. 참고로 `skipWaiting()`은 Workbox v6부터 Deprecate 되었기때문에 `self.skipWaiting()`을 직접 사용해야 합니다. `@vue/cli-plugin-pwa`를 사용한다면 `vue.config.js` 파일에서 아래와 같이 지정해줍니다.
 
 ```javascript
 // vue.config.js
