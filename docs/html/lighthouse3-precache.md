@@ -1,12 +1,12 @@
-# Lighthouse 퍼포먼스 점수 올리기 3: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더 설정, Service Worker, Cache Storage API 사용하기, Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
+# Lighthouse 퍼포먼스 점수 올리기 3: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더, Service Worker, Cache Storage API, `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기
 
 <br>
 
 1. HTTP 캐싱 메커니즘
 2. `Cache-Control` 응답 헤더 설정
 3. Service Worker, Cache Storage API 사용하기
-4. Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
-5. `@vue/cli-plugin-pwa`로 간단하게 Service Worker 캐싱 리셋하기
+4. `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기
+5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`, `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때는 `clientsClaim: true`
 
 <br>
 
@@ -169,9 +169,9 @@ const response = await cache.match(request, options);
 
 <br>
 
-## 4. Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
+## 4. `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기
 
-### 4-1. `@vue/cli-plugin-pwa`
+### 4-1. `@vue/cli-plugin-pwa` 플러그인 개요
 
 만약 Vue([`@vue/cli`](https://cli.vuejs.org/)) 앱에서 Service Worker를 간단하게 관리하시려면 [`@vue/cli-plugin-pwa`](https://cli.vuejs.org/core-plugins/pwa.html#configuration) 플러그인을 사용할 수 있겠습니다. 이 플러그인의 역할 중 하나는 Service Worker 파일을 빌드 시점에 자동으로 생성하는 것인데요, [Workbox](https://developers.google.com/web/tools/workbox) 기반의 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 내부적으로 사용하여 Service Worker를 관리하고, Vue 앱의 빌드 프로세스에 통합시킵니다.
 
@@ -181,7 +181,7 @@ const response = await cache.match(request, options);
 
 <br>
 
-### 4-2. 설치하기
+### 4-2. `@vue/cli-plugin-pwa` 설치하기
 
 이미 생성된 Vue 프로젝트가 있다면, 프로젝트 루트 경로에서 다음 명령어를 사용하여 `@vue/cli-plugin-pwa` 플러그인을 설치합니다.
 
@@ -201,7 +201,7 @@ vue add pwa
 
 <br>
 
-### 4-3. 설정하기
+### 4-3. `@vue/cli-plugin-pwa` 플러그인 기본 설정
 
 이 플러그인은 크게 Service Worker에 대한 설정과, [Manifest](https://developer.mozilla.org/ko/docs/Web/Manifest)에 대한 설정을 지원합니다. 각 설정값들에 따라 Service Worker 파일과 Manifest 파일을 자동으로 생성해주고요. 설정은 다음의 두 가지 방법 중 하나를 택해서 진행하면 됩니다. 자세한 내용은 [공식문서](https://cli.vuejs.org/core-plugins/pwa.html#configuration)를 참고하세요.
 
@@ -239,7 +239,7 @@ module.exports = {
 
 <br>
 
-### 테스트하기
+### 4-4. Service Worker 테스트하기
 
 이 플러그인에서 다루는 Service Worker 파일은 프로덕션 모드, 그러니까 `process.env.NODE_ENV === 'production'` 일 때만 작동하므로, 로컬에서 테스트하려면 앱을 프로덕션 빌드하고 [`serve`](https://yarnpkg.com/package/serve#readme)와 같은 HTTP 서버로 실행하여 테스트해볼 수 있겠습니다.
 
@@ -272,9 +272,81 @@ serve -s dist
 
 <br>
 
-## 5. `@vue/cli-plugin-pwa`로 간단하게 Service Worker 캐싱 리셋하기
+## 5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`, `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때는 `clientsClaim: true`
 
-Workbox의 [`clientsClaim()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#clients_claim) 메소드는 앱을 새로 배포했을 때, 사용자가 이미 웹페이지를 사용중이더라도 캐싱된 Service Worker가 아닌 업데이트된 Service Worker가 작동하도록 합니다. 사용자가 새로고침할 필요 없이 말이죠. `@vue/cli-plugin-pwa`를 사용한다면 아래와 같이 설정하면 됩니다.
+### 5-1. 라이프사이클 `install` ~ `activate`
+
+먼저 [Service Worker의 라이프사이클](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)을 알아야합니다. [Using Service Workers | MDN](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API/Using_Service_Workers#install_and_activate_populating_your_cache) 문서에 따르면, Service Worker 등록시 `install`, `activate` 순으로 사이클이 진행되고 각 사이클에 접근할 수 있는 이벤트가 발생합니다.
+
+> After your service worker is registered, the browser will attempt to install then activate the service worker for your page/site.
+
+<br>
+
+### 5-2. `skipWaiting()`
+
+[`install`]()은 Service Worker가 실행될 때 가장 처음 발생하는 이벤트이고요, Service Worker당 한 번만 발생하는 이벤트입니다. Service Worker 파일에 변경이 있으면 새로운 Service Worker로 인식하므로 다시 `install` 이벤트가 발생하고요. 
+
+<br>
+
+Service Worker를 활용하는 캐싱은 바로 이 `install` 이벤트가 발생했을 때 진행됩니다. `evt.waitUntil()` 메소드의 인자로 `Promise` 객체를 넘겨주면, 브라우저는 `install`이 완료되었는지, 성공했는지와 같은 정보를 얻게 됩니다. 여기서 실패하게 되면 Service Worker는 무시됩니다.
+
+```javascript
+// service-worker.js
+
+self.addEventListener('install', evt => {
+  evt.waitUntil(
+    (async () => {
+		const cache = await caches.open('static-v1');
+		await cache.add('/cat.svg');
+	})()
+  );
+
+  // 기다리는 Service Worker가 발견되면 그 Service Worker를 바로 활성화시킨다
+  self.skipWaiting();
+});
+```
+
+<br>
+
+### 5-3. `clients.claim()`
+
+Service Worker 설치가 성공적으로 완료되면, Service Worker가 활성화되고 `activate` 이벤트가 발생합니다. 여기서 주의할 점은 Service Worker가 활성화되었다고해서 이전에 사용중이던 Service Worker를 즉시 대체하여 작동하지 않는다는 것입니다. 새로운 Service Worker가 등록되고 설치되는동안 브라우저는 미리 캐싱한 리소스들을 사용하여 어쨋든 사용자가 앱을 즉시 사용할 수 있도록 합니다. 때문에 앱을 처음 로드할 때는 이전에 캐싱된 Service Worker가 사용됩니다.
+
+```javascript
+// service-worker.js
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+		// ..
+    })()
+  );
+});
+```
+
+<br>
+
+새로 설치된 Service Worker는 사용자가 앱을 새로고침하면 그제서야 작동합니다. 하지만 사용자들은 특별한 이유가 없는한 앱을 새로고침하지 않기 때문에 새로운 Service Worker가 작동하도록 강제하는 메소드가 제공되는데요, 바로 `clients.claim()` 입니다. 이 메소드는 `activate` 리스너의 콜백 안에서 호출합니다.
+
+```javascript
+// service-worker.js
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+		// ..
+    })()
+  );
+
+  self.clients.claim();
+});
+```
+
+<br>
+
+### 5-4. `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때는 `clientsClaim: true`
+
+Workbox를 사용하여 Service Worker 파일을 자동 생성한다면 [`clientsClaim()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#clients_claim) 메소드를 사용합니다. `@vue/cli-plugin-pwa`를 사용한다면 `vue.config.js` 파일에서 아래와 같이 `clientsClaim: true`라고 지정해줍니다.
 
 ```javascript
 // vue.config.js
@@ -301,3 +373,5 @@ module.exports = {
 - [Vue.js Performance | Vue School](https://vueschool.io/articles/series/vue-js-performance/)
 - [Mastering Browser Cache | Vue School](https://vueschool.io/articles/vuejs-tutorials/vue-js-performance-mastering-cache/)
 - [Caching in a Vue.js PWA - Axel Hodler](https://axelhodler.medium.com/caching-in-a-vue-js-pwa-845233696072)
+- [The Service Worker Lifecycle - Jake Archibald](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)
+- [Speed up Service Worker with Navigation Preloads - Jake Archibald](https://developers.google.com/web/updates/2017/02/navigation-preload)
