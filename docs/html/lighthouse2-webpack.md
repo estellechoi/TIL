@@ -6,7 +6,7 @@
 2. SPA를 빠르게: Webpack의 번들링 원리, 코드 쪼개기(Code Splitting)
 3. 동적 임포트: `import()`, 정적 임포트
 4. Vue에서 라우트 기반 번들 쪼개기: Webpack 동적 임포트 활용, 번들 네이밍과 그루핑
-5. `SplitChunksPlugin`으로 써드파티 모듈이 번들링될 때 중복 제거하기
+5. `SplitChunksPlugin`으로 써드파티 모듈 번들링 중복 제거하기
 6. `webpack-bundle-analyzer`를 사용하여 JavaScript 번들 분석하기
 
 <br>
@@ -180,7 +180,7 @@ const About = () => import(/* webpackChunkName: "home" */ "./About.vue");
 
 <br>
 
-## 5. `SplitChunksPlugin`으로 써드파티 모듈이 번들링될 때 중복 제거하기
+## 5. `SplitChunksPlugin`으로 써드파티 모듈 번들링 중복 제거하기
 
 ### 5-1. `SplitChunksPlugin`
 
@@ -242,7 +242,7 @@ getDynamicModule()
 
 <br>
 
-다음은 각 설정값에 따른 번들링 결과물을 간단히 나타냈습니다.
+다음은 각 설정값에 따른 번들링 결과물을 간단히 나타낸 것입니다. 여기에서 `async`는 비동기 방식으로 동적 임포트하는 모듈을 의미합니다.
 
 `async` (디폴트)
 
@@ -322,7 +322,7 @@ module.exports = {
 
 <br>
 
-이제 `vue-cli-service build`를 실행하면 다음과 같이 분석 결과를 확인할 수 있습니다.
+이제 `vue-cli-service build`를 실행시켜 앱을 빌드하면, 다음과 같이 분석 결과를 확인할 수 있습니다.
 
 <img src="./../img/webpack-bundle-analyzer.png" />
 

@@ -88,7 +88,7 @@ Cache-Control: private
 
 <br>
 
-<img src="./../img/service-worker.png" width="700" />
+<img src="./../img/service-worker.jpeg" width="700" />
 
 <br>
 
