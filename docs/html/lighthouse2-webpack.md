@@ -340,5 +340,6 @@ module.exports = {
 - [Code Splitting With Vue.js And Webpack - Anthony Gore](https://vuejsdevelopers.com/2017/07/03/vue-js-code-splitting-webpack/)
 - [3 Code Splitting Patterns For VueJS and Webpack - Anthony Gore](https://vuejsdevelopers.com/2017/07/08/vue-js-3-ways-code-splitting-webpack/)
 - [Webpack: What is the difference between "all" and "initial" options in optimization.splitChunks.chunks | Stack Overflow](https://stackoverflow.com/questions/50127185/webpack-what-is-the-difference-between-all-and-initial-options-in-optimizat)
+- [The 100% correct way to split your chunks with Webpack](https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758)
 - [SPA 초기 로딩 속도 개선하기](https://medium.com/little-big-programming/spa-%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%94%A9-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-9db137d25566)
 - [웹팩5(Webpack) 설정하기 | zerocho.com](https://www.zerocho.com/category/Webpack/post/58aa916d745ca90018e5301d)

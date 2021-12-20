@@ -6,6 +6,7 @@
 2. `Cache-Control` 응답 헤더 설정
 3. Service Worker, Cache Storage API 사용하기
 4. Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
+5. `@vue/cli-plugin-pwa`로 간단하게 Service Worker 캐싱 리셋하기
 
 <br>
 
@@ -170,11 +171,17 @@ const response = await cache.match(request, options);
 
 ## 4. Vue 플러그인으로 Service Worker 구성하기: `@vue/cli-plugin-pwa`
 
-Cache Storage API를 사용하는데는 그닥 유용하지 않지만, 만약 Vue([`@vue/cli`](https://cli.vuejs.org/)) 앱에서 Service Worker를 간단하게 관리하시려면 [`@vue/cli-plugin-pwa`](https://cli.vuejs.org/core-plugins/pwa.html#configuration) 플러그인을 사용할 수 있겠습니다. 이 플러그인의 역할 중 하나는 Service Worker 파일을 빌드 시점에 자동으로 생성하는 것입니다. 이 플러그인의 원리는 [Workbox](https://developers.google.com/web/tools/workbox) 기반으로 구성된 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 내부적으로 사용하여 Service Worker를 관리하고, Vue 앱의 빌드 프로세스에 통합시키는 것입니다. 하지만 Cache Storage, [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)와 같이 Service Worker의 기능들을 풍부하게 사용할 계획이라면, Workbox의 Service Worker 자동생성 기능을 사용하는데 한계가 있기 때문에 이 플러그인이 유용하지 않을 수 있습니다.
+### 4-1. `@vue/cli-plugin-pwa`
+
+만약 Vue([`@vue/cli`](https://cli.vuejs.org/)) 앱에서 Service Worker를 간단하게 관리하시려면 [`@vue/cli-plugin-pwa`](https://cli.vuejs.org/core-plugins/pwa.html#configuration) 플러그인을 사용할 수 있겠습니다. 이 플러그인의 역할 중 하나는 Service Worker 파일을 빌드 시점에 자동으로 생성하는 것인데요, [Workbox](https://developers.google.com/web/tools/workbox) 기반의 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 내부적으로 사용하여 Service Worker를 관리하고, Vue 앱의 빌드 프로세스에 통합시킵니다.
 
 <br>
 
-### 설치하기
+하지만 Cache Storage, [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)와 같이 Service Worker의 기능들을 풍부하게 사용할 계획이라면, Workbox의 Service Worker 자동생성 기능을 사용하는데 한계가 있기 때문에 이 플러그인이 유용하지 않을 수 있습니다.
+
+<br>
+
+### 4-2. 설치하기
 
 이미 생성된 Vue 프로젝트가 있다면, 프로젝트 루트 경로에서 다음 명령어를 사용하여 `@vue/cli-plugin-pwa` 플러그인을 설치합니다.
 
@@ -194,7 +201,7 @@ vue add pwa
 
 <br>
 
-### 설정하기
+### 4-3. 설정하기
 
 이 플러그인은 크게 Service Worker에 대한 설정과, [Manifest](https://developer.mozilla.org/ko/docs/Web/Manifest)에 대한 설정을 지원합니다. 각 설정값들에 따라 Service Worker 파일과 Manifest 파일을 자동으로 생성해주고요. 설정은 다음의 두 가지 방법 중 하나를 택해서 진행하면 됩니다. 자세한 내용은 [공식문서](https://cli.vuejs.org/core-plugins/pwa.html#configuration)를 참고하세요.
 
@@ -203,7 +210,7 @@ vue add pwa
 
 <br>
 
-저는 `vue.config.js` 파일에서 설정을 관리했습니다. `workboxPluginMode` 속성 값으로 `GenerateSW`/`InjectManifest` 두 가지 모드를 지원하지만, [Push와 같은 Service Worker 기능들을 사용하려면 `InjectManifest` 모드를 사용해야합니다](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin). 참고로 `InjectManifest` 모드를 사용하면, 프로젝트에 존재하는 Service Worker 파일을 사용하므로 `workboxOptions.swSrc` 값을 필수적으로 지정해주어야합니다. 이때 플러그인 설치시 자동으로 생성된 `registerServiceWorker.js` 파일 내에서 Service Worker 등록에 사용되는 파일명과 일치해야하고요! 이 외 모든 `workboxOptions` 속성들은 [Workbox 공식문서](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest#InjectManifest)에서 확인할 수 있습니다.
+저는 `vue.config.js` 파일에서 설정을 관리했습니다. `workboxPluginMode` 속성 값으로 `GenerateSW`/`InjectManifest` 두 가지 모드를 지원하지만, [Push와 같은 Service Worker 기능들을 사용하려면 `InjectManifest` 모드를 사용해야합니다](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin). 참고로 `InjectManifest` 모드를 사용하면, 프로젝트에 이미 존재하는 Service Worker 파일을 사용하는 것이므로 `workboxOptions.swSrc` 속성에 파일 경로를 필수적으로 지정해주어야합니다. 이때 플러그인 설치시 자동으로 생성된 `registerServiceWorker.js` 파일 내에서 Service Worker 등록에 사용되는 파일명과 일치해야하고요! 이 외 모든 `workboxOptions` 속성들은 [Workbox 공식문서](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest#InjectManifest)에서 확인할 수 있습니다.
 
 ```javascript
 // vue.config.js
@@ -223,7 +230,7 @@ module.exports = {
 	},
 	workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      swSrc: 'service-worker.js',
+      swSrc: 'public/service-worker.js',
     }
 	// ..
   }
@@ -265,6 +272,26 @@ serve -s dist
 
 <br>
 
+## 5. `@vue/cli-plugin-pwa`로 간단하게 Service Worker 캐싱 리셋하기
+
+Workbox의 [`clientsClaim()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#clients_claim) 메소드는 앱을 새로 배포했을 때, 사용자가 이미 웹페이지를 사용중이더라도 캐싱된 Service Worker가 아닌 업데이트된 Service Worker가 작동하도록 합니다. 사용자가 새로고침할 필요 없이 말이죠. `@vue/cli-plugin-pwa`를 사용한다면 아래와 같이 설정하면 됩니다.
+
+```javascript
+// vue.config.js
+
+module.exports = {
+  pwa: {
+	// ..
+    workboxOptions: {
+		// ..
+		skipWaiting: true, // deprecated from Workbox v6
+		clientsClaim: true
+    }
+	// ..
+  }
+}
+```
+
 <br>
 
 ---
@@ -273,4 +300,4 @@ serve -s dist
 
 - [Vue.js Performance | Vue School](https://vueschool.io/articles/series/vue-js-performance/)
 - [Mastering Browser Cache | Vue School](https://vueschool.io/articles/vuejs-tutorials/vue-js-performance-mastering-cache/)
-- [The 100% correct way to split your chunks with Webpack](https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758)
+- [Caching in a Vue.js PWA - Axel Hodler](https://axelhodler.medium.com/caching-in-a-vue-js-pwa-845233696072)
