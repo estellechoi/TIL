@@ -4,7 +4,7 @@
 
 1. HTTP 캐싱 메커니즘
 2. `Cache-Control` 응답 헤더 설정
-3. Service Worker, Cache Storage API 사용하기
+3. Service Worker, Cache Storage API로 캐싱하기
 4. `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기
 5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`
 
@@ -83,7 +83,9 @@ Cache-Control: private
 
 <br>
 
-## 3. Service Worker, Cache Storage API 사용하기
+## 3. Service Worker, Cache Storage API로 캐싱하기
+
+### 3-1. Service Worker, Cache Storage API
 
 프론트엔드에서 캐싱은 [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)와 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) 웹API를 사용하여 구현할 수 있습니다. Service Worker는 브라우저에서 서버로 요청을 보내려는 순간 끼어들어, 다양한 일들을 수행하는 일종의 인터셉터입니다. 앱의 Service Worker로 등록된 JavaScript 파일에 Cache Storage API를 사용하여 캐싱을 매니징하는 코드를 작성하면 됩니다. Cache Storage API는 HTTP 요청과 응답 정보를 캐시에 저장, 조회, 관리하는 기능을 제공합니다.
 
@@ -99,12 +101,12 @@ Cache Storage API를 사용하여 캐싱을 컨트롤하더라도 `Cache-Control
 
 <br>
 
-### Service Worker 직접 등록하기
+### 3-2. Service Worker 직접 등록하기
 
-보통 앱의 빌드 시점에 Service Worker를 자동으로 생성하고 등록해주는 [플러그인을 사용](https://web.dev/workbox/#how-should-you-use-workbox)합니다. 플러그인을 사용할 수 없는 환경이라면 직접 Service Worker 파일을 작성하고 등록할 수 있습니다. Service Worker 웹API를 직접 핸들링하면 되겠죠. 흔히 `service-worker.js`로 네이밍되는 파일을 하나 만드시고요, `navigator.serviceWorker.register()` 메소드를 사용하여 해당 파일을 앱의 Service Worker로서 등록하면 끝입니다.
+보통 앱의 빌드 시점에 Service Worker를 자동으로 생성하고 등록해주는 [플러그인을 사용](https://web.dev/workbox/#how-should-you-use-workbox)합니다. 플러그인을 사용할 수 없는 환경이라면 직접 Service Worker 파일을 작성하고 등록할 수 있습니다. Service Worker 웹API를 직접 핸들링하면 되겠죠. Service Worker API를 핸들링할 파일 `registerServiceWorker.js`를 생성하시고요, Service Worker로 사용될 파일 `service-worker.js`도 생성해주세요. 이제 `registerServiceWorker.js` 내에서 `navigator.serviceWorker.register()` 메소드를 사용하여 `service-worker.js` 파일을 앱의 Service Worker로서 등록하면 끝입니다.
 
 ```javascript
-// app.js
+// registerServiceWorker.js
 
 async function registerServiceWorker() {
 	if ("serviceWorker" in navigator) {
@@ -128,7 +130,9 @@ registerServiceWorker();
 
 <br>
 
-### 캐시에 서버응답 저장
+### 3-3. Cache Storage API 맛보기
+
+#### 캐시에 서버응답 저장
 
 ```javascript
 // service-worker.js
@@ -136,15 +140,16 @@ registerServiceWorker();
 // ..
 
 // 캐시를 열고
-const cache = await caches.open("my-cache");
+const cache = await caches.open('static-v1');
 
 // data.json 요청에 대한 응답 데이터를 받으면 캐시에 저장
-cache.add(new Request("/data.json"));
+const request = new Request('/data.json')
+cache.add(request);
 ```
 
 <br>
 
-### 캐시로부터 데이터 회수하기
+#### 캐시로부터 데이터 회수하기
 
 `Cache.match()` 메소드는 캐시에 저장되어있는 지난 HTTP 요청 정보 중 현재 요청과 일치하는 요청이 있는 지 검사하고, 있다면 해당 요청에 대한 응답 데이터를 반환합니다. 이때 요청 URL, [`Vary`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary) 요청 헤더, 메소드(`GET`, `POST` 등), 쿼리 스트링을 모두 검사합니다.
 
@@ -165,19 +170,19 @@ const response = await cache.match(request, options);
 
 <br>
 
-[Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/), [Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) 문서에서 더 자세한 사용법을 확인할 수 있습니다. [Workbox](https://web.dev/workbox/)와 같은 도구를 사용하여 Service Worker를 자동으로 구성할 수도 있고요.
+[Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/), [Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) 문서에서 더 자세한 사용법을 확인할 수 있습니다.
 
 <br>
 
 ## 4. `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기
 
-### 4-1. `@vue/cli-plugin-pwa` 플러그인 개요
+### 4-1. `@vue/cli-plugin-pwa` 플러그인
 
 만약 Vue([`@vue/cli`](https://cli.vuejs.org/)) 앱에서 Service Worker를 간단하게 관리하시려면 [`@vue/cli-plugin-pwa`](https://cli.vuejs.org/core-plugins/pwa.html#configuration) 플러그인을 사용할 수 있겠습니다. 이 플러그인의 역할 중 하나는 Service Worker 파일을 빌드 시점에 자동으로 생성하는 것인데요, [Workbox](https://developers.google.com/web/tools/workbox) 기반의 [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 플러그인을 내부적으로 사용하여 Service Worker를 관리하고, Vue 앱의 빌드 프로세스에 통합시킵니다.
 
 <br>
 
-하지만 Cache Storage, [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)와 같이 Service Worker의 기능들을 풍부하게 사용할 계획이라면, Workbox의 Service Worker 자동생성 기능을 사용하는데 한계가 있기 때문에 이 플러그인이 유용하지 않을 수 있습니다.
+하지만 Cache Storage API, [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)와 같이 Service Worker의 기능들을 세세하게 조작하고 사용할 계획이라면, Workbox의 Service Worker 자동생성 기능을 사용하는데 한계가 있기 때문에 이 플러그인이 유용하지 않을 수 있습니다.
 
 <br>
 
@@ -210,7 +215,9 @@ vue add pwa
 
 <br>
 
-저는 `vue.config.js` 파일에서 설정을 관리했습니다. `workboxPluginMode` 속성 값으로 `GenerateSW`/`InjectManifest` 두 가지 모드를 지원하지만, [Push와 같은 Service Worker 기능들을 사용하려면 `InjectManifest` 모드를 사용해야합니다](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin). 참고로 `InjectManifest` 모드를 사용하면, 프로젝트에 이미 존재하는 Service Worker 파일을 사용하는 것이므로 `workboxOptions.swSrc` 속성에 파일 경로를 필수적으로 지정해주어야합니다. 이때 플러그인 설치시 자동으로 생성된 `registerServiceWorker.js` 파일 내에서 Service Worker 등록에 사용되는 파일명과 일치해야하고요! 이 외 모든 `workboxOptions` 속성들은 [Workbox 공식문서](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest#InjectManifest)에서 확인할 수 있습니다.
+#### `vue.config.js`에서 설정하기
+
+저는 `vue.config.js` 파일에서 설정을 관리했습니다. `workboxPluginMode` 속성에 `GenerateSW`/`InjectManifest` 둘 중 한 가지 모드를 택하여 지정하는 것으로 설정을 시작하면 됩니다. `GenerateSW`는 빌드시 Service Worker 파일을 자동생성하는 모드이고, `InjectManifest`는 직접 만든 Service Worker 파일을 사용하는 모드입니다. [Push와 같은 Service Worker 기능들을 사용하려면 `InjectManifest` 모드를 사용해야합니다](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin). 참고로 `InjectManifest` 모드를 사용하면, 프로젝트에 이미 존재하는 Service Worker 파일을 사용하는 것이므로 `workboxOptions.swSrc` 속성에 파일 경로를 필수적으로 지정해주어야합니다. 이때 플러그인 설치시 자동으로 생성된 `registerServiceWorker.js` 파일 내에서 Service Worker 등록에 사용되는 파일명과 일치해야하고요! 이 외 모든 `workboxOptions` 속성들은 [Workbox 공식문서](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest#InjectManifest)에서 확인할 수 있습니다.
 
 ```javascript
 // vue.config.js
@@ -239,10 +246,9 @@ module.exports = {
 
 <br>
 
-### 4-4. Service Worker 테스트하기
+### 4-4. HTTPS로 Service Worker 테스트하기
 
 이 플러그인에서 다루는 Service Worker 파일은 프로덕션 모드, 그러니까 `process.env.NODE_ENV === 'production'` 일 때만 작동하므로, 로컬에서 테스트하려면 앱을 프로덕션 빌드하고 [`serve`](https://yarnpkg.com/package/serve#readme)와 같은 HTTP 서버로 실행하여 테스트해볼 수 있겠습니다.
-
 
 ```zsh
 # 저의 경우 다음 명령어가 실행됩니다 : cross-env NODE_ENV=production vue-cli-service build --modern
@@ -272,9 +278,9 @@ serve -s dist
 
 <br>
 
-## 5. 새 Service Worker 즉시 작동하게 만들기: 라이프사이클 `install` ~ `activate`, `skipWaiting()`, `clients.claim()`
+## 5. Service Worker 라이프사이클: `install`, `activate`, `fetch`
 
-### 5-1. 라이프사이클 `install` ~ `activate`
+### 5-1. `install` → `activate`
 
 먼저 [Service Worker의 라이프사이클](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)을 알아야합니다. [Using Service Workers | MDN](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API/Using_Service_Workers#install_and_activate_populating_your_cache) 문서에 따르면, Service Worker 등록시 `install`, `activate` 순으로 사이클이 진행되고 각 사이클에 접근할 수 있는 이벤트가 발생합니다.
 
@@ -282,35 +288,32 @@ serve -s dist
 
 <br>
 
-### 5-2. `skipWaiting()`
+#### `install`
 
 [`install`]()은 Service Worker가 실행될 때 가장 처음 발생하는 이벤트이고요, Service Worker당 한 번만 발생하는 이벤트입니다. Service Worker 파일에 변경이 있으면 새로운 Service Worker로 인식하므로 다시 `install` 이벤트가 발생하고요. 
 
 <br>
 
-Service Worker를 활용하는 캐싱은 바로 이 `install` 이벤트가 발생했을 때 진행됩니다. `evt.waitUntil()` 메소드의 인자로 `Promise` 객체를 넘겨주면, 브라우저는 `install`이 완료되었는지, 성공했는지와 같은 정보를 얻게 됩니다. 여기서 실패하게 되면 Service Worker는 무시됩니다.
+Service Worker를 활용하는 캐싱은 바로 이 `install` 이벤트가 발생했을 때 진행됩니다. `event.waitUntil()` 메소드의 인자로 `Promise` 객체를 넘겨주면, 브라우저는 `install`이 완료되었는지, 성공했는지와 같은 정보를 얻게 됩니다. 여기서 실패하게 되면 Service Worker는 무시됩니다.
 
 ```javascript
 // service-worker.js
 
-self.addEventListener('install', evt => {
-  evt.waitUntil(
+self.addEventListener('install', event => {
+  event.waitUntil(
     (async () => {
 		const cache = await caches.open('static-v1');
-		await cache.add('/cat.svg');
+		await cache.add(new Request('/data.json'));
 	})()
   );
-
-  // 기다리는 Service Worker가 발견되면 그 Service Worker를 바로 활성화시킨다
-  self.skipWaiting();
 });
 ```
 
 <br>
 
-### 5-3. `clients.claim()`
+#### `activate`
 
-Service Worker 설치가 성공적으로 완료되면, Service Worker가 활성화되고 `activate` 이벤트가 발생합니다. 여기서 주의할 점은 Service Worker가 활성화되었다고해서 이전에 사용중이던 Service Worker를 즉시 대체하여 작동하지 않는다는 것입니다. 앱이 처음 로드될 때는 이전에 캐싱된 Service Worker가 사용됩니다. 새로운 Service Worker가 등록되고 설치되는동안 브라우저는 미리 캐싱한 리소스들을 사용하여 사용자가 기다리지 않고 앱을 즉시 사용할 수 있게 해야하기 때문입니다.
+Service Worker 설치가 성공적으로 완료되면, Service Worker가 활성화되고 `activate` 이벤트가 발생합니다. 여기서 주의할 점은 Service Worker가 활성화되었다고해서 이전에 사용중이던 Service Worker를 즉시 대체하여 작동하지 않는다는 것입니다. 앱이 처음 로드될 때는 이전에 캐싱된 Service Worker가 사용됩니다. 새로운 Service Worker가 등록되고 설치되는동안 브라우저는 미리 캐싱한 리소스들을 사용하여 사용자가 기다리지 않고 앱을 즉시 사용할 수 있게 해야하기 때문입니다. 활성화된 새로운 Service Worker는 사용자가 앱을 새로고침하면 그제서야 작동합니다.
 
 ```javascript
 // service-worker.js
@@ -326,7 +329,70 @@ self.addEventListener('activate', (event) => {
 
 <br>
 
-활성화된 새로운 Service Worker는 사용자가 앱을 새로고침하면 그제서야 작동합니다. 하지만 사용자들은 특별한 이유가 없는 한 앱을 새로고침하지 않기 때문에 새롭게 활성화된 Service Worker가 작동하도록 강제하는 메소드가 제공되는데요, 바로 `clients.claim()` 입니다. 이 메소드는 `activate` 리스너의 콜백 안에서 호출합니다.
+### 5-2. `fetch`
+
+[`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent) 이벤트는 브라우저가 [Service Worker의 Scope](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#scope_and_control)에 한해 요청을 보낼 때마다 발생합니다. 참고로 Service Worker의 디폴트 Scope은 `/` 입니다.
+
+> The fetch event runs every time the browser attempts to access content within the scope of the Service Worker. - [Using fetch in Service Workers | Microsoft Edge Developer documentation](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#using-fetch-in-service-workers)
+
+<br>
+
+바로 이 사이클에서 캐싱된 리소스를 검증하고 유효하다면 저장해놓은 리소스를 응답하면 됩니다. 또는 아래 예시와 같이 서버 응답에 오류가 있을 때 캐싱된 리소르를 응답해줌으로써 오프라인 Fallback을 제공할 수 있겠습니다. 응답은 `event.respondWith()` 메소드를 사용합니다.
+
+```javascript
+self.addEventListener('fetch', (event) => {
+	if (event.request.mode !== 'navigate')
+		return;
+	
+	event.respondWith(
+		(async () => {
+		try {
+			// First, try to use the navigation preload response if it's supported.
+			const preloadResponse = await event.preloadResponse;
+			if (preloadResponse)
+				return preloadRsponse;
+
+			// Always try the network first.
+			const networkResponse = await fetch(event.request);
+			return networkResponse;
+		} catch (error) {
+			const cache = await caches.open('static-v1');
+			const cachedResponse = await cache.match(request);
+			return cachedResponse;
+		}
+		})()
+	)
+});
+```
+
+<br>
+
+## 6. 새 Service Worker 즉시 작동하게 만들기: `skipWaiting()`, `clients.claim()`
+
+### 6-1. `skipWaiting()`
+
+`skipWaiting()` 메소드는 `install` 이벤트가 발생했을 때, 이미 대기중인 Service Worker가 발견되면 그 Service Worker가 즉시 작동하도록 하는 메소드입니다. 캐싱된 Service Worker 중에서 가장 최신의 것이 작동하도록 하는데 사용됩니다. `install` 리스너의 콜백 안에서 호출합니다.
+
+```javascript
+// service-worker.js
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    (async () => {
+		const cache = await caches.open('static-v1');
+		await cache.add(new Request('/data.json'));
+	})()
+  );
+
+  self.skipWaiting();
+});
+```
+
+<br>
+
+### 6-2. `clients.claim()`
+
+사용자가 앱을 새로고침해야만 새로 활성화된 Service Worker가 작동하는데요, 하지만 사용자들은 특별한 이유가 없는 한 앱을 새로고침하지 않기 때문에 새롭게 활성화된 Service Worker에 대한 요청을 강제하는 방법이 제공됩니다. `clients.claim()` 메소드이고요, `activate` 리스너의 콜백 안에서 호출합니다.
 
 ```javascript
 // service-worker.js
@@ -344,7 +410,7 @@ self.addEventListener('activate', (event) => {
 
 <br>
 
-### 5-4. `@vue/cli-plugin-pwa`로 Service Worker를 자동 생성할 때: `clientsClaim: true`
+### 6-3. `@vue/cli-plugin-pwa`에서의 설정
 
 Workbox를 사용하여 Service Worker 파일을 자동 생성한다면 [`skipWaiting()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#the_skipwaiting_wrapper_is_deprecated), [`clientsClaim()`](https://developers.google.com/web/tools/workbox/modules/workbox-core#clients_claim) 메소드를 사용합니다. 참고로 `skipWaiting()`은 Workbox v6부터 Deprecate 되었기때문에 `self.skipWaiting()`을 직접 사용해야 합니다. `@vue/cli-plugin-pwa`를 사용한다면 `vue.config.js` 파일에서 아래와 같이 지정해줍니다.
 
