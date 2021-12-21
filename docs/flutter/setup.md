@@ -6,7 +6,7 @@
 2. Flutter Doctor로 개발환경 진단하기
 3. iOS 앱 개발을 위한 셋업: Xcode 설치하기, iOS 시뮬레이터 테스트, CocoaPods 설치하기
 4. Android 앱 개발을 위한 셋업: Android SDK 설치하기
-5. 에디터(Android Studio/Visual Studio Code) 플러그인 설치
+5. Android Studio/VS Code용 Flutter 플러그인 설치
 
 <br>
 
@@ -71,7 +71,7 @@ which flutter
 
 ## 2. Flutter Doctor로 개발환경 진단하기
 
-다음 명령어는 Flutter 개발환경 셋업을 완료하기 위해 추가로 설치할 것들은 없는지 진단 결과를 출력합니다.
+다음 명령어는 Flutter 개발환경 셋업을 완료하기 위해 추가로 설치할 것들은 없는지 진단하고 결과를 출력합니다.
 
 ```zsh
 flutter doctor
@@ -79,31 +79,35 @@ flutter doctor
 
 <br>
 
-명령어를 실행하면 아래와 같은 진단 결과가 출력되는데요, 저의 경우 Xcode 설치가 필요하고, Android Studio용 Flutter/Dart 플러그인 설치, 테스트용 기기 연결이 필요하다고 하네요.
+`flutter doctor` 명령어를 실행하면 아래와 같은 진단 결과가 출력됩니다.
 
 ```
 Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 1.22.5, on Mac OS X 10.15.7 19H2 darwin-x64, locale
-    ko-KR)
-[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
+[✓] Flutter (Channel stable, 2.8.1, on macOS 11.3.1 20E241 darwin-arm, locale ko-KR)
+[✗] Android toolchain - develop for Android devices
+    ✗ Unable to locate Android SDK.
+      Install Android Studio from: https://developer.android.com/studio/index.html
+      On first launch it will assist you in installing the Android SDK components.
+      (or visit https://flutter.dev/docs/get-started/install/macos#android-setup for detailed instructions).
+      If the Android SDK has been installed to a custom location, please use
+      `flutter config --android-sdk` to update to that location.
+
 [✗] Xcode - develop for iOS and macOS
-    ✗ Xcode installation is incomplete; a full installation is necessary for iOS
-      development.
+    ✗ Xcode installation is incomplete; a full installation is necessary for iOS development.
       Download at: https://developer.apple.com/xcode/download/
       Or install Xcode via the App Store.
       Once installed, run:
         sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
         sudo xcodebuild -runFirstLaunch
     ✗ CocoaPods not installed.
-        CocoaPods is used to retrieve the iOS and macOS platform side's plugin
-        code that responds to your plugin usage on the Dart side.
+        CocoaPods is used to retrieve the iOS and macOS platform side's plugin code that responds to your plugin usage on
+        the Dart side.
         Without CocoaPods, plugins will not work on iOS or macOS.
         For more info, see https://flutter.dev/platform-plugins
-      To install:
-        sudo gem install cocoapods
-[!] Android Studio (version 4.1)
-    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
-    ✗ Dart plugin not installed; this adds Dart specific functionality.
+      To install see https://guides.cocoapods.org/using/getting-started.html#installation for instructions.
+[✓] Chrome - develop for the web
+[!] Android Studio (not installed)
+[✓] VS Code (version 1.63.2)
 [!] Connected device
     ! No devices available
 
@@ -112,11 +116,26 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 <br>
 
+Flutter를 사용하여 앱 개발을 하려면 기본적으로 다음 항목들과 테스트용 실제 디바이스 1 개 이상이 필요합니다. 저의 경우 Android SDK와 Xcode 설치가 필요하다고 하네요. Flutter Doctor는 각 디펜던시를 어떻게 설치할 수 있는지에 대한 설명까지 가이드를 주기 때문에 이를 참고하여 설치하시면 됩니다.
+
+#### 개발 디펜던시
+
+- Flutter SDK
+- Android SDK : Android 앱 개발에 필요
+- Xcode : iOS 앱 개발에 필요
+
+#### 에디터
+
+- [Android Studio](https://developer.android.com/studio)
+- [VS Code](https://code.visualstudio.com/)
+
+<br>
+
 ## 3. iOS 앱 개발을 위한 셋업: Xcode 설치하기, iOS 시뮬레이터 테스트, CocoaPods 설치하기
 
 ### 3-1. Xcode 설치하기
 
-Flutter를 사용해서 iOS 앱을 개발하고 빌드하려면 `Xcode 9.0^`가 설치된 macOS가 필요합니다. Flutter Doctor의 설명에 따라 App Store에서 Xcode를 설치한 후 다음 명령어를 실행합니다.
+Flutter를 사용해서 iOS 앱을 개발하고 빌드하려면 `Xcode 9.0^`가 설치된 macOS가 필요합니다. Flutter Doctor의 설명에 따라 App Store에서 Xcode를 설치한 후, 아래 명령어를 실행합니다.
 
 ```zsh
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
@@ -181,7 +200,21 @@ sudo gem install cocoapods
 
 ## 4. Android 앱 개발을 위한 셋업: Android SDK 설치하기
 
-[Android Studio](https://developer.android.com/studio)를 공식 홈페이지나 [Homebrew](https://brew.sh/index_ko)를 사용해서 설치합니다. Android Studio를 열고 `Configure` → `SDK Manager`로 이동하면 안드로이드 앱 개발과 빌드에 필요한 Android SDK와 CLI, 빌드 툴을 설치할 수 있습니다. 이제 다음 명령어를 사용하여 Android SDK 라이센스에 동의합니다.
+먼저 Android Studio를 [공식 홈페이지](https://developer.android.com/studio)나 [Homebrew](https://brew.sh/index_ko)를 사용해서 설치합니다. 저는 [Homebrew를 사용](https://formulae.brew.sh/cask/android-studio)했습니다.
+
+```zsh
+brew install --cask android-studio
+```
+
+<br>
+
+이제 Android Studio를 열고 `Preferences...` → `Appearance & Behavior` → `System Settings` → `Android SDK`로 이동한 후, `SDK` 탭을 클릭하면 안드로이드 앱 개발과 빌드에 필요한 Android SDK와 CLI, 빌드 툴 등을 설치할 수 있습니다. 아래와 같이 설치할 항목들을 체크하신 후 `Apply` 버튼을 클릭하여 진행하면 됩니다.
+
+<img src="./../img/android-sdk-install.png" width="700" />
+
+<br>
+
+그리고 다음 명령어를 사용하여 Android SDK 라이센스에 동의합니다.
 
 ```zsh
 flutter doctor --android-licenses
@@ -189,15 +222,13 @@ flutter doctor --android-licenses
 
 <br>
 
-## 5. 에디터(Android Studio/Visual Studio Code) 플러그인 설치
+## 5. Android Studio/VS Code용 Flutter 플러그인 설치
 
-### 5-1. Visual Studio Code
+[Flutter 공식문서](https://docs.flutter.dev/get-started/editor?tab=vscode)의 가이드에 따라 선택한 에디터에서 Flutter를 사용하기 위해 `Flutter` 플러그인을 설치하고 개발을 시작하면 됩니다. `Dart` 플러그인은 `Flutter` 플러그인에 내장되어 있으므로 별도로 설치하지 않아도 됩니다.
 
 <br>
 
-### 5-2. Android Studio용 Flutter & Dart 플러그인 설치하기
-
-만약 Android Studio에서 Flutter를 사용하여 개발하려면 별도로 플러그인을 설치해야 하는데요, `Configure` → `Plugins`로 이동한 후 `Flutter`를 검색하여 설치합니다. `Dart` 플러그인은 `Flutter` 플러그인에 내장되어 있으므로 별도로 설치하지 않아도 됩니다.
+만약 Android Studio에서 Flutter를 사용하여 개발하려면 별도로 플러그인을 설치해야 하는데요, `Configure` → `Plugins`로 이동한 후 `Flutter`를 검색하여 설치합니다. VS Code용 플러그인과 마찬가지로 `Dart` 플러그인은 `Flutter` 플러그인에 포함되어있습니다.
 
 <br>
 
