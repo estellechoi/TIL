@@ -185,12 +185,29 @@ open -a Simulator
 
 <br>
 
-### 3-3. CocoaPods 설치하기 (선택)
+### 3-3. CocoaPods 설치하기
 
-Flutter로 개발한 앱을 배포하고 실제 iOS 디바이스에서 테스트하려면, Xcode에 디바이스를 등록해야하고 Apple Developer 계정도 필요합니다. 이때 Flutter 플러그인을 사용한다면 Xcode용 써드파티 디펜던시 매니저인 [CocoaPods](https://cocoapods.org/)가 필요한데요, Flutter Doctor의 가이드에 따라 미리 설치해줍니다.
+Flutter로 개발한 앱을 iOS 디바이스에 실행하기 위해서는 iOS 앱으로 빌드해야 하는데요, 이때 iOS용 디펜던시 매니저인 [CocoaPods](https://cocoapods.org/)가 필요합니다. Flutter Doctor의 가이드에 따라 아래 명령어를 사용하여 설치하시거나, [Homebrew를 사용하여 설치](https://formulae.brew.sh/formula/cocoapods)하시면 됩니다. 저는 Homebrew를 사용했습니다.
 
 ```zsh
-sudo gem install cocoapods
+brew install cocoapods
+```
+
+<br>
+
+그리고 Flutter Doctor로 잘 설치됐는지 확인해줍니다.
+
+```zsh
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel stable, 2.8.1, on macOS 11.3.1 20E241 darwin-arm, locale ko-KR)
+[✓] Android toolchain - develop for Android devices (Android SDK version 32.0.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 13.2.1)
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 2020.3)
+[✓] VS Code (version 1.63.2)
+[✓] Connected device (2 available)
+
+• No issues found!
 ```
 
 <br>
