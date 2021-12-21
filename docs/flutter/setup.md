@@ -151,29 +151,26 @@ sudo xcodebuild -license
 
 <br>
 
-Xcode 설치가 잘 되었는지 확인하기 위해 다시 `flutter doctor` 명령어를 실행해봅니다. 저의 경우 `Xcode 12.3`이 설치된 것을 확인할 수 있네요.
+Xcode 설치가 잘 되었는지 확인하기 위해 다시 `flutter doctor` 명령어를 실행해봅니다. 저의 경우 `Xcode 13.2.1`이 설치된 것을 확인할 수 있네요.
 
 ```
 Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 1.22.5, on Mac OS X 10.15.7 19H2 darwin-x64, locale
-    ko-KR)
-[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
-[!] Xcode - develop for iOS and macOS (Xcode 12.3)
+[✓] Flutter (Channel stable, 2.8.1, on macOS 11.3.1 20E241 darwin-arm, locale ko-KR)
+[✓] Android toolchain - develop for Android devices (Android SDK version 32.0.0)
+[!] Xcode - develop for iOS and macOS (Xcode 13.2.1)
     ✗ CocoaPods not installed.
-        CocoaPods is used to retrieve the iOS and macOS platform side's plugin
-        code that responds to your plugin usage on the Dart side.
+        CocoaPods is used to retrieve the iOS and macOS platform side's plugin code that responds to your plugin usage on the Dart
+        side.
         Without CocoaPods, plugins will not work on iOS or macOS.
         For more info, see https://flutter.dev/platform-plugins
-      To install:
-        sudo gem install cocoapods
-[!] Android Studio (version 4.1)
-    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
-    ✗ Dart plugin not installed; this adds Dart specific functionality.
-
+      To install see https://guides.cocoapods.org/using/getting-started.html#installation for instructions.
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 2020.3)
+[✓] VS Code (version 1.63.2)
 [!] Connected device
     ! No devices available
 
-! Doctor found issues in 3 categories.
+! Doctor found issues in 1 category.
 ```
 
 <br>
@@ -228,7 +225,7 @@ flutter doctor --android-licenses
 
 <br>
 
-만약 Android Studio에서 Flutter를 사용하여 개발하려면 별도로 플러그인을 설치해야 하는데요, `Configure` → `Plugins`로 이동한 후 `Flutter`를 검색하여 설치합니다. VS Code용 플러그인과 마찬가지로 `Dart` 플러그인은 `Flutter` 플러그인에 포함되어있습니다.
+만약 Android Studio에서 Flutter를 사용하여 개발하려면 별도로 플러그인을 설치해야 하는데요, `Preferences...` →→→ `Plugins`로 이동한 후 `Flutter`를 검색하여 설치합니다. VS Code용 플러그인과 마찬가지로 `Dart` 플러그인은 `Flutter` 플러그인에 포함되어있습니다.
 
 <br>
 
