@@ -187,7 +187,7 @@ open -a Simulator
 
 ### 3-3. CocoaPods 설치하기
 
-Flutter로 개발한 앱을 iOS 디바이스에 실행하기 위해서는 iOS 앱으로 빌드해야 하는데요, 이때 iOS용 디펜던시 매니저인 [CocoaPods](https://cocoapods.org/)가 필요합니다. Flutter Doctor의 가이드에 따라 아래 명령어를 사용하여 설치하시거나, [Homebrew를 사용하여 설치](https://formulae.brew.sh/formula/cocoapods)하시면 됩니다. 저는 Homebrew를 사용했습니다.
+Flutter로 개발한 앱을 iOS 디바이스에 실행하기 위해서는 iOS 앱으로 빌드해야 하는데요, 이때 iOS용 디펜던시 매니저인 [CocoaPods](https://cocoapods.org/)가 필요합니다. [CocoaPods](https://guides.cocoapods.org/using/getting-started.html#installation) 공식문서의 가이드에 따라 설치하시거나, [Homebrew를 사용하여 설치](https://formulae.brew.sh/formula/cocoapods)하시면 됩니다. 저는 Homebrew를 사용했습니다.
 
 ```zsh
 brew install cocoapods
