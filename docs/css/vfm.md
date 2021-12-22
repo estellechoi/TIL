@@ -1,9 +1,9 @@
-# VFM(Visual Formatting Model): Overflow, Over-constrained, 유효한 여백주기
+# VFM, 유효한 여백주기(Over-constrained)
 
 <br>
 
 1. VFM(Visual Formatting Model)이란
-2. 스크롤 영역의 오른쪽/왼쪽 여백이 무시되는 이유: Overflow, Over-constrained, 유효한 여백주기
+2. 스크롤 영역의 오른쪽/왼쪽 여백이 무시되는 이유: Over-constrained, 유효한 여백주기
 
 <br>
 
@@ -35,7 +35,7 @@ VFM이 워킹하는 영역, 즉 화면이 렌더링되는 영역을 뷰포트라
 
 <br>
 
-## 2. 스크롤 영역의 오른쪽/왼쪽 여백이 무시되는 이유: Overflow, Over-constrained, 유효한 여백주기
+## 2. 스크롤 영역의 오른쪽/왼쪽 여백이 무시되는 이유: Over-constrained, 유효한 여백주기
 
 특정 영역 내에서 요소들을 가로 방향으로 스크롤하여 탐색할 수 있는 UI를 개발한다고 가정해보겠습니다. 이때 요소들을 담고있는 컨테이너 박스에는 다음과 같이 CSS 속성을 지정하게 됩니다.
 
@@ -58,25 +58,9 @@ VFM이 워킹하는 영역, 즉 화면이 렌더링되는 영역을 뷰포트라
 
 이제 우리는 해당 영역에서 스크롤을 했을 때 다음과 같이 여백이 적용된 모습을 기대하게 됩니다. 하지만 예상과 달리 `padding`이던 `margin`이던 여백 값은 무시됩니다.
 
-<img src="./../img/overconstrained-r.png" width="410" />
-
-사진출처 : [닥터밀로](https://meallo.co.kr)
-
 <br>
 
-### 2-1. Overflow
-
-먼저, 컨테이너 박스의 양옆 `padding` 값이 무시되는 이유는 `overflow` 속성이 지정된 컨테이너 박스 내부가 어떻게 렌더링될지는 포함된 요소들의 콘텐츠에 의해 결정되기 때문입니다. 그러니까, 컨테이너 박스 내부에 지정된 `padding` 값은 완전히 무시됩니다.
-
-<br>
-
-다음은 W3C Workding Draft [11.1.1 Overflow: the 'overflow' property](https://www.w3.org/TR/CSS22/visufx.html#overflow) 섹션에서 발췌한 설명입니다.
-
-> This property specifies whether content of a block container element is clipped when it overflows the element's box.
-
-<br>
-
-### 2-2. Over-constrained
+### 2-1. Over-constrained
 
 컨테이너 박스 내에서 요소들이 왼쪽에서 오른쪽 방향으로 배치되어 있다면 `margin-right` 값이 무시됩니다. 반대 방향으로 배치되어 있다면 `margin-left` 값이 무시되고요. 이는 컨테이너에 포함된 요소들의 크기와 여백 값들이 (개발자의 일반적인 의도와는 달리) 지나치게 통제되었다고(over-constrained) 보기 때문에 브라우저가 가장 마지막 요소의 오른쪽 마진 값을 무시하기 때문입니다.
 
@@ -106,7 +90,7 @@ W3C Working Draft의 [Visual formatting model details](https://www.w3.org/TR/CSS
 
 <br>
 
-### 2-3. 유효한 여백주기
+### 2-2. 유효한 여백주기
 
 여백을 반드시 주어야한다면, 첫번째 또는 마지막 요소에 `border-left`, `border-right` 속성을 사용하는 트릭을 사용할 수 있습니다. 예를 들어, 마지막 요소에 다음과 같이 투명한 `border`를 부여할 수 있겠습니다.
 

@@ -70,7 +70,7 @@
 
 ### CSS
 
-- [VFM(Visual Formatting Model): Overflow, Over-constrained, 유효한 여백주기](https://github.com/estellechoi/TIL/blob/master/docs/css/vfm.md)
+- [VFM(Visual Formatting Model): Overflow, Over-constrained, 유효한 여백주기](https://github.com/estellechoi/TIL/blob/master/docs/css/vfm.md) \*
 - [박스 모델(Box Model)](https://github.com/estellechoi/TIL/blob/master/docs/css/box.md)
 - [포지셔닝 규칙(Positioning schemes)](https://github.com/estellechoi/TIL/blob/master/docs/css/positioning.md)
 - [블록 서식 컨텍스트(Block Formatting Context)](https://github.com/estellechoi/TIL/blob/master/docs/css/bfc.md)
