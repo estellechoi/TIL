@@ -10,7 +10,7 @@
 6. 컨텍스트 변수 사용하기, 환경변수와의 차이점
 7. `secrets` 컨텍스트를 사용하여 환경변수 세팅하기
 8. CI: Webhook으로 코드 컨벤션 자동 체크, Actions로 테스트와 PR 자동화하기
-9. CD: Github Pages에 배포하기, AWS에 배포하기
+9. CD: SSH로 원격 서버에 접속해서 배포하기
 
 <br>
 
@@ -520,28 +520,205 @@ jobs:
 
 <br>
 
-## 9. CD: Github Pages에 배포하기, AWS에 배포하기
+## 9. CD: SSH로 원격 서버에 접속해서 배포하기
 
-### 9-1. Github Pages에 배포하기
-
-커뮤니티 Action을 사용해서 쉽게 구축할 수 있습니다. [Vue to Github Pages](https://github.com/marketplace/actions/vue-to-github-pages)를 참고하세요.
-
-... Writing in progress
+[`appleboy/ssh-action`](https://github.com/marketplace/actions/ssh-remote-commands)과 같이 쉽게 SSH 접속을 지원하는 써드파티 Action들이 있기는 하지만, 원격 서버에서 실행할 Shell 커맨드들을 하나의 Step에 묶어야하는 등 제한이 따릅니다. 저는 Job을 여러 단계의 Step으로 나누고싶어서 `ssh` 커맨드를 직접 실행하는 방법으로 CD 구축을 했습니다.
 
 <br>
 
-### 9-2. AWS에 배포하기
+### 9-1. 원격 서버에 SSH 키가 있는지 확인하기
 
-... Research in progress
+일단 비밀번호를 사용하여 원격 서버에 SSH 접속을 합니다!
+
+```zsh
+ssh username@host
+```
+
+<br>
+
+보통 SSH 키는 기본적으로 `~/.ssh` 디렉토리에 있습니다. 접속한 원격 서버에서 이 디렉토리를 리스팅해보면 이미 SSH 키가 존재하는지 확인할 수 있습니다. 만약 `id_rsa`와 같은 이름의 파일과 동일한 파일명의 `.pub` 확장자 파일이 하나 더 있다면 SSH 개인키와 공개키가 모두 있는 것입니다. 개인키는 지정된 사용자만 사용할 수 있기 때문에 안전하게 보관해야하는 키이고, 공개키는 어디서나 사용할 수 있는 키입니다. `.pub` 확장자 파일이 공개키 파일입니다.
+
+```zsh
+ls ~/.ssh
+```
+
+<br>
+
+### 9-2. SSH 키 생성하기: `ssh-keygen`
+
+만약 SSH 키가 없다면 `ssh-keygen`을 사용하여 키를 생성합니다. `ssh-keygen`은 Linux, macOS의 SSH 패키지에 기본으로 포함되어 있기 때문에 바로 사용할 수 있습니다.
+
+```zsh
+ssh-keygen -t rsa -b 4096 -C "user@email.com"
+```
+
+<br>
+
+위 커맨드에 사용된 옵션들은 각각 다음을 의미하는데요, SSH 키를 생성하면서 기존의 키 파일을 덮어쓰지 않도록 주의해야 합니다. 다른 서버와의 연결에 사용되고 있을 수 있기 때문입니다.
+
+- `-t`: 암호화 타입, 디폴트 값은 `rsa` (RSA 알고리즘 사용)
+- `-b`: 암호의 bit 수, 디폴트 값은 `2048`
+- `-f`: 저장할 파일 위치와 파일명 (`-f path/file_name`)
+- `-C`: 주석
+
+<br>
+
+커맨드를 실행하면 아래와 같이 `passphrase`를 입력란이 나타납니다. 옵션이므로 빈칸으로 진행할 수 있고, 만약 사용한다면 개인키를 사용하여 접속을 시도할 때 비밀번호 입력을 강제합니다.
+
+```zsh
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+```
+
+<br>
+
+키 생성이 완료되면 아래와 같이 안내문구가 출력되고요, 별도로 `-f` 옵션을 명시하지 않았다면 디폴트 파일경로는 `~/.ssh/id_rsa`, `~/.ssh/id_rsa.pub`이 됩니다.
+
+```
+Your identification has been saved in /home/user/.ssh/id_rsa.
+Your public key has been saved in /home/user/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:9u5autgLNrHcbF1fnQybvmvxTgGTBxA5+YVtQiVVh+Q estele.choi@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+|           o*=*++|
+|           + +=+.|
+|            o=E. |
+|             .O o|
+|      . S   .o +o|
+|     . * o ..o ..|
+|      * + +  .+. |
+|     . * +   .o. |
+|      . *=o .oo. |
++----[SHA256]-----+
+```
+
+<br>
+
+참고로, 생성된 공개키는 `authorized_keys`에 명시해야 사용할 수 있습니다.
+
+```zsh
+cd ~/.ssh
+cat id_rsa.pub >> authorized_keys
+```
+
+<br>
+
+### 9-3. SSH 개인키를 Github Secret에 등록
+
+개인키는 안전하게 보관하기 위해 Github Secret에 등록합니다. `~/.ssh/id_rsa` 파일을 열어 내용을 모두 복사한 후, Github Secret으로 등록합니다.
+
+<br>
+
+### 9-4. Job 만들기
+
+Github Secret에 SSH 개인키를 등록했다면, 이제 Github Actions Workflow에서 `secrets` 컨텍스트를 통해 해당 값에 접근할 수 있습니다.
 
 ```yml
 name: CD
+
 on:
   pull_request:
     branches: [ master ]
-    types: [ closed ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1: Checks-out your repository
+      - uses: actions/checkout@v2
+      
+      # 2: Configure SSH
+      - name: Configure SSH
+        env:
+          PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }},
+          PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }},
+          PROD_SERVER_SSH_PRIVATEKEY: ${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}
+        run: |
+        mkdir -p ~/.ssh/
+        touch ~/.ssh/keyname
+        echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname
+        chmod 600 ~/.ssh/keyname
+        cat <<EOF >> ~/.ssh/config
+        Host hostname
+          HostName $PROD_SERVER_IP
+          User $PROD_SERVER_SSH_USERNAME
+          IdentityFile ~/.ssh/keyname
+          StrictHostKeyChecking no
+        EOF
+
+      # 3: Connect to server using SSH, Git-pull
+      - name: Git pull
+        env:
+          GH_USERNAME: ${{ secrets.GH_USERNAME }},
+          GH_USEREMAIL: ${{ secrets.GH_USEREMAIL }},
+          GH_TOKEN: ${{ github.token }},
+        run: |
+          ssh hostname 'cd appname && 
+          git config user.name $GH_USERNAME && 
+          git config user.email $GH_USEREMAIL && 
+          git remote set-url origin https://$GH_TOKEN@github.com/organization/appname.git && 
+          sudo git pull'
+
+      - name: Set env
+        env:
+          VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
+        run: |
+          ssh hostname 'cd appname && 
+          touch .env && 
+          echo "VUE_APP_API_URL=$VUE_APP_API_URL" > .env'
+
+      - name: Install packages & Build
+        run: ssh hostname 'cd appname && sudo yarn install && sudo yarn build'
 ```
 
+<br>
+
+#### `Configure SSH`
+
+```yml
+  # 2: Configure SSH
+  - name: Configure SSH
+    env:
+      PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }},
+      PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }},
+      PROD_SERVER_SSH_PRIVATEKEY: ${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}
+    run: |
+      mkdir -p ~/.ssh/
+      touch ~/.ssh/keyname
+      echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname
+      chmod 600 ~/.ssh/keyname
+      cat <<EOF >> ~/.ssh/config
+      Host hostname
+        HostName $PROD_SERVER_IP
+        User $PROD_SERVER_SSH_USERNAME
+        IdentityFile ~/.ssh/keyname
+        StrictHostKeyChecking no
+      EOF
+```
+
+<br>
+
+- `mkdir -p ~/.ssh/` 커맨드를 실행하는 이유는, `ssh` 커맨드를 최초로 사용할 때 `~/.ssh` 디렉토리가 생성되기 때문입니다. 아직 `~/.ssh` 디렉토리가 없기 때문에 생성해줍니다.
+
+- `cat <<EOF >> ~/.ssh/config `: `~/.ssh/config`는 SSH 설정파일입니다. 호스트별로 접속정보를 저장해놓고, 호스트 이름으로 간편하게 참조할 수 있습니다. `<<EOF`는 `EOF` 키워드가 나오기 전까지의 내용을 입력한다는 의미입니다.
+
+```
+Host hostname1
+    SSH_OPTION value
+    SSH_OPTION value
+
+Host hostname2
+    SSH_OPTION value
+
+Host *
+    SSH_OPTION value
+```
+
+<br>
 <br>
 
 ---
@@ -556,3 +733,4 @@ on:
 - [About webhooks | GitHub Docs](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks)
 - [Github Actions으로 배포 자동화하기 | NHN Cloud Meetup](https://meetup.toast.com/posts/286)
 - [[Github Action] Github Action 맛보고, AWS S3에 Vue 자동으로 배포하기 | 빈이의 개발 블로그](https://bin-e.tistory.com/44)
+- [\<Linux\> SSH key의 기본 작동 원리와 SSH 접속 시 key로 접속하는 법 | DanTheTech](https://danthetech.netlify.app/Backend/configure-ssh-key-based-authentication-on-a-linux-server)
