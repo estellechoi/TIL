@@ -734,3 +734,5 @@ Host *
 - [Github Actions으로 배포 자동화하기 | NHN Cloud Meetup](https://meetup.toast.com/posts/286)
 - [[Github Action] Github Action 맛보고, AWS S3에 Vue 자동으로 배포하기 | 빈이의 개발 블로그](https://bin-e.tistory.com/44)
 - [\<Linux\> SSH key의 기본 작동 원리와 SSH 접속 시 key로 접속하는 법 | DanTheTech](https://danthetech.netlify.app/Backend/configure-ssh-key-based-authentication-on-a-linux-server)
+- [Deploying to a server via SSH and Rsync in a Github Action | Zellwk](https://zellwk.com/blog/github-actions-deploy/)
+- [GitHub Actions: How to run SSH commands (without third-party actions)](https://blog.benoitblanchon.fr/github-action-run-ssh-commands/)
