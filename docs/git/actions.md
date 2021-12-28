@@ -616,7 +616,15 @@ cat id_rsa.pub >> authorized_keys
 
 ### 9-3. SSH 개인키를 Github Secret에 등록
 
-개인키는 안전하게 보관하기 위해 Github Secret에 등록합니다. `~/.ssh/id_rsa` 파일을 열어 내용을 모두 복사한 후, Github Secret으로 등록합니다. 이때 키 값만 저장하는 것이 아니라, `-----BEGIN RSA PRIVATE KEY-----`와 `-----END RSA PRIVATE KEY-----`를 포함한 PEM 포맷의 파일 내용 전체를 그대로 저장해야합니다. Github Actions Workflow에서 이 Secret 변수값을 그대로 사용하여 `pem` 파일을 만들기 위함입니다.
+개인키는 안전하게 보관하기 위해 [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)에 추가합니다. `~/.ssh/id_rsa` 파일을 열어 내용을 모두 복사한 후, 그대로 보관하면 됩니다. 이때 키 값만 저장하는 것이 아니라, `-----BEGIN RSA PRIVATE KEY-----`와 `-----END RSA PRIVATE KEY-----`를 포함한 PEM 포맷의 파일 내용 전체를 그대로 저장해야합니다. Github Actions Workflow에서 SSH 접속에 사용할 `pem` 파일을 생성할 때 이 Secret 데이터를 그대로 사용하기 위함이죠. 
+
+<br>
+
+저는 아래와 같이 `PROD_SERVER_SSH_PRIVATEKEY`라는 이름으로 추가했고요, Workflow에서 `${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}` 구문을 사용하여 접근할 수 있습니다.
+
+<br>
+
+<img src="./../img/github-secret.png" />
 
 <br>
 
@@ -706,7 +714,7 @@ echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname.pem
 chmod 600 ~/.ssh/keyname.pem
 ```
 
-이제 Github Secret으로 등록해놓은 SSH 키파일 내용을 `~/.ssh/keyname.pem` 파일을 생성하여 입력합니다. 그다음 `chmod 600` 커맨드를 사용하여 사용자 권한을 수정해줘야하는데요, 디폴트 권한 값이 `644`이기 때문에 SSH 접속시 사용할 수 없습니다. 사용자 권한을 수정해주지 않으면 다음과 같이 경고가 나타나고 비밀번호 입력이 강제됩니다.
+이제 `~/.ssh/keyname.pem` 파일을 생성하고, `$PROD_SERVER_SSH_PRIVATEKEY` 변수의 값을 파일 내용으로 추가합니다. 그다음 지정된 사용자만 해당 파일을 읽고 쓸 수 있도록 `chmod 600` 커맨드를 사용하여 사용자 권한을 수정합니다. 그렇지 않으면, 디폴트 권한 값이 `644`이기 때문에 SSH 접속시 사용할 수 없습니다. 사용자 권한을 수정하지 않고 이 파일을 사용하여 SSH 사용을 시도하면 다음과 같은 경고가 나타나고 비밀번호 입력이 강제됩니다.
 
 ```zsh
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
