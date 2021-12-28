@@ -605,7 +605,7 @@ The key's randomart image is:
 
 <br>
 
-참고로, 생성된 공개키는 `authorized_keys`에 명시해야 사용할 수 있습니다.
+참고로, 생성된 공개키의 값은 `authorized_keys`에 명시해야 사용할 수 있습니다.
 
 ```zsh
 cd ~/.ssh
@@ -628,7 +628,7 @@ cat id_rsa.pub >> authorized_keys
 
 <br>
 
-### 9-4. Job 만들기
+### 9-4. Job 작성하기
 
 이제 Job을 작성하면 됩니다. 다음은 제가 작성한 Job입니다.
 
@@ -652,19 +652,19 @@ jobs:
       # 2: Configure SSH
       - name: Configure SSH
         env:
-          PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }},
-          PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }},
+          PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }}
+          PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }}
           PROD_SERVER_SSH_PRIVATEKEY: ${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname
-          chmod 600 ~/.ssh/keyname
+          echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname.pem
+          chmod 600 ~/.ssh/keyname.pem
           cat <<EOF >> ~/.ssh/config
           Host hostname
             HostName $PROD_SERVER_IP
             User $PROD_SERVER_SSH_USERNAME
-            IdentityFile ~/.ssh/keyname
+            IdentityFile ~/.ssh/keyname.pem
             StrictHostKeyChecking no
           EOF
           chmod 700 ~/.ssh/config
@@ -672,28 +672,29 @@ jobs:
       # 3: Connect to server, git pull
       - name: Git pull
         env:
-          GH_USERNAME: ${{ secrets.GH_USERNAME }},
-          GH_USEREMAIL: ${{ secrets.GH_USEREMAIL }},
-          GH_TOKEN: ${{ github.token }},
+          GH_USER_NAME: ${{ secrets.GH_USER_NAME }}
+          ORIGIN_URL: https://${{ secrets.GH_USER_TOKEN }}@github.com/${{ github.repository }}.git
         run: |
-          ssh hostname 'cd appname && 
-          git config user.name $GH_USERNAME && 
-          git config user.email $GH_USEREMAIL && 
-          git remote set-url origin https://$GH_TOKEN@github.com/organization/appname.git && 
-          sudo git pull'
+          ssh hostname "cd appname && 
+          git config user.name ${GH_USERNAME} && 
+          git remote set-url origin ${ORIGIN_URL} &&
+          sudo git checkout master &&
+          sudo git pull"
 
       # 4: Connect to server, set env
       - name: Set env
         env:
           VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
         run: |
-          ssh hostname 'cd appname && 
-          touch .env && 
-          echo "VUE_APP_API_URL=$VUE_APP_API_URL" > .env'
+          ssh hostname "cd appname && 
+          echo VUE_APP_API_URL=${VUE_APP_API_URL} > .env"
 
       # 5: Connect to server, install packages and build app
       - name: Install packages & Build
-        run: ssh hostname 'cd appname && sudo yarn install && sudo yarn build'
+        run: |
+        ssh hostname "cd appname && 
+        sudo yarn install && 
+        sudo yarn build"
 ```
 
 <br>
@@ -701,20 +702,39 @@ jobs:
 #### SSH 설정
 
 ```yml
+env:
+  PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }}
+  PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }}
+  PROD_SERVER_SSH_PRIVATEKEY: ${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}
+```
+
+이 단계에서는 위의 환경변수들이 필요합니다.
+
+<br>
+
+##### `~/.ssh` 디렉토리 생성
+
+```yml
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 ```
 
-아직 `~/.ssh` 디렉토리가 없기 때문에 `~/.ssh` 디렉토리를 생성합니다. `~/.ssh` 디렉토리는 `ssh` 커맨드를 최초로 사용할 때 생성되기 때문입니다. 디렉토리를 생성한 후에는 `chmod 700` 커맨드를 사용하여 사용자 권한을 수정합니다.
+먼저 `~/.ssh` 디렉토리를 생성합니다. `~/.ssh` 디렉토리는 `ssh` 커맨드를 최초로 사용할 때 생성되기 때문에 아직 이 디렉토리는 존재하지 않기 때문입니다. 디렉토리를 생성하고, [`chmod 700`](https://chmodcommand.com/chmod-700/) 커맨드를 사용하여 소유자가 읽고, 쓰고, 실행할 수 있도록 사용자 권한을 수정합니다.
 
 <br>
+
+##### SSH 키파일 생성
 
 ```yml
 echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname.pem
 chmod 600 ~/.ssh/keyname.pem
 ```
 
-이제 `~/.ssh/keyname.pem` 파일을 생성하고, `$PROD_SERVER_SSH_PRIVATEKEY` 변수의 값을 파일 내용으로 추가합니다. 그다음 지정된 사용자만 해당 파일을 읽고 쓸 수 있도록 `chmod 600` 커맨드를 사용하여 사용자 권한을 수정합니다. 그렇지 않으면, 디폴트 권한 값이 `644`이기 때문에 SSH 접속시 사용할 수 없습니다. 사용자 권한을 수정하지 않고 이 파일을 사용하여 SSH 사용을 시도하면 다음과 같은 경고가 나타나고 비밀번호 입력이 강제됩니다.
+이제 `echo` 커맨드를 사용하여 `~/.ssh/keyname.pem` 파일을 생성하고, `$PROD_SERVER_SSH_PRIVATEKEY` 변수의 값을 파일 내용으로 Redirect 합니다. 이때 `"$PROD_SERVER_SSH_PRIVATEKEY"`에서 쌍따옴표(`"`)를 사용하는 이유는 `$PROD_SERVER_SSH_PRIVATEKEY` 변수의 치환값에 줄바꿈 여백이 포함되어 있어 하나의 문자열로 묶어줘야하기 때문입니다.
+
+<br>
+
+그다음 [`chmod 600`](https://chmodcommand.com/chmod-600/) 커맨드를 사용하여 해당 파일의 소유자만 읽고 쓸 수 있도록 사용자 권한을 수정합니다. 디폴트 권한인 `644`를 그대로 사용하면 안전하지 않다고 보기 때문에 SSH 접속시 사용할 수 없습니다. 이 경우 SSH 사용을 시도하면 다음과 같은 경고가 나타나고 비밀번호 입력이 강제됩니다.
 
 ```zsh
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -728,6 +748,8 @@ Load key "~/.ssh/keyname.pem": bad permissions
 
 <br>
 
+##### SSH 호스트 정보 저장
+
 ```yml
 cat <<EOF >> ~/.ssh/config
 Host hostname
@@ -739,7 +761,11 @@ EOF
 chmod 700 ~/.ssh/config
 ```
 
-`~/.ssh/config`는 SSH 설정 파일입니다. 호스트별로 정보를 저장해놓고, `ssh` 커맨드를 사용할 때 호스트 이름으로 간편하게 참조할 수 있습니다. `<<EOF`는 `EOF` 키워드가 나오기 전까지의 내용을 입력한다는 의미입니다. 아래는 `~/.ssh/config` 파일의 유효 형식입니다. 이 파일에 대한 자세한 설명이 필요하시다면 [Using the SSH Config File | Linuxize](https://linuxize.com/post/using-the-ssh-config-file/) 문서가 도움이 됩니다.
+`~/.ssh/config`는 SSH 설정 파일입니다. 호스트별로 정보를 저장해놓고, `ssh` 커맨드를 사용할 때 호스트 별명으로 간편하게 참조할 수 있습니다. `<<EOF`는 `EOF` 키워드가 나오기 전까지의 내용을 입력한다는 의미입니다.
+
+<br>
+
+아래는 `~/.ssh/config` 파일의 유효 형식입니다. 이 파일에 대한 자세한 설명이 필요하시다면 [Using the SSH Config File | Linuxize](https://linuxize.com/post/using-the-ssh-config-file/) 문서가 도움이 됩니다.
 
 ```
 Host hostname1
@@ -754,6 +780,70 @@ Host *
 ```
 
 <br>
+
+#### Git Pull
+
+```yml
+env:
+  GH_USER_NAME: ${{ secrets.GH_USER_NAME }}
+  ORIGIN_URL: https://${{ secrets.GH_USER_TOKEN }}@github.com/${{ github.repository }}.git
+```
+
+이제 SSH 설정이 완료되었기 때문에, SSH를 사용하여 배포용 서버에 접속하면 됩니다. 이 단계에서는 `git pull`을 하기 위해 위의 환경변수들이 필요합니다. 저는 Github 레포 Authentication에 필요한 사용자 이름과 해당 사용자의 Access Token을 Secrets에 미리 추가해두었습니다. (`GH_USER_NAME`, `GH_USER_TOKEN`)
+
+<br>
+
+그리고 Git의 원격 레포지토리 URL로 사용할 환경변수 `ORIGIN_URL`을 위와 같이 세팅했는데요, 원격 레포지토리 URL에 Access Token을 포함해두면 `git` 명령어를 사용할 때 매번 토큰을 입력하지 않아도 됩니다! 참고로 [`github.repository`](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context)는 Github Actions에서 기본으로 제공하는 컨텍스트 변수입니다.
+
+<br>
+
+##### SSH로 배포용 서버에 연결
+
+```yml
+run: |
+  ssh hostname "cd appname && 
+  git config user.name ${GH_USERNAME} && 
+  git remote set-url origin ${ORIGIN_URL} &&
+  sudo git checkout master &&
+  sudo git pull"
+```
+
+이제 `ssh hostname` 커맨드를 사용하여 배포용 서버에 연결합니다. 연결된 서버에서 실행할 커맨드는 쌍따옴표(`"`) 안에 작성하면 됩니다. 이때 환경변수 치환값을 사용하기 위해 홀따옴표(`'`)가 아닌 쌍따옴표(`"`)를 사용합니다. Bash 쉘의 따옴표 문법에 대한 설명이 필요하시면 [Unix/Linux Shell Quoting for remote shells](http://teaching.idallen.com/cst8207/15w/notes/445_quotes_for_remote.html) 문서를 확인해보세요.
+
+<br>
+
+#### 배포용 서버에 환경변수 추가
+
+```yml
+env:
+  VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
+```
+
+<br>
+
+```yml
+run: |
+  ssh hostname "cd appname && 
+  echo VUE_APP_API_URL=${VUE_APP_API_URL} > .env"
+```
+
+이제 위와 같이 앱 실행에 필요한 환경변수들을 `.env` 파일에 작성합니다. 첫 번째 변수를 추가할 때는 `echo >` 커맨드를 사용하고, 다음 변수부터는 파일을 덮어쓰지 않고 Append하기 위해 `>>`를 사용합니다.
+
+
+
+
+<br>
+
+#### 패키지 설치 & 빌드
+
+```yml
+ssh hostname "cd appname && 
+        sudo yarn install && 
+        sudo yarn build"
+```
+
+마지막으로 패키지를 설치하고 앱을 빌드합니다!
+
 <br>
 
 ---
@@ -771,3 +861,5 @@ Host *
 - [\<Linux\> SSH key의 기본 작동 원리와 SSH 접속 시 key로 접속하는 법 | DanTheTech](https://danthetech.netlify.app/Backend/configure-ssh-key-based-authentication-on-a-linux-server)
 - [Deploying to a server via SSH and Rsync in a Github Action | Zellwk](https://zellwk.com/blog/github-actions-deploy/)
 - [GitHub Actions: How to run SSH commands (without third-party actions)](https://blog.benoitblanchon.fr/github-action-run-ssh-commands/)
+- [Unix/Linux Shell Quoting for remote shells](http://teaching.idallen.com/cst8207/15w/notes/445_quotes_for_remote.html)
+- [Using the SSH Config File](https://linuxize.com/post/using-the-ssh-config-file/)
