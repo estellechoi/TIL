@@ -546,7 +546,7 @@ ls ~/.ssh
 
 ### 9-2. SSH 키 생성하기: `ssh-keygen`
 
-만약 SSH 키가 없다면 `ssh-keygen`을 사용하여 키를 생성합니다. `ssh-keygen`은 Linux, macOS의 SSH 패키지에 기본으로 포함되어 있기 때문에 바로 사용할 수 있습니다.
+만약 SSH 키가 없다면 `ssh-keygen`을 사용하여 키를 생성합니다. `ssh-keygen`은 Linux, macOS의 [OpenSSH](https://www.ssh.com/academy/ssh/openssh#what-is-openssh?) 패키지에 기본으로 포함되어 있기 때문에 바로 사용할 수 있습니다.
 
 ```zsh
 ssh-keygen -t rsa -b 4096 -C "user@email.com"
@@ -578,7 +578,7 @@ Enter same passphrase again:
 Your identification has been saved in /home/user/.ssh/id_rsa.
 Your public key has been saved in /home/user/.ssh/id_rsa.pub.
 The key fingerprint is:
-SHA256:9u5autgLNrHcbF1fnQybvmvxTgGTBxA5+YVtQiVVh+Q estele.choi@gmail.com
+...
 The key's randomart image is:
 +---[RSA 4096]----+
 |           o*=*++|
@@ -595,6 +595,16 @@ The key's randomart image is:
 
 <br>
 
+생성된 파일을 열어서 다음과 같이 `-----BEGIN RSA PRIVATE KEY-----`로 시작하는 [`PEM`](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) 포맷의 키 파일이 잘 만들어졌는지 확인합니다.
+
+```zsh
+-----BEGIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----
+```
+
+<br>
+
 참고로, 생성된 공개키는 `authorized_keys`에 명시해야 사용할 수 있습니다.
 
 ```zsh
@@ -606,13 +616,13 @@ cat id_rsa.pub >> authorized_keys
 
 ### 9-3. SSH 개인키를 Github Secret에 등록
 
-개인키는 안전하게 보관하기 위해 Github Secret에 등록합니다. `~/.ssh/id_rsa` 파일을 열어 내용을 모두 복사한 후, Github Secret으로 등록합니다.
+개인키는 안전하게 보관하기 위해 Github Secret에 등록합니다. `~/.ssh/id_rsa` 파일을 열어 내용을 모두 복사한 후, Github Secret으로 등록합니다. 이때 키 값만 저장하는 것이 아니라, `-----BEGIN RSA PRIVATE KEY-----`와 `-----END RSA PRIVATE KEY-----`를 포함한 PEM 포맷의 파일 내용 전체를 그대로 저장해야합니다. Github Actions Workflow에서 이 Secret 변수값을 그대로 사용하여 `pem` 파일을 만들기 위함입니다.
 
 <br>
 
 ### 9-4. Job 만들기
 
-Github Secret에 SSH 개인키를 등록했다면, 이제 Github Actions Workflow에서 `secrets` 컨텍스트를 통해 해당 값에 접근할 수 있습니다.
+이제 Job을 작성하면 됩니다. 다음은 제가 작성한 Job입니다.
 
 ```yml
 name: CD
@@ -638,19 +648,20 @@ jobs:
           PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }},
           PROD_SERVER_SSH_PRIVATEKEY: ${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}
         run: |
-        mkdir -p ~/.ssh/
-        touch ~/.ssh/keyname
-        echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname
-        chmod 600 ~/.ssh/keyname
-        cat <<EOF >> ~/.ssh/config
-        Host hostname
-          HostName $PROD_SERVER_IP
-          User $PROD_SERVER_SSH_USERNAME
-          IdentityFile ~/.ssh/keyname
-          StrictHostKeyChecking no
-        EOF
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname
+          chmod 600 ~/.ssh/keyname
+          cat <<EOF >> ~/.ssh/config
+          Host hostname
+            HostName $PROD_SERVER_IP
+            User $PROD_SERVER_SSH_USERNAME
+            IdentityFile ~/.ssh/keyname
+            StrictHostKeyChecking no
+          EOF
+          chmod 700 ~/.ssh/config
 
-      # 3: Connect to server using SSH, Git-pull
+      # 3: Connect to server, git pull
       - name: Git pull
         env:
           GH_USERNAME: ${{ secrets.GH_USERNAME }},
@@ -663,6 +674,7 @@ jobs:
           git remote set-url origin https://$GH_TOKEN@github.com/organization/appname.git && 
           sudo git pull'
 
+      # 4: Connect to server, set env
       - name: Set env
         env:
           VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
@@ -671,40 +683,55 @@ jobs:
           touch .env && 
           echo "VUE_APP_API_URL=$VUE_APP_API_URL" > .env'
 
+      # 5: Connect to server, install packages and build app
       - name: Install packages & Build
         run: ssh hostname 'cd appname && sudo yarn install && sudo yarn build'
 ```
 
 <br>
 
-#### `Configure SSH`
+#### SSH 설정
 
 ```yml
-  # 2: Configure SSH
-  - name: Configure SSH
-    env:
-      PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }},
-      PROD_SERVER_SSH_USERNAME: ${{ secrets.PROD_SERVER_SSH_USERNAME }},
-      PROD_SERVER_SSH_PRIVATEKEY: ${{ secrets.PROD_SERVER_SSH_PRIVATEKEY }}
-    run: |
-      mkdir -p ~/.ssh/
-      touch ~/.ssh/keyname
-      echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname
-      chmod 600 ~/.ssh/keyname
-      cat <<EOF >> ~/.ssh/config
-      Host hostname
-        HostName $PROD_SERVER_IP
-        User $PROD_SERVER_SSH_USERNAME
-        IdentityFile ~/.ssh/keyname
-        StrictHostKeyChecking no
-      EOF
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+```
+
+아직 `~/.ssh` 디렉토리가 없기 때문에 `~/.ssh` 디렉토리를 생성합니다. `~/.ssh` 디렉토리는 `ssh` 커맨드를 최초로 사용할 때 생성되기 때문입니다. 디렉토리를 생성한 후에는 `chmod 700` 커맨드를 사용하여 사용자 권한을 수정합니다.
+
+<br>
+
+```yml
+echo "$PROD_SERVER_SSH_PRIVATEKEY" > ~/.ssh/keyname.pem
+chmod 600 ~/.ssh/keyname.pem
+```
+
+이제 Github Secret으로 등록해놓은 SSH 키파일 내용을 `~/.ssh/keyname.pem` 파일을 생성하여 입력합니다. 그다음 `chmod 600` 커맨드를 사용하여 사용자 권한을 수정해줘야하는데요, 디폴트 권한 값이 `644`이기 때문에 SSH 접속시 사용할 수 없습니다. 사용자 권한을 수정해주지 않으면 다음과 같이 경고가 나타나고 비밀번호 입력이 강제됩니다.
+
+```zsh
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for '~/.ssh/keyname.pem' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "~/.ssh/keyname.pem": bad permissions
 ```
 
 <br>
 
-- `mkdir -p ~/.ssh/` 커맨드를 실행하는 이유는, `ssh` 커맨드를 최초로 사용할 때 `~/.ssh` 디렉토리가 생성되기 때문입니다. 아직 `~/.ssh` 디렉토리가 없기 때문에 생성해줍니다.
+```yml
+cat <<EOF >> ~/.ssh/config
+Host hostname
+  HostName $PROD_SERVER_IP
+  User $PROD_SERVER_SSH_USERNAME
+  IdentityFile ~/.ssh/keyname
+  StrictHostKeyChecking no
+EOF
+chmod 700 ~/.ssh/config
+```
 
-- `cat <<EOF >> ~/.ssh/config `: `~/.ssh/config`는 SSH 설정파일입니다. 호스트별로 접속정보를 저장해놓고, 호스트 이름으로 간편하게 참조할 수 있습니다. `<<EOF`는 `EOF` 키워드가 나오기 전까지의 내용을 입력한다는 의미입니다.
+`~/.ssh/config`는 SSH 설정 파일입니다. 호스트별로 정보를 저장해놓고, `ssh` 커맨드를 사용할 때 호스트 이름으로 간편하게 참조할 수 있습니다. `<<EOF`는 `EOF` 키워드가 나오기 전까지의 내용을 입력한다는 의미입니다. 아래는 `~/.ssh/config` 파일의 유효 형식입니다. 이 파일에 대한 자세한 설명이 필요하시다면 [Using the SSH Config File | Linuxize](https://linuxize.com/post/using-the-ssh-config-file/) 문서가 도움이 됩니다.
 
 ```
 Host hostname1
