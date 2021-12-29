@@ -18,15 +18,30 @@
 
 ### 1-2. Jest 설치하기
 
-다음과 같이 패키지매니저를 사용해서 설치하거나,
-
-```zsh
-yarn add jest --dev
-```
+[Vue 테스트 유틸](https://vue-test-utils.vuejs.org/) 라이브러리를 통해 Jest를 사용할 수 있습니다. Vue 테스트 유틸은 Vue에서 공식 지원하는 단위 테스트 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 앱 생성시 단위테스트 툴로 Jest를 선택하여 쉽게 셋업할 수 있습니다. `@vue/cli`를 사용하여 앱을 생성할 때 `Unit Testing` 도구로 `Jest`를 선택하면 됩니다. 그럼 아래와 같이 필요한 스크립트와 라이브러리들이 Preset 됩니다. ([TypeScript](https://www.typescriptlang.org/)를 사용한다고 가정)
 
 <br>
 
-[Vue 테스트 유틸](https://vue-test-utils.vuejs.org/) 라이브러리를 통해 Jest를 사용할 수 있습니다. Vue 테스트 유틸은 Vue에서 공식 지원하는 단위 테스트 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 앱 생성시 단위테스트 툴로 Jest를 선택하여 쉽게 셋업할 수 있습니다.
+JSON 파일이므로 실제 파일에서 주석은 사용할 수 없지만 여기서만 사용해보겠습니다!
+
+```json
+// package.json
+{
+	"scripts": {
+		// ..
+		"test:unit": "vue-cli-service test:unit"
+	},
+	"devDependencies": {
+		// ..
+		"@types/jest": "^24.0.19",
+		"@vue/cli-plugin-typescript": "~4.5.0",
+		"@vue/cli-plugin-unit-jest": "~4.5.0",
+		"@vue/test-utils": "^2.0.0-0",
+		"typescript": "~4.1.5",
+		"vue-jest": "^5.0.0-0"
+	}
+}
+```
 
 <br>
 
