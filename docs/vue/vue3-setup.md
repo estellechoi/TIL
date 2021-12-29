@@ -261,3 +261,4 @@ declare module "*.vue" {
 - [Vue3 Migration Guide | Vue.js](https://v3.vuejs.org/guide/migration/introduction.html)
 - [Intro to the TSConfig Reference | TypeScript](https://www.typescriptlang.org/tsconfig)
 - [TypeScript: Ambient modules for Webpack loaders | fettblog.eu](https://fettblog.eu/typescript-modules-for-webpack/)
+- [What does the shims-tsx.d.ts file do in a Vue-Typescript project? | NEWBEDEV](https://newbedev.com/what-does-the-shims-tsx-d-ts-file-do-in-a-vue-typescript-project)
