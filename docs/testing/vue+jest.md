@@ -1,14 +1,22 @@
 # Vue + Jest 단위테스트 자동화하기
 
+> This doc is not done, under research and using-by-myself currently.
+
 <br>
 
 ## 1. Jest
+
+<br>
+
+## 1. Jest
+
+### 1-1. Jest
 
 [Jest](https://jestjs.io/)는 JavaScript 테스트 라이브러리입니다.
 
 <br>
 
-### Jest 설치하기
+### 1-2. Jest 설치하기
 
 다음과 같이 패키지매니저를 사용해서 설치하거나,
 
@@ -18,11 +26,11 @@ yarn add jest --dev
 
 <br>
 
-[Vue 테스트 유틸](https://vue-test-utils.vuejs.org/) 라이브러리를 통해 Jest를 사용할 수 있습니다. Vue 테스트 유틸은 Vue용 공식 단위 테스트 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 앱 생성시 단위테스트 툴로 Jest를 선택하여 쉽게 셋업할 수 있습니다.
+[Vue 테스트 유틸](https://vue-test-utils.vuejs.org/) 라이브러리를 통해 Jest를 사용할 수 있습니다. Vue 테스트 유틸은 Vue에서 공식 지원하는 단위 테스트 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 앱 생성시 단위테스트 툴로 Jest를 선택하여 쉽게 셋업할 수 있습니다.
 
 <br>
 
-기존 프로젝트에 Vue 테스트 유틸을 추가하는 경우라면, 아래와 같이 뷰 테스트 유틸 라이브러리를 설치합니다.
+기존 프로젝트에 Vue 테스트 유틸을 추가하는 경우라면, 아래와 같이 패키지매니저를 사용하여 필요한 라이브러리들을 직접 추가합니다.
 
 ```zsh
 yarn add jest @vue/test-utils vue-jest babel-jest --dev
@@ -30,7 +38,7 @@ yarn add jest @vue/test-utils vue-jest babel-jest --dev
 
 <br>
 
-### Jest 설정하기
+### 1-3. Jest 설정하기: `jest.config.js`
 
 Jest 설정파일은 `jest.config.js`입니다. `@vue/cli`를 사용하여 앱을 생성할 때 `Unit Testing` 도구로 `Jest`를 선택했다면, `jest.config.js` 파일이 자동으로 생성되고 기본값들이 세팅됩니다. `jest.config.js` 대신 `package.json` 파일의 `jest` 필드를 사용할 수도 있습니다.
 
