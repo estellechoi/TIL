@@ -131,7 +131,7 @@
 
 ### Vue
 
-- [Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
+- [Vue CLI로 Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
 
 <br>
 
