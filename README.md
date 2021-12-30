@@ -34,7 +34,7 @@
 
 ### Testing
 
-- [Vue + Jest 단위테스트 자동화하기](./docs/testing/vue+jest.md) \*
+- [Vue + TypeScript + Jest 단위테스트 자동화하기](./docs/testing/vue+jest.md) \*
 
 <br>
 
