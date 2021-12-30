@@ -850,6 +850,8 @@ ssh hostname "cd appname &&
 
 ### References
 
+- [Continuous Integration - Martin Fowler](https://martinfowler.com/articles/continuousIntegration.html)
+- [Software Delivery Guide - Martin Fowler](https://martinfowler.com/delivery.html)
 - [Deployment Pipelines (CI/CD) in Software Engineering - Dan Merron](https://www.bmc.com/blogs/deployment-pipeline/#)
 - [Understanding GitHub Actions | GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
 - [About GitHub-hosted runners | GitHub Docs](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
