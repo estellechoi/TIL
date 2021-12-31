@@ -21,9 +21,9 @@
 
 ### 1-2. Jest 설치하기
 
-#### 새 프로젝트 만들기
+#### `@vue/cli`로 새 프로젝트 만들기
 
-Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils.vuejs.org/guides/#getting-started)을 통해 Jest를 사용할 수 있습니다. VTU는 Vue 컴포넌트에 대한 단위 테스트를 간편하게 해주는 유틸 함수들을 제공하는 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 앱 생성시 단위 테스트 툴을 선택함으로써 VTU를 쉽게 셋업할 수 있습니다. `@vue/cli`를 사용하여 앱을 생성할 때 `Unit Testing` 도구로 `Jest`를 선택하면 되고요, [VTU 공식 문서](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)에서도 Jest 사용을 권장합니다.
+Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils.vuejs.org/guides/#getting-started)을 통해 Jest를 사용할 수 있습니다. VTU는 Vue 컴포넌트에 대한 단위 테스트를 간단하게 해주는 유틸 함수들을 제공하는 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 아래와 같이 앱 생성시 단위 테스트 툴을 선택함으로써 VTU와 추가 라이브러리들을 쉽게 셋업할 수 있습니다. 앱을 생성할 때 `Unit Testing` 도구로 `Jest`를 선택하면 됩니다. [VTU 공식 문서](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)에서는 VTU를 Jest와 함께 사용하는 것을 권장니다.
 
 <br>
 
@@ -31,7 +31,7 @@ Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils
 
 <br>
 
-그럼 `package.json` 파일에 아래와 같이 필요한 스크립트와 디펜던시들이 Preset 됩니다. ([TypeScript](https://www.typescriptlang.org/), [Babel](https://babeljs.io/), Jest 관련 항목이 아닌 것은 생략)
+앱 생성을 완료하면 `package.json` 파일에 아래와 같이 필요한 스크립트와 디펜던시들이 Preset 됩니다. ([TypeScript](https://www.typescriptlang.org/), [Babel](https://babeljs.io/), Jest 관련 항목이 아닌 것은 생략)
 
 ```json
 {
@@ -52,14 +52,14 @@ Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils
 
 <br>
 
-- [`@types/jest`](https://www.npmjs.com/package/@types/jest): `.ts` 파일에서 테스트 작성시 Jest를 사용하기 위해 필요한 Type 정보를 제공
+- [`@types/jest`](https://www.npmjs.com/package/@types/jest): TypeScript를 사용하여 테스트 파일을 작성하는 경우 Jest를 사용하기 위해 필요한 Type 정보를 제공 (Optional)
 
 - [`@vue/cli-plugin-babel`](https://cli.vuejs.org/core-plugins/babel.html): Babel7 + [`babel-loader`](https://webpack.js.org/loaders/babel-loader/) + [`@vue/babel-preset-app`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/babel-preset-app)
 
 - [`@vue/cli-plugin-typescript`](https://cli.vuejs.org/core-plugins/typescript.html): TypeScript + [`ts-loader`](https://github.com/TypeStrong/ts-loader) + [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin)
 
-- [`@vue/cli-plugin-unit-jest`](): 4.x 이상 버전에서 TypeScript + Babel 사용을 위한 Preset 제공 ([`/presets/typescript-and-babel`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest/presets/typescript-and-babel)).
-	- 이전 버전을 사용한다면 Babel의 TypeScript 플러그인 [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) 추가 설치 필요. ([Jest에서 Babel을 통해 TypeScript를 지원](https://jestjs.io/docs/getting-started#using-typescript)하기 때문)
+- [`@vue/cli-plugin-unit-jest`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest): `jest` 실행을 위한 `vue-cli-service test:unit` 커맨드를 제공하는 플러그인, 4.x 이상 버전 사용시 Vue 컴포넌트를 Plain JavaScript로 변환할 때 [TypeScript 변환과 Babel 사용을 위한 Preset](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest/presets/typescript-and-babel) 제공
+	> 이전 버전을 사용한다면 Babel에서 TypeScript를 컴파일할 수 있도록 [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) 플러그인 추가 설치 필요 ([Jest에서 Babel을 통해 TypeScript를 지원합니다](https://jestjs.io/docs/getting-started#using-typescript))
 
 - [`@vue/test-utils`](https://github.com/vuejs/vue-test-utils): Vue 컴포넌트에 대한 단위 테스트를 간편하게 해주는 유틸 함수들을 제공
 
