@@ -96,11 +96,13 @@
 
 ### JavaScript
 
-- [네이티브 객체(Native Built-in Objects)](https://github.com/estellechoi/TIL/blob/master/docs/javascript/native.md) \*
-- [배열(Array)과 배열형 객체](https://github.com/estellechoi/TIL/blob/master/docs/javascript/array.md)
 - [스코프(Scope)](https://github.com/estellechoi/TIL/blob/master/docs/javascript/scope.md)
 - [실행 컨텍스트(Execution Context)와 호이스팅(Hoisting)](https://github.com/estellechoi/TIL/blob/master/docs/javascript/executionContext.md)
 - [JavaScript는 어떻게 동작하는가? - JS 엔진, 이벤트 루프, 콜백 큐](https://github.com/estellechoi/TIL/blob/master/docs/javascript/howJavascriptWorks.md)
+- [JavaScript ES6 컬렉션: Set, Map, WeakSet, WeakMap](./docs/javascript/mapset.md) \*
+- [JavaScript ES6 Symbol 이해하기](./docs/javascript/symbol.md) \*
+- [네이티브 객체(Native Built-in Objects)](https://github.com/estellechoi/TIL/blob/master/docs/javascript/native.md) \*
+- [배열(Array)과 배열형 객체](https://github.com/estellechoi/TIL/blob/master/docs/javascript/array.md)
 - [[번역] V8 엔진에서 JavaScript가 동작하는 원리](https://github.com/estellechoi/TIL/blob/master/docs/javascript/v8.md) \*
 - [Node.js](https://github.com/estellechoi/TIL/blob/master/docs/javascript/nodejs.md) \*
 - [[React] Class vs Function 컴포넌트](https://github.com/estellechoi/TIL/blob/master/docs/javascript/react-classVsFunc.md)
