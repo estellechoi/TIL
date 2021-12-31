@@ -132,6 +132,7 @@
 ### Vue
 
 - [Vue CLI로 Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
+- [Vue, 웹 컴포넌트, Reactivity](./docs/vue/vue.md)
 
 <br>
 
