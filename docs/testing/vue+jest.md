@@ -1,6 +1,4 @@
-# 프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위테스트
-
-> This doc is not done, under research and using-by-myself currently.
+# 프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위 테스트
 
 <br>
 
@@ -15,7 +13,7 @@
 
 ## 1. 테스트 러너란, 프론트엔드에서의 테스트
 
-### 1-1. 테스트 러너란, 프론트엔드에서의 테스트
+### 1-1. 테스트 러너란
 
 [Jest](https://jestjs.io/)와 같은 테스트 도구를 테스트 러너라고 합니다. 개발자가 테스트 코드를 작성할 때 테스트 자체에만 집중할 수 있도록 유용한 메소드들을 제공하고, 테스트 코드를 실행하는데 필요한 환경 셋업을 간단하게 해줍니다.
 
@@ -33,7 +31,11 @@
 
 <br>
 
-UI 테스트와 사용자 이벤트 핸들링에 대한 테스트는 보통 앱의 컴포넌트 단위에서 진행되므로, 컴포넌트에 대한 [단위 테스트](https://martinfowler.com/bliki/UnitTest.html)를 수행합니다. API 통신의 경우 라우트 단위의 단위 테스트를 수행하거나, 실제 API를 사용한 [E2E 테스트](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)를 수행합니다.
+UI 테스트와 사용자 이벤트 핸들링에 대한 단위 테스트는 보통 앱의 컴포넌트 단위에서 진행되므로, 컴포넌트에 대한 [단위 테스트](https://martinfowler.com/bliki/UnitTest.html)를 수행합니다. API 통신의 경우 라우트별로 단위 테스트를 수행할 수 있겠습니다.
+
+<br>
+
+앱 전체가 잘 동작하는지 확인하려면 [E2E 테스트](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)를 하는 것이 좋습니다. 실제 브라우저에서 UI가 의도한대로 렌더링 되는지, 라우트간 이동이 잘 되는지, 실제 API 통신에 문제가 없는지 등을 Assertion을 사용하여 테스트합니다. E2E 테스트 도구로는 [Cypress](https://www.cypress.io/)가 있습니다.
 
 <br>
 
@@ -44,9 +46,7 @@ UI 테스트와 사용자 이벤트 핸들링에 대한 테스트는 보통 앱�
 [Jest](https://jestjs.io/)는 JavaScript로 만든 프로그램의 단위 테스트를 간단하게 해주는 테스트 러너입니다. 프론트엔드 관점에서만 보면, UI 테스트를 위한 [스냅샷 테스트](https://jestjs.io/docs/snapshot-testing) 기능을 제공하고요, Mocking을 통한 API 통신 테스트도 수행할 수 있습니다. Jest가 개발자를 대신하여 해주는 일들은 다양하지만, 단순하게 다음 2가지로 정리해볼 수 있습니다.
 
 - 개발자가 테스트 코드를 간단하게 작성할 수 있도록 유용한 메소드 제공
-- 테스트 코드를 Node.js 환경에서 실행
-
-<br>
+- 테스트 코드를 Node.js 환경에서 간단하게 실행하기 위한 환경 제공
 
 <br>
 
@@ -56,7 +56,7 @@ Jest는 [jsdom](https://github.com/jsdom/jsdom)이라는 가상 DOM 라이브러
 
 ### 2-2. Transformer
 
-Jest는 테스트 코드를 실행할 때 [Transformer의 도움](https://jestjs.io/docs/code-transformation)을 받습니다. 테스트 코드가 Plain JavaScript로 작성된 모듈만 사용한다면 Node.js에서 실행하는데 문제가 없겠지만, Vue, TypeScript 등이 사용된 모듈이 포함된 테스트 코드는 Node.js가 이해할 수 없기 때문에 Plain JavaScript로 변환하는 작업을 거쳐야합니다. 이 Transformer에 대한 설정은 뒤에서 알아볼 Jest 설정파일인 `jest.config.js`에서 합니다.
+Jest는 테스트 코드를 실행할 때 [Transformer의 도움](https://jestjs.io/docs/code-transformation)을 받습니다. 테스트 코드가 Plain JavaScript로 작성된 모듈만 사용한다면 Node.js에서 실행하는데 문제가 없겠지만, Vue, TypeScript 등을 사용하여 작성된 모듈을 포함하는 테스트 코드는 Node.js가 이해할 수 없기 때문에 Plain JavaScript로 변환하는 작업을 거쳐야합니다. 이 Transformer에 대한 설정은 뒤에서 알아볼 Jest 설정파일인 `jest.config.js`에서 합니다.
 
 <br>
 
@@ -81,7 +81,7 @@ describe("HelloWorld.vue", () => {
 
 <br>
 
-다음은 위의 테스트 코드에서 사용하는 `HelloWorld.vue` 파일입니다. 이 파일은 [`vue-jest`](https://github.com/vuejs/vue-jest)라는 Transformer를 사용하여 `<template>`, `<script>`, `<style>` 구문을 의도에 맞는 Plain JavasCript로 변환해야합니다. `<script>` 영역에 작성된 TypeScript 코드 역시 [`ts-jest`](https://github.com/kulshekhar/ts-jest)라는 Transformer를 사용하여 Plain JavaScript로 변환해야하고요.
+다음은 위의 테스트 코드에서 사용하는 `HelloWorld.vue` 파일입니다. 이 파일은 [`vue-jest`](https://github.com/vuejs/vue-jest)라는 Transformer를 사용하여 `<template>`, `<script>`, `<style>` 구문을 의도에 맞는 Plain JavaScript로 변환해야합니다. `<script>` 영역에 작성된 TypeScript 코드 역시 [`ts-jest`](https://github.com/kulshekhar/ts-jest)라는 Transformer를 사용하여 Plain JavaScript로 변환해야하고요.
 
 ```vue
 <template>
@@ -111,7 +111,7 @@ div {
 
 ### 3-1. `@vue/cli`로 새 프로젝트 만들기
 
-Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils.vuejs.org/guides/#getting-started)을 통해 Jest를 사용할 수 있습니다. VTU는 Vue 컴포넌트에 대한 단위 테스트를 간단하게 해주는 유틸 함수들을 제공하는 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 아래와 같이 앱 생성시 단위 테스트 툴을 선택함으로써 VTU와 추가 라이브러리들을 쉽게 셋업할 수 있습니다. 앱을 생성할 때 `Unit Testing` 도구로 `Jest`를 선택하면 됩니다. [VTU 공식 문서](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)에서는 VTU를 Jest와 함께 사용하는 것을 권장니다.
+Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils.vuejs.org/guides/#getting-started)을 통해 Jest를 사용할 수 있습니다. VTU는 Vue 컴포넌트에 대한 단위 테스트를 간단하게 해주는 유틸 함수들을 제공하는 라이브러리입니다. [`@vue/cli`](https://cli.vuejs.org/) 3.x 이후 버전을 사용하여 Vue 앱을 새로 생성하는 경우라면, 앱 생성시 단위 테스트 툴을 선택함으로써 VTU와 추가 라이브러리들을 쉽게 셋업할 수 있습니다. 아래와 같이 앱을 생성할 때 `Unit Testing` 도구로 `Jest`를 선택하면 됩니다. [VTU 공식 문서](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)에서도 VTU를 Jest와 함께 사용하는 것을 권장니다.
 
 <br>
 
@@ -140,24 +140,24 @@ Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils
 
 <br>
 
-- [`@types/jest`](https://www.npmjs.com/package/@types/jest): TypeScript를 사용하여 테스트 파일을 작성하는 경우 Jest를 사용하기 위해 필요한 Type 정보를 제공 (Optional)
+- [`@types/jest`](https://www.npmjs.com/package/@types/jest): 테스트 코드 자체를 TypeScript를 사용하여 작성하는 경우 Jest 모듈을 사용하기 위해 필요한 Type 정보 제공 (Optional)
 
 - [`@vue/cli-plugin-babel`](https://cli.vuejs.org/core-plugins/babel.html): Babel7 + [`babel-loader`](https://webpack.js.org/loaders/babel-loader/) + [`@vue/babel-preset-app`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/babel-preset-app)
 
 - [`@vue/cli-plugin-typescript`](https://cli.vuejs.org/core-plugins/typescript.html): TypeScript + [`ts-loader`](https://github.com/TypeStrong/ts-loader) + [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin)
 
-- [`@vue/cli-plugin-unit-jest`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest): `jest` 실행을 위한 `vue-cli-service test:unit` 커맨드를 제공하는 플러그인, 4.x 이상 버전 사용시 Vue 컴포넌트를 Plain JavaScript로 변환할 때 [TypeScript 변환과 Babel 사용을 위한 Preset](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest/presets/typescript-and-babel) 제공
+- [`@vue/cli-plugin-unit-jest`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest): `jest`를 실행하는 `vue-cli-service test:unit` 커맨드를 등록하는 플러그인, 4.x 이상 버전 사용시 Vue 컴포넌트를 Plain JavaScript로 변환할 때 [TypeScript 변환과 Babel 사용을 위한 Preset](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest/presets/typescript-and-babel) 제공
 	> 이전 버전을 사용한다면 Babel에서 TypeScript를 컴파일할 수 있도록 [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) 플러그인 추가 설치 필요 ([Jest에서 Babel을 통해 TypeScript를 지원합니다](https://jestjs.io/docs/getting-started#using-typescript))
 
 - [`@vue/test-utils`](https://github.com/vuejs/vue-test-utils): Vue 컴포넌트에 대한 단위 테스트를 간편하게 해주는 유틸 함수들을 제공
 
-- [`vue-jest`](https://github.com/vuejs/vue-jest): `.vue` 파일([SFC](https://vuejs.org/v2/guide/single-file-components.html))내 `<template>`,  `<script>`, `<style>` 구문들을 Jest가 동작할 수 있는 JavaScript 파일로 변환
+- [`vue-jest`](https://github.com/vuejs/vue-jest): `.vue` 파일([SFC](https://vuejs.org/v2/guide/single-file-components.html))내 `<template>`,  `<script>`, `<style>` 구문들을 Plain JavaScript로 변환
 
 <br>
 
 ### 3-2. 기존 프로젝트에 추가하기
 
-기존 Vue 프로젝트에 VTU를 추가하는 경우라면, 아래와 같이 `@vue/cli` 명령어를 사용할 수 있습니다. [이 명령어](https://cli.vuejs.org/core-plugins/unit-jest.html#installing-in-an-already-created-project)는 `vue-cli-service test:unit` 커맨드를 추가하고, `@vue/cli-plugin-unit-jest`를 설치합니다.
+기존 Vue 프로젝트에 VTU를 추가하는 경우라면, 아래와 같이 `@vue/cli` 명령어를 사용할 수 있습니다. [이 명령어](https://cli.vuejs.org/core-plugins/unit-jest.html#installing-in-an-already-created-project)는 `@vue/cli-plugin-unit-jest`를 설치합니다.
 
 ```zsh
 vue add unit-jest
