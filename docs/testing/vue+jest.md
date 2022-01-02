@@ -1,4 +1,4 @@
-# 프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위 테스트
+# 프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위 테스트 셋업
 
 <br>
 

@@ -34,7 +34,7 @@
 
 ### Testing
 
-- [프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위테스트](./docs/testing/vue+jest.md) \*
+- [프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위 테스트 셋업](./docs/testing/vue+jest.md) \*
 
 <br>
 
