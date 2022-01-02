@@ -182,6 +182,8 @@
 
 ## 5. Programming Paradigm
 
+### FP
+
 - [함수형 프로그래밍 & JavaScript FP Cheat Sheet](./docs/cs/fp.md)
 
 <br>
