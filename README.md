@@ -6,9 +6,9 @@
 
 <br>
 
-## 0. UX
+## 0. Graphic / UI / UX
 
-### Graphic Inspiration
+### Graphic Inspiration Sources
 
 - [It's Nice That](https://www.itsnicethat.com/)
 - [Are.na](https://www.are.na/)
@@ -150,7 +150,7 @@
 
 <br>
 
-## 3. Mobile App Front-end
+## 3. Native App Front-end
 
 ### Flutter
 
@@ -180,7 +180,13 @@
 
 <br>
 
-## 5. Etc
+## 5. Programming Paradigm
+
+- [함수형 프로그래밍 & JavaScript FP Cheat Sheet](./docs/cs/fp.md)
+
+<br>
+
+## 6. Etc
 
 ### HTTP
 
