@@ -64,18 +64,18 @@ Jest는 테스트 코드를 실행할 때 [Transformer의 도움](https://jestjs
 
 ```javascript
 // example.spec.ts
-   
+
 import { shallowMount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
 
 describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg },
-    });
-    expect(wrapper.text()).toMatch(msg);
-  });
+	it("renders props.msg when passed", () => {
+		const msg = "new message";
+		const wrapper = shallowMount(HelloWorld, {
+			props: { msg },
+		});
+		expect(wrapper.text()).toMatch(msg);
+	});
 });
 ```
 
@@ -85,22 +85,22 @@ describe("HelloWorld.vue", () => {
 
 ```vue
 <template>
-  <div class="hello">{{ msg }}</div>
+	<div class="hello">{{ msg }}</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
-  name: "HelloWorld",
-  props: {
-    msg: String,
-  },
+	name: "HelloWorld",
+	props: {
+		msg: String,
+	},
 });
 </script>
 
 <style scoped lang="scss">
 div {
-  color: #42b983;
+	color: #42b983;
 }
 </style>
 ```
@@ -147,11 +147,12 @@ Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils
 - [`@vue/cli-plugin-typescript`](https://cli.vuejs.org/core-plugins/typescript.html): TypeScript + [`ts-loader`](https://github.com/TypeStrong/ts-loader) + [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin)
 
 - [`@vue/cli-plugin-unit-jest`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest): `jest`를 실행하는 `vue-cli-service test:unit` 커맨드를 등록하는 플러그인, 4.x 이상 버전 사용시 Vue 컴포넌트를 Plain JavaScript로 변환할 때 [TypeScript 변환과 Babel 사용을 위한 Preset](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest/presets/typescript-and-babel) 제공
-	> 이전 버전을 사용한다면 Babel에서 TypeScript를 컴파일할 수 있도록 [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) 플러그인 추가 설치 필요 ([Jest에서 Babel을 통해 TypeScript를 지원합니다](https://jestjs.io/docs/getting-started#using-typescript))
+
+  > 이전 버전을 사용한다면 Babel에서 TypeScript를 컴파일할 수 있도록 [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) 플러그인 추가 설치 필요 ([Jest에서 Babel을 통해 TypeScript를 지원합니다](https://jestjs.io/docs/getting-started#using-typescript))
 
 - [`@vue/test-utils`](https://github.com/vuejs/vue-test-utils): Vue 컴포넌트에 대한 단위 테스트를 간편하게 해주는 유틸 함수들을 제공
 
-- [`vue-jest`](https://github.com/vuejs/vue-jest): `.vue` 파일([SFC](https://vuejs.org/v2/guide/single-file-components.html))내 `<template>`,  `<script>`, `<style>` 구문들을 Plain JavaScript로 변환
+- [`vue-jest`](https://github.com/vuejs/vue-jest): `.vue` 파일([SFC](https://vuejs.org/v2/guide/single-file-components.html))내 `<template>`, `<script>`, `<style>` 구문들을 Plain JavaScript로 변환
 
 <br>
 
@@ -183,10 +184,10 @@ Jest 설정파일은 `jest.config.js`입니다. `jest.config.js` 대신 `package
 // jest.config.js
 
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
-  transform: {
-    '^.+\\.vue$': 'vue-jest', // vue-jest를 사용하여 모든 *.vue 파일을 *.js 파일로 컴파일
-  },
+	preset: "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
+	transform: {
+		"^.+\\.vue$": "vue-jest", // vue-jest를 사용하여 모든 *.vue 파일을 *.js 파일로 컴파일
+	},
 };
 ```
 
@@ -207,7 +208,7 @@ module.exports = {
 기본적으로 Jest는 `node_modules`에 설치된 디펜던시 모듈에 대해 테스트를 위한 변환 작업을 하지 않습니다. Jest 설정 옵션 중 `transformIgnorePatterns`의 디폴트 값에 `/node_modules/` 경로가 포함되어있기 때문입니다.
 
 ```javascript
-transformIgnorePatterns: ['/node_modules/']
+transformIgnorePatterns: ["/node_modules/"];
 ```
 
 <br>
@@ -227,8 +228,8 @@ transformIgnorePatterns: ['/node_modules/']
 
 module.exports = {
 	// ..
-	transformIgnorePatterns: ['/node_modules/(?!name-of-lib-to-transform)']
-}
+	transformIgnorePatterns: ["/node_modules/(?!name-of-lib-to-transform)"],
+};
 ```
 
 <br>
@@ -246,12 +247,12 @@ module.exports = {
 	// ..
 	collectCoverage: true,
 	collectCoverageFrom: [
-		'**/*.{ts,vue}',
-		'!**/node_modules/**',
-		'!**/coverage/**',
-		'!**/tests/**'
-	]
-}
+		"**/*.{ts,vue}",
+		"!**/node_modules/**",
+		"!**/coverage/**",
+		"!**/tests/**",
+	],
+};
 ```
 
 <br>
@@ -284,11 +285,8 @@ yarn test:unit
 ```javascript
 module.exports = {
 	// ..
-	testMatch: [
-		'**/tests/unit/**/*.spec.[jt]s?(x)',
-		'**/__tests__/*.[jt]s?(x)'
-	]
-}
+	testMatch: ["**/tests/unit/**/*.spec.[jt]s?(x)", "**/__tests__/*.[jt]s?(x)"],
+};
 ```
 
 <br>
@@ -307,6 +305,7 @@ module.exports = {
 - [IntegrationTest - Martin Fowler](https://martinfowler.com/bliki/IntegrationTest.html)
 - [BroadStackTest - Martin Fowler](https://martinfowler.com/bliki/BroadStackTest.html)
 - [ExtremeProgramming - Martin Fowler](https://martinfowler.com/bliki/ExtremeProgramming.html)
+- [SUT | xUnit Patterns](http://xunitpatterns.com/SUT.html)
 - [Using TypeScript | Jest](https://jestjs.io/docs/getting-started#using-typescript)
 - [Using Vue Test Utils with Jest (recommended) | Vue Test Utils](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)
 - [Unit Testing with Jest | Cracking Vue.js](https://joshua1988.github.io/vue-camp/testing/jest-testing.html#jest-%E1%84%89%E1%85%A9%E1%84%80%E1%85%A2)
@@ -314,3 +313,4 @@ module.exports = {
 - [Testing Environments | React](https://reactjs.org/docs/testing-environments.html)
 - [모던 프론트엔드 테스트 전략 — 1편(Testing Overview) | 콴다 팀블로그](https://blog.mathpresso.com/%EB%AA%A8%EB%8D%98-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A0%84%EB%9E%B5-1%ED%8E%B8-841e87a613b2)
 - [테스트 | TOAST UI](https://ui.toast.com/fe-guide/ko_TEST)
+- [테스트 코드에서 내부 구현 검증 피하기 | 기억보단 기록을](https://jojoldu.tistory.com/614)
