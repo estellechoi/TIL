@@ -38,7 +38,16 @@
 
 <br>
 
-## 2. Web Front-end
+## 2. DevOps
+
+### Docker
+
+- [Dockerizing an App Built with JavaScript](./docs/devops/docker.md) \*
+- [Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
+
+<br>
+
+## 3. Web Front-end
 
 ### Performance
 
@@ -150,7 +159,7 @@
 
 <br>
 
-## 3. Native App Front-end
+## 4. Native App Front-end
 
 ### Flutter
 
@@ -169,14 +178,6 @@
 - [Flutter에서 `provider`로 App State 관리하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/state.md)
 - [Fastlane을 사용하여 Flutter iOS/Android 앱 배포 자동화하기](https://github.com/estellechoi/TIL/blob/master/docs/flutter/cd.md)
 - [Flutter에서 웹뷰(Web View) 사용하기](./docs/flutter/webview.md) \*
-
-<br>
-
-## 4. DevOps
-
-### Docker
-
-- [Dockerizing an App Built with JavaScript](./docs/devops/docker.md) \*
 
 <br>
 

@@ -310,6 +310,7 @@ module.exports = {
 - [Using Vue Test Utils with Jest (recommended) | Vue Test Utils](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)
 - [Unit Testing with Jest | Cracking Vue.js](https://joshua1988.github.io/vue-camp/testing/jest-testing.html#jest-%E1%84%89%E1%85%A9%E1%84%80%E1%85%A2)
 - [Vue Test Utils | Cracking Vue.js](https://joshua1988.github.io/vue-camp/testing/vue-test-util.html#%E1%84%8E%E1%85%AC%E1%84%89%E1%85%B5%E1%86%AB-vue-cli-3-x-%E1%84%87%E1%85%A5%E1%84%8C%E1%85%A5%E1%86%AB-%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A1%E1%86%BC-%E1%84%8B%E1%85%A6%E1%84%89%E1%85%A5-%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8E%E1%85%B5-%E1%84%87%E1%85%A1%E1%86%BC%E1%84%87%E1%85%A5%E1%86%B8)
+- [Setting up for TDD | Vue Testing Handbook](https://lmiller1990.github.io/vue-testing-handbook/v3/setting-up-for-tdd.html)
 - [Testing Environments | React](https://reactjs.org/docs/testing-environments.html)
 - [모던 프론트엔드 테스트 전략 — 1편(Testing Overview) | 콴다 팀블로그](https://blog.mathpresso.com/%EB%AA%A8%EB%8D%98-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A0%84%EB%9E%B5-1%ED%8E%B8-841e87a613b2)
 - [테스트 | TOAST UI](https://ui.toast.com/fe-guide/ko_TEST)

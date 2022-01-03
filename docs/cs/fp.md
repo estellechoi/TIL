@@ -13,7 +13,7 @@
 
 ### 1-1. FP
 
-FP(함수형 프로그래밍)이란 함수 사용이 강조되는 프로그래밍 방법론입니다. [Side effect](<https://en.wikipedia.org/wiki/Side_effect_(computer_science)>)가 없는 [순수함수](https://en.wikipedia.org/wiki/Pure_function)의 사용이 핵심입니다. 여기에서 Side effect가 없다는 말은, 함수에 전달된 인자에만 의존하며 함수 스코프 외부에 어떠한 변경도 일으키지 않는 것을 의미합니다. FP는 순수함수 외에도 다음의 개념들을 기반으로 합니다.
+FP(함수형 프로그래밍)이란 함수 사용이 강조되는 프로그래밍 방법론입니다. [Side effect](<https://en.wikipedia.org/wiki/Side_effect_(computer_science)>)가 없는 [순수함수](https://en.wikipedia.org/wiki/Pure_function)의 사용이 핵심입니다. 여기에서 Side effect가 없다는 말은, 함수에 전달된 인자에만 의존하며 함수 스코프 외부에 어떠한 변경도 일으키지 않는 것을 의미합니다. FP는 순수함수 외에도 다음의 개념들을 특징으로 합니다.
 
 - 선언적 프로그래밍: 서술 파트와 평가 파트 분리
 - 참조 투명성: 함수 인수와 리턴값 사이의 순수한 매핑 관계
