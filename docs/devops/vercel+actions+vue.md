@@ -1,4 +1,4 @@
-# Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)
+# Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)
 
 > This doc is WIP ...
 

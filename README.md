@@ -43,7 +43,7 @@
 ### Docker
 
 - [Dockerizing an App Built with JavaScript](./docs/devops/docker.md) \*
-- [Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
+- [Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
 
 <br>
 
