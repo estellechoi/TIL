@@ -1,35 +1,65 @@
-# Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)
+# FaaS란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)
 
 > This doc is WIP ...
 
 <br>
 
-1. Faas란, Vercel vs Netlify
-2. Vercel, 일단 배포하기
-3. Vercel CLI 설치 & 프로젝트 연결하고 `projectId`, `orgId` 확인하기
-4. GitHub Actions로 테스트 + Vercel에 배포하기
+1. FaaS란, 장단점, 람다 함수
+2. Vercel vs Netlify
+3. Vercel, 일단 배포하기
+4. Vercel CLI 설치 & 프로젝트 연결하고 `projectId`, `orgId` 확인하기
+5. GitHub Actions로 테스트 + Vercel에 배포하기
 
 <br>
 
-## 1. Faas란, Vercel vs Netlify
+## 1. FaaS란, 장단점, 람다 함수
 
-### 1-1. Faas란
+### 1-1. FaaS란
 
-[Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/)와 같은 서비스들이 무슨 서비스인지 이해하려면 먼저 [Faas(Funciton as a Service)](https://www.redhat.com/ko/topics/cloud-native-apps/what-is-faas)를 알아야 합니다. FaaS는 [서버리스(Serverless) 컴퓨팅](https://velopert.com/3543)을 구현하는 하나의 방식인데요, 앱을 함수로 추상화해서 컴퓨팅 자원에 등록하고 요청이 있을 때마다 함수가 실행되도록 합니다. FaaS의 장점에는 다음과 같은 것들이 있습니다.
+프론트엔드 배포에 많이 사용되는 [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/)와 같은 서비스들이 무슨 서비스인지 이해하려면 먼저 [FaaS(Funciton as a Service)](https://www.redhat.com/ko/topics/cloud-native-apps/what-is-faas)를 알아야 합니다. FaaS는 [서버리스(Serverless)](https://velopert.com/3543)를 구현하는 하나의 방식/서비스인데요, 애플리케이션을 함수로 추상화해서 거대하고 분산된 컴퓨팅 자원에 등록하고 HTTP 요청같은 이벤트가 발생할 때마다 함수를 호출하여 애플리케이션을 Serve하도록 합니다. FaaS의 장단점으로는 다음과 같은 것들이 있습니다.
+
+<br>
+
+#### 장점
 
 - 확장성 : FaaS는 트래픽에 따라 서버를 늘리는 방식이 아니라, 매우 거대하고 분산된 컴퓨팅 자원에 등록된 함수가 이벤트 기반으로 호출되는 방식이기 때문에 조건에 따라 리소스를 확장한다는 개념이 없습니다. 트래픽이 늘어나면 자동으로 함수 호출 횟수가 늘어날 뿐입니다.
 
-- 비용 : 또한, [AWS Elastic Beanstalk](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/Welcome.html) 같은 [PaaS(Platform as a Service)](https://www.ibm.com/kr-ko/cloud/learn/paas)와는 달리, 앱 배포 후 24시간 서버가 작동하는 것이 아닙니다. 요청이 있을 때만 함수가 호출되어 작동하기 때문에 사용된 리소스에 대해서만 과금됩니다.
+- 사용된 리소스에 대해서만 과금 : 애플리케이션을 배포하는 시점부터 24시간 리소스를 사용하며 Serving하지 않고, 요청이 있을 때만 함수가 호출되며 함수 호출시마다 과금되기 때문에 사용된 리소스에 대해서만 비용이 발생합니다.
 
 <br>
 
-### 1-2. Vercel vs Netlify
-
-가장 대표적인 FaaS는 [AWS Lambda](https://aws.amazon.com/ko/lambda/)입니다. Vercel과 Netlify 모두 AWS Lambda 기반이고요. 두 서비스 모두 GitHub과의 조합이 Awesome해서 아무것도 모르고 시도부터 해봤는데 단 몇 분만에 배포가 가능했습니다! 다만 어떻게 각 서비스를 비교하고 더 적합한 것을 판단할 수 있는지 알기 위해 서칭을 해보다가 [Netlify vs. Vercel: A Comparison - Max Niederman](https://dev.to/maxniederman/netlify-vs-vercel-a-comparison-5643) 글을 찾았습니다. [서버리스 함수](https://www.serverless.com/framework/docs/providers/aws/guide/functions) 사용법, Netlify의 [GoTrue API](https://github.com/netlify/gotrue) 같은 Authentication API 제공여부, 정적사이트 A/B 테스트 구현 용이성 등에서 차이가 있었고, 가격에서는 큰 차이가 없었습니다.
+FaaS 참 좋은 것 같은데, [AWS Elastic Beanstalk](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/Welcome.html) 같은 Non-FaaS를 쓰는 이유는 무엇일지 생각해보게 되었습니다. 서칭도 해보고 지인 분들에게 물어본 결과 다음과 같이 고려할 사항들을 정리할 수 있었습니다.
 
 <br>
 
-## Vercel, 일단 배포하기
+#### 단점
+
+- 트래픽이 많은 서비스라면 Non-FaaS보다 훨씬 큰 비용이 발생할 수 있습니다.
+
+> Large apps can reach the cost curve limits of serverless. Bank of America, for example, announced $2B in savings from building their own data centers. - [Serverless Pros & Cons - when should you go serverless? | Serverless Handbook](https://serverlesshandbook.dev/serverless-pros-cons)
+
+- 요청에 대한 응답 속도가 느리기 때문에 API 서버로 사용하기 어렵습니다. 애플리케이션이 특정한 서버 인스턴스에 고정되어있지 않고, 이벤트가 발생했을 때 사용 가능한 리소스를 찾아 할당 및 실행한 후 다시 할당 해제하는 방식이기 때문입니다.
+
+<br>
+
+### 1-3. 람다 함수
+
+가장 대표적인 FaaS는 [AWS Lambda](https://aws.amazon.com/ko/lambda/)입니다. Vercel과 Netlify 모두 AWS Lambda 기반이고요. 서비스 이름에 붙은 람다(Lambda)처럼, FaaS는 람다 함수 개념을 사용합니다. 클라우드 컴퓨팅 맥락에서 람다 함수는 HTTP 요청, [메시지 큐](https://en.wikipedia.org/wiki/Message_queue) 등의 이벤트를 인자로 받고 애플리케이션을 반환하는 함수를 말합니다. [람다 대수](https://en.wikipedia.org/wiki/Lambda_calculus)를 기원으로 하는 [함수형 프로그래밍](https://en.wikipedia.org/wiki/Functional_programming) 원칙들을 똑같이 따릅니다.
+
+> A lambda always follows this pattern 👉 function with an event and a return value. - [Elements of serverless - lambdas, queues, gateways, and more](https://serverlesshandbook.dev/serverless-elements)
+
+<br>
+
+## 2. Vercel vs Netlify
+
+Vercel과 Netlify는 [Jamstack](https://www.cloudflare.com/ko-kr/learning/performance/what-is-jamstack/)을 지원하는 AWS Lambda 기반의 배포 서비스입니다. Vercel, Netlify 두 서비스 모두 GitHub과의 조합이 Awesome해서 아무것도 모르고 시도부터 해봤는데 단 몇 분만에 배포가 가능했습니다! 두 서비스를 비교해보자면, [서버리스 함수](https://www.serverless.com/framework/docs/providers/aws/guide/functions) 사용법, Netlify의 [GoTrue API](https://github.com/netlify/gotrue) 같은 Authentication API 제공여부, 정적사이트 A/B 테스트 구현 용이성 등에서 차이가 있었고, 가격 정책에도 차이가 있었지만 가격면에서의 메리트는 서비스에 따라 다를 것 같습니다. 아래 글들이 두 서비스를 비교하는데 도움이 되었습니다.
+
+- [Netlify vs. Vercel: A Comparison - Max Niederman](https://dev.to/maxniederman/netlify-vs-vercel-a-comparison-5643)
+- [Vercel vs. Netlify: Jamstack Deployment & Hosting Solutions Comparison | SNIPCART](https://snipcart.com/blog/vercel-vs-netlify)
+
+<br>
+
+## 3. Vercel, 일단 배포하기
 
 Vercel로 배포하는 것 자체는 매우 간단합니다. [Vercel 프로젝트 만들기](https://vercel.com/new) 페이지에서 배포하려는 프로젝트 코드가 있는 Git 레포지토리를 Import 한 후, 앱 빌드 스크립트, 패키지 설치 스크립트, 환경변수, Output 디렉토리 등을 입력하고 `Deploy` 버튼을 클릭하면 바로 배포됩니다. 이 과정에 대한 설명이 필요하다면 [Deploying React & Vue Applications With Vercel](https://medium.com/swlh/deploying-react-vue-applications-with-vercel-42aa642534d5) 블로그 글이나 [Preparing for automatic deployment on Vercel with GitHub](https://books.google.co.kr/books?id=wED-DwAAQBAJ&pg=PA452&lpg=PA452&dq=vue+vercel&source=bl&ots=YuzntMpcKp&sig=ACfU3U3FFArUTJKV0BmvH3HnDyqfTyEATA&hl=ko&sa=X&ved=2ahUKEwiV4qjPz5T1AhUDMd4KHR29B_wQ6AF6BAgZEAM#v=onepage&q=vue%20vercel&f=false) p.455를 참고하세요.
 
@@ -125,19 +155,18 @@ vercel --token iZJb2oftmY4ab12HBzyBXMkp
 
 ### 4-1. CD 파이프라인 계획
 
-이제 [GitHub Actions를 사용](./../git/actions.md)하여 Vercel에 배포하는 CD 파이프라인을 구축해보겠습니다. 저는 배포 파이프라안에서 다음 일들을 수행하려고 합니다.
+이제 [GitHub Actions를 사용](./../git/actions.md)하여 Vercel에 배포하는 CD 파이프라인을 구축해보겠습니다. 저는 배포 파이프라인에서 다음 일들을 수행할거고요, 각 단계를 통과해야만 다음 단계로 넘어갈 수 있습니다. ([GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)를 사용한다고 가정)
 
-- `master` 브랜치에 대한 `pull_request`가 머지되면 자동 배포 시작
-- Test Suite를 실행하고, 통과시에만 계속 진행
-- Vercel에 Preview 배포
-- Vercel Preview에 대해 테스트 실행하고, 통과시에만 계속 진행
-- Vercel에 Production 배포
+1. `develop` 브랜치에 대한 `pull_request`가 머지되면 Workflow 시작
+2. `develop` 브랜치를 Vercel Preview 배포
+3. Vercel Preview에 대해 [테스트 Suite](https://en.wikipedia.org/wiki/Test_suite) 실행 → Slack 알림
+4. 테스트 통과시에만 `master` 브랜치에 `push` → Slack 알림
 
 <br>
 
 ### 4-2. GitHub Secret 등록
 
-Vercel에 배포할 때 필요한 3가지 값을 GitHub 레포지토리의 [Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets)으로 등록합니다.
+Vercel CLI를 사용하여 배포할 때 필요한 3가지 값을 GitHub 레포지토리의 [Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets)으로 등록합니다.
 
 - `VERCEL_PROJECT_ID`: `.vercel/project.json` 파일의 `projectId` 필드 값
 - `VERCEL_ORG_ID`: `.vercel/project.json` 파일의 `orgId` 필드 값
@@ -145,22 +174,29 @@ Vercel에 배포할 때 필요한 3가지 값을 GitHub 레포지토리의 [Secr
 
 <br>
 
-<img src="./../img/vercel-actions-secrets.png" />
+그다음 [Slack Webhook URL](https://api.slack.com/messaging/webhooks)도 등록합니다. Slack 알림을 보낼 때 필요합니다.
+
+<img src="./../img/actions-secrets-vercel.png" />
 
 <br>
 
-### 4-3. Workflow 작성
+### 4-3. 앱 환경변수 등록
 
-저는 다음과 같이 Workflow 파일 `.github/workflows/cd.yml`을 작성했습니다. Vercel에 배포하는 단계에서 써드파티 Action인 [Vercel Action](https://github.com/amondnet/vercel-action#outputs)을 사용했는데요, 이 Action은 Vercel CLI를 사용합니다.
+앱이 런타임에서 사용하는 환경변수가 있다면, Vercel의 프로젝트 설정 페이지에서 [Environment Variables](https://vercel.com/docs/concepts/projects/environment-variables)로 추가해놓아야 합니다. 그럼 Vercel이 배포를 실행할 때 자동으로 `.env` 파일을 생성하고 앱을 빌드할 때 포함시킵니다.
+
+<br>
+
+### 4-4. Workflow 작성
+
+저는 다음과 같이 Workflow 파일 `.github/workflows/preview-deployment.yml`을 작성했습니다. Vercel에 배포하는 단계는 Vercel CLI를 직접 사용하지 않고 써드파티 Action인 [Vercel Action](https://github.com/amondnet/vercel-action#outputs)을 사용했습니다.
 
 ```yml
-name: CD
+# preview-deployment.yml
+name: Preview Deployment
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ develop ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -175,7 +211,9 @@ jobs:
     steps:
       - name: Repo checkout
         uses: actions/checkout@v2
-        # Repo checkout under $GITHUB_WORKSPACE
+        with: 
+          ref: develop
+        # Repo checkout under $GITHUB_WORKSPACE, doc at https://github.com/actions/checkout
         
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -185,34 +223,78 @@ jobs:
       - name: Install packages
         run: yarn install
         
-      - name: Run unit test locally
-        run: yarn test:unit
-        
-      - name: Deploy to preview
+      - name: Deploy to Vercel Preview
         id: vercel-preview
         uses: amondnet/vercel-action@v20
+        if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/develop' }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
+          # vercel-args: '--prod'
           
-      - name: Run unit test against Vercel preview
+      - name: Run unit test against Vercel Preview
+        id: unittest
         env:
           VERCEL_URL: ${{ steps.vercel-preview.outputs.preview-url }}
           # see doc at https://github.com/amondnet/vercel-action#outputs
         run: yarn test:unit
+        continue-on-error: true
         
-      - name: Deploy to production
-        id: vercel-production
-        uses: amondnet/vercel-action@v20
-        if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/master' }}
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          scope: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-args: '--prod'
+      - name: Run e2e test against Vercel Preview
+        id: e2etest
+        env:
+          VERCEL_URL: ${{ steps.vercel-preview.outputs.preview-url }}
+          # see doc at https://github.com/amondnet/vercel-action#outputs
+        run: yarn test:e2e
+        continue-on-error: true
+
+      - name: Slack notification
+        if: ${{ always() }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        uses: edge/simple-slack-notify@master
+        with: 
+          channel: '#notification'
+          username: 'CI/CD Bot'
+          status: ${{ job.status }}
+          success_text: |
+            '🥳 Success!
+            * unit test → ${{ steps.unittest.conclusion }}
+            * e2e → ${{ steps.e2etest.conclusion }}\n'
+          failure_text: |
+            '😭 Failed
+            * unit test → ${{ steps.unittest.conclusion }}
+            * e2e → ${{ steps.e2etest.conclusion }}\n'
+          cancelled_text: |
+            '😭 Cancelled
+            * unit test → ${{ steps.unittest.conclusion }}
+            * e2e → ${{ steps.e2etest.conclusion }}\n'
+          fields: |
+            [{ "title": "Repository", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}", "short": true },
+            { "title": "Ref", "value": "${env.GITHUB_REF_NAME}", "short": true },
+            { "title": "Workflow", "value": "${env.GITHUB_WORKFLOW}", "short": true },
+            { "title": "Job", "value": "${env.GITHUB_JOB}", "short": true },
+            { "title": "Actor", "value": "@${env.GITHUB_ACTOR}", "short": true }]
+
+  pushtomaster:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v2
+        with: 
+          ref: develop
+
+      - name: Push to master
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout master
+          git rev-parse --abbrev-ref HEAD
+          git merge develop
+          git push origin master
 ```
 
 <br>
@@ -258,6 +340,8 @@ describe("HelloWorld.vue", () => {
 
 - [서버리스 아키텍쳐(Serverless)란? | VELOPERT.LOG](https://velopert.com/3543)
 - [서비스로서의 기능(Function-as-a-Service, FaaS)이란? | Red Hat](https://www.redhat.com/ko/topics/cloud-native-apps/what-is-faas)
+- [Jamstack WTF](https://jamstack.wtf/)
+- [AWS, Azure, Vercel, Netlify, or Firebase? | Serverless Handbook](https://serverlesshandbook.dev/serverless-flavors/)
 - [Netlify vs. Vercel: A Comparison - Max Niederman](https://dev.to/maxniederman/netlify-vs-vercel-a-comparison-5643)
 - [nextJS 뭘로 배포할까? (Netlify, Vercel, Github page) | Learn in Public](https://taeny.dev/javascript/nextjs-with-deployment-platform/)
 - [CLI & Config | Vercel](https://vercel.com/docs/cli)
