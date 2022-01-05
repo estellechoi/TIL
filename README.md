@@ -28,7 +28,6 @@
 ### GIT
 
 - [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
-- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
 
 <br>
 
@@ -43,6 +42,12 @@
 ### Docker
 
 - [Dockerizing an App Built with JavaScript](./docs/devops/docker.md) \*
+
+<br>
+
+### CI/CD
+
+- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
 - [Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
 
 <br>

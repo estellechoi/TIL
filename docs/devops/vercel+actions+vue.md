@@ -198,6 +198,14 @@ Workflow를 작성하기 전에, GitHub 레포지토리의 [Secret](https://docs
 
 <br>
 
+Vercel에 배포하기 전, 테스트를 실행할 때 환경변수가 사용될 수 있으므로 GitHub Secrets에 등록해둡니다. 저는 `APP_ENV_SET`라는 이름의 Secret을 등록했는데요, 이 Secret의 값은 `.env` 파일의 내용을 통째로 담고 있기 때문에 다음과 같은 포맷을 따릅니다.
+
+```
+VUE_APP_API_URL=https://example.com
+```
+
+<br>
+
 ### 5-4. Workflow 작성
 
 저는 다음과 같이 Workflow 파일 `.github/workflows/preview-deployment.yml`을 작성했습니다. Vercel에 배포하는 단계는 Vercel CLI를 직접 사용하지 않고 써드파티 Action인 [`amondnet/vercel-action@v20`](https://github.com/amondnet/vercel-action)을 사용했습니다.
@@ -238,9 +246,7 @@ jobs:
       - name: Set envs
         env:
           APP_ENV_SET: ${{ secrets.APP_ENV_SET || '' }}
-        run: |
-          echo "${APP_ENV_SET}" > .env
-          cat .env
+        run: echo "${APP_ENV_SET}" > .env
 
       - name: Run unit test
         id: unit-test
