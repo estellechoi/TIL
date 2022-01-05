@@ -33,7 +33,15 @@
 
 ### Testing
 
-- [프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위 테스트 셋업](./docs/testing/vue+jest.md) \*
+- [프론트엔드 테스트하기 1: 프론트엔드에서의 테스트, Vue + TypeScript + Jest 단위 테스트 셋업](./docs/testing/vue+jest1.md)
+- [프론트엔드 테스트하기 2: Vue + TypeScript + Jest 단위 테스트 작성하기](./docs/testing/vue+jest2.md)
+
+<br>
+
+### CI/CD
+
+- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
+- [Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
 
 <br>
 
@@ -42,13 +50,6 @@
 ### Docker
 
 - [Dockerizing an App Built with JavaScript](./docs/devops/docker.md) \*
-
-<br>
-
-### CI/CD
-
-- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
-- [Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
 
 <br>
 

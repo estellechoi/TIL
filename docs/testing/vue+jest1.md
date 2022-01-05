@@ -1,4 +1,4 @@
-# 프론트엔드에서의 테스트 1: Vue + TypeScript + Jest 단위 테스트 셋업
+# 프론트엔드 테스트하기 1: 프론트엔드에서의 테스트, Vue + TypeScript + Jest 단위 테스트 셋업
 
 <br>
 
@@ -31,11 +31,24 @@
 
 <br>
 
-UI 테스트와 사용자 이벤트 핸들링에 대한 단위 테스트는 보통 앱의 컴포넌트 단위에서 진행되므로, 컴포넌트에 대한 [단위 테스트](https://martinfowler.com/bliki/UnitTest.html)를 수행합니다. API 통신의 경우 라우트별로 단위 테스트를 수행할 수 있겠습니다.
+테스트 종류로 나눠보면 [단위 테스트](https://martinfowler.com/bliki/UnitTest.html)와 [E2E 테스트](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)를 각각 어떻게 수행할지 정리해볼 수 있습니다.
 
 <br>
 
-앱 전체가 잘 동작하는지 확인하려면 [E2E 테스트](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)를 하는 것이 좋습니다. 실제 브라우저에서 UI가 의도한대로 렌더링 되는지, 라우트간 이동이 잘 되는지, 실제 API 통신에 문제가 없는지 등을 Assertion을 사용하여 테스트합니다. E2E 테스트 도구로는 [Cypress](https://www.cypress.io/)가 있습니다.
+#### 단위 테스트
+
+- 컴포넌트: UI 테스트와 사용자 이벤트 핸들링에 대한 단위 테스트는, React나 Vue 같은 모던 프레임워크 환경에서 보통 앱의 컴포넌트 단위에서 진행
+
+- Util 함수: 여러 컴포넌트에서 공통으로 사용되는 Util 함수 각각에 대한 단위 테스트를 수행
+
+- State 핸들러: 주어진 값에 대해 State가 의도한대로 업데이트되는지 테스트 ([Vuex](https://vuex.vuejs.org/guide/)의 Mutation, [Redux](https://redux.js.org/introduction/getting-started/)의 [Reducer](https://www.robinwieruch.de/javascript-reducer/)에 대한 단위 테스트를 수행)
+  - 참고 → [Vuex vs. Redux - similarities and differences | merixstudio](https://www.merixstudio.com/blog/vuex-vs-redux/)
+
+<br>
+
+#### E2E 테스트
+
+앱 전체가 잘 동작하는지 확인하려면 를 하는 것이 좋습니다. 실제 브라우저에서 UI가 의도한대로 렌더링 되는지, 라우트간 이동이 잘 되는지, 실제 API 통신에 문제가 없는지 등을 Assertion을 사용하여 테스트합니다. E2E 테스트 도구로는 [Cypress](https://www.cypress.io/)가 있습니다.
 
 <br>
 
@@ -119,7 +132,7 @@ Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils
 
 <br>
 
-앱 생성을 완료하면 `package.json` 파일에 아래와 같이 필요한 스크립트와 디펜던시들이 Preset 됩니다. ([TypeScript](https://www.typescriptlang.org/), [Babel](https://babeljs.io/), Jest 관련 항목이 아닌 것은 생략)
+저는 `@vue/cli` 4.5.13 버전으로 앱을 생성했는데요, 앱 생성을 완료하면 `package.json` 파일에 아래와 같이 필요한 스크립트와 디펜던시들이 Preset 됩니다. ([TypeScript](https://www.typescriptlang.org/), [Babel](https://babeljs.io/), Jest 관련 항목이 아닌 것은 생략)
 
 ```json
 {
@@ -140,17 +153,21 @@ Vue에서 공식 지원하는 [VTU(Vue 테스트 유틸)](https://vue-test-utils
 
 <br>
 
-- [`@types/jest`](https://www.npmjs.com/package/@types/jest): 테스트 코드 자체를 TypeScript를 사용하여 작성하는 경우 Jest 모듈을 사용하기 위해 필요한 Type 정보 제공 (Optional)
+- [`@types/jest`](https://www.npmjs.com/package/@types/jest): 테스트 코드 자체를 TypeScript를 사용하여 작성하는 경우 Jest 모듈에 대한 Type 정보 제공 (Optional)
 
-- [`@vue/cli-plugin-babel`](https://cli.vuejs.org/core-plugins/babel.html): Babel7 + [`babel-loader`](https://webpack.js.org/loaders/babel-loader/) + [`@vue/babel-preset-app`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/babel-preset-app)
+- [`@vue/cli-plugin-babel`](https://cli.vuejs.org/core-plugins/babel.html): Babel 7 + [`babel-loader`](https://webpack.js.org/loaders/babel-loader/) + [`@vue/babel-preset-app`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/babel-preset-app)
 
-- [`@vue/cli-plugin-typescript`](https://cli.vuejs.org/core-plugins/typescript.html): TypeScript + [`ts-loader`](https://github.com/TypeStrong/ts-loader) + [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin)
+- [`@vue/cli-plugin-typescript`](https://cli.vuejs.org/core-plugins/typescript.html): [`ts-loader`](https://github.com/TypeStrong/ts-loader) + [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin)
+
+  > Since 3.0.0-rc.6, typescript is now a peer dependency of this package, so you can use a specific version of TypeScript ...
 
 - [`@vue/cli-plugin-unit-jest`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest): `jest`를 실행하는 `vue-cli-service test:unit` 커맨드를 등록하는 플러그인, 4.x 이상 버전 사용시 Vue 컴포넌트를 Plain JavaScript로 변환할 때 [TypeScript 변환과 Babel 사용을 위한 Preset](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest/presets/typescript-and-babel) 제공
 
   > 이전 버전을 사용한다면 Babel에서 TypeScript를 컴파일할 수 있도록 [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) 플러그인 추가 설치 필요 ([Jest에서 Babel을 통해 TypeScript를 지원합니다](https://jestjs.io/docs/getting-started#using-typescript))
 
 - [`@vue/test-utils`](https://github.com/vuejs/vue-test-utils): Vue 컴포넌트에 대한 단위 테스트를 간편하게 해주는 유틸 함수들을 제공
+
+- [`typescript`](https://yarnpkg.com/package/typescript): TypeScript
 
 - [`vue-jest`](https://github.com/vuejs/vue-jest): `.vue` 파일([SFC](https://vuejs.org/v2/guide/single-file-components.html))내 `<template>`, `<script>`, `<style>` 구문들을 Plain JavaScript로 변환
 
@@ -166,7 +183,7 @@ vue add unit-jest
 
 <br>
 
-그리고 패키지매니저를 사용하여 `@vue/test-utils`, `vue-jest`를 설치합니다.
+그리고 패키지매니저를 사용하여 `@vue/test-utils`, `vue-jest` 등 추가로 필요한 패키지들을 설치합니다.
 
 ```zsh
 yarn add @vue/test-utils --dev
@@ -178,7 +195,7 @@ yarn add @vue/test-utils --dev
 
 ### 4-1. `jest.config.js`
 
-Jest 설정파일은 `jest.config.js`입니다. `jest.config.js` 대신 `package.json` 파일의 `jest` 필드를 사용할 수도 있습니다. 다음은 `@vue/cli`로 Babel, TypeScript를 포함하여 앱 생성시 기본으로 세팅되는 `jest.config.js` 파일 내용입니다.
+Jest 설정파일은 `jest.config.js`입니다. `jest.config.js` 대신 `package.json` 파일의 `jest` 필드를 사용할 수도 있습니다. 다음은 `@vue/cli` 4.5.13 버전으로 Babel, TypeScript를 포함하여 앱 생성시 기본으로 세팅되는 `jest.config.js` 파일 내용입니다.
 
 ```javascript
 // jest.config.js
@@ -213,7 +230,7 @@ transformIgnorePatterns: ["/node_modules/"];
 
 <br>
 
-이는 대부분의 써드파티 모듈이 JavaScript 파일로만 구성되어있기 때문입니다. 게다가 Jest는 브라우저가 아닌 Node.js 환경에서 Run 되는데, `node` 8.x 이상부터 거의 대부분의 모던 ECMAScript 기능들을 지원하고있기 때문에 Babel 또한 필요없기 때문이죠. 다만 아래의 예외 사항에 해당하는 라이브러리가 있다면 테스트를 실행하기 전 Jest가 해당 라이브러리 모듈을 적절하게 변환할 수 있도록 알려주어야합니다!
+이는 대부분의 써드파티 모듈이 Plain JavaScript로 작성되기 때문입니다. 게다가 Jest는 브라우저가 아닌 Node.js 환경에서 Run 되는데, Node.js 8.x 이상부터 거의 대부분의 모던 ECMAScript 기능들을 지원하고있기 때문에 Babel 또한 필요없기 때문이죠. 다만 아래의 예외 사항에 해당하는 라이브러리가 있다면 테스트를 실행하기 전 Jest가 해당 라이브러리 모듈을 적절하게 변환할 수 있도록 알려주어야합니다!
 
 - ES6 `import`/`export` 모듈 구문을 사용하는 경우, Node.js에서 실행할 수 있도록 `module.exports`로 변환되어야 함
 - `.vue` 파일을 사용하는 경우, `vue-jest`를 사용하여 변환되어야 함
@@ -234,11 +251,11 @@ module.exports = {
 
 <br>
 
-## 6. 테스트 커버리지 관리하기: Jest 설정에 명시, 커버리지 리포트
+## 6. 테스트 커버리지 측정하기: Jest 설정, 커버리지 리포트
 
-### 6-1. Jest 설정에 명시
+### 6-1. Jest 설정
 
-Jest는 테스트 커버리지를 나타내는 지표 보고서도 생성할 수 있습니다. 아래와 같이 `jest.config.js` 파일에 [해당 옵션들](https://jestjs.io/docs/configuration#collectcoverage-boolean)을 지정해주면 됩니다. 아래와 같이 `collectCoverageFrom` 값을 지정해주면, 모든 `*.ts`, `*.vue` 파일에 대해 테스트 커버리지를 수집하되, `node_modules`, `coverage`, `tests` 디렉토리에 존재하는 파일들은 제외한다는 의미입니다.
+Jest는 테스트 커버리지를 측정하고 커버리지 보고서도 생성할 수 있습니다. 아래와 같이 `jest.config.js` 파일에 [해당 옵션들](https://jestjs.io/docs/configuration#collectcoverage-boolean)을 지정해주면 됩니다. 아래와 같이 `collectCoverageFrom` 값을 지정해주면, 모든 `*.ts`, `*.vue` 파일에 대해 테스트 커버리지를 수집하되, `node_modules`, `coverage`, `tests` 디렉토리에 존재하는 파일들은 제외한다는 의미입니다.
 
 ```javascript
 // jest.config.js
@@ -268,7 +285,13 @@ yarn test:unit
 
 <br>
 
-다음과 같은 보고서가 출력되고요, 보고서의 각 항목은 다음을 의미합니다.
+다음과 같은 보고서가 출력되고요,
+
+<img src="./../img/jest-coverage-report.png" width="800" />
+
+<br>
+
+보고서의 각 항목은 다음을 의미합니다.
 
 - `Stmts`: 최소 한 번 이상 실행된 명령문(변수에 값 저장, 함수 호출 등) 코드의 비율
 - `Branch`: 최소 한 번 이상 if, switch와 같은 분기 조건이 충족된 비율
@@ -276,11 +299,9 @@ yarn test:unit
 - `Lines`: 최소 한 번 이상 실행된 코드 라인의 비율
 - `Uncovered Line`: 코드 커버리지에 측정되지 않은 코드 라인 수
 
-<img src="./../img/jest-coverage-report.png" width="800" />
-
 <br>
 
-붉은색으로 표시된 파일들은 대응하는 테스트 파일이 없는 파일들입니다. [VTU의 Jest Preset](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-unit-jest/presets/default/jest-preset.js)에 따라, Jest는 디폴트로 다음 경로에 해당하는 테스트 파일을 실행합니다. 앱 생성시 자동 포함된 샘플 테스트 파일인 `tests/unit/example.spec.ts`에서 `HelloWorld.vue` 컴포넌트에 대한 테스트를 포함하고 있기 때문에 `HelloWorld.vue` 파일에 대한 커버리지만 `100`인 것을 확인할 수 있습니다.
+붉은색으로 표시된 파일들은 대응하는 테스트 파일이 없는 파일들입니다. [VTU의 Jest Preset](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-unit-jest/presets/default/jest-preset.js)에 따라, Jest는 디폴트로 다음 경로에 해당하는 테스트 파일을 실행합니다.
 
 ```javascript
 module.exports = {
@@ -288,6 +309,10 @@ module.exports = {
 	testMatch: ["**/tests/unit/**/*.spec.[jt]s?(x)", "**/__tests__/*.[jt]s?(x)"],
 };
 ```
+
+<br>
+
+앱 생성시 자동 포함된 샘플 테스트 파일인 `tests/unit/example.spec.ts`에서 `HelloWorld.vue` 컴포넌트에 대한 테스트를 포함하고 있기 때문에 `HelloWorld.vue` 파일에 대한 커버리지만 `100`인 것을 확인할 수 있습니다.
 
 <br>
 
