@@ -306,6 +306,7 @@ module.exports = {
 - [BroadStackTest - Martin Fowler](https://martinfowler.com/bliki/BroadStackTest.html)
 - [ExtremeProgramming - Martin Fowler](https://martinfowler.com/bliki/ExtremeProgramming.html)
 - [SUT | xUnit Patterns](http://xunitpatterns.com/SUT.html)
+- [The little guide to CI/CD for frontend developers - Maxime Heckel](https://blog.maximeheckel.com/posts/guide-to-cicd-for-frontend-developers/)
 - [Using TypeScript | Jest](https://jestjs.io/docs/getting-started#using-typescript)
 - [Using Vue Test Utils with Jest (recommended) | Vue Test Utils](https://vue-test-utils.vuejs.org/installation/#using-vue-test-utils-with-jest-recommended)
 - [Unit Testing with Jest | Cracking Vue.js](https://joshua1988.github.io/vue-camp/testing/jest-testing.html#jest-%E1%84%89%E1%85%A9%E1%84%80%E1%85%A2)

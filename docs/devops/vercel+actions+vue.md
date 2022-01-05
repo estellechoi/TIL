@@ -8,7 +8,7 @@
 2. Vercel vs Netlify
 3. Vercel, 일단 배포하기
 4. Vercel CLI 설치 & 프로젝트 연결하고 `projectId`, `orgId` 확인하기
-5. GitHub Actions로 테스트 + Vercel에 배포하기
+5. GitHub Actions로 Vercel에 배포하는 CD 파이프라인 구축하기
 
 <br>
 
@@ -61,7 +61,7 @@ Vercel과 Netlify는 [Jamstack](https://www.cloudflare.com/ko-kr/learning/perfor
 
 ## 3. Vercel, 일단 배포하기
 
-Vercel로 배포하는 것 자체는 매우 간단합니다. [Vercel 프로젝트 만들기](https://vercel.com/new) 페이지에서 배포하려는 프로젝트 코드가 있는 Git 레포지토리를 Import 한 후, 앱 빌드 스크립트, 패키지 설치 스크립트, 환경변수, Output 디렉토리 등을 입력하고 `Deploy` 버튼을 클릭하면 바로 배포됩니다. 이 과정에 대한 설명이 필요하다면 [Deploying React & Vue Applications With Vercel](https://medium.com/swlh/deploying-react-vue-applications-with-vercel-42aa642534d5) 블로그 글이나 [Preparing for automatic deployment on Vercel with GitHub](https://books.google.co.kr/books?id=wED-DwAAQBAJ&pg=PA452&lpg=PA452&dq=vue+vercel&source=bl&ots=YuzntMpcKp&sig=ACfU3U3FFArUTJKV0BmvH3HnDyqfTyEATA&hl=ko&sa=X&ved=2ahUKEwiV4qjPz5T1AhUDMd4KHR29B_wQ6AF6BAgZEAM#v=onepage&q=vue%20vercel&f=false) p.455를 참고하세요.
+Vercel로 배포하는 것 자체는 매우 간단합니다. [Vercel 프로젝트 만들기](https://vercel.com/new) 페이지에서 배포하려는 프로젝트 코드가 있는 GitHub 레포지토리를 Import 한 후, 앱 빌드 스크립트, 패키지 설치 스크립트, 환경변수, Output 디렉토리 등을 입력하고 `Deploy` 버튼을 클릭하면 바로 배포됩니다. 그리고 Import한 GitHub 레포지토리에 [Vercel for GitHub](https://vercel.com/docs/concepts/git/vercel-for-github) 앱이 자동으로 설치되는데요, 이 앱은 레포지토리의 Pull Request가 `merge`되거나 `push`가 발생하면 Vercel에 자동으로 배포하고 댓글을 남기는 일들을 합니다. 이 최초 배포 과정에 대한 설명이 필요하다면 [Deploying React & Vue Applications With Vercel](https://medium.com/swlh/deploying-react-vue-applications-with-vercel-42aa642534d5) 블로그 글이나 [Preparing for automatic deployment on Vercel with GitHub](https://books.google.co.kr/books?id=wED-DwAAQBAJ&pg=PA452&lpg=PA452&dq=vue+vercel&source=bl&ots=YuzntMpcKp&sig=ACfU3U3FFArUTJKV0BmvH3HnDyqfTyEATA&hl=ko&sa=X&ved=2ahUKEwiV4qjPz5T1AhUDMd4KHR29B_wQ6AF6BAgZEAM#v=onepage&q=vue%20vercel&f=false) p.455를 참고하세요.
 
 <br>
 
@@ -75,13 +75,13 @@ Vercel로 배포하는 것 자체는 매우 간단합니다. [Vercel 프로젝�
 
 <br>
 
-## 3. Vercel CLI 설치 & 프로젝트 연결하고 `projectId`, `orgId` 확인하기
+## 4. Vercel CLI 설치 & 프로젝트 연결하고 `projectId`, `orgId` 확인하기
 
 기본적인 빌드 스크립트 외에 슬랙 Notification, Lighthouse 보고서 생성 등 Delivery 과정을 커스텀하려면, CD 파이프라인을 구축할 때 [Vercel CLI](https://vercel.com/docs/cli#)를 사용할 수 있습니다.
 
 <br>
 
-### 3-1. 설치
+### 4-1. 설치
 
 먼저 Vercel CLI를 설치합니다. 저는 아래와 같이 전역 설치했습니다.
 
@@ -99,7 +99,7 @@ vercel --prod
 
 <br>
 
-### 3-2. 프로젝트 연결
+### 4-2. 프로젝트 연결
 
 `vercel`은 기본적으로 배포를 시작하는 명령어입니다. 하지만 `vercel` 명령어를 실행하는 디렉토리 경로에 `.vercel/project.json` 파일이 없다면 (보통 최초로 명령어를 실행하는 경우) [Vercel 프로젝트를 연결하는 작업이 선행](https://vercel.com/docs/cli#commands/overview/project-linking)됩니다. 배포가 진행되려면 `.vercel/project.json` 파일이 Vercel 계정 정보와 어떤 Vercel 프로젝트에 배포해야하는지 정보를 제공해줘야하기 때문입니다.
 
@@ -131,64 +131,76 @@ vercel --token iZJb2oftmY4ab12HBzyBXMkp
 
 <br>
 
-### 3-3. Vercel for GitHub 자동 배포 Disable
+### 4-3. Vercel for GitHub 자동 배포 Disable
 
 그 다음, [Vercel for GitHub](https://vercel.com/docs/concepts/git/vercel-for-github) 앱이 설치된 GitHub 레포지토리에 `push`가 발생했을 때 자동 배포되는 것을 막기 위해 별도의 설정이 필요합니다. 프로젝트 루트 경로에 `vercel.json`을 생성하고, 다음과 같이 `github` 필드를 설정합니다.
 
 ```json
 {
-    "github": {
-      "enabled": false,
-      "silent": true
-    }
+	"github": {
+		"enabled": false,
+		"silent": true
+	}
 }
 ```
 
 <br>
 
-- [`enabled`](https://vercel.com/docs/cli#git-configuration/github-enabled): 레포지토리에 이 설치되어있으면 Vercel에 자동 배포함
-- [`silent`](https://vercel.com/docs/cli#git-configuration/github-silent): Vercel for GitHub 봇이 PR과 커밋에 자동으로 댓글다는 것을 Disable
+- [`enabled`](https://vercel.com/docs/cli#git-configuration/github-enabled): 레포지토리에서 `merge`/`push` 발생시 Vercel에 자동 배포함
+- [`silent`](https://vercel.com/docs/cli#git-configuration/github-silent): Vercel for GitHub 봇이 PR과 Commit에 자동으로 댓글다는 것을 Disable
 
 <br>
 
-## 4. GitHub Actions로 Vercel에 배포하기
+## 5. GitHub Actions로 Vercel에 배포하는 CD 파이프라인 구축하기
 
-### 4-1. CD 파이프라인 계획
+### 5-1. CD 파이프라인 계획
 
-이제 [GitHub Actions를 사용](./../git/actions.md)하여 Vercel에 배포하는 CD 파이프라인을 구축해보겠습니다. 저는 배포 파이프라인에서 다음 일들을 수행할거고요, 각 단계를 통과해야만 다음 단계로 넘어갈 수 있습니다. ([GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)를 사용한다고 가정)
+이제 [GitHub Actions를 사용](./../git/actions.md)해서 Vercel에 배포하는 CD 파이프라인을 구축해보겠습니다. 저는 배포 파이프라인에서 다음 일들을 수행할거고요, 각 단계를 통과해야만 다음 단계로 넘어갈 수 있습니다. ([GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)를 사용한다고 가정)
+
+<br>
+
+#### Preview 배포 (Staging)
 
 1. `develop` 브랜치에 대한 `pull_request`가 머지되면 Workflow 시작
-2. `develop` 브랜치를 Vercel Preview 배포
-3. Vercel Preview에 대해 [테스트 Suite](https://en.wikipedia.org/wiki/Test_suite) 실행 → Slack 알림
-4. 테스트 통과시에만 `master` 브랜치에 `push` → Slack 알림
+2. [테스트 Suite](https://en.wikipedia.org/wiki/Test_suite) 실행
+3. 테스트 통과시 → `develop` 브랜치를 Vercel Preview 배포
+4. 배포 성공시 → Vercel Preview에 대해 테스트 실행
+5. Slack 채널로 결과 알림 전송
 
 <br>
 
-### 4-2. GitHub Secret 등록
+#### Production 배포
 
-Vercel CLI를 사용하여 배포할 때 필요한 3가지 값을 GitHub 레포지토리의 [Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets)으로 등록합니다.
+1. `master` 브랜치에 대한 `pull_request`가 머지되면 Workflow 시작
+2. `master` 브랜치를 Vercel Production 배포
+3. Slack 채널로 결과 알림 전송
 
+<br>
+
+### 5-2. GitHub Secret 등록
+
+Workflow를 작성하기 전에, GitHub 레포지토리의 [Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets)에 암호화와 보호가 필요한 값들을 먼저 등록합니다. 저의 경우, Slack 알림 전송시 필요한 값과 Vercel CLI를 사용하여 배포할 때 필요한 값들입니다.
+
+- `SLACK_WEBHOOK`: Slack 알림을 보낼 때 필요 ([Slack Webhook URL](https://api.slack.com/messaging/webhooks) 참고)
 - `VERCEL_PROJECT_ID`: `.vercel/project.json` 파일의 `projectId` 필드 값
 - `VERCEL_ORG_ID`: `.vercel/project.json` 파일의 `orgId` 필드 값
 - `VERCEL_TOKEN`: Vercel에 로그인하기 위해 필요한 토큰 ([Personal Account Settings](https://vercel.com/account/tokens)에서 생성)
 
 <br>
 
-그다음 [Slack Webhook URL](https://api.slack.com/messaging/webhooks)도 등록합니다. Slack 알림을 보낼 때 필요합니다.
-
 <img src="./../img/actions-secrets-vercel.png" />
 
 <br>
 
-### 4-3. 앱 환경변수 등록
+### 5-3. 앱 환경변수 등록
 
 앱이 런타임에서 사용하는 환경변수가 있다면, Vercel의 프로젝트 설정 페이지에서 [Environment Variables](https://vercel.com/docs/concepts/projects/environment-variables)로 추가해놓아야 합니다. 그럼 Vercel이 배포를 실행할 때 자동으로 `.env` 파일을 생성하고 앱을 빌드할 때 포함시킵니다.
 
 <br>
 
-### 4-4. Workflow 작성
+### 5-4. Workflow 작성
 
-저는 다음과 같이 Workflow 파일 `.github/workflows/preview-deployment.yml`을 작성했습니다. Vercel에 배포하는 단계는 Vercel CLI를 직접 사용하지 않고 써드파티 Action인 [Vercel Action](https://github.com/amondnet/vercel-action#outputs)을 사용했습니다.
+저는 다음과 같이 Workflow 파일 `.github/workflows/preview-deployment.yml`을 작성했습니다. Vercel에 배포하는 단계는 Vercel CLI를 직접 사용하지 않고 써드파티 Action인 [`amondnet/vercel-action@v20`](https://github.com/amondnet/vercel-action)을 사용했습니다.
 
 ```yml
 # preview-deployment.yml
@@ -196,7 +208,7 @@ name: Preview Deployment
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -211,125 +223,76 @@ jobs:
     steps:
       - name: Repo checkout
         uses: actions/checkout@v2
-        with: 
+        with:
           ref: develop
         # Repo checkout under $GITHUB_WORKSPACE, doc at https://github.com/actions/checkout
-        
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Install packages
         run: yarn install
-        
+
+      - name: Set envs
+        env:
+          APP_ENV_SET: ${{ secrets.APP_ENV_SET || '' }}
+        run: |
+          echo "${APP_ENV_SET}" > .env
+          cat .env
+
+      - name: Run unit test
+        id: unit-test
+        run: yarn test:unit
+        continue-on-error: true
+
+      - name: Run e2e test
+        id: e2e-test
+        run: yarn test:e2e
+        continue-on-error: true
+
       - name: Deploy to Vercel Preview
         id: vercel-preview
+        if: ${{ success() }}
         uses: amondnet/vercel-action@v20
-        if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/develop' }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
-          # vercel-args: '--prod'
-          
-      - name: Run unit test against Vercel Preview
-        id: unittest
-        env:
-          VERCEL_URL: ${{ steps.vercel-preview.outputs.preview-url }}
-          # see doc at https://github.com/amondnet/vercel-action#outputs
-        run: yarn test:unit
-        continue-on-error: true
-        
-      - name: Run e2e test against Vercel Preview
-        id: e2etest
-        env:
-          VERCEL_URL: ${{ steps.vercel-preview.outputs.preview-url }}
-          # see doc at https://github.com/amondnet/vercel-action#outputs
-        run: yarn test:e2e
-        continue-on-error: true
+          # vercel-args: '--prod' (this is for production deployment)
 
       - name: Slack notification
         if: ${{ always() }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          VERCEL_URL: ${{ steps.vercel-preview.outputs.preview-url }}
+          # see doc at https://github.com/amondnet/vercel-action#outputs
         uses: edge/simple-slack-notify@master
-        with: 
-          channel: '#notification'
-          username: 'CI/CD Bot'
+        with:
+          channel: "#notification"
+          username: "CI/CD Bot"
           status: ${{ job.status }}
           success_text: |
-            '🥳 Success!
-            * unit test → ${{ steps.unittest.conclusion }}
-            * e2e → ${{ steps.e2etest.conclusion }}\n'
+            🥳 Success!
+            * unit test → ${{ steps.unit-test.conclusion }}
+            * e2e → ${{ steps.e2e-test.conclusion }}\n
           failure_text: |
-            '😭 Failed
-            * unit test → ${{ steps.unittest.conclusion }}
-            * e2e → ${{ steps.e2etest.conclusion }}\n'
+            😭 Failed
+            * unit test → ${{ steps.unit-test.conclusion }}
+            * e2e → ${{ steps.e2e-test.conclusion }}\n
           cancelled_text: |
-            '😭 Cancelled
-            * unit test → ${{ steps.unittest.conclusion }}
-            * e2e → ${{ steps.e2etest.conclusion }}\n'
+            😭 Cancelled
+            * unit test → ${{ steps.unit-test.conclusion }}
+            * e2e → ${{ steps.e2e-test.conclusion }}\n
           fields: |
             [{ "title": "Repository", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}", "short": true },
             { "title": "Ref", "value": "${env.GITHUB_REF_NAME}", "short": true },
             { "title": "Workflow", "value": "${env.GITHUB_WORKFLOW}", "short": true },
             { "title": "Job", "value": "${env.GITHUB_JOB}", "short": true },
-            { "title": "Actor", "value": "@${env.GITHUB_ACTOR}", "short": true }]
-
-  pushtomaster:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repo checkout
-        uses: actions/checkout@v2
-        with: 
-          ref: develop
-
-      - name: Push to master
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git checkout master
-          git rev-parse --abbrev-ref HEAD
-          git merge develop
-          git push origin master
-```
-
-<br>
-
-`Run unit test against Vercel preview` 단계에서는 GitHub Actions의 [`steps`](https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context) 컨텍스트와 [`amondnet/vercel-action@v20`의 Output](https://github.com/amondnet/vercel-action#outputs)을 사용하여 Vercel Preview에 배포된 URL을 얻었고요, 이를 `VERCEL_URL`이라는 환경변수로 세팅했습니다. 이 환경변수를 사용하여 로컬에서의 테스트와 Vercel에서의 테스트를 분기할 수 있습니다.
-
-```yml
-      - name: Run unit test against Vercel preview
-        env:
-          VERCEL_URL: ${{ steps.vercel-preview.outputs.preview-url }}
-        run: yarn test:unit
-```
-
-<br>
-
-다음은 [Jest](https://jestjs.io/)에서 사용하는 테스트 파일을 예로 들었습니다.
-
-```typescript
-// tests/example.spec.ts
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
-
-if (process.env.VERCEL_URL) {
-  console.log("This test is running against Vercel.");
-}
-
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg },
-    });
-    expect(wrapper.text()).toMatch(msg);
-  });
-});
+            { "title": "Actor", "value": "@${env.GITHUB_ACTOR}", "short": true },
+            { "title": "Deployed URL", "value": "${env.VERCEL_URL}" }]
 ```
 
 <br>
