@@ -7,7 +7,7 @@
 3. AAA 패턴 (Arrange, Act, Assert)
 4. DOM 엘리먼트의 렌더링 Assert 하기: `find().exists()`로 존재하는지 검사, `get().isVisible()`로 보이는지 검사
 5. Mount 옵션으로 Vue 컴포넌트에 옵션 부여하기
-6. 이벤트 Emit 테스트: `emitted()`
+6. 테스트 코드에서의 이벤트 핸들링: `emitted()`, Form Submit 테스트
 
 <br>
 
@@ -246,9 +246,9 @@ test("HelloWorld - DOM Exists", () => {
 
 <br>
 
-## 6. 이벤트 Emit 테스트: `emitted()`
+## 6. 테스트 코드에서의 이벤트 핸들링: `emitted()`, Form Submit 테스트
 
-### 6-1. 테스트 코드 작성하기
+### 6-1. `emitted()`
 
 `emitted()` 메소드를 인자 없이 호출하면, 발생한 모든 이벤트의 이름을 Key로 하는 `Record<string, unknown[]>` 객체를 반환합니다. 인자로 이벤트 이름을 주면, 해당 이벤트가 발생한 횟수만큼을 길이로 하는 배열을 반환합니다. 다음은 컴포넌트 내의 버튼을 클릭하면 `increment` 이벤트가 Emit 된다고 가정하는 예제입니다. 아래와 같이 버튼을 두 번 클릭시키면, `increment` 이벤트가 두 번 Emit 되리라고 Assert 할 수 있겠죠. 그럼 `wrapper.emitted("increment")`는 두 번의 Emit된 데이터를 각 요소로 하는 배열을 반환합니다.
 
@@ -271,7 +271,7 @@ test("Incrementor - Event Emitted", () => {
 
 <br>
 
-만약 `increment` 이벤트가 Emit될 때 실제로 어떤 값이 Increment 되는지, 그 값이 이벤트와 함께 Emit 되는지 테스트하려면 다음과 같이 테스트 코드를 추가할 수 있습니다. 
+만약 `increment` 이벤트가 Emit될 때 실제로 어떤 값이 Increment 되는지, 그 값이 이벤트와 함께 Emit 되는지 테스트하려면 다음과 같이 테스트 코드를 추가할 수 있습니다.
 
 ```typescript
 expect(incrementEvent[0]).toEqual([1]);
@@ -283,8 +283,6 @@ expect(incrementEvent[1]).toEqual([2]);
 각 이벤트와 함께 Emit된 값이 배열에 담긴 것에 유의하세요. 이 예제에서 `wrapper.emitted("increment")`는 `[[1], [2]]`를 반환합니다.
 
 <br>
-
-### 6-2. 테스트를 통과하는 기능 개발하기
 
 이제 위의 명세 테스트를 통과하는 기능은 다음과 같이 작성할 수 있겠습니다. [Composition API]()를 사용한다면, `this.$emit()`이 아닌 `context.emit()`을 호출할텐데요, 두 경우 모두 VTU의 `emitted()` 메소드를 사용하여 테스트할 수 있습니다.
 
@@ -316,6 +314,15 @@ export default defineComponent({
 
 <br>
 
+### 6-2. Form Submit 테스트
+
+Form Submit 테스트를 간단하게 하는 방법은 `submit` 대신 `click` 이벤트를 Trigge 하는 것입니다. [HTML 명세](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm)에 따르면, `document` 객체에 연결되지 않은 Form은 Submit될 수 없기 때문입니다. `submit` 이벤트를 사용하여 테스트하고 싶다면 [`attachTo`](https://next.vue-test-utils.vuejs.org/api/#attachto)를 사용해서 `document` 객체와 Form 엘리먼트를 연결해야합니다.
+
+<br>
+
+이 외 Form 엘리먼트에 대한 이벤트 핸들링 테스트를 더 알아보시려면 [Vue Test Utils 공식문서의 Interacting with Vue Component inputs](https://next.vue-test-utils.vuejs.org/guide/essentials/forms.html#interacting-with-vue-component-inputs) 섹션을 참고하세요.
+
+<br>
 
 ---
 
