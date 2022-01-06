@@ -5,6 +5,9 @@
 1. 렌더링된 컴포넌트의 DOM에 접근해서 테스트하기
 2. Vue의 DOM 업데이트를 비동기로 테스트하기
 3. AAA 패턴 (Arrange, Act, Assert)
+4. DOM 엘리먼트의 렌더링 Assert 하기: `find().exists()`로 존재하는지 검사, `get().isVisible()`로 보이는지 검사
+5. Mount 옵션으로 Vue 컴포넌트에 옵션 부여하기
+6. 이벤트 Emit 테스트: `emitted()`
 
 <br>
 
@@ -39,7 +42,7 @@ test("HelloWorld", () => {});
 
 <br>
 
-`mount()` 메소드는 이름 그대로 컴포넌트를 Mount하는데요, 컴포넌트를 렌더링할 뿐만 아니라 반환하는 `VueWrapper` 객체에 유용한 테스트 메소드들이 포함되어있기 때문에 컴포넌트를 Wrap한다고 말합니다. `mount()` 메소드가 반환하는 객체를 흔히 `wrapper`라고 명합니다.
+`mount()` 메소드는 이름 그대로 컴포넌트를 Mount하는데요, 컴포넌트를 렌더링할 뿐만 아니라 [Wrapper API](https://next.vue-test-utils.vuejs.org/api/#wrapper-methods)를 Implement한 `VueWrapper` 객체를 반환합니다.
 
 ```typescript
 // helloworld.spec.ts
@@ -55,7 +58,7 @@ test("HelloWorld", () => {
 
 ### 1-3. Attribute 셀렉터로 DOM 엘리먼트에 접근하기
 
-`wrapper.get()` 메소드를 사용하면 렌더링된 컴포넌트의 DOM 엘리먼트에 접근할 수 있습니다. 아래와 같이 `get("[data-test='hello']")`을 호출하면 해당 Attribute 셀렉터에 맞는 엘리먼트를 찾아 반환합니다. 예를 들어, `<div data-test="hello">...</div>`라고 마크업한 엘리먼트가 있다면 이 엘리먼트를 반환하겠죠.
+VueWrapper의 [`get()`](https://next.vue-test-utils.vuejs.org/api/#get) 메소드를 사용하면 렌더링된 컴포넌트의 DOM 엘리먼트에 접근할 수 있습니다. 아래와 같이 `get("[data-test='hello']")`을 호출하면 해당 Attribute 셀렉터에 맞는 엘리먼트를 찾아 `DOMWrapper` 객체를 반환합니다. 예를 들어, `<div data-test="hello">...</div>`라고 마크업한 엘리먼트가 있다면 이 엘리먼트를 반환하고, 해당하는 엘리먼트가 없으면 에러가 발생하여 테스트에 실패합니다.
 
 ```typescript
 // helloworld.spec.ts
@@ -64,7 +67,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 
 test("HelloWorld", () => {
 	const wrapper = mount(HelloWorld);
-	const target = wrapper.get("[data-test='hello']");
+	const target = wrapper.get("[data-test='hello']"); // target: Omit<DOMWrapper<T>, 'exist'>
 });
 ```
 
@@ -78,7 +81,7 @@ test("HelloWorld", () => {
 
 ### 1-4. `expect()`
 
-이제 렌더링된 결과물이 개발자의 예상과 일치하는지 확인하기위해 VTU의 전역 메소드인 `expect()` 메소드를 사용합니다. `expect()` 메소드의 인자로 테스트 대상이 되는 값을 넣고요, 의도한 값을 인자로 받는 `toBe()` 메소드를 체이닝합니다.
+이제 렌더링된 결과물이 개발자의 예상과 일치하는지 확인하기위해 VTU의 전역 메소드인 `expect()` 메소드를 사용합니다. `expect()` 메소드의 인자로 테스트 대상이 되는 값을 넣고요, 의도한 값을 인자로 받는 [`toBe()`](https://jestjs.io/docs/using-matchers#common-matchers) 메소드를 체이닝합니다.
 
 - `expect(target.text())`: `target` 엘리먼트의 `innerText` 값을 예상합니다
 - `.toBe("Hello World!")`: 예상하는 값은 `"Hello World!"` 입니다
@@ -144,7 +147,13 @@ DOM 업데이트가 발생하는 테스트를 비동기로 실행해야하는 �
 
 ## 3. AAA 패턴 (Arrange, Act, Assert)
 
-위 섹션에서 사용한 예제는 전형적인 AAA(Arrange, Act, Assert) 패턴의 테스트 코드 입니다.
+위 섹션에서 사용한 예제를 다시 보면, 전형적인 AAA(Arrange, Act, Assert) 패턴의 테스트 코드 입니다.
+
+- Arrange: 시나리오를 세업하는 단계, Vuex 스토어를 생성하거나
+- Act: 사용자의 행동을 시뮬레이션
+- Assert: 컴포넌트가 Act 후 어떤 상태여야 하는지에 대한 명세
+
+<br>
 
 ```typescript
 // helloworld.spec.ts
@@ -166,11 +175,147 @@ test("HelloWorld - Form Submit", async () => {
 
 <br>
 
-- Arrange: 시나리오를 세업하는 단계, Vuex 스토어를 생성하거나
-- Act: 사용자의 행동을 시뮬레이션
-- Assert: 컴포넌트가 Act 후 어떤 상태여야 하는지에 대한 명세
+## 4. DOM 엘리먼트의 렌더링 Assert 하기: `find().exists()`로 존재 Asset, `get().isVisible()`로 보임 Asset
+
+### 4-1. `find().exists()`로 존재 Asset
+
+특정한 DOM 엘리먼트가 존재하는지 확인하려면 [`find()`](https://next.vue-test-utils.vuejs.org/api/#find)와 [`exsits()`](https://next.vue-test-utils.vuejs.org/api/#exists) 메소드를 사용합니다. `find()` 메소드가 `DOMWrapper` 객체를 반환했다면 `exists()` 메소드는 `true`를 반환합니다. `boolean` 타입으로 심플하게 검증할 수 있습니다.
+
+```typescript
+import { mount } from "@vue/test-utils";
+import HelloWorld from "@/components/HelloWorld.vue";
+
+test("HelloWorld - DOM Exists", () => {
+	const wrapper = mount(HelloWorld);
+
+	expect(wrapper.find("[data-test='admin']").exists()).toBe(true);
+});
+```
 
 <br>
+
+`get()` 메소드를 사용하여 엘리먼트의 존재여부를 검증할 수도 있지만 VTU에서 권장하지 않습니다.
+
+> `get()` works on the assumption that elements do exist and throws an error when they do not. It is not recommended to use it for asserting existence. - [Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/conditional-rendering.html#using-find-and-exists)
+
+<br>
+
+### 4-2. `get().isVisible()`로 보임 Asset
+
+DOM 엘리먼트가 실제로 보이는 상태인지 검사하려면 `get()`과 `isVisible()` 메소드를 사용합니다. `isVisible()`로 보이는지 여부를 검사할 때는 이미 DOM 엘리먼트가 존재한다고 가정하기 때문에 `find()`가 아닌 `get()`을 사용합니다.
+
+```typescript
+// helloworld.spec.ts
+import { mount } from "@vue/test-utils";
+import HelloWorld from "@/components/HelloWorld.vue";
+
+test("HelloWorld - DOM is Visible", () => {
+	const wrapper = mount(HelloWorld);
+
+	expect(wrapper.get("[data-test='admin']").isVisible()).toBe(true);
+});
+```
+
+<br>
+
+## 5. Mount 옵션으로 Vue 컴포넌트에 옵션 부여하기
+
+`mount()` 메소드의 두 번째 인자로 [Mount 옵션](https://next.vue-test-utils.vuejs.org/api/#mount)을 줄 수 있습니다. 그 중 [`data` 옵션](https://next.vue-test-utils.vuejs.org/guide/essentials/passing-data.html)은 Vue 컴포넌트에 `data` 옵션을 부여하고 기존의 옵션들과 Merge되며, 중복되는 옵션들을 Overwrite 합니다.
+
+```typescript
+// helloworld.spec.ts
+import { mount } from "@vue/test-utils";
+import HelloWorld from "@/components/HelloWorld.vue";
+
+test("HelloWorld - DOM Exists", () => {
+	const wrapper = mount(HelloWorld, {
+		data() {
+			return {
+				isAdmin: true
+			}
+		}
+	});
+
+	expect(wrapper.find("[data-test='admin']").exists()).toBe(true);
+});
+```
+
+<br>
+
+위의 예제 테스트 코드에서는 컴포넌트를 Mount하면서 `isAdmin: true` 데이터를 부여했는데요, `isAdmin` 값에 따라 특정 엘리먼트가 동적으로 렌더링되는 경우에 유용합니다. 예를 들어 `<div v-if="isAdmin" data-test="admin"></div>`라는 엘리먼트가 있다면, 위의 테스트를 통과하기 위해 `isAdmin` 값이 [Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)여야 합니다.
+
+<br>
+
+## 6. 이벤트 Emit 테스트: `emitted()`
+
+### 6-1. 테스트 코드 작성하기
+
+`emitted()` 메소드를 인자 없이 호출하면, 발생한 모든 이벤트의 이름을 Key로 하는 `Record<string, unknown[]>` 객체를 반환합니다. 인자로 이벤트 이름을 주면, 해당 이벤트가 발생한 횟수만큼을 길이로 하는 배열을 반환합니다. 다음은 컴포넌트 내의 버튼을 클릭하면 `increment` 이벤트가 Emit 된다고 가정하는 예제입니다. 아래와 같이 버튼을 두 번 클릭시키면, `increment` 이벤트가 두 번 Emit 되리라고 Assert 할 수 있겠죠. 그럼 `wrapper.emitted("increment")`는 두 번의 Emit된 데이터를 각 요소로 하는 배열을 반환합니다.
+
+```typescript
+// helloworld.spec.ts
+import { mount } from "@vue/test-utils";
+import Incrementor from "@/components/Incrementor.vue";
+
+test("Incrementor - Event Emitted", () => {
+	const wrapper = mount(Incrementor);
+
+	wrapper.find("button").trigger("click");
+	wrapper.find("button").trigger("click");
+
+	// Assert increment event will be emitted
+	const incrementEvent = wrapper.emitted("increment");
+	expect(incrementEvent).toHaveLength(2);
+});
+```
+
+<br>
+
+만약 `increment` 이벤트가 Emit될 때 실제로 어떤 값이 Increment 되는지, 그 값이 이벤트와 함께 Emit 되는지 테스트하려면 다음과 같이 테스트 코드를 추가할 수 있습니다. 
+
+```typescript
+expect(incrementEvent[0]).toEqual([1]);
+expect(incrementEvent[1]).toEqual([2]);
+```
+
+<br>
+
+각 이벤트와 함께 Emit된 값이 배열에 담긴 것에 유의하세요. 이 예제에서 `wrapper.emitted("increment")`는 `[[1], [2]]`를 반환합니다.
+
+<br>
+
+### 6-2. 테스트를 통과하는 기능 개발하기
+
+이제 위의 명세 테스트를 통과하는 기능은 다음과 같이 작성할 수 있겠습니다. [Composition API]()를 사용한다면, `this.$emit()`이 아닌 `context.emit()`을 호출할텐데요, 두 경우 모두 VTU의 `emitted()` 메소드를 사용하여 테스트할 수 있습니다.
+
+```vue
+<!-- Incrementor.vue-->
+<template>
+	<button type="button" @click="handleClick">Increment</button>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "HelloWorld",
+  data() {
+	return {
+		count: 0
+	}
+  },
+  methods: {
+	  handleClick() {
+		  this.count += 1;
+		  this.$emit("increment", this.count);
+	  }
+  }
+});
+</script>
+```
+
+<br>
+
 
 ---
 
