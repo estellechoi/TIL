@@ -1,14 +1,14 @@
-# 프론트엔드 테스트하기 2: DOM 업데이트를 비동기로 테스트하기, AAA 패턴
+# 프론트엔드 테스트하기 2: Vue 컴포넌트 테스트 Basics, 구현 세부사항을 테스트하지 말 것
 
 <br>
 
 1. 렌더링된 컴포넌트의 DOM에 접근해서 테스트하기
-2. 구현 코드와 결합된 테스트 코드 피하기: DOM 접근시 Attribute 셀렉터 사용하기
+2. 구현 세부사항을 테스트하지 말 것: Class나 Id 사용 피하기, 사용자 행동 Mimic 하기
 3. Vue의 DOM 업데이트를 비동기로 테스트하기
 4. AAA 패턴 (Arrange, Act, Assert)
-5. DOM 엘리먼트의 렌더링 Assert 하기: `find().exists()`로 존재하는지 검사, `get().isVisible()`로 보이는지 검사
-6. Mount 옵션으로 Vue 컴포넌트에 옵션 부여하기
-7. 테스트 코드에서의 이벤트 핸들링: `emitted()`, Form Submit 테스트
+5. DOM 엘리먼트 렌더링 테스트: `find().exists()`, `get().isVisible()`
+6. Mount 옵션, `setData()`, `setProps()`로 Vue 컴포넌트에 데이터 전달하기
+7. 이벤트 핸들링 테스트: `emitted()`, Form Submit 테스트
 
 <br>
 
@@ -57,7 +57,7 @@ test("HelloWorld", () => {
 
 <br>
 
-### 1-3. Attribute 셀렉터로 DOM 엘리먼트에 접근하기
+### 1-3. `get()` 메소드로 DOM 엘리먼트에 접근하기
 
 VueWrapper의 [`get()`](https://next.vue-test-utils.vuejs.org/api/#get) 메소드를 사용하면 렌더링된 컴포넌트의 DOM 엘리먼트에 접근할 수 있습니다. 아래와 같이 `get("[data-test='hello']")`을 호출하면 해당 셀렉터에 맞는 엘리먼트를 찾아 `DOMWrapper` 객체를 반환합니다. 예를 들어, `<div data-test="hello">...</div>`라고 마크업한 엘리먼트가 있다면 이 엘리먼트를 감싼 `DOMWrapper`를 반환하고, 해당하는 엘리먼트가 없으면 에러가 발생하여 테스트에 실패합니다.
 
@@ -111,18 +111,49 @@ test("HelloWorld", () => {
 
 <br>
 
-## 2. 구현 코드와 결합된 테스트 코드 피하기: DOM 접근시 Attribute 셀렉터 사용하기
+## 2. 구현 세부사항을 테스트하지 말 것: Class나 Id 사용 피하기, 사용자 행동 Mimic 하기
 
-엘리먼트에 접근할 때 Class나 Id가 아닌 Attribute 셀렉터를 사용하는 이유는, Class와 Id는 변하기 때문입니다. 변하기 쉬운 구현 코드와 결합된 테스트 코드는 좋지 않습니다. 이게 무슨 말이냐면, Class 셀렉터를 사용해서 `DOMWrapper`를 얻는 테스트 코드를 작성하면, 나중에 Class 네이밍을 변경하거나 새로운 CSS 라이브러리를 도입하여 리팩토링을 진행하게 될 때 테스트 코드도 같이 변경해줘야하기 때문에 불필요한 관리포인트가 발생하는 것입니다. 다음은 [클린 아키텍처](http://www.yes24.com/Product/Goods/77283734)에서 발췌한 내용입니다.
+### 2-1. Class나 Id 사용 피하기
 
-> 상용 클래스나 메서드 중 하나라도 변경되면 딸려 있는 다수의 테스트가 변경되어야 한다. 결과적으로 테스트는 깨지기 쉬워지고, 이로 인해 상용 코드를 뻣뻣하게 만든다.
-> 테스트 API의 역할은 애플리케이션의 구조를 테스트로부터 숨기는 데 있다. 이렇게 만들면 상용 코드를 리팩터링하거나 진화시키더라도 테스트에는 전혀 영향을 주지 않는다. 또한 테스트를 리팩터링하거나 진화시킬 때도 상용 코드에는 전혀 영향을 주지 않는다.
+위 섹션에서 엘리먼트에 접근할 때 Class나 Id가 아닌 Attribute 셀렉터를 사용한 이유는, Class와 Id는 변하기 때문입니다. 다시 말해 Class와 Id가 구현 세부사항이기 때문인데요, 테스트에 관한 유명한 말이 있죠. [Do not test implementation details](https://next.vue-test-utils.vuejs.org/guide/essentials/easy-to-test.html#do-not-test-implementation-details): 구현 세부사항을 테스트하지 말 것. 구현 세부사항은 변하기 쉽기 때문에 구현 세부사항과 결합된 테스트 코드는 좋지 않다고 봅니다. 만약 Class 셀렉터를 사용해서 `DOMWrapper`를 얻는 테스트 코드를 작성하면, 나중에 Class 네이밍을 변경하거나 새로운 CSS 라이브러리를 도입하여 리팩토링을 진행하게 될 때 테스트 코드도 같이 변경해줘야하기 때문에 불필요한 관리포인트가 발생하겠죠. 테스트 코드에서는 아래와 같이 Class 셀렉터를 사용해서 DOM에 접근하지 맙시다!
+
+```typescript
+const wrapper = mount(Counter)
+const paragraph = wrapper.find('.paragraph');
+```
 
 <br>
 
-VTU 공식문서에서는 Class나 Id 대신 `data-test` Attribute 셀릭터를 사용하라고 권장하네요.
+[VTU 공식문서]((https://next.vue-test-utils.vuejs.org/guide/essentials/a-crash-course.html#the-first-test-a-todo-is-rendered))에서는 Class나 Id 대신 `data-test` Attribute 셀릭터를 사용하라고 권장하네요.
 
-> Using data-test selectors is not required, but it can make your tests less brittle. classes and ids tend to change or move around as an application grows - by using data-test, it's clear to other developers which elements are used in tests, and should not be changed. - [Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/a-crash-course.html#the-first-test-a-todo-is-rendered)
+> Using data-test selectors is not required, but it can make your tests less brittle. classes and ids tend to change or move around as an application grows - by using data-test, it's clear to other developers which elements are used in tests, and should not be changed.
+
+<br>
+
+### 2-2. 사용자 행동 Mimic 하기
+
+다음과 같이 `setData()`를 사용하여 데이터를 강제로 변경하는 코드 역시 구현 세부사항을 포함하기 때문에 좋지 않습니다.
+
+```typescript
+await wrapper.setData({ count: 2 })
+```
+
+<br>
+
+위의 테스트 코드는 이렇게 사용자의 행동을 Mimic 하는 식으로 리팩토링할 수 있습니다.
+
+```typescript
+const button = wrapper.find('button');
+await button.trigger('click');
+await button.trigger('click');
+```
+
+<br>
+
+다음은 [클린 아키텍처](http://www.yes24.com/Product/Goods/77283734)에서 발췌한 단락인데요, 테스트 코드가 애플리케이션의 구현 사항과 결합되어있으면 리팩토링을 해나감에 따라 테스트 코드가 언제든 깨질 수 있다는 내용입니다.
+
+> 상용 클래스나 메서드 중 하나라도 변경되면 딸려 있는 다수의 테스트가 변경되어야 한다. 결과적으로 테스트는 깨지기 쉬워지고, 이로 인해 상용 코드를 뻣뻣하게 만든다.
+> 테스트 API의 역할은 애플리케이션의 구조를 테스트로부터 숨기는 데 있다. 이렇게 만들면 상용 코드를 리팩터링하거나 진화시키더라도 테스트에는 전혀 영향을 주지 않는다. 또한 테스트를 리팩터링하거나 진화시킬 때도 상용 코드에는 전혀 영향을 주지 않는다.
 
 <br>
 
@@ -159,9 +190,9 @@ DOM 업데이트가 발생하는 테스트를 비동기로 실행해야하는 �
 
 위 섹션에서 사용한 예제를 다시 보면, 전형적인 AAA(Arrange, Act, Assert) 패턴의 테스트 코드 입니다.
 
-- Arrange: 시나리오를 세업하는 단계, Vuex 스토어를 생성하거나
-- Act: 사용자의 행동을 시뮬레이션
-- Assert: 컴포넌트가 Act 후 어떤 상태여야 하는지에 대한 명세
+- Arrange: 시나리오를 셋업하는 단계, Vuex 스토어를 생성하는 것도 Arrange에 해당
+- Act: 사용자 행동을 시뮬레이션, 값을 입력하거나 버튼을 클릭하는 행동을 Mimic
+- Assert: 컴포넌트가 Act 후 어떤 상태여야 하는지에 대한 명세를 단언
 
 <br>
 
@@ -185,7 +216,7 @@ test("HelloWorld - Form Submit", async () => {
 
 <br>
 
-## 5. DOM 엘리먼트의 렌더링 Assert 하기: `find().exists()`로 존재 Asset, `get().isVisible()`로 보임 Asset
+## 5. DOM 엘리먼트 렌더링 테스트: `find().exists()`, `get().isVisible()`
 
 ### 5-1. `find().exists()`로 존재 Asset
 
@@ -204,7 +235,7 @@ test("HelloWorld - DOM Exists", () => {
 
 <br>
 
-`get()` 메소드를 사용하여 엘리먼트의 존재여부를 검증할 수도 있지만 VTU에서 권장하지 않습니다.
+`get()` 메소드를 사용하여 엘리먼트의 존재여부를 검증할 수도 있지만 VTU에서 권장하지 않습니다. `get()` 메소드는 어떤 DOM 엘리먼트가 정적으로 렌더링되기 때문에 항상 존재한다고 믿을 때 사용합니다.
 
 > `get()` works on the assumption that elements do exist and throws an error when they do not. It is not recommended to use it for asserting existence. - [Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/conditional-rendering.html#using-find-and-exists)
 
@@ -212,7 +243,7 @@ test("HelloWorld - DOM Exists", () => {
 
 ### 5-2. `get().isVisible()`로 보임 Asset
 
-DOM 엘리먼트가 실제로 보이는 상태인지 검사하려면 `get()`과 `isVisible()` 메소드를 사용합니다. `isVisible()`로 보이는지 여부를 검사할 때는 이미 DOM 엘리먼트가 존재한다고 가정하기 때문에 `find()`가 아닌 `get()`을 사용합니다.
+DOM 엘리먼트가 존재는 하나, 실제로 Visible 상태인지 검사하려면 `get()`과 [`isVisible()`](https://next.vue-test-utils.vuejs.org/api/#isvisible) 메소드를 사용합니다. `isVisible()`로 보이는지 여부를 검사할 때는 이미 DOM 엘리먼트가 존재한다고 가정하기 때문에 `find()`가 아닌 `get()`을 사용합니다.
 
 ```typescript
 // helloworld.spec.ts
@@ -228,16 +259,18 @@ test("HelloWorld - DOM is Visible", () => {
 
 <br>
 
-## 6. Mount 옵션으로 Vue 컴포넌트에 옵션 부여하기
+## 6. Mount 옵션, `setData()`, `setProps()`로 Vue 컴포넌트에 데이터 전달하기
 
-`mount()` 메소드의 두 번째 인자로 [Mount 옵션](https://next.vue-test-utils.vuejs.org/api/#mount)을 줄 수 있습니다. 그 중 [`data` 옵션](https://next.vue-test-utils.vuejs.org/guide/essentials/passing-data.html)은 Vue 컴포넌트에 `data` 옵션을 부여하고 기존의 옵션들과 Merge되며, 중복되는 옵션들을 Overwrite 합니다.
+### 6-1. Mount 옵션
+
+`mount()` 메소드의 두 번째 인자로 [Mount 옵션](https://next.vue-test-utils.vuejs.org/api/#mount)을 넘겨서 [Vue 컴포넌트 옵션](https://v3.vuejs.org/guide/instance.html#component-instance-properties)을 통제할 수 있습니다. Mount 옵션은 컴포넌트가 이미 갖고있는 옵션들과 Merge되며, 중복되는 옵션 Key들을 Overwrite 합니다.
 
 ```typescript
 // helloworld.spec.ts
 import { mount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
 
-test("HelloWorld - DOM Exists", () => {
+test("HelloWorld - Dynamic Rendering", () => {
 	const wrapper = mount(HelloWorld, {
 		data() {
 			return {
@@ -252,18 +285,39 @@ test("HelloWorld - DOM Exists", () => {
 
 <br>
 
-위의 예제 테스트 코드에서는 컴포넌트를 Mount하면서 `isAdmin: true` 데이터를 부여했는데요, `isAdmin` 값에 따라 특정 엘리먼트가 동적으로 렌더링되는 경우에 유용합니다. 예를 들어 `<div v-if="isAdmin" data-test="admin"></div>`라는 엘리먼트가 있다면, 위의 테스트를 통과하기 위해 `isAdmin` 값이 [Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)여야 합니다.
+위의 예제 테스트 코드에서는 컴포넌트를 Mount하면서 `data` 옵션을 사용하여 `isAdmin: true` 데이터를 넘겼는데요, `isAdmin` 값에 따라 특정 엘리먼트가 동적으로 렌더링되는 경우 이를 테스트할 때 유용합니다. 예를 들어 `<div v-if="isAdmin" data-test="admin">`라는 엘리먼트가 있다고 가정해보겠습니다. 위의 테스트를 통과하려면 `isAdmin` 값이 `true`이므로 해당 엘리먼트가 렌더링되어야겠죠. 반대로 `isAdmin`이 `false`일 때는 렌더링되면 안됩니다!
 
 <br>
 
-## 7. 테스트 코드에서의 이벤트 핸들링: `emitted()`, Form Submit 테스트
+### 6-2. Prop 업데이트하기: `setProps()`
+
+`prop` 데이터도 마찬가지로 Mount 옵션으로 넘기면 됩니다. 하지만 Mount 옵션은 `data`와 `prop`의 초기값을 세팅할 때만 유용합니다. 만약 컴포넌트가 Mount 된 후 변경된 데이터를 나중에 넘겨야할 때는 [`setProps()`](https://next.vue-test-utils.vuejs.org/api/#setprops) 메소드를 사용합니다. 어떤 컴포넌트가 `show`라는 `prop`을 갖고있으며, `show`의 초기값이 `true`라고 가정해보겠습니다. 그리고 `show === true` 일 때만 `Hello World`라는 텍스트를 보여준다고 해볼게요. 이 명세에 대한 테스트 코드는 다음과 같이 작성할 수 있습니다. 필요한 경우 같은 방식으로 [`setData()`](https://next.vue-test-utils.vuejs.org/api/#setdata)를 사용하면 됩니다.
+
+```typescript
+// helloworld.spec.ts
+import { mount } from "@vue/test-utils";
+import HelloWorld from "@/components/HelloWorld.vue";
+
+test("HelloWorld - Dynamic Rendering", async () => {
+	const wrapper = mount(HelloWorld);
+	expect(wrapper.html()).toContain("Hello World");
+
+	await wrapper.setProps({ show: false });
+
+	expect(wrapper.html()).not.toContain("Hello World");
+});
+```
+
+<br>
+
+## 7. 이벤트 핸들링 테스트: `emitted()`, Form Submit 테스트
 
 ### 7-1. `emitted()`
 
 `emitted()` 메소드를 인자 없이 호출하면, 발생한 모든 이벤트의 이름을 Key로 하는 `Record<string, unknown[]>` 객체를 반환합니다. 인자로 이벤트 이름을 주면, 해당 이벤트가 발생한 횟수만큼을 길이로 하는 배열을 반환합니다. 다음은 컴포넌트 내의 버튼을 클릭하면 `increment` 이벤트가 Emit 된다고 가정하는 예제입니다. 아래와 같이 버튼을 두 번 클릭시키면, `increment` 이벤트가 두 번 Emit 되리라고 Assert 할 수 있겠죠. 그럼 `wrapper.emitted("increment")`는 두 번의 Emit된 데이터를 각 요소로 하는 배열을 반환합니다.
 
 ```typescript
-// helloworld.spec.ts
+// incrementor.spec.ts
 import { mount } from "@vue/test-utils";
 import Incrementor from "@/components/Incrementor.vue";
 
@@ -281,7 +335,7 @@ test("Incrementor - Event Emitted", () => {
 
 <br>
 
-만약 `increment` 이벤트가 Emit될 때 실제로 어떤 값이 Increment 되는지, 그 값이 이벤트와 함께 Emit 되는지 테스트하려면 다음과 같이 테스트 코드를 추가할 수 있습니다.
+만약 `increment` 이벤트가 Emit될 때 실제로 어떤 값이 Increment 되는지, 그 값이 이벤트와 함께 Emit 되는지 테스트하려면 다음과 같이 테스트 코드를 추가할 수 있습니다. 각 이벤트와 함께 Emit된 값이 배열에 담긴 것에 유의하세요. 이 예제에서 `wrapper.emitted("increment")`는 `[[1], [2]]`를 반환합니다.
 
 ```typescript
 expect(incrementEvent[0]).toEqual([1]);
@@ -290,11 +344,7 @@ expect(incrementEvent[1]).toEqual([2]);
 
 <br>
 
-각 이벤트와 함께 Emit된 값이 배열에 담긴 것에 유의하세요. 이 예제에서 `wrapper.emitted("increment")`는 `[[1], [2]]`를 반환합니다.
-
-<br>
-
-이제 위의 명세 테스트를 통과하는 기능은 다음과 같이 작성할 수 있겠습니다. [Composition API]()를 사용한다면, `this.$emit()`이 아닌 `context.emit()`을 호출할텐데요, 두 경우 모두 VTU의 `emitted()` 메소드를 사용하여 테스트할 수 있습니다.
+이제 위의 테스트를 통과하는 기능은 다음과 같이 작성할 수 있겠습니다. [Composition API]()를 사용한다면, `this.$emit()`이 아닌 `context.emit()`을 호출할텐데요, 두 경우 모두 VTU의 `emitted()` 메소드를 사용하여 테스트할 수 있습니다.
 
 ```vue
 <!-- Incrementor.vue-->
@@ -326,11 +376,37 @@ export default defineComponent({
 
 ### 7-2. Form Submit 테스트
 
-Form Submit 테스트를 간단하게 하는 방법은 `submit` 대신 `click` 이벤트를 Trigge 하는 것입니다. [HTML 명세](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm)에 따르면, `document` 객체에 연결되지 않은 Form은 Submit될 수 없기 때문입니다. `submit` 이벤트를 사용하여 테스트하고 싶다면 [`attachTo`](https://next.vue-test-utils.vuejs.org/api/#attachto)를 사용해서 `document` 객체와 Form 엘리먼트를 연결해야합니다.
+Form Submit 테스트를 간단하게 하는 방법은 `submit` 대신 `click` 이벤트를 Trigger 하는 것입니다. [HTML 명세](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm)에 따르면, `document` 객체에 연결되지 않은 Form은 Submit될 수 없기 때문입니다. `submit` 이벤트를 사용하여 테스트하고 싶다면 [`attachTo`](https://next.vue-test-utils.vuejs.org/api/#attachto)를 사용해서 `document` 객체와 Form 엘리먼트를 연결해야합니다.
+
+```typescript
+// form.spec.ts
+import { mount } from "@vue/test-utils";
+import Form from "@/components/Form.vue";
+
+document.body.innerHTML = `<div id="app"></div>`;
+
+test("Form - Submit", async () => {
+	// Arrange
+	const wrapper = mount(Form, {
+		attachTo: document.getElementById("app")
+	});
+	const email = "abc@gmail.com";
+
+	// Act
+	await wrapper.find('input[type=email]').setValue(email);
+	await wrapper.find("form").trigger("submit");
+
+	// Assert
+	const submitEvent = wrapper.emitted("submit");
+	expect(submitEvent[0][0]).toStrictEqual({
+		email
+	});
+});
+```
 
 <br>
 
-이 외 Form 엘리먼트에 대한 이벤트 핸들링 테스트를 더 알아보시려면 [Vue Test Utils 공식문서의 Interacting with Vue Component inputs](https://next.vue-test-utils.vuejs.org/guide/essentials/forms.html#interacting-with-vue-component-inputs) 섹션을 참고하세요.
+Submit 버튼 외에 Form 엘리먼트에 대한 이벤트 핸들링 테스트를 더 알아보시려면 [Vue Test Utils 공식문서의 Interacting with Vue Component inputs](https://next.vue-test-utils.vuejs.org/guide/essentials/forms.html#interacting-with-vue-component-inputs) 섹션을 참고하세요.
 
 <br>
 
@@ -340,5 +416,9 @@ Form Submit 테스트를 간단하게 하는 방법은 `submit` 대신 `click` �
 
 - [A Crash Course | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/a-crash-course.html)
 - [Conditional Rendering | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/conditional-rendering.html)
+- [Testing Emitted Events | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/event-handling.html)
+- [Testing Forms | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/forms.html)
+- [Passing Data to Components | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/passing-data.html)
+- [Write components that are easy to test |  Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/easy-to-test.html)
 - [Test your VueJS + TypeScript application - Vincent Francolin](https://medium.com/codex/test-your-vuejs-typescript-application-b7dc9133e6f)
 - [Test your VueJS + TypeScript application; part 2 - Vincent Francolin](https://vince-f.medium.com/test-your-vuejs-typescript-application-part-2-acaa5d8ba327)
