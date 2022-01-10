@@ -7,7 +7,7 @@
 3. Vue의 DOM 업데이트를 비동기로 테스트하기
 4. AAA 패턴 (Arrange, Act, Assert)
 5. DOM 엘리먼트 렌더링 테스트: `find().exists()`, `get().isVisible()`
-6. Mount 옵션, `setData()`, `setProps()`로 Vue 컴포넌트에 데이터 전달하기
+6. 테스트 코드에서 Vue 컴포넌트에 데이터 전달하기: Data, Props, Slots
 7. 이벤트 핸들링 테스트: `emitted()`, Form Submit 테스트
 
 <br>
@@ -271,7 +271,7 @@ test("HelloWorld - DOM is Visible", () => {
 
 <br>
 
-## 6. Mount 옵션, `setData()`, `setProps()`로 Vue 컴포넌트에 데이터 전달하기
+## 6. 테스트 코드에서 Vue 컴포넌트에 데이터 전달하기: Data, Props, Slots
 
 ### 6-1. Data 전달하기
 
@@ -479,5 +479,6 @@ Submit 버튼 외에 Form 엘리먼트에 대한 이벤트 핸들링 테스트�
 - [Testing Forms | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/forms.html)
 - [Passing Data to Components | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/passing-data.html)
 - [Write components that are easy to test |  Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/essentials/easy-to-test.html)
+- [Slots | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/advanced/slots.html)
 - [Test your VueJS + TypeScript application - Vincent Francolin](https://medium.com/codex/test-your-vuejs-typescript-application-b7dc9133e6f)
 - [Test your VueJS + TypeScript application; part 2 - Vincent Francolin](https://vince-f.medium.com/test-your-vuejs-typescript-application-part-2-acaa5d8ba327)
