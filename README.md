@@ -35,7 +35,7 @@
 
 - [프론트엔드 테스트하기 1: 프론트엔드에서의 테스트, Vue + TypeScript + Jest 단위 테스트 셋업](./docs/testing/vue+jest1.md)
 - [프론트엔드 테스트하기 2: Vue 컴포넌트 테스트 Basics, 구현 세부사항을 테스트하지 말 것](./docs/testing/vue+jest2.md)
-- [프론트엔드 테스트하기 3: HTTP 통신 테스트](./docs/testing/vue+jest3.md)
+- [프론트엔드 테스트하기 3: HTTP 통신 테스트 (feat. Axios, Vuex)](./docs/testing/vue+jest3.md)
 
 <br>
 
