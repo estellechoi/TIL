@@ -186,6 +186,18 @@ DOM 업데이트가 발생하는 테스트를 비동기로 실행해야하는 �
 
 <br>
 
+Vue에서는 다음 이벤트 루프 틱이 실행되어 DOM이 업데이트될 때까지 기다리는 [`nextTick()`](https://v3.vuejs.org/api/global-api.html#nexttick) 메소드를 제공하는데요, 그래서 위의 테스트는 아래와 같이 작성할 수도 있습니다. VTU에서 DOM을 업데이트하는 `trigger()`, `setValue()` 같은 메소드들이 `nextTick`을 반환하기 때문에 위의 테스트 코드는 축약형을 사용한 것이죠. [VTU 공식문서](https://next.vue-test-utils.vuejs.org/guide/advanced/async-suspense.html#a-simple-example-updating-with-trigger)를 참고하시면 좋을 것 같습니다!
+
+```typescript
+import { nextTick } from "vue"
+// ..
+
+wrapper.get("[data-test='input-name']").setValue("Yujin Choi");
+await nextTick();
+```
+
+<br>
+
 ## 4. AAA 패턴 (Arrange, Act, Assert)
 
 위 섹션에서 사용한 예제를 다시 보면, 전형적인 AAA(Arrange, Act, Assert) 패턴의 테스트 코드 입니다.
@@ -261,9 +273,9 @@ test("HelloWorld - DOM is Visible", () => {
 
 ## 6. Mount 옵션, `setData()`, `setProps()`로 Vue 컴포넌트에 데이터 전달하기
 
-### 6-1. Mount 옵션
+### 6-1. Data 전달하기
 
-`mount()` 메소드의 두 번째 인자로 [Mount 옵션](https://next.vue-test-utils.vuejs.org/api/#mount)을 넘겨서 [Vue 컴포넌트 옵션](https://v3.vuejs.org/guide/instance.html#component-instance-properties)을 통제할 수 있습니다. Mount 옵션은 컴포넌트가 이미 갖고있는 옵션들과 Merge되며, 중복되는 옵션 Key들을 Overwrite 합니다.
+`mount()` 메소드의 두 번째 인자로 [Mount 옵션](https://next.vue-test-utils.vuejs.org/api/#mount)을 넘겨서 테스트하려는 Vue 컴포넌트에 데이터를 전달할 수 있습니다. `data`, `props` 같은 [Vue 컴포넌트 옵션](https://v3.vuejs.org/guide/instance.html#component-instance-properties)을 통제할 수 있죠. Mount 옵션은 컴포넌트가 이미 갖고있는 옵션들과 Merge되며, 중복되는 옵션 Key들을 Overwrite 합니다. 아래의 예제 테스트 코드에서는 컴포넌트를 Mount하면서 `data` 옵션을 사용하여 `isAdmin: true` 데이터를 넘겼는데요, `isAdmin` 값에 따라 특정 엘리먼트가 동적으로 렌더링되는 경우 이를 테스트할 때 유용합니다. 예를 들어 `<div v-if="isAdmin" data-test="admin">`라는 엘리먼트가 있다고 가정해보겠습니다. 위의 테스트를 통과하려면 `isAdmin` 값이 `true`이므로 해당 엘리먼트가 렌더링되어야겠죠. 반대로 `isAdmin`이 `false`일 때는 렌더링되면 안됩니다!
 
 ```typescript
 // helloworld.spec.ts
@@ -285,13 +297,13 @@ test("HelloWorld - Dynamic Rendering", () => {
 
 <br>
 
-위의 예제 테스트 코드에서는 컴포넌트를 Mount하면서 `data` 옵션을 사용하여 `isAdmin: true` 데이터를 넘겼는데요, `isAdmin` 값에 따라 특정 엘리먼트가 동적으로 렌더링되는 경우 이를 테스트할 때 유용합니다. 예를 들어 `<div v-if="isAdmin" data-test="admin">`라는 엘리먼트가 있다고 가정해보겠습니다. 위의 테스트를 통과하려면 `isAdmin` 값이 `true`이므로 해당 엘리먼트가 렌더링되어야겠죠. 반대로 `isAdmin`이 `false`일 때는 렌더링되면 안됩니다!
+하지만 Mount 옵션은 `data`와 `props`의 초기값을 세팅할 때만 유용합니다. 만약 컴포넌트가 Mount 된 후 변경된 데이터를 나중에 넘겨야할 때는 [`setData()`](https://next.vue-test-utils.vuejs.org/api/#setdata) 메소드를 사용합니다.
 
 <br>
 
-### 6-2. Prop 업데이트하기: `setProps()`
+### 6-2. Props 전달하기
 
-`prop` 데이터도 마찬가지로 Mount 옵션으로 넘기면 됩니다. 하지만 Mount 옵션은 `data`와 `prop`의 초기값을 세팅할 때만 유용합니다. 만약 컴포넌트가 Mount 된 후 변경된 데이터를 나중에 넘겨야할 때는 [`setProps()`](https://next.vue-test-utils.vuejs.org/api/#setprops) 메소드를 사용합니다. 어떤 컴포넌트가 `show`라는 `prop`을 갖고있으며, `show`의 초기값이 `true`라고 가정해보겠습니다. 그리고 `show === true` 일 때만 `Hello World`라는 텍스트를 보여준다고 해볼게요. 이 명세에 대한 테스트 코드는 다음과 같이 작성할 수 있습니다. 필요한 경우 같은 방식으로 [`setData()`](https://next.vue-test-utils.vuejs.org/api/#setdata)를 사용하면 됩니다.
+`props` 데이터도 마찬가지로 Mount 옵션으로 넘기면 됩니다. Mount 이후 변경된 Prop은 [`setProps()`](https://next.vue-test-utils.vuejs.org/api/#setprops) 메소드를 사용하여 전달합니다. 어떤 컴포넌트가 `show`라는 `props`을 갖고있으며, `show`의 초기값이 `true`라고 가정해보겠습니다. 그리고 `show === true` 일 때만 `Hello World`라는 텍스트를 보여준다고 해볼게요. 이 명세에 대한 테스트 코드는 다음과 같이 작성할 수 있습니다. 필요한 경우 같은 방식으로 를 사용하면 됩니다.
 
 ```typescript
 // helloworld.spec.ts
@@ -305,6 +317,53 @@ test("HelloWorld - Dynamic Rendering", async () => {
 	await wrapper.setProps({ show: false });
 
 	expect(wrapper.html()).not.toContain("Hello World");
+});
+```
+
+<br>
+
+### 6-3. Slot 사용하기
+
+Vue에서는 [Slot](https://v3.vuejs.org/guide/component-slots.html)을 사용하여 컴포넌트의 특정 부분에 HTML을 전달하는데요, 컴포넌트를 테스트할 때는 VTU의 Mount 옵션 중 [`slots`](https://next.vue-test-utils.vuejs.org/guide/advanced/slots.html#slots) 옵션을 사용하면 됩니다.
+
+```typescript
+// helloworld.spec.ts
+import { mount } from "@vue/test-utils";
+import HelloWorld from "@/components/HelloWorld.vue";
+
+test("HelloWorld - Slot", () => {
+	const wrapper = mount(HelloWorld, {
+		slots: {
+			default: "Main Content"
+		}
+	});
+
+	expect(wrapper.html()).toContain("Main Content");
+});
+```
+
+<br>
+
+[Named Slot](https://v3.vuejs.org/guide/component-slots.html#named-slots)을 가진 컴포넌트는 다음과 같이 테스트하고요, 값으로는 Vue의 렌더링 함수인 `h`를 사용하거나 Vue의 SFC를 그대로 지정할 수도 있습니다.
+
+```typescript
+// helloworld.spec.ts
+import { mount } from "@vue/test-utils";
+import { h } from "vue";
+import HelloWorld from "@/components/HelloWorld.vue";
+import Header from "@/views/Header.vue";
+
+test("HelloWorld - Named Slots", () => {
+	const wrapper = mount(HelloWorld, {
+		slots: {
+			header: Header,
+			main: h("div", "Main Content"),
+			sidebar: { template: "<div>Sidebar</div>" },
+			footer: "<div>Footer</div>",
+		}
+	});
+
+	expect(wrapper.html()).toContain("Main Content");
 });
 ```
 
