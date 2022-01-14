@@ -5,7 +5,7 @@
 <br>
 
 1. Docker: 컨테이너와 이미지, Docker 설치하기
-2. Docker 이미지 만들기: Dockerfile, 이미지 레이어 캐싱
+2. Docker 이미지 만들기: Dockerfile, 이미지 레이어 캐싱, `.dockerignore`
 3. 이미지 빌드하기: `docker build`
 
 <br>
@@ -53,7 +53,7 @@ docker-compose version
 
 <br>
 
-## 2. Docker 이미지 만들기: Dockerfile, 이미지 레이어 캐싱
+## 2. Docker 이미지 만들기: Dockerfile, 이미지 레이어 캐싱, `.dockerignore`
 
 ### 2-1. Dockerfile
 
@@ -105,9 +105,22 @@ CMD [ "serve", "dist" ]
 
 <br>
 
+### 2-3. `.dockerignore`
+
+[`.dockerignore`](https://docs.docker.com/engine/reference/builder/#dockerignore-file) 파일은 `docker` 커맨드가 실행될 때 무시되어야하는 경로를 명시하는 파일입니다. 이미지 빌드시 Dockerfile의 `COPY` 키워드를 통해 클라이언트의 컨텍스트가 Docker의 벡엔드와도 같은 [Docker Daemon](https://docs.docker.com/get-started/overview/#docker-architecture)으로 옮겨지는데요, 이때 옮길 필요가 없는 파일들을 명시하기 위해 사용합니다. 다음은 Vue 프로젝트에서 사용한 `.dockerignore` 파일입니다.
+
+```zsh
+# .dockerignore
+node_modules
+dist
+coverage
+```
+
+<br>
+
 ## 3. 이미지 빌드하기: `docker build`
 
-이미지를 빌드하는 커맨드는 `docker build` 입니다. 이 커맨드는 컨텍스트(지정한 경로)와 실행 환경을 이미지로 추상화하여 Docker의 백엔드와도 같은 [Docker Daemon](https://docs.docker.com/get-started/overview/#docker-architecture)으로 보냅니다.
+이미지를 빌드하는 커맨드는 `docker build` 입니다. 이 커맨드는 클라이언트의 컨텍스트(지정한 경로)와 실행 환경을 이미지로 추상화하여 Docker Daemon으로 보냅니다.
 
 <br>
 
