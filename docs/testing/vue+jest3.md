@@ -1,4 +1,4 @@
-# 프론트엔드 테스트하기 3: HTTP 통신 테스트 (feat. Axios, Vuex)
+# 프론트엔드 테스트하기 3: HTTP 통신 테스트하기, Store를 사용하는 컴포넌트 (feat. Axios, Vuex)
 
 > This doc is WIP ..
 
@@ -6,7 +6,7 @@
 
 1. Axios Mocking 하기: `jest.mock()`, Mock 데이터 변수명 `mock-` Prefix
 2. Promise Resolve 하기: `flushPromises()`
-3. Vuex Action 테스트하기
+3. Store를 사용하는 컴포넌트 테스트하기: 테스트 코드에서 Vuex 사용하기, Mock Store
 
 <br>
 
@@ -74,15 +74,19 @@ test("UserList - Fetch on Button Click", async () => {
 
 <br>
 
-## 3. Vuex Action 테스트하기
+## 3. Vuex를 사용하는 컴포넌트 테스트하기: 테스트 코드에서 Vuex 사용하기, Mock Store
 
-### 3-1. 실제 Vuex Store 사용하기
+### 3-1. 테스트 코드에서 Vuex 사용하기
 
-중요! [Vuex](https://next.vuex.vuejs.org/)는 구현 세부사항이기 때문에 Vuex 자체를 테스트하지는 않습니다.
+사용자가 어떤 행동을 했을 때 [Vuex](https://next.vuex.vuejs.org/)의 State 변경을 통해 UI 업데이트가 일어난다면 [테스트 코드에서도 Vuex를 사용](https://next.vue-test-utils.vuejs.org/guide/advanced/vuex.html#testing-with-a-real-vuex-store)할 수 있습니다. Vuex API를 사용해서 Store를 만들고, `mount()` 메소드를 호출할 때 Mount 옵션으로 다음과 같이 `global.plugins` 속성에 Store를 주입하면 됩니다. 중요! Vuex는 구현 세부사항이기 때문에 Vuex 자체를 테스트하지는 않습니다.
 
 ```typescript
+// incrementor.spec.ts
+import { mount } from "@vue/test-utils";
 import { createStore } from "vuex";
+import Incrementor from "@/components/Incrementor.vue";
 
+// Store 생성
 const store = createStore({
   state() {
     return {
@@ -95,9 +99,63 @@ const store = createStore({
     }
   }
 });
+
+test("Incrementor - Increment on Button Click", async () => {
+	const wrapper = mount(Incrementor, {
+    global: {
+      plugins: [store]
+    }
+  });
+
+	await wrapper.get("button").trigger("click");
+
+  // Vuex Mutions는 동기 방식으로 작동하므로 `await flushPromises()` 필요 없습니다
+  expect(wrapper.html()).toContain("Count: 1");
+});
 ```
 
 <br>
+
+Vuex를 사용한 테스트에 대한 더 자세한 설명과 예제는 [VTU 공식문서](https://next.vue-test-utils.vuejs.org/guide/advanced/vuex.html)에서 확인하세요.
+
+<br>
+
+### 3-2. Mock Store
+
+Vuex를 사용하지 않고 Mock Store를 사용하는 방법도 있는데요, 컴포넌트와 Store를 서로 다른 유닛으로 정의하고 서로 독립적으로 테스트하고싶을 때 유용합니다. 테스트하려는 컴포넌트에서 사용하는 Store의 일부만 Mock Store로 선언하고요, `global.mocks` 속성에 추가합니다.
+
+```typescript
+// incrementor.spec.ts
+import { mount } from '@vue/test-utils'
+import Incrementor from '@/components/Incrementor.vue'
+
+test('vuex using a mock store', async () => {
+  const $store = {
+    state: {
+      count: 0
+    },
+    commit: jest.fn()
+  }
+
+  const wrapper = mount(Incrementor, {
+    global: {
+      mocks: {
+        $store
+      }
+    }
+  })
+
+  expect(wrapper.html()).toContain('Count: 0')
+
+  await wrapper.find('button').trigger('click')
+
+  // Store Commit이 호출되었는지 체크합니다
+  expect($store.commit).toHaveBeenCalled()
+})
+```
+
+<br>
+
 
 ---
 
@@ -106,3 +164,5 @@ const store = createStore({
 - [Asynchronous Behavior | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/advanced/async-suspense.html)
 - [Making HTTP requests | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/advanced/http-requests.html)
 - [Testing Vuex | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/advanced/vuex.html)
+- [Testing Vue Router | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/advanced/vue-router.html)
+- [Testing Teleport | Vue Test Utils for Vue 3](https://next.vue-test-utils.vuejs.org/guide/advanced/teleport.html)
