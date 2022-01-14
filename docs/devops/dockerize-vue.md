@@ -99,7 +99,7 @@ CMD [ "serve", "dist" ]
 
 ### 2-2. 이미지 레이어 캐싱
 
-예제 Dockerfile을 보면, 패키지 설치를 먼저 진행한 후 나머지 파일들을 이후에 옮기도록 작성된 것을 확인할 수 있습니다. `RUN yarn install` → `COPY . .` 이것은 Docker에서 중요한 [이미지 레이어 캐싱](https://docs.docker.com/get-started/09_image_best/#layer-caching) 개념을 활용한 것입니다. Docker의 이미지는 여러 겹의 읽기전용 레이어로 구성되는데요, 파일이 추가되거나 수정되면 이전에 생성된 레이어는 그대로 사용하고 해당 파일이 포함된 레이어부터 변경되는 방식을 사용하여 빌드 시간을 절약합니다. Dockerfile에 작성한 커맨드들의 결과물이 바로 이미지를 구성하는 각각의 레이어가 됩니다. 이때 주의할 점은, 어떤 레이어에 변경이 생기면 다음에 만들어지는 모든 레이어는 재활용되지 않고 새로 생성된다는 것입니다.
+예제 Dockerfile을 보면, 패키지 설치를 먼저 진행한 후 나머지 파일들을 이후에 옮기도록 작성된 것을 확인할 수 있습니다. `RUN yarn install` → `COPY . .` 이것은 Docker에서 중요한 [이미지 레이어 캐싱](https://docs.docker.com/get-started/09_image_best/#layer-caching) 개념을 활용한 것입니다. Docker의 이미지는 컨테이너를 구성하는데 필요한 읽기전용 지시서로, 여러 겹의 레이어로 구성됩니다. 파일이 추가되거나 수정되면 이전에 생성된 레이어는 그대로 두고, 수정된 파일이 포함된 레이어부터 변경되는 방식을 사용하여 빌드 시간을 절약합니다. Dockerfile에 작성한 커맨드들의 결과물이 바로 이미지를 구성하는 각각의 레이어가 됩니다. 이때 주의할 점은, 어떤 레이어에 변경이 생기면 다음에 만들어지는 모든 레이어는 재활용되지 않고 새로 생성된다는 것입니다.
 
 > Once a layer changes, all downstream layers have to be recreated as well - Docker Docs
 
@@ -107,15 +107,19 @@ CMD [ "serve", "dist" ]
 
 ## 3. 이미지 빌드하기: `docker build`
 
-이제 작성한 Dockerfile을 사용하여 이미지를 빌드하기 위해 `docker build` 커맨드를 사용합니다. 이 커맨드는 컨텍스트(지정한 경로)와 실행 환경을 이미지로 추상화하여 Docker의 백엔드와도 같은 [Daemon](https://docs.docker.com/get-started/overview/#docker-architecture)으로 보내는 역할을 합니다.
-
-```zsh
-docker build -f Dockerfile.dev -t yujinchoi/dev .
-```
+이미지를 빌드하는 커맨드는 `docker build` 입니다. 이 커맨드는 컨텍스트(지정한 경로)와 실행 환경을 이미지로 추상화하여 Docker의 백엔드와도 같은 [Docker Daemon](https://docs.docker.com/get-started/overview/#docker-architecture)으로 보냅니다.
 
 <br>
 
 <img src="./../img/docker-daemon.svg" />
+
+<br>
+
+위에서 작성한 Dockerfile을 사용하여 개발 환경 컨테이너를 구성하기 위한 이미지를 빌드하려면 다음과 같이 커맨드를 실행하면 됩니다.
+
+```zsh
+docker build -f Dockerfile.dev -t yujinchoi/dev .
+```
 
 <br>
 
@@ -128,8 +132,6 @@ docker build -f Dockerfile.dev -t yujinchoi/dev .
 #### `-t`
 
 `-t` 옵션은 태그(Tag)를 의미합니다. Docker에서 이미지들은 URL을 사용하여 식별됩니다. 그래서 위와 같이 `yujinchoi/dev`와 같이 태그를 붙이면 되고요, 이미지가 빌드되면 태그에 자동으로 버전 번호가 따라붙습니다. 위와 같이 커맨드를 실행하면 `Dockerfile.dev` 파일에 따라 이미지를 빌드하고, 이미지 태그는 `yujinchoi/dev`로 하며, 현재경로(`.`)에 이미지를 저장한다는 의미입니다. 자세한 내용은 [Docker 공식문서](https://docs.docker.com/engine/reference/builder/#usage)를 참고하세요.
-
-<br>
 
 <br>
 
