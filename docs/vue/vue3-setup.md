@@ -4,7 +4,7 @@
 
 1. `@vue/cli` 버전 확인 & 업데이트
 2. `@vue/cli`로 Vue3 프로젝트 생성하기
-3. TypeScript에게 `.vue` 확장자를 가진 모듈의 Type 알려주기: `shims-vue.d.ts`
+3. TypeScript에게 모듈 타입 정보 알려주기: `shims-vue.d.ts`
 
 <br>
 
@@ -238,9 +238,9 @@ cd project-name
 
 <br>
 
-## 3. TypeScript에게 `.vue` 확장자를 가진 모듈의 Type 알려주기: `shims-vue.d.ts`
+## 3. TypeScript에게 모듈 타입 정보 알려주기: `shims-vue.d.ts`
 
-`src/shims-vue.d.ts` 파일은 TypeScript가 `.vue` 확장자를 가진 모듈을 어떤 Type으로 해석해야하는지 명시하는 용도입니다. `.ts` 파일 내에서 `.vue` 확장자의 파일을 임포트하려는 경우, TypeScript는 기본적으로 이 모듈에 대한 Type을 알지 못하기 때문에 `Vue` Type으로 해석하면 된다고 알려주는 식이죠.
+`src/shims-vue.d.ts` 파일은 TypeScript가 `.vue` 확장자를 가진 모듈을 어떤 Type으로 해석해야하는지 명시하는 용도입니다. `.ts` 파일 내에서 `.vue` 확장자의 [SFC](https://v3.vuejs.org/guide/single-file-component.html)를 Import하려는 경우, TypeScript는 기본적으로 이 모듈에 대한 타입을 알지 못하기 때문에 `DefineComponent` 타입으로 해석하면 된다고 알려주는 식이죠.
 
 ```typescript
 /* eslint-disable */
@@ -259,6 +259,7 @@ declare module "*.vue" {
 
 - [Installation | Vue.js](https://v3.vuejs.org/guide/installation.html#release-notes)
 - [Vue3 Migration Guide | Vue.js](https://v3.vuejs.org/guide/migration/introduction.html)
+- [TypeScript Support | Vue.js](https://v3.vuejs.org/guide/typescript-support.html)
 - [Intro to the TSConfig Reference | TypeScript](https://www.typescriptlang.org/tsconfig)
 - [TypeScript: Ambient modules for Webpack loaders | fettblog.eu](https://fettblog.eu/typescript-modules-for-webpack/)
 - [What does the shims-tsx.d.ts file do in a Vue-Typescript project? | NEWBEDEV](https://newbedev.com/what-does-the-shims-tsx-d-ts-file-do-in-a-vue-typescript-project)
