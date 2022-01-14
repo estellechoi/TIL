@@ -50,7 +50,7 @@
 
 ### Docker
 
-- [Dockerizing an App Built with JavaScript](./docs/devops/docker.md) \*
+- [도커라이징](./docs/devops/dockerize-vue.md)
 
 <br>
 

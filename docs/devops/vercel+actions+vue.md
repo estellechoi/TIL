@@ -59,6 +59,10 @@ Vercel과 Netlify는 [Jamstack](https://www.cloudflare.com/ko-kr/learning/perfor
 
 <br>
 
+[Vercel은 Docker를 지원하지 않으니](https://vercel.com/support/articles/does-vercel-support-docker-deployments), 이 점도 참고해주세요!
+
+<br>
+
 ## 3. Vercel, 일단 배포하기
 
 Vercel로 배포하는 것 자체는 매우 간단합니다. [Vercel 프로젝트 만들기](https://vercel.com/new) 페이지에서 배포하려는 프로젝트 코드가 있는 GitHub 레포지토리를 Import 한 후, 앱 빌드 스크립트, 패키지 설치 스크립트, 환경변수, Output 디렉토리 등을 입력하고 `Deploy` 버튼을 클릭하면 바로 배포됩니다. 그리고 Import한 GitHub 레포지토리에 [Vercel for GitHub](https://vercel.com/docs/concepts/git/vercel-for-github) 앱이 자동으로 설치되는데요, 이 앱은 레포지토리의 Pull Request가 `merge`되거나 `push`가 발생하면 Vercel에 자동으로 배포하고 댓글을 남기는 일들을 합니다. 이 최초 배포 과정에 대한 설명이 필요하다면 [Deploying React & Vue Applications With Vercel](https://medium.com/swlh/deploying-react-vue-applications-with-vercel-42aa642534d5) 블로그 글이나 [Preparing for automatic deployment on Vercel with GitHub](https://books.google.co.kr/books?id=wED-DwAAQBAJ&pg=PA452&lpg=PA452&dq=vue+vercel&source=bl&ots=YuzntMpcKp&sig=ACfU3U3FFArUTJKV0BmvH3HnDyqfTyEATA&hl=ko&sa=X&ved=2ahUKEwiV4qjPz5T1AhUDMd4KHR29B_wQ6AF6BAgZEAM#v=onepage&q=vue%20vercel&f=false) p.455를 참고하세요.
@@ -137,10 +141,10 @@ vercel --token iZJb2oftmY4ab12HBzyBXMkp
 
 ```json
 {
-	"github": {
-		"enabled": false,
-		"silent": true
-	}
+  "github": {
+    "enabled": false,
+    "silent": true
+  }
 }
 ```
 
