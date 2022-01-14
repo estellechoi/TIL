@@ -65,7 +65,7 @@ touch Dockerfile Dockerfile.dev
 
 <br>
 
-Dockerfile은 Docker의 [Domain Specific 언어(DSL)](https://en.wikipedia.org/wiki/Domain-specific_language)로 작성하면 되는데요, 앱을 실행하기 위해 필요한 런타임 프로그램과 패키지 설치, 환경설정을 실행하는 커맨드들을 `Dockerfile`로 옮긴다고 생각하면 됩니다. 다음은 Docker 이미지를 테슽트해보기 위해 제가 작성했던 예시입니다.
+Dockerfile은 Docker의 [Domain Specific 언어(DSL)](https://en.wikipedia.org/wiki/Domain-specific_language)로 작성하면 되는데요, 앱을 실행하기 위해 필요한 런타임 프로그램과 패키지 설치, 환경설정을 실행하는 커맨드들을 `Dockerfile`로 옮긴다고 생각하면 됩니다. 다음은 Docker 이미지를 테스트해보기 위해 제가 작성했던 예시로, [Vue 공식 문서 - Dockerize Vue.js App](https://kr.vuejs.org/v2/cookbook/dockerize-vuejs-app.html)을 참고했습니다.
 
 ```dockerfile
 FROM node:14
@@ -99,7 +99,7 @@ CMD [ "serve", "dist" ]
 
 ### 2-2. 이미지 레이어 캐싱
 
-예제 Dockerfile을 보면, 패키지 설치를 먼저 진행한 후 나머지 파일들을 이후에 옮기도록 작성된 것을 확인할 수 있습니다. 이것은 Docker에서 중요한 [이미지 레이어 캐싱](https://docs.docker.com/get-started/09_image_best/#layer-caching) 개념을 활용한 것입니다. Docker의 이미지는 여러 겹의 읽기전용 레이어로 구성되는데요, 파일이 추가되거나 수정되면 이전에 생성된 레이어는 그대로 사용하고 해당 파일이 포함된 레이어부터 변경되는 방식을 사용하여 빌드 시간을 절약합니다. Dockerfile에 작성한 커맨드들의 결과물이 바로 이미지를 구성하는 각각의 레이어가 됩니다. 이때 주의할 점은, 어떤 레이어에 변경이 생기면 다음에 만들어지는 모든 레이어는 재활용되지 않고 새로 생성된다는 것입니다.
+예제 Dockerfile을 보면, 패키지 설치를 먼저 진행한 후 나머지 파일들을 이후에 옮기도록 작성된 것을 확인할 수 있습니다. `RUN yarn install` → `COPY . .` 이것은 Docker에서 중요한 [이미지 레이어 캐싱](https://docs.docker.com/get-started/09_image_best/#layer-caching) 개념을 활용한 것입니다. Docker의 이미지는 여러 겹의 읽기전용 레이어로 구성되는데요, 파일이 추가되거나 수정되면 이전에 생성된 레이어는 그대로 사용하고 해당 파일이 포함된 레이어부터 변경되는 방식을 사용하여 빌드 시간을 절약합니다. Dockerfile에 작성한 커맨드들의 결과물이 바로 이미지를 구성하는 각각의 레이어가 됩니다. 이때 주의할 점은, 어떤 레이어에 변경이 생기면 다음에 만들어지는 모든 레이어는 재활용되지 않고 새로 생성된다는 것입니다.
 
 > Once a layer changes, all downstream layers have to be recreated as well - Docker Docs
 
