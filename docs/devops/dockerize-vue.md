@@ -53,7 +53,7 @@ docker-compose version
 
 <br>
 
-## 2. Docker 이미지 만들기: Dockerfile, 이미지 레이어 캐싱, 이미지 빌드: `docker build`
+## 2. Docker 이미지 만들기: Dockerfile, 이미지 레이어 캐싱
 
 ### 2-1. Dockerfile
 
