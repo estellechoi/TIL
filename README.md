@@ -188,11 +188,18 @@
 
 <br>
 
-## 5. Programming Paradigm
+## 5. CS
 
-### FP
+### Programming Paradigm - FP
 
 - [함수형 프로그래밍 & JavaScript FP Cheat Sheet](./docs/cs/fp.md)
+
+<br>
+
+### Algorithm
+
+- [ALT: Algorithms Learned Today](https://github.com/estellechoi/algorithm)
+- [시간복잡도(Time Complexity)](./docs/algorithm/time-complexity.md)
 
 <br>
 
@@ -221,11 +228,6 @@
 
 - [Cross site scripting (XSS)]()
 - [Cross-site request forgery (CSRF)](./docs/security/csrf.md)
-  <br>
-
-### Algorithm
-
-- [시간복잡도(Time Complexity)](./docs/algorithm/time-complexity.md)
 
 <br>
 
