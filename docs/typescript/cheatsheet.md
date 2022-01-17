@@ -22,12 +22,12 @@ const tupl: [string, number] = ["1", 2];
 // Object
 const obj: object = {};
 const person: object = {
-	name: "Yujin",
-	age: 29,
+  name: "Yujin",
+  age: 29,
 };
 const person: { name: string; age: number } = {
-	name: "Yujin",
-	age: 29,
+  name: "Yujin",
+  age: 29,
 };
 
 // Boolean
@@ -44,7 +44,7 @@ const show: boolean = true;
 
 ```typescript
 function sum(a: number, b: number): number {
-	return a + b;
+  return a + b;
 }
 ```
 
@@ -54,7 +54,7 @@ Returning type is inferenced from typed parameters, if not specified.
 
 ```typescript
 function sum(a: number, b: number) {
-	return a + b;
+  return a + b;
 }
 ```
 
@@ -66,7 +66,7 @@ Parameters can be optional.
 
 ```typescript
 function log(a: string, b?: string, c?: string) {
-	// ...
+  // ...
 }
 
 log("hello");
@@ -80,7 +80,7 @@ log("hello", "world", "!");
 
 ```typescript
 function getString(): string {
-	return "hello world.";
+  return "hello world.";
 }
 ```
 
@@ -106,7 +106,7 @@ val = [1, 2];
 
 ```typescript
 function logSomething(str: string): void {
-	console.log(str);
+  console.log(str);
 }
 ```
 
@@ -119,13 +119,13 @@ function logSomething(str: string): void {
 ```typescript
 // Interface
 interface User {
-	name: string;
-	age: number;
+  name: string;
+  age: number;
 }
 
 // Used like below
 function postUser(user: User) {
-	// ..
+  // ..
 }
 
 postUser({ name: "Estelle", age: 27 });
@@ -138,12 +138,12 @@ postUser({ name: "Estelle", age: 27 });
 ```typescript
 // Function Interface
 interface Sum {
-	(a: number, b: number): number;
+  (a: number, b: number): number;
 }
 
 // Used like below
 const sum: Sum = function (a: number, b: number): number {
-	return a + b;
+  return a + b;
 };
 ```
 
@@ -154,7 +154,7 @@ const sum: Sum = function (a: number, b: number): number {
 ```typescript
 // Interface with typed index and value
 interface StringArray {
-	[index: number]: string;
+  [index: number]: string;
 }
 
 // Used like below
@@ -169,12 +169,12 @@ arr[0] = 10; // Error ! String Only as Pre-typed
 ```typescript
 // Inteface with typed key and value
 interface StringRegExDic {
-	[key: string]: RegExp;
+  [key: string]: RegExp;
 }
 
 // Used like below
 const obj: StringRegExDic = {
-	cssFile: /\.css$/,
+  cssFile: /\.css$/,
 };
 obj.cssFile = "css"; // Error ! RegEx Only as Pre-typed
 ```
@@ -186,19 +186,19 @@ obj.cssFile = "css"; // Error ! RegEx Only as Pre-typed
 ```typescript
 // Interface
 interface User {
-	name: string;
-	age: number;
+  name: string;
+  age: number;
 }
 
 // Extending User interface
 interface Admin extends User {
-	team: string;
+  team: string;
 }
 
 const admin: Admin = {
-	name: "estelle",
-	age: 27,
-	team: "Design System",
+  name: "estelle",
+  age: 27,
+  team: "Design System",
 };
 ```
 
@@ -224,24 +224,24 @@ const name: Name = "Estelle";
 ```typescript
 // Interface
 interface User {
-	name: string;
-	age: string;
+  name: string;
+  age: string;
 }
 
 const user: User = {
-	name: "Estelle",
-	age: 27,
+  name: "Estelle",
+  age: 27,
 };
 
 // Type alias
 type Person = {
-	name: string;
-	age: string;
+  name: string;
+  age: string;
 };
 
 const user: Person = {
-	name: "Estelle",
-	age: 27,
+  name: "Estelle",
+  age: 27,
 };
 ```
 
@@ -252,13 +252,43 @@ Type Alias is literally just naming types, not an interface, which means it is n
 ```typescript
 // User is extendable since it is an interface
 interface VipUser extends User {
-	agreeMarketing: boolean;
+  agreeMarketing: boolean;
 }
 
 const vipUser: VipUser = {
-	name: "Estelle",
-	age: 27,
-	agreeMarketing: true,
+  name: "Estelle",
+  age: 27,
+  agreeMarketing: true,
+};
+```
+
+<br />
+
+Type alias doest not assert allowed keys for objects. Interface is stronger typing for objects.
+
+```typescript
+// Interface
+interface User {
+  name: string;
+  age: string;
+}
+
+const user: User = {
+  name: "Estelle",
+  age: 27,
+  city: "Barcelona", // Error !
+};
+
+// Type alias
+type Person = {
+  name: string;
+  age: string;
+};
+
+const user: Person = {
+  name: "Estelle",
+  age: 27,
+  city: "Barcelona", // Ok
 };
 ```
 
@@ -272,9 +302,9 @@ Union type allows more than one type.
 
 ```typescript
 function printInformation(value: string | number) {
-	// Type Filtering
-	if (typeof value === "string") console.log("Name : ", value);
-	if (typeof value === "number") console.log("Age : ", value);
+  // Type Filtering
+  if (typeof value === "string") console.log("Name : ", value);
+  if (typeof value === "number") console.log("Age : ", value);
 }
 
 printInformation("Estelle");
@@ -287,13 +317,13 @@ printInformation(27);
 
 ```typescript
 interface User {
-	name: string;
-	age: number;
+  name: string;
+  age: number;
 }
 
 interface VipUser extends User {
-	agreeMarketing: boolean;
-	email: string;
+  agreeMarketing: boolean;
+  email: string;
 }
 ```
 
@@ -303,23 +333,23 @@ interface VipUser extends User {
 
 ```typescript
 function printUser(user: User | VipUser) {
-	// Can access common properties without filtering type.
-	console.log("Name : ", user.name);
-	console.log("Age : ", user.age);
+  // Can access common properties without filtering type.
+  console.log("Name : ", user.name);
+  console.log("Age : ", user.age);
 
-	// Type Filtering
-	if (typeof user === VipUser) {
-		console.log("Agree Marketing : ", user.agreeMarketing);
-		console.log("Email : ", user.email);
-	}
+  // Type Filtering
+  if (typeof user === VipUser) {
+    console.log("Agree Marketing : ", user.agreeMarketing);
+    console.log("Email : ", user.email);
+  }
 }
 
 printUser({ name: "Estelle", age: 27 });
 printUser({
-	name: "Estelle",
-	age: 27,
-	agreeMarketing: true,
-	email: "rubyisthebestpoodleever@gmail.com",
+  name: "Estelle",
+  age: 27,
+  agreeMarketing: true,
+  email: "rubyisthebestpoodleever@gmail.com",
 });
 ```
 
@@ -331,12 +361,12 @@ Intersection Type must have all properties from more than one type.
 
 ```typescript
 interface User {
-	name: string;
-	age: number;
+  name: string;
+  age: number;
 }
 
 interface Admin {
-	office: string;
+  office: string;
 }
 ```
 
@@ -346,13 +376,13 @@ In this case, `name`, `age` and `office` properties are required.
 
 ```typescript
 function printAdminUser(user: User & Admin) {
-	// ..
+  // ..
 }
 
 printAdminUser({
-	name: "Estelle",
-	age: 27,
-	office: "Barcelona",
+  name: "Estelle",
+  age: 27,
+  office: "Barcelona",
 });
 ```
 
@@ -366,8 +396,8 @@ Enum is a group of pre-defined values. The default value of an enum member is `0
 
 ```typescript
 enum City {
-	Seoul,
-	Tokyo,
+  Seoul,
+  Tokyo,
 }
 
 const office = City.Seoul;
@@ -380,8 +410,8 @@ Initialize members if needed like below.
 
 ```typescript
 enum City {
-	Seoul = "Seoul",
-	Tokyo = "Tokyo",
+  Seoul = "Seoul",
+  Tokyo = "Tokyo",
 }
 
 const office = City.Seoul;
@@ -420,11 +450,11 @@ Constructor functions are replacable with `class` syntax since ES6.
 
 ```javascript
 class User {
-	constructor(name, age) {
-		console.log("User instance created");
-		this.name = name;
-		this.age = age;
-	}
+  constructor(name, age) {
+    console.log("User instance created");
+    this.name = name;
+    this.age = age;
+  }
 }
 
 const user = new User("Estelle", 27); // "User instance created"
@@ -436,9 +466,9 @@ Nothing different fundamentally. Just syntax diff.
 
 ```javascript
 function User(name, age) {
-	console.log("User instance created");
-	this.name = name;
-	this.age = age;
+  console.log("User instance created");
+  this.name = name;
+  this.age = age;
 }
 
 const user = new User("Estelle", 27); // "User instance created"
@@ -469,14 +499,14 @@ console.log(admin.age); // 27
 
 ```typescript
 class User {
-	readonly id: string;
-	private name: string;
-	public nickname: string;
+  readonly id: string;
+  private name: string;
+  public nickname: string;
 
-	constructor(name: string, nickname: string) {
-		this.name = name;
-		this.nickname = nickname;
-	}
+  constructor(name: string, nickname: string) {
+    this.name = name;
+    this.nickname = nickname;
+  }
 }
 ```
 
@@ -490,12 +520,12 @@ Any type is acceptable and the late-given type will work for any `T` position.
 
 ```typescript
 function printValue<T>(value: T): T {
-	console.log(value);
-	return value;
+  console.log(value);
+  return value;
 }
 
 function reverseString(value: string) {
-	return value.split("").reverse().join("");
+  return value.split("").reverse().join("");
 }
 
 // Returning type is fixed when calling the function.
@@ -514,12 +544,12 @@ What if we don't have generics syntax and just use union type to allow more than
 let reversedValue: string = "";
 
 function printValue(value: string | number) {
-	console.log(value);
-	return value;
+  console.log(value);
+  return value;
 }
 
 function reverseString(value: string) {
-	return value.split("").reverse().join("");
+  return value.split("").reverse().join("");
 }
 
 const value: string | number = printValue("Hello World.");
@@ -535,8 +565,8 @@ if (typeof value === "number") reversedValue = reverseString(value + "");
 
 ```typescript
 interface DropdownItem<T> {
-	value: T;
-	selected: boolean;
+  value: T;
+  selected: boolean;
 }
 
 const item: DropdownItem<string> = { value: "Estelle", selected: false };
@@ -562,12 +592,12 @@ printTextLength<string>(["Estelle", "Hailey"]); // 2
 
 ```typescript
 interface Length {
-	length: number;
+  length: number;
 }
 
 function printTextLength<T extends Length>(text: T): T {
-	console.log(text.length);
-	return text;
+  console.log(text.length);
+  return text;
 }
 
 printTextLength<string>("Estelle"); // 7
@@ -580,14 +610,14 @@ printTextLength<number>(123); // Error ! Number type has no `length` prop.
 
 ```typescript
 interface User {
-	name: string;
-	age: number;
-	isVip: boolean;
+  name: string;
+  age: number;
+  isVip: boolean;
 }
 
 function printUserOption<T extends keyof User>(key: T): T {
-	console.log(key);
-	return key;
+  console.log(key);
+  return key;
 }
 
 printUserOption("name");
@@ -602,11 +632,11 @@ Generics is used for the functions returning `Promise`, which are mostly the fun
 
 ```typescript
 function fetchNames(): Promise<string[]> {
-	return new Promise((resolve) => resolve(["Estelle", "Hailey"]));
+  return new Promise((resolve) => resolve(["Estelle", "Hailey"]));
 }
 
 fetchNames().then((res) => {
-	// ..
+  // ..
 });
 ```
 
@@ -623,7 +653,7 @@ let value = 7; // value: number
 
 // getValue(value :?number): number
 function getValue(value = 10) {
-	return value;
+  return value;
 }
 ```
 
@@ -635,15 +665,15 @@ The type of interface properties typed with `T`(Generics) is inferenced.
 
 ```typescript
 interface DropdownItem<T> {
-	value: T;
-	label: string;
-	selected: boolean;
+  value: T;
+  label: string;
+  selected: boolean;
 }
 
 const item: DropdownItem<string> = {
-	value: "Estelle", // value: string - type inference
-	label: "Estelle",
-	selected: false,
+  value: "Estelle", // value: string - type inference
+  label: "Estelle",
+  selected: false,
 };
 ```
 
@@ -653,22 +683,22 @@ A more complicated example is following.
 
 ```typescript
 interface DropdownItem<T> {
-	id: string;
-	label: string;
-	value: T;
+  id: string;
+  label: string;
+  value: T;
 }
 
 interface DropdownItemStatus<K> extends DropdownItem<K> {
-	selected: boolean;
-	tag: K;
+  selected: boolean;
+  tag: K;
 }
 
 const dropdownItem: DropdownItemStatus<string> = {
-	id: "dfjdikfalkdflskdjfk",
-	label: "Sunday",
-	value: "SUN", // type inference
-	selected: false,
-	tag: "SUN", // type inference
+  id: "dfjdikfalkdflskdjfk",
+  label: "Sunday",
+  value: "SUN", // type inference
+  selected: false,
+  tag: "SUN", // type inference
 };
 ```
 
@@ -722,17 +752,17 @@ Type Guard function is a function returning `boolean` value to tell if the type 
 
 ```typescript
 enum City {
-	Seoul = "Seoul",
-	Tokyo = "Tokyo",
+  Seoul = "Seoul",
+  Tokyo = "Tokyo",
 }
 
 interface User {
-	id: string;
-	name: string;
+  id: string;
+  name: string;
 }
 
 interface Admin extends User {
-	office: City;
+  office: City;
 }
 ```
 
@@ -743,13 +773,13 @@ Type Guard functions are mostly named with `is-` prefix to implicit it will retu
 ```typescript
 // Type Guard Function
 function isAdminUser(target: User | Admin): target is Admin {
-	return (target as Admin).office !== undefined; // true or false
+  return (target as Admin).office !== undefined; // true or false
 }
 
 const user = { id: "sjdikflskd", name: "Estelle", office: "Seoul" };
 
 if (isAdminUser(user)) {
-	// ..
+  // ..
 }
 ```
 
@@ -765,13 +795,13 @@ Type compatibility is based on structural typing. For type compatibility, the ty
 
 ```typescript
 class User {
-	id: string;
-	name: string;
+  id: string;
+  name: string;
 }
 
 interface Admin {
-	id: string;
-	name: string;
+  id: string;
+  name: string;
 }
 
 let admin: Admin;
@@ -784,12 +814,12 @@ If not inclusive of all, an error will be thrown.
 
 ```typescript
 interface User {
-	id: string;
-	name: string;
+  id: string;
+  name: string;
 }
 
 interface Admin {
-	name: string;
+  name: string;
 }
 
 let user: User;
@@ -805,11 +835,11 @@ user = admin; // Error ! `admin` doesn't include `id` property.
 
 ```typescript
 const sum1 = function (a: number) {
-	// ..
+  // ..
 };
 
 const sum2 = function (a: number, b: number) {
-	// ..
+  // ..
 };
 ```
 
@@ -833,7 +863,7 @@ Two variables with differently typed generics are type-compatible, if the interf
 
 ```typescript
 interface Test<T> {
-	// ..
+  // ..
 }
 
 const stringTest: Test<string>;
@@ -858,7 +888,7 @@ However, if the interface type has any property typed with generics, the two var
 
 ```typescript
 interface Test<T> {
-	value: T;
+  value: T;
 }
 
 const stringTest: Test<string>;
@@ -880,8 +910,8 @@ Interface can be exported and imported like a variable or function in JavaScript
 ```typescript
 // user.ts
 export interface User {
-	id: string;
-	name: string;
+  id: string;
+  name: string;
 }
 ```
 
@@ -892,7 +922,7 @@ export interface User {
 import { User } from "./user.ts";
 
 class Test extends User {
-	// ..
+  // ..
 }
 ```
 
@@ -912,16 +942,16 @@ class Test extends User {
 
 ```json
 {
-	"compilerOptions": {
-		"allowJS": false,
-		"checkJS": true,
-		"target": "es5",
-		"lib": ["es2015", "dom", "dom.iterable"],
-		"noImplicitAny": true,
-		"strict": true,
-		"strictFunctionTypes": true
-	},
-	"include": ["./src/**/*.ts"]
+  "compilerOptions": {
+    "allowJS": false,
+    "checkJS": true,
+    "target": "es5",
+    "lib": ["es2015", "dom", "dom.iterable"],
+    "noImplicitAny": true,
+    "strict": true,
+    "strictFunctionTypes": true
+  },
+  "include": ["./src/**/*.ts"]
 }
 ```
 
@@ -931,34 +961,34 @@ class Test extends User {
 
 ```json
 {
-	"compilerOptions": {
-		"target": "esnext",
-		"module": "esnext",
-		"strict": true,
-		"jsx": "preserve",
-		"importHelpers": true,
-		"moduleResolution": "node",
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"noImplicitAny": true,
-		"sourceMap": true,
-		"baseUrl": ".",
-		"types": ["webpack-env"],
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
-	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"src/**/*.d.ts",
-		"tests/**/*.ts",
-		"tests/**/*.tsx"
-	],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": ["webpack-env"],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.d.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
 }
 ```
 
