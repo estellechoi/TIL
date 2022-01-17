@@ -247,6 +247,8 @@ const user: Person = {
 
 <br />
 
+#### Type Alias is not extendable
+
 Type Alias is literally just naming types, not an interface, which means it is not extendable with `extends` word.
 
 ```typescript
@@ -263,6 +265,8 @@ const vipUser: VipUser = {
 ```
 
 <br />
+
+#### Type Alias does not assert object keys
 
 Type alias doest not assert allowed keys for objects. Interface is stronger typing for objects.
 
