@@ -6,7 +6,7 @@
 
 <br>
 
-## 0. Graphic / UI / UX
+## 1. Graphic / UIUX
 
 ### Graphic Inspiration Sources
 
@@ -23,7 +23,21 @@
 
 <br>
 
-## 1. Work Flow
+## 2. CS
+
+### FP
+
+- [함수형 프로그래밍 & JavaScript FP Cheat Sheet](./docs/cs/fp.md)
+
+<br>
+
+### Algorithm
+
+- [ALT: Algorithms Learned Today](https://github.com/estellechoi/algorithm)
+
+<br>
+
+## 3. Work Flow
 
 ### GIT
 
@@ -46,7 +60,7 @@
 
 <br>
 
-## 2. DevOps
+## 4. DevOps
 
 ### Docker
 
@@ -54,7 +68,7 @@
 
 <br>
 
-## 3. Web Front-end
+## 5. Web Front-end
 
 ### Performance
 
@@ -75,6 +89,12 @@
 ### Accessibility
 
 - [How to get web-accessibility highly achieved](https://github.com/estellechoi/TIL/blob/master/docs/html/webaccess.md) \*
+
+<br>
+
+### Browser
+
+- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/docs/Http/cors.md)
 
 <br>
 
@@ -166,7 +186,7 @@
 
 <br>
 
-## 4. Native App Front-end
+## 6. Native App Front-end
 
 ### Flutter
 
@@ -188,22 +208,7 @@
 
 <br>
 
-## 5. CS
-
-### Programming Paradigm - FP
-
-- [함수형 프로그래밍 & JavaScript FP Cheat Sheet](./docs/cs/fp.md)
-
-<br>
-
-### Algorithm
-
-- [ALT: Algorithms Learned Today](https://github.com/estellechoi/algorithm)
-- [시간복잡도(Time Complexity)](./docs/algorithm/time-complexity.md)
-
-<br>
-
-## 6. Etc
+## 7. Etc
 
 ### HTTP
 
@@ -211,8 +216,6 @@
 - [Some Tips for REST](https://github.com/estellechoi/TIL/blob/master/docs/Http/restTips.md)
 - [REST API Security](https://github.com/estellechoi/TIL/blob/master/docs/Http/restSecurity.md) \*
 - [HTTP Cookies](https://github.com/estellechoi/TIL/blob/master/docs/Http/cookie.md)
-- [CORS (Cross Origin Resource Sharing)](https://github.com/estellechoi/TIL/blob/master/docs/Http/cors.md)
-- [Browser](https://github.com/estellechoi/TIL/blob/master/docs/www/browser.md)
 - [Internet and HTTP](https://github.com/estellechoi/TIL/blob/master/docs/www/http.md)
 - [Web Server / Web Application Server](https://github.com/estellechoi/TIL/blob/master/docs/www/was.md)
 
@@ -247,7 +250,7 @@
 
 <br>
 
-## 5. Articles by Various Authors
+### Articles by Various Authors
 
 - [All You Need To Know About CSS-in-JS](https://medium.com/better-programming/all-you-need-to-know-about-css-in-js-984a72d48ebc)
 - [ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?](https://gomugom.github.io/is-class-only-a-syntactic-sugar/)
