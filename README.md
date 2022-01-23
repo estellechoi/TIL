@@ -34,7 +34,7 @@
 ### Algorithm
 
 - [ALT: Algorithms Learned Today - Data Structures & Search](https://github.com/estellechoi/algorithm/blob/main/data-structures/README.md)
-- [ALT: Algorithms Learned Today - Mathematics](https://github.com/estellechoi/algorithm/blob/main/math/README.md#1-3-euclidean--modulo)
+- [ALT: Algorithms Learned Today - Mathematics](https://github.com/estellechoi/algorithm/blob/main/math/README.md)
 
 <br>
 
