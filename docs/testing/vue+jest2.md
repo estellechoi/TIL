@@ -31,7 +31,7 @@ module.exports = {
 
 ### 1-2. 컴포넌트 Mount & Wrap
 
-저는 `HelloWorld.vue` 컴포넌트에 대한 테스트를 수행할 `helloworld.spec.ts` 파일을 하나 만들었고요, 다음과 같이 `@vue/test-utils`(VTU)에서 제공하는 `mount()` 메소드와 테스트 대상 컴포넌트인 `HelloWorld.vue`를 Import 했습니다. `test()` 메소드는 VTU에서 Test를 정의하는 전역 메소드로, 두 번째 인자로 테스트 코드가 담긴 콜백 함수를 받습니다.
+저는 `HelloWorld.vue` 컴포넌트에 대한 테스트를 수행할 `helloworld.spec.ts` 파일을 하나 만들었고요, 다음과 같이 [`@vue/test-utils`(VTU)](https://vue-test-utils.vuejs.org/guides/#getting-started)에서 제공하는 `mount()` 메소드와 테스트 대상 컴포넌트인 `HelloWorld.vue`를 Import 했습니다. `test()` 메소드는 VTU에서 Test를 정의하는 전역 메소드로, 두 번째 인자로 테스트 코드가 담긴 콜백 함수를 받습니다.
 
 ```typescript
 // helloworld.spec.ts
