@@ -6,7 +6,7 @@
 
 <br>
 
-## 1. Graphic / UIUX
+## 1. Graphic & UIUX
 
 ### Graphic Inspiration Sources
 
@@ -62,11 +62,11 @@
 
 <br>
 
-## 4. DevOps
+## 4. Blockchain
 
-### Docker
+### Ethereum
 
-- [도커라이징](./docs/devops/dockerize-vue.md)
+- [Contract & Solidity](https://github.com/estellechoi/cryptozombies/blob/main/docs/contract.md)
 
 <br>
 
@@ -210,7 +210,15 @@
 
 <br>
 
-## 7. Etc
+## 7. DevOps
+
+### Docker
+
+- [도커라이징](./docs/devops/dockerize-vue.md)
+
+<br>
+
+## 8. Etc
 
 ### HTTP
 
