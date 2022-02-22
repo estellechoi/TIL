@@ -67,7 +67,7 @@
 ### Ethereum
 
 - [Contract, Immutability & Composability, Address, Gas, Finality in PoW/PoS](https://github.com/estellechoi/cryptozombies/blob/main/docs/contract.md)
-- [Solidity Basics](https://github.com/estellechoi/cryptozombies/blob/main/docs/solidity.md)
+- [Solidity, Security, Access Control, Storage vs Memory](https://github.com/estellechoi/cryptozombies/blob/main/docs/solidity.md)
 - [EVM](https://github.com/estellechoi/cryptozombies/blob/main/docs/evm.md)
 
 <br>
