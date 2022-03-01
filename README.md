@@ -2,18 +2,13 @@
 
 🌎 Today I learned
 
-\*-marked item is a work in progress, so it would be good NOT TO READ it.
+Any doc you find here could be a work in progress, so if mark ed as a WIP, please don't consider it trustful and any review will be appreciated.
+
+Additionally, to focus more on tech things, I removed the section Graphic Inspiration Sources, so if you need some sources, please check out [It's Nice That](https://www.itsnicethat.com/) and [Are.na](https://www.are.na/)
 
 <br>
 
-## 1. Graphic & UIUX
-
-### Graphic Inspiration Sources
-
-- [It's Nice That](https://www.itsnicethat.com/)
-- [Are.na](https://www.are.na/)
-
-<br>
+## 1. UIUX
 
 ### Design System
 
