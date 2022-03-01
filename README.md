@@ -2,7 +2,7 @@
 
 🌎 Today I learned
 
-Any doc you find here could be a work in progress, so if mark ed as a WIP, please don't consider it trustful and any review will be appreciated.
+Any documents that you find here may be a work in progress. If so, marked it as a WIP. Please do not consider it to be trustful. Any comments will be appreciated.
 
 Additionally, to focus more on tech things, I removed the section Graphic Inspiration Sources, so if you need some sources, please check out [It's Nice That](https://www.itsnicethat.com/) and [Are.na](https://www.are.na/)
 
