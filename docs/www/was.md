@@ -47,7 +47,11 @@
 
 <br>
 
-***
+---
 
-  ### Reference
-  - edwith \[부스트코스\] 웹 프로그래밍 교육자료
+### Reference
+
+- [Web Server vs. Application Server | IBM Cloud Learn Hub](https://www.ibm.com/cloud/learn/web-server-vs-application-server)
+- [What is the difference between application server and web server? | StackOverflow](https://stackoverflow.com/questions/936197/what-is-the-difference-between-application-server-and-web-server)
+- edwith \[부스트코스\] 웹 프로그래밍 교육자료
+
