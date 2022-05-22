@@ -536,6 +536,7 @@ git branch
 
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 - [Git Branching Naming Convention: Best Practices](https://codingsight.com/git-branching-naming-convention-best-practices/)
+- [Difference Between Git Merge and Git Merge --no-ff - Akhil Bhadwal](https://hackr.io/blog/difference-between-git-merge-and-git-merge-no-ff)
 - [Linking a pull request to an issue | Github Docs](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
 - [About pull requests | Github Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 - [Git Feature Branch Workflow | Bitbucket](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
