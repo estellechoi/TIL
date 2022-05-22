@@ -537,6 +537,7 @@ git branch
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 - [Git Branching Naming Convention: Best Practices](https://codingsight.com/git-branching-naming-convention-best-practices/)
 - [Linking a pull request to an issue | Github Docs](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+- [About pull requests | Github Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 - [Git Feature Branch Workflow | Bitbucket](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
 - [Pull Requests and Gitflow | GitKraken Blog](https://www.gitkraken.com/blog/pull-requests-gitflow)
 - [GitFlow? 들어도 봤고, 쓰고도 있는데... | 강남언니 공식 블로그](https://blog.gangnamunni.com/post/understanding_git_flow/)
