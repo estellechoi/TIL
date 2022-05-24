@@ -1,0 +1,11 @@
+type : title
+
+################
+# ex) close #7
+
+################
+# docs : documentated
+# refact : refactored
+# style : styling codes added, not affecting what this project does
+# chore : build or package related modifications done
+################
