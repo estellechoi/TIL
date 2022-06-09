@@ -2,6 +2,12 @@
 
 <br>
 
+1. `create-react-app` 최신 버전 확인
+2. React 16.x + TypeScript 앱 생성하기
+3. SCSS + Tailwind CSS 셋업 (WIP)
+
+<br>
+
 ## 1. `create-react-app` 최신 버전 확인
 
 기존에 전역 설치된 [`create-react-app`](https://github.com/facebook/create-react-app)이 있다면 삭제하고 최신 버전을 사용하라고 [공식문서](https://create-react-app.dev/docs/getting-started#quick-start)에서 권장하고 있습니다.
@@ -19,7 +25,7 @@ yarn global remove create-react-app
 
 <br>
 
-## 2. React 16.xx + TypeScript 앱 생성하기
+## 2. React 16.x + TypeScript 앱 생성하기
 
 ### 2-1. 앱 생성시 `--template` 옵션 사용하기
 
@@ -37,18 +43,18 @@ yarn create react-app project-name --template typescript
 
 <br>
 
-`package.json` 파일에서 다음 두 패키지의 버전을 변경합니다.
+`package.json` 파일에서 다음 패키지들의 버전을 변경합니다.
+
+<br>
 
 변경 전
 
 ```json
 "dependencies": {
-    ...
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    ...
   },
 ```
 
@@ -56,18 +62,18 @@ yarn create react-app project-name --template typescript
 
 ```json
 "dependencies": {
-    ...
     "@types/react": "^16.0.0",
     "@types/react-dom": "^16.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    ...
   },
 ```
 
 <br>
 
 그리고 아직 React 16.x 버전에는 존재하지 않는 메소드들을 수정해줍니다. `index.tsx` 파일에서 다음 부분을 수정하면 될겁니다.
+
+<br>
 
 변경 전
 
@@ -107,6 +113,11 @@ ReactDOM.render(
 yarn install
 ```
 
+<br>
+
+## 3. SCSS + Tailwind CSS 셋업
+
+<br>
 <br>
 
 ---
