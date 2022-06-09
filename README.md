@@ -168,6 +168,12 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
+### React
+
+- [Create React App으로 React 16.x + TypeScript 프로젝트 셋업하기](./docs/react/setup.md)
+
+<br>
+
 ### Vue
 
 - [Vue CLI로 Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
