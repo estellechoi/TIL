@@ -53,5 +53,6 @@
 
 - [Web Server vs. Application Server | IBM Cloud Learn Hub](https://www.ibm.com/cloud/learn/web-server-vs-application-server)
 - [What is the difference between application server and web server? | StackOverflow](https://stackoverflow.com/questions/936197/what-is-the-difference-between-application-server-and-web-server)
-- edwith \[부스트코스\] 웹 프로그래밍 교육자료
-
+- [웹 애플리케이션 서버 | 위키백과](https://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98_%EC%84%9C%EB%B2%84)
+- [(Video) 웹애플리케이션 만들기 - 서버와 클라이언트 | 생활코딩](https://www.youtube.com/watch?v=YfXj8kOo7j4)
+- [edwith \[부스트코스\] 웹 프로그래밍 교육자료](https://www.boostcourse.org/web316/lecture/16666?isDesc=false)
