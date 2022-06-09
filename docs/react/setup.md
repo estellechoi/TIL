@@ -1,4 +1,4 @@
-# Create React App으로 React16 + TypeScript 프로젝트 셋업하기
+# Create React App으로 React 16.x + TypeScript 프로젝트 셋업하기
 
 <br>
 
@@ -114,4 +114,6 @@ yarn install
 ### References
 
 - [React v16.0 | React](https://ko.reactjs.org/blog/2017/09/26/react-v16.0.html)
+- [Create a New React App | React](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app)
+- [Adding TypeScript | Create React App](https://create-react-app.dev/docs/adding-typescript)
 - [How to use create-react-app with an older React version? | StackOverflow](https://stackoverflow.com/questions/46566830/how-to-use-create-react-app-with-an-older-react-version)
