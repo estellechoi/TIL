@@ -282,10 +282,10 @@ module.exports = {
 
 <br>
 
-마지막으로 `App.css` 파일 상단에 아래와 같이 `@tailwind` 디렉티브를 사용해서 Tailwind CSS를 포함시키면 됩니다.
+마지막으로 `index.css` 파일 상단에 아래와 같이 `@tailwind` 디렉티브를 사용해서 Tailwind CSS를 포함시키면 됩니다.
 
 ```css
-/* App.css*/
+/* index.css*/
 
 @tailwind base;
 @tailwind components;
