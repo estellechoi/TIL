@@ -170,7 +170,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 ### React
 
-- [Create React App으로 React 17.x + TypeScript 프로젝트 셋업하기](./docs/react/setup.md)
+- [React 17.x + TypeScript + Tailwind CSS 프로젝트 셋업하기](./docs/react/setup.md)
 
 <br>
 

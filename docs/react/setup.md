@@ -1,11 +1,11 @@
-# Create React App으로 React 17.x + TypeScript 프로젝트 셋업하기
+# React 17.x + TypeScript + Tailwind CSS 프로젝트 셋업하기
 
 <br>
 
 1. `create-react-app` 최신 버전 확인
 2. React 17.x + TypeScript 앱 생성하기
 3. ESLint React 플러그인 셋업
-4. SCSS + Tailwind CSS 셋업 (WIP)
+4. Tailwind CSS 셋업
 
 <br>
 
@@ -147,6 +147,10 @@ yarn install
 
 그 다음 ESLint 설정 파일을 생성하신 후 ESLint 플러그인들을 추가해주면 됩니다. 다음은 React 17.x + TypeScript 조합을 사용중인 [Uniswap/interface](https://github.com/Uniswap/interface/blob/main/.eslintrc.json) 레포지토리의 ESLint 설정 파일인데, 참고하기 좋아서 가져왔습니다. 다른 부분은 `create-react-app`의 Preset을 거의 그대로 사용하므로, `extends`와 `rules` 필드를 주로 보시면 되겠습니다.
 
+#### 패키지 업데이트 이슈
+
+- `prettier/@typescript-eslint` 플러그인은 8.0.0 버전부터 `prettier` 패키지에 기본 기능으로 통합되었습니다. 만약 저처럼 8.x 이상 버전을 사용하신다면 아래의 ESLint 설정을 참고하시되, `extends` 필드에서 `prettier/@typescript-eslint`는 제거하셔야 합니다.
+
 ```json
 {
   "parser": "@typescript-eslint/parser",
@@ -154,7 +158,6 @@ yarn install
     "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
-      // Allows for the parsing of JSX
       "jsx": true
     }
   },
@@ -239,9 +242,56 @@ yarn install
 
 <br>
 
-## 4. SCSS + Tailwind CSS 셋업
+## 4. Tailwind CSS 셋업
+
+Tailwind CSS 공식문서 [Install Tailwind CSS with Create React App](https://tailwindcss.com/docs/guides/create-react-app)을 참고했습니다. 필요한 디펜던시는 다음과 같습니다.
+
+- `tailwindcss`: Tailwind CSS 코어 패키지
+- `postcss`: Tailwind CSS를 Pure CSS로 변환해주는 Preprocessor
+- `autoprefixer`: Post CSS 플러그인으로 사용될 Vendor Prefixer
+
+```zsh
+yarn add -D tailwindcss postcss autoprefixer
+```
 
 <br>
+
+`tailwindcss` 초기화 커맨드를 실행하면 Tailwind CSS 설정파일 `tailwind.config.js`와 Post CSS 설정파일 `postcss.config.js`가 자동으로 생성됩니다.
+
+```zsh
+npx tailwindcss init -p
+```
+
+<br>
+
+그 다음, `tailwind.config.js` 파일에서 Tailwind를 사용할 파일들의 경로를 지정해주면 됩니다.
+
+```javascript
+// tailwind.config.js
+
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+<br>
+
+마지막으로 `App.css` 파일 상단에 아래와 같이 `@tailwind` 디렉티브를 사용해서 Tailwind CSS를 포함시키면 됩니다.
+
+```css
+/* App.css*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
 <br>
 
 ---
@@ -252,3 +302,4 @@ yarn install
 - [Create a New React App | React](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app)
 - [Adding TypeScript | Create React App](https://create-react-app.dev/docs/adding-typescript)
 - [How to use create-react-app with an older React version? | StackOverflow](https://stackoverflow.com/questions/46566830/how-to-use-create-react-app-with-an-older-react-version)
+- [Install Tailwind CSS with Create React App](https://tailwindcss.com/docs/guides/create-react-app)
