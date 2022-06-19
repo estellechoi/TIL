@@ -1,9 +1,9 @@
-# React 17.x + TypeScript + Tailwind CSS 프로젝트 셋업하기
+# React 17.x + TypeScript + Redux + Tailwind CSS 프로젝트 셋업하기
 
 <br>
 
 1. `create-react-app` 최신 버전 확인
-2. React 17.x + TypeScript 앱 생성하기
+2. React 17.x + TypeScript + Redux 앱 생성하기
 3. ESLint React 플러그인 셋업
 4. Tailwind CSS 셋업
 
@@ -26,7 +26,7 @@ yarn global remove create-react-app
 
 <br>
 
-## 2. React 17.x + TypeScript 앱 생성하기
+## 2. React 17.x + TypeScript + Redux 앱 생성하기
 
 ### 2-1. 앱 생성시 `--template` 옵션 사용하기
 
@@ -34,6 +34,14 @@ yarn global remove create-react-app
 
 ```zsh
 yarn create react-app project-name --template typescript
+```
+
+<br>
+
+만약 State 관리를 위해 Redux를 사용하실거라면, 다음과 같이 `--template` 옵션 값으로 `redux-typescript`를 지정하면 됩니다. 이렇게 하면 [Redux Toolkit](https://redux-toolkit.js.org/)과 [React Redux](https://react-redux.js.org/) 패키지가 함께 설치됩니다.
+
+```zsh
+yarn create react-app project-name --template redux-typescript
 ```
 
 <br>
@@ -303,3 +311,4 @@ module.exports = {
 - [Adding TypeScript | Create React App](https://create-react-app.dev/docs/adding-typescript)
 - [How to use create-react-app with an older React version? | StackOverflow](https://stackoverflow.com/questions/46566830/how-to-use-create-react-app-with-an-older-react-version)
 - [Install Tailwind CSS with Create React App](https://tailwindcss.com/docs/guides/create-react-app)
+- [Getting Started | Redux Toolkit](https://redux-toolkit.js.org/introduction/getting-started#using-create-react-app)
