@@ -77,7 +77,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 - [Uniswap V1 - V2 이해하기](https://github.com/estellechoi/yuniswap/blob/main/docs/uniswap.md)
 - [Uniswap V2 Core & Periphery 코드 분석](https://github.com/estellechoi/yuniswap/blob/main/docs/v2-code.md)
-- [DEX Aggregator 이해하기](./docs/aggregator.md)
+- [DEX Aggregator 이해하기](./docs/defi/aggregator.md)
 
 <br>
 
