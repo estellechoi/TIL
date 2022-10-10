@@ -73,6 +73,12 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
+### Cosmos SDK
+
+- [Cosmos SDK, Application-specific, Tendermint](./docs/cosmos/sdk.md)
+
+<br>
+
 ### DeFi
 
 - [Uniswap V1 - V2 이해하기](https://github.com/estellechoi/yuniswap/blob/main/docs/uniswap.md)
