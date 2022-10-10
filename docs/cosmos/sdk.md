@@ -4,7 +4,7 @@
 
 1. Cosmos SDK란, Application-specific 블록체인
 2. 블록체인 구조: 상태 머신, Deterministic & Replicated, Tendermint
-3. Cosmos SDK `BaseApp`
+3. Cosmos SDK `BaseApp`, `Multistore`, `Module`
 
 <br>
 
@@ -64,7 +64,9 @@ Tendermint 엔진이 핸들링하는 Transaction 코드는 Byte로 인코딩되�
 
 <br>
 
-## 3. Cosmos SDK `BaseApp`
+## 3. Cosmos SDK `BaseApp`, `Multistore`, `Module`
+
+### 3-1. `BaseApp`
 
 [`BaseApp`](https://docs.cosmos.network/main/core/baseapp)은 Cosmos SDK 애플리케이션의 코어 부분을 구현하기 위한 타입으로, 여기에 Tendermint 엔진과 상호작용하기 위한 ABCI 구현체와 `message`들을 각 Module로 라우팅하는 부분도 포함되어 있습니다. 일반적으로 개발자들은 다음과 같이 `BaseApp`을 포함하는 애플리케이션 구조체를 작성하게 됩니다.
 
@@ -81,6 +83,24 @@ type App struct {
 }
 ```
 
+<br>
+
+### 3-2. `Multistore`
+
+`Multistore`는 블록의 상태 값을 저장하기 위한 Interface로, 여러 개의 `KVStore`들을 저장하는 루트 Store를 위한 타입입니다. [`Multistore` Interface](https://github.com/cosmos/cosmos-sdk/blob/v0.46.0/store/types/store.go#L97-L133)는 다음과 같이 `StoreKey` 값을 사용해서 `KVStore`를 겟할 수 있는 메소드를 포함합니다. 각각의 `KVStore`는 `[]bytes` 타입의 로우 데이터만 저장할 수 있기 때문에, 이 데이터들의 구조까지 저장하기 위한 목적으로 `Multistore`를 사용합니다. `Multistore`가 저장하는, 데이터들 간의 구조를 포함한 최종 상태 값은 별도의 [Encoder](https://docs.cosmos.network/main/core/encoding)를 사용하여 인코딩됩니다.
+
+
+```go
+// Convenience for fetching substores.
+// If the store does not exist, panics.
+GetStore(StoreKey) Store
+GetKVStore(StoreKey) KVStore
+```
+
+<br>
+
+### 3-3. `Module`
+
 (WIP)
 
 <br>
@@ -90,4 +110,5 @@ type App struct {
 ### References
 
 - [High-level Overview | Cosmos SDK Documentation](https://docs.cosmos.network/main/intro/overview)
-- [Blockchain Architecture](https://docs.cosmos.network/main/intro/sdk-app-architecture)
+- [Blockchain Architecture | Cosmos SDK Documentation](https://docs.cosmos.network/main/intro/sdk-app-architecture)
+- [Main Components of the Cosmos SDK | Cosmos SDK Documentation](https://docs.cosmos.network/main/intro/sdk-design)
