@@ -18,6 +18,12 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
+### UX
+
+- [Laws of UX](./docs/ux/laws.md)
+
+<br>
+
 ### Growth Hacking
 
 - [아하 모먼트](./docs/growth/aha.md)
