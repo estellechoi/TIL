@@ -21,7 +21,7 @@
 
 <img src="./../img/aha.png" />
 
-이미지 출처: [This Is How You Find Your App’s Aha! Moment - ](https://apptimize.com/blog/2016/02/this-is-how-you-find-your-apps-aha-moment/)
+이미지 출처: [This Is How You Find Your App’s Aha! Moment | Apptimize](https://apptimize.com/blog/2016/02/this-is-how-you-find-your-apps-aha-moment/)
 
 <br>
 
