@@ -26,7 +26,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 ### Growth Hacking
 
-- [아하 모먼트](./docs/growth/aha.md)
+- [아하 모먼트: 30일 Retention, 가능한 행동들 모으기, Base Retention과 비교하기, 최적 빈도/횟수 찾기, Sanity Check, A/B 테스트](./docs/growth/aha.md)
 
 <br>
 
