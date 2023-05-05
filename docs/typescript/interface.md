@@ -54,7 +54,7 @@ interface Point {
 
 <br>
 
-Array도 변경되지 않도록 타이핑할 수 있습니다.
+`ReadonlyArray` 타입을 사용해서 Array도 변경되지 않도록 타이핑할 수 있습니다.
 
 ```typescript
 let arr: ReadonlyArray<number> = [1, 2, 3, 4];
@@ -66,7 +66,7 @@ arr.length = 100; // error
 
 <br>
 
-주의할만한 점은 TS의 readonly 선언이 객체의 속성들을 통제하는 방법이라는 것입니다. 따라서 arr의 속성들을 변경하는 것이 아니라 아예 새로운 값을 할당하는 경우는 체크하지 않습니다.
+주의할만한 점은 TS의 `readonly` 선언이 객체의 속성들을 통제하는 방법이라는 것입니다. 따라서 `arr`의 속성들을 변경하는 것이 아니라 아예 새로운 값을 할당하는 경우는 체크하지 않습니다.
 
 ```typescript
 arr = [5, 6, 7];
@@ -87,7 +87,7 @@ arr = [5, 6, 7]; // error
 
 ## 3. Interface 속성 체크
 
-interface는 분명 Required 속성들만 체크하고, 이 외 속성에 대해서는 체크하지 않기 때문에 정의되지 않은 속성을 허용한다고 했습니다. 그런데 엄격해지는 경우도 있는데요, 객체 리터럴 값을 할당하려고 할 때는 정의되지 않은 속성이 포함되었는지 체크합니다. TS 문서를 읽어보면 이것은 Interface의 규칙이라기보다, 버그로 간주하고 추가적으로 경고를 주는 것으로 보입니다.
+Interface는 분명 Required 속성들만 체크하고, 이 외 속성에 대해서는 체크하지 않기 때문에 정의되지 않은 속성들이 포함되어 있어도 허용한다고 했습니다. 그런데 엄격해지는 경우도 있는데요, 객체 리터럴 값을 할당하려고 할 때는 정의되지 않은 속성이 포함되었는지 체크합니다. TS 문서를 읽어보면 이것은 Interface의 규칙이라기보다, 버그로 간주하고 추가적으로 경고를 주는 것으로 보입니다.
 
 ```typescript
 interface Person {
@@ -144,7 +144,7 @@ type Member = Person & {
 
 ## 5. Type Alias와의 차이점
 
-[공식문서](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)에 너무 명쾌하게 명시되어 있었습니다. 아마 그간 많은 개발자들이 질문하고 얘기해온 주제이기 때문인 것 같습니다. 그 내용은 바로, Type Alias는 Interface의 기능을 거의 모두 동일하게 제공하지만, Interface처럼 선언적 확장을 할 수 없습니다.
+[공식문서](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)에 너무 명쾌하게 명시되어 있었습니다. 아마 그간 많은 개발자들이 질문하고 얘기해온 주제이기 때문인 것 같습니다. 그 내용은 바로, Type Alias는 Interface의 기능을 거의 모두 동일하게 제공하지만, Interface처럼 선언적 확장을 할 수 없다는 것이었습니다.
 
 > Type aliases and interfaces are very similar, and in many cases you can choose between them freely. Almost all features of an interface are available in type, the key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable.
 
