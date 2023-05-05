@@ -1,10 +1,10 @@
-# CSS 애니메이션 성능 높이기: `transform`, `will-change`
+# CSS 애니메이션 성능 높이기: 브라우저의 애니메이션 렌더링 과정, `transform`, `will-change`, 성능 말고 접근성도 고려하기
 
 1. CSS 애니메이션: 사용되는 속성들, JavaScript/animation/transition 성능 비교
 2. 브라우저의 애니메이션 렌더링 과정: `top`보다 `transform`이 부드러운 이유
 3. 애니메이션 성능 측정하기: Redering, Layers, Performance monitor
 4. 브라우저에 힌트 주기: will-change
-5. 접근성
+5. 성능 말고 접근성도 고려하기
 
 <br>
 
@@ -159,7 +159,7 @@ CSS의 `will-change` 속성을 사용하는 방법이 있습니다. 노드에 �
 
 <br>
 
-## 5. 접근성
+## 5. 성능 말고 접근성도 고려하기
 
 마지막으로.. 성능과는 관련이 없지만, 애니메이션 구현시 [접근성 고려사항](https://developer.mozilla.org/en-US/docs/Web/CSS/animation#accessibility_concerns)이 있습니다. 깜빡이는 애니메이션의 경우 인지 문제가 있는 사람들에게 문제가 되거나, 사람들에게 건강상 문제를 일으킬 수 있으므로 주의해야한다는 내용입니다. 별도로 다룰 정도의 양은 아니어서 이 글에 살짝 추가해보았습니다.
 
