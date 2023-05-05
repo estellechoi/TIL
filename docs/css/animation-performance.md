@@ -22,17 +22,21 @@
 
 <br>
 
-지금 생각해보면 그럴듯한데요, 일단 JavaScript로 애니메이션을 구현하다보면 HTML 엘리먼트 객체에 그떄 그때 바꿔 적용해야할 CSS 셀렉터를 추가하고 빼는 작업들을 하게 됩니다. 이 과정에서 DOM 노드와 매칭되는 CSS 셀렉터를 찾고 스타일을 재계산하는 과정을 계속 반복하게 될테지요. 그런데 이 과정이 브라우저 렌더링 프로세스의 초기 단계에 해당하기 때문에, 이어지는 다음 단계들도 모두 반복하게 되는 식으로 성능 문제가 증폭될 수 있겠구나 추측해볼 수 있습니다. 브라우저 렌더링 프로세스는 뒤에서 좀 더 디테일하게 정리할 겁니다.
+지금 생각해보면 그럴듯한데요, 일단 JavaScript로 애니메이션을 구현하다보면 HTML 엘리먼트 객체에 그때 그때 바꿔 적용해야할 CSS 셀렉터를 추가하고 빼는 작업들을 하게 됩니다. 이 때마다 브라우저에서는 DOM 노드와 매칭되는 CSS 셀렉터를 찾고 스타일을 재계산하는 과정을 계속 반복하게 될테지요. 그런데 이 과정이 브라우저 렌더링 프로세스의 초기 단계에 해당하기 때문에, 이어지는 다음 단계들도 모두 반복하게 되는 식으로 성능 문제가 증폭될 수 있겠구나 추측해볼 수 있습니다. 브라우저 렌더링 프로세스는 뒤에서 좀 더 디테일하게 정리할 겁니다.
 
 <br>
 
-[CSS and JavaScript animation performance](https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance) MDN 문서에서는 대부분의 경우 이 둘의 성능 차이가 없다고 말합니다. 이 글에서는 브라우저 API인 [`requestAnimationFrame()`](https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/)을 사용하는 경우에 한해 이야기하고 있어서 그런 것 같습니다. 이 함수는 브라우저의 각 프레임마다 Paint 작업 전에 수행할 콜백을 지정할 수 있게 해주는 API이기 때문에 역시나 렌더링 프로세스의 다소 초기 단계를 건드리게 됩니다. 하지만, 초기 단계들을 다시 하지 않고, 브라우저의 메인 쓰레드가 아닌 GPU에 위임한 별도의 단계에서만 렌더링을 다시 하도록 튜닝할 수 있다면 CSS로 더 빠른 애니메이션을 구현할 수 있을 것 같습니다.
+[MDN 문서(CSS and JavaScript animation performance)](https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance)에서는 대부분의 경우 이 둘의 성능 차이가 없다고 말합니다. 이 글에서는 브라우저 API인 [`requestAnimationFrame()`](https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/)을 사용하는 경우에 한해 이야기하고 있어서 그런 것 같습니다. 이 함수는 브라우저의 각 프레임마다 Paint 작업 전에 수행할 콜백을 지정할 수 있게 해주는 API이기 때문에 역시나 렌더링 프로세스의 다소 초기 단계를 건드리게 됩니다. 하지만, 초기 단계들을 다시 하지 않고, 브라우저의 메인 쓰레드가 아닌 GPU에 위임한 별도의 단계에서만 렌더링을 다시 하도록 튜닝할 수 있다면 CSS로 더 빠른 애니메이션을 구현할 수 있을 것 같습니다.
 
 <br>
 
-`transition` 속성의 경우 딱 두 가지 상태만 지정해서 애니메이션을 구현할 수 있는데요, 반면 `animation`을 사용하면 아주 많은 상태를 각 프레임으로 쪼개어서 훨씬 더 복잡하고 화려한 애니메이션을 구현할 수 있습니다. 그래서 이 두 속성을 각각 지정했을 때, 브라우저에서 어느 정도의 프레임 컨트롤이 필요한지 미리 알 수 있으므로 준비 작업의 양도 다를 것으로 예상해봤습니다. 실제로는 어떤지 서칭을 좀 해봤는데요, [MDN 문서](https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance#css_transitions_and_animations)에서는 이 둘의 성능 차이는 없다고 일축하는군요.
+그렇다면 CSS 애니메이션 내에서, `transition`과 `animation`의 성능 차이는 있을까요? `transition` 속성의 경우 딱 두 가지 상태만 지정해서 애니메이션을 구현할 수 있는데요, 반면 `animation`을 사용하면 아주 많은 상태를 각 프레임으로 쪼개어서 훨씬 더 복잡하고 화려한 애니메이션을 구현할 수 있습니다. 그래서 이 두 속성을 각각 지정했을 때, 브라우저에서 어느 정도의 프레임 컨트롤이 필요한지 미리 알 수 있으므로 준비 작업의 양도 다를 것으로 예상해봤습니다. 실제로는 어떤지 서칭을 좀 해봤는데요, [MDN 문서](https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance#css_transitions_and_animations)에서는 이 둘의 성능 차이는 없다고 일축하는군요.
 
 > In terms of performance, there is no difference between implementing an animation with CSS transitions or animations. Both of them are classified under the same CSS-based umbrella in this article.
+
+<br>
+
+이 둘의 성능 비교에 대한 것은 추후 더 알아보고 이 글에 추가해보도록 하겠습니다.
 
 <br>
 
