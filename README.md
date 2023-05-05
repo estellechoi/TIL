@@ -163,6 +163,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 - [TypeScript Cheat Sheet](./docs/typescript/cheatsheet.md)
 - [Type Guard: Type Assertion 사용하지 않기](./docs/typescript/guard.md)
+- [Type과 Interface](./docs/typescript/interface.md)
 
 <br>
 
