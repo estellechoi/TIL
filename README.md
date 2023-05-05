@@ -8,25 +8,13 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
-## 1. UIUX
+## 1. Interface Design
 
 ### Design System
 
 - [개발자를 위한 디자인 시스템 1: 파운데이션과 철학, 컬러](./docs/design-system/color-system.md)
 - [개발자를 위한 디자인 시스템 2: 그리드(Grid)](./docs/design-system/grid.md)
 - [개발자를 위한 디자인 시스템 3: 타이포그래피(Typography)](./docs/design-system/typography.md)
-
-<br>
-
-### UX
-
-- [Laws of UX](./docs/ux/laws.md)
-
-<br>
-
-### Growth Hacking
-
-- [아하 모먼트: 30일 Retention, 가능한 행동들 모으기, Base Retention과 비교하기, 최적 빈도/횟수 찾기, Sanity Check, A/B 테스트](./docs/growth/aha.md)
 
 <br>
 
@@ -46,30 +34,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
-## 3. Work Flow
-
-### GIT
-
-- [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
-
-<br>
-
-### Testing
-
-- [프론트엔드 테스트하기 1: 프론트엔드에서의 테스트, Vue + TypeScript + Jest 단위 테스트 셋업](./docs/testing/vue+jest1.md)
-- [프론트엔드 테스트하기 2: Vue 컴포넌트 테스트 Basics, 구현 세부사항을 테스트하지 말 것](./docs/testing/vue+jest2.md)
-- [프론트엔드 테스트하기 3: HTTP 통신 테스트하기, Store를 사용하는 컴포넌트 (feat. Axios, Vuex)](./docs/testing/vue+jest3.md)
-
-<br>
-
-### CI/CD
-
-- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
-- [Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
-
-<br>
-
-## 4. Blockchain
+## 3. Blockchain
 
 ### Ethereum
 
@@ -93,7 +58,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
-## 5. Web Front-end
+## 4. Web Front-end
 
 ### Performance
 
@@ -101,6 +66,14 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 - [Lighthouse 퍼포먼스 점수 올리기 2: Webpack을 활용한 Preload, Lazy Load (feat. Vue)](./docs/html/lighthouse2-webpack.md)
 - [Lighthouse 퍼포먼스 점수 올리기 3: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더, Service Worker, Cache Storage API, `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기](./docs/html/lighthouse3-precache.md)
 - [Lighthouse 퍼포먼스 점수 올리기 4: 압축, SSR](./docs/html/lighthouse4-minify.md)
+
+<br>
+
+### Testing
+
+- [프론트엔드 테스트하기 1: 프론트엔드에서의 테스트, Vue + TypeScript + Jest 단위 테스트 셋업](./docs/testing/vue+jest1.md)
+- [프론트엔드 테스트하기 2: Vue 컴포넌트 테스트 Basics, 구현 세부사항을 테스트하지 말 것](./docs/testing/vue+jest2.md)
+- [프론트엔드 테스트하기 3: HTTP 통신 테스트하기, Store를 사용하는 컴포넌트 (feat. Axios, Vuex)](./docs/testing/vue+jest3.md)
 
 <br>
 
@@ -218,6 +191,21 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
+## 5. Work Flow
+
+### GIT
+
+- [깃 플로우(Git Flow)와 이슈 관리, PR(Pull Request)](./docs/git/branch.md)
+
+<br>
+
+### CI/CD
+
+- [GitHub Webhook으로 코드 컨벤션 체크, Actions로 프론트엔드 CI/CD 구축하기](./docs/git/actions.md) \*
+- [Faas란, Vercel + GitHub Actions로 프로젝트 배포하기 (feat. Vue)](./docs/devops/vercel+actions+vue.md)
+
+<br>
+
 ## 6. Native App Front-end
 
 ### Flutter
@@ -250,6 +238,18 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 ## 8. Etc
 
+### Growth Hacking
+
+- [아하 모먼트: 30일 Retention, 가능한 행동들 모으기, Base Retention과 비교하기, 최적 빈도/횟수 찾기, Sanity Check, A/B 테스트](./docs/growth/aha.md)
+
+<br>
+
+### UX
+
+- [Laws of UX](./docs/ux/laws.md)
+
+<br>
+
 ### HTTP
 
 - [REST, REST API and RESTful Web Services](https://github.com/estellechoi/TIL/blob/master/docs/Http/rest.md)
@@ -267,9 +267,9 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 <br>
 
-### Security
+### Security (To study)
 
-- [Cross site scripting (XSS)]()
+- Cross site scripting (XSS)
 - [Cross-site request forgery (CSRF)](./docs/security/csrf.md)
 
 <br>
