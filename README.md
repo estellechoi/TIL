@@ -66,6 +66,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 - [Lighthouse 퍼포먼스 점수 올리기 2: Webpack을 활용한 Preload, Lazy Load (feat. Vue)](./docs/html/lighthouse2-webpack.md)
 - [Lighthouse 퍼포먼스 점수 올리기 3: HTTP 캐싱 메커니즘, `Cache-Control` 응답 헤더, Service Worker, Cache Storage API, `@vue/cli-plugin-pwa` 플러그인으로 Vue 앱 Service Worker 구성하기](./docs/html/lighthouse3-precache.md)
 - [Lighthouse 퍼포먼스 점수 올리기 4: 압축, SSR](./docs/html/lighthouse4-minify.md)
+- [CSS 애니메이션 성능 높이기: `transform`, `will-change`](./docs/css/animation-performance.md)
 
 <br>
 
