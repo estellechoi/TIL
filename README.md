@@ -60,6 +60,13 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 ## 4. Web Front-end
 
+### WebGL
+
+- [Shader 입히기 1: GLSL과 OpenGL이란, GLSL 문법, Uniform, 내장 함수, gl_FragCoord, Three.js에서 사용하기](./docs/webgl/shader1.md)
+- [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
+
+<br>
+
 ### Performance
 
 - [CSS 애니메이션 성능 높이기: 브라우저의 애니메이션 렌더링 과정, `transform`, `will-change`, 성능 말고 접근성도 고려하기](./docs/css/animation-performance.md)
@@ -178,12 +185,6 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 
 - [Vue CLI로 Vue3 + TypeScript 프로젝트 셋업하기](./docs/vue/vue3-setup.md)
 - [Vue, 웹 컴포넌트, Reactivity](./docs/vue/vue.md)
-
-<br>
-
-### 3D
-
-- [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
 
 <br>
 
