@@ -41,7 +41,7 @@ void main() {
     - `precision mediump float;`
     - `precision lowp float;`
     - `precision highp float;`
-5. GPU의 모든 쓰레드에 동일하게 전달할 데이터를 Uniform이라하고, `uniform float u_time;`과 같이 작성한다.
+5. GPU의 모든 쓰레드에 동일하게 전달할 데이터를 Uniform이라하고, `uniform float u_time;`과 같이 정의한다.
 
 <br>
 
@@ -89,7 +89,7 @@ void main() {
 
 ### 2-3. GLSL 내장 함수
 
-위 예제를 통해 내장된 몇가지 함수를 알아보겠습니다. GLSL의 내장 함수들은 주로 그래픽에서 많이 사용되는 삼각함수, 지수함수들인데요, 이 함수들은 CPU가 아닌 GPU에서 직접 연산할 수 있느 함수들입니다.
+위 예제를 통해 내장된 몇가지 함수를 알아보겠습니다. GLSL의 내장 함수들은 주로 그래픽에서 많이 사용되는 삼각함수, 지수함수들인데요, 이 함수들은 CPU가 아닌 GPU에서 직접 연산할 수 있는 함수들입니다.
 
 - [`sin`](https://thebookofshaders.com/glossary/?search=sin)/`cos`/`tan`/`asin`/`acos`/`atan`
 - `pow`/`exp`/`log`/`sqrt`
