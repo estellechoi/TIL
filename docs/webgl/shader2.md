@@ -60,7 +60,7 @@ void main() {
 
 픽셀의 x 좌표값을 다른 방식으로 가공해서 조금 다른 그라이데션도 만들어볼 수 있겠습니다. 가령 아래와 같이 [`pow`](https://thebookofshaders.com/glossary/?search=pow)나 [`sqrt`](https://thebookofshaders.com/glossary/?search=sqrt) 함수를 사용할 수 있겠지요. `pow` 와 같은 GLSL 내장함수는 코드를 해석하는 별도의 소프트웨어 엔진을 거치지 않고, GPU로 직접 전달되어 하드웨어에서 실행되기 때문에 실행 속도가 매우 빠릅니다. 화려한 인터렉션도 부드럽게 구현할 수 있는 이유이지요.
 
-```c
+```glsl
 // x 좌표값의 1 제곱값인 색상 추출
 float colorValue = pow(st.x, 1.0);
 
@@ -84,7 +84,7 @@ float colorValue = sqrt(st.x);
 
 [`step`](https://thebookofshaders.com/glossary/?search=step) 역시 GLSL의 내장된 함수인데요, `step(threshold, value)`와 같이 2개의 파라미터를 사용하여 호출할 수 있습니다. 두번째 파라미터의 값이 첫번째 파라미터의 값(threshold)보다 크면 1.1, 작으면 0.0을 반환하는 함수입니다.
 
-```c
+```glsl
 // 두번째 파라미터 값이 0.5 미만이면 0.0 반환
 // st.x는 0.0 - 1.0 사이의 값으로 변환된 x 좌표값이므로 
 // 절반 미만인 좌측에 대해 0.0 반환
@@ -102,7 +102,7 @@ float colorValue = step(0.5, st.x);
 
 [`smoothstep`](https://thebookofshaders.com/glossary/?search=smoothstep)은 threshold 값을 범위로 지정하여 0.0과 1.0 사이의 값을 변환하도록 허용하는 함수입니다. `smoothstep(threshold_start, threshold_end, value)`와 같이 실행하면 됩니다.
 
-```c
+```glsl
 // 0.4 - 0.6 사이의 값에 대해서는 0.0 혹은 1.0이 아닌 그 사이의 interpolation 값 반환
 float colorValue = smoothstep(0.4, 0.6, st.x)
 ```
@@ -123,7 +123,7 @@ float colorValue = smoothstep(0.4, 0.6, st.x)
 
 <br>
 
-```c
+```glsl
 #ifdef GL_ES
 precision mediump float;
 #endif

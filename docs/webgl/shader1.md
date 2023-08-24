@@ -22,7 +22,7 @@
 
 GLSL은 C언어와 유사한 문법을 사용합니다. 다음은 아주 간단한 GLSL 코드 예제를 통해 몇가지 규칙을 알아볼겁니다.
 
-```c
+```glsl
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -59,7 +59,7 @@ Uniform 데이터는 CPU에서 GPU의 각 쓰레드에 동일하게(uniform) 전
 
 이렇게 Uniform을 작성하면 GPU의 모든 쓰레드가 해당 정보를 갖게 되므로, `main` 함수에서 사용할 수 있습니다.
 
-```c
+```glsl
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -73,7 +73,7 @@ uniform float u_time;       // Time in seconds since load
 
 다음과 같이 `u_time` 데이터를 사용할 수 있습니다.
 
-```c
+```glsl
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -105,7 +105,7 @@ void main() {
 
 이번에는 `vec4` 타입의 글로벌 변수인 `gl_FragCoord`를 알아볼겁니다. 위에서 봤던 `gl_FragColor`와 같은 GLSL의 내장 변수입니다. `gl_FragCoord`는 GPU의 각 쓰레드가 렌더링 작업을 하고 있는 픽셀의 좌표 정보를 담고있는 변수입니다. 그래서 아래와 같이 코드를 작성하면 GPU의 각 쓰레드에서 실행되는 `main` 함수의 작업 내용은 서로 다르겠지요. `main` 함수 내에서 `st` 변수에 할당되는 값이 다르기 때문에, `gl_FragColor` 에 할당되는 값도 다르고, 따라서 각 쓰레드가 담당하는 픽셀에 렌더링되는 색상이 달라지기 때문입니다! 이런식으로 한 화면의 각 픽셀의 렌더링을 컨트롤 할 수 있습니다.
 
-```c
+```glsl
 #ifdef GL_ES
 precision mediump float;
 #endif
