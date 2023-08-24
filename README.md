@@ -63,6 +63,7 @@ Additionally, to focus more on tech things, I removed the section Graphic Inspir
 ### WebGL
 
 - [Shader 입히기 1: GLSL과 OpenGL이란, GLSL 문법, Uniform, 내장 함수, gl_FragCoord, Three.js에서 사용하기](./docs/webgl/shader1.md)
+- [Shader 입히기 2: 그라데이션 원리, pow, sqrt, step, smoothstep, 선 그리기, Sine과 Cosine의 규칙성, 그래픽을 위한 수학 자료](./docs/webgl/shader2.md)
 - [Three.js로 WebGL 시작하기](./docs/webgl/getting-started-with-threejs.md)
 
 <br>
