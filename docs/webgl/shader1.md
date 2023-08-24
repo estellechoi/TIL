@@ -103,7 +103,7 @@ void main() {
 
 ### 2-4. gl_FragCoord
 
-이번에는 `vec4` 타입의 글로벌 변수인 `gl_FragCoord`를 알아볼겁니다. 위에서 봤던 `gl_FragColor`와 같은 GLSL의 내장 변수입니다. `gl_FragCoord`는 GPU의 각 쓰레드가 어떤 픽셀의 렌더링 작업을 하고 있는지에 대한 정보를 담고있는 변수입니다. 그래서 아래와 같이 코드를 작성했을 때, 각 쓰레드에서 실행되는 main 함수의 작업은 서로 다른 작업이 됩니다.
+이번에는 `vec4` 타입의 글로벌 변수인 `gl_FragCoord`를 알아볼겁니다. 위에서 봤던 `gl_FragColor`와 같은 GLSL의 내장 변수입니다. `gl_FragCoord`는 GPU의 각 쓰레드가 렌더링 작업을 하고 있는 픽셀의 좌표 정보를 담고있는 변수입니다. 그래서 아래와 같이 코드를 작성하면 GPU의 각 쓰레드에서 실행되는 `main` 함수의 작업 내용은 서로 다르겠지요. `main` 함수 내에서 `st` 변수에 할당되는 값이 다르기 때문에, `gl_FragColor` 에 할당되는 값도 다르고, 따라서 각 쓰레드가 담당하는 픽셀에 렌더링되는 색상이 달라지기 때문입니다! 이런식으로 한 화면의 각 픽셀의 렌더링을 컨트롤 할 수 있습니다.
 
 ```c
 #ifdef GL_ES
@@ -115,7 +115,7 @@ uniform vec2 u_mouse;
 uniform float u_time;
 
 void main() {
-	vec2 st = gl_FragCoord.xy/u_resolution; // the values will go between 0.0 and 1.0
+	vec2 st = gl_FragCoord.xy / u_resolution; // 전체 Canvas 사이즈로 나누어서 0.0 - 1.0 사의 값으로 변환! (색을 나타내는 vec4 값은 0.0 - 1.0 사의의 값이기 때문)
 	gl_FragColor = vec4(st.x,st.y,0.0,1.0);
 }
 ```
