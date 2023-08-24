@@ -104,7 +104,7 @@ float colorValue = step(0.5, st.x);
 
 ```glsl
 // 0.4 - 0.6 사이의 값에 대해서는 0.0 혹은 1.0이 아닌 그 사이의 interpolation 값 반환
-float colorValue = smoothstep(0.4, 0.6, st.x)
+float colorValue = smoothstep(0.4, 0.6, st.x);
 ```
 
 <br>
@@ -202,7 +202,7 @@ void main() {
 
 - [Exponential Shaping Functions](http://www.flong.com/archive/texts/code/shapers_exp/)
 
-- [Circular & Elliptical Shaping Functions]((http://www.flong.com/archive/texts/code/shapers_circ/))
+- [Circular & Elliptical Shaping Functions](http://www.flong.com/archive/texts/code/shapers_circ/)
 
 - [Bezier and Other Parametric Shaping Functions](http://www.flong.com/archive/texts/code/shapers_bez/)
 
