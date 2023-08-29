@@ -97,6 +97,8 @@ void main(){
 
 <br>
 
+렌더링 결과는 대략 이렇습니다.
+
 <img src="/docs/img/radial.jpg" />
 
 <br>
@@ -126,7 +128,7 @@ float brightness = sqrt(toCenter.x * toCenter.x + toCenter.y * toCenter.y);
 
 ### 3-4. dot
 
-`sqrt` 함수의 연산은 컴퓨팅 파워를 많이 쓰기 때문에, [`dot`](https://thebookofshaders.com/glossary/?search=dot) 함수로 대체할 수도 있습니다. 두 벡터의 [스칼라곱](https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%B9%BC%EB%9D%BC%EA%B3%B1)을 반환하는 함수입니다.
+`sqrt` 함수의 연산은 컴퓨팅 파워를 많이 쓰기 때문에, [`dot`](https://thebookofshaders.com/glossary/?search=dot) 함수로 대체할 수도 있습니다. 두 벡터의 [스칼라곱](https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%B9%BC%EB%9D%BC%EA%B3%B1)을 반환하는 함수입니다. 다만 아래의 예제에서는 `smoothstep` 함수를 사용했기 때문에 원의 내부와 외부의 색이 검은색과 흰색으로 반전되는 형태로 렌더링됩니다.
 
 ```glsl
 float circle(in vec2 st, in float size){
@@ -149,6 +151,11 @@ void main() {
 ```
 
 <br>
+
+아래와 같은 렌더링 결과를 얻을 수 있을겁니다.
+
+<img src="/docs/img/circle.jpg" />
+
 <br>
 
 ---
