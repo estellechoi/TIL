@@ -22,7 +22,7 @@ bool isSameValue2 = color.g == coordinates.y; // true
 
 <br>
 
-따라서 GLSL에서는 위의 특성을 활용하여 각 픽셀의 좌표값에 대응하는 색의 값을 통제하는 것이 일반적입니다. 각 픽셀의 좌표값을 담고있는 벡터 변수 `gl_FragCoord`을 활용하는 GLSL 코드를 많이 볼 수 있지요.
+위와 같은 특성때문에 GLSL에서는 각 픽셀의 좌표 벡터를 활용하여 해당 픽셀에 렌더링할 색의 값을 추출하는 것이 일반적입니다. 따라서 각 픽셀의 좌표값을 담고있는 벡터 변수 `gl_FragCoord`를 활용하는 GLSL 코드를 많이 볼 수 있지요.
 
 ```glsl
 uniform vec2 u_resolution;
