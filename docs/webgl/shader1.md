@@ -130,7 +130,7 @@ GLSL 코드를 작성하고 콘솔을 사용해서 바로 렌더링해볼 수 �
 
 ### 3-1. Shader 작성하기
 
-[Three.js](https://threejs.org)에서는 `THREE.ShaderMaterial` API를 사용해서 `ShaderMaterial` 객체를 만들면 되는데요, API 사용법에 따라 Uniform와 Shader 값을 지정해주면 됩니다.
+[Three.js](https://threejs.org)에서는 `THREE.ShaderMaterial` API를 사용해서 `ShaderMaterial` 인스턴스를 만들면 되는데요, 파라미터의 `vertexShader`, `fragmentShader` 필드에 GLSL 문법으로 작성된 Shader 문자열을 넣어줍니다. 이 둘의 차이는 후에 별도로 다루겠습니다. `uniforms` 필드에는 문자열로 넣어준 Shader 코드에서 사용될 `uniform` 변수들의 초기값을 넣어주면 됩니다.
 
 ```typescript
 export const INITIAL_UNIFORMS: ShaderMaterialProps['uniforms'] = {
@@ -216,7 +216,7 @@ document.onmousemove = onMouseMove;
 
 ### 3-4. 다른 방법으로 GLSL 작성하기
 
-참고로 GLSL은 원래 `.frag` 확장자 파일에 작성하는데요, HTML 문서에서는 다음과 같이 script 태그 안에 작성할 수도 있습니다.
+참고로 GLSL 파일은 원래 `.vert`, `.frag` 등의 확장자를 사용하는데요, HTML 문서에서는 다음과 같이 script 태그 안에 작성할 수도 있습니다.
 
 ```html
 <script id="vertexShader" type="x-shader/x-vertex">
