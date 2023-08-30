@@ -1,4 +1,4 @@
-# Shader 입히기 1: GLSL과 OpenGL이란, GLSL 문법, Uniform, 내장 함수, gl_FragCoord, Three.js에서 사용하기
+# Shader 1: GLSL과 OpenGL이란, GLSL 문법, Uniform, 내장 함수, gl_FragCoord, Three.js에서 사용하기
 
 <br>
 

@@ -1,4 +1,4 @@
-# Shader 입히기 3: 벡터 타입의 유연성, 색 섞을 때 유용한 mix 함수, 원형 패턴을 위한 distance, length, sqrt, dot
+# Shader 3: 벡터 타입의 유연성, 색 섞을 때 유용한 mix 함수, 원형 패턴을 위한 distance, length, sqrt, dot
 
 <br>
 

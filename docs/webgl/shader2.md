@@ -1,4 +1,4 @@
-# Shader 입히기 2: 그라데이션 원리, pow, sqrt, step, smoothstep, 선 그리기, Sine과 Cosine의 규칙성, 그래픽을 위한 수학 자료
+# Shader 2: 그라데이션 원리, pow, sqrt, step, smoothstep, 선 그리기, Sine과 Cosine의 규칙성, 그래픽을 위한 수학 자료
 
 <br>
 
