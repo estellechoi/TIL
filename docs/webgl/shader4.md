@@ -1,13 +1,15 @@
-# Shader 입히기 4: 회전변환행렬(Rotation Matrix), 회전변환행렬 함수 구현하기
+# Shader 입히기 4: 회전변환행렬(Rotation Matrix), 축척행렬(Scale Matrix)
 
 <br>
 
 1. 회전변환행렬(Rotation Matrix)
-2. 회전변환행렬 함수 구현하기
+2. 축척행렬(Scale Matrix)
 
 <br>
 
 ## 1. 회전변환행렬(Rotation Matrix)
+
+### 1-1. 회전
 
 [선형 대수학](https://ko.wikipedia.org/wiki/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99) 분야에서 잘 알려진 행렬(Matrix) 중에 [회전변환행렬(Rotation Matrix)](https://ko.wikipedia.org/wiki/%ED%9A%8C%EC%A0%84%EB%B3%80%ED%99%98%ED%96%89%EB%A0%AC)이 있습니다.
 
@@ -31,7 +33,7 @@
 
 <br>
 
-## 2. 회전변환행렬 함수 구현하기
+### 1-2. 회전변환행렬 함수 구현하기
 
 GLSL에서는 다음과 같이 회전변환행렬을 함수로 구현할 수 있습니다.
 
@@ -43,7 +45,7 @@ mat2 rotate2D(float angle) {
 
 <br>
 
-그리고 이 함수는 아래와 같이 사용할 수 있습니다. `rotate2D` 함수가 반환하는 행렬에 각 쓰레드의 좌표값을 곱하기 전에 `-vec2(0.5)` 만큼 이동시키는 코드를 확인할 수 있는데요, 이는 회전변환행렬이 유효한 기준 좌표값은 `(0, 0)`이라는 수학적 조건을 따르기 위함입니다.
+그리고 이 함수는 아래와 같이 사용할 수 있습니다. `rotate2D` 함수가 반환하는 행렬에 각 쓰레드의 좌표값을 곱하기 전에 `-vec2(0.5)` 만큼 이동시키는 코드를 확인할 수 있는데요, 이는 행렬 곱을 할 때 회전시키려는 도형의 중앙점이 `(0, 0)`이어야 제자리에서 회전하는 애니메이션을 구현할 수 있기 때문입니다.
 
 ```glsl
 uniform vec2 u_resolution;
@@ -69,9 +71,52 @@ void main() {
 
 <br>
 
+## 2. 축척행렬(Scale Matrix)
+
+### 2-1. 축척
+
+행렬과 좌표의 곱을 이해하면, 특정 도형을 축소/확대할 수 있는 축척도 구현할 수 있습니다.
+
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f8b981072c2d00c1ce373cd483c00fd6d927f668" width="294" />
+
+<br>
+
+### 2-2. 축척 함수 구현하기
+
+다음과 같이 함수를 작성해서 구현할 수 있고요.
+
+```glsl
+mat2 scale2D(vec2 multiplier){
+    return mat2(multiplier.x, 0.0, 0.0, multiplier.y);
+}
+```
+
+<br>
+
+도형의 좌우상하 좌표 움직임을 동일하게 하기 위해서 역시나 행렬 곱을 하기 전 모든 벡터를 `-vec2(0.5)` 만큼 이동시키고, 행렬 곱이 완료된 후에 다시 `vec2(0.5)`씩 이동시키는 교정을 처리합니다. `multiplier`의 값은 무한히 증가하는 수 대신 `sin(u_time)`과 같이 삼각함수를 사용하여 특정 구간을 반복하는 수를 넣어주어 확대 축소를 반복하는 애니메이션을 구현했습니다.
+
+```glsl
+uniform vec2 u_resolution;
+uniform float u_time;
+
+void main() {
+    vec2 st = gl_FragCoord.xy/u_resolution.xy;
+
+    st -= vec2(0.5);
+
+    vec2 multiplier = vec2(sin(u_time));
+    st = scale(multiplier) * st;
+
+    st += vec2(0.5);
+}
+```
+
+<br>
+
 ---
 
 ### References
 
 - [Rotation matrix | Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
+- [Scaling (geometry) | Wikipedia](https://en.wikipedia.org/wiki/Scaling_(geometry))
 - [Rotation Matrix | The Book of Shaders](https://thebookofshaders.com/08/)
