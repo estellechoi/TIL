@@ -17,7 +17,7 @@ With the new `/app` directory, these things became possible or got a major upgra
 | **Layouts & Templates** | Reusable, nested, and state-isolated when needed |
 | **Dynamic Rendering Config** | Control SSR/SSG per route or param |
 
----
+<br/>
 
 ## 🎯 Server Components: Default Mode in App Router
 
@@ -27,7 +27,7 @@ With the new `/app` directory, these things became possible or got a major upgra
 
 🧠 Summary: You only hydrate what *needs* to be interactive.
 
----
+<br/>
 
 ## ⚙️ Server Actions: Direct Calls to Server Logic — Without API Routes
 
@@ -55,7 +55,7 @@ export async function submitForm(data: FormData) {
 They’re serialized and sent via React Flight — like a function call between components, not a network request.
 You can even call 3rd-party APIs using secret environment variables, and they’ll never touch the browser.
 
----
+<br/>
 
 ## 🚰 Streaming + Partial Rendering (with Suspense)
 
@@ -80,14 +80,14 @@ export default function Page() {
 }
 ```
 
----
+<br/>
 
 ## 🧱 Layouts vs Templates
 
 - Layout persists across pages and preserves state (like tab selection, scroll, etc).
 - Template re-renders and resets state on every navigation. Think: a wizard page where you don’t want previous step state to leak.
 
----
+<br/>
 
 ## 🧩 Dynamic vs Static: The `dynamic` Option + `generateStaticParams()`
 
@@ -106,7 +106,7 @@ export async function generateStaticParams() {
 
 ```
 
----
+<br/>
 
 ## 🌐 Hydration vs. CSR — What’s the Real Difference?
 
@@ -132,7 +132,7 @@ Hydration and CSR (Client-Side Rendering) are not the same thing, even though th
 `'use client'` = eager + interactive
 `dynamic(..., { ssr: false })` = lazy + isolated + fully CSR
 
----
+<br/>
 
 ## ⚛️ Concurrent Rendering: Not Multithreading, Just Smart Scheduling
 
@@ -204,7 +204,7 @@ export function Search() {
 }
 ```
 
----
+<br/>
 
 ## 🔌 Adapter Pattern: Bridging Server & Client Responsibilities
 
@@ -248,7 +248,7 @@ export function Button() {
 }
 ```
 
----
+<br/>
 
 ## 🧃 Provider Patterns Are Getting Weaker in SSR-First Architectures
 
