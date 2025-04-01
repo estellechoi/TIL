@@ -43,6 +43,7 @@ They allow you to run server-side logic directly from your UI, without having to
 
 ```tsx
 // app/actions.ts
+
 'use server'
 export async function submitForm(data: FormData) {
   const body = await data.get('name');
@@ -91,9 +92,11 @@ export default function Page() {
 
 ## 🧩 Dynamic vs Static: The `dynamic` Option + `generateStaticParams()`
 
-Next.js lets you finely control how pages are rendered:
+Next.js lets you finely control how pages are rendered.
 
-- 🧠 Pro tip: Without `dynamic = 'force-dynamic'`, using `generateStaticParams` implicitly makes the page SSG — even if you `fetch()` inside. Watch out!
+### 🧠 Pro tip:
+
+Without `dynamic = 'force-dynamic'`, using `generateStaticParams` implicitly makes the page SSG — even if you `fetch()` inside. Watch out!
 
 ```tsx
 // Force SSR
@@ -129,8 +132,9 @@ Hydration and CSR (Client-Side Rendering) are not the same thing, even though th
 - Perfect for heavy, non-critical components (e.g. modals, charts, editors).
 
 ### 📌 TL;DR
-`'use client'` = eager + interactive
-`dynamic(..., { ssr: false })` = lazy + isolated + fully CSR
+
+- `'use client'` = eager + interactive
+- `dynamic(..., { ssr: false })` = lazy + isolated + fully CSR
 
 <br/>
 
@@ -138,15 +142,13 @@ Hydration and CSR (Client-Side Rendering) are not the same thing, even though th
 
 One of the most misunderstood parts of React 18 is Concurrent Rendering.
 
-It's not “multithreaded rendering.”
-It's smart scheduling in a single thread.
+- It's not “multithreaded rendering.”
+- It's smart scheduling in a single thread.
 
 ### 🧠 What's the actual innovation?
 
 React 18 introduced a cooperative scheduler that allows rendering work to be deferred, interrupted, paused, and resumed.
-
-Why? Because JavaScript is single-threaded.
-When one render blocks the main thread, user interactions suffer.
+Why? Because JavaScript is single-threaded. When one render blocks the main thread, user interactions suffer.
 
 ### 🚦 Example: `startTransition`
 
@@ -224,6 +226,7 @@ You separate a component into two distinct layers:
 
 ```tsx
 // ButtonView.tsx (Server Component - no 'use client')
+
 export function ButtonView({ label, disabled }: { label: string; disabled?: boolean }) {
   return <button disabled={disabled}>{label}</button>;
 }
