@@ -3,7 +3,7 @@
 > A personal exploration of what *really* changed with the app router, Server Components, and streaming.  
 > Written for future me — and anyone else curious enough to care.  
 
----
+<br/>
 
 ## 🔥 What Changed with the App Router?
 
